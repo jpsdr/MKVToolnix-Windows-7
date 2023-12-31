@@ -18,8 +18,6 @@
 #include "common/strings/parsing.h"
 #include "propedit/target.h"
 
-using namespace libmatroska;
-
 target_c::target_c()
   : m_level1_element{}
   , m_master{}
@@ -48,20 +46,20 @@ void
 target_c::set_level1_element(ebml_element_cptr level1_element_cp,
                              ebml_element_cptr track_headers_cp) {
   m_level1_element_cp = level1_element_cp;
-  m_level1_element    = static_cast<EbmlMaster *>(m_level1_element_cp.get());
+  m_level1_element    = static_cast<libebml::EbmlMaster *>(m_level1_element_cp.get());
 
   m_track_headers_cp  = track_headers_cp;
   m_master            = m_level1_element;
 }
 
-std::tuple<EbmlMaster *, EbmlMaster *>
+std::tuple<libebml::EbmlMaster *, libebml::EbmlMaster *>
 target_c::get_masters()
   const {
   return std::make_tuple(m_master, m_sub_master);
 }
 
 void
-target_c::add_or_replace_all_master_elements(EbmlMaster *source) {
+target_c::add_or_replace_all_master_elements(libebml::EbmlMaster *source) {
   size_t idx;
   for (idx = 0; m_level1_element->ListSize() > idx; ++idx)
     delete (*m_level1_element)[idx];
@@ -86,7 +84,7 @@ target_c::get_track_uid()
   return m_track_uid;
 }
 
-EbmlMaster *
+libebml::EbmlMaster *
 target_c::get_level1_element()
   const {
   return m_level1_element;

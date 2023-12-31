@@ -17,8 +17,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_prores.h"
 
-using namespace libmatroska;
-
 prores_video_packetizer_c::prores_video_packetizer_c(generic_reader_c *reader,
                                                      track_info_c &ti,
                                                      int64_t default_duration,

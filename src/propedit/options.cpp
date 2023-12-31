@@ -16,8 +16,6 @@
 #include "propedit/tag_target.h"
 #include "propedit/track_target.h"
 
-using namespace libmatroska;
-
 options_c::options_c()
   : m_show_progress(false)
   , m_parse_mode(kax_analyzer_c::parse_mode_fast)
@@ -46,7 +44,7 @@ options_c::execute(kax_analyzer_c &analyzer) {
 
 void
 options_c::prune_empty_masters() {
-  std::unordered_map<EbmlMaster *, bool> handled;
+  std::unordered_map<libebml::EbmlMaster *, bool> handled;
 
   for (auto &target : m_targets) {
     if (!dynamic_cast<track_target_c *>(target.get()))
@@ -188,7 +186,7 @@ options_c::find_elements(kax_analyzer_c *analyzer) {
   auto tracks_required = std::find_if(m_targets.begin(), m_targets.end(), [](auto const &target) { return !!dynamic_cast<track_target_c *>(target.get()); })
     != m_targets.end();
 
-  ebml_element_cptr tracks(read_element<KaxTracks>(analyzer, Y("Track headers"), tracks_required));
+  ebml_element_cptr tracks(read_element<libmatroska::KaxTracks>(analyzer, Y("Track headers"), tracks_required));
   ebml_element_cptr info, tags, chapters, attachments;
   attachment_id_manager_cptr attachment_id_manager;
 
@@ -196,34 +194,34 @@ options_c::find_elements(kax_analyzer_c *analyzer) {
     target_c &target = *target_ptr;
     if (dynamic_cast<segment_info_target_c *>(&target)) {
       if (!info)
-        info = read_element<KaxInfo>(analyzer, Y("Segment information"));
+        info = read_element<libmatroska::KaxInfo>(analyzer, Y("Segment information"));
       target.set_level1_element(info);
 
     } else if (dynamic_cast<tag_target_c *>(&target)) {
       if (!tags) {
-        tags = read_element<KaxTags>(analyzer, Y("Tags"), false);
+        tags = read_element<libmatroska::KaxTags>(analyzer, Y("Tags"), false);
         if (!tags)
-          tags = ebml_element_cptr(new KaxTags);
+          tags = ebml_element_cptr(new libmatroska::KaxTags);
       }
 
       target.set_level1_element(tags, tracks);
 
     } else if (dynamic_cast<chapter_target_c *>(&target)) {
       if (!chapters) {
-        chapters = read_element<KaxChapters>(analyzer, Y("Chapters"), false);
+        chapters = read_element<libmatroska::KaxChapters>(analyzer, Y("Chapters"), false);
         if (!chapters)
-          chapters = ebml_element_cptr(new KaxChapters);
+          chapters = ebml_element_cptr(new libmatroska::KaxChapters);
       }
 
       target.set_level1_element(chapters, tracks);
 
     } else if (dynamic_cast<attachment_target_c *>(&target)) {
       if (!attachments) {
-        attachments = read_element<KaxAttachments>(analyzer, Y("Attachments"), false);
+        attachments = read_element<libmatroska::KaxAttachments>(analyzer, Y("Attachments"), false);
         if (!attachments)
-          attachments = ebml_element_cptr(new KaxAttachments);
+          attachments = ebml_element_cptr(new libmatroska::KaxAttachments);
 
-        attachment_id_manager = std::make_shared<attachment_id_manager_c>(static_cast<EbmlMaster *>(attachments.get()), 1);
+        attachment_id_manager = std::make_shared<attachment_id_manager_c>(static_cast<libebml::EbmlMaster *>(attachments.get()), 1);
       }
 
       static_cast<attachment_target_c &>(target).set_id_manager(attachment_id_manager);

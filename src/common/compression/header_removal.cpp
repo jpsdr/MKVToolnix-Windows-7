@@ -71,7 +71,7 @@ header_removal_compressor_c::set_track_headers(libmatroska::KaxContentEncoding &
   compressor_c::set_track_headers(c_encoding);
 
   // Set compression parameters.
-  GetChild<libmatroska::KaxContentCompSettings>(GetChild<libmatroska::KaxContentCompression>(c_encoding)).CopyBuffer(m_bytes->get_buffer(), m_bytes->get_size());
+  libebml::GetChild<libmatroska::KaxContentCompSettings>(libebml::GetChild<libmatroska::KaxContentCompression>(c_encoding)).CopyBuffer(m_bytes->get_buffer(), m_bytes->get_size());
 }
 
 // ------------------------------------------------------------

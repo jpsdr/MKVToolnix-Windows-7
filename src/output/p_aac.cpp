@@ -19,8 +19,6 @@
 #include "merge/output_control.h"
 #include "output/p_aac.h"
 
-using namespace libmatroska;
-
 aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    mtx::aac::audio_config_t const &config,

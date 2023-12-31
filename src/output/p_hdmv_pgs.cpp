@@ -22,8 +22,6 @@
 #include "common/strings/formatting.h"
 #include "output/p_hdmv_pgs.h"
 
-using namespace libmatroska;
-
 hdmv_pgs_packetizer_c::hdmv_pgs_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti)
   : generic_packetizer_c{p_reader, p_ti, track_subtitle}

@@ -35,8 +35,6 @@
 #include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 
-using namespace libmatroska;
-
 debugging_option_c render_groups_c::ms_gap_detection{"cluster_helper_gap_detection"};
 
 cluster_helper_c::impl_t::~impl_t() {
@@ -55,7 +53,7 @@ cluster_helper_c::get_output() {
   return m->out;
 }
 
-KaxCluster *
+libmatroska::KaxCluster *
 cluster_helper_c::get_cluster() {
   return m->cluster.get();
 }
@@ -409,7 +407,7 @@ cluster_helper_c::render() {
 
   bool use_simpleblock     = !mtx::hacks::is_engaged(mtx::hacks::NO_SIMPLE_BLOCKS);
 
-  LacingType lacing_type   = mtx::hacks::is_engaged(mtx::hacks::LACING_XIPH) ? LACING_XIPH : mtx::hacks::is_engaged(mtx::hacks::LACING_EBML) ? LACING_EBML : LACING_AUTO;
+  auto lacing_type         = mtx::hacks::is_engaged(mtx::hacks::LACING_XIPH) ? libmatroska::LACING_XIPH : mtx::hacks::is_engaged(mtx::hacks::LACING_EBML) ? libmatroska::LACING_EBML : libmatroska::LACING_AUTO;
 
   int64_t min_cl_timestamp = std::numeric_limits<int64_t>::max();
   int64_t max_cl_timestamp = 0;
@@ -458,7 +456,7 @@ cluster_helper_c::render() {
     min_cl_timestamp                       = std::min(pack->assigned_timestamp, min_cl_timestamp);
     max_cl_timestamp                       = std::max(pack->assigned_timestamp, max_cl_timestamp);
 
-    KaxTrackEntry &track_entry             = static_cast<KaxTrackEntry &>(*source->get_track_entry());
+    libmatroska::KaxTrackEntry &track_entry             = static_cast<libmatroska::KaxTrackEntry &>(*source->get_track_entry());
 
     kax_block_blob_c *previous_block_group = !render_group->m_groups.empty() ? render_group->m_groups.back().get() : nullptr;
     kax_block_blob_c *new_block_group      = previous_block_group;
@@ -478,13 +476,13 @@ cluster_helper_c::render() {
       render_group->m_duration_mandatory = false;
       render_group->m_first_timestamp_rounding_error.reset();
 
-      BlockBlobType this_block_blob_type
-        = !use_simpleblock                         ? BLOCK_BLOB_NO_SIMPLE
-        : must_duration_be_set(render_group, pack) ? BLOCK_BLOB_NO_SIMPLE
-        : !pack->data_adds.empty()                 ? BLOCK_BLOB_NO_SIMPLE
-        : has_codec_state                          ? BLOCK_BLOB_NO_SIMPLE
-        : pack->has_discard_padding()              ? BLOCK_BLOB_NO_SIMPLE
-        :                                            BLOCK_BLOB_ALWAYS_SIMPLE;
+      libmatroska::BlockBlobType this_block_blob_type
+        = !use_simpleblock                         ? libmatroska::BLOCK_BLOB_NO_SIMPLE
+        : must_duration_be_set(render_group, pack) ? libmatroska::BLOCK_BLOB_NO_SIMPLE
+        : !pack->data_adds.empty()                 ? libmatroska::BLOCK_BLOB_NO_SIMPLE
+        : has_codec_state                          ? libmatroska::BLOCK_BLOB_NO_SIMPLE
+        : pack->has_discard_padding()              ? libmatroska::BLOCK_BLOB_NO_SIMPLE
+        :                                            libmatroska::BLOCK_BLOB_ALWAYS_SIMPLE;
 
       render_group->m_groups.push_back(kax_block_blob_cptr(new kax_block_blob_c(this_block_blob_type)));
       new_block_group = render_group->m_groups.back().get();
@@ -501,7 +499,7 @@ cluster_helper_c::render() {
       if (packet_extension_c::BEFORE_ADDING_TO_CLUSTER_CB == extension->get_type())
         static_cast<before_adding_to_cluster_cb_packet_extension_c *>(extension.get())->get_callback()(pack, timestamp_offset);
 
-    auto data_buffer = new DataBuffer(static_cast<binary *>(pack->data->get_buffer()), pack->data->get_size());
+    auto data_buffer = new libmatroska::DataBuffer(static_cast<uint8_t *>(pack->data->get_buffer()), pack->data->get_size());
 
     // Now put the packet into the cluster.
     render_group->m_more_data = new_block_group->add_frame_auto(track_entry, pack->assigned_timestamp - timestamp_offset, *data_buffer, lacing_type,
@@ -510,8 +508,8 @@ cluster_helper_c::render() {
                                                                 pack->key_flag, pack->discardable_flag);
 
     if (has_codec_state) {
-      KaxBlockGroup &bgroup = (KaxBlockGroup &)*new_block_group;
-      KaxCodecState *cstate = new KaxCodecState;
+      auto &bgroup = (libmatroska::KaxBlockGroup &)*new_block_group;
+      auto cstate  = new libmatroska::KaxCodecState;
       bgroup.PushElement(*cstate);
       cstate->CopyBuffer(pack->codec_state->get_buffer(), pack->codec_state->get_size());
     }
@@ -538,23 +536,23 @@ cluster_helper_c::render() {
     if (new_block_group) {
       // Set the reference priority if it was wanted.
       if ((0 < pack->ref_priority) && new_block_group->replace_simple_by_group())
-        GetChild<KaxReferencePriority>(*new_block_group).SetValue(pack->ref_priority);
+        libebml::GetChild<libmatroska::KaxReferencePriority>(*new_block_group).SetValue(pack->ref_priority);
 
       // Handle BlockAdditions if needed
       if (!pack->data_adds.empty() && new_block_group->ReplaceSimpleByGroup()) {
-        KaxBlockAdditions &additions = AddEmptyChild<KaxBlockAdditions>(*new_block_group);
+        auto &additions = AddEmptyChild<libmatroska::KaxBlockAdditions>(*new_block_group);
 
         for (auto const &add : pack->data_adds) {
-          auto &block_more = AddEmptyChild<KaxBlockMore>(additions);
+          auto &block_more = AddEmptyChild<libmatroska::KaxBlockMore>(additions);
 
           block_more.PushElement(*new kax_block_add_id_c{m->always_write_block_add_ids});
           static_cast<kax_block_add_id_c &>(*block_more.GetElementList().back()).SetValue(add.id.value_or(1));
-          GetChild<KaxBlockAdditional>(block_more).CopyBuffer(static_cast<binary *>(add.data->get_buffer()), add.data->get_size());
+          GetChild<libmatroska::KaxBlockAdditional>(block_more).CopyBuffer(static_cast<uint8_t *>(add.data->get_buffer()), add.data->get_size());
         }
       }
 
       if (pack->has_discard_padding()) {
-        GetChild<KaxDiscardPadding>(*new_block_group).SetValue(pack->discard_padding.to_ns());
+        libebml::GetChild<libmatroska::KaxDiscardPadding>(*new_block_group).SetValue(pack->discard_padding.to_ns());
         render_group->m_has_discard_padding = true;
       }
     }
@@ -745,7 +743,7 @@ cluster_helper_c::dump_split_points()
 }
 
 void
-cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
+cluster_helper_c::create_tags_for_track_statistics(libmatroska::KaxTags &tags,
                                                    std::string const &writing_app,
                                                    QDateTime const &writing_date) {
   std::optional<QDateTime> actual_writing_date;

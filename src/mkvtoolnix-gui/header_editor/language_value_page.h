@@ -21,7 +21,7 @@ public:
   std::string m_originalValue;
 
 public:
-  LanguageValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  LanguageValuePage(Tab &parent, PageBase &topLevelPage, libebml::EbmlMaster &master, libebml::EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
   virtual ~LanguageValuePage();
 
   virtual QWidget *createInputControl() override;

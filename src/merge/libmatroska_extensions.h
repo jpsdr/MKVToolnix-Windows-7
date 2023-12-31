@@ -23,6 +23,8 @@
 #include <matroska/KaxSeekHead.h>
 #include <matroska/KaxSemantic.h>
 
+#include "common/ebml.h"
+
 class kax_cluster_c: public libmatroska::KaxCluster {
 public:
   kax_cluster_c(): libmatroska::KaxCluster() {
@@ -57,9 +59,9 @@ public:
   }
 
 #if LIBEBML_VERSION >= 0x020000
-  virtual filepos_t UpdateSize(ShouldWrite writeFilter = WriteSkipDefault, bool bForceRender = false) override;
+  virtual libebml::filepos_t UpdateSize(ShouldWrite writeFilter = WriteSkipDefault, bool bForceRender = false) override;
 #else
-  virtual filepos_t UpdateSize(bool bSaveDefault, bool bForceRender) override;
+  virtual libebml::filepos_t UpdateSize(bool bSaveDefault, bool bForceRender) override;
 #endif
 };
 
@@ -90,7 +92,7 @@ public:
   {
   }
 
-  filepos_t Render(libebml::IOCallback &output) {
+  libebml::filepos_t Render(libebml::IOCallback &output) {
 #if LIBEBML_VERSION >= 0x020000
     return libebml::EbmlElement::Render(output, WriteAll, false, true);
 #else

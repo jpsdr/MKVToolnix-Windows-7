@@ -77,8 +77,6 @@
 #include "output/p_vorbis.h"
 #include "output/p_vpx.h"
 
-using namespace libmatroska;
-
 constexpr auto MAX_INTERLEAVING_BADNESS = 0.4;
 
 namespace mtx {
@@ -2054,7 +2052,7 @@ qtmp4_reader_c::create_global_tags_from_meta_data() {
 
   m_tags.reset(mtx::construct::cons<libmatroska::KaxTags>(mtx::construct::cons<libmatroska::KaxTag>(mtx::construct::cons<libmatroska::KaxTagTargets>(new libmatroska::KaxTagTargetTypeValue, 50,
                                                                                                                                                      new libmatroska::KaxTagTargetType,      "MOVIE"))));
-  auto &tag = static_cast<KaxTag &>(*(*m_tags)[0]);
+  auto &tag = static_cast<libmatroska::KaxTag &>(*(*m_tags)[0]);
 
   if (!m_comment.empty())
     tag.PushElement(*mtx::construct::cons<libmatroska::KaxTagSimple>(new libmatroska::KaxTagName,   "COMMENT",
@@ -2071,7 +2069,7 @@ qtmp4_reader_c::process_global_tags() {
     return;
 
   for (auto tag : *m_tags)
-    add_tags(static_cast<KaxTag &>(*tag));
+    add_tags(static_cast<libmatroska::KaxTag &>(*tag));
 
   m_tags->RemoveAll();
 }

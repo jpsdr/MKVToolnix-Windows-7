@@ -39,8 +39,6 @@
 #include "extract/xtr_wav.h"
 #include "extract/xtr_webvtt.h"
 
-using namespace libmatroska;
-
 xtr_base_c::xtr_base_c(const std::string &codec_id,
                        int64_t tid,
                        track_spec_t &tspec,
@@ -63,7 +61,7 @@ xtr_base_c::~xtr_base_c() {
 
 void
 xtr_base_c::create_file(xtr_base_c *master,
-                        KaxTrackEntry &track) {
+                        libmatroska::KaxTrackEntry &track) {
   auto actual_file_name = get_file_name().string();
 
   if (master)
@@ -106,7 +104,7 @@ xtr_base_c::headers_done() {
 }
 
 memory_cptr
-xtr_base_c::decode_codec_private(KaxCodecPrivate *priv) {
+xtr_base_c::decode_codec_private(libmatroska::KaxCodecPrivate *priv) {
   auto mpriv = memory_c::borrow(priv->GetBuffer(), priv->GetSize());
   m_content_decoder.reverse(mpriv, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
 
@@ -114,7 +112,7 @@ xtr_base_c::decode_codec_private(KaxCodecPrivate *priv) {
 }
 
 void
-xtr_base_c::init_content_decoder(KaxTrackEntry &track) {
+xtr_base_c::init_content_decoder(libmatroska::KaxTrackEntry &track) {
   if (m_content_decoder_initialized)
     return;
 
@@ -218,10 +216,10 @@ xtr_base_c::get_track_language(libmatroska::KaxTrackEntry &track) {
 
 void
 xtr_fullraw_c::create_file(xtr_base_c *master,
-                           KaxTrackEntry &track) {
+                           libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
 
-  KaxCodecPrivate *priv = FindChild<KaxCodecPrivate>(&track);
+  libmatroska::KaxCodecPrivate *priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
 
   if (priv && (0 != priv->GetSize())) {
     auto mem = memory_c::borrow(priv->GetBuffer(), priv->GetSize());

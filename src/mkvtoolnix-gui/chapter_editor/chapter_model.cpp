@@ -12,7 +12,6 @@
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-using namespace libmatroska;
 using namespace mtx::gui;
 
 namespace mtx::gui::ChapterEditor {
@@ -68,9 +67,9 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
     return;
 
   auto flags     = QStringList{};
-  auto isDefault = edition && FindChildValue<KaxEditionFlagDefault>(*edition);
-  auto isHidden  = edition && FindChildValue<KaxEditionFlagHidden>(*edition);
-  auto isOrdered = edition && FindChildValue<KaxEditionFlagOrdered>(*edition);
+  auto isDefault = edition && FindChildValue<libmatroska::KaxEditionFlagDefault>(*edition);
+  auto isHidden  = edition && FindChildValue<libmatroska::KaxEditionFlagHidden>(*edition);
+  auto isOrdered = edition && FindChildValue<libmatroska::KaxEditionFlagOrdered>(*edition);
 
   if (isOrdered)
     flags << QY("Ordered");
@@ -85,12 +84,12 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
 
 ChapterPtr
 ChapterModel::chapterFromItem(QStandardItem *item) {
-  return std::static_pointer_cast<KaxChapterAtom>(m_elementRegistry[ registryIdFromItem(item) ]);
+  return std::static_pointer_cast<libmatroska::KaxChapterAtom>(m_elementRegistry[ registryIdFromItem(item) ]);
 }
 
 EditionPtr
 ChapterModel::editionFromItem(QStandardItem *item) {
-  return std::static_pointer_cast<KaxEditionEntry>(m_elementRegistry[ registryIdFromItem(item) ]);
+  return std::static_pointer_cast<libmatroska::KaxEditionEntry>(m_elementRegistry[ registryIdFromItem(item) ]);
 }
 
 void
@@ -101,11 +100,11 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
 
   auto flags     = QStringList{};
 
-  auto isEnabled = FindChildValue<KaxChapterFlagEnabled>(*chapter, 1);
-  auto isHidden  = FindChildValue<KaxChapterFlagHidden>(*chapter);
+  auto isEnabled = FindChildValue<libmatroska::KaxChapterFlagEnabled>(*chapter, 1);
+  auto isHidden  = FindChildValue<libmatroska::KaxChapterFlagHidden>(*chapter);
 
-  auto kStart    = FindChild<KaxChapterTimeStart>(*chapter);
-  auto kEnd      = FindChild<KaxChapterTimeEnd>(*chapter);
+  auto kStart    = FindChild<libmatroska::KaxChapterTimeStart>(*chapter);
+  auto kEnd      = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
 
   if (!isEnabled)
     flags << QY("Disabled");
@@ -140,7 +139,7 @@ void
 ChapterModel::insertEdition(int row,
                             EditionPtr const &edition) {
   auto rowItems = newRowItems();
-  rowItems[0]->setData(registerElement(std::static_pointer_cast<EbmlMaster>(edition)), Util::ChapterEditorChapterOrEditionRole);
+  rowItems[0]->setData(registerElement(std::static_pointer_cast<libebml::EbmlMaster>(edition)), Util::ChapterEditorChapterOrEditionRole);
 
   setEditionRowText(rowItems);
   insertRow(row, rowItems);
@@ -157,7 +156,7 @@ ChapterModel::insertChapter(int row,
                             ChapterPtr const &chapter,
                             QModelIndex const &parentIdx) {
   auto rowItems = newRowItems();
-  rowItems[0]->setData(registerElement(std::static_pointer_cast<EbmlMaster>(chapter)), Util::ChapterEditorChapterOrEditionRole);
+  rowItems[0]->setData(registerElement(std::static_pointer_cast<libebml::EbmlMaster>(chapter)), Util::ChapterEditorChapterOrEditionRole);
 
   setChapterRowText(rowItems);
   itemFromIndex(parentIdx)->insertRow(row, rowItems);
@@ -175,10 +174,10 @@ ChapterModel::reset() {
 }
 
 QString
-ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
+ChapterModel::chapterNameForLanguage(libmatroska::KaxChapterAtom &chapter,
                                      std::string const &language) {
   for (auto const &child : chapter) {
-    auto kDisplay = dynamic_cast<KaxChapterDisplay *>(child);
+    auto kDisplay = dynamic_cast<libmatroska::KaxChapterDisplay *>(child);
     if (!kDisplay)
       continue;
 
@@ -190,14 +189,14 @@ ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
               return (language == actualLanguage.get_language())
                   || (language == actualLanguage.get_iso639_alpha_3_code());
             }) != lists.languageCodes.end()))
-      return Q(FindChildValue<KaxChapterString>(kDisplay));
+      return Q(FindChildValue<libmatroska::KaxChapterString>(kDisplay));
   }
 
   return Q("");
 }
 
 QString
-ChapterModel::chapterDisplayName(KaxChapterAtom &chapter) {
+ChapterModel::chapterDisplayName(libmatroska::KaxChapterAtom &chapter) {
   auto chapterName = chapterNameForLanguage(chapter, "und");
 
   if (chapterName.isEmpty())
@@ -222,7 +221,7 @@ ChapterModel::removeTree(QModelIndex const &idx) {
 }
 
 void
-ChapterModel::populate(EbmlMaster &master,
+ChapterModel::populate(libebml::EbmlMaster &master,
                        bool append) {
   beginResetModel();
 
@@ -241,12 +240,12 @@ ChapterModel::populate(EbmlMaster &master,
 }
 
 void
-ChapterModel::populate(EbmlMaster &master,
+ChapterModel::populate(libebml::EbmlMaster &master,
                        QModelIndex const &parentIdx) {
   auto masterIdx = 0u;
   while (masterIdx < master.ListSize()) {
     auto element = master[masterIdx];
-    auto edition = dynamic_cast<KaxEditionEntry *>(element);
+    auto edition = dynamic_cast<libmatroska::KaxEditionEntry *>(element);
     if (edition) {
       if (!parentIdx.isValid()) {
         appendEdition(EditionPtr{edition});
@@ -256,7 +255,7 @@ ChapterModel::populate(EbmlMaster &master,
       continue;
     }
 
-    auto chapter = dynamic_cast<KaxChapterAtom *>(element);
+    auto chapter = dynamic_cast<libmatroska::KaxChapterAtom *>(element);
     if (chapter) {
       if (parentIdx.isValid()) {
         appendChapter(ChapterPtr{chapter}, parentIdx);
@@ -303,11 +302,11 @@ ChapterModel::duplicateTree(QModelIndex const &destParentIdx,
 
 void
 ChapterModel::cloneElementsForRetrieval(QModelIndex const &parentIdx,
-                                        EbmlMaster &target) {
+                                        libebml::EbmlMaster &target) {
   for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
     auto elementIdx  = index(row, 0, parentIdx);
     auto elementItem = itemFromIndex(elementIdx);
-    auto newElement  = static_cast<EbmlMaster *>(parentIdx.isValid() ? chapterFromItem(elementItem)->Clone() : editionFromItem(elementItem)->Clone());
+    auto newElement  = static_cast<libebml::EbmlMaster *>(parentIdx.isValid() ? chapterFromItem(elementItem)->Clone() : editionFromItem(elementItem)->Clone());
 
     target.PushElement(*newElement);
 
@@ -317,17 +316,17 @@ ChapterModel::cloneElementsForRetrieval(QModelIndex const &parentIdx,
 
 ChaptersPtr
 ChapterModel::cloneSubtreeForRetrieval(QModelIndex const &topIdx) {
-  auto newChapters  = std::make_shared<KaxChapters>();
+  auto newChapters  = std::make_shared<libmatroska::KaxChapters>();
   auto topItem      = itemFromIndex(topIdx);
   auto topIsEdition = !topIdx.parent().isValid();
-  auto newElement   = static_cast<EbmlMaster *>(topIsEdition ? editionFromItem(topItem)->Clone() : chapterFromItem(topItem)->Clone());
+  auto newElement   = static_cast<libebml::EbmlMaster *>(topIsEdition ? editionFromItem(topItem)->Clone() : chapterFromItem(topItem)->Clone());
 
   if (topIsEdition)
     newChapters->PushElement(*newElement);
 
   else {
-    newChapters->PushElement(*new KaxEditionEntry);
-    static_cast<KaxEditionEntry *>((*newChapters)[0])->PushElement(*newElement);
+    newChapters->PushElement(*new libmatroska::KaxEditionEntry);
+    static_cast<libmatroska::KaxEditionEntry *>((*newChapters)[0])->PushElement(*newElement);
   }
 
   cloneElementsForRetrieval(topIdx, *newElement);
@@ -342,7 +341,7 @@ ChapterModel::collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx,
   for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
     auto elementIdx  = index(row, 0, parentIdx);
     auto elementItem = itemFromIndex(elementIdx);
-    auto uid         = !parentIdx.isValid() ? FindChildValue<KaxEditionUID>(*editionFromItem(elementItem)) : FindChildValue<KaxChapterUID>(*chapterFromItem(elementItem));
+    auto uid         = !parentIdx.isValid() ? FindChildValue<libmatroska::KaxEditionUID>(*editionFromItem(elementItem)) : FindChildValue<libmatroska::KaxChapterUID>(*chapterFromItem(elementItem));
 
     if (uid) {
       if (!parentIdx.isValid())
@@ -356,11 +355,11 @@ ChapterModel::collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx,
 }
 
 void
-ChapterModel::fixEditionAndChapterUIDs(EbmlMaster &master,
+ChapterModel::fixEditionAndChapterUIDs(libebml::EbmlMaster &master,
                                        QSet<uint64_t> &usedEditionUIDs,
                                        QSet<uint64_t> &usedChapterUIDs) {
-  auto isEdition  = dynamic_cast<KaxEditionEntry *>(&master);
-  auto uidElement = isEdition ? static_cast<EbmlUInteger *>(FindChild<KaxEditionUID>(master)) : static_cast<EbmlUInteger *>(FindChild<KaxChapterUID>(master));
+  auto isEdition  = dynamic_cast<libmatroska::KaxEditionEntry *>(&master);
+  auto uidElement = isEdition ? static_cast<libebml::EbmlUInteger *>(FindChild<libmatroska::KaxEditionUID>(master)) : static_cast<libebml::EbmlUInteger *>(FindChild<libmatroska::KaxChapterUID>(master));
 
   if (uidElement && uidElement->GetValue()) {
     auto &set = isEdition ? usedEditionUIDs : usedChapterUIDs;
@@ -378,12 +377,12 @@ ChapterModel::fixEditionAndChapterUIDs(EbmlMaster &master,
   }
 
   for (auto & child : master)
-    if (dynamic_cast<EbmlMaster *>(child))
-      fixEditionAndChapterUIDs(*dynamic_cast<EbmlMaster *>(child), usedEditionUIDs, usedChapterUIDs);
+    if (dynamic_cast<libebml::EbmlMaster *>(child))
+      fixEditionAndChapterUIDs(*dynamic_cast<libebml::EbmlMaster *>(child), usedEditionUIDs, usedChapterUIDs);
 }
 
 void
-ChapterModel::fixEditionAndChapterUIDs(EbmlMaster &master) {
+ChapterModel::fixEditionAndChapterUIDs(libebml::EbmlMaster &master) {
   QSet<uint64_t> usedEditionUIDs, usedChapterUIDs;
 
   collectUsedEditionAndChapterUIDs({}, usedEditionUIDs, usedChapterUIDs);
@@ -392,7 +391,7 @@ ChapterModel::fixEditionAndChapterUIDs(EbmlMaster &master) {
 
 ChaptersPtr
 ChapterModel::allChapters() {
-  auto chapters = std::make_shared<KaxChapters>();
+  auto chapters = std::make_shared<libmatroska::KaxChapters>();
   cloneElementsForRetrieval(QModelIndex{}, *chapters);
 
   mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(*chapters);
@@ -407,18 +406,18 @@ ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
     if (!element)
       return;
 
-    if (Is<KaxChapterAtom>(*element) && !FindChildValue<KaxChapterUID>(*element, 0))
-      DeleteChildren<KaxChapterUID>(*element);
+    if (Is<libmatroska::KaxChapterAtom>(*element) && !FindChildValue<libmatroska::KaxChapterUID>(*element, 0))
+      DeleteChildren<libmatroska::KaxChapterUID>(*element);
 
-    else if (Is<KaxEditionEntry>(*element) && !FindChildValue<KaxEditionUID>(*element, 0))
-      DeleteChildren<KaxEditionUID>(*element);
+    else if (Is<libmatroska::KaxEditionEntry>(*element) && !FindChildValue<libmatroska::KaxEditionUID>(*element, 0))
+      DeleteChildren<libmatroska::KaxEditionUID>(*element);
 
     fix_mandatory_elements(element.get());
   });
 }
 
 qulonglong
-ChapterModel::registerElement(std::shared_ptr<EbmlMaster> const &element) {
+ChapterModel::registerElement(std::shared_ptr<libebml::EbmlMaster> const &element) {
   m_elementRegistry[ ++m_nextElementRegistryIdx ] = element;
   return m_nextElementRegistryIdx;
 }

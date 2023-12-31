@@ -21,8 +21,6 @@
 #include "output/p_dts.h"
 #include "common/strings/formatting.h"
 
-using namespace libmatroska;
-
 dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    mtx::dts::header_t const &dtsheader)

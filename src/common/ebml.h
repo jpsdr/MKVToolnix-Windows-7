@@ -227,13 +227,13 @@ GetChildEmptyIfNew(libebml::EbmlMaster *m) {
 template <typename A>A &
 GetFirstOrNextChild(libebml::EbmlMaster &master,
                     A *previous_child) {
-  return !previous_child ? GetChild<A>(master) : GetNextChild<A>(master, *previous_child);
+  return !previous_child ? GetChild<A>(master) : libebml::GetNextChild<A>(master, *previous_child);
 }
 
 template <typename A>A &
 GetFirstOrNextChild(libebml::EbmlMaster *master,
                     A *previous_child) {
-  return !previous_child ? GetChild<A>(*master) : GetNextChild<A>(*master, *previous_child);
+  return !previous_child ? GetChild<A>(*master) : libebml::GetNextChild<A>(*master, *previous_child);
 }
 
 template<typename T>
@@ -456,13 +456,13 @@ clone(std::unique_ptr<T> const &e) {
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 bool
-change_values(EbmlMaster &master,
+change_values(libebml::EbmlMaster &master,
               std::unordered_map<Tvalue, Tvalue> const &changes) {
   auto modified = false;
 
   for (auto const &child : master) {
-    if (dynamic_cast<EbmlMaster *>(child)) {
-      if (change_values<Telement>(static_cast<EbmlMaster &>(*child), changes))
+    if (dynamic_cast<libebml::EbmlMaster *>(child)) {
+      if (change_values<Telement>(static_cast<libebml::EbmlMaster &>(*child), changes))
         modified = true;
 
     } else if (dynamic_cast<Telement *>(child)) {
@@ -483,8 +483,8 @@ change_values(EbmlMaster &master,
   return modified;
 }
 
-bool has_default_value(EbmlElement const &elt);
-bool has_default_value(EbmlElement const *elt);
+bool has_default_value(libebml::EbmlElement const &elt);
+bool has_default_value(libebml::EbmlElement const *elt);
 
 bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle);
 
@@ -492,4 +492,9 @@ bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle
 libebml::EbmlElement::ShouldWrite render_should_write_arg(bool with_default);
 #else
 bool render_should_write_arg(bool with_default);
+
+namespace libebml {
+using filepos_t = ::filepos_t;
+}
+
 #endif

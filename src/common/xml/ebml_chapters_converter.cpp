@@ -25,8 +25,6 @@
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
 
-using namespace libmatroska;
-
 namespace mtx::xml {
 
 ebml_chapters_converter_c::ebml_chapters_converter_c()
@@ -76,60 +74,60 @@ ebml_chapters_converter_c::fix_xml(document_cptr &doc)
 }
 
 void
-ebml_chapters_converter_c::fix_ebml(EbmlMaster &chapters)
+ebml_chapters_converter_c::fix_ebml(libebml::EbmlMaster &chapters)
   const {
   for (auto element : chapters)
-    if (dynamic_cast<KaxEditionEntry *>(element))
-      fix_edition_entry(static_cast<KaxEditionEntry &>(*element));
+    if (dynamic_cast<libmatroska::KaxEditionEntry *>(element))
+      fix_edition_entry(static_cast<libmatroska::KaxEditionEntry &>(*element));
 }
 
 void
-ebml_chapters_converter_c::fix_edition_entry(KaxEditionEntry &eentry)
+ebml_chapters_converter_c::fix_edition_entry(libmatroska::KaxEditionEntry &eentry)
   const {
   bool atom_found = false;
 
-  KaxEditionUID *euid = nullptr;
+  libmatroska::KaxEditionUID *euid = nullptr;
   for (auto element : eentry)
-    if (dynamic_cast<KaxEditionUID *>(element)) {
-      euid = static_cast<KaxEditionUID *>(element);
+    if (dynamic_cast<libmatroska::KaxEditionUID *>(element)) {
+      euid = static_cast<libmatroska::KaxEditionUID *>(element);
       if (!is_unique_number(euid->GetValue(), UNIQUE_EDITION_IDS)) {
         mxwarn(fmt::format(Y("Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"), euid->GetValue()));
         euid->SetValue(create_unique_number(UNIQUE_EDITION_IDS));
       }
 
-    } else if (dynamic_cast<KaxEditionDisplay *>(element))
-      fix_edition_display(static_cast<KaxEditionDisplay &>(*element));
+    } else if (dynamic_cast<libmatroska::KaxEditionDisplay *>(element))
+      fix_edition_display(static_cast<libmatroska::KaxEditionDisplay &>(*element));
 
-    else if (dynamic_cast<KaxChapterAtom *>(element)) {
+    else if (dynamic_cast<libmatroska::KaxChapterAtom *>(element)) {
       atom_found = true;
-      fix_atom(static_cast<KaxChapterAtom &>(*element));
+      fix_atom(static_cast<libmatroska::KaxChapterAtom &>(*element));
     }
 
   if (!atom_found)
     throw conversion_x{Y("At least one <ChapterAtom> element is needed.")};
 
   if (!euid)
-    eentry.PushElement((new KaxEditionUID)->SetValue(create_unique_number(UNIQUE_EDITION_IDS)));
+    eentry.PushElement((new libmatroska::KaxEditionUID)->SetValue(create_unique_number(UNIQUE_EDITION_IDS)));
 }
 
 void
-ebml_chapters_converter_c::fix_atom(KaxChapterAtom &atom)
+ebml_chapters_converter_c::fix_atom(libmatroska::KaxChapterAtom &atom)
   const {
   for (auto element : atom)
-    if (dynamic_cast<KaxChapterAtom *>(element))
-      fix_atom(*static_cast<KaxChapterAtom *>(element));
+    if (dynamic_cast<libmatroska::KaxChapterAtom *>(element))
+      fix_atom(*static_cast<libmatroska::KaxChapterAtom *>(element));
 
-  if (!FindChild<KaxChapterTimeStart>(atom))
+  if (!FindChild<libmatroska::KaxChapterTimeStart>(atom))
     throw conversion_x{Y("<ChapterAtom> is missing the <ChapterTimeStart> child.")};
 
-  if (!FindChild<KaxChapterUID>(atom))
-    atom.PushElement((new KaxChapterUID)->SetValue(create_unique_number(UNIQUE_CHAPTER_IDS)));
+  if (!FindChild<libmatroska::KaxChapterUID>(atom))
+    atom.PushElement((new libmatroska::KaxChapterUID)->SetValue(create_unique_number(UNIQUE_CHAPTER_IDS)));
 
-  auto ctrack = FindChild<KaxChapterTrack>(atom);
-  if (ctrack && !FindChild<KaxChapterTrackNumber>(ctrack))
+  auto ctrack = FindChild<libmatroska::KaxChapterTrack>(atom);
+  if (ctrack && !FindChild<libmatroska::KaxChapterTrackNumber>(ctrack))
     throw conversion_x{Y("<ChapterTrack> is missing the <ChapterTrackNumber> child.")};
 
-  auto cdisplay = FindChild<KaxChapterDisplay>(atom);
+  auto cdisplay = FindChild<libmatroska::KaxChapterDisplay>(atom);
   if (cdisplay)
     fix_chapter_display(*cdisplay);
 }
@@ -169,7 +167,7 @@ ebml_chapters_converter_c::fix_chapter_display_languages_and_countries(libmatros
 void
 ebml_chapters_converter_c::fix_chapter_display(libmatroska::KaxChapterDisplay &display)
   const {
-  if (!FindChild<KaxChapterString>(display))
+  if (!FindChild<libmatroska::KaxChapterString>(display))
     throw conversion_x{Y("<ChapterDisplay> is missing the <ChapterString> child.")};
 
   fix_chapter_display_languages_and_countries(display);
@@ -190,14 +188,14 @@ ebml_chapters_converter_c::fix_edition_display_languages(libmatroska::KaxEdition
 void
 ebml_chapters_converter_c::fix_edition_display(libmatroska::KaxEditionDisplay &display)
   const {
-  if (!FindChild<KaxEditionString>(display))
+  if (!FindChild<libmatroska::KaxEditionString>(display))
     throw conversion_x{Y("<EditionDisplay> is missing the <EditionString> child.")};
 
   fix_edition_display_languages(display);
 }
 
 void
-ebml_chapters_converter_c::write_xml(KaxChapters &chapters,
+ebml_chapters_converter_c::write_xml(libmatroska::KaxChapters &chapters,
                                      mm_io_c &out) {
   document_cptr doc(new pugi::xml_document);
 
@@ -240,8 +238,8 @@ ebml_chapters_converter_c::parse_file(std::string const &file_name,
   auto parse = [&file_name]() -> auto {
     auto master = ebml_chapters_converter_c{}.to_ebml(file_name, "Chapters");
     sort_ebml_master(master.get());
-    fix_mandatory_elements(static_cast<KaxChapters *>(master.get()));
-    return std::dynamic_pointer_cast<KaxChapters>(master);
+    fix_mandatory_elements(static_cast<libmatroska::KaxChapters *>(master.get()));
+    return std::dynamic_pointer_cast<libmatroska::KaxChapters>(master);
   };
 
   if (throw_on_error)

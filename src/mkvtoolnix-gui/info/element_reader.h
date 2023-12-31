@@ -15,11 +15,11 @@ class ElementReader : public QObject, public Util::Runnable {
 
 protected:
   mm_io_c &m_in;
-  EbmlElement &m_element;
+  libebml::EbmlElement &m_element;
   QModelIndex m_idx;
 
 public:
-  explicit ElementReader(mm_io_c &in, EbmlElement &m_element, QModelIndex const &idx);
+  explicit ElementReader(mm_io_c &in, libebml::EbmlElement &m_element, QModelIndex const &idx);
   virtual ~ElementReader();
 
   virtual void run() override;

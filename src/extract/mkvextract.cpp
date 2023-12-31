@@ -28,8 +28,6 @@
 #include "extract/extract_cli_parser.h"
 #include "extract/mkvextract.h"
 
-using namespace libmatroska;
-
 enum operation_mode_e {
   MODE_TRACKS,
   MODE_TAGS,
@@ -86,7 +84,7 @@ open_output_file(std::string const &file_name) {
 }
 
 void
-show_element(EbmlElement *l,
+show_element(libebml::EbmlElement *l,
              int level,
              const std::string &info) {
   if (9 < level)

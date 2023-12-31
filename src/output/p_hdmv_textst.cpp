@@ -22,8 +22,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_hdmv_textst.h"
 
-using namespace libmatroska;
-
 hdmv_textst_packetizer_c::hdmv_textst_packetizer_c(generic_reader_c *p_reader,
                                                    track_info_c &p_ti,
                                                    memory_cptr const &dialog_style_segment)

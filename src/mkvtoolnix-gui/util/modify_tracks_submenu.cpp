@@ -33,14 +33,14 @@ ModifyTracksSubmenu::setupTrack(QMenu &subMenu) {
   m_toggleVisualImpairedFlag  ->setShortcut(Q("Ctrl+Alt+F, V"));
   m_toggleTextDescriptionsFlag->setShortcut(Q("Ctrl+Alt+F, T"));
 
-  m_toggleTrackEnabledFlag    ->setData(libmatroska::EBML_ID(KaxTrackFlagEnabled).GetValue());
-  m_toggleDefaultTrackFlag    ->setData(libmatroska::EBML_ID(KaxTrackFlagDefault).GetValue());
-  m_toggleForcedDisplayFlag   ->setData(libmatroska::EBML_ID(KaxTrackFlagForced).GetValue());
-  m_toggleCommentaryFlag      ->setData(libmatroska::EBML_ID(KaxFlagCommentary).GetValue());
-  m_toggleOriginalFlag        ->setData(libmatroska::EBML_ID(KaxFlagOriginal).GetValue());
-  m_toggleHearingImpairedFlag ->setData(libmatroska::EBML_ID(KaxFlagHearingImpaired).GetValue());
-  m_toggleVisualImpairedFlag  ->setData(libmatroska::EBML_ID(KaxFlagVisualImpaired).GetValue());
-  m_toggleTextDescriptionsFlag->setData(libmatroska::EBML_ID(KaxFlagTextDescriptions).GetValue());
+  m_toggleTrackEnabledFlag    ->setData(EBML_ID(libmatroska::KaxTrackFlagEnabled).GetValue());
+  m_toggleDefaultTrackFlag    ->setData(EBML_ID(libmatroska::KaxTrackFlagDefault).GetValue());
+  m_toggleForcedDisplayFlag   ->setData(EBML_ID(libmatroska::KaxTrackFlagForced).GetValue());
+  m_toggleCommentaryFlag      ->setData(EBML_ID(libmatroska::KaxFlagCommentary).GetValue());
+  m_toggleOriginalFlag        ->setData(EBML_ID(libmatroska::KaxFlagOriginal).GetValue());
+  m_toggleHearingImpairedFlag ->setData(EBML_ID(libmatroska::KaxFlagHearingImpaired).GetValue());
+  m_toggleVisualImpairedFlag  ->setData(EBML_ID(libmatroska::KaxFlagVisualImpaired).GetValue());
+  m_toggleTextDescriptionsFlag->setData(EBML_ID(libmatroska::KaxFlagTextDescriptions).GetValue());
 
   subMenu.addAction(m_toggleTrackEnabledFlag);
   subMenu.addAction(m_toggleDefaultTrackFlag);

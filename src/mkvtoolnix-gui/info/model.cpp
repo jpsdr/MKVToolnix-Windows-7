@@ -13,8 +13,6 @@
 #include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-using namespace libmatroska;
-
 namespace mtx::gui::Info {
 
 class ModelPrivate {
@@ -44,7 +42,7 @@ Model::info() {
   return *p_func()->m_info;
 }
 
-EbmlElement *
+libebml::EbmlElement *
 Model::elementFromIndex(QModelIndex const &idx) {
   if (!idx.isValid())
     return {};
@@ -56,10 +54,10 @@ Model::elementFromIndex(QModelIndex const &idx) {
   return {};
 }
 
-EbmlElement *
+libebml::EbmlElement *
 Model::elementFromItem(QStandardItem &item)
   const {
-  return reinterpret_cast<EbmlElement *>(item.data(Roles::Element).toULongLong());
+  return reinterpret_cast<libebml::EbmlElement *>(item.data(Roles::Element).toULongLong());
 }
 
 QList<QStandardItem *>
@@ -108,7 +106,7 @@ Model::retranslateUi() {
 
 void
 Model::setItemsFromElement(QList<QStandardItem *> &items,
-                           EbmlElement &element) {
+                           libebml::EbmlElement &element) {
   auto p             = p_func();
   auto nameAndStatus = elementName(element);
   auto locale        = QLocale::system();
@@ -125,7 +123,7 @@ Model::setItemsFromElement(QList<QStandardItem *> &items,
   items[4]->setTextAlignment(Qt::AlignRight);
 
   items[0]->setData(reinterpret_cast<qulonglong>(&element),          Roles::Element);
-  items[0]->setData(static_cast<qint64>(EbmlId(element).GetValue()), Roles::EbmlId);
+  items[0]->setData(static_cast<qint64>(libebml::EbmlId(element).GetValue()), Roles::EbmlId);
 }
 
 void
@@ -143,7 +141,7 @@ Model::reset() {
 
 void
 Model::addElement(int level,
-                  EbmlElement *element,
+                  libebml::EbmlElement *element,
                   bool readFully) {
   auto p = p_func();
 
@@ -153,7 +151,7 @@ Model::addElement(int level,
   auto items = newItems();
   setItemsFromElement(items, *element);
 
-  if (!readFully && dynamic_cast<EbmlMaster *>(element)) {
+  if (!readFully && dynamic_cast<libebml::EbmlMaster *>(element)) {
     items[0]->setData(true,  Roles::DeferredLoad);
     items[0]->setData(false, Roles::Loaded);
   }
@@ -202,7 +200,7 @@ Model::addElementInfo(int level,
 }
 
 void
-Model::addFrameInfo(DataBuffer &buffer,
+Model::addFrameInfo(libmatroska::DataBuffer &buffer,
                     int64_t position) {
   auto p = p_func();
 
@@ -249,7 +247,7 @@ Model::addFrameInfoFor(T &block) {
 
 void
 Model::addElementStructure(QStandardItem &parent,
-                           EbmlElement &element) {
+                           libebml::EbmlElement &element) {
   auto p = p_func();
 
   p->m_info->run_generic_pre_processors(element);
@@ -261,16 +259,16 @@ Model::addElementStructure(QStandardItem &parent,
 
   p->m_treeInsertionPosition << items[0];
 
-  auto master = dynamic_cast<EbmlMaster *>(&element);
+  auto master = dynamic_cast<libebml::EbmlMaster *>(&element);
   if (master) {
     for (auto child : *master)
       addElementStructure(*items[0], *child);
 
-  } else if (dynamic_cast<KaxSimpleBlock *>(&element))
-    addFrameInfoFor(static_cast<KaxSimpleBlock &>(element));
+  } else if (dynamic_cast<libmatroska::KaxSimpleBlock *>(&element))
+    addFrameInfoFor(static_cast<libmatroska::KaxSimpleBlock &>(element));
 
-  else if (dynamic_cast<KaxBlock *>(&element))
-    addFrameInfoFor(static_cast<KaxBlock &>(element));
+  else if (dynamic_cast<libmatroska::KaxBlock *>(&element))
+    addFrameInfoFor(static_cast<libmatroska::KaxBlock &>(element));
 
   p->m_info->run_generic_post_processors(element);
 
@@ -290,7 +288,7 @@ Model::hasChildren(const QModelIndex &parent)
   if (!item->data(Roles::Loaded).toBool())
     return true;
 
-  auto element = dynamic_cast<EbmlMaster *>(elementFromItem(*item));
+  auto element = dynamic_cast<libebml::EbmlMaster *>(elementFromItem(*item));
   return element ? !!element->ListSize() : false;
 }
 
@@ -306,7 +304,7 @@ Model::forgetLevel1ElementChildren(QModelIndex const &idx) {
   item->removeRows(0, item->rowCount());
   item->setData(false, Roles::Loaded);
 
-  auto element = dynamic_cast<EbmlMaster *>(elementFromItem(*item));
+  auto element = dynamic_cast<libebml::EbmlMaster *>(elementFromItem(*item));
   if (!element)
     return;
 
@@ -322,7 +320,7 @@ Model::addChildrenOfLevel1Element(QModelIndex const &idx) {
 
   auto p       = p_func();
   auto element = elementFromIndex(idx);
-  auto master  = dynamic_cast<EbmlMaster *>(element);
+  auto master  = dynamic_cast<libebml::EbmlMaster *>(element);
   auto parent  = itemFromIndex(idx);
   auto items   = itemsForRow(idx);
 
@@ -341,13 +339,13 @@ Model::addChildrenOfLevel1Element(QModelIndex const &idx) {
 }
 
 std::pair<QString, bool>
-Model::elementName(EbmlElement &element) {
+Model::elementName(libebml::EbmlElement &element) {
   auto name = kax_element_names_c::get(element);
 
   if (name.empty())
     return { Q(fmt::format(Y("Unknown element (ID: 0x{0})"), kax_info_c::format_ebml_id_as_hex(element))), false };
 
-  if (dynamic_cast<EbmlDummy *>(&element))
+  if (dynamic_cast<libebml::EbmlDummy *>(&element))
     return { Q(fmt::format(Y("Known element, but invalid at this position: {0} (ID: 0x{1})"), name, kax_info_c::format_ebml_id_as_hex(element))), false };
 
   return { Q(name), true };

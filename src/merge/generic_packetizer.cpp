@@ -35,8 +35,6 @@
 #include "merge/output_control.h"
 #include "merge/webm.h"
 
-using namespace libmatroska;
-
 namespace {
 
 constexpr auto
@@ -361,11 +359,11 @@ generic_packetizer_c::set_tag_track_uid() {
   mtx::tags::convert_old(*m_ti.m_tags);
   size_t idx_tags;
   for (idx_tags = 0; m_ti.m_tags->ListSize() > idx_tags; ++idx_tags) {
-    KaxTag *tag = (KaxTag *)(*m_ti.m_tags)[idx_tags];
+    libmatroska::KaxTag *tag = (libmatroska::KaxTag *)(*m_ti.m_tags)[idx_tags];
 
     mtx::tags::remove_track_uid_targets(tag);
 
-    GetChild<KaxTagTrackUID>(GetChild<KaxTagTargets>(tag)).SetValue(m_huid);
+    GetChild<libmatroska::KaxTagTrackUID>(GetChild<libmatroska::KaxTagTargets>(tag)).SetValue(m_huid);
 
     fix_mandatory_elements(tag);
 
@@ -383,7 +381,7 @@ generic_packetizer_c::set_uid(uint64_t uid) {
   add_unique_number(uid, UNIQUE_TRACK_IDS);
   m_huid = uid;
   if (m_track_entry)
-    GetChild<KaxTrackUID>(m_track_entry).SetValue(m_huid);
+    GetChild<libmatroska::KaxTrackUID>(m_track_entry).SetValue(m_huid);
 
   return true;
 }
@@ -431,14 +429,14 @@ void
 generic_packetizer_c::set_track_name(const std::string &name) {
   m_ti.m_track_name = name;
   if (m_track_entry && !name.empty())
-    GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
+    GetChild<libmatroska::KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
 }
 
 void
 generic_packetizer_c::set_codec_id(const std::string &id) {
   m_hcodec_id = id;
   if (m_track_entry && !id.empty())
-    GetChild<KaxCodecID>(m_track_entry).SetValue(m_hcodec_id);
+    GetChild<libmatroska::KaxCodecID>(m_track_entry).SetValue(m_hcodec_id);
 }
 
 void
@@ -447,7 +445,7 @@ generic_packetizer_c::set_codec_private(memory_cptr const &buffer) {
     m_hcodec_private = buffer->clone();
 
     if (m_track_entry)
-      GetChild<KaxCodecPrivate>(*m_track_entry).CopyBuffer(static_cast<binary *>(m_hcodec_private->get_buffer()), m_hcodec_private->get_size());
+      GetChild<libmatroska::KaxCodecPrivate>(*m_track_entry).CopyBuffer(static_cast<uint8_t *>(m_hcodec_private->get_buffer()), m_hcodec_private->get_size());
 
   } else
     m_hcodec_private.reset();
@@ -457,7 +455,7 @@ void
 generic_packetizer_c::set_codec_name(std::string const &name) {
   m_hcodec_name = name;
   if (m_track_entry && !name.empty())
-    GetChild<KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
+    GetChild<libmatroska::KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
 }
 
 void
@@ -470,9 +468,9 @@ generic_packetizer_c::set_track_default_duration(int64_t def_dur,
 
   if (m_track_entry) {
     if (m_htrack_default_duration)
-      GetChild<KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
+      GetChild<libmatroska::KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
     else
-      DeleteChildren<KaxTrackDefaultDuration>(m_track_entry);
+      DeleteChildren<libmatroska::KaxTrackDefaultDuration>(m_track_entry);
   }
 }
 
@@ -487,7 +485,7 @@ generic_packetizer_c::set_track_default_flag(bool default_track,
                                              option_source_e source) {
   m_ti.m_default_track.set(default_track, source);
   if (m_track_entry)
-    GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(m_ti.m_default_track.get() ? 1 : 0);
+    GetChild<libmatroska::KaxTrackFlagDefault>(m_track_entry).SetValue(m_ti.m_default_track.get() ? 1 : 0);
 }
 
 void
@@ -495,7 +493,7 @@ generic_packetizer_c::set_track_forced_flag(bool forced_track,
                                             option_source_e source) {
   m_ti.m_forced_track.set(forced_track, source);
   if (m_track_entry)
-    GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.get() ? 1 : 0);
+    GetChild<libmatroska::KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.get() ? 1 : 0);
 }
 
 void
@@ -503,7 +501,7 @@ generic_packetizer_c::set_track_enabled_flag(bool enabled_track,
                                              option_source_e source) {
   m_ti.m_enabled_track.set(enabled_track, source);
   if (m_track_entry)
-    GetChild<KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track.get() ? 1 : 0);
+    GetChild<libmatroska::KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track.get() ? 1 : 0);
 }
 
 void
@@ -511,7 +509,7 @@ generic_packetizer_c::set_hearing_impaired_flag(bool hearing_impaired_flag,
                                                 option_source_e source) {
   m_ti.m_hearing_impaired_flag.set(hearing_impaired_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagHearingImpaired>(m_track_entry).SetValue(m_ti.m_hearing_impaired_flag.get() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagHearingImpaired>(m_track_entry).SetValue(m_ti.m_hearing_impaired_flag.get() ? 1 : 0);
 }
 
 void
@@ -519,7 +517,7 @@ generic_packetizer_c::set_visual_impaired_flag(bool visual_impaired_flag,
                                                option_source_e source) {
   m_ti.m_visual_impaired_flag.set(visual_impaired_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagVisualImpaired>(m_track_entry).SetValue(m_ti.m_visual_impaired_flag.get() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagVisualImpaired>(m_track_entry).SetValue(m_ti.m_visual_impaired_flag.get() ? 1 : 0);
 }
 
 void
@@ -527,7 +525,7 @@ generic_packetizer_c::set_text_descriptions_flag(bool text_descriptions_flag,
                                                  option_source_e source) {
   m_ti.m_text_descriptions_flag.set(text_descriptions_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagTextDescriptions>(m_track_entry).SetValue(m_ti.m_text_descriptions_flag.get() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagTextDescriptions>(m_track_entry).SetValue(m_ti.m_text_descriptions_flag.get() ? 1 : 0);
 }
 
 void
@@ -535,7 +533,7 @@ generic_packetizer_c::set_original_flag(bool original_flag,
                                         option_source_e source) {
   m_ti.m_original_flag.set(original_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagOriginal>(m_track_entry).SetValue(m_ti.m_original_flag.get() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagOriginal>(m_track_entry).SetValue(m_ti.m_original_flag.get() ? 1 : 0);
 }
 
 void
@@ -543,49 +541,49 @@ generic_packetizer_c::set_commentary_flag(bool commentary_flag,
                                           option_source_e source) {
   m_ti.m_commentary_flag.set(commentary_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagCommentary>(m_track_entry).SetValue(m_ti.m_commentary_flag.get() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagCommentary>(m_track_entry).SetValue(m_ti.m_commentary_flag.get() ? 1 : 0);
 }
 
 void
 generic_packetizer_c::set_track_seek_pre_roll(timestamp_c const &seek_pre_roll) {
   m_seek_pre_roll = seek_pre_roll;
   if (m_track_entry)
-    GetChild<KaxSeekPreRoll>(m_track_entry).SetValue(seek_pre_roll.to_ns());
+    GetChild<libmatroska::KaxSeekPreRoll>(m_track_entry).SetValue(seek_pre_roll.to_ns());
 }
 
 void
 generic_packetizer_c::set_codec_delay(timestamp_c const &codec_delay) {
   m_codec_delay = codec_delay;
   if (m_track_entry)
-    GetChild<KaxCodecDelay>(m_track_entry).SetValue(codec_delay.to_ns());
+    GetChild<libmatroska::KaxCodecDelay>(m_track_entry).SetValue(codec_delay.to_ns());
 }
 
 void
 generic_packetizer_c::set_audio_sampling_freq(double freq) {
   m_haudio_sampling_freq = freq;
   if (m_track_entry)
-    GetChild<KaxAudioSamplingFreq>(GetChild<KaxTrackAudio>(m_track_entry)).SetValue(m_haudio_sampling_freq);
+    GetChild<libmatroska::KaxAudioSamplingFreq>(GetChild<libmatroska::KaxTrackAudio>(m_track_entry)).SetValue(m_haudio_sampling_freq);
 }
 
 void
 generic_packetizer_c::set_audio_output_sampling_freq(double freq) {
   m_haudio_output_sampling_freq = freq;
   if (m_track_entry)
-    GetChild<KaxAudioOutputSamplingFreq>(GetChild<KaxTrackAudio>(m_track_entry)).SetValue(m_haudio_output_sampling_freq);
+    GetChild<libmatroska::KaxAudioOutputSamplingFreq>(GetChild<libmatroska::KaxTrackAudio>(m_track_entry)).SetValue(m_haudio_output_sampling_freq);
 }
 
 void
 generic_packetizer_c::set_audio_channels(int channels) {
   m_haudio_channels = channels;
   if (m_track_entry)
-    GetChild<KaxAudioChannels>(GetChild<KaxTrackAudio>(*m_track_entry)).SetValue(m_haudio_channels);
+    GetChild<libmatroska::KaxAudioChannels>(GetChild<libmatroska::KaxTrackAudio>(*m_track_entry)).SetValue(m_haudio_channels);
 }
 
 void
 generic_packetizer_c::set_audio_bit_depth(int bit_depth) {
   m_haudio_bit_depth = bit_depth;
   if (m_track_entry)
-    GetChild<KaxAudioBitDepth>(GetChild<KaxTrackAudio>(*m_track_entry)).SetValue(m_haudio_bit_depth);
+    GetChild<libmatroska::KaxAudioBitDepth>(GetChild<libmatroska::KaxTrackAudio>(*m_track_entry)).SetValue(m_haudio_bit_depth);
 }
 
 void
@@ -594,20 +592,20 @@ generic_packetizer_c::set_audio_emphasis(audio_emphasis_c::mode_e audio_emphasis
   m_ti.m_audio_emphasis.set(audio_emphasis, source);
 
   if (m_track_entry && (audio_emphasis_c::unspecified != m_ti.m_audio_emphasis.get()))
-    set_audio_emphasis_impl(GetChild<KaxTrackAudio>(*m_track_entry), m_ti.m_audio_emphasis.get());
+    set_audio_emphasis_impl(GetChild<libmatroska::KaxTrackAudio>(*m_track_entry), m_ti.m_audio_emphasis.get());
 }
 
 void
-generic_packetizer_c::set_audio_emphasis_impl(EbmlMaster &audio,
+generic_packetizer_c::set_audio_emphasis_impl(libebml::EbmlMaster &audio,
                                               audio_emphasis_c::mode_e audio_emphasis) {
-  GetChild<KaxEmphasis>(audio).SetValue(static_cast<unsigned int>(audio_emphasis));
+  GetChild<libmatroska::KaxEmphasis>(audio).SetValue(static_cast<unsigned int>(audio_emphasis));
 }
 
 void
 generic_packetizer_c::set_video_interlaced_flag(bool interlaced) {
   m_hvideo_interlaced_flag = interlaced ? 1 : 0;
   if (m_track_entry)
-    GetChild<KaxVideoFlagInterlaced>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_interlaced_flag);
+    GetChild<libmatroska::KaxVideoFlagInterlaced>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_interlaced_flag);
 }
 
 void
@@ -616,8 +614,8 @@ generic_packetizer_c::set_video_pixel_dimensions(int width,
   m_hvideo_pixel_width  = width;
   m_hvideo_pixel_height = height;
   if (m_track_entry) {
-    GetChild<KaxVideoPixelHeight>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_height);
-    GetChild<KaxVideoPixelWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_width);
+    GetChild<libmatroska::KaxVideoPixelHeight>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_height);
+    GetChild<libmatroska::KaxVideoPixelWidth>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_width);
   }
 }
 
@@ -641,12 +639,12 @@ generic_packetizer_c::set_video_display_dimensions(int width,
   m_hvideo_display_unit            = unit;
 
   if (m_track_entry) {
-    GetChild<KaxVideoDisplayWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_width);
-    GetChild<KaxVideoDisplayHeight>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_height);
+    GetChild<libmatroska::KaxVideoDisplayWidth>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_width);
+    GetChild<libmatroska::KaxVideoDisplayHeight>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_height);
 
     if (   (unit != ddu_pixels)
-        || (unit != FindChildValue<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry), ddu_pixels)))
-      GetChild<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_unit);
+        || (unit != FindChildValue<libmatroska::KaxVideoDisplayUnit>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry), ddu_pixels)))
+      GetChild<libmatroska::KaxVideoDisplayUnit>(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_unit);
   }
 }
 
@@ -675,9 +673,9 @@ generic_packetizer_c::set_language(mtx::bcp47::language_c const &language) {
   if (!m_track_entry || !language.is_valid())
     return;
 
-  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(language.get_closest_iso639_2_alpha_3_code());
+  GetChild<libmatroska::KaxTrackLanguage>(m_track_entry).SetValue(language.get_closest_iso639_2_alpha_3_code());
   if (!mtx::bcp47::language_c::is_disabled())
-    GetChild<KaxLanguageIETF>(m_track_entry).SetValue(language.format());
+    GetChild<libmatroska::KaxLanguageIETF>(m_track_entry).SetValue(language.format());
 }
 
 void
@@ -689,13 +687,13 @@ generic_packetizer_c::set_video_pixel_cropping(int left,
   m_ti.m_pixel_cropping.set(pixel_crop_t{left, top, right, bottom}, source);
 
   if (m_track_entry) {
-    KaxTrackVideo &video = GetChild<KaxTrackVideo>(m_track_entry);
+    libmatroska::KaxTrackVideo &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
     auto crop            = m_ti.m_pixel_cropping.get();
 
-    GetChild<KaxVideoPixelCropLeft  >(video).SetValue(crop.left);
-    GetChild<KaxVideoPixelCropTop   >(video).SetValue(crop.top);
-    GetChild<KaxVideoPixelCropRight >(video).SetValue(crop.right);
-    GetChild<KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
+    GetChild<libmatroska::KaxVideoPixelCropLeft  >(video).SetValue(crop.left);
+    GetChild<libmatroska::KaxVideoPixelCropTop   >(video).SetValue(crop.top);
+    GetChild<libmatroska::KaxVideoPixelCropRight >(video).SetValue(crop.right);
+    GetChild<libmatroska::KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
   }
 }
 
@@ -706,9 +704,9 @@ generic_packetizer_c::set_video_color_matrix(int matrix_index,
   if (   m_track_entry
       && (matrix_index >= 0)
       && (matrix_index <= 10)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourMatrix>(color).SetValue(m_ti.m_color_matrix_coeff.get());
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoColourMatrix>(color).SetValue(m_ti.m_color_matrix_coeff.get());
   }
 }
 
@@ -717,9 +715,9 @@ generic_packetizer_c::set_video_bits_per_channel(int num_bits,
                                                  option_source_e source) {
   m_ti.m_bits_per_channel.set(num_bits, source);
   if (m_track_entry && (num_bits >= 0)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoBitsPerChannel>(color).SetValue(m_ti.m_bits_per_channel.get());
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoBitsPerChannel>(color).SetValue(m_ti.m_bits_per_channel.get());
   }
 }
 
@@ -730,12 +728,12 @@ generic_packetizer_c::set_video_chroma_subsample(const chroma_subsample_t &subsa
   if (   m_track_entry
       && (   (subsample.hori >= 0)
           || (subsample.vert >= 0))) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
     if (subsample.hori >= 0)
-      GetChild<KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
+      GetChild<libmatroska::KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
     if (subsample.vert >= 0)
-      GetChild<KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
+      GetChild<libmatroska::KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
   }
 }
 
@@ -746,12 +744,12 @@ generic_packetizer_c::set_video_cb_subsample(const cb_subsample_t &subsample,
   if (   m_track_entry
       && (   (subsample.hori >= 0)
           || (subsample.vert >= 0))) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
     if (subsample.hori >= 0)
-      GetChild<KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
+      GetChild<libmatroska::KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
     if (subsample.vert >= 0)
-      GetChild<KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
+      GetChild<libmatroska::KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
   }
 }
 
@@ -762,12 +760,12 @@ generic_packetizer_c::set_video_chroma_siting(const chroma_siting_t &siting,
   if (   m_track_entry
       && (   ((siting.hori >= 0) && (siting.hori <= 2))
           || ((siting.vert >= 0) && (siting.hori <= 2)))) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
     if ((siting.hori >= 0) && (siting.hori <= 2))
-      GetChild<KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
+      GetChild<libmatroska::KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
     if ((siting.vert >= 0) && (siting.hori <= 2))
-      GetChild<KaxVideoChromaSitVert>(color).SetValue(siting.vert);
+      GetChild<libmatroska::KaxVideoChromaSitVert>(color).SetValue(siting.vert);
   }
 }
 
@@ -776,9 +774,9 @@ generic_packetizer_c::set_video_color_range(int range,
                                              option_source_e source) {
   m_ti.m_color_range.set(range, source);
   if (m_track_entry && (range >= 0) && (range <= 3)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourRange>(color).SetValue(range);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoColourRange>(color).SetValue(range);
   }
 }
 
@@ -787,9 +785,9 @@ generic_packetizer_c::set_video_color_transfer_character(int transfer_index,
                                                           option_source_e source) {
   m_ti.m_color_transfer.set(transfer_index, source);
   if (m_track_entry && (transfer_index >= 0) && (transfer_index <= 18)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
   }
 }
 
@@ -800,9 +798,9 @@ generic_packetizer_c::set_video_color_primaries(int primary_index,
   if (     m_track_entry
       && (primary_index >= 0)
       && ((primary_index <= 10) || (primary_index == 22))) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourPrimaries>(color).SetValue(primary_index);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoColourPrimaries>(color).SetValue(primary_index);
   }
 }
 
@@ -811,9 +809,9 @@ generic_packetizer_c::set_video_max_cll(int max_cll,
                                         option_source_e source) {
   m_ti.m_max_cll.set(max_cll, source);
   if (m_track_entry && (max_cll >= 0)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourMaxCLL>(color).SetValue(max_cll);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoColourMaxCLL>(color).SetValue(max_cll);
   }
 }
 
@@ -822,9 +820,9 @@ generic_packetizer_c::set_video_max_fall(int max_fall,
                                          option_source_e source) {
   m_ti.m_max_fall.set(max_fall, source);
   if (m_track_entry && (max_fall >= 0)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourMaxFALL>(color).SetValue(max_fall);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoColourMaxFALL>(color).SetValue(max_fall);
   }
 }
 
@@ -839,20 +837,20 @@ generic_packetizer_c::set_video_chroma_coordinates(chroma_coordinates_t const &c
           || ((coordinates.green_y >= 0) && (coordinates.green_y <= 1))
           || ((coordinates.blue_x  >= 0) && (coordinates.blue_x  <= 1))
           || ((coordinates.blue_y  >= 0) && (coordinates.blue_y  <= 1)))) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
     if ((coordinates.red_x >= 0) && (coordinates.red_x <= 1))
-      GetChild<KaxVideoRChromaX>(color).SetValue(coordinates.red_x);
+      GetChild<libmatroska::KaxVideoRChromaX>(color).SetValue(coordinates.red_x);
     if ((coordinates.red_y >= 0) && (coordinates.red_y <= 1))
-      GetChild<KaxVideoRChromaY>(color).SetValue(coordinates.red_y);
+      GetChild<libmatroska::KaxVideoRChromaY>(color).SetValue(coordinates.red_y);
     if ((coordinates.green_x >= 0) && (coordinates.green_x <= 1))
-      GetChild<KaxVideoGChromaX>(color).SetValue(coordinates.green_x);
+      GetChild<libmatroska::KaxVideoGChromaX>(color).SetValue(coordinates.green_x);
     if ((coordinates.green_y >= 0) && (coordinates.green_y <= 1))
-      GetChild<KaxVideoGChromaY>(color).SetValue(coordinates.green_y);
+      GetChild<libmatroska::KaxVideoGChromaY>(color).SetValue(coordinates.green_y);
     if ((coordinates.blue_x >= 0) && (coordinates.blue_x <= 1))
-      GetChild<KaxVideoBChromaX>(color).SetValue(coordinates.blue_x);
+      GetChild<libmatroska::KaxVideoBChromaX>(color).SetValue(coordinates.blue_x);
     if ((coordinates.blue_y >= 0) && (coordinates.blue_y <= 1))
-      GetChild<KaxVideoBChromaY>(color).SetValue(coordinates.blue_y);
+      GetChild<libmatroska::KaxVideoBChromaY>(color).SetValue(coordinates.blue_y);
   }
 }
 
@@ -863,12 +861,12 @@ generic_packetizer_c::set_video_white_color_coordinates(white_color_coordinates_
   if (   m_track_entry
       && (   ((coordinates.x >= 0) && (coordinates.x <= 1))
           || ((coordinates.y >= 0) && (coordinates.y <= 1)))) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
     if ((coordinates.x >= 0) && (coordinates.x <= 1))
-      GetChild<KaxVideoWhitePointChromaX>(color).SetValue(coordinates.x);
+      GetChild<libmatroska::KaxVideoWhitePointChromaX>(color).SetValue(coordinates.x);
     if ((coordinates.y >= 0) && (coordinates.y <= 1))
-      GetChild<KaxVideoWhitePointChromaY>(color).SetValue(coordinates.y);
+      GetChild<libmatroska::KaxVideoWhitePointChromaY>(color).SetValue(coordinates.y);
   }
 }
 
@@ -879,9 +877,9 @@ generic_packetizer_c::set_video_max_luminance(double luminance,
   if (   m_track_entry
       && (luminance >= 0)
       && (luminance <= 9999.99)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoLuminanceMax>(color).SetValue(luminance);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoLuminanceMax>(color).SetValue(luminance);
   }
 }
 
@@ -890,9 +888,9 @@ generic_packetizer_c::set_video_min_luminance(double luminance,
                                               option_source_e source) {
   m_ti.m_min_luminance.set(luminance, source);
   if (m_track_entry && (luminance >= 0) && (luminance <= 999.9999)) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoLuminanceMin>(color).SetValue(luminance);
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+    GetChild<libmatroska::KaxVideoLuminanceMin>(color).SetValue(luminance);
   }
 }
 
@@ -901,8 +899,8 @@ generic_packetizer_c::set_video_projection_type(uint64_t value,
                                                 option_source_e source) {
   m_ti.m_projection_type.set(value, source);
   if (m_track_entry) {
-    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
-    GetChild<KaxVideoProjectionType>(projection).SetValue(value);
+    auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(GetChild<libmatroska::KaxTrackVideo>(m_track_entry));
+    GetChild<libmatroska::KaxVideoProjectionType>(projection).SetValue(value);
   }
 }
 
@@ -911,11 +909,11 @@ generic_packetizer_c::set_video_projection_private(memory_cptr const &value,
                                                    option_source_e source) {
   m_ti.m_projection_private.set(value, source);
   if (m_track_entry && value) {
-    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
+    auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(GetChild<libmatroska::KaxTrackVideo>(m_track_entry));
     if (value->get_size())
-      GetChild<KaxVideoProjectionPrivate>(projection).CopyBuffer(value->get_buffer(), value->get_size());
+      GetChild<libmatroska::KaxVideoProjectionPrivate>(projection).CopyBuffer(value->get_buffer(), value->get_size());
     else
-      DeleteChildren<KaxVideoProjectionPrivate>(projection);
+      DeleteChildren<libmatroska::KaxVideoProjectionPrivate>(projection);
   }
 }
 
@@ -924,8 +922,8 @@ generic_packetizer_c::set_video_projection_pose_yaw(double value,
                                                     option_source_e source) {
   m_ti.m_projection_pose_yaw.set(value, source);
   if (m_track_entry && (value >= 0)) {
-    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
-    GetChild<KaxVideoProjectionPoseYaw>(projection).SetValue(value);
+    auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(GetChild<libmatroska::KaxTrackVideo>(m_track_entry));
+    GetChild<libmatroska::KaxVideoProjectionPoseYaw>(projection).SetValue(value);
   }
 }
 
@@ -934,8 +932,8 @@ generic_packetizer_c::set_video_projection_pose_pitch(double value,
                                                       option_source_e source) {
   m_ti.m_projection_pose_pitch.set(value, source);
   if (m_track_entry && (value >= 0)) {
-    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
-    GetChild<KaxVideoProjectionPosePitch>(projection).SetValue(value);
+    auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(GetChild<libmatroska::KaxTrackVideo>(m_track_entry));
+    GetChild<libmatroska::KaxVideoProjectionPosePitch>(projection).SetValue(value);
   }
 }
 
@@ -944,8 +942,8 @@ generic_packetizer_c::set_video_projection_pose_roll(double value,
                                                      option_source_e source) {
   m_ti.m_projection_pose_roll.set(value, source);
   if (m_track_entry && (value >= 0)) {
-    auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(GetChild<KaxTrackVideo>(m_track_entry));
-    GetChild<KaxVideoProjectionPoseRoll>(projection).SetValue(value);
+    auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(GetChild<libmatroska::KaxTrackVideo>(m_track_entry));
+    GetChild<libmatroska::KaxVideoProjectionPoseRoll>(projection).SetValue(value);
   }
 }
 
@@ -960,8 +958,8 @@ generic_packetizer_c::set_video_field_order(uint64_t order,
                                             option_source_e source) {
   m_ti.m_field_order.set(order, source);
   if (m_track_entry && m_ti.m_field_order) {
-    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
-    GetChild<KaxVideoFieldOrder>(video).SetValue(m_ti.m_field_order.get());
+    auto &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
+    GetChild<libmatroska::KaxVideoFieldOrder>(video).SetValue(m_ti.m_field_order.get());
   }
 }
 
@@ -971,16 +969,16 @@ generic_packetizer_c::set_video_alpha_mode(bool alpha_mode,
   m_ti.m_alpha_mode.set(alpha_mode, source);
 
   if (m_track_entry)
-    set_video_alpha_mode_impl(GetChild<KaxTrackVideo>(*m_track_entry), m_ti.m_alpha_mode.get());
+    set_video_alpha_mode_impl(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry), m_ti.m_alpha_mode.get());
 }
 
 void
-generic_packetizer_c::set_video_alpha_mode_impl(EbmlMaster &video,
+generic_packetizer_c::set_video_alpha_mode_impl(libebml::EbmlMaster &video,
                                                 bool alpha_mode) {
   if (alpha_mode)
-    GetChild<KaxVideoAlphaMode>(video).SetValue(1);
+    GetChild<libmatroska::KaxVideoAlphaMode>(video).SetValue(1);
   else
-    DeleteChildren<KaxVideoAlphaMode>(video);
+    DeleteChildren<libmatroska::KaxVideoAlphaMode>(video);
 }
 
 void
@@ -989,13 +987,13 @@ generic_packetizer_c::set_video_stereo_mode(stereo_mode_c::mode stereo_mode,
   m_ti.m_stereo_mode.set(stereo_mode, source);
 
   if (m_track_entry && (stereo_mode_c::unspecified != m_ti.m_stereo_mode.get()))
-    set_video_stereo_mode_impl(GetChild<KaxTrackVideo>(*m_track_entry), m_ti.m_stereo_mode.get());
+    set_video_stereo_mode_impl(GetChild<libmatroska::KaxTrackVideo>(*m_track_entry), m_ti.m_stereo_mode.get());
 }
 
 void
-generic_packetizer_c::set_video_stereo_mode_impl(EbmlMaster &video,
+generic_packetizer_c::set_video_stereo_mode_impl(libebml::EbmlMaster &video,
                                                  stereo_mode_c::mode stereo_mode) {
-  GetChild<KaxVideoStereoMode>(video).SetValue(stereo_mode);
+  GetChild<libmatroska::KaxVideoStereoMode>(video).SetValue(stereo_mode);
 }
 
 void
@@ -1004,7 +1002,7 @@ generic_packetizer_c::set_video_color_space(memory_cptr const &value,
   m_ti.m_color_space.set(value, source);
 
   if (m_track_entry && value && value->get_size())
-    GetChild<KaxVideoColourSpace>(m_track_entry).CopyBuffer(value->get_buffer(), value->get_size());
+    GetChild<libmatroska::KaxVideoColourSpace>(m_track_entry).CopyBuffer(value->get_buffer(), value->get_size());
 }
 
 void
@@ -1024,7 +1022,7 @@ generic_packetizer_c::update_max_block_addition_id() {
 
   if ((new_max_block_add_id > 0) && (new_max_block_add_id > m_max_block_add_id)) {
     m_max_block_add_id = new_max_block_add_id;
-    GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
+    GetChild<libmatroska::KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
   }
 }
 
@@ -1055,7 +1053,7 @@ generic_packetizer_c::set_headers() {
     ptzrs_in_header_order.push_back(this);
 
   if (!m_track_entry) {
-    m_track_entry    = !g_kax_last_entry ? &GetChild<KaxTrackEntry>(*g_kax_tracks) : &GetNextChild<KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
+    m_track_entry    = !g_kax_last_entry ? &GetChild<libmatroska::KaxTrackEntry>(*g_kax_tracks) : &libebml::GetNextChild<libmatroska::KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
     g_kax_last_entry = m_track_entry;
     m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
   }
@@ -1065,74 +1063,74 @@ generic_packetizer_c::set_headers() {
     g_packetizers_by_track_num[m_hserialno] = this;
   }
 
-  GetChild<KaxTrackNumber>(m_track_entry).SetValue(m_hserialno);
+  GetChild<libmatroska::KaxTrackNumber>(m_track_entry).SetValue(m_hserialno);
 
   if (0 == m_huid)
     m_huid = create_unique_number(UNIQUE_TRACK_IDS);
 
-  GetChild<KaxTrackUID>(m_track_entry).SetValue(m_huid);
+  GetChild<libmatroska::KaxTrackUID>(m_track_entry).SetValue(m_huid);
 
   if (-1 != m_htrack_type)
-    GetChild<KaxTrackType>(m_track_entry).SetValue(m_htrack_type);
+    GetChild<libmatroska::KaxTrackType>(m_track_entry).SetValue(m_htrack_type);
 
   if (!m_hcodec_id.empty())
-    GetChild<KaxCodecID>(m_track_entry).SetValue(m_hcodec_id);
+    GetChild<libmatroska::KaxCodecID>(m_track_entry).SetValue(m_hcodec_id);
 
   if (m_hcodec_private)
-    GetChild<KaxCodecPrivate>(*m_track_entry).CopyBuffer(static_cast<binary *>(m_hcodec_private->get_buffer()), m_hcodec_private->get_size());
+    GetChild<libmatroska::KaxCodecPrivate>(*m_track_entry).CopyBuffer(static_cast<uint8_t *>(m_hcodec_private->get_buffer()), m_hcodec_private->get_size());
 
   if (!m_hcodec_name.empty())
-    GetChild<KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
+    GetChild<libmatroska::KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
 
   update_max_block_addition_id();
 
   if (m_timestamp_factory)
     m_htrack_default_duration = (int64_t)m_timestamp_factory->get_default_duration(m_htrack_default_duration);
   if (-1.0 != m_htrack_default_duration)
-    GetChild<KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
+    GetChild<libmatroska::KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
 
   idx = track_type_to_deftrack_type(m_htrack_type);
 
   auto language = m_ti.m_language.is_valid() ? m_ti.m_language : g_default_language;
-  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(language.get_closest_iso639_2_alpha_3_code());
+  GetChild<libmatroska::KaxTrackLanguage>(m_track_entry).SetValue(language.get_closest_iso639_2_alpha_3_code());
   if (!mtx::bcp47::language_c::is_disabled())
-    GetChild<KaxLanguageIETF>(m_track_entry).SetValue(language.format());
+    GetChild<libmatroska::KaxLanguageIETF>(m_track_entry).SetValue(language.format());
 
   if (!m_ti.m_track_name.empty())
-    GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
+    GetChild<libmatroska::KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
 
   if (m_ti.m_default_track.has_value())
-    GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(m_ti.m_default_track.value() ? 1 : 0);
+    GetChild<libmatroska::KaxTrackFlagDefault>(m_track_entry).SetValue(m_ti.m_default_track.value() ? 1 : 0);
 
   if (m_ti.m_forced_track.has_value())
-    GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.value() ? 1 : 0);
+    GetChild<libmatroska::KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.value() ? 1 : 0);
 
   if (m_ti.m_enabled_track.has_value())
-    GetChild<KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track.value() ? 1 : 0);
+    GetChild<libmatroska::KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track.value() ? 1 : 0);
 
   if (m_ti.m_hearing_impaired_flag.has_value())
-    GetChild<KaxFlagHearingImpaired>(m_track_entry).SetValue(m_ti.m_hearing_impaired_flag.value() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagHearingImpaired>(m_track_entry).SetValue(m_ti.m_hearing_impaired_flag.value() ? 1 : 0);
 
   if (m_ti.m_visual_impaired_flag.has_value())
-    GetChild<KaxFlagVisualImpaired>(m_track_entry).SetValue(m_ti.m_visual_impaired_flag.value() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagVisualImpaired>(m_track_entry).SetValue(m_ti.m_visual_impaired_flag.value() ? 1 : 0);
 
   if (m_ti.m_text_descriptions_flag.has_value())
-    GetChild<KaxFlagTextDescriptions>(m_track_entry).SetValue(m_ti.m_text_descriptions_flag.value() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagTextDescriptions>(m_track_entry).SetValue(m_ti.m_text_descriptions_flag.value() ? 1 : 0);
 
   if (m_ti.m_original_flag.has_value())
-    GetChild<KaxFlagOriginal>(m_track_entry).SetValue(m_ti.m_original_flag.value() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagOriginal>(m_track_entry).SetValue(m_ti.m_original_flag.value() ? 1 : 0);
 
   if (m_ti.m_commentary_flag.has_value())
-    GetChild<KaxFlagCommentary>(m_track_entry).SetValue(m_ti.m_commentary_flag.value() ? 1 : 0);
+    GetChild<libmatroska::KaxFlagCommentary>(m_track_entry).SetValue(m_ti.m_commentary_flag.value() ? 1 : 0);
 
   if (m_seek_pre_roll.valid())
-    GetChild<KaxSeekPreRoll>(m_track_entry).SetValue(m_seek_pre_roll.to_ns());
+    GetChild<libmatroska::KaxSeekPreRoll>(m_track_entry).SetValue(m_seek_pre_roll.to_ns());
 
   if (m_codec_delay.valid())
-    GetChild<KaxCodecDelay>(m_track_entry).SetValue(m_codec_delay.to_ns());
+    GetChild<libmatroska::KaxCodecDelay>(m_track_entry).SetValue(m_codec_delay.to_ns());
 
   if (track_video == m_htrack_type) {
-    KaxTrackVideo &video = GetChild<KaxTrackVideo>(m_track_entry);
+    libmatroska::KaxTrackVideo &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
 
     if (-1 != m_hvideo_interlaced_flag)
       set_video_interlaced_flag(m_hvideo_interlaced_flag != 0);
@@ -1163,153 +1161,153 @@ generic_packetizer_c::set_headers() {
         }
       }
 
-      GetChild<KaxVideoPixelWidth   >(video).SetValue(m_hvideo_pixel_width);
-      GetChild<KaxVideoPixelHeight  >(video).SetValue(m_hvideo_pixel_height);
+      GetChild<libmatroska::KaxVideoPixelWidth   >(video).SetValue(m_hvideo_pixel_width);
+      GetChild<libmatroska::KaxVideoPixelHeight  >(video).SetValue(m_hvideo_pixel_height);
 
-      GetChild<KaxVideoDisplayWidth >(video).SetValue(m_hvideo_display_width);
-      GetChild<KaxVideoDisplayHeight>(video).SetValue(m_hvideo_display_height);
+      GetChild<libmatroska::KaxVideoDisplayWidth >(video).SetValue(m_hvideo_display_width);
+      GetChild<libmatroska::KaxVideoDisplayHeight>(video).SetValue(m_hvideo_display_height);
 
-      GetChild<KaxVideoDisplayWidth >(video).SetDefaultSize(4);
-      GetChild<KaxVideoDisplayHeight>(video).SetDefaultSize(4);
+      GetChild<libmatroska::KaxVideoDisplayWidth >(video).SetDefaultSize(4);
+      GetChild<libmatroska::KaxVideoDisplayHeight>(video).SetDefaultSize(4);
 
       if (m_hvideo_display_unit != ddu_pixels)
-        GetChild<KaxVideoDisplayUnit>(video).SetValue(m_hvideo_display_unit);
+        GetChild<libmatroska::KaxVideoDisplayUnit>(video).SetValue(m_hvideo_display_unit);
 
       if (m_ti.m_color_space)
-        GetChild<KaxVideoColourSpace>(video).CopyBuffer(m_ti.m_color_space.get()->get_buffer(), m_ti.m_color_space.get()->get_size());
+        GetChild<libmatroska::KaxVideoColourSpace>(video).CopyBuffer(m_ti.m_color_space.get()->get_buffer(), m_ti.m_color_space.get()->get_size());
 
       if (m_ti.m_pixel_cropping) {
         auto crop = m_ti.m_pixel_cropping.get();
-        GetChild<KaxVideoPixelCropLeft  >(video).SetValue(crop.left);
-        GetChild<KaxVideoPixelCropTop   >(video).SetValue(crop.top);
-        GetChild<KaxVideoPixelCropRight >(video).SetValue(crop.right);
-        GetChild<KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
+        GetChild<libmatroska::KaxVideoPixelCropLeft  >(video).SetValue(crop.left);
+        GetChild<libmatroska::KaxVideoPixelCropTop   >(video).SetValue(crop.top);
+        GetChild<libmatroska::KaxVideoPixelCropRight >(video).SetValue(crop.right);
+        GetChild<libmatroska::KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
       }
 
       if (m_ti.m_color_matrix_coeff) {
         int color_matrix = m_ti.m_color_matrix_coeff.get();
-        auto &color      = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoColourMatrix>(color).SetValue(color_matrix);
+        auto &color      = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoColourMatrix>(color).SetValue(color_matrix);
       }
 
       if (m_ti.m_bits_per_channel) {
         int bits    = m_ti.m_bits_per_channel.get();
-        auto &color = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoBitsPerChannel>(color).SetValue(bits);
+        auto &color = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoBitsPerChannel>(color).SetValue(bits);
       }
 
       if (m_ti.m_chroma_subsample) {
         auto const &subsample = m_ti.m_chroma_subsample.get();
-        auto &color           = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
-        GetChild<KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
+        auto &color           = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
+        GetChild<libmatroska::KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
       }
 
       if (m_ti.m_cb_subsample) {
         auto const &subsample = m_ti.m_cb_subsample.get();
-        auto &color           = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
-        GetChild<KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
+        auto &color           = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
+        GetChild<libmatroska::KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
       }
 
       if (m_ti.m_chroma_siting) {
         auto const &siting = m_ti.m_chroma_siting.get();
-        auto &color        = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
-        GetChild<KaxVideoChromaSitVert>(color).SetValue(siting.vert);
+        auto &color        = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
+        GetChild<libmatroska::KaxVideoChromaSitVert>(color).SetValue(siting.vert);
       }
 
       if (m_ti.m_color_range) {
         int range_index = m_ti.m_color_range.get();
-        auto &color     = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoColourRange>(color).SetValue(range_index);
+        auto &color     = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoColourRange>(color).SetValue(range_index);
       }
 
       if (m_ti.m_color_transfer) {
         int transfer_index = m_ti.m_color_transfer.get();
-        auto &color        = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
+        auto &color        = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
       }
 
       if (m_ti.m_color_primaries) {
         int primary_index = m_ti.m_color_primaries.get();
-        auto &color       = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoColourPrimaries>(color).SetValue(primary_index);
+        auto &color       = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoColourPrimaries>(color).SetValue(primary_index);
       }
 
       if (m_ti.m_max_cll) {
         int cll_index = m_ti.m_max_cll.get();
-        auto &color   = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoColourMaxCLL>(color).SetValue(cll_index);
+        auto &color   = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoColourMaxCLL>(color).SetValue(cll_index);
       }
 
       if (m_ti.m_max_fall) {
         int fall_index = m_ti.m_max_fall.get();
-        auto &color    = GetChild<KaxVideoColour>(video);
-        GetChild<KaxVideoColourMaxFALL>(color).SetValue(fall_index);
+        auto &color    = GetChild<libmatroska::KaxVideoColour>(video);
+        GetChild<libmatroska::KaxVideoColourMaxFALL>(color).SetValue(fall_index);
       }
 
       if (m_ti.m_chroma_coordinates) {
         auto const &coordinates = m_ti.m_chroma_coordinates.get();
-        auto &color             = GetChild<KaxVideoColour>(video);
-        auto &master_meta       = GetChild<KaxVideoColourMasterMeta>(color);
-        GetChild<KaxVideoRChromaX>(master_meta).SetValue(coordinates.red_x);
-        GetChild<KaxVideoRChromaY>(master_meta).SetValue(coordinates.red_y);
-        GetChild<KaxVideoGChromaX>(master_meta).SetValue(coordinates.green_x);
-        GetChild<KaxVideoGChromaY>(master_meta).SetValue(coordinates.green_y);
-        GetChild<KaxVideoBChromaX>(master_meta).SetValue(coordinates.blue_x);
-        GetChild<KaxVideoBChromaY>(master_meta).SetValue(coordinates.blue_y);
+        auto &color             = GetChild<libmatroska::KaxVideoColour>(video);
+        auto &master_meta       = GetChild<libmatroska::KaxVideoColourMasterMeta>(color);
+        GetChild<libmatroska::KaxVideoRChromaX>(master_meta).SetValue(coordinates.red_x);
+        GetChild<libmatroska::KaxVideoRChromaY>(master_meta).SetValue(coordinates.red_y);
+        GetChild<libmatroska::KaxVideoGChromaX>(master_meta).SetValue(coordinates.green_x);
+        GetChild<libmatroska::KaxVideoGChromaY>(master_meta).SetValue(coordinates.green_y);
+        GetChild<libmatroska::KaxVideoBChromaX>(master_meta).SetValue(coordinates.blue_x);
+        GetChild<libmatroska::KaxVideoBChromaY>(master_meta).SetValue(coordinates.blue_y);
       }
 
       if (m_ti.m_white_coordinates) {
         auto const &coordinates = m_ti.m_white_coordinates.get();
-        auto &color             = GetChild<KaxVideoColour>(video);
-        auto &master_meta       = GetChild<KaxVideoColourMasterMeta>(color);
-        GetChild<KaxVideoWhitePointChromaX>(master_meta).SetValue(coordinates.x);
-        GetChild<KaxVideoWhitePointChromaY>(master_meta).SetValue(coordinates.y);
+        auto &color             = GetChild<libmatroska::KaxVideoColour>(video);
+        auto &master_meta       = GetChild<libmatroska::KaxVideoColourMasterMeta>(color);
+        GetChild<libmatroska::KaxVideoWhitePointChromaX>(master_meta).SetValue(coordinates.x);
+        GetChild<libmatroska::KaxVideoWhitePointChromaY>(master_meta).SetValue(coordinates.y);
       }
 
       if (m_ti.m_max_luminance) {
         auto luminance    = m_ti.m_max_luminance.get();
-        auto &color       = GetChild<KaxVideoColour>(video);
-        auto &master_meta = GetChild<KaxVideoColourMasterMeta>(color);
-        GetChild<KaxVideoLuminanceMax>(master_meta).SetValue(luminance);
+        auto &color       = GetChild<libmatroska::KaxVideoColour>(video);
+        auto &master_meta = GetChild<libmatroska::KaxVideoColourMasterMeta>(color);
+        GetChild<libmatroska::KaxVideoLuminanceMax>(master_meta).SetValue(luminance);
       }
 
       if (m_ti.m_min_luminance) {
         auto luminance    = m_ti.m_min_luminance.get();
-        auto &color       = GetChild<KaxVideoColour>(video);
-        auto &master_meta = GetChild<KaxVideoColourMasterMeta>(color);
-        GetChild<KaxVideoLuminanceMin>(master_meta).SetValue(luminance);
+        auto &color       = GetChild<libmatroska::KaxVideoColour>(video);
+        auto &master_meta = GetChild<libmatroska::KaxVideoColourMasterMeta>(color);
+        GetChild<libmatroska::KaxVideoLuminanceMin>(master_meta).SetValue(luminance);
       }
 
       if (m_ti.m_projection_type) {
-        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
-        GetChild<KaxVideoProjectionType>(projection).SetValue(m_ti.m_projection_type.get());
+        auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(video);
+        GetChild<libmatroska::KaxVideoProjectionType>(projection).SetValue(m_ti.m_projection_type.get());
       }
 
       if (m_ti.m_projection_private) {
-        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
-        GetChild<KaxVideoProjectionPrivate>(projection).CopyBuffer(m_ti.m_projection_private.get()->get_buffer(), m_ti.m_projection_private.get()->get_size());
+        auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(video);
+        GetChild<libmatroska::KaxVideoProjectionPrivate>(projection).CopyBuffer(m_ti.m_projection_private.get()->get_buffer(), m_ti.m_projection_private.get()->get_size());
       }
 
       if (m_ti.m_projection_pose_yaw) {
-        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
-        GetChild<KaxVideoProjectionPoseYaw>(projection).SetValue(m_ti.m_projection_pose_yaw.get());
+        auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(video);
+        GetChild<libmatroska::KaxVideoProjectionPoseYaw>(projection).SetValue(m_ti.m_projection_pose_yaw.get());
       }
 
       if (m_ti.m_projection_pose_pitch) {
-        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
-        GetChild<KaxVideoProjectionPosePitch>(projection).SetValue(m_ti.m_projection_pose_pitch.get());
+        auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(video);
+        GetChild<libmatroska::KaxVideoProjectionPosePitch>(projection).SetValue(m_ti.m_projection_pose_pitch.get());
       }
 
       if (m_ti.m_projection_pose_roll) {
-        auto &projection = GetChildEmptyIfNew<KaxVideoProjection>(video);
-        GetChild<KaxVideoProjectionPoseRoll>(projection).SetValue(m_ti.m_projection_pose_roll.get());
+        auto &projection = GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(video);
+        GetChild<libmatroska::KaxVideoProjectionPoseRoll>(projection).SetValue(m_ti.m_projection_pose_roll.get());
       }
 
       if (m_ti.m_field_order)
-        GetChild<KaxVideoFieldOrder>(video).SetValue(m_ti.m_field_order.get());
+        GetChild<libmatroska::KaxVideoFieldOrder>(video).SetValue(m_ti.m_field_order.get());
 
       if (m_ti.m_stereo_mode && (stereo_mode_c::unspecified != m_ti.m_stereo_mode.get()))
         set_video_stereo_mode_impl(video, m_ti.m_stereo_mode.get());
@@ -1319,39 +1317,39 @@ generic_packetizer_c::set_headers() {
     }
 
   } else if (track_audio == m_htrack_type) {
-    KaxTrackAudio &audio = GetChild<KaxTrackAudio>(m_track_entry);
+    libmatroska::KaxTrackAudio &audio = GetChild<libmatroska::KaxTrackAudio>(m_track_entry);
 
     if (-1   != m_haudio_sampling_freq)
-      GetChild<KaxAudioSamplingFreq>(audio).SetValue(m_haudio_sampling_freq);
+      GetChild<libmatroska::KaxAudioSamplingFreq>(audio).SetValue(m_haudio_sampling_freq);
 
     if (-1.0 != m_haudio_output_sampling_freq)
-      GetChild<KaxAudioOutputSamplingFreq>(audio).SetValue(m_haudio_output_sampling_freq);
+      GetChild<libmatroska::KaxAudioOutputSamplingFreq>(audio).SetValue(m_haudio_output_sampling_freq);
 
     if (-1   != m_haudio_channels)
-      GetChild<KaxAudioChannels>(audio).SetValue(m_haudio_channels);
+      GetChild<libmatroska::KaxAudioChannels>(audio).SetValue(m_haudio_channels);
 
     if (-1   != m_haudio_bit_depth)
-      GetChild<KaxAudioBitDepth>(audio).SetValue(m_haudio_bit_depth);
+      GetChild<libmatroska::KaxAudioBitDepth>(audio).SetValue(m_haudio_bit_depth);
 
     if (m_ti.m_audio_emphasis && (audio_emphasis_c::mode_e::none != m_ti.m_audio_emphasis.get()))
       set_audio_emphasis_impl(audio, m_ti.m_audio_emphasis.get());
 
   } else if (track_buttons == m_htrack_type) {
     if ((-1 != m_hvideo_pixel_height) && (-1 != m_hvideo_pixel_width)) {
-      KaxTrackVideo &video = GetChild<KaxTrackVideo>(m_track_entry);
+      libmatroska::KaxTrackVideo &video = GetChild<libmatroska::KaxTrackVideo>(m_track_entry);
 
-      GetChild<KaxVideoPixelWidth >(video).SetValue(m_hvideo_pixel_width);
-      GetChild<KaxVideoPixelHeight>(video).SetValue(m_hvideo_pixel_height);
+      GetChild<libmatroska::KaxVideoPixelWidth >(video).SetValue(m_hvideo_pixel_width);
+      GetChild<libmatroska::KaxVideoPixelHeight>(video).SetValue(m_hvideo_pixel_height);
     }
 
   }
 
   if ((COMPRESSION_UNSPECIFIED != m_hcompression) && (COMPRESSION_NONE != m_hcompression)) {
-    KaxContentEncoding &c_encoding = GetChild<KaxContentEncoding>(GetChild<KaxContentEncodings>(m_track_entry));
+    libmatroska::KaxContentEncoding &c_encoding = GetChild<libmatroska::KaxContentEncoding>(GetChild<libmatroska::KaxContentEncodings>(m_track_entry));
 
-    GetChild<KaxContentEncodingOrder>(c_encoding).SetValue(0); // First modification.
-    GetChild<KaxContentEncodingType >(c_encoding).SetValue(0); // It's a compression.
-    GetChild<KaxContentEncodingScope>(c_encoding).SetValue(1); // Only the frame contents have been compresed.
+    GetChild<libmatroska::KaxContentEncodingOrder>(c_encoding).SetValue(0); // First modification.
+    GetChild<libmatroska::KaxContentEncodingType >(c_encoding).SetValue(0); // It's a compression.
+    GetChild<libmatroska::KaxContentEncodingScope>(c_encoding).SetValue(1); // Only the frame contents have been compresed.
 
     m_compressor = compressor_c::create(m_hcompression);
     m_compressor->set_track_headers(c_encoding);
@@ -1365,7 +1363,7 @@ generic_packetizer_c::set_headers() {
   set_tag_track_uid();
   if (m_ti.m_tags) {
     while (m_ti.m_tags->ListSize() != 0) {
-      add_tags(static_cast<KaxTag &>(*(*m_ti.m_tags)[0]));
+      add_tags(static_cast<libmatroska::KaxTag &>(*(*m_ti.m_tags)[0]));
       m_ti.m_tags->Remove(0);
     }
   }
@@ -1379,25 +1377,25 @@ generic_packetizer_c::apply_block_addition_mappings() {
   std::sort(m_block_addition_mappings.begin(), m_block_addition_mappings.end(),
             [](auto const &a, auto const &b) { return a.id_value.value_or(1) < b.id_value.value_or(1); });
 
-  DeleteChildren<KaxBlockAdditionMapping>(m_track_entry);
+  DeleteChildren<libmatroska::KaxBlockAdditionMapping>(m_track_entry);
 
   for (auto const &mapping : m_block_addition_mappings) {
     if (!mapping.is_valid())
       continue;
 
-    auto &kmapping = AddEmptyChild<KaxBlockAdditionMapping>(m_track_entry);
+    auto &kmapping = AddEmptyChild<libmatroska::KaxBlockAdditionMapping>(m_track_entry);
 
     if (!mapping.id_name.empty())
-      GetChild<KaxBlockAddIDName>(kmapping).SetValue(mapping.id_name);
+      GetChild<libmatroska::KaxBlockAddIDName>(kmapping).SetValue(mapping.id_name);
 
     if (mapping.id_type)
-      GetChild<KaxBlockAddIDType>(kmapping).SetValue(*mapping.id_type);
+      GetChild<libmatroska::KaxBlockAddIDType>(kmapping).SetValue(*mapping.id_type);
 
     if (mapping.id_value)
-      GetChild<KaxBlockAddIDValue>(kmapping).SetValue(*mapping.id_value);
+      GetChild<libmatroska::KaxBlockAddIDValue>(kmapping).SetValue(*mapping.id_value);
 
     if (mapping.id_extra_data && mapping.id_extra_data->get_size())
-      GetChild<KaxBlockAddIDExtraData>(kmapping).CopyBuffer(mapping.id_extra_data->get_buffer(), mapping.id_extra_data->get_size());
+      GetChild<libmatroska::KaxBlockAddIDExtraData>(kmapping).CopyBuffer(mapping.id_extra_data->get_buffer(), mapping.id_extra_data->get_size());
   }
 }
 
@@ -1457,7 +1455,7 @@ generic_packetizer_c::add_packet(packet_cptr const &pack) {
 
     if (new_max > m_max_block_add_id) {
       m_max_block_add_id = new_max;
-      GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
+      GetChild<libmatroska::KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
 
       rerender_track_headers();
     }

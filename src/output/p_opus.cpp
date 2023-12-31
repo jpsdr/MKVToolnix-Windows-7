@@ -18,8 +18,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_opus.h"
 
-using namespace libmatroska;
-
 opus_packetizer_c::opus_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
   : generic_packetizer_c{reader, ti, track_audio}

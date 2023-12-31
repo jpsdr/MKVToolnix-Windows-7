@@ -11,8 +11,8 @@ using namespace mtx::gui;
 
 AsciiStringValuePage::AsciiStringValuePage(Tab &parent,
                                            PageBase &topLevelPage,
-                                           EbmlMaster &master,
-                                           EbmlCallbacks const &callbacks,
+                                           libebml::EbmlMaster &master,
+                                           libebml::EbmlCallbacks const &callbacks,
                                            translatable_string_c const &title,
                                            translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::AsciiString, title, description}
@@ -25,7 +25,7 @@ AsciiStringValuePage::~AsciiStringValuePage() {
 QWidget *
 AsciiStringValuePage::createInputControl() {
   if (m_element)
-    m_originalValue = static_cast<EbmlString *>(m_element)->GetValue();
+    m_originalValue = static_cast<libebml::EbmlString *>(m_element)->GetValue();
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(Q(m_originalValue));
@@ -66,7 +66,7 @@ AsciiStringValuePage::validateValue()
 
 void
 AsciiStringValuePage::copyValueToElement() {
-  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(m_leValue->text()));
+  static_cast<libebml::EbmlString *>(m_element)->SetValue(to_utf8(m_leValue->text()));
 }
 
 }

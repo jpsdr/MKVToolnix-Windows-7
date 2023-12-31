@@ -26,8 +26,6 @@
 #include "propedit/attachment_target.h"
 #include "propedit/globals.h"
 
-using namespace libmatroska;
-
 attachment_target_c::attachment_target_c()
   : target_c()
   , m_command{ac_add}
@@ -189,11 +187,11 @@ attachment_target_c::execute_add() {
   auto description = m_options.m_description                        ? *m_options.m_description : ""s;
   auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
 
-  auto att          = mtx::construct::cons<KaxAttached>(new KaxFileName,                                         to_wide(file_name),
-                                                        !description.empty() ? new KaxFileDescription : nullptr, to_wide(description),
-                                                        new KaxMimeType,                                         mime_type,
-                                                        new KaxFileUID,                                          uid,
-                                                        new KaxFileData,                                         m_file_content);
+  auto att          = mtx::construct::cons<libmatroska::KaxAttached>(new libmatroska::KaxFileName,                                         to_wide(file_name),
+                                                                     !description.empty() ? new libmatroska::KaxFileDescription : nullptr, to_wide(description),
+                                                                     new libmatroska::KaxMimeType,                                         mime_type,
+                                                                     new libmatroska::KaxFileUID,                                          uid,
+                                                                     new libmatroska::KaxFileData,                                         m_file_content);
 
   m_level1_element->PushElement(*att);
 
@@ -241,20 +239,20 @@ attachment_target_c::delete_by_id() {
 }
 
 bool
-attachment_target_c::matches_by_uid_name_or_mime_type(KaxAttached &att) {
+attachment_target_c::matches_by_uid_name_or_mime_type(libmatroska::KaxAttached &att) {
   if (st_uid == m_selector_type) {
-    auto file_uid = FindChild<KaxFileUID>(att);
+    auto file_uid = FindChild<libmatroska::KaxFileUID>(att);
     auto uid      = file_uid ? uint64_t(*file_uid) : static_cast<uint64_t>(0);
     return uid == m_selector_num_arg;
   }
 
   if (st_name == m_selector_type) {
-    auto file_name = FindChild<KaxFileName>(att);
-    return file_name && (UTFstring(*file_name).GetUTF8() == m_selector_string_arg);
+    auto file_name = FindChild<libmatroska::KaxFileName>(att);
+    return file_name && (libebml::UTFstring(*file_name).GetUTF8() == m_selector_string_arg);
   }
 
   if (st_mime_type == m_selector_type) {
-    auto mime_type = FindChild<KaxMimeType>(att);
+    auto mime_type = FindChild<libmatroska::KaxMimeType>(att);
     return mime_type && (std::string(*mime_type) == m_selector_string_arg);
   }
 
@@ -269,7 +267,7 @@ attachment_target_c::delete_by_uid_name_mime_type() {
   for (auto counter = m_level1_element->ListSize(); 0 < counter; --counter) {
     auto idx = counter - 1;
     auto ele = (*m_level1_element)[idx];
-    auto att = dynamic_cast<KaxAttached *>(ele);
+    auto att = dynamic_cast<libmatroska::KaxAttached *>(ele);
 
     if (!att || !matches_by_uid_name_or_mime_type(*att))
       continue;
@@ -303,7 +301,7 @@ attachment_target_c::replace_by_uid_name_mime_type() {
   bool replaced_something = false;
 
   for (auto idx = m_level1_element->ListSize(); 0 < idx; --idx) {
-    auto attached = dynamic_cast<KaxAttached *>((*m_level1_element)[idx - 1]);
+    auto attached = dynamic_cast<libmatroska::KaxAttached *>((*m_level1_element)[idx - 1]);
 
     if (!attached || !matches_by_uid_name_or_mime_type(*attached))
       continue;
@@ -316,32 +314,32 @@ attachment_target_c::replace_by_uid_name_mime_type() {
 }
 
 void
-attachment_target_c::replace_attachment_values(KaxAttached &att) {
+attachment_target_c::replace_attachment_values(libmatroska::KaxAttached &att) {
   if (m_options.m_name) {
     auto file_name = !m_options.m_name->empty() ? *m_options.m_name : to_utf8(mtx::fs::to_path(m_file_name).filename().string());
-    GetChild<KaxFileName>(att).SetValueUTF8(file_name);
+    GetChild<libmatroska::KaxFileName>(att).SetValueUTF8(file_name);
   }
 
-  auto current_mime_type = FindChildValue<KaxMimeType>(att);
+  auto current_mime_type = FindChildValue<libmatroska::KaxMimeType>(att);
   auto new_mime_type     = !m_options.m_mime_type         ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(current_mime_type, g_use_legacy_font_mime_types)
                          : m_options.m_mime_type->empty() ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(::mtx::mime::guess_type_for_file(m_file_name), g_use_legacy_font_mime_types)
                          :                                  *m_options.m_mime_type;
 
   if (!new_mime_type.empty() && (new_mime_type != current_mime_type))
-    GetChild<KaxMimeType>(att).SetValue(new_mime_type);
+    GetChild<libmatroska::KaxMimeType>(att).SetValue(new_mime_type);
 
   if (m_options.m_description) {
     if (m_options.m_description->empty())
-      DeleteChildren<KaxFileDescription>(att);
+      DeleteChildren<libmatroska::KaxFileDescription>(att);
     else
-      GetChild<KaxFileDescription>(att).SetValueUTF8(*m_options.m_description);
+      GetChild<libmatroska::KaxFileDescription>(att).SetValueUTF8(*m_options.m_description);
   }
 
   if (m_options.m_uid)
-    GetChild<KaxFileUID>(att).SetValue(*m_options.m_uid);
+    GetChild<libmatroska::KaxFileUID>(att).SetValue(*m_options.m_uid);
 
   if (m_file_content)
-    GetChild<KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
+    GetChild<libmatroska::KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
 }
 
 std::string

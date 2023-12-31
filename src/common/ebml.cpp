@@ -32,9 +32,6 @@
 #include "common/unique_numbers.h"
 #include "common/version.h"
 
-using namespace libebml;
-using namespace libmatroska;
-
 namespace {
 
 void
@@ -60,11 +57,11 @@ remove_elements_recursively_if(libebml::EbmlMaster &master,
 
 }
 
-EbmlElement *
-empty_ebml_master(EbmlElement *e) {
-  EbmlMaster *m;
+libebml::EbmlElement *
+empty_ebml_master(libebml::EbmlElement *e) {
+  libebml::EbmlMaster *m;
 
-  m = dynamic_cast<EbmlMaster *>(e);
+  m = dynamic_cast<libebml::EbmlMaster *>(e);
   if (!m)
     return e;
 
@@ -76,13 +73,13 @@ empty_ebml_master(EbmlElement *e) {
   return m;
 }
 
-EbmlElement *
-create_ebml_element(const EbmlCallbacks &callbacks,
-                    const EbmlId &id) {
-  const EbmlSemanticContext &context = EBML_INFO_CONTEXT(callbacks);
+libebml::EbmlElement *
+create_ebml_element(const libebml::EbmlCallbacks &callbacks,
+                    const libebml::EbmlId &id) {
+  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(callbacks);
   size_t i;
 
-//   if (id == EbmlId(*parent))
+//   if (id == libebml::EbmlId(*parent))
 //     return empty_ebml_master(&parent->Generic().Create());
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
@@ -90,7 +87,7 @@ create_ebml_element(const EbmlCallbacks &callbacks,
       return empty_ebml_master(&EBML_SEM_CREATE(EBML_CTX_IDX(context,i)));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {
-    EbmlElement *e;
+    libebml::EbmlElement *e;
 
     if (!(context != EBML_SEM_CONTEXT(EBML_CTX_IDX(context,i))))
       continue;
@@ -103,11 +100,11 @@ create_ebml_element(const EbmlCallbacks &callbacks,
   return nullptr;
 }
 
-static EbmlCallbacks const *
-do_find_ebml_callbacks(EbmlCallbacks const &base,
-                       EbmlId const &id) {
-  const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
-  const EbmlCallbacks *result;
+static libebml::EbmlCallbacks const *
+do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
+                       libebml::EbmlId const &id) {
+  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlCallbacks *result;
   size_t i;
 
   if (EBML_INFO_ID(base) == id)
@@ -128,10 +125,10 @@ do_find_ebml_callbacks(EbmlCallbacks const &base,
   return nullptr;
 }
 
-EbmlCallbacks const *
-find_ebml_callbacks(EbmlCallbacks const &base,
-                    EbmlId const &id) {
-  static std::unordered_map<uint32_t, EbmlCallbacks const *> s_cache;
+libebml::EbmlCallbacks const *
+find_ebml_callbacks(libebml::EbmlCallbacks const &base,
+                    libebml::EbmlId const &id) {
+  static std::unordered_map<uint32_t, libebml::EbmlCallbacks const *> s_cache;
 
   auto itr = s_cache.find(id.GetValue());
   if (itr != s_cache.end())
@@ -143,11 +140,11 @@ find_ebml_callbacks(EbmlCallbacks const &base,
   return result;
 }
 
-static EbmlCallbacks const *
-do_find_ebml_callbacks(EbmlCallbacks const &base,
+static libebml::EbmlCallbacks const *
+do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
                        char const *debug_name) {
-  const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
-  const EbmlCallbacks *result;
+  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlCallbacks *result;
   size_t i;
 
   if (!strcmp(debug_name, EBML_INFO_NAME(base)))
@@ -168,10 +165,10 @@ do_find_ebml_callbacks(EbmlCallbacks const &base,
   return nullptr;
 }
 
-EbmlCallbacks const *
-find_ebml_callbacks(EbmlCallbacks const &base,
+libebml::EbmlCallbacks const *
+find_ebml_callbacks(libebml::EbmlCallbacks const &base,
                     char const *debug_name) {
-  static std::unordered_map<std::string, EbmlCallbacks const *> s_cache;
+  static std::unordered_map<std::string, libebml::EbmlCallbacks const *> s_cache;
 
   auto itr = s_cache.find(debug_name);
   if (itr != s_cache.end())
@@ -183,11 +180,11 @@ find_ebml_callbacks(EbmlCallbacks const &base,
   return result;
 }
 
-static EbmlCallbacks const *
-do_find_ebml_parent_callbacks(EbmlCallbacks const &base,
-                              EbmlId const &id) {
-  const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
-  const EbmlCallbacks *result;
+static libebml::EbmlCallbacks const *
+do_find_ebml_parent_callbacks(libebml::EbmlCallbacks const &base,
+                              libebml::EbmlId const &id) {
+  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlCallbacks *result;
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
@@ -205,10 +202,10 @@ do_find_ebml_parent_callbacks(EbmlCallbacks const &base,
   return nullptr;
 }
 
-EbmlCallbacks const *
-find_ebml_parent_callbacks(EbmlCallbacks const &base,
-                           EbmlId const &id) {
-  static std::unordered_map<uint32_t, EbmlCallbacks const *> s_cache;
+libebml::EbmlCallbacks const *
+find_ebml_parent_callbacks(libebml::EbmlCallbacks const &base,
+                           libebml::EbmlId const &id) {
+  static std::unordered_map<uint32_t, libebml::EbmlCallbacks const *> s_cache;
 
   auto itr = s_cache.find(id.GetValue());
   if (itr != s_cache.end())
@@ -220,11 +217,11 @@ find_ebml_parent_callbacks(EbmlCallbacks const &base,
   return result;
 }
 
-static EbmlSemantic const *
-do_find_ebml_semantic(EbmlCallbacks const &base,
-                      EbmlId const &id) {
-  const EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
-  const EbmlSemantic *result;
+static libebml::EbmlSemantic const *
+do_find_ebml_semantic(libebml::EbmlCallbacks const &base,
+                      libebml::EbmlId const &id) {
+  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlSemantic *result;
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
@@ -242,10 +239,10 @@ do_find_ebml_semantic(EbmlCallbacks const &base,
   return nullptr;
 }
 
-EbmlSemantic const *
-find_ebml_semantic(EbmlCallbacks const &base,
-                   EbmlId const &id) {
-  static std::unordered_map<uint32_t, EbmlSemantic const *> s_cache;
+libebml::EbmlSemantic const *
+find_ebml_semantic(libebml::EbmlCallbacks const &base,
+                   libebml::EbmlId const &id) {
+  static std::unordered_map<uint32_t, libebml::EbmlSemantic const *> s_cache;
 
   auto itr = s_cache.find(id.GetValue());
   if (itr != s_cache.end())
@@ -257,8 +254,8 @@ find_ebml_semantic(EbmlCallbacks const &base,
   return result;
 }
 
-EbmlMaster *
-sort_ebml_master(EbmlMaster *m) {
+libebml::EbmlMaster *
+sort_ebml_master(libebml::EbmlMaster *m) {
   if (!m)
     return m;
 
@@ -266,9 +263,9 @@ sort_ebml_master(EbmlMaster *m) {
   int first_master  = -1;
   size_t i;
   for (i = 0; i < m->ListSize(); i++) {
-    if (dynamic_cast<EbmlMaster *>((*m)[i]) && (-1 == first_master))
+    if (dynamic_cast<libebml::EbmlMaster *>((*m)[i]) && (-1 == first_master))
       first_master = i;
-    else if (!dynamic_cast<EbmlMaster *>((*m)[i]) && (-1 != first_master) && (-1 == first_element))
+    else if (!dynamic_cast<libebml::EbmlMaster *>((*m)[i]) && (-1 != first_master) && (-1 == first_element))
       first_element = i;
     if ((first_master != -1) && (first_element != -1))
       break;
@@ -278,27 +275,27 @@ sort_ebml_master(EbmlMaster *m) {
     return m;
 
   while (first_element != -1) {
-    EbmlElement *e = (*m)[first_element];
+    libebml::EbmlElement *e = (*m)[first_element];
     m->Remove(first_element);
     m->InsertElement(*e, first_master);
     first_master++;
     for (first_element++; first_element < static_cast<int>(m->ListSize()); first_element++)
-      if (!dynamic_cast<EbmlMaster *>((*m)[first_element]))
+      if (!dynamic_cast<libebml::EbmlMaster *>((*m)[first_element]))
         break;
     if (first_element >= static_cast<int>(m->ListSize()))
       first_element = -1;
   }
 
   for (i = 0; i < m->ListSize(); i++)
-    if (dynamic_cast<EbmlMaster *>((*m)[i]))
-      sort_ebml_master(dynamic_cast<EbmlMaster *>((*m)[i]));
+    if (dynamic_cast<libebml::EbmlMaster *>((*m)[i]))
+      sort_ebml_master(dynamic_cast<libebml::EbmlMaster *>((*m)[i]));
 
   return m;
 }
 
 void
-move_children(EbmlMaster &source,
-              EbmlMaster &destination) {
+move_children(libebml::EbmlMaster &source,
+              libebml::EbmlMaster &destination) {
   for (auto child : source)
     destination.PushElement(*child);
 }
@@ -306,81 +303,81 @@ move_children(EbmlMaster &source,
 // ------------------------------------------------------------------------
 
 int64_t
-kt_get_default_duration(KaxTrackEntry &track) {
-  return FindChildValue<KaxTrackDefaultDuration>(track);
+kt_get_default_duration(libmatroska::KaxTrackEntry &track) {
+  return FindChildValue<libmatroska::KaxTrackDefaultDuration>(track);
 }
 
 int64_t
-kt_get_number(KaxTrackEntry &track) {
-  return FindChildValue<KaxTrackNumber>(track);
+kt_get_number(libmatroska::KaxTrackEntry &track) {
+  return FindChildValue<libmatroska::KaxTrackNumber>(track);
 }
 
 int64_t
-kt_get_uid(KaxTrackEntry &track) {
-  return FindChildValue<KaxTrackUID>(track);
+kt_get_uid(libmatroska::KaxTrackEntry &track) {
+  return FindChildValue<libmatroska::KaxTrackUID>(track);
 }
 
 std::string
-kt_get_codec_id(KaxTrackEntry &track) {
-  return FindChildValue<KaxCodecID>(track);
+kt_get_codec_id(libmatroska::KaxTrackEntry &track) {
+  return FindChildValue<libmatroska::KaxCodecID>(track);
 }
 
 int
-kt_get_max_blockadd_id(KaxTrackEntry &track) {
-  return FindChildValue<KaxMaxBlockAdditionID>(track);
+kt_get_max_blockadd_id(libmatroska::KaxTrackEntry &track) {
+  return FindChildValue<libmatroska::KaxMaxBlockAdditionID>(track);
 }
 
 int
-kt_get_a_channels(KaxTrackEntry &track) {
-  auto audio = FindChild<KaxTrackAudio>(track);
-  return audio ? FindChildValue<KaxAudioChannels>(audio, 1u) : 1;
+kt_get_a_channels(libmatroska::KaxTrackEntry &track) {
+  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
+  return audio ? FindChildValue<libmatroska::KaxAudioChannels>(audio, 1u) : 1;
 }
 
 double
-kt_get_a_sfreq(KaxTrackEntry &track) {
-  auto audio = FindChild<KaxTrackAudio>(track);
-  return audio ? FindChildValue<KaxAudioSamplingFreq>(audio, 8000.0) : 8000.0;
+kt_get_a_sfreq(libmatroska::KaxTrackEntry &track) {
+  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
+  return audio ? FindChildValue<libmatroska::KaxAudioSamplingFreq>(audio, 8000.0) : 8000.0;
 }
 
 double
-kt_get_a_osfreq(KaxTrackEntry &track) {
-  auto audio = FindChild<KaxTrackAudio>(track);
-  return audio ? FindChildValue<KaxAudioOutputSamplingFreq>(audio, 8000.0) : 8000.0;
+kt_get_a_osfreq(libmatroska::KaxTrackEntry &track) {
+  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
+  return audio ? FindChildValue<libmatroska::KaxAudioOutputSamplingFreq>(audio, 8000.0) : 8000.0;
 }
 
 int
-kt_get_a_bps(KaxTrackEntry &track) {
-  auto audio = FindChild<KaxTrackAudio>(track);
-  return audio ? FindChildValue<KaxAudioBitDepth, int>(audio, -1) : -1;
+kt_get_a_bps(libmatroska::KaxTrackEntry &track) {
+  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
+  return audio ? FindChildValue<libmatroska::KaxAudioBitDepth, int>(audio, -1) : -1;
 }
 
 int
-kt_get_v_pixel_width(KaxTrackEntry &track) {
-  auto video = FindChild<KaxTrackVideo>(track);
-  return video ? FindChildValue<KaxVideoPixelWidth>(video) : 0;
+kt_get_v_pixel_width(libmatroska::KaxTrackEntry &track) {
+  auto video = FindChild<libmatroska::KaxTrackVideo>(track);
+  return video ? FindChildValue<libmatroska::KaxVideoPixelWidth>(video) : 0;
 }
 
 int
-kt_get_v_pixel_height(KaxTrackEntry &track) {
-  auto video = FindChild<KaxTrackVideo>(track);
-  return video ? FindChildValue<KaxVideoPixelHeight>(video) : 0;
+kt_get_v_pixel_height(libmatroska::KaxTrackEntry &track) {
+  auto video = FindChild<libmatroska::KaxTrackVideo>(track);
+  return video ? FindChildValue<libmatroska::KaxVideoPixelHeight>(video) : 0;
 }
 
-EbmlElement *
-find_ebml_element_by_id(EbmlMaster *master,
-                        const EbmlId &id) {
+libebml::EbmlElement *
+find_ebml_element_by_id(libebml::EbmlMaster *master,
+                        const libebml::EbmlId &id) {
   for (auto child : *master)
-    if (EbmlId(*child) == id)
+    if (libebml::EbmlId(*child) == id)
       return child;
 
   return nullptr;
 }
 
-std::pair<EbmlMaster *, size_t>
-find_element_in_master(EbmlMaster *master,
-                       EbmlElement *element_to_find) {
+std::pair<libebml::EbmlMaster *, size_t>
+find_element_in_master(libebml::EbmlMaster *master,
+                       libebml::EbmlElement *element_to_find) {
   if (!master || !element_to_find)
-    return std::make_pair<EbmlMaster *, size_t>(nullptr, 0);
+    return std::make_pair<libebml::EbmlMaster *, size_t>(nullptr, 0);
 
   auto &elements = master->GetElementList();
   auto itr       = std::find(elements.begin(), elements.end(), element_to_find);
@@ -389,7 +386,7 @@ find_element_in_master(EbmlMaster *master,
     return std::make_pair(master, std::distance(elements.begin(), itr));
 
   for (auto &sub_element : elements) {
-    auto sub_master = dynamic_cast<EbmlMaster *>(sub_element);
+    auto sub_master = dynamic_cast<libebml::EbmlMaster *>(sub_element);
     if (!sub_master)
       continue;
 
@@ -398,7 +395,7 @@ find_element_in_master(EbmlMaster *master,
       return result;
   }
 
-  return std::make_pair<EbmlMaster *, size_t>(nullptr, 0);
+  return std::make_pair<libebml::EbmlMaster *, size_t>(nullptr, 0);
 }
 
 static std::unordered_map<uint32_t, bool> const &
@@ -408,58 +405,58 @@ get_deprecated_elements_by_id() {
   if (!s_elements.empty())
     return s_elements;
 
-  s_elements[EBML_ID(KaxAudioPosition).GetValue()]              = true;
-  s_elements[EBML_ID(KaxBlockVirtual).GetValue()]               = true;
-  s_elements[EBML_ID(KaxClusterSilentTrackNumber).GetValue()]   = true;
-  s_elements[EBML_ID(KaxClusterSilentTracks).GetValue()]        = true;
-  s_elements[EBML_ID(KaxCodecDecodeAll).GetValue()]             = true;
-  s_elements[EBML_ID(KaxCodecDownloadURL).GetValue()]           = true;
-  s_elements[EBML_ID(KaxCodecInfoURL).GetValue()]               = true;
-  s_elements[EBML_ID(KaxCodecSettings).GetValue()]              = true;
-  s_elements[EBML_ID(KaxContentSigAlgo).GetValue()]             = true;
-  s_elements[EBML_ID(KaxContentSigHashAlgo).GetValue()]         = true;
-  s_elements[EBML_ID(KaxContentSigKeyID).GetValue()]            = true;
-  s_elements[EBML_ID(KaxContentSignature).GetValue()]           = true;
-  s_elements[EBML_ID(KaxCueRefCluster).GetValue()]              = true;
-  s_elements[EBML_ID(KaxCueRefCodecState).GetValue()]           = true;
-  s_elements[EBML_ID(KaxCueRefNumber).GetValue()]               = true;
-  s_elements[EBML_ID(KaxEncryptedBlock).GetValue()]             = true;
-  s_elements[EBML_ID(KaxFileReferral).GetValue()]               = true;
-  s_elements[EBML_ID(KaxFileUsedEndTime).GetValue()]            = true;
-  s_elements[EBML_ID(KaxFileUsedStartTime).GetValue()]          = true;
-  s_elements[EBML_ID(KaxOldStereoMode).GetValue()]              = true;
-  s_elements[EBML_ID(KaxReferenceFrame).GetValue()]             = true;
-  s_elements[EBML_ID(KaxReferenceOffset).GetValue()]            = true;
-  s_elements[EBML_ID(KaxReferenceTimeCode).GetValue()]          = true;
-  s_elements[EBML_ID(KaxReferenceVirtual).GetValue()]           = true;
-  s_elements[EBML_ID(KaxSliceBlockAddID).GetValue()]            = true;
-  s_elements[EBML_ID(KaxSliceDelay).GetValue()]                 = true;
-  s_elements[EBML_ID(KaxSliceDuration).GetValue()]              = true;
-  s_elements[EBML_ID(KaxSliceFrameNumber).GetValue()]           = true;
-  s_elements[EBML_ID(KaxSliceLaceNumber).GetValue()]            = true;
-  s_elements[EBML_ID(KaxSlices).GetValue()]                     = true;
-  s_elements[EBML_ID(KaxTagDefaultBogus).GetValue()]            = true;
-  s_elements[EBML_ID(KaxTimeSlice).GetValue()]                  = true;
-  s_elements[EBML_ID(KaxTrackAttachmentLink).GetValue()]        = true;
-  s_elements[EBML_ID(KaxTrackMaxCache).GetValue()]              = true;
-  s_elements[EBML_ID(KaxTrackMinCache).GetValue()]              = true;
-  s_elements[EBML_ID(KaxTrackOffset).GetValue()]                = true;
-  s_elements[EBML_ID(KaxTrackTimecodeScale).GetValue()]         = true;
-  s_elements[EBML_ID(KaxTrickMasterTrackSegmentUID).GetValue()] = true;
-  s_elements[EBML_ID(KaxTrickMasterTrackUID).GetValue()]        = true;
-  s_elements[EBML_ID(KaxTrickTrackFlag).GetValue()]             = true;
-  s_elements[EBML_ID(KaxTrickTrackSegmentUID).GetValue()]       = true;
-  s_elements[EBML_ID(KaxTrickTrackUID).GetValue()]              = true;
-  s_elements[EBML_ID(KaxVideoAspectRatio).GetValue()]           = true;
-  s_elements[EBML_ID(KaxVideoFrameRate).GetValue()]             = true;
-  s_elements[EBML_ID(KaxVideoGamma).GetValue()]                 = true;
+  s_elements[EBML_ID(libmatroska::KaxAudioPosition).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxBlockVirtual).GetValue()]               = true;
+  s_elements[EBML_ID(libmatroska::KaxClusterSilentTrackNumber).GetValue()]   = true;
+  s_elements[EBML_ID(libmatroska::KaxClusterSilentTracks).GetValue()]        = true;
+  s_elements[EBML_ID(libmatroska::KaxCodecDecodeAll).GetValue()]             = true;
+  s_elements[EBML_ID(libmatroska::KaxCodecDownloadURL).GetValue()]           = true;
+  s_elements[EBML_ID(libmatroska::KaxCodecInfoURL).GetValue()]               = true;
+  s_elements[EBML_ID(libmatroska::KaxCodecSettings).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxContentSigAlgo).GetValue()]             = true;
+  s_elements[EBML_ID(libmatroska::KaxContentSigHashAlgo).GetValue()]         = true;
+  s_elements[EBML_ID(libmatroska::KaxContentSigKeyID).GetValue()]            = true;
+  s_elements[EBML_ID(libmatroska::KaxContentSignature).GetValue()]           = true;
+  s_elements[EBML_ID(libmatroska::KaxCueRefCluster).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxCueRefCodecState).GetValue()]           = true;
+  s_elements[EBML_ID(libmatroska::KaxCueRefNumber).GetValue()]               = true;
+  s_elements[EBML_ID(libmatroska::KaxEncryptedBlock).GetValue()]             = true;
+  s_elements[EBML_ID(libmatroska::KaxFileReferral).GetValue()]               = true;
+  s_elements[EBML_ID(libmatroska::KaxFileUsedEndTime).GetValue()]            = true;
+  s_elements[EBML_ID(libmatroska::KaxFileUsedStartTime).GetValue()]          = true;
+  s_elements[EBML_ID(libmatroska::KaxOldStereoMode).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxReferenceFrame).GetValue()]             = true;
+  s_elements[EBML_ID(libmatroska::KaxReferenceOffset).GetValue()]            = true;
+  s_elements[EBML_ID(libmatroska::KaxReferenceTimeCode).GetValue()]          = true;
+  s_elements[EBML_ID(libmatroska::KaxReferenceVirtual).GetValue()]           = true;
+  s_elements[EBML_ID(libmatroska::KaxSliceBlockAddID).GetValue()]            = true;
+  s_elements[EBML_ID(libmatroska::KaxSliceDelay).GetValue()]                 = true;
+  s_elements[EBML_ID(libmatroska::KaxSliceDuration).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxSliceFrameNumber).GetValue()]           = true;
+  s_elements[EBML_ID(libmatroska::KaxSliceLaceNumber).GetValue()]            = true;
+  s_elements[EBML_ID(libmatroska::KaxSlices).GetValue()]                     = true;
+  s_elements[EBML_ID(libmatroska::KaxTagDefaultBogus).GetValue()]            = true;
+  s_elements[EBML_ID(libmatroska::KaxTimeSlice).GetValue()]                  = true;
+  s_elements[EBML_ID(libmatroska::KaxTrackAttachmentLink).GetValue()]        = true;
+  s_elements[EBML_ID(libmatroska::KaxTrackMaxCache).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxTrackMinCache).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxTrackOffset).GetValue()]                = true;
+  s_elements[EBML_ID(libmatroska::KaxTrackTimecodeScale).GetValue()]         = true;
+  s_elements[EBML_ID(libmatroska::KaxTrickMasterTrackSegmentUID).GetValue()] = true;
+  s_elements[EBML_ID(libmatroska::KaxTrickMasterTrackUID).GetValue()]        = true;
+  s_elements[EBML_ID(libmatroska::KaxTrickTrackFlag).GetValue()]             = true;
+  s_elements[EBML_ID(libmatroska::KaxTrickTrackSegmentUID).GetValue()]       = true;
+  s_elements[EBML_ID(libmatroska::KaxTrickTrackUID).GetValue()]              = true;
+  s_elements[EBML_ID(libmatroska::KaxVideoAspectRatio).GetValue()]           = true;
+  s_elements[EBML_ID(libmatroska::KaxVideoFrameRate).GetValue()]             = true;
+  s_elements[EBML_ID(libmatroska::KaxVideoGamma).GetValue()]                 = true;
 
   return s_elements;
 }
 
 template<typename T>
 void
-fix_elements_set_to_default_value_if_unset(EbmlElement *e) {
+fix_elements_set_to_default_value_if_unset(libebml::EbmlElement *e) {
   static debugging_option_c s_debug{"fix_elements_in_master"};
 
   auto t = static_cast<T *>(e);
@@ -469,20 +466,20 @@ fix_elements_set_to_default_value_if_unset(EbmlElement *e) {
 
   mxdebug_if(s_debug,
              fmt::format("fix_elements_in_master: element has default, but value is no set; setting: ID {0:08x} name {1}\n",
-                         EbmlId(*t).GetValue(), EBML_NAME(t)));
+                         libebml::EbmlId(*t).GetValue(), EBML_NAME(t)));
   t->SetValue(t->GetValue());
 }
 
 void
-fix_elements_in_master(EbmlMaster *master) {
+fix_elements_in_master(libebml::EbmlMaster *master) {
   static debugging_option_c s_debug{"fix_elements_in_master"};
 
   if (!master)
     return;
 
-  auto callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), EbmlId(*master));
+  auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(*master));
   if (!callbacks) {
-    mxdebug_if(s_debug, fmt::format("fix_elements_in_master: No callbacks found for ID {0:08x}\n", EbmlId(*master).GetValue()));
+    mxdebug_if(s_debug, fmt::format("fix_elements_in_master: No callbacks found for ID {0:08x}\n", libebml::EbmlId(*master).GetValue()));
     return;
   }
 
@@ -499,7 +496,7 @@ fix_elements_in_master(EbmlMaster *master) {
 
   while (idx < master->ListSize()) {
     auto child    = (*master)[idx];
-    auto child_id = EbmlId(*child).GetValue();
+    auto child_id = libebml::EbmlId(*child).GetValue();
     auto itr      = deprecated_elements.find(child_id);
 
     if (itr != deprecated_elements_end) {
@@ -512,26 +509,26 @@ fix_elements_in_master(EbmlMaster *master) {
     ++idx;
     is_present[child_id] = true;
 
-    if (dynamic_cast<EbmlMaster *>(child))
-      fix_elements_in_master(static_cast<EbmlMaster *>(child));
+    if (dynamic_cast<libebml::EbmlMaster *>(child))
+      fix_elements_in_master(static_cast<libebml::EbmlMaster *>(child));
 
-    else if (dynamic_cast<EbmlDate *>(child))
-      fix_elements_set_to_default_value_if_unset<EbmlDate>(child);
+    else if (dynamic_cast<libebml::EbmlDate *>(child))
+      fix_elements_set_to_default_value_if_unset<libebml::EbmlDate>(child);
 
-    else if (dynamic_cast<EbmlFloat *>(child))
-      fix_elements_set_to_default_value_if_unset<EbmlFloat>(child);
+    else if (dynamic_cast<libebml::EbmlFloat *>(child))
+      fix_elements_set_to_default_value_if_unset<libebml::EbmlFloat>(child);
 
-    else if (dynamic_cast<EbmlSInteger *>(child))
-      fix_elements_set_to_default_value_if_unset<EbmlSInteger>(child);
+    else if (dynamic_cast<libebml::EbmlSInteger *>(child))
+      fix_elements_set_to_default_value_if_unset<libebml::EbmlSInteger>(child);
 
-    else if (dynamic_cast<EbmlString *>(child))
-      fix_elements_set_to_default_value_if_unset<EbmlString>(child);
+    else if (dynamic_cast<libebml::EbmlString *>(child))
+      fix_elements_set_to_default_value_if_unset<libebml::EbmlString>(child);
 
-    else if (dynamic_cast<EbmlUInteger *>(child))
-      fix_elements_set_to_default_value_if_unset<EbmlUInteger>(child);
+    else if (dynamic_cast<libebml::EbmlUInteger *>(child))
+      fix_elements_set_to_default_value_if_unset<libebml::EbmlUInteger>(child);
 
-    else if (dynamic_cast<EbmlUnicodeString *>(child))
-      fix_elements_set_to_default_value_if_unset<EbmlUnicodeString>(child);
+    else if (dynamic_cast<libebml::EbmlUnicodeString *>(child))
+      fix_elements_set_to_default_value_if_unset<libebml::EbmlUnicodeString>(child);
   }
 
   // 4. Take care of certain mandatory elements without default values
@@ -539,97 +536,97 @@ fix_elements_in_master(EbmlMaster *master) {
   //    ourselves.
 
   // 4.1. Info
-  if (dynamic_cast<KaxInfo *>(master)) {
+  if (dynamic_cast<libmatroska::KaxInfo *>(master)) {
     auto info_data = get_default_segment_info_data();
 
-    if (!is_present[EBML_ID(KaxMuxingApp).GetValue()])
-      AddEmptyChild<KaxMuxingApp>(master).SetValueUTF8(info_data.muxing_app);
+    if (!is_present[EBML_ID(libmatroska::KaxMuxingApp).GetValue()])
+      AddEmptyChild<libmatroska::KaxMuxingApp>(master).SetValueUTF8(info_data.muxing_app);
 
-    if (!is_present[EBML_ID(KaxWritingApp).GetValue()])
-      AddEmptyChild<KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
+    if (!is_present[EBML_ID(libmatroska::KaxWritingApp).GetValue()])
+      AddEmptyChild<libmatroska::KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
   }
 
   // 4.2. Tracks
-  else if (dynamic_cast<KaxTrackEntry *>(master)) {
-    if (!is_present[EBML_ID(KaxTrackUID).GetValue()])
-      AddEmptyChild<KaxTrackUID>(master).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
+  else if (dynamic_cast<libmatroska::KaxTrackEntry *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxTrackUID).GetValue()])
+      AddEmptyChild<libmatroska::KaxTrackUID>(master).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
   }
 
   // 4.3. Chapters
-  else if (dynamic_cast<KaxEditionEntry *>(master)) {
-    if (!is_present[EBML_ID(KaxEditionUID).GetValue()])
-      AddEmptyChild<KaxEditionUID>(master).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+  else if (dynamic_cast<libmatroska::KaxEditionEntry *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxEditionUID).GetValue()])
+      AddEmptyChild<libmatroska::KaxEditionUID>(master).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
 
-  } else if (dynamic_cast<KaxChapterAtom *>(master)) {
-    if (!is_present[EBML_ID(KaxChapterUID).GetValue()])
-      AddEmptyChild<KaxChapterUID>(master).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+  } else if (dynamic_cast<libmatroska::KaxChapterAtom *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxChapterUID).GetValue()])
+      AddEmptyChild<libmatroska::KaxChapterUID>(master).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
 
-    if (!is_present[EBML_ID(KaxChapterTimeStart).GetValue()])
-      AddEmptyChild<KaxChapterTimeStart>(master).SetValue(0);
+    if (!is_present[EBML_ID(libmatroska::KaxChapterTimeStart).GetValue()])
+      AddEmptyChild<libmatroska::KaxChapterTimeStart>(master).SetValue(0);
 
-  } else if (dynamic_cast<KaxChapterDisplay *>(master)) {
-    if (!is_present[EBML_ID(KaxChapterString).GetValue()])
-      AddEmptyChild<KaxChapterString>(master).SetValueUTF8("");
+  } else if (dynamic_cast<libmatroska::KaxChapterDisplay *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxChapterString).GetValue()])
+      AddEmptyChild<libmatroska::KaxChapterString>(master).SetValueUTF8("");
 
   }
 
   // 4.4. Tags
-  else if (dynamic_cast<KaxTag *>(master)) {
-    if (!is_present[EBML_ID(KaxTagTargets).GetValue()])
-      fix_elements_in_master(&AddEmptyChild<KaxTagTargets>(master));
+  else if (dynamic_cast<libmatroska::KaxTag *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxTagTargets).GetValue()])
+      fix_elements_in_master(&AddEmptyChild<libmatroska::KaxTagTargets>(master));
 
-    else if (!is_present[EBML_ID(KaxTagSimple).GetValue()])
-      fix_elements_in_master(&AddEmptyChild<KaxTagSimple>(master));
+    else if (!is_present[EBML_ID(libmatroska::KaxTagSimple).GetValue()])
+      fix_elements_in_master(&AddEmptyChild<libmatroska::KaxTagSimple>(master));
 
-  } else if (dynamic_cast<KaxTagTargets *>(master)) {
-    if (!is_present[EBML_ID(KaxTagTargetTypeValue).GetValue()])
-      AddEmptyChild<KaxTagTargetTypeValue>(master).SetValue(50); // = movie
+  } else if (dynamic_cast<libmatroska::KaxTagTargets *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxTagTargetTypeValue).GetValue()])
+      AddEmptyChild<libmatroska::KaxTagTargetTypeValue>(master).SetValue(50); // = movie
 
-  } else if (dynamic_cast<KaxTagSimple *>(master)) {
-    if (!is_present[EBML_ID(KaxTagName).GetValue()])
-      AddEmptyChild<KaxTagName>(master).SetValueUTF8("");
+  } else if (dynamic_cast<libmatroska::KaxTagSimple *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxTagName).GetValue()])
+      AddEmptyChild<libmatroska::KaxTagName>(master).SetValueUTF8("");
 
   }
 
   // 4.5. Attachments
-  else if (dynamic_cast<KaxAttached *>(master)) {
-    if (!is_present[EBML_ID(KaxFileUID).GetValue()])
-      AddEmptyChild<KaxFileUID>(master).SetValue(create_unique_number(UNIQUE_ATTACHMENT_IDS));
+  else if (dynamic_cast<libmatroska::KaxAttached *>(master)) {
+    if (!is_present[EBML_ID(libmatroska::KaxFileUID).GetValue()])
+      AddEmptyChild<libmatroska::KaxFileUID>(master).SetValue(create_unique_number(UNIQUE_ATTACHMENT_IDS));
   }
 }
 
 void
-fix_mandatory_elements(EbmlElement *master) {
-  if (dynamic_cast<EbmlMaster *>(master))
-    fix_elements_in_master(static_cast<EbmlMaster *>(master));
+fix_mandatory_elements(libebml::EbmlElement *master) {
+  if (dynamic_cast<libebml::EbmlMaster *>(master))
+    fix_elements_in_master(static_cast<libebml::EbmlMaster *>(master));
 }
 
 void
-remove_voids_from_master(EbmlElement *element) {
-  auto master = dynamic_cast<EbmlMaster *>(element);
+remove_voids_from_master(libebml::EbmlElement *element) {
+  auto master = dynamic_cast<libebml::EbmlMaster *>(element);
   if (master)
-    DeleteChildren<EbmlVoid>(master);
+    DeleteChildren<libebml::EbmlVoid>(master);
 }
 
 int
 write_ebml_element_head(mm_io_c &out,
-                        EbmlId const &id,
+                        libebml::EbmlId const &id,
                         int64_t content_size) {
-	int id_size    = EBML_ID_LENGTH(id);
-	int coded_size = CodedSizeLength(content_size, 0);
+  int id_size    = EBML_ID_LENGTH(id);
+  int coded_size = libebml::CodedSizeLength(content_size, 0);
   uint8_t buffer[4 + 8];
 
-	id.Fill(buffer);
-	CodedValueLength(content_size, coded_size, &buffer[id_size]);
+  id.Fill(buffer);
+  libebml::CodedValueLength(content_size, coded_size, &buffer[id_size]);
 
   return out.write(buffer, id_size + coded_size);
 }
 
 bool
-remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
-                                                    EbmlMaster *child,
-                                                    std::unordered_map<EbmlMaster *, bool> &handled) {
+remove_master_from_parent_if_empty_or_only_defaults(libebml::EbmlMaster *parent,
+                                                    libebml::EbmlMaster *child,
+                                                    std::unordered_map<libebml::EbmlMaster *, bool> &handled) {
   if (!parent || !child || handled[child])
     return false;
 
@@ -638,13 +635,13 @@ remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
 
     for (auto const &childs_child : *child)
       if (   !childs_child->IsDefaultValue()
-          || !(   dynamic_cast<EbmlBinary        *>(childs_child)
-               || dynamic_cast<EbmlDate          *>(childs_child)
-               || dynamic_cast<EbmlFloat         *>(childs_child)
-               || dynamic_cast<EbmlSInteger      *>(childs_child)
-               || dynamic_cast<EbmlString        *>(childs_child)
-               || dynamic_cast<EbmlUInteger      *>(childs_child)
-               || dynamic_cast<EbmlUnicodeString *>(childs_child))) {
+          || !(   dynamic_cast<libebml::EbmlBinary        *>(childs_child)
+               || dynamic_cast<libebml::EbmlDate          *>(childs_child)
+               || dynamic_cast<libebml::EbmlFloat         *>(childs_child)
+               || dynamic_cast<libebml::EbmlSInteger      *>(childs_child)
+               || dynamic_cast<libebml::EbmlString        *>(childs_child)
+               || dynamic_cast<libebml::EbmlUInteger      *>(childs_child)
+               || dynamic_cast<libebml::EbmlUnicodeString *>(childs_child))) {
         all_set_to_default_value = false;
         break;
       }
@@ -672,9 +669,9 @@ remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
 void
 remove_ietf_language_elements(libebml::EbmlMaster &master) {
   remove_elements_recursively_if(master, [](auto &child) {
-    return dynamic_cast<KaxLanguageIETF *>(&child)
-        || dynamic_cast<KaxChapLanguageIETF *>(&child)
-        || dynamic_cast<KaxTagLanguageIETF *>(&child);
+    return dynamic_cast<libmatroska::KaxLanguageIETF *>(&child)
+        || dynamic_cast<libmatroska::KaxChapLanguageIETF *>(&child)
+        || dynamic_cast<libmatroska::KaxTagLanguageIETF *>(&child);
   });
 }
 
@@ -691,12 +688,12 @@ remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
       continue;
     }
 
-    ++num_elements_by_type[ EbmlId(*child).GetValue() ];
+    ++num_elements_by_type[ libebml::EbmlId(*child).GetValue() ];
 
     if (!child->IsDefaultValue())
       continue;
 
-    auto semantic = find_ebml_semantic(EBML_INFO(KaxSegment), libebml::EbmlId(*child));
+    auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(*child));
 
     if (!semantic || !semantic->IsMandatory())
       continue;
@@ -720,7 +717,7 @@ remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
       continue;
     }
 
-    if (num_elements_by_type[ EbmlId(*child).GetValue() ] == 1) {
+    if (num_elements_by_type[ libebml::EbmlId(*child).GetValue() ] == 1) {
       delete child;
       master.Remove(idx);
 
@@ -730,16 +727,16 @@ remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
 }
 
 static bool
-must_be_present_in_master_by_id(EbmlId const &id) {
+must_be_present_in_master_by_id(libebml::EbmlId const &id) {
   static debugging_option_c s_debug{"must_be_present_in_master"};
 
-  auto semantic = find_ebml_semantic(EBML_INFO(KaxSegment), id);
+  auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), id);
   if (!semantic || !semantic->IsMandatory()) {
     mxdebug_if(s_debug, fmt::format("ID {0:08x}: 0 (either no semantic or not mandatory)\n", id.GetValue()));
     return false;
   }
 
-  auto elt         = std::shared_ptr<EbmlElement>(&semantic->Create());
+  auto elt         = std::shared_ptr<libebml::EbmlElement>(&semantic->Create());
   auto has_default = has_default_value(*elt);
 
   mxdebug_if(s_debug, fmt::format("ID {0:08x}: {1} (does {2}have a default value)\n", id.GetValue(), !has_default, has_default ? "" : "not "));
@@ -748,7 +745,7 @@ must_be_present_in_master_by_id(EbmlId const &id) {
 }
 
 bool
-must_be_present_in_master(EbmlId const &id) {
+must_be_present_in_master(libebml::EbmlId const &id) {
   static std::unordered_map<uint32_t, bool> s_must_be_present;
 
   auto itr = s_must_be_present.find(id.GetValue());
@@ -764,20 +761,20 @@ must_be_present_in_master(EbmlId const &id) {
 
 
 bool
-must_be_present_in_master(EbmlElement const &element) {
-  return must_be_present_in_master(EbmlId(element));
+must_be_present_in_master(libebml::EbmlElement const &element) {
+  return must_be_present_in_master(libebml::EbmlId(element));
 }
 
 bool
-found_in(EbmlElement &haystack,
-         EbmlElement const *needle) {
+found_in(libebml::EbmlElement &haystack,
+         libebml::EbmlElement const *needle) {
   if (!needle)
     return false;
 
   if (needle == &haystack)
     return true;
 
-  auto master = dynamic_cast<EbmlMaster *>(&haystack);
+  auto master = dynamic_cast<libebml::EbmlMaster *>(&haystack);
   if (!master)
     return false;
 
@@ -785,7 +782,7 @@ found_in(EbmlElement &haystack,
     if (child == needle)
       return true;
 
-    if (dynamic_cast<EbmlMaster *>(child) && found_in(*child, needle))
+    if (dynamic_cast<libebml::EbmlMaster *>(child) && found_in(*child, needle))
       return true;
   }
 
@@ -807,7 +804,7 @@ remove_unrenderable_elements(libebml::EbmlMaster &master,
 }
 
 bool
-has_default_value(EbmlElement const *elt) {
+has_default_value(libebml::EbmlElement const *elt) {
   return elt ? has_default_value(*elt) : false;
 }
 
@@ -818,7 +815,7 @@ render_should_write_arg(bool with_default) {
 }
 
 bool
-has_default_value(EbmlElement const &elt) {
+has_default_value(libebml::EbmlElement const &elt) {
   return elt.DefaultISset();
   // return elt.GetClassInfo().HasDefault();
 }
@@ -830,7 +827,7 @@ render_should_write_arg(bool with_default) {
 }
 
 bool
-has_default_value(EbmlElement const &elt) {
+has_default_value(libebml::EbmlElement const &elt) {
   return elt.DefaultISset();
 }
 

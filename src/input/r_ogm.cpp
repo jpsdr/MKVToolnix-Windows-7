@@ -808,8 +808,8 @@ void
 ogm_reader_c::handle_tags(mtx::tags::converted_vorbis_comments_t const &converted,
                           ogm_demuxer_cptr const &dmx) {
   mxdebug_if(m_debug_tags, fmt::format("handle_tags; num track tags: {} num album tags: {}\n",
-                                       converted.m_track_tags ? static_cast<EbmlMaster *>((*converted.m_track_tags)[0])->ListSize() - 1 : 0,
-                                       converted.m_album_tags ? static_cast<EbmlMaster *>((*converted.m_album_tags)[0])->ListSize() - 1 : 0));
+                                       converted.m_track_tags ? static_cast<libebml::EbmlMaster *>((*converted.m_track_tags)[0])->ListSize() - 1 : 0,
+                                       converted.m_album_tags ? static_cast<libebml::EbmlMaster *>((*converted.m_album_tags)[0])->ListSize() - 1 : 0));
 
   dmx->m_tags = mtx::tags::merge(converted.m_track_tags, converted.m_album_tags);
 }

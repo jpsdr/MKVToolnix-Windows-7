@@ -21,8 +21,6 @@
 #include "merge/output_control.h"
 #include "output/p_vorbis.h"
 
-using namespace libmatroska;
-
 vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *reader,
                                          track_info_c &ti,
                                          std::vector<memory_cptr> const &headers)

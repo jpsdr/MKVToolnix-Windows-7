@@ -10,13 +10,10 @@
 #include "mkvtoolnix-gui/info/element_reader.h"
 #include "mkvtoolnix-gui/util/runnable.h"
 
-using namespace libebml;
-using namespace libmatroska;
-
 namespace mtx::gui::Info {
 
 ElementReader::ElementReader(mm_io_c &in,
-                             EbmlElement &element,
+                             libebml::EbmlElement &element,
                              QModelIndex const &idx)
   : m_in{in}
   , m_element{element}
@@ -36,12 +33,12 @@ ElementReader::run() {
   try {
     m_in.setFilePointer(m_element.GetElementPosition());
 
-    auto callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), EbmlId(m_element));
+    auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(m_element));
     if (!callbacks)
-      callbacks = &EBML_CLASS_CALLBACK(KaxSegment);
+      callbacks = &EBML_CLASS_CALLBACK(libmatroska::KaxSegment);
 
-    EbmlStream es(m_in);
-    auto upper_lvl_el = static_cast<EbmlElement *>(nullptr);
+    libebml::EbmlStream es(m_in);
+    auto upper_lvl_el = static_cast<libebml::EbmlElement *>(nullptr);
     auto upper_lvl    = 0;
 
     m_element.Read(es, EBML_INFO_CONTEXT(*callbacks), upper_lvl, upper_lvl_el, true);

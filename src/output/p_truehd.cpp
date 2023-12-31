@@ -21,8 +21,6 @@
 #include "merge/output_control.h"
 #include "output/p_truehd.h"
 
-using namespace libmatroska;
-
 truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
                                          track_info_c &p_ti,
                                          mtx::truehd::frame_t::codec_e codec,

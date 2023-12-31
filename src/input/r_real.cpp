@@ -30,8 +30,6 @@
 #include "output/p_realaudio.h"
 #include "output/p_generic_video.h"
 
-using namespace libmatroska;
-
 namespace {
 debugging_option_c s_debug{"real_reader"};
 }
@@ -70,9 +68,9 @@ mm_io_file_seek(void *file,
   if (!file)
     return -1;
 
-  seek_mode smode = SEEK_END == whence ? libebml::seek_end
-                  : SEEK_CUR == whence ? libebml::seek_current
-                  :                      libebml::seek_beginning;
+  auto smode = SEEK_END == whence ? libebml::seek_end
+             : SEEK_CUR == whence ? libebml::seek_current
+             :                      libebml::seek_beginning;
   return static_cast<mm_io_c *>(file)->setFilePointer2(offset, smode) ? 0 : -1;
 }
 
@@ -700,13 +698,13 @@ real_reader_c::set_dimensions(real_demuxer_cptr const &dmx,
 
     }
 
-    auto video = GetChild<KaxTrackVideo>(*ptzr(dmx->ptzr).get_track_entry());
-    GetChild<KaxVideoPixelWidth>(video).SetValue(width);
-    GetChild<KaxVideoPixelHeight>(video).SetValue(height);
+    auto video = GetChild<libmatroska::KaxTrackVideo>(*ptzr(dmx->ptzr).get_track_entry());
+    GetChild<libmatroska::KaxVideoPixelWidth>(video).SetValue(width);
+    GetChild<libmatroska::KaxVideoPixelHeight>(video).SetValue(height);
 
     if ((0 != disp_width) && (0 != disp_height)) {
-      GetChild<KaxVideoDisplayWidth>(video).SetValue(disp_width);
-      GetChild<KaxVideoDisplayHeight>(video).SetValue(disp_height);
+      GetChild<libmatroska::KaxVideoDisplayWidth>(video).SetValue(disp_width);
+      GetChild<libmatroska::KaxVideoDisplayHeight>(video).SetValue(disp_height);
     }
 
     rerender_track_headers();

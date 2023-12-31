@@ -22,8 +22,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_kate.h"
 
-using namespace libmatroska;
-
 kate_packetizer_c::kate_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
   : generic_packetizer_c{reader, ti, track_subtitle}

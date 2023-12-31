@@ -42,7 +42,7 @@ public:
 
   virtual void ui_show_error(std::string const &error) override;
   virtual void ui_show_element_info(int level, std::string const &text, std::optional<int64_t> position, std::optional<int64_t> size, std::optional<int64_t> dataSize) override;
-  virtual void ui_show_element(EbmlElement &e) override;
+  virtual void ui_show_element(libebml::EbmlElement &e) override;
   virtual void ui_show_progress(int percentage, std::string const &text) override;
 
   virtual result_e open_and_process_file(std::string const &fileName) override;
@@ -61,7 +61,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
   void elementInfoFound(int level, QString const &text, std::optional<int64_t> position, std::optional<int64_t> size, std::optional<int64_t> dataSize);
-  void elementFound(int level, EbmlElement *e, bool readFully);
+  void elementFound(int level, libebml::EbmlElement *e, bool readFully);
   void errorFound(const QString &message);
   void progressChanged(int percentage, const QString &text);
 

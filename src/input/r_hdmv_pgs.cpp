@@ -31,7 +31,7 @@ hdmv_pgs_reader_c::probe_file() {
   m_in->skip(4 + 4 + 1);
   auto segment_size = m_in->read_uint16_be();
 
-  m_in->setFilePointer(segment_size, seek_current);
+  m_in->setFilePointer(segment_size, libebml::seek_current);
 
   return mtx::hdmv_pgs::FILE_MAGIC == m_in->read_uint16_be();
 }

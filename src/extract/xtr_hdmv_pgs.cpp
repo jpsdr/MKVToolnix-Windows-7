@@ -29,11 +29,11 @@ xtr_hdmv_pgs_c::xtr_hdmv_pgs_c(const std::string &codec_id,
 
 void
 xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
-  binary sup_header[10];
-  binary *mybuffer = f.frame->get_buffer();
-  int frame_size   = f.frame->get_size();
-  int offset       = 0;
-  uint64_t pts     = (f.timestamp * 9) / 100000;
+  uint8_t sup_header[10];
+  auto mybuffer  = f.frame->get_buffer();
+  int frame_size = f.frame->get_size();
+  int offset     = 0;
+  uint64_t pts   = (f.timestamp * 9) / 100000;
 
   put_uint16_be(&sup_header[0], mtx::hdmv_pgs::FILE_MAGIC);
   put_uint32_be(&sup_header[2], (uint32_t)pts);

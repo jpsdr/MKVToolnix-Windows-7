@@ -16,8 +16,6 @@
 #include "common/strings/parsing.h"
 #include "propedit/track_target.h"
 
-using namespace libmatroska;
-
 track_target_c::track_target_c(std::string const &spec)
   : target_c()
   , m_selection_mode{track_target_c::sm_undefined}
@@ -52,9 +50,9 @@ track_target_c::validate() {
 
 void
 track_target_c::look_up_property_elements() {
-  auto &property_table = property_element_c::get_table_for(EBML_INFO(KaxTracks),
-                                                             track_audio == m_track_type ? &EBML_INFO(KaxTrackAudio)
-                                                           : track_video == m_track_type ? &EBML_INFO(KaxTrackVideo)
+  auto &property_table = property_element_c::get_table_for(EBML_INFO(libmatroska::KaxTracks),
+                                                             track_audio == m_track_type ? &EBML_INFO(libmatroska::KaxTrackAudio)
+                                                           : track_video == m_track_type ? &EBML_INFO(libmatroska::KaxTrackVideo)
                                                            :                               nullptr,
                                                            false);
 
@@ -116,7 +114,7 @@ void
 track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
                                    ebml_element_cptr track_headers_cp) {
   m_level1_element_cp = level1_element_cp;
-  m_level1_element    = static_cast<EbmlMaster *>(m_level1_element_cp.get());
+  m_level1_element    = static_cast<libebml::EbmlMaster *>(m_level1_element_cp.get());
 
   m_track_headers_cp  = track_headers_cp;
 
@@ -131,23 +129,23 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
   if (!track_headers_cp)
     track_headers_cp = level1_element_cp;
 
-  EbmlMaster *track_headers = static_cast<EbmlMaster *>(track_headers_cp.get());
+  libebml::EbmlMaster *track_headers = static_cast<libebml::EbmlMaster *>(track_headers_cp.get());
 
   size_t i;
   for (i = 0; track_headers->ListSize() > i; ++i) {
-    if (!Is<KaxTrackEntry>((*track_headers)[i]))
+    if (!Is<libmatroska::KaxTrackEntry>((*track_headers)[i]))
       continue;
 
-    KaxTrackEntry *track = dynamic_cast<KaxTrackEntry *>((*track_headers)[i]);
+    libmatroska::KaxTrackEntry *track = dynamic_cast<libmatroska::KaxTrackEntry *>((*track_headers)[i]);
     assert(track);
 
-    KaxTrackType *kax_track_type     = dynamic_cast<KaxTrackType *>(FindChild<KaxTrackType>(track));
+    libmatroska::KaxTrackType *kax_track_type     = dynamic_cast<libmatroska::KaxTrackType *>(FindChild<libmatroska::KaxTrackType>(track));
     track_type this_track_type       = !kax_track_type ? track_video : static_cast<track_type>(uint8_t(*kax_track_type));
 
-    KaxTrackUID *kax_track_uid       = dynamic_cast<KaxTrackUID *>(FindChild<KaxTrackUID>(track));
+    libmatroska::KaxTrackUID *kax_track_uid       = dynamic_cast<libmatroska::KaxTrackUID *>(FindChild<libmatroska::KaxTrackUID>(track));
     uint64_t track_uid               = !kax_track_uid ? 0 : uint64_t(*kax_track_uid);
 
-    KaxTrackNumber *kax_track_number = dynamic_cast<KaxTrackNumber *>(FindChild<KaxTrackNumber>(track));
+    libmatroska::KaxTrackNumber *kax_track_number = dynamic_cast<libmatroska::KaxTrackNumber *>(FindChild<libmatroska::KaxTrackNumber>(track));
 
     ++num_tracks_total;
     ++num_tracks_by_type[this_track_type];
@@ -163,8 +161,8 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     m_track_uid  = track_uid;
     m_track_type = this_track_type;
     m_master     = track;
-    m_sub_master = track_video == m_track_type ? static_cast<EbmlMaster *>(&GetChild<KaxTrackVideo>(track))
-                 : track_audio == m_track_type ? static_cast<EbmlMaster *>(&GetChild<KaxTrackAudio>(track))
+    m_sub_master = track_video == m_track_type ? static_cast<libebml::EbmlMaster *>(&GetChild<libmatroska::KaxTrackVideo>(track))
+                 : track_audio == m_track_type ? static_cast<libebml::EbmlMaster *>(&GetChild<libmatroska::KaxTrackAudio>(track))
                  :                               nullptr;
 
     look_up_property_elements();
@@ -177,9 +175,9 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &EBML_INFO(KaxVideoColour)     ? &GetChildEmptyIfNew<KaxVideoColour>(m_sub_master)
-                                : prop.m_sub_sub_master_callbacks == &EBML_INFO(KaxVideoProjection) ? &GetChildEmptyIfNew<KaxVideoProjection>(m_sub_master)
-                                :                                                                     static_cast<EbmlMaster*>(nullptr);
+        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoColour)     ? &GetChildEmptyIfNew<libmatroska::KaxVideoColour>(m_sub_master)
+                                : prop.m_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoProjection) ? &GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(m_sub_master)
+                                :                                                                                  static_cast<libebml::EbmlMaster*>(nullptr);
 
         if (!change.m_sub_sub_master)
           continue;
@@ -187,8 +185,8 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &EBML_INFO(KaxVideoColourMasterMeta) ? &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(change.m_sub_sub_master)
-                                    :                                                                               nullptr;
+        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoColourMasterMeta) ? &GetChildEmptyIfNew<libmatroska::KaxVideoColourMasterMeta>(change.m_sub_sub_master)
+                                    :                                                                                            nullptr;
       }
 
     if (sub_master_is_track()) {

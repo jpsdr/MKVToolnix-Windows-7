@@ -20,8 +20,8 @@ using namespace mtx::gui;
 
 ValuePage::ValuePage(Tab &parent,
                      PageBase &topLevelPage,
-                     EbmlMaster &master,
-                     EbmlCallbacks const &callbacks,
+                     libebml::EbmlMaster &master,
+                     libebml::EbmlCallbacks const &callbacks,
                      ValueType valueType,
                      translatable_string_c const &title,
                      translatable_string_c const &description)
@@ -72,7 +72,7 @@ ValuePage::init() {
   if (m_present) {
     auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), m_callbacks.ClassId());
     if (semantic && semantic->IsMandatory()) {
-      std::unique_ptr<EbmlElement> elt(&semantic->Create());
+      std::unique_ptr<libebml::EbmlElement> elt(&semantic->Create());
       m_mayBeRemoved = has_default_value(*elt);
 
     } else if (semantic && !semantic->IsMandatory())
@@ -258,7 +258,7 @@ ValuePage::modifyThis() {
 
   if (m_present && m_cbAddOrRemove->isChecked()) {
     for (auto i = 0u; m_master.ListSize() > i; ++i) {
-      if (EbmlId(*m_master[i]) != m_callbacks.ClassId())
+      if (libebml::EbmlId(*m_master[i]) != m_callbacks.ClassId())
         continue;
 
       auto e = m_master[i];

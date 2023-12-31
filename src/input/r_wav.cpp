@@ -332,7 +332,7 @@ wav_reader_c::scan_chunks_wave() {
       }
 
       m_chunks.push_back(new_chunk);
-      m_in->setFilePointer(new_chunk.len, seek_current);
+      m_in->setFilePointer(new_chunk.len, libebml::seek_current);
 
     }
   } catch (...) {
@@ -366,7 +366,7 @@ wav_reader_c::scan_chunks_wave64() {
         m_bytes_in_data_chunks += new_chunk.len;
 
       m_chunks.push_back(new_chunk);
-      m_in->setFilePointer(new_chunk.len, seek_current);
+      m_in->setFilePointer(new_chunk.len, libebml::seek_current);
 
     }
   } catch (...) {

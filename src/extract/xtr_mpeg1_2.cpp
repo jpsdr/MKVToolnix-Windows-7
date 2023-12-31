@@ -37,7 +37,7 @@ xtr_mpeg1_2_video_c::create_file(xtr_base_c *master,
 
 void
 xtr_mpeg1_2_video_c::handle_frame(xtr_frame_t &f) {
-  binary *buf = (binary *)f.frame->get_buffer();
+  auto buf = f.frame->get_buffer();
 
   if (f.keyframe && m_seq_hdr) {
     bool seq_hdr_found = false;

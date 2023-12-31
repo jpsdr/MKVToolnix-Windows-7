@@ -8,7 +8,6 @@
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
-using namespace libmatroska;
 using namespace mtx::gui;
 
 namespace mtx::gui::ChapterEditor {
@@ -34,12 +33,12 @@ NameModel::newRowItems() {
   return QList<QStandardItem *>{} << new QStandardItem{} << new QStandardItem{};
 }
 
-KaxChapterDisplay *
+libmatroska::KaxChapterDisplay *
 NameModel::displayFromItem(QStandardItem *item) {
   return m_displayRegistry[ registryIdFromItem(item) ];
 }
 
-KaxChapterDisplay *
+libmatroska::KaxChapterDisplay *
 NameModel::displayFromIndex(QModelIndex const &idx) {
   return displayFromItem(itemFromIndex(idx));
 }
@@ -85,7 +84,7 @@ NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
 
   lists.languageNames.sort();
 
-  rowItems[0]->setText(Q(GetChildValue<KaxChapterString>(display)));
+  rowItems[0]->setText(Q(GetChildValue<libmatroska::KaxChapterString>(display)));
   rowItems[1]->setText(lists.languageNames.join(Q("; ")));
 }
 
@@ -104,7 +103,7 @@ NameModel::updateRow(int row) {
 }
 
 void
-NameModel::append(KaxChapterDisplay &display) {
+NameModel::append(libmatroska::KaxChapterDisplay &display) {
   auto rowItems = newRowItems();
   rowItems[0]->setData(registerDisplay(display), Util::ChapterEditorChapterDisplayRole);
 
@@ -115,9 +114,9 @@ NameModel::append(KaxChapterDisplay &display) {
 void
 NameModel::addNew() {
   auto &cfg     = Util::Settings::get();
-  auto display = new KaxChapterDisplay;
+  auto display = new libmatroska::KaxChapterDisplay;
 
-  GetChild<KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
+  GetChild<libmatroska::KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
   mtx::chapters::set_languages_in_display(*display, cfg.m_defaultChapterLanguage);
 
   m_chapter->PushElement(*display);
@@ -151,7 +150,7 @@ NameModel::reset() {
 }
 
 void
-NameModel::populate(KaxChapterAtom &chapter) {
+NameModel::populate(libmatroska::KaxChapterAtom &chapter) {
   beginResetModel();
 
   removeRows(0, rowCount());
@@ -160,7 +159,7 @@ NameModel::populate(KaxChapterAtom &chapter) {
   m_chapter                = &chapter;
 
   for (auto const &child : chapter) {
-    auto display = dynamic_cast<KaxChapterDisplay *>(child);
+    auto display = dynamic_cast<libmatroska::KaxChapterDisplay *>(child);
     if (display)
       append(*display);
   }
@@ -184,7 +183,7 @@ NameModel::flags(QModelIndex const &index)
 }
 
 qulonglong
-NameModel::registerDisplay(KaxChapterDisplay &display) {
+NameModel::registerDisplay(libmatroska::KaxChapterDisplay &display) {
   m_displayRegistry[ ++m_nextDisplayRegistryIdx ] = &display;
   return m_nextDisplayRegistryIdx;
 }

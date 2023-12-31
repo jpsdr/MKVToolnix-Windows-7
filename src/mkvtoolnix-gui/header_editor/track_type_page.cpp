@@ -14,32 +14,32 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/model.h"
 
-using namespace libmatroska;
+
 using namespace mtx::gui;
 
 namespace mtx::gui::HeaderEditor {
 
 TrackTypePage::TrackTypePage(Tab &parent,
-                             EbmlMaster &master,
+                             libebml::EbmlMaster &master,
                              uint64_t trackIdxMkvmerge)
   : TopLevelPage{parent, "", true}
   , ui{new Ui::TrackTypePage}
   , m_master(master)
   , m_trackIdxMkvmerge{trackIdxMkvmerge}
-  , m_trackType{FindChildValue<KaxTrackType>(m_master)}
-  , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}
-  , m_trackUid{FindChildValue<KaxTrackUID>(m_master)}
-  , m_codecId{Q(FindChildValue<KaxCodecID>(m_master))}
-  , m_name{Q(FindChildValue<KaxTrackName>(m_master))}
-  , m_defaultTrackFlag{!!FindChildValue<KaxTrackFlagDefault>(m_master, 1u)}
-  , m_forcedTrackFlag{!!FindChildValue<KaxTrackFlagForced>(m_master, 0u)}
-  , m_enabledTrackFlag{!!FindChildValue<KaxTrackFlagEnabled>(m_master, 1u)}
+  , m_trackType{FindChildValue<libmatroska::KaxTrackType>(m_master)}
+  , m_trackNumber{FindChildValue<libmatroska::KaxTrackNumber>(m_master)}
+  , m_trackUid{FindChildValue<libmatroska::KaxTrackUID>(m_master)}
+  , m_codecId{Q(FindChildValue<libmatroska::KaxCodecID>(m_master))}
+  , m_name{Q(FindChildValue<libmatroska::KaxTrackName>(m_master))}
+  , m_defaultTrackFlag{!!FindChildValue<libmatroska::KaxTrackFlagDefault>(m_master, 1u)}
+  , m_forcedTrackFlag{!!FindChildValue<libmatroska::KaxTrackFlagForced>(m_master, 0u)}
+  , m_enabledTrackFlag{!!FindChildValue<libmatroska::KaxTrackFlagEnabled>(m_master, 1u)}
   , m_yesIcon{Util::fixStandardItemIcon(MainWindow::yesIcon())}
   , m_noIcon{Util::fixStandardItemIcon(MainWindow::noIcon())}
 {
-  m_language = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF>(m_master));
+  m_language = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxLanguageIETF>(m_master));
   if (!m_language.is_valid())
-    m_language = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage>(m_master, "eng"s));
+    m_language = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxTrackLanguage>(m_master, "eng"s));
 
   ui->setupUi(this);
 }
@@ -130,18 +130,18 @@ TrackTypePage::summarizeProperties() {
   auto properties = QStringList{};
 
   if (track_audio == m_trackType) {
-    auto channels      = getPageUnsignedIntegerValueForElement(EBML_ID(KaxAudioChannels), 1);
-    auto bitsPerSample = getPageUnsignedIntegerValueForElement(EBML_ID(KaxAudioBitDepth), 0);
+    auto channels      = getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxAudioChannels), 1);
+    auto bitsPerSample = getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxAudioBitDepth), 0);
 
-    properties << QY("%1 Hz").arg(getPageDoubleValueForElement(EBML_ID(KaxAudioSamplingFreq), 8000));
+    properties << QY("%1 Hz").arg(getPageDoubleValueForElement(EBML_ID(libmatroska::KaxAudioSamplingFreq), 8000));
     properties << QNY("%1 channel", "%1 channels", channels).arg(channels);
     if (bitsPerSample != 0)
       properties << QNY("%1 bit per sample", "%1 bits per sample", bitsPerSample).arg(bitsPerSample);
 
   } else if (track_video == m_trackType)
     properties << QY("%1 pixels").arg(Q("%1x%2")
-                                      .arg(getPageUnsignedIntegerValueForElement(EBML_ID(KaxVideoPixelWidth),  0))
-                                      .arg(getPageUnsignedIntegerValueForElement(EBML_ID(KaxVideoPixelHeight), 0)));
+                                      .arg(getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxVideoPixelWidth),  0))
+                                      .arg(getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxVideoPixelHeight), 0)));
 
   m_properties = properties.join(Q(", "));
 }
@@ -153,7 +153,7 @@ TrackTypePage::internalIdentifier()
 }
 
 ValuePage *
-TrackTypePage::findPageForElement(EbmlId const &wantedId) {
+TrackTypePage::findPageForElement(libebml::EbmlId const &wantedId) {
   for (auto child : m_children) {
     auto valueChild = dynamic_cast<ValuePage *>(child);
     if (valueChild && (valueChild->m_callbacks.ClassId() == wantedId))
@@ -164,27 +164,27 @@ TrackTypePage::findPageForElement(EbmlId const &wantedId) {
 }
 
 QString
-TrackTypePage::getPageStringValueForElement(EbmlId const &wantedId) {
+TrackTypePage::getPageStringValueForElement(libebml::EbmlId const &wantedId) {
   auto valuePage = findPageForElement(wantedId);
   return valuePage ? valuePage->currentValueAsString() : QString{};
 }
 
 uint64_t
-TrackTypePage::getPageUnsignedIntegerValueForElement(EbmlId const &wantedId,
+TrackTypePage::getPageUnsignedIntegerValueForElement(libebml::EbmlId const &wantedId,
                                                      uint64_t valueIfNotPresent) {
   auto valuePage = dynamic_cast<UnsignedIntegerValuePage *>(findPageForElement(wantedId));
   return valuePage ? valuePage->currentValue(valueIfNotPresent) : valueIfNotPresent;
 }
 
 double
-TrackTypePage::getPageDoubleValueForElement(EbmlId const &wantedId,
+TrackTypePage::getPageDoubleValueForElement(libebml::EbmlId const &wantedId,
                                             double valueIfNotPresent) {
   auto valuePage = dynamic_cast<FloatValuePage *>(findPageForElement(wantedId));
   return valuePage ? valuePage->currentValue(valueIfNotPresent) : valueIfNotPresent;
 }
 
 bool
-TrackTypePage::getPageBoolValueForElement(EbmlId const &wantedId,
+TrackTypePage::getPageBoolValueForElement(libebml::EbmlId const &wantedId,
                                           bool valueIfNotPresent) {
   auto valuePage = dynamic_cast<BoolValuePage *>(findPageForElement(wantedId));
   return valuePage ? valuePage->currentValue(valueIfNotPresent) : valueIfNotPresent;
@@ -192,16 +192,16 @@ TrackTypePage::getPageBoolValueForElement(EbmlId const &wantedId,
 
 void
 TrackTypePage::updateModelItems() {
-  m_trackNumber             = getPageUnsignedIntegerValueForElement(EBML_ID(KaxTrackNumber), 0);
-  m_trackUid                = getPageUnsignedIntegerValueForElement(EBML_ID(KaxTrackUID),    0);
-  m_codecId                 = getPageStringValueForElement(EBML_ID(KaxCodecID));
-  m_name                    = getPageStringValueForElement(EBML_ID(KaxTrackName));
-  m_defaultTrackFlag        = getPageBoolValueForElement(EBML_ID(KaxTrackFlagDefault), true);
-  m_forcedTrackFlag         = getPageBoolValueForElement(EBML_ID(KaxTrackFlagForced),  false);
-  m_enabledTrackFlag        = getPageBoolValueForElement(EBML_ID(KaxTrackFlagEnabled), true);
+  m_trackNumber             = getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxTrackNumber), 0);
+  m_trackUid                = getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxTrackUID),    0);
+  m_codecId                 = getPageStringValueForElement(EBML_ID(libmatroska::KaxCodecID));
+  m_name                    = getPageStringValueForElement(EBML_ID(libmatroska::KaxTrackName));
+  m_defaultTrackFlag        = getPageBoolValueForElement(EBML_ID(libmatroska::KaxTrackFlagDefault), true);
+  m_forcedTrackFlag         = getPageBoolValueForElement(EBML_ID(libmatroska::KaxTrackFlagForced),  false);
+  m_enabledTrackFlag        = getPageBoolValueForElement(EBML_ID(libmatroska::KaxTrackFlagEnabled), true);
 
-  auto languageIETFPage     = static_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(KaxLanguageIETF)));
-  auto languagePage         = static_cast<LanguageValuePage     *>(findPageForElement(EBML_ID(KaxTrackLanguage)));
+  auto languageIETFPage     = static_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(libmatroska::KaxLanguageIETF)));
+  auto languagePage         = static_cast<LanguageValuePage     *>(findPageForElement(EBML_ID(libmatroska::KaxTrackLanguage)));
   auto languageIfNotPresent = mtx::bcp47::language_c::parse("eng");
   m_language                = languagePage->currentValue(languageIfNotPresent);
   m_language                = languageIETFPage->currentValue(m_language);
@@ -218,8 +218,8 @@ TrackTypePage::updateModelItems() {
 
 void
 TrackTypePage::deriveLanguageIETFFromLegacyIfNotPresent() {
-  auto languageIETFPage = static_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(KaxLanguageIETF)));
-  auto languagePage     = static_cast<LanguageValuePage     *>(findPageForElement(EBML_ID(KaxTrackLanguage)));
+  auto languageIETFPage = static_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(libmatroska::KaxLanguageIETF)));
+  auto languagePage     = static_cast<LanguageValuePage     *>(findPageForElement(EBML_ID(libmatroska::KaxTrackLanguage)));
 
   languageIETFPage->deriveFromLegacyIfNotPresent(languagePage->originalValueAsString());
 

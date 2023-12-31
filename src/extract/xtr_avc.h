@@ -27,23 +27,23 @@ protected:
   std::optional<unsigned int> m_previous_idr_pic_id;
   debugging_option_c m_debug_access_unit_delimiters{"access_unit_delimiters"};
 
-  static binary const ms_start_code[4], ms_aud_nalu[2];
+  static uint8_t const ms_start_code[4], ms_aud_nalu[2];
 
 public:
   xtr_avc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
   virtual void create_file(xtr_base_c *master, libmatroska::KaxTrackEntry &track) override;
   virtual void handle_frame(xtr_frame_t &f) override;
-  virtual bool write_nal(binary *data, size_t &pos, size_t data_size, size_t nal_size_size);
+  virtual bool write_nal(uint8_t *data, size_t &pos, size_t data_size, size_t nal_size_size);
 
   virtual const char *get_container_name() override {
     return "AVC/H.264 elementary stream";
   };
 
-  virtual nal_unit_list_t find_nal_units(binary *buf, std::size_t frame_size) const;
+  virtual nal_unit_list_t find_nal_units(uint8_t *buf, std::size_t frame_size) const;
 
 protected:
-  virtual bool need_to_write_access_unit_delimiter(binary *buffer, std::size_t size);
+  virtual bool need_to_write_access_unit_delimiter(uint8_t *buffer, std::size_t size);
   virtual void write_access_unit_delimiter();
   virtual unsigned char get_nalu_type(unsigned char const *buffer, std::size_t size) const;
 };

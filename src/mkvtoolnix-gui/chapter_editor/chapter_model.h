@@ -70,8 +70,8 @@ protected:
   void duplicateTree(QModelIndex const &destParentIdx, int destRow, QModelIndex const &srcIdx);
 
   void collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx, QSet<uint64_t> &usedEditionUIDs, QSet<uint64_t> &usedChapterUIDs);
-  void fixEditionAndChapterUIDs(EbmlMaster &master);
-  void fixEditionAndChapterUIDs(EbmlMaster &master, QSet<uint64_t> &usedEditionUIDs, QSet<uint64_t> &usedChapterUIDs);
+  void fixEditionAndChapterUIDs(libebml::EbmlMaster &master);
+  void fixEditionAndChapterUIDs(libebml::EbmlMaster &master, QSet<uint64_t> &usedEditionUIDs, QSet<uint64_t> &usedChapterUIDs);
 
   qulonglong registerElement(std::shared_ptr<libebml::EbmlMaster> const &element);
   qulonglong registryIdFromItem(QStandardItem *item);

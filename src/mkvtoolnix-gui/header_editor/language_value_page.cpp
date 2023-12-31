@@ -17,8 +17,8 @@ using namespace mtx::gui;
 
 LanguageValuePage::LanguageValuePage(Tab &parent,
                                      PageBase &topLevelPage,
-                                     EbmlMaster &master,
-                                     EbmlCallbacks const &callbacks,
+                                     libebml::EbmlMaster &master,
+                                     libebml::EbmlCallbacks const &callbacks,
                                      translatable_string_c const &title,
                                      translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::AsciiString, title, description}
@@ -30,7 +30,7 @@ LanguageValuePage::~LanguageValuePage() {
 
 QWidget *
 LanguageValuePage::createInputControl() {
-  m_originalValue   = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : "eng";
+  m_originalValue   = m_element ? static_cast<libebml::EbmlString *>(m_element)->GetValue() : "eng";
   auto qOriginal    = Q(m_originalValue);
   auto languageOnly = qOriginal.mid(0, qOriginal.indexOf(Q('-')));
   auto languageOpt  = mtx::iso639::look_up(to_utf8(languageOnly), true);
@@ -84,7 +84,7 @@ LanguageValuePage::validateValue()
 
 void
 LanguageValuePage::copyValueToElement() {
-  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
+  static_cast<libebml::EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
 }
 
 void

@@ -22,8 +22,6 @@
 #include "input/subtitles.h"
 #include "output/p_vobsub.h"
 
-using namespace libmatroska;
-
 vobsub_packetizer_c::vobsub_packetizer_c(generic_reader_c *reader,
                                          track_info_c &ti)
   : generic_packetizer_c{reader, ti, track_subtitle}

@@ -24,8 +24,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_video_for_windows.h"
 
-using namespace libmatroska;
-
 generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reader,
                                                        track_info_c &p_ti,
                                                        std::string const &codec_id,

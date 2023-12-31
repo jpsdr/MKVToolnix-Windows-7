@@ -20,8 +20,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_tta.h"
 
-using namespace libmatroska;
-
 tta_packetizer_c::tta_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    int channels,

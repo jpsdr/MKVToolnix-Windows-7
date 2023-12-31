@@ -213,7 +213,7 @@ protected:
 
   QString fixAndGetTimestampString(QLineEdit &lineEdit);
 
-  static QString formatEbmlBinary(EbmlBinary *binary);
+  static QString formatEbmlBinary(libebml::EbmlBinary *binary);
 };
 
 }

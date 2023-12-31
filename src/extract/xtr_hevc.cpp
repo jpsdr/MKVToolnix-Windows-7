@@ -83,7 +83,7 @@ xtr_hevc_c::unwrap_write_hevcc(bool skip_prefix_sei) {
 }
 
 bool
-xtr_hevc_c::write_nal(binary *data,
+xtr_hevc_c::write_nal(uint8_t *data,
                       size_t &pos,
                       size_t data_size,
                       size_t write_nal_size_size) {

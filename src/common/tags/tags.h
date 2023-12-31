@@ -41,7 +41,7 @@ bool remove_track_statistics(libmatroska::KaxTags *tags, std::optional<uint64_t>
 libmatroska::KaxTags *select_for_chapters(libmatroska::KaxTags &tags, libmatroska::KaxChapters &chapters);
 
 libmatroska::KaxTagSimple &find_simple(const std::string &name, libebml::EbmlMaster &m);
-libmatroska::KaxTagSimple &find_simple(const UTFstring &name, libebml::EbmlMaster &m);
+libmatroska::KaxTagSimple &find_simple(const libebml::UTFstring &name, libebml::EbmlMaster &m);
 std::string get_simple_value(const std::string &name, libebml::EbmlMaster &m);
 int64_t get_tuid(const libmatroska::KaxTag &tag);
 int64_t get_cuid(const libmatroska::KaxTag &tag);

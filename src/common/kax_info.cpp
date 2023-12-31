@@ -76,7 +76,6 @@
 #include "common/xml/ebml_tags_converter.h"
 #include "matroska/KaxSemantic.h"
 
-using namespace libmatroska;
 using namespace mtx::kax_info;
 
 namespace mtx {
@@ -189,7 +188,7 @@ kax_info_c::ui_show_element_info(int level,
 }
 
 void
-kax_info_c::ui_show_element(EbmlElement &e) {
+kax_info_c::ui_show_element(libebml::EbmlElement &e) {
   auto p = p_func();
 
   if (p->m_show_summary)
@@ -212,7 +211,7 @@ kax_info_c::ui_show_progress(int /* percentage */,
 }
 
 void
-kax_info_c::show_element(EbmlElement *l,
+kax_info_c::show_element(libebml::EbmlElement *l,
                          int level,
                          const std::string &info,
                          std::optional<int64_t> position,
@@ -227,7 +226,7 @@ kax_info_c::show_element(EbmlElement *l,
                          size               ? *size
                        : !l                 ? std::optional<int64_t>{}
                        : !l->IsFiniteSize() ? -2
-                       :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*l)) + l->GetSize()),
+                       :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(*l)) + l->GetSize()),
                          !l                 ? std::optional<int64_t>{}
                        : !l->IsFiniteSize() ? std::optional<int64_t>{}
                        :                      l->GetSize());
@@ -239,22 +238,22 @@ kax_info_c::format_ebml_id_as_hex(uint32_t id) {
 }
 
 std::string
-kax_info_c::format_ebml_id_as_hex(EbmlId const &id) {
+kax_info_c::format_ebml_id_as_hex(libebml::EbmlId const &id) {
   return format_ebml_id_as_hex(EBML_ID_VALUE(id));
 }
 
 std::string
-kax_info_c::format_ebml_id_as_hex(EbmlElement &e) {
-  return format_ebml_id_as_hex(static_cast<const EbmlId &>(e));
+kax_info_c::format_ebml_id_as_hex(libebml::EbmlElement &e) {
+  return format_ebml_id_as_hex(static_cast<const libebml::EbmlId &>(e));
 }
 
 std::string
-kax_info_c::create_unknown_element_text(EbmlElement &e) {
+kax_info_c::create_unknown_element_text(libebml::EbmlElement &e) {
   return fmt::format(Y("(Unknown element: {0}; ID: 0x{1} size: {2})"), EBML_NAME(&e), format_ebml_id_as_hex(e), (e.GetSize() + e.HeadSize()));
 }
 
 std::string
-kax_info_c::create_known_element_but_not_allowed_here_text(EbmlElement &e) {
+kax_info_c::create_known_element_but_not_allowed_here_text(libebml::EbmlElement &e) {
   return fmt::format(Y("(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"), kax_element_names_c::get(e), format_ebml_id_as_hex(e), e.GetSize() + e.HeadSize());
 }
 
@@ -284,13 +283,13 @@ kax_info_c::create_element_text(const std::string &text,
 }
 
 std::string
-kax_info_c::create_text_representation(EbmlElement &e) {
+kax_info_c::create_text_representation(libebml::EbmlElement &e) {
   auto text = kax_element_names_c::get(e);
 
   if (text.empty())
     text = create_unknown_element_text(e);
 
-  else if (dynamic_cast<EbmlDummy *>(&e))
+  else if (dynamic_cast<libebml::EbmlDummy *>(&e))
     text = create_known_element_but_not_allowed_here_text(e);
 
   else {
@@ -306,47 +305,47 @@ kax_info_c::create_text_representation(EbmlElement &e) {
 }
 
 std::string
-kax_info_c::format_element_value(EbmlElement &e) {
+kax_info_c::format_element_value(libebml::EbmlElement &e) {
   auto p = p_func();
 
-  auto formatter = p->m_custom_element_value_formatters.find(EbmlId(e).GetValue());
+  auto formatter = p->m_custom_element_value_formatters.find(libebml::EbmlId(e).GetValue());
 
-  return (formatter == p->m_custom_element_value_formatters.end()) || dynamic_cast<EbmlDummy *>(&e) ? format_element_value_default(e) : formatter->second(e);
+  return (formatter == p->m_custom_element_value_formatters.end()) || dynamic_cast<libebml::EbmlDummy *>(&e) ? format_element_value_default(e) : formatter->second(e);
 }
 
 std::string
-kax_info_c::format_element_value_default(EbmlElement &e) {
-  if (Is<EbmlVoid>(e))
+kax_info_c::format_element_value_default(libebml::EbmlElement &e) {
+  if (Is<libebml::EbmlVoid>(e))
     return format_element_size(e);
 
-  if (Is<EbmlCrc32>(e))
-    return fmt::format("0x{0:08x}", static_cast<EbmlCrc32 &>(e).GetCrc32());
+  if (Is<libebml::EbmlCrc32>(e))
+    return fmt::format("0x{0:08x}", static_cast<libebml::EbmlCrc32 &>(e).GetCrc32());
 
-  if (dynamic_cast<EbmlUInteger *>(&e))
-    return fmt::to_string(static_cast<EbmlUInteger &>(e).GetValue());
+  if (dynamic_cast<libebml::EbmlUInteger *>(&e))
+    return fmt::to_string(static_cast<libebml::EbmlUInteger &>(e).GetValue());
 
-  if (dynamic_cast<EbmlSInteger *>(&e))
-    return fmt::to_string(static_cast<EbmlSInteger &>(e).GetValue());
+  if (dynamic_cast<libebml::EbmlSInteger *>(&e))
+    return fmt::to_string(static_cast<libebml::EbmlSInteger &>(e).GetValue());
 
-  if (dynamic_cast<EbmlString *>(&e))
-    return static_cast<EbmlString &>(e).GetValue();
+  if (dynamic_cast<libebml::EbmlString *>(&e))
+    return static_cast<libebml::EbmlString &>(e).GetValue();
 
-  if (dynamic_cast<EbmlUnicodeString *>(&e))
-    return static_cast<EbmlUnicodeString &>(e).GetValueUTF8();
+  if (dynamic_cast<libebml::EbmlUnicodeString *>(&e))
+    return static_cast<libebml::EbmlUnicodeString &>(e).GetValueUTF8();
 
-  if (dynamic_cast<EbmlBinary *>(&e))
-    return format_binary(static_cast<EbmlBinary &>(e));
+  if (dynamic_cast<libebml::EbmlBinary *>(&e))
+    return format_binary(static_cast<libebml::EbmlBinary &>(e));
 
-  if (dynamic_cast<EbmlDate *>(&e))
-    return mtx::date_time::format(QDateTime::fromSecsSinceEpoch(static_cast<EbmlDate &>(e).GetEpochDate(), Qt::UTC), "%Y-%m-%d %H:%M:%S UTC");
+  if (dynamic_cast<libebml::EbmlDate *>(&e))
+    return mtx::date_time::format(QDateTime::fromSecsSinceEpoch(static_cast<libebml::EbmlDate &>(e).GetEpochDate(), Qt::UTC), "%Y-%m-%d %H:%M:%S UTC");
 
-  if (dynamic_cast<EbmlMaster *>(&e))
+  if (dynamic_cast<libebml::EbmlMaster *>(&e))
     return {};
 
-  if (dynamic_cast<EbmlFloat *>(&e))
-    return mtx::string::normalize_fmt_double_output(static_cast<EbmlFloat &>(e).GetValue());
+  if (dynamic_cast<libebml::EbmlFloat *>(&e))
+    return mtx::string::normalize_fmt_double_output(static_cast<libebml::EbmlFloat &>(e).GetValue());
 
-  throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
+  throw std::invalid_argument{"format_element_value: unsupported libebml::EbmlElement type"};
 }
 
 std::string
@@ -363,7 +362,7 @@ kax_info_c::create_hexdump(unsigned char const *buf,
 }
 
 std::string
-kax_info_c::create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
+kax_info_c::create_codec_dependent_private_info(libmatroska::KaxCodecPrivate &c_priv,
                                                 char track_type,
                                                 std::string const &codec_id) {
   if ((codec_id == MKV_V_MSCOMP) && ('v' == track_type) && (c_priv.GetSize() >= sizeof(alBITMAPINFOHEADER))) {
@@ -421,10 +420,10 @@ kax_info_c::find_track(int tnum) {
 }
 
 void
-kax_info_c::read_master(EbmlMaster *m,
-                        EbmlSemanticContext const &ctx,
+kax_info_c::read_master(libebml::EbmlMaster *m,
+                        libebml::EbmlSemanticContext const &ctx,
                         int &upper_lvl_el,
-                        EbmlElement *&l2) {
+                        libebml::EbmlElement *&l2) {
   m->Read(*p_func()->m_es, ctx, upper_lvl_el, l2, true);
   if (m->ListSize() == 0)
     return;
@@ -433,7 +432,7 @@ kax_info_c::read_master(EbmlMaster *m,
 }
 
 std::string
-kax_info_c::format_binary(EbmlBinary &bin) {
+kax_info_c::format_binary(libebml::EbmlBinary &bin) {
   auto &p      = *p_func();
   auto len     = std::min<std::size_t>(p.m_hexdump_max_size, bin.GetSize());
   auto const b = bin.GetBuffer();
@@ -451,66 +450,66 @@ kax_info_c::format_binary(EbmlBinary &bin) {
 }
 
 std::string
-kax_info_c::format_binary_as_hex(EbmlElement &e) {
-  return mtx::string::to_hex(static_cast<EbmlBinary &>(e));
+kax_info_c::format_binary_as_hex(libebml::EbmlElement &e) {
+  return mtx::string::to_hex(static_cast<libebml::EbmlBinary &>(e));
 }
 
 std::string
-kax_info_c::format_element_size(EbmlElement &e) {
+kax_info_c::format_element_size(libebml::EbmlElement &e) {
   if (e.IsFiniteSize())
     return fmt::format(Y("size {0}"), e.GetSize());
   return Y("size unknown");
 }
 
 std::string
-kax_info_c::format_unsigned_integer_as_timestamp(EbmlElement &e) {
-  return mtx::string::format_timestamp(static_cast<EbmlUInteger &>(e).GetValue());
+kax_info_c::format_unsigned_integer_as_timestamp(libebml::EbmlElement &e) {
+  return mtx::string::format_timestamp(static_cast<libebml::EbmlUInteger &>(e).GetValue());
 }
 
 std::string
-kax_info_c::format_unsigned_integer_as_scaled_timestamp(EbmlElement &e) {
-  return mtx::string::format_timestamp(p_func()->m_ts_scale * static_cast<EbmlUInteger &>(e).GetValue());
+kax_info_c::format_unsigned_integer_as_scaled_timestamp(libebml::EbmlElement &e) {
+  return mtx::string::format_timestamp(p_func()->m_ts_scale * static_cast<libebml::EbmlUInteger &>(e).GetValue());
 }
 
 std::string
-kax_info_c::format_signed_integer_as_timestamp(EbmlElement &e) {
-  return mtx::string::format_timestamp(static_cast<EbmlSInteger &>(e).GetValue());
+kax_info_c::format_signed_integer_as_timestamp(libebml::EbmlElement &e) {
+  return mtx::string::format_timestamp(static_cast<libebml::EbmlSInteger &>(e).GetValue());
 }
 
 std::string
-kax_info_c::format_signed_integer_as_scaled_timestamp(EbmlElement &e) {
-  return mtx::string::format_timestamp(p_func()->m_ts_scale * static_cast<EbmlSInteger &>(e).GetValue());
+kax_info_c::format_signed_integer_as_scaled_timestamp(libebml::EbmlElement &e) {
+  return mtx::string::format_timestamp(p_func()->m_ts_scale * static_cast<libebml::EbmlSInteger &>(e).GetValue());
 }
 
 void
 kax_info_c::init_custom_element_value_formatters_and_processors() {
-  using pre_mem_fn_t  = bool (kax_info_c::*)(EbmlElement &);
-  using post_mem_fn_t = void (kax_info_c::*)(EbmlElement &);
-  using fmt_mem_fn_t  = std::string (kax_info_c::*)(EbmlElement &);
+  using pre_mem_fn_t  = bool (kax_info_c::*)(libebml::EbmlElement &);
+  using post_mem_fn_t = void (kax_info_c::*)(libebml::EbmlElement &);
+  using fmt_mem_fn_t  = std::string (kax_info_c::*)(libebml::EbmlElement &);
 
   auto p = p_func();
 
-  auto add_pre = [&p](EbmlId const &id, std::function<bool(EbmlElement &)> const &processor) {
+  auto add_pre = [&p](libebml::EbmlId const &id, std::function<bool(libebml::EbmlElement &)> const &processor) {
     p->m_custom_element_pre_processors.insert({ id.GetValue(), processor });
   };
 
-  auto add_pre_mem = [this, &p](EbmlId const &id, pre_mem_fn_t processor) {
+  auto add_pre_mem = [this, &p](libebml::EbmlId const &id, pre_mem_fn_t processor) {
     p->m_custom_element_pre_processors.insert({ id.GetValue(), std::bind(processor, this, std::placeholders::_1) });
   };
 
-  auto add_post = [&p](EbmlId const &id, std::function<void(EbmlElement &)> const &processor) {
+  auto add_post = [&p](libebml::EbmlId const &id, std::function<void(libebml::EbmlElement &)> const &processor) {
     p->m_custom_element_post_processors.insert({ id.GetValue(), processor });
   };
 
-  auto add_post_mem = [this, &p](EbmlId const &id, post_mem_fn_t processor) {
+  auto add_post_mem = [this, &p](libebml::EbmlId const &id, post_mem_fn_t processor) {
     p->m_custom_element_post_processors.insert({ id.GetValue(), std::bind(processor, this, std::placeholders::_1) });
   };
 
-  auto add_fmt = [&p](EbmlId const &id, std::function<std::string(EbmlElement &)> const &formatter) {
+  auto add_fmt = [&p](libebml::EbmlId const &id, std::function<std::string(libebml::EbmlElement &)> const &formatter) {
     p->m_custom_element_value_formatters.insert({ id.GetValue(), formatter });
   };
 
-  auto add_fmt_mem = [this, &p](EbmlId const &id, fmt_mem_fn_t formatter) {
+  auto add_fmt_mem = [this, &p](libebml::EbmlId const &id, fmt_mem_fn_t formatter) {
     p->m_custom_element_value_formatters.insert({ id.GetValue(), std::bind(formatter, this, std::placeholders::_1) });
   };
 
@@ -519,39 +518,39 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   p->m_custom_element_post_processors.clear();
 
   // Simple processors:
-  add_pre(    EBML_ID(KaxInfo),        [p](EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<KaxTimecodeScale>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
-  add_pre(    EBML_ID(KaxTracks),      [p](EbmlElement &)  -> bool { p->m_mkvmerge_track_id = 0; return true; });
-  add_pre_mem(EBML_ID(KaxSimpleBlock), &kax_info_c::pre_simple_block);
-  add_pre_mem(EBML_ID(KaxBlockGroup),  &kax_info_c::pre_block_group);
-  add_pre_mem(EBML_ID(KaxBlock),       &kax_info_c::pre_block);
+  add_pre(    EBML_ID(libmatroska::KaxInfo),        [p](libebml::EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<libmatroska::KaxTimecodeScale>(static_cast<libmatroska::KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
+  add_pre(    EBML_ID(libmatroska::KaxTracks),      [p](libebml::EbmlElement &)  -> bool { p->m_mkvmerge_track_id = 0; return true; });
+  add_pre_mem(EBML_ID(libmatroska::KaxSimpleBlock), &kax_info_c::pre_simple_block);
+  add_pre_mem(EBML_ID(libmatroska::KaxBlockGroup),  &kax_info_c::pre_block_group);
+  add_pre_mem(EBML_ID(libmatroska::KaxBlock),       &kax_info_c::pre_block);
 
   // More complex processors:
-  add_pre(EBML_ID(KaxSeekHead), ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(libmatroska::KaxSeekHead), ([this, p](libebml::EbmlElement &e) -> bool {
     if (!p->m_show_all_elements && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Seek head (subentries will be skipped)"));
     return p->m_show_all_elements || p->m_use_gui;
   }));
 
-  add_pre(EBML_ID(KaxCues), ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(libmatroska::KaxCues), ([this, p](libebml::EbmlElement &e) -> bool {
     if (!p->m_show_all_elements && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Cues (subentries will be skipped)"));
     return p->m_show_all_elements || p->m_use_gui;
   }));
 
-  add_pre(EBML_ID(KaxTrackEntry), [p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(libmatroska::KaxTrackEntry), [p](libebml::EbmlElement &e) -> bool {
     p->m_summary.clear();
 
-    auto &master                 = static_cast<EbmlMaster &>(e);
+    auto &master                 = static_cast<libebml::EbmlMaster &>(e);
     p->m_track                   = std::make_shared<kax_info::track_t>();
-    p->m_track->tuid             = FindChildValue<KaxTrackUID>(master);
-    p->m_track->codec_id         = FindChildValue<KaxCodecID>(master);
-    p->m_track->default_duration = FindChildValue<KaxTrackDefaultDuration>(master);
+    p->m_track->tuid             = FindChildValue<libmatroska::KaxTrackUID>(master);
+    p->m_track->codec_id         = FindChildValue<libmatroska::KaxCodecID>(master);
+    p->m_track->default_duration = FindChildValue<libmatroska::KaxTrackDefaultDuration>(master);
 
     return true;
   });
 
-  add_pre(EBML_ID(KaxTrackNumber), ([this, p](EbmlElement &e) -> bool {
-    p->m_track->tnum    = static_cast<KaxTrackNumber &>(e).GetValue();
+  add_pre(EBML_ID(libmatroska::KaxTrackNumber), ([this, p](libebml::EbmlElement &e) -> bool {
+    p->m_track->tnum    = static_cast<libmatroska::KaxTrackNumber &>(e).GetValue();
     auto existing_track = find_track(p->m_track->tnum);
     auto track_id       = p->m_mkvmerge_track_id;
 
@@ -570,8 +569,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_pre(EBML_ID(KaxTrackType), [p](EbmlElement &e) -> bool {
-    auto ttype       = static_cast<KaxTrackType &>(e).GetValue();
+  add_pre(EBML_ID(libmatroska::KaxTrackType), [p](libebml::EbmlElement &e) -> bool {
+    auto ttype       = static_cast<libmatroska::KaxTrackType &>(e).GetValue();
     p->m_track->type = track_audio    == ttype ? 'a'
                      : track_video    == ttype ? 'v'
                      : track_subtitle == ttype ? 's'
@@ -580,8 +579,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   });
 
-  add_pre(EBML_ID(KaxCodecPrivate), ([this, p](EbmlElement &e) -> bool {
-    auto &c_priv        = static_cast<KaxCodecPrivate &>(e);
+  add_pre(EBML_ID(libmatroska::KaxCodecPrivate), ([this, p](libebml::EbmlElement &e) -> bool {
+    auto &c_priv        = static_cast<libmatroska::KaxCodecPrivate &>(e);
     p->m_track-> fourcc = create_codec_dependent_private_info(c_priv, p->m_track->type, p->m_track->codec_id);
 
     if (p->m_calc_checksums && !p->m_show_summary)
@@ -595,44 +594,44 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_pre(EBML_ID(KaxCluster), ([this, p](EbmlElement &e) -> bool {
-    p->m_cluster = static_cast<KaxCluster *>(&e);
-    p->m_cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
+  add_pre(EBML_ID(libmatroska::KaxCluster), ([this, p](libebml::EbmlElement &e) -> bool {
+    p->m_cluster = static_cast<libmatroska::KaxCluster *>(&e);
+    p->m_cluster->InitTimecode(FindChildValue<libmatroska::KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
 
     ui_show_progress(100 * p->m_cluster->GetElementPosition() / p->m_file_size, Y("Parsing file"));
 
     return true;
   }));
 
-  add_post(EBML_ID(KaxAudioSamplingFreq),       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioSamplingFreq &>(e).GetValue()))); });
-  add_post(EBML_ID(KaxAudioOutputSamplingFreq), [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
-  add_post(EBML_ID(KaxAudioChannels),           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<KaxAudioChannels &>(e).GetValue())); });
-  add_post(EBML_ID(KaxAudioBitDepth),           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<KaxAudioBitDepth &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxAudioSamplingFreq),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<libmatroska::KaxAudioSamplingFreq &>(e).GetValue()))); });
+  add_post(EBML_ID(libmatroska::KaxAudioOutputSamplingFreq), [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<libmatroska::KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
+  add_post(EBML_ID(libmatroska::KaxAudioChannels),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<libmatroska::KaxAudioChannels &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxAudioBitDepth),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<libmatroska::KaxAudioBitDepth &>(e).GetValue())); });
 
-  add_post(EBML_ID(KaxVideoPixelWidth),         [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel width: {0}"), static_cast<KaxVideoPixelWidth &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoPixelHeight),        [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel height: {0}"), static_cast<KaxVideoPixelHeight &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoDisplayWidth),       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display width: {0}"), static_cast<KaxVideoDisplayWidth &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoDisplayHeight),      [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display height: {0}"), static_cast<KaxVideoDisplayHeight &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoPixelCropLeft),      [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop left: {0}"), static_cast<KaxVideoPixelCropLeft &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoPixelCropTop),       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop top: {0}"), static_cast<KaxVideoPixelCropTop &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoPixelCropRight),     [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop right: {0}"), static_cast<KaxVideoPixelCropRight &>(e).GetValue())); });
-  add_post(EBML_ID(KaxVideoPixelCropBottom),    [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop bottom: {0}"), static_cast<KaxVideoPixelCropBottom &>(e).GetValue())); });
-  add_post(EBML_ID(KaxTrackLanguage),           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language: {0}"), static_cast<KaxTrackLanguage &>(e).GetValue())); });
-  add_post(EBML_ID(KaxLanguageIETF),            [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language (IETF BCP 47): {0}"), static_cast<KaxLanguageIETF &>(e).GetValue())); });
-  add_post(EBML_ID(KaxBlockDuration),           [p](EbmlElement &e) { p->m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * p->m_ts_scale; });
-  add_post(EBML_ID(KaxReferenceBlock),          [p](EbmlElement &)  { ++p->m_num_references; });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelWidth),         [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel width: {0}"), static_cast<libmatroska::KaxVideoPixelWidth &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelHeight),        [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel height: {0}"), static_cast<libmatroska::KaxVideoPixelHeight &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoDisplayWidth),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display width: {0}"), static_cast<libmatroska::KaxVideoDisplayWidth &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoDisplayHeight),      [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display height: {0}"), static_cast<libmatroska::KaxVideoDisplayHeight &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropLeft),      [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop left: {0}"), static_cast<libmatroska::KaxVideoPixelCropLeft &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropTop),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop top: {0}"), static_cast<libmatroska::KaxVideoPixelCropTop &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropRight),     [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop right: {0}"), static_cast<libmatroska::KaxVideoPixelCropRight &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropBottom),    [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop bottom: {0}"), static_cast<libmatroska::KaxVideoPixelCropBottom &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxTrackLanguage),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language: {0}"), static_cast<libmatroska::KaxTrackLanguage &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxLanguageIETF),            [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language (IETF BCP 47): {0}"), static_cast<libmatroska::KaxLanguageIETF &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxBlockDuration),           [p](libebml::EbmlElement &e) { p->m_block_duration = static_cast<double>(static_cast<libmatroska::KaxBlockDuration &>(e).GetValue()) * p->m_ts_scale; });
+  add_post(EBML_ID(libmatroska::KaxReferenceBlock),          [p](libebml::EbmlElement &)  { ++p->m_num_references; });
 
-  add_post_mem(EBML_ID(KaxSimpleBlock),         &kax_info_c::post_simple_block);
-  add_post_mem(EBML_ID(KaxBlock),               &kax_info_c::post_block);
-  add_post_mem(EBML_ID(KaxBlockGroup),          &kax_info_c::post_block_group);
+  add_post_mem(EBML_ID(libmatroska::KaxSimpleBlock),         &kax_info_c::post_simple_block);
+  add_post_mem(EBML_ID(libmatroska::KaxBlock),               &kax_info_c::post_block);
+  add_post_mem(EBML_ID(libmatroska::KaxBlockGroup),          &kax_info_c::post_block_group);
 
-  add_post(EBML_ID(KaxTrackDefaultDuration),    [p](EbmlElement &) {
+  add_post(EBML_ID(libmatroska::KaxTrackDefaultDuration),    [p](libebml::EbmlElement &) {
     p->m_summary.push_back(fmt::format(Y("default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"),
                                        static_cast<double>(p->m_track->default_duration) / 1'000'000.0,
                                        1'000'000'000.0 / static_cast<double>(p->m_track->default_duration)));
   });
 
-  add_post(EBML_ID(KaxTrackEntry), [p](EbmlElement &) {
+  add_post(EBML_ID(libmatroska::KaxTrackEntry), [p](libebml::EbmlElement &) {
     if (!p->m_show_summary)
       return;
 
@@ -650,9 +649,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   });
 
   if (debugging_c::requested("dovi")) {
-    add_post(EBML_ID(KaxBlockAddIDType),       [p](EbmlElement &e) { p->m_block_add_id_type       = static_cast<KaxBlockAddIDType &>(e).GetValue(); });
-    add_post(EBML_ID(KaxBlockAddIDExtraData),  [p](EbmlElement &e) { p->m_block_add_id_extra_data = memory_c::clone(static_cast<KaxBlockAddIDExtraData &>(e)); });
-    add_post(EBML_ID(KaxBlockAdditionMapping), [p](EbmlElement &) {
+    add_post(EBML_ID(libmatroska::KaxBlockAddIDType),       [p](libebml::EbmlElement &e) { p->m_block_add_id_type       = static_cast<libmatroska::KaxBlockAddIDType &>(e).GetValue(); });
+    add_post(EBML_ID(libmatroska::KaxBlockAddIDExtraData),  [p](libebml::EbmlElement &e) { p->m_block_add_id_extra_data = memory_c::clone(static_cast<libmatroska::KaxBlockAddIDExtraData &>(e)); });
+    add_post(EBML_ID(libmatroska::KaxBlockAdditionMapping), [p](libebml::EbmlElement &) {
       if (p->m_block_add_id_type && p->m_block_add_id_extra_data) {
         try {
           mtx::bits::reader_c r{*p->m_block_add_id_extra_data};
@@ -669,55 +668,55 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   }
 
   // Simple formatters:
-  add_fmt_mem(EBML_ID(KaxSegmentUID),       &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(EBML_ID(KaxSegmentFamily),    &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(EBML_ID(KaxNextUID),          &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(EBML_ID(KaxSegmentFamily),    &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(EBML_ID(KaxPrevUID),          &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(EBML_ID(KaxSegment),          &kax_info_c::format_element_size);
-  add_fmt_mem(EBML_ID(KaxFileData),         &kax_info_c::format_element_size);
-  add_fmt_mem(EBML_ID(KaxChapterTimeStart), &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(EBML_ID(KaxChapterTimeEnd),   &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(EBML_ID(KaxCueDuration),      &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(EBML_ID(KaxCueTime),          &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(EBML_ID(KaxCueRefTime),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(EBML_ID(KaxCodecDelay),       &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(EBML_ID(KaxSeekPreRoll),      &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(EBML_ID(KaxClusterTimecode),  &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(EBML_ID(KaxSliceDelay),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(EBML_ID(KaxSliceDuration),    &kax_info_c::format_signed_integer_as_timestamp);
-  add_fmt_mem(EBML_ID(KaxSimpleBlock),      &kax_info_c::format_simple_block);
-  add_fmt_mem(EBML_ID(KaxBlock),            &kax_info_c::format_block);
-  add_fmt_mem(EBML_ID(KaxBlockDuration),    &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(EBML_ID(KaxReferenceBlock),   &kax_info_c::format_signed_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSegmentUID),       &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSegmentFamily),    &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(libmatroska::KaxNextUID),          &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSegmentFamily),    &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(libmatroska::KaxPrevUID),          &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSegment),          &kax_info_c::format_element_size);
+  add_fmt_mem(EBML_ID(libmatroska::KaxFileData),         &kax_info_c::format_element_size);
+  add_fmt_mem(EBML_ID(libmatroska::KaxChapterTimeStart), &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxChapterTimeEnd),   &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxCueDuration),      &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxCueTime),          &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxCueRefTime),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxCodecDelay),       &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSeekPreRoll),      &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxClusterTimecode),  &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSliceDelay),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSliceDuration),    &kax_info_c::format_signed_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxSimpleBlock),      &kax_info_c::format_simple_block);
+  add_fmt_mem(EBML_ID(libmatroska::KaxBlock),            &kax_info_c::format_block);
+  add_fmt_mem(EBML_ID(libmatroska::KaxBlockDuration),    &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(libmatroska::KaxReferenceBlock),   &kax_info_c::format_signed_integer_as_scaled_timestamp);
 
-  add_fmt(EBML_ID(KaxDuration),             [p](EbmlElement &e) { return mtx::string::format_timestamp(static_cast<int64_t>(static_cast<EbmlFloat &>(e).GetValue() * p->m_ts_scale)); });
+  add_fmt(EBML_ID(libmatroska::KaxDuration),             [p](libebml::EbmlElement &e) { return mtx::string::format_timestamp(static_cast<int64_t>(static_cast<libebml::EbmlFloat &>(e).GetValue() * p->m_ts_scale)); });
 
   // More complex formatters:
-  add_fmt(EBML_ID(KaxSeekID), [](EbmlElement &e) -> std::string {
-    auto &seek_id = static_cast<KaxSeekID &>(e);
-    EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
+  add_fmt(EBML_ID(libmatroska::KaxSeekID), [](libebml::EbmlElement &e) -> std::string {
+    auto &seek_id = static_cast<libmatroska::KaxSeekID &>(e);
+    libebml::EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
 
     return fmt::format("{0} ({1})",
                        mtx::string::to_hex(seek_id),
-                         Is<KaxInfo>(id)        ? "KaxInfo"
-                       : Is<KaxCluster>(id)     ? "KaxCluster"
-                       : Is<KaxTracks>(id)      ? "KaxTracks"
-                       : Is<KaxCues>(id)        ? "KaxCues"
-                       : Is<KaxAttachments>(id) ? "KaxAttachments"
-                       : Is<KaxChapters>(id)    ? "KaxChapters"
-                       : Is<KaxTags>(id)        ? "KaxTags"
-                       : Is<KaxSeekHead>(id)    ? "KaxSeekHead"
-                       :                          "unknown");
+                         Is<libmatroska::KaxInfo>(id)        ? "KaxInfo"
+                       : Is<libmatroska::KaxCluster>(id)     ? "KaxCluster"
+                       : Is<libmatroska::KaxTracks>(id)      ? "KaxTracks"
+                       : Is<libmatroska::KaxCues>(id)        ? "KaxCues"
+                       : Is<libmatroska::KaxAttachments>(id) ? "KaxAttachments"
+                       : Is<libmatroska::KaxChapters>(id)    ? "KaxChapters"
+                       : Is<libmatroska::KaxTags>(id)        ? "KaxTags"
+                       : Is<libmatroska::KaxSeekHead>(id)    ? "KaxSeekHead"
+                       :                                       "unknown");
   });
 
-  add_fmt(EBML_ID(KaxEmphasis), [](EbmlElement &e) -> std::string {
-    auto audio_emphasis = static_cast<KaxEmphasis &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxEmphasis), [](libebml::EbmlElement &e) -> std::string {
+    auto audio_emphasis = static_cast<libmatroska::KaxEmphasis &>(e).GetValue();
     return fmt::format("{0} ({1})", audio_emphasis, audio_emphasis_c::translate(static_cast<audio_emphasis_c::mode_e>(audio_emphasis)));
   });
 
-  add_fmt(EBML_ID(KaxVideoProjectionType), [](EbmlElement &e) -> std::string {
-    auto value       = static_cast<KaxVideoProjectionType &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxVideoProjectionType), [](libebml::EbmlElement &e) -> std::string {
+    auto value       = static_cast<libmatroska::KaxVideoProjectionType &>(e).GetValue();
     auto description = 0 == value ? Y("rectangular")
                      : 1 == value ? Y("equirectangular")
                      : 2 == value ? Y("cubemap")
@@ -727,8 +726,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return fmt::format("{0} ({1})", value, description);
   });
 
-  add_fmt(EBML_ID(KaxVideoDisplayUnit), [](EbmlElement &e) -> std::string {
-      auto unit = static_cast<KaxVideoDisplayUnit &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxVideoDisplayUnit), [](libebml::EbmlElement &e) -> std::string {
+      auto unit = static_cast<libmatroska::KaxVideoDisplayUnit &>(e).GetValue();
       return fmt::format("{0}{1}",
                          unit,
                            0 == unit ? Y(" (pixels)")
@@ -738,8 +737,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                          :               "");
   });
 
-  add_fmt(EBML_ID(KaxVideoFieldOrder), [](EbmlElement &e) -> std::string {
-    auto field_order = static_cast<KaxVideoFieldOrder &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxVideoFieldOrder), [](libebml::EbmlElement &e) -> std::string {
+    auto field_order = static_cast<libmatroska::KaxVideoFieldOrder &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        field_order,
                           0 == field_order ? Y("progressive")
@@ -751,13 +750,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                     Y("unknown"));
   });
 
-  add_fmt(EBML_ID(KaxVideoStereoMode), [](EbmlElement &e) -> std::string {
-    auto stereo_mode = static_cast<KaxVideoStereoMode &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxVideoStereoMode), [](libebml::EbmlElement &e) -> std::string {
+    auto stereo_mode = static_cast<libmatroska::KaxVideoStereoMode &>(e).GetValue();
     return fmt::format("{0} ({1})", stereo_mode, stereo_mode_c::translate(static_cast<stereo_mode_c::mode>(stereo_mode)));
   });
 
-  add_fmt(EBML_ID(KaxVideoAspectRatio), [](EbmlElement &e) -> std::string {
-    auto ar_type = static_cast<KaxVideoAspectRatio &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxVideoAspectRatio), [](libebml::EbmlElement &e) -> std::string {
+    auto ar_type = static_cast<libmatroska::KaxVideoAspectRatio &>(e).GetValue();
     return fmt::format("{0}{1}",
                        ar_type,
                          0 == ar_type ? Y(" (free resizing)")
@@ -766,9 +765,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                  "");
   });
 
-  add_fmt(EBML_ID(KaxContentEncodingScope), [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(libmatroska::KaxContentEncodingScope), [](libebml::EbmlElement &e) -> std::string {
     std::vector<std::string> scope;
-    auto ce_scope = static_cast<KaxContentEncodingScope &>(e).GetValue();
+    auto ce_scope = static_cast<libmatroska::KaxContentEncodingScope &>(e).GetValue();
 
     if ((ce_scope & 0x01) == 0x01)
       scope.emplace_back(Y("1: all frames"));
@@ -782,8 +781,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return fmt::format("{0} ({1})", ce_scope, mtx::string::join(scope, ", "));
   });
 
-  add_fmt(EBML_ID(KaxContentEncodingType), [](EbmlElement &e) -> std::string {
-    auto ce_type = static_cast<KaxContentEncodingType &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxContentEncodingType), [](libebml::EbmlElement &e) -> std::string {
+    auto ce_type = static_cast<libmatroska::KaxContentEncodingType &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        ce_type,
                          0 == ce_type ? Y("compression")
@@ -791,8 +790,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                Y("unknown"));
   });
 
-  add_fmt(EBML_ID(KaxContentCompAlgo), [](EbmlElement &e) -> std::string {
-    auto c_algo = static_cast<KaxContentCompAlgo &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxContentCompAlgo), [](libebml::EbmlElement &e) -> std::string {
+    auto c_algo = static_cast<libmatroska::KaxContentCompAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        c_algo,
                          0 == c_algo ?   "ZLIB"
@@ -802,8 +801,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :               Y("unknown"));
   });
 
-  add_fmt(EBML_ID(KaxContentEncAlgo), [](EbmlElement &e) -> std::string {
-    auto e_algo = static_cast<KaxContentEncAlgo &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxContentEncAlgo), [](libebml::EbmlElement &e) -> std::string {
+    auto e_algo = static_cast<libmatroska::KaxContentEncAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        e_algo,
                          0 == e_algo ? Y("no encryption")
@@ -815,8 +814,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :               Y("unknown"));
   });
 
-  add_fmt(EBML_ID(KaxContentSigAlgo), [](EbmlElement &e) -> std::string {
-    auto s_algo = static_cast<KaxContentSigAlgo &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxContentSigAlgo), [](libebml::EbmlElement &e) -> std::string {
+    auto s_algo = static_cast<libmatroska::KaxContentSigAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        s_algo,
                          0 == s_algo ? Y("no signature algorithm")
@@ -824,8 +823,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :               Y("unknown"));
   });
 
-  add_fmt(EBML_ID(KaxContentSigHashAlgo), [](EbmlElement &e) -> std::string {
-    auto s_halgo = static_cast<KaxContentSigHashAlgo &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxContentSigHashAlgo), [](libebml::EbmlElement &e) -> std::string {
+    auto s_halgo = static_cast<libmatroska::KaxContentSigHashAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        s_halgo,
                          0 == s_halgo ? Y("no signature hash algorithm")
@@ -834,10 +833,10 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                Y("unknown"));
   });
 
-  add_fmt(EBML_ID(KaxTrackNumber), [p](EbmlElement &e) -> std::string { return fmt::format(Y("{0} (track ID for mkvmerge & mkvextract: {1})"), p->m_track_by_element[&e]->tnum, p->m_track_by_element[&e]->mkvmerge_track_id); });
+  add_fmt(EBML_ID(libmatroska::KaxTrackNumber), [p](libebml::EbmlElement &e) -> std::string { return fmt::format(Y("{0} (track ID for mkvmerge & mkvextract: {1})"), p->m_track_by_element[&e]->tnum, p->m_track_by_element[&e]->mkvmerge_track_id); });
 
-  add_fmt(EBML_ID(KaxTrackType), [](EbmlElement &e) -> std::string {
-    auto ttype = static_cast<KaxTrackType &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxTrackType), [](libebml::EbmlElement &e) -> std::string {
+    auto ttype = static_cast<libmatroska::KaxTrackType &>(e).GetValue();
     return track_audio    == ttype ? Y("audio")
          : track_video    == ttype ? Y("video")
          : track_subtitle == ttype ? Y("subtitles")
@@ -845,19 +844,19 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
          :                           Y("unknown");
   });
 
-  add_fmt(EBML_ID(KaxCodecPrivate), [p](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(libmatroska::KaxCodecPrivate), [p](libebml::EbmlElement &e) -> std::string {
     return fmt::format(Y("size {0}"), e.GetSize()) + p->m_track_by_element[&e]->fourcc;
   });
 
-  add_fmt(EBML_ID(KaxTrackDefaultDuration), [](EbmlElement &e) -> std::string {
-    auto default_duration = static_cast<KaxTrackDefaultDuration &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxTrackDefaultDuration), [](libebml::EbmlElement &e) -> std::string {
+    auto default_duration = static_cast<libmatroska::KaxTrackDefaultDuration &>(e).GetValue();
     return fmt::format(Y("{0} ({1:.3f} frames/fields per second for a video track)"),
                        mtx::string::format_timestamp(default_duration),
                        1'000'000'000.0 / static_cast<double>(default_duration));
   });
 
-  add_fmt(EBML_ID(KaxBlockAddIDType), [](auto &e) -> std::string {
-    auto value       = static_cast<EbmlUInteger &>(e).GetValue();
+  add_fmt(EBML_ID(libmatroska::KaxBlockAddIDType), [](auto &e) -> std::string {
+    auto value       = static_cast<libebml::EbmlUInteger &>(e).GetValue();
     auto description = value >  std::numeric_limits<uint32_t>::max() ? Y("unknown")
                      : value >= 1u << 24                             ? fourcc_c{static_cast<uint32_t>(value)}.str()
                      : value ==   1                                  ? Y("codec-specific")
@@ -867,26 +866,26 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return fmt::format("{0} ({1})", value, description);
   });
 
-  add_fmt(EBML_ID(KaxChapterSkipType), [](EbmlElement &e) -> std::string {
-    auto value       = static_cast<EbmlUInteger &>(e).GetValue();
-    auto description = value == MATROSKA_CHAPTERSKIPTYPE_NO_SKIPPING     ? Y("no skipping")
-                     : value == MATROSKA_CHAPTERSKIPTYPE_OPENING_CREDITS ? Y("opening credits")
-                     : value == MATROSKA_CHAPTERSKIPTYPE_END_CREDITS     ? Y("end credits")
-                     : value == MATROSKA_CHAPTERSKIPTYPE_RECAP           ? Y("recap")
-                     : value == MATROSKA_CHAPTERSKIPTYPE_NEXT_PREVIEW    ? Y("preview of next episode")
-                     : value == MATROSKA_CHAPTERSKIPTYPE_PREVIEW         ? Y("preview of current episode")
-                     : value == MATROSKA_CHAPTERSKIPTYPE_ADVERTISEMENT   ? Y("advertisement")
-                     :                                                     Y("unknown");
+  add_fmt(EBML_ID(libmatroska::KaxChapterSkipType), [](libebml::EbmlElement &e) -> std::string {
+    auto value       = static_cast<libebml::EbmlUInteger &>(e).GetValue();
+    auto description = value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_NO_SKIPPING     ? Y("no skipping")
+                     : value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_OPENING_CREDITS ? Y("opening credits")
+                     : value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_END_CREDITS     ? Y("end credits")
+                     : value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_RECAP           ? Y("recap")
+                     : value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_NEXT_PREVIEW    ? Y("preview of next episode")
+                     : value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_PREVIEW         ? Y("preview of current episode")
+                     : value == libmatroska::MATROSKA_CHAPTERSKIPTYPE_ADVERTISEMENT   ? Y("advertisement")
+                     :                                                                  Y("unknown");
 
     return fmt::format("{0} ({1})", value, description);
   });
 }
 
 bool
-kax_info_c::pre_block(EbmlElement &e) {
+kax_info_c::pre_block(libebml::EbmlElement &e) {
   auto p = p_func();
 
-  auto &block = static_cast<KaxBlock &>(e);
+  auto &block = static_cast<libmatroska::KaxBlock &>(e);
 
   block.SetParent(*p->m_cluster);
 
@@ -898,18 +897,18 @@ kax_info_c::pre_block(EbmlElement &e) {
 }
 
 std::string
-kax_info_c::format_block(EbmlElement &e) {
+kax_info_c::format_block(libebml::EbmlElement &e) {
   auto p = p_func();
 
-  auto &block = static_cast<KaxBlock &>(e);
+  auto &block = static_cast<libmatroska::KaxBlock &>(e);
 
   return fmt::format(Y("track number {0}, {1} frame(s), timestamp {2}"), block.TrackNum(), block.NumberFrames(), mtx::string::format_timestamp(p->m_lf_timestamp));
 }
 
 void
-kax_info_c::post_block(EbmlElement &e) {
+kax_info_c::post_block(libebml::EbmlElement &e) {
   auto p         = p_func();
-  auto &block    = static_cast<KaxBlock &>(e);
+  auto &block    = static_cast<libmatroska::KaxBlock &>(e);
   auto frame_pos = e.GetElementPosition() + e.ElementSize();
 
   for (int i = 0, num_frames = block.NumberFrames(); i < num_frames; ++i)
@@ -940,7 +939,7 @@ kax_info_c::post_block(EbmlElement &e) {
 }
 
 void
-kax_info_c::show_frame_summary(EbmlElement &e) {
+kax_info_c::show_frame_summary(libebml::EbmlElement &e) {
   auto p         = p_func();
   auto frame_pos = e.GetElementPosition() + e.ElementSize();
 
@@ -978,7 +977,7 @@ kax_info_c::show_frame_summary(EbmlElement &e) {
 }
 
 bool
-kax_info_c::pre_block_group(EbmlElement &) {
+kax_info_c::pre_block_group(libebml::EbmlElement &) {
   auto p              = p_func();
 
   p->m_num_references = 0;
@@ -993,7 +992,7 @@ kax_info_c::pre_block_group(EbmlElement &) {
 }
 
 void
-kax_info_c::post_block_group(EbmlElement &e) {
+kax_info_c::post_block_group(libebml::EbmlElement &e) {
   auto p = p_func();
 
   if (p->m_show_summary)
@@ -1020,21 +1019,21 @@ kax_info_c::post_block_group(EbmlElement &e) {
 }
 
 bool
-kax_info_c::pre_simple_block(EbmlElement &e) {
+kax_info_c::pre_simple_block(libebml::EbmlElement &e) {
   auto p = p_func();
 
   p->m_frame_sizes.clear();
   p->m_frame_adlers.clear();
   p->m_frame_hexdumps.clear();
 
-  static_cast<KaxSimpleBlock &>(e).SetParent(*p->m_cluster);
+  static_cast<libmatroska::KaxSimpleBlock &>(e).SetParent(*p->m_cluster);
 
   return true;
 }
 
 std::string
-kax_info_c::format_simple_block(EbmlElement &e) {
-  auto &block       = static_cast<KaxSimpleBlock &>(e);
+kax_info_c::format_simple_block(libebml::EbmlElement &e) {
+  auto &block       = static_cast<libmatroska::KaxSimpleBlock &>(e);
   auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
 
   std::string info;
@@ -1051,10 +1050,10 @@ kax_info_c::format_simple_block(EbmlElement &e) {
 }
 
 void
-kax_info_c::post_simple_block(EbmlElement &e) {
+kax_info_c::post_simple_block(libebml::EbmlElement &e) {
   auto p            = p_func();
 
-  auto &block       = static_cast<KaxSimpleBlock &>(e);
+  auto &block       = static_cast<libmatroska::KaxSimpleBlock &>(e);
   auto &tinfo       = p->m_track_info[block.TrackNum()];
   auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
   int num_frames    = block.NumberFrames();
@@ -1116,11 +1115,11 @@ kax_info_c::post_simple_block(EbmlElement &e) {
 }
 
 kax_info_c::result_e
-kax_info_c::handle_segment(EbmlElement *l0) {
+kax_info_c::handle_segment(libebml::EbmlElement *l0) {
   ui_show_element(*l0);
 
   auto p        = p_func();
-  auto l1       = std::shared_ptr<EbmlElement>{};
+  auto l1       = std::shared_ptr<libebml::EbmlElement>{};
   auto kax_file = std::make_shared<kax_file_c>(*p->m_in);
   p->m_level    = 1;
 
@@ -1132,7 +1131,7 @@ kax_info_c::handle_segment(EbmlElement *l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     retain_element(l1);
 
-    if (Is<KaxCluster>(*l1) && !p->m_continue_at_cluster && !p->m_show_summary) {
+    if (Is<libmatroska::KaxCluster>(*l1) && !p->m_continue_at_cluster && !p->m_show_summary) {
       ui_show_element(*l1);
       return result_e::succeeded;
 
@@ -1156,14 +1155,14 @@ kax_info_c::handle_segment(EbmlElement *l0) {
 }
 
 bool
-kax_info_c::run_generic_pre_processors(EbmlElement &e) {
+kax_info_c::run_generic_pre_processors(libebml::EbmlElement &e) {
   auto p = p_func();
 
-  auto is_dummy = !!dynamic_cast<EbmlDummy *>(&e);
+  auto is_dummy = !!dynamic_cast<libebml::EbmlDummy *>(&e);
   if (is_dummy)
     return true;
 
-  auto pre_processor = p->m_custom_element_pre_processors.find(EbmlId(e).GetValue());
+  auto pre_processor = p->m_custom_element_pre_processors.find(libebml::EbmlId(e).GetValue());
   if (pre_processor != p->m_custom_element_pre_processors.end())
     if (!pre_processor->second(e))
       return false;
@@ -1172,20 +1171,20 @@ kax_info_c::run_generic_pre_processors(EbmlElement &e) {
 }
 
 void
-kax_info_c::run_generic_post_processors(EbmlElement &e) {
+kax_info_c::run_generic_post_processors(libebml::EbmlElement &e) {
   auto p = p_func();
 
-  auto is_dummy = !!dynamic_cast<EbmlDummy *>(&e);
+  auto is_dummy = !!dynamic_cast<libebml::EbmlDummy *>(&e);
   if (is_dummy)
     return;
 
-  auto post_processor = p->m_custom_element_post_processors.find(EbmlId(e).GetValue());
+  auto post_processor = p->m_custom_element_post_processors.find(libebml::EbmlId(e).GetValue());
   if (post_processor != p->m_custom_element_post_processors.end())
     post_processor->second(e);
 }
 
 void
-kax_info_c::handle_elements_generic(EbmlElement &e) {
+kax_info_c::handle_elements_generic(libebml::EbmlElement &e) {
   auto p = p_func();
 
   if (!run_generic_pre_processors(e))
@@ -1193,10 +1192,10 @@ kax_info_c::handle_elements_generic(EbmlElement &e) {
 
   ui_show_element(e);
 
-  if (dynamic_cast<EbmlMaster *>(&e)) {
+  if (dynamic_cast<libebml::EbmlMaster *>(&e)) {
     ++p->m_level;
 
-    for (auto child : static_cast<EbmlMaster &>(e))
+    for (auto child : static_cast<libebml::EbmlMaster &>(e))
       handle_elements_generic(*child);
 
     --p->m_level;
@@ -1248,19 +1247,19 @@ kax_info_c::process_file() {
   auto p         = p_func();
 
   p->m_file_size = p->m_in->get_size();
-  p->m_es        = std::make_shared<EbmlStream>(*p->m_in);
+  p->m_es        = std::make_shared<libebml::EbmlStream>(*p->m_in);
 
-  // Find the EbmlHead element. Must be the first one.
-  auto l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL) };
-  if (!l0 || !Is<EbmlHead>(*l0)) {
+  // Find the libebml::EbmlHead element. Must be the first one.
+  auto l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(libebml::EbmlHead), 0xFFFFFFFFL) };
+  if (!l0 || !Is<libebml::EbmlHead>(*l0)) {
     ui_show_error(fmt::format("{0} {1}", Y("No EBML head found."), Y("This file is probably not a Matroska file.")));
     return result_e::failed;
   }
 
   int upper_lvl_el           = 0;
-  EbmlElement *element_found = nullptr;
+  libebml::EbmlElement *element_found = nullptr;
 
-  read_master(static_cast<EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
+  read_master(static_cast<libebml::EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
   delete element_found;
 
   retain_element(l0);
@@ -1270,13 +1269,13 @@ kax_info_c::process_file() {
 
   while (true) {
     // NEXT element must be a segment
-    l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
+    l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(libmatroska::KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
     if (!l0)
       break;
 
     retain_element(l0);
 
-    if (!Is<KaxSegment>(*l0)) {
+    if (!Is<libmatroska::KaxSegment>(*l0)) {
       handle_elements_generic(*l0);
       l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
 
@@ -1361,7 +1360,7 @@ kax_info_c::abort() {
 }
 
 void
-kax_info_c::retain_element(std::shared_ptr<EbmlElement> const &element) {
+kax_info_c::retain_element(std::shared_ptr<libebml::EbmlElement> const &element) {
   auto p = p_func();
 
   if (p->m_retain_elements)
@@ -1369,7 +1368,7 @@ kax_info_c::retain_element(std::shared_ptr<EbmlElement> const &element) {
 }
 
 void
-kax_info_c::discard_retained_element(EbmlElement &element_to_remove) {
+kax_info_c::discard_retained_element(libebml::EbmlElement &element_to_remove) {
   auto p = p_func();
 
   p->m_retained_elements.erase(std::remove_if(p->m_retained_elements.begin(), p->m_retained_elements.end(),

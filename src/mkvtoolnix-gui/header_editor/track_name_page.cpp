@@ -13,8 +13,8 @@ using namespace mtx::gui;
 
 TrackNamePage::TrackNamePage(Tab &parent,
                              PageBase &topLevelPage,
-                             EbmlMaster &master,
-                             EbmlCallbacks const &callbacks,
+                             libebml::EbmlMaster &master,
+                             libebml::EbmlCallbacks const &callbacks,
                              translatable_string_c const &title,
                              translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
@@ -28,7 +28,7 @@ TrackNamePage::~TrackNamePage() {
 QWidget *
 TrackNamePage::createInputControl() {
   if (m_element)
-    m_originalValue = Q(static_cast<EbmlUnicodeString *>(m_element)->GetValue());
+    m_originalValue = Q(static_cast<libebml::EbmlUnicodeString *>(m_element)->GetValue());
 
   m_cbTrackName = new QComboBox{this};
   m_cbTrackName->setEditable(true);
@@ -67,7 +67,7 @@ TrackNamePage::validateValue()
 
 void
 TrackNamePage::copyValueToElement() {
-  static_cast<EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_cbTrackName->currentText()));
+  static_cast<libebml::EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_cbTrackName->currentText()));
 }
 
 void

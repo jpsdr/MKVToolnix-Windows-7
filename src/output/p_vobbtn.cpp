@@ -22,8 +22,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_vobbtn.h"
 
-using namespace libmatroska;
-
 vobbtn_packetizer_c::vobbtn_packetizer_c(generic_reader_c *p_reader,
                                          track_info_c &p_ti,
                                          int width,

@@ -21,8 +21,6 @@
 #include "merge/packet_extensions.h"
 #include "output/p_mp3.h"
 
-using namespace libmatroska;
-
 mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    int samples_per_sec,

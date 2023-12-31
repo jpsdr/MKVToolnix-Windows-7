@@ -25,8 +25,6 @@
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
 
-using namespace libmatroska;
-
 kax_file_c::kax_file_c(mm_io_c &in)
   : m_in(in)
   , m_resynced{}
@@ -35,21 +33,21 @@ kax_file_c::kax_file_c(mm_io_c &in)
   , m_segment_end{}
   , m_timestamp_scale{TIMESTAMP_SCALE}
   , m_last_timestamp{-1}
-  , m_es{new EbmlStream{m_in}}
+  , m_es{new libebml::EbmlStream{m_in}}
   , m_debug_read_next{"kax_file|kax_file_read_next"}
   , m_debug_resync{   "kax_file|kax_file_resync"}
 {
 }
 
-std::shared_ptr<EbmlElement>
+std::shared_ptr<libebml::EbmlElement>
 kax_file_c::read_next_level1_element(uint32_t wanted_id,
                                      bool report_cluster_timestamp) {
   try {
     auto element = read_next_level1_element_internal(wanted_id);
 
-    if (element && report_cluster_timestamp && (-1 != m_timestamp_scale) && (EBML_ID_VALUE(EBML_ID(KaxCluster)) == wanted_id))
+    if (element && report_cluster_timestamp && (-1 != m_timestamp_scale) && (EBML_ID_VALUE(EBML_ID(libmatroska::KaxCluster)) == wanted_id))
       report(fmt::format(Y("The first cluster timestamp after the resync is {0}.\n"),
-                         mtx::string::format_timestamp(FindChildValue<KaxClusterTimecode>(static_cast<KaxCluster *>(element.get())) * m_timestamp_scale)));
+                         mtx::string::format_timestamp(FindChildValue<libmatroska::KaxClusterTimecode>(static_cast<libmatroska::KaxCluster *>(element.get())) * m_timestamp_scale)));
 
     return element;
 
@@ -74,7 +72,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
   return nullptr;
 }
 
-std::shared_ptr<EbmlElement>
+std::shared_ptr<libebml::EbmlElement>
 kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   if (m_segment_end && (m_in.getFilePointer() >= m_segment_end))
     return nullptr;
@@ -110,7 +108,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
 
       // If a specific level 1 is wanted, make sure it was actually
       // read. Otherwise try again.
-      if (!wanted_id || (wanted_id == EbmlId(*l1).GetValue()))
+      if (!wanted_id || (wanted_id == libebml::EbmlId(*l1).GetValue()))
         return l1;
       return read_next_level1_element(wanted_id);
     }
@@ -142,22 +140,22 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   return resync_to_level1_element(wanted_id);
 }
 
-std::shared_ptr<EbmlElement>
+std::shared_ptr<libebml::EbmlElement>
 kax_file_c::read_one_element() {
   if (m_segment_end && (m_in.getFilePointer() >= m_segment_end))
     return nullptr;
 
   auto upper_lvl_el = 0;
-  auto l1           = std::shared_ptr<EbmlElement>{m_es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true)};
+  auto l1           = std::shared_ptr<libebml::EbmlElement>{m_es->FindNextElement(EBML_CLASS_CONTEXT(libmatroska::KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true)};
 
   if (!l1)
     return {};
 
-  auto callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), EbmlId(*l1));
+  auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(*l1));
   if (!callbacks)
-    callbacks = &EBML_CLASS_CALLBACK(KaxSegment);
+    callbacks = &EBML_CLASS_CALLBACK(libmatroska::KaxSegment);
 
-  auto l2 = static_cast<EbmlElement *>(nullptr);
+  auto l2 = static_cast<libebml::EbmlElement *>(nullptr);
   try {
     l1->Read(*m_es.get(), EBML_INFO_CONTEXT(*callbacks), upper_lvl_el, l2, true);
     if (upper_lvl_el && !found_in(*l1, l2))
@@ -182,7 +180,7 @@ kax_file_c::read_one_element() {
 
 bool
 kax_file_c::is_level1_element_id(vint_c id) {
-  auto &context = EBML_CLASS_CONTEXT(KaxSegment);
+  auto &context = EBML_CLASS_CONTEXT(libmatroska::KaxSegment);
   for (int segment_idx = 0, end = EBML_CTX_SIZE(context); end > segment_idx; ++segment_idx)
     if (EBML_ID_VALUE(EBML_CTX_IDX_ID(context,segment_idx)) == id.m_value)
       return true;
@@ -192,11 +190,11 @@ kax_file_c::is_level1_element_id(vint_c id) {
 
 bool
 kax_file_c::is_global_element_id(vint_c id) {
-  return (EBML_ID_VALUE(EBML_ID(EbmlVoid))  == id.m_value)
-    ||   (EBML_ID_VALUE(EBML_ID(EbmlCrc32)) == id.m_value);
+  return (EBML_ID_VALUE(EBML_ID(libebml::EbmlVoid))  == id.m_value)
+    ||   (EBML_ID_VALUE(EBML_ID(libebml::EbmlCrc32)) == id.m_value);
 }
 
-std::shared_ptr<EbmlElement>
+std::shared_ptr<libebml::EbmlElement>
 kax_file_c::resync_to_level1_element(uint32_t wanted_id) {
   try {
     return resync_to_level1_element_internal(wanted_id);
@@ -206,7 +204,7 @@ kax_file_c::resync_to_level1_element(uint32_t wanted_id) {
   }
 }
 
-std::shared_ptr<EbmlElement>
+std::shared_ptr<libebml::EbmlElement>
 kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   if (m_segment_end && (m_in.getFilePointer() >= m_segment_end))
     return {};
@@ -216,7 +214,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
 
   auto actual_id     = m_in.read_uint32_be();
   auto start_time    = mtx::sys::get_current_time_millis();
-  auto is_cluster_id = !wanted_id || (EBML_ID_VALUE(EBML_ID(KaxCluster)) == wanted_id); // 0 means: any level 1 element will do
+  auto is_cluster_id = !wanted_id || (EBML_ID_VALUE(EBML_ID(libmatroska::KaxCluster)) == wanted_id); // 0 means: any level 1 element will do
 
   report(fmt::format(Y("{0}: Error in the Matroska file structure at position {1}. Resyncing to the next level 1 element.\n"),
                      m_in.get_file_name(), m_resync_start_pos));
@@ -292,14 +290,14 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   return {};
 }
 
-std::shared_ptr<KaxCluster>
+std::shared_ptr<libmatroska::KaxCluster>
 kax_file_c::resync_to_cluster() {
-  return std::static_pointer_cast<KaxCluster>(resync_to_level1_element(EBML_ID_VALUE(EBML_ID(KaxCluster))));
+  return std::static_pointer_cast<libmatroska::KaxCluster>(resync_to_level1_element(EBML_ID_VALUE(EBML_ID(libmatroska::KaxCluster))));
 }
 
-std::shared_ptr<KaxCluster>
+std::shared_ptr<libmatroska::KaxCluster>
 kax_file_c::read_next_cluster() {
-  return std::static_pointer_cast<KaxCluster>(read_next_level1_element(EBML_ID_VALUE(EBML_ID(KaxCluster))));
+  return std::static_pointer_cast<libmatroska::KaxCluster>(read_next_level1_element(EBML_ID_VALUE(EBML_ID(libmatroska::KaxCluster))));
 }
 
 bool
@@ -313,13 +311,13 @@ kax_file_c::get_resync_start_pos() const {
 }
 
 unsigned long
-kax_file_c::get_element_size(EbmlElement &e) {
-  auto m = dynamic_cast<EbmlMaster *>(&e);
+kax_file_c::get_element_size(libebml::EbmlElement &e) {
+  auto m = dynamic_cast<libebml::EbmlMaster *>(&e);
 
   if (!m || e.IsFiniteSize())
-    return e.GetSizeLength() + EBML_ID_LENGTH(static_cast<const EbmlId &>(e)) + e.GetSize();
+    return e.GetSizeLength() + EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(e)) + e.GetSize();
 
-  auto max_end_pos = e.GetElementPosition() + EBML_ID_LENGTH(static_cast<const EbmlId &>(e));
+  auto max_end_pos = e.GetElementPosition() + EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(e));
   for (int idx = 0, end = m->ListSize(); end > idx; ++idx)
     max_end_pos = std::max(max_end_pos, (*m)[idx]->GetElementPosition() + get_element_size(*(*m)[idx]));
 
@@ -337,7 +335,7 @@ kax_file_c::set_last_timestamp(int64_t last_timestamp) {
 }
 
 void
-kax_file_c::set_segment_end(EbmlElement const &segment) {
+kax_file_c::set_segment_end(libebml::EbmlElement const &segment) {
   m_segment_end = segment.IsFiniteSize() ? segment.GetElementPosition() + segment.HeadSize() + segment.GetSize() : m_in.get_size();
 }
 

@@ -29,7 +29,7 @@
 #include "common/kax_info_p.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 
-using namespace libmatroska;
+
 
 namespace mtx::gui::Util {
 
@@ -78,11 +78,11 @@ KaxInfo::ui_show_element_info(int level,
 }
 
 void
-KaxInfo::ui_show_element(EbmlElement &e) {
+KaxInfo::ui_show_element(libebml::EbmlElement &e) {
   auto p = p_func();
 
   if (p->m_use_gui) {
-    if ((p->m_scanType == ScanType::StartOfFile) && Is<KaxCluster>(e))
+    if ((p->m_scanType == ScanType::StartOfFile) && Is<libmatroska::KaxCluster>(e))
       p->m_firstLevel1ElementPosition = e.GetElementPosition();
     else
       Q_EMIT elementFound(p->m_level, &e, p->m_scanType == ScanType::StartOfFile);
@@ -174,7 +174,7 @@ KaxInfo::doScanLevel1Elements() {
 
     while (!p->m_abort) {
       auto upper_lvl_el = 0;
-      auto l1           = std::shared_ptr<EbmlElement>(p->m_es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true));
+      auto l1           = std::shared_ptr<libebml::EbmlElement>(p->m_es->FindNextElement(EBML_CLASS_CONTEXT(libmatroska::KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true));
 
       if (!l1)
         break;
@@ -186,7 +186,7 @@ KaxInfo::doScanLevel1Elements() {
 
         l1 = kax_file->read_next_level1_element();
 
-        if (!dynamic_cast<EbmlMaster *>(l1.get()))
+        if (!dynamic_cast<libebml::EbmlMaster *>(l1.get()))
           break;
 
         empty_ebml_master(l1.get());
@@ -199,7 +199,7 @@ KaxInfo::doScanLevel1Elements() {
       retain_element(l1);
       ui_show_element(*l1);
 
-      if (upper_lvl_el && !kax_file_c::is_global_element_id(EbmlId(*l1)))
+      if (upper_lvl_el && !kax_file_c::is_global_element_id(libebml::EbmlId(*l1)))
         break;
 
       p->m_in->setFilePointer(end_position);
@@ -241,9 +241,9 @@ void
 KaxInfo::disableFrameInfo() {
   auto p = p_func();
 
-  p->m_custom_element_post_processors.erase(EBML_ID(KaxBlock).GetValue());
-  p->m_custom_element_post_processors.erase(EBML_ID(KaxBlockGroup).GetValue());
-  p->m_custom_element_post_processors.erase(EBML_ID(KaxSimpleBlock).GetValue());
+  p->m_custom_element_post_processors.erase(EBML_ID(libmatroska::KaxBlock).GetValue());
+  p->m_custom_element_post_processors.erase(EBML_ID(libmatroska::KaxBlockGroup).GetValue());
+  p->m_custom_element_post_processors.erase(EBML_ID(libmatroska::KaxSimpleBlock).GetValue());
 }
 
 }

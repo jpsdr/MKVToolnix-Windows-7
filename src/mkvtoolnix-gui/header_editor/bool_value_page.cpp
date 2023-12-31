@@ -12,18 +12,18 @@ using namespace mtx::gui;
 
 BoolValuePage::BoolValuePage(Tab &parent,
                              PageBase &topLevelPage,
-                             EbmlMaster &master,
-                             EbmlCallbacks const &callbacks,
+                             libebml::EbmlMaster &master,
+                             libebml::EbmlCallbacks const &callbacks,
                              translatable_string_c const &title,
                              translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::Bool, title, description}
 {
-  auto eltWithDefault = std::unique_ptr<EbmlElement>(&callbacks.NewElement());
+  auto eltWithDefault = std::unique_ptr<libebml::EbmlElement>(&callbacks.NewElement());
 
-  if (!dynamic_cast<EbmlUInteger *>(eltWithDefault.get()))
+  if (!dynamic_cast<libebml::EbmlUInteger *>(eltWithDefault.get()))
     return;
 
-  auto &eltUInt = static_cast<EbmlUInteger &>(*eltWithDefault.get());
+  auto &eltUInt = static_cast<libebml::EbmlUInteger &>(*eltWithDefault.get());
   m_valueIfNotPresent = eltUInt.ValueIsSet() && (eltUInt.GetValue() == 1);
 }
 
@@ -37,7 +37,7 @@ BoolValuePage::createInputControl() {
   m_cbValue->addItem(QY("Yes"));
 
   if (m_element)
-    m_originalValue = std::min<uint64_t>(static_cast<EbmlUInteger *>(m_element)->GetValue(), 1);
+    m_originalValue = std::min<uint64_t>(static_cast<libebml::EbmlUInteger *>(m_element)->GetValue(), 1);
 
   m_cbValue->setCurrentIndex(m_originalValue);
 
@@ -80,7 +80,7 @@ BoolValuePage::validateValue()
 
 void
 BoolValuePage::copyValueToElement() {
-  static_cast<EbmlUInteger *>(m_element)->SetValue(m_cbValue->currentIndex());
+  static_cast<libebml::EbmlUInteger *>(m_element)->SetValue(m_cbValue->currentIndex());
 }
 
 void

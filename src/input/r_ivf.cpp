@@ -110,13 +110,13 @@ ivf_reader_c::read(generic_packetizer_c *,
   uint32_t frame_size  = get_uint32_le(&header.frame_size);
 
   if (remaining_bytes < frame_size) {
-    m_in->setFilePointer(0, seek_end);
+    m_in->setFilePointer(0, libebml::seek_end);
     return flush_packetizers();
   }
 
   memory_cptr buffer = memory_c::alloc(frame_size);
   if (m_in->read(buffer->get_buffer(), frame_size) < frame_size) {
-    m_in->setFilePointer(0, seek_end);
+    m_in->setFilePointer(0, libebml::seek_end);
     return flush_packetizers();
   }
 

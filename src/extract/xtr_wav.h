@@ -42,7 +42,7 @@ class xtr_wavpack4_c: public xtr_base_c {
 private:
   uint32_t m_number_of_samples;
   int m_extract_blockadd_level;
-  binary m_version[2];
+  uint8_t m_version[2];
   mm_io_cptr m_corr_out;
   int m_channels;
 

@@ -28,17 +28,15 @@
 #include "common/xml/ebml_tags_converter.h"
 #include "extract/mkvextract.h"
 
-using namespace libmatroska;
-
 bool
 extract_tags(kax_analyzer_c &analyzer,
              options_c::mode_options_c &options) {
-  auto tags = analyzer.read_all(EBML_INFO(KaxTags));
+  auto tags = analyzer.read_all(EBML_INFO(libmatroska::KaxTags));
 
-  if (!dynamic_cast<KaxTags *>(tags.get()))
+  if (!dynamic_cast<libmatroska::KaxTags *>(tags.get()))
     return true;
 
-  mtx::xml::ebml_tags_converter_c::write_xml(static_cast<KaxTags &>(*tags), *open_output_file(options.m_output_file_name));
+  mtx::xml::ebml_tags_converter_c::write_xml(static_cast<libmatroska::KaxTags &>(*tags), *open_output_file(options.m_output_file_name));
 
   return true;
 }

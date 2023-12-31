@@ -19,8 +19,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_realaudio.h"
 
-using namespace libmatroska;
-
 ra_packetizer_c::ra_packetizer_c(generic_reader_c *p_reader,
                                  track_info_c &p_ti,
                                  int samples_per_sec,

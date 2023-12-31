@@ -32,13 +32,13 @@ public:
   struct parser_context_t {
     std::string const &name;
     std::string const &content;
-    EbmlElement &e;
+    libebml::EbmlElement &e;
     pugi::xml_node const &node;
     std::map<std::string, bool> &handled_attributes;
     limits_t limits;
   };
 
-  using value_formatter_t = std::function<void(pugi::xml_node &, EbmlElement &)>;
+  using value_formatter_t = std::function<void(pugi::xml_node &, libebml::EbmlElement &)>;
   using value_parser_t    = std::function<void(parser_context_t &ctx)>;
 
 protected:
@@ -52,19 +52,19 @@ public:
   ebml_converter_c();
   virtual ~ebml_converter_c();
 
-  document_cptr to_xml(EbmlElement &e, document_cptr const &destination = document_cptr{}) const;
+  document_cptr to_xml(libebml::EbmlElement &e, document_cptr const &destination = document_cptr{}) const;
   ebml_master_cptr to_ebml(std::string const &file_name, std::string const &required_root_name);
 
-  std::string get_tag_name(EbmlElement &e) const;
+  std::string get_tag_name(libebml::EbmlElement &e) const;
   std::string get_debug_name(std::string const &tag_name) const;
 
 public:
-  static void format_uint(pugi::xml_node &node, EbmlElement &e);
-  static void format_int(pugi::xml_node &node, EbmlElement &e);
-  static void format_string(pugi::xml_node &node, EbmlElement &e);
-  static void format_ustring(pugi::xml_node &node, EbmlElement &e);
-  static void format_binary(pugi::xml_node &node, EbmlElement &e);
-  static void format_timestamp(pugi::xml_node &node, EbmlElement &e);
+  static void format_uint(pugi::xml_node &node, libebml::EbmlElement &e);
+  static void format_int(pugi::xml_node &node, libebml::EbmlElement &e);
+  static void format_string(pugi::xml_node &node, libebml::EbmlElement &e);
+  static void format_ustring(pugi::xml_node &node, libebml::EbmlElement &e);
+  static void format_binary(pugi::xml_node &node, libebml::EbmlElement &e);
+  static void format_timestamp(pugi::xml_node &node, libebml::EbmlElement &e);
 
   static void parse_uint(parser_context_t &ctx);
   static void parse_int(parser_context_t &ctx);
@@ -74,22 +74,22 @@ public:
   static void parse_timestamp(parser_context_t &ctx);
 
 protected:
-  void format_value(pugi::xml_node &node, EbmlElement &e, value_formatter_t default_formatter) const;
+  void format_value(pugi::xml_node &node, libebml::EbmlElement &e, value_formatter_t default_formatter) const;
   void parse_value(parser_context_t &ctx, value_parser_t default_parser) const;
 
-  void to_xml_recursively(pugi::xml_node &parent, EbmlElement &e) const;
+  void to_xml_recursively(pugi::xml_node &parent, libebml::EbmlElement &e) const;
 
-  void to_ebml_recursively(EbmlMaster &parent, pugi::xml_node &node) const;
-  EbmlElement *convert_node_or_attribute_to_ebml(EbmlMaster &parent, pugi::xml_node const &node, pugi::xml_attribute const &attribute, std::map<std::string, bool> &handled_attributes) const;
-  EbmlElement *verify_and_create_element(EbmlMaster &parent, std::string const &name, pugi::xml_node const &node) const;
+  void to_ebml_recursively(libebml::EbmlMaster &parent, pugi::xml_node &node) const;
+  libebml::EbmlElement *convert_node_or_attribute_to_ebml(libebml::EbmlMaster &parent, pugi::xml_node const &node, pugi::xml_attribute const &attribute, std::map<std::string, bool> &handled_attributes) const;
+  libebml::EbmlElement *verify_and_create_element(libebml::EbmlMaster &parent, std::string const &name, pugi::xml_node const &node) const;
 
   virtual void fix_xml(document_cptr &doc) const;
-  virtual void fix_ebml(EbmlMaster &root) const;
+  virtual void fix_ebml(libebml::EbmlMaster &root) const;
 
   void reverse_debug_to_tag_name_map();
 
   void dump_semantics(std::string const &top_element_name) const;
-  void dump_semantics_recursively(int level, EbmlElement &element, std::map<std::string, bool> &visited_masters) const;
+  void dump_semantics_recursively(int level, libebml::EbmlElement &element, std::map<std::string, bool> &visited_masters) const;
 };
 
 }

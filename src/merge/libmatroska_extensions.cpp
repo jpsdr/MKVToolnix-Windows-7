@@ -16,15 +16,14 @@
 
 #include <cassert>
 
+#include "common/ebml.h"
 #include "merge/libmatroska_extensions.h"
 
-using namespace libmatroska;
-
 kax_reference_block_c::kax_reference_block_c():
-  KaxReferenceBlock(), m_value(-1) {
+  libmatroska::KaxReferenceBlock(), m_value(-1) {
 }
 
-filepos_t
+libebml::filepos_t
 kax_reference_block_c::UpdateSize(
 #if LIBEBML_VERSION >= 0x020000
                                   ShouldWrite writeFilter,
@@ -38,20 +37,20 @@ kax_reference_block_c::UpdateSize(
   }
 
 #if LIBEBML_VERSION >= 0x020000
-  return EbmlSInteger::UpdateSize(writeFilter, bForceRender);
+  return libebml::EbmlSInteger::UpdateSize(writeFilter, bForceRender);
 #else
-  return EbmlSInteger::UpdateSize(bSaveDefault, bForceRender);
+  return libebml::EbmlSInteger::UpdateSize(bSaveDefault, bForceRender);
 #endif
 }
 
 bool
-kax_block_group_c::add_frame(const KaxTrackEntry &track,
+kax_block_group_c::add_frame(const libmatroska::KaxTrackEntry &track,
                              uint64_t timestamp,
-                             DataBuffer &buffer,
+                             libmatroska::DataBuffer &buffer,
                              int64_t past_block,
                              int64_t forw_block,
-                             LacingType lacing) {
-  KaxBlock & block = GetChild<KaxBlock>(*this);
+                             libmatroska::LacingType lacing) {
+  libmatroska::KaxBlock & block = GetChild<libmatroska::KaxBlock>(*this);
   assert(ParentCluster);
   block.SetParent(*ParentCluster);
 
@@ -83,23 +82,23 @@ kax_block_group_c::add_frame(const KaxTrackEntry &track,
 }
 
 bool
-kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
+kax_block_blob_c::add_frame_auto(const libmatroska::KaxTrackEntry &track,
                                  uint64_t timestamp,
-                                 DataBuffer &buffer,
-                                 LacingType lacing,
+                                 libmatroska::DataBuffer &buffer,
+                                 libmatroska::LacingType lacing,
                                  int64_t past_block,
                                  int64_t forw_block,
                                  std::optional<bool> key_flag,
                                  std::optional<bool> discardable_flag) {
   bool result = false;
 
-  if (   (BLOCK_BLOB_ALWAYS_SIMPLE == SimpleBlockMode)
-      || (   (BLOCK_BLOB_SIMPLE_AUTO == SimpleBlockMode)
+  if (   (libmatroska::BLOCK_BLOB_ALWAYS_SIMPLE == SimpleBlockMode)
+      || (   (libmatroska::BLOCK_BLOB_SIMPLE_AUTO == SimpleBlockMode)
           && (-1 == past_block)
           && (-1 == forw_block))) {
     assert(true == bUseSimpleBlock);
     if (!Block.simpleblock) {
-      Block.simpleblock = new KaxSimpleBlock();
+      Block.simpleblock = new libmatroska::KaxSimpleBlock();
       Block.simpleblock->SetParent(*ParentCluster);
     }
 
@@ -132,7 +131,7 @@ kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
 
 bool
 kax_block_blob_c::replace_simple_by_group() {
-  if (BLOCK_BLOB_ALWAYS_SIMPLE == SimpleBlockMode)
+  if (libmatroska::BLOCK_BLOB_ALWAYS_SIMPLE == SimpleBlockMode)
     return false;
 
   if (!bUseSimpleBlock) {
@@ -163,16 +162,16 @@ kax_cluster_c::~kax_cluster_c() {
 }
 
 // The kax_block_group_c objects are stored in std::shared_ptrs outside of
-// the cluster structure as well. KaxSimpleBlock objects are deleted
+// the cluster structure as well. libmatroska::KaxSimpleBlock objects are deleted
 // when they're replaced with kax_block_group_c. All other object
 // types must be deleted explicitely. This applies to
-// e.g. KaxClusterTimecodes.
+// e.g. libmatroska::KaxClusterTimecodes.
 void
 kax_cluster_c::delete_non_blocks() {
   unsigned idx;
   for (idx = 0; ListSize() > idx; ++idx) {
-    EbmlElement *e = (*this)[idx];
-    if (!dynamic_cast<kax_block_group_c *>(e) && !dynamic_cast<KaxSimpleBlock *>(e))
+    libebml::EbmlElement *e = (*this)[idx];
+    if (!dynamic_cast<kax_block_group_c *>(e) && !dynamic_cast<libmatroska::KaxSimpleBlock *>(e))
       delete e;
   }
 
@@ -180,7 +179,7 @@ kax_cluster_c::delete_non_blocks() {
 }
 
 kax_cues_with_cleanup_c::kax_cues_with_cleanup_c()
-  : KaxCues{}
+  : libmatroska::KaxCues{}
 {
 }
 

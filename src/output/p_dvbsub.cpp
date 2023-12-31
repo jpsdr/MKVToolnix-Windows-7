@@ -18,8 +18,6 @@
 #include "common/codec.h"
 #include "output/p_dvbsub.h"
 
-using namespace libmatroska;
-
 dvbsub_packetizer_c::dvbsub_packetizer_c(generic_reader_c *reader,
                                          track_info_c &ti,
                                          memory_cptr const &private_data)
