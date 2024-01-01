@@ -817,7 +817,7 @@ render_should_write_arg(bool with_default) {
 bool
 has_default_value(libebml::EbmlElement const &elt) {
   return elt.DefaultISset();
-  // return elt.GetClassInfo().HasDefault();
+  // return elt.ElementSpec().HasDefault();
 }
 
 #else
