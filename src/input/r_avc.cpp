@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc/util.h"
+#include "common/xyzvc/util.h"
 #include "common/codec.h"
 #include "common/memory.h"
 #include "common/id_info.h"
@@ -41,7 +41,7 @@ avc_es_reader_c::probe_file() {
     if (first && (0x47 == m_buffer->get_buffer()[0]))
       return 0;
 
-    if (first && m_probe_range_info.require_headers_at_start && !mtx::avc_hevc::might_be_avc_or_hevc(*m_buffer))
+    if (first && m_probe_range_info.require_headers_at_start && !mtx::xyzvc::might_be_xyzvc(*m_buffer))
       return false;
 
     first = false;

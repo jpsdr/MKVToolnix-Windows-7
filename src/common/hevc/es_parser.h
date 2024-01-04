@@ -15,20 +15,20 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc/types.h"
-#include "common/avc_hevc/es_parser.h"
+#include "common/dovi_meta.h"
 #include "common/hevc/types.h"
 #include "common/math_fwd.h"
-#include "common/dovi_meta.h"
+#include "common/xyzvc/types.h"
+#include "common/xyzvc/es_parser.h"
 
 namespace mtx::hevc {
 
-class es_parser_c: public mtx::avc_hevc::es_parser_c {
+class es_parser_c: public mtx::xyzvc::es_parser_c {
 protected:
   int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
   bool m_first_access_unit_parsed{}, m_first_access_unit_parsing_slices{};
 
-  std::deque<mtx::avc_hevc::frame_t> m_frames_awaiting_dovi_el;
+  std::deque<mtx::xyzvc::frame_t> m_frames_awaiting_dovi_el;
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
@@ -71,7 +71,7 @@ public:
 
   bool headers_parsed() const;
 
-  virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
+  virtual int64_t duration_for(mtx::xyzvc::slice_info_t const &si) const override;
 
   bool has_dovi_rpu_header() const;
 
@@ -88,7 +88,7 @@ public:
   void add_enhancement_layer_bytes(memory_cptr const &buf);
 
 protected:
-  bool parse_slice(memory_cptr const &nalu, mtx::avc_hevc::slice_info_t &si);
+  bool parse_slice(memory_cptr const &nalu, mtx::xyzvc::slice_info_t &si);
   void handle_nalu_internal(memory_cptr const &nalu, uint64_t nalu_pos);
   void handle_vps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_sps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
@@ -103,7 +103,7 @@ protected:
   virtual void calculate_frame_order() override;
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 
-  bool add_dovi_combiner_frame_data(mtx::avc_hevc::frame_t &frame);
+  bool add_dovi_combiner_frame_data(mtx::xyzvc::frame_t &frame);
 
   void cleanup_and_combine_dovi_layers();
   void combine_dovi_layers();

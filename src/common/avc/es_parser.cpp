@@ -28,7 +28,7 @@
 namespace mtx::avc {
 
 es_parser_c::es_parser_c()
-  : mtx::avc_hevc::es_parser_c{"avc"s, 11, 13}
+  : mtx::xyzvc::es_parser_c{"avc"s, 11, 13}
 {
   m_all_i_slices_are_key_frames = mtx::hacks::is_engaged(mtx::hacks::ALL_I_SLICES_ARE_KEY_FRAMES);
 
@@ -48,7 +48,7 @@ void
 es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
-    int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == mtx::avc_hevc::NALU_START_CODE ? 4 : 3;
+    int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == mtx::xyzvc::NALU_START_CODE ? 4 : 3;
     auto nalu_size  = m_unparsed_buffer->get_size() - marker_size;
     handle_nalu(memory_c::clone(m_unparsed_buffer->get_buffer() + marker_size, nalu_size), m_parsed_position - nalu_size);
   }
@@ -109,8 +109,8 @@ es_parser_c::add_sps_and_pps_to_extra_data() {
 }
 
 bool
-es_parser_c::flush_decision(mtx::avc_hevc::slice_info_t &si,
-                            mtx::avc_hevc::slice_info_t &ref) {
+es_parser_c::flush_decision(mtx::xyzvc::slice_info_t &si,
+                            mtx::xyzvc::slice_info_t &ref) {
 
   if (NALU_TYPE_IDR_SLICE == si.nalu_type) {
     if (0 != si.first_mb_in_slice)
@@ -154,7 +154,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  mtx::avc_hevc::slice_info_t si;
+  mtx::xyzvc::slice_info_t si;
   if (!parse_slice(nalu, si))   // no conversion to RBSP; the bit reader takes care of it
     return;
 
@@ -422,7 +422,7 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 
 bool
 es_parser_c::parse_slice(memory_cptr const &nalu,
-                         mtx::avc_hevc::slice_info_t &si) {
+                         mtx::xyzvc::slice_info_t &si) {
   try {
     mtx::bits::reader_c r(nalu->get_buffer(), nalu->get_size());
     r.enable_rbsp_mode();
@@ -501,7 +501,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
 }
 
 int64_t
-es_parser_c::duration_for(mtx::avc_hevc::slice_info_t const &si)
+es_parser_c::duration_for(mtx::xyzvc::slice_info_t const &si)
   const {
   return duration_for_impl(si.sps, si.field_pic_flag);
 }

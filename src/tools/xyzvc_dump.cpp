@@ -40,7 +40,7 @@ static framing_type_e s_framing_type{framing_type_e::unknown};
 static bool s_portable_format{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
-static std::unique_ptr<mtx::avc_hevc::es_parser_c> s_parser;
+static std::unique_ptr<mtx::xyzvc::es_parser_c> s_parser;
 
 static void
 setup_help() {
@@ -73,10 +73,10 @@ detect_framing_type(std::string const &file_name) {
 
   auto marker_or_size = in.read_uint32_be();
 
-  if (marker_or_size == mtx::avc_hevc::NALU_START_CODE)
+  if (marker_or_size == mtx::xyzvc::NALU_START_CODE)
     return framing_type_e::annex_b;
 
-  if ((marker_or_size >> 8) != mtx::avc_hevc::NALU_START_CODE)
+  if ((marker_or_size >> 8) != mtx::xyzvc::NALU_START_CODE)
     return framing_type_e::iso_14496_15;
 
   try {
@@ -248,10 +248,10 @@ parse_file_annex_b(std::string const &file_name) {
     if (pos >= file_size)
       break;
 
-    if (marker == mtx::avc_hevc::NALU_START_CODE)
+    if (marker == mtx::xyzvc::NALU_START_CODE)
       marker_size = 4;
 
-    else if ((marker & 0x00ffffff) == mtx::avc_hevc::NALU_START_CODE)
+    else if ((marker & 0x00ffffff) == mtx::xyzvc::NALU_START_CODE)
       marker_size = 3;
 
     else {

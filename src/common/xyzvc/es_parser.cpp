@@ -12,15 +12,15 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc/es_parser.h"
 #include "common/checksums/base_fwd.h"
 #include "common/endian.h"
 #include "common/memory_slice_cursor.h"
 #include "common/mm_file_io.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
+#include "common/xyzvc/es_parser.h"
 
-namespace mtx::avc_hevc {
+namespace mtx::xyzvc {
 
 std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type, es_parser_c::ms_slice_names_by_type;
 
@@ -232,7 +232,7 @@ es_parser_c::get_num_frames_available()
   return m_frames_out.size();
 }
 
-mtx::avc_hevc::frame_t
+mtx::xyzvc::frame_t
 es_parser_c::get_frame() {
   assert(!m_frames_out.empty());
 
@@ -655,4 +655,4 @@ es_parser_c::debug_dump_statistics()
       mxdebug(fmt::format("  {0}: {1}\n", i < static_cast<int>(ms_slice_names_by_type.size()) ? ms_slice_names_by_type[i] : "?"s, m_stats.num_slices_by_type[i]));
 }
 
-} // namespace mtx::avc_hevc
+} // namespace mtx::xyzvc

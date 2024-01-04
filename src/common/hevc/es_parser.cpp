@@ -15,7 +15,6 @@
 
 #include <cmath>
 
-#include "common/avc_hevc/types.h"
 #include "common/bit_reader.h"
 #include "common/checksums/base_fwd.h"
 #include "common/endian.h"
@@ -32,11 +31,12 @@
 #include "common/memory_slice_cursor.h"
 #include "common/strings/formatting.h"
 #include "common/timestamp.h"
+#include "common/xyzvc/types.h"
 
 namespace mtx::hevc {
 
 es_parser_c::es_parser_c()
-  : mtx::avc_hevc::es_parser_c{"hevc"s, 3, 64}
+  : mtx::xyzvc::es_parser_c{"hevc"s, 3, 64}
 {
   init_nalu_names();
 }
@@ -85,7 +85,7 @@ es_parser_c::flush() {
 
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
-    auto marker_size   = get_uint32_be(m_unparsed_buffer->get_buffer()) == mtx::avc_hevc::NALU_START_CODE ? 4 : 3;
+    auto marker_size   = get_uint32_be(m_unparsed_buffer->get_buffer()) == mtx::xyzvc::NALU_START_CODE ? 4 : 3;
     auto nalu_size     = m_unparsed_buffer->get_size() - marker_size;
     handle_nalu(memory_c::clone(m_unparsed_buffer->get_buffer() + marker_size, nalu_size), m_parsed_position - nalu_size);
   }
@@ -119,7 +119,7 @@ es_parser_c::determine_if_first_access_unit_parsed() {
 }
 
 bool
-es_parser_c::add_dovi_combiner_frame_data(mtx::avc_hevc::frame_t &frame) {
+es_parser_c::add_dovi_combiner_frame_data(mtx::xyzvc::frame_t &frame) {
   mxdebug_if(m_debug_dovi_el_combiner, fmt::format("add_dovi_combiner_frame_data_to_incomplete_frame: starting\n"));
 
   if (!m_dovi_el_combiner->frame_available())
@@ -195,7 +195,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  mtx::avc_hevc::slice_info_t si;
+  mtx::xyzvc::slice_info_t si;
   if (!parse_slice(nalu, si))   // no conversion to RBSP; the bit reader takes care of it
     return;
 
@@ -548,7 +548,7 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 
 bool
 es_parser_c::parse_slice(memory_cptr const &nalu,
-                         mtx::avc_hevc::slice_info_t &si) {
+                         mtx::xyzvc::slice_info_t &si) {
   try {
     mtx::bits::reader_c r(nalu->get_buffer(), nalu->get_size());
     r.enable_rbsp_mode();
@@ -634,7 +634,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
 }
 
 int64_t
-es_parser_c::duration_for(mtx::avc_hevc::slice_info_t const &si)
+es_parser_c::duration_for(mtx::xyzvc::slice_info_t const &si)
   const {
   int64_t duration = -1 != m_forced_default_duration                                                  ? m_forced_default_duration * 2
                    : (m_sps_info_list.size() > si.sps) && m_sps_info_list[si.sps].timing_info_valid() ? m_sps_info_list[si.sps].default_duration()

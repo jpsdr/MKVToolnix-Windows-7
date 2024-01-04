@@ -19,15 +19,15 @@
 #include "common/bit_reader.h"
 #include "common/bit_writer.h"
 #include "common/byte_buffer.h"
-#include "common/avc_hevc/types.h"
 #include "common/checksums/base.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/hevc/hevcc.h"
+#include "common/hevc/util.h"
 #include "common/mm_io_x.h"
 #include "common/mm_mem_io.h"
 #include "common/mpeg.h"
-#include "common/hevc/util.h"
-#include "common/hevc/hevcc.h"
+#include "common/xyzvc/types.h"
 
 namespace mtx::hevc {
 
@@ -949,7 +949,7 @@ hevcc_to_nalus(const uint8_t *buffer,
         if (element_size != mem.read(copy_buffer->get_buffer() + 4, element_size))
           throw false;
 
-        put_uint32_be(copy_buffer->get_buffer(), mtx::avc_hevc::NALU_START_CODE);
+        put_uint32_be(copy_buffer->get_buffer(), mtx::xyzvc::NALU_START_CODE);
         nalus.add(copy_buffer->get_buffer(), element_size + 4);
       }
     }

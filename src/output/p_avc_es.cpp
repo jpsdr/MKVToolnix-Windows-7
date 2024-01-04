@@ -24,7 +24,7 @@ avc_es_video_packetizer_c(generic_reader_c *p_reader,
                           track_info_c &p_ti,
                           uint32_t width,
                           uint32_t height)
-  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "avc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::avc::es_parser_c), width, height}
+  : xyzvc_es_video_packetizer_c{p_reader, p_ti, "avc", std::unique_ptr<mtx::xyzvc::es_parser_c>(new mtx::avc::es_parser_c), width, height}
   , m_parser{static_cast<mtx::avc::es_parser_c &>(*m_parser_base)}
 {
   set_codec_id(MKV_V_MPEG4_AVC);

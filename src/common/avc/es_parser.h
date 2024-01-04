@@ -17,13 +17,13 @@
 #include "common/common_pch.h"
 
 #include "common/avc/util.h"
-#include "common/avc_hevc/types.h"
-#include "common/avc_hevc/es_parser.h"
 #include "common/math_fwd.h"
+#include "common/xyzvc/types.h"
+#include "common/xyzvc/es_parser.h"
 
 namespace mtx::avc {
 
-class es_parser_c: public mtx::avc_hevc::es_parser_c {
+class es_parser_c: public mtx::xyzvc::es_parser_c {
 protected:
   bool m_fix_bitstream_frame_rate{};
 
@@ -73,16 +73,16 @@ public:
 
   bool headers_parsed() const;
 
-  virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
+  virtual int64_t duration_for(mtx::xyzvc::slice_info_t const &si) const override;
 
-  bool parse_slice(memory_cptr const &nalu, mtx::avc_hevc::slice_info_t &si);
+  bool parse_slice(memory_cptr const &nalu, mtx::xyzvc::slice_info_t &si);
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);
   void handle_sei_nalu(memory_cptr const &nalu);
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
 
 protected:
-  bool flush_decision(mtx::avc_hevc::slice_info_t &si, mtx::avc_hevc::slice_info_t &ref);
+  bool flush_decision(mtx::xyzvc::slice_info_t &si, mtx::xyzvc::slice_info_t &ref);
   void flush_incomplete_frame();
   void add_sps_and_pps_to_extra_data();
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);

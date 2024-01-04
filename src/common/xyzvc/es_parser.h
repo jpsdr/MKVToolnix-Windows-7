@@ -14,10 +14,10 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc/types.h"
 #include "common/math_fwd.h"
+#include "common/xyzvc/types.h"
 
-namespace mtx::avc_hevc {
+namespace mtx::xyzvc {
 
 class es_parser_c {
 public:
@@ -52,7 +52,7 @@ protected:
   memory_cptr m_unparsed_buffer;
   uint64_t m_stream_position{}, m_parsed_position{};
 
-  mtx::avc_hevc::frame_t m_incomplete_frame;
+  mtx::xyzvc::frame_t m_incomplete_frame;
 
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
@@ -103,7 +103,7 @@ public:
 
   bool frame_available() const;
   std::size_t get_num_frames_available() const;
-  mtx::avc_hevc::frame_t get_frame();
+  mtx::xyzvc::frame_t get_frame();
 
   bool configuration_record_changed() const;
 
@@ -139,7 +139,7 @@ public:
   virtual int get_width() const = 0;
   virtual int get_height() const = 0;
 
-  virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const = 0;
+  virtual int64_t duration_for(mtx::xyzvc::slice_info_t const &si) const = 0;
 
   virtual void calculate_frame_order() = 0;
   void calculate_frame_timestamps(std::vector<int64_t> const &provided_timestamps_to_use);

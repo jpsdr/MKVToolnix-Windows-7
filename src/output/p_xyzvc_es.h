@@ -17,9 +17,9 @@
 #include "common/hevc/es_parser.h"
 #include "merge/generic_packetizer.h"
 
-class avc_hevc_es_video_packetizer_c: public generic_packetizer_c {
+class xyzvc_es_video_packetizer_c: public generic_packetizer_c {
 protected:
-  std::unique_ptr<mtx::avc_hevc::es_parser_c> m_parser_base;
+  std::unique_ptr<mtx::xyzvc::es_parser_c> m_parser_base;
 
   int64_t m_default_duration_for_interlaced_content{-1};
   std::optional<int64_t> m_parser_default_duration_to_force;
@@ -28,7 +28,7 @@ protected:
   debugging_option_c m_debug_timestamps, m_debug_aspect_ratio;
 
 public:
-  avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, std::string const &p_debug_type, std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base, uint32_t width, uint32_t height);
+  xyzvc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, std::string const &p_debug_type, std::unique_ptr<mtx::xyzvc::es_parser_c> &&parser_base, uint32_t width, uint32_t height);
 
   virtual void set_headers() override;
 
