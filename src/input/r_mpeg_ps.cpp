@@ -513,7 +513,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
     }
 
     marker = get_uint32_be(buffer.get_buffer());
-    if (mtx::avc_hevc::NALU_START_CODE == marker) {
+    if (mtx::xyzvc::NALU_START_CODE == marker) {
       m_in->restore_pos();
       new_stream_v_avc(id, buf, length, track);
       return;

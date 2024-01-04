@@ -21,7 +21,7 @@
 #include "common/hevc/es_parser.h"
 #include "merge/block_addition_mapping.h"
 #include "merge/connection_checks.h"
-#include "output/p_avc_hevc_es.h"
+#include "output/p_xyzvc_es.h"
 #include "output/p_hevc_es.h"
 
 static debugging_option_c s_debug_dovi_configuration_record{"dovi_configuration_record"};
@@ -30,7 +30,7 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
                                                        track_info_c &p_ti,
                                                        uint32_t width,
                                                        uint32_t height)
-  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "hevc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::hevc::es_parser_c), width, height}
+  : xyzvc_es_video_packetizer_c{p_reader, p_ti, "hevc", std::unique_ptr<mtx::xyzvc::es_parser_c>(new mtx::hevc::es_parser_c), width, height}
   , m_parser{static_cast<mtx::hevc::es_parser_c &>(*m_parser_base)}
 {
   set_codec_id(MKV_V_MPEGH_HEVC);
@@ -114,7 +114,7 @@ void
 hevc_es_video_packetizer_c::handle_delayed_headers() {
   handle_dovi_block_addition_mappings();
 
-  avc_hevc_es_video_packetizer_c::handle_delayed_headers();
+  xyzvc_es_video_packetizer_c::handle_delayed_headers();
 }
 
 void

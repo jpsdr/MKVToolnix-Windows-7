@@ -98,7 +98,7 @@ xtr_avc_c::need_to_write_access_unit_delimiter(uint8_t *buffer,
       return false;
     }
 
-    mtx::avc_hevc::slice_info_t si;
+    mtx::xyzvc::slice_info_t si;
     if (!m_parser.parse_slice(nalu, si)) {
       mxdebug_if(m_debug_access_unit_delimiters, "  IDR slice parsing failed\n");
       m_previous_idr_pic_id.reset();

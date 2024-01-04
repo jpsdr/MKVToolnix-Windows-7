@@ -16,9 +16,9 @@
 #include "common/common_pch.h"
 
 #include "common/avc/es_parser.h"
-#include "output/p_avc_hevc_es.h"
+#include "output/p_xyzvc_es.h"
 
-class avc_es_video_packetizer_c: public avc_hevc_es_video_packetizer_c {
+class avc_es_video_packetizer_c: public xyzvc_es_video_packetizer_c {
 protected:
   mtx::avc::es_parser_c &m_parser;
 

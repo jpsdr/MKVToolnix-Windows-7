@@ -673,8 +673,8 @@ avi_reader_c::set_avc_nal_size_size(avc_es_video_packetizer_c *packetizer) {
     size    = AVI_read_frame(m_avi, reinterpret_cast<char *>(buffer->get_buffer()), &key);
 
     if (   (4 <= size)
-        && (   (get_uint32_be(buffer->get_buffer()) == mtx::avc_hevc::NALU_START_CODE)
-            || (get_uint24_be(buffer->get_buffer()) == mtx::avc_hevc::NALU_START_CODE)))
+        && (   (get_uint32_be(buffer->get_buffer()) == mtx::xyzvc::NALU_START_CODE)
+            || (get_uint24_be(buffer->get_buffer()) == mtx::xyzvc::NALU_START_CODE)))
       m_avc_nal_size_size = -1;
 
     break;
@@ -750,7 +750,7 @@ avi_reader_c::read_video() {
         break;
 
       memory_cptr nalu = memory_c::alloc(4 + nalu_size);
-      put_uint32_be(nalu->get_buffer(), mtx::avc_hevc::NALU_START_CODE);
+      put_uint32_be(nalu->get_buffer(), mtx::xyzvc::NALU_START_CODE);
       memcpy(nalu->get_buffer() + 4, chunk->get_buffer() + offset, nalu_size);
       offset += nalu_size;
 

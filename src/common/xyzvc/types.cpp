@@ -12,10 +12,10 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc/types.h"
 #include "common/mpeg.h"
+#include "common/xyzvc/types.h"
 
-namespace mtx::avc_hevc {
+namespace mtx::xyzvc {
 
 void
 slice_info_t::dump()

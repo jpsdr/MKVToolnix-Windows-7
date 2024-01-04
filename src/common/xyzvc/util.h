@@ -14,8 +14,8 @@
 
 #include "common/common_pch.h"
 
-namespace mtx::avc_hevc {
+namespace mtx::xyzvc {
 
-bool might_be_avc_or_hevc(memory_c const &buffer);
+bool might_be_xyzvc(memory_c const &buffer);
 
 }

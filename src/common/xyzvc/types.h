@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-namespace mtx::avc_hevc {
+namespace mtx::xyzvc {
 
 constexpr auto NALU_START_CODE = 0x00000001;
 
@@ -55,7 +55,7 @@ public:
   uint64_t m_position{};
   bool m_keyframe{}, m_has_provided_timestamp{};
   std::optional<bool> m_discardable;
-  mtx::avc_hevc::slice_info_t m_si{};
+  mtx::xyzvc::slice_info_t m_si{};
   int m_presentation_order{}, m_decode_order{};
 
   // AVC-specific fields:

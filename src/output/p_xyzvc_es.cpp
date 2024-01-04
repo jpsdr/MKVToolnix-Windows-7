@@ -17,15 +17,15 @@
 
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
-#include "output/p_avc_hevc_es.h"
+#include "output/p_xyzvc_es.h"
 
-avc_hevc_es_video_packetizer_c::
-avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
-                               track_info_c &p_ti,
-                               std::string const &p_debug_type,
-                               std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base,
-                               uint32_t width,
-                               uint32_t height)
+xyzvc_es_video_packetizer_c::
+xyzvc_es_video_packetizer_c(generic_reader_c *p_reader,
+                            track_info_c &p_ti,
+                            std::string const &p_debug_type,
+                            std::unique_ptr<mtx::xyzvc::es_parser_c> &&parser_base,
+                            uint32_t width,
+                            uint32_t height)
   : generic_packetizer_c{p_reader, p_ti, track_video}
   , m_parser_base{std::move(parser_base)}
   , m_width{width}
@@ -65,30 +65,30 @@ avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
 }
 
 void
-avc_hevc_es_video_packetizer_c::set_headers() {
+xyzvc_es_video_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 
   m_track_entry->EnableLacing(false);
 }
 
 void
-avc_hevc_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
+xyzvc_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
   m_parser_base->set_container_default_duration(default_duration);
 }
 
 unsigned int
-avc_hevc_es_video_packetizer_c::get_nalu_size_length()
+xyzvc_es_video_packetizer_c::get_nalu_size_length()
   const {
   return m_parser_base->get_nalu_size_length();
 }
 
 void
-avc_hevc_es_video_packetizer_c::add_extra_data(memory_cptr const &data) {
+xyzvc_es_video_packetizer_c::add_extra_data(memory_cptr const &data) {
   m_parser_base->add_bytes(data->get_buffer(), data->get_size());
 }
 
 void
-avc_hevc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
+xyzvc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     if (packet->has_timestamp())
       m_parser_base->add_timestamp(packet->timestamp);
@@ -105,13 +105,13 @@ avc_hevc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
 }
 
 void
-avc_hevc_es_video_packetizer_c::flush_impl() {
+xyzvc_es_video_packetizer_c::flush_impl() {
   m_parser_base->flush();
   flush_frames();
 }
 
 void
-avc_hevc_es_video_packetizer_c::flush_frames() {
+xyzvc_es_video_packetizer_c::flush_frames() {
   while (m_parser_base->frame_available()) {
     if (m_first_frame) {
       handle_delayed_headers();
@@ -132,13 +132,13 @@ avc_hevc_es_video_packetizer_c::flush_frames() {
 }
 
 void
-avc_hevc_es_video_packetizer_c::check_if_default_duration_available()
+xyzvc_es_video_packetizer_c::check_if_default_duration_available()
   const {
   // No default implementation, but not required either.
 }
 
 void
-avc_hevc_es_video_packetizer_c::handle_delayed_headers() {
+xyzvc_es_video_packetizer_c::handle_delayed_headers() {
   if (0 < m_parser_base->get_num_skipped_frames())
     mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"), m_parser_base->get_num_skipped_frames()));
 
@@ -153,7 +153,7 @@ avc_hevc_es_video_packetizer_c::handle_delayed_headers() {
 }
 
 void
-avc_hevc_es_video_packetizer_c::handle_aspect_ratio() {
+xyzvc_es_video_packetizer_c::handle_aspect_ratio() {
   mxdebug_if(m_debug_aspect_ratio, fmt::format("already set? {0} has par been found? {1}\n", display_dimensions_or_aspect_ratio_set(), m_parser_base->has_par_been_found()));
 
   if (display_dimensions_or_aspect_ratio_set() || !m_parser_base->has_par_been_found())
@@ -172,7 +172,7 @@ avc_hevc_es_video_packetizer_c::handle_aspect_ratio() {
 }
 
 void
-avc_hevc_es_video_packetizer_c::handle_actual_default_duration() {
+xyzvc_es_video_packetizer_c::handle_actual_default_duration() {
   int64_t actual_default_duration = m_parser_base->get_most_often_used_duration();
   mxdebug_if(m_debug_timestamps, fmt::format("Most often used duration: {0} forced? {1} current default duration: {2}\n", actual_default_duration, m_default_duration_forced, m_htrack_default_duration));
 
@@ -190,14 +190,14 @@ avc_hevc_es_video_packetizer_c::handle_actual_default_duration() {
 }
 
 void
-avc_hevc_es_video_packetizer_c::connect(generic_packetizer_c *src,
+xyzvc_es_video_packetizer_c::connect(generic_packetizer_c *src,
                                         int64_t p_append_timestamp_offset) {
   generic_packetizer_c::connect(src, p_append_timestamp_offset);
 
   if (2 != m_connected_to)
     return;
 
-  auto real_src = dynamic_cast<avc_hevc_es_video_packetizer_c *>(src);
+  auto real_src = dynamic_cast<xyzvc_es_video_packetizer_c *>(src);
   assert(real_src);
 
   m_htrack_default_duration = real_src->m_htrack_default_duration;

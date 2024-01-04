@@ -12,21 +12,21 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc/types.h"
-#include "common/avc_hevc/util.h"
 #include "common/endian.h"
+#include "common/xyzvc/types.h"
+#include "common/xyzvc/util.h"
 
-namespace mtx::avc_hevc {
+namespace mtx::xyzvc {
 
 bool
-might_be_avc_or_hevc(memory_c const &buffer) {
+might_be_xyzvc(memory_c const &buffer) {
   if (buffer.get_size() < 5)
     return false;
 
   auto marker      = get_uint32_be(buffer.get_buffer());
-  auto marker_size = marker        == mtx::avc_hevc::NALU_START_CODE ? 4
-                   : (marker >> 8) == mtx::avc_hevc::NALU_START_CODE ? 3
-                   :                                                   0;
+  auto marker_size = marker        == mtx::xyzvc::NALU_START_CODE ? 4
+                   : (marker >> 8) == mtx::xyzvc::NALU_START_CODE ? 3
+                   :                                                0;
 
   if (!marker_size)
     return false;
@@ -41,4 +41,4 @@ might_be_avc_or_hevc(memory_c const &buffer) {
   return true;
 }
 
-} // namespace mtx::avc_hevc
+} // namespace mtx::xyzvc
