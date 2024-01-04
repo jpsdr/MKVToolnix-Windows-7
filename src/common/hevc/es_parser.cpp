@@ -35,10 +35,17 @@
 
 namespace mtx::hevc {
 
+namespace {
+std::unordered_map<unsigned int, std::string> s_nalu_names_by_type, s_slice_names_by_type;
+}
+
 es_parser_c::es_parser_c()
   : mtx::xyzvc::es_parser_c{"hevc"s, 3, 64}
 {
   init_nalu_names();
+
+  m_nalu_names_by_type  = &s_nalu_names_by_type;
+  m_slice_names_by_type = &s_slice_names_by_type;
 }
 
 bool
@@ -801,12 +808,11 @@ es_parser_c::get_dovi_rpu_header()
 }
 
 void
-es_parser_c::init_nalu_names()
-  const {
-  if (!ms_nalu_names_by_type.empty())
+es_parser_c::init_nalu_names() {
+  if (!s_nalu_names_by_type.empty())
     return;
 
-  ms_nalu_names_by_type = std::unordered_map<int, std::string>{
+  s_nalu_names_by_type = std::unordered_map<unsigned int, std::string>{
     { NALU_TYPE_TRAIL_N,       "trail_n"       },
     { NALU_TYPE_TRAIL_R,       "trail_r"       },
     { NALU_TYPE_TSA_N,         "tsa_n"         },
@@ -873,10 +879,10 @@ es_parser_c::init_nalu_names()
     { NALU_TYPE_UNSPEC63,      "unspec63"      },
   };
 
-  ms_slice_names_by_type[0] = "B";
-  ms_slice_names_by_type[1] = "P";
-  ms_slice_names_by_type[2] = "I";
-  ms_slice_names_by_type[3] = "unknown";
+  s_slice_names_by_type[0] = "B";
+  s_slice_names_by_type[1] = "P";
+  s_slice_names_by_type[2] = "I";
+  s_slice_names_by_type[3] = "unknown";
 }
 
 }                              // namespace mtx::hevc

@@ -22,8 +22,6 @@
 
 namespace mtx::xyzvc {
 
-std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type, es_parser_c::ms_slice_names_by_type;
-
 es_parser_c::es_parser_c(std::string const &debug_type,
                          std::size_t num_slice_types,
                          std::size_t num_nalu_types)
@@ -599,8 +597,8 @@ es_parser_c::get_num_frame_slices()
 std::string
 es_parser_c::get_nalu_type_name(int type)
   const {
-  auto name = ms_nalu_names_by_type.find(type);
-  return (ms_nalu_names_by_type.end() == name) ? "unknown" : name->second;
+  auto name = m_nalu_names_by_type->find(type);
+  return (m_nalu_names_by_type->end() == name) ? "unknown" : name->second;
 }
 
 void
@@ -652,7 +650,7 @@ es_parser_c::debug_dump_statistics()
   mxdebug(fmt::format("{0}: Number of slices by type:\n", m_debug_type));
   for (int i = 0, size = m_stats.num_slices_by_type.size(); i < size; ++i)
     if (0 != m_stats.num_slices_by_type[i])
-      mxdebug(fmt::format("  {0}: {1}\n", i < static_cast<int>(ms_slice_names_by_type.size()) ? ms_slice_names_by_type[i] : "?"s, m_stats.num_slices_by_type[i]));
+      mxdebug(fmt::format("  {0}: {1}\n", i < static_cast<int>(m_slice_names_by_type->size()) ? m_slice_names_by_type->at(i) : "?"s, m_stats.num_slices_by_type[i]));
 }
 
 } // namespace mtx::xyzvc

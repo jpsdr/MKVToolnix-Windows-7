@@ -61,8 +61,6 @@ protected:
   std::string const m_debug_type;
   debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info, m_debug_statistics;
 
-  static std::unordered_map<int, std::string> ms_nalu_names_by_type, ms_slice_names_by_type;
-
   struct stats_t {
     std::vector<int> num_slices_by_type, num_nalus_by_type;
     std::size_t num_frames_out{}, num_frames_discarded{}, num_timestamps_in{}, num_timestamps_generated{}, num_timestamps_discarded{}, num_field_slices{}, num_frame_slices{}, num_idr_slices{}, num_sei_nalus{};
@@ -73,6 +71,8 @@ protected:
     {
     }
   } m_stats;
+
+  std::unordered_map<unsigned int, std::string> *m_nalu_names_by_type{}, *m_slice_names_by_type{};
 
 protected:
   es_parser_c(std::string const &debug_type, std::size_t num_slice_types, std::size_t num_nalu_types);
@@ -146,9 +146,9 @@ public:
   void calculate_frame_references();
   void update_frame_stats();
 
-  virtual void init_nalu_names() const = 0;
-
   void dump_info() const;
+
+  std::string get_nalu_type_name(int type) const;
 
 protected:
   void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
@@ -160,9 +160,6 @@ protected:
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const = 0;
 
   void debug_dump_statistics() const;
-
-public:
-  std::string get_nalu_type_name(int type) const;
 };
 
 }

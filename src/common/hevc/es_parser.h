@@ -108,7 +108,7 @@ protected:
   void cleanup_and_combine_dovi_layers();
   void combine_dovi_layers();
 
-  virtual void init_nalu_names() const override;
+  static void init_nalu_names();
 };
 
 }                              // namespace mtx::hevc
