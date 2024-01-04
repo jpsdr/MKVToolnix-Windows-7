@@ -10,6 +10,7 @@
 
 #include "common/common_pch.h"
 
+#include <memory>
 #include <QRegularExpression>
 
 #include "common/avc/es_parser.h"
@@ -22,12 +23,9 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/qt.h"
-
-enum class codec_type_e {
-  unknown,
-  avc,
-  hevc,
-};
+#include "common/vvc/es_parser.h"
+#include "common/xyzvc/es_parser.h"
+#include "qregularexpression.h"
 
 enum class framing_type_e {
   unknown,
@@ -35,12 +33,106 @@ enum class framing_type_e {
   annex_b,
 };
 
-static codec_type_e s_codec_type{codec_type_e::unknown};
+class parser_c {
+protected:
+  std::unique_ptr<mtx::xyzvc::es_parser_c> m_es_parser;
+
+public:
+  virtual ~parser_c() = default;
+
+  virtual std::string get_full_name() = 0;
+  virtual std::string get_itu_t_name() = 0;
+  virtual QRegularExpression get_file_name_regex() = 0;
+  virtual unsigned int get_nalu_type(uint8_t *bytes) = 0;
+  virtual std::string get_nalu_type_name(unsigned int type) {
+    return m_es_parser->get_nalu_type_name(type);
+  }
+  virtual std::optional<uint32_t> determine_inner_nalu_type([[maybe_unused]] uint8_t const *buffer, [[maybe_unused]] uint64_t size, [[maybe_unused]] uint32_t type) {
+    return {};
+  }
+};
+
+class avc_parser_c: public parser_c {
+public:
+  avc_parser_c() {
+    m_es_parser.reset(new mtx::avc::es_parser_c);
+  }
+
+  virtual std::string get_full_name() override {
+    return "AVC/H.264";
+  }
+
+  virtual std::string get_itu_t_name() override {
+    return "H.264";
+  }
+
+  virtual QRegularExpression get_file_name_regex() override {
+    return QRegularExpression{ Q("\\.(avc|[hx]?264)$"), QRegularExpression::CaseInsensitiveOption };
+  }
+
+  virtual unsigned int get_nalu_type(uint8_t *bytes) override {
+    return bytes[0] & 0x1f;
+  }
+};
+
+class hevc_parser_c: public parser_c {
+public:
+  hevc_parser_c() {
+    m_es_parser.reset(new mtx::hevc::es_parser_c);
+  }
+
+  virtual std::string get_full_name() override {
+    return "HEVC/H.265";
+  }
+
+  virtual std::string get_itu_t_name() override {
+    return "H.265";
+  }
+
+  virtual QRegularExpression get_file_name_regex() override {
+    return QRegularExpression{ Q("\\.(hevc|[hx]?265)$"), QRegularExpression::CaseInsensitiveOption };
+  }
+
+  virtual unsigned int get_nalu_type(uint8_t *bytes) override {
+    return (bytes[0] >> 1) & 0x3f;
+  }
+
+  virtual std::optional<uint32_t> determine_inner_nalu_type(uint8_t const *buffer, uint64_t size, uint32_t type) override {
+    if ((size >= 3) && mtx::included_in(static_cast<int>(type), mtx::hevc::NALU_TYPE_UNSPEC62, mtx::hevc::NALU_TYPE_UNSPEC63))
+      return (buffer[2] >> 1) & 0x3f;
+
+    return {};
+  }
+};
+
+class vvc_parser_c: public parser_c {
+public:
+  vvc_parser_c() {
+    m_es_parser.reset(new mtx::vvc::es_parser_c);
+  }
+
+  virtual std::string get_full_name() override {
+    return "VVC/H.266";
+  }
+
+  virtual std::string get_itu_t_name() override {
+    return "H.266";
+  }
+
+  virtual QRegularExpression get_file_name_regex() override {
+    return QRegularExpression{ Q("\\.(vvc|[hx]?266)$"), QRegularExpression::CaseInsensitiveOption };
+  }
+
+  virtual unsigned int get_nalu_type(uint8_t *bytes) override {
+    return (bytes[1] >> 3) & 0x1f;
+  }
+};
+
 static framing_type_e s_framing_type{framing_type_e::unknown};
 static bool s_portable_format{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
-static std::unique_ptr<mtx::xyzvc::es_parser_c> s_parser;
+static std::shared_ptr<parser_c> s_parser;
 
 static void
 setup_help() {
@@ -97,13 +189,21 @@ detect_framing_type(std::string const &file_name) {
 static std::string
 parse_args(std::vector<std::string> &args) {
   std::string file_name;
+  std::vector<std::shared_ptr<parser_c>> parsers = {
+    std::make_shared<avc_parser_c>(),
+    std::make_shared<hevc_parser_c>(),
+    std::make_shared<vvc_parser_c>(),
+  };
 
   for (auto & arg: args) {
     if ((arg == "-4") || (arg == "--h264") || (arg == "--avc"))
-      s_codec_type = codec_type_e::avc;
+      s_parser = parsers[0];
 
     else if ((arg == "-5") || (arg == "--h265") || (arg == "--hevc"))
-      s_codec_type = codec_type_e::hevc;
+      s_parser = parsers[1];
+
+    else if ((arg == "-6") || (arg == "--h266") || (arg == "--vvc"))
+      s_parser = parsers[2];
 
     else if ((arg == "-a") || (arg == "--annex-b"))
       s_framing_type = framing_type_e::annex_b;
@@ -126,16 +226,16 @@ parse_args(std::vector<std::string> &args) {
     mxerror(Y("No file name given\n"));
   }
 
-  if (s_codec_type == codec_type_e::unknown) {
+  if (!s_parser) {
     auto file_name_q = Q(file_name);
 
-    if (file_name_q.contains(QRegularExpression{Q("\\.(avc|[hx]?264)$"), QRegularExpression::CaseInsensitiveOption}))
-      s_codec_type = codec_type_e::avc;
+    for (auto const &parser : parsers)
+      if (file_name_q.contains(parser->get_file_name_regex())) {
+        s_parser = parser;
+        break;
+      }
 
-    else if (file_name_q.contains(QRegularExpression{Q("\\.(hevc|[hx]?265)$"), QRegularExpression::CaseInsensitiveOption}))
-      s_codec_type = codec_type_e::hevc;
-
-    else
+    if (!s_parser)
       mxerror("The file type could not be derived from the file name's extension. Please specify the corresponding command line option (see 'xyzvc_dump --help').\n");
   }
 
@@ -207,29 +307,13 @@ show_nalu(uint32_t type,
                      inner_type_str));
 }
 
-static std::optional<uint32_t>
-determine_inner_nalu_type(uint8_t const *buffer,
-                          uint64_t size,
-                          uint32_t type) {
-  if (   (size         >= 3)
-         && (s_codec_type == codec_type_e::hevc)
-         && mtx::included_in(static_cast<int>(type), mtx::hevc::NALU_TYPE_UNSPEC62, mtx::hevc::NALU_TYPE_UNSPEC63))
-    return (buffer[2] >> 1) & 0x3f;
-
-  return {};
-}
-
 static void
 parse_file_annex_b(std::string const &file_name) {
   auto in_ptr    = open_file(file_name);
   auto &in       = *in_ptr;
   auto file_size = static_cast<uint64_t>(in.get_size());
 
-  mxinfo(fmt::format("{0}: {1}, ITU-T H.26{2} Annex B, {3} bytes\n",
-                     file_name,
-                     s_codec_type == codec_type_e::avc ? "AVC/H.264" : "HEVC/H.265",
-                     s_codec_type == codec_type_e::avc ? 4           : 5,
-                     file_size));
+  mxinfo(fmt::format("{0}: {1}, ITU-T {2} Annex B, {3} bytes\n", file_name, s_parser->get_full_name(), s_parser->get_itu_t_name(), file_size));
 
   if (4 > file_size)
     return;
@@ -267,7 +351,7 @@ parse_file_annex_b(std::string const &file_name) {
 
     if (-1 != previous_pos) {
       auto size       = pos - previous_pos - previous_marker_size;
-      auto inner_type = determine_inner_nalu_type(s_frame->get_buffer(), size, previous_type);
+      auto inner_type = s_parser->determine_inner_nalu_type(s_frame->get_buffer(), size, previous_type);
       show_nalu(previous_type, size, previous_pos, calc_frame_checksum(marker_size), previous_marker_size, inner_type);
 
     } else
@@ -280,7 +364,7 @@ parse_file_annex_b(std::string const &file_name) {
     auto num_read        = in.read(next_bytes, num_to_read);
     previous_pos         = pos;
     previous_marker_size = marker_size;
-    previous_type        = s_codec_type == codec_type_e::avc ? next_bytes[0] & 0x1f : (next_bytes[0] >> 1) & 0x3f;
+    previous_type        = s_parser->get_nalu_type(next_bytes);
     marker               = (1ull << 24) | get_uint24_be(&next_bytes[1]);
 
     for (auto idx = 0u; idx < num_read; ++idx)
@@ -291,7 +375,7 @@ parse_file_annex_b(std::string const &file_name) {
     return;
 
   auto size       = in.getFilePointer() - previous_pos - previous_marker_size;
-  auto inner_type = determine_inner_nalu_type(s_frame->get_buffer(), size, previous_type);
+  auto inner_type = s_parser->determine_inner_nalu_type(s_frame->get_buffer(), size, previous_type);
 
   show_nalu(previous_type, size, previous_pos, calc_frame_checksum(0), previous_marker_size, inner_type);
 }
@@ -302,21 +386,23 @@ parse_file_iso_14496_15(std::string const &file_name) {
   auto &in       = *in_ptr;
   auto file_size = static_cast<uint64_t>(in.get_size());
 
-  mxinfo(fmt::format("{0}: {1}, ISO/IEC 14496-15, {2} bytes\n", file_name, s_codec_type == codec_type_e::avc ? "AVC/H.264" : "HEVC/H.265", file_size));
+  mxinfo(fmt::format("{0}: {1}, ISO/IEC 14496-15, {2} bytes\n", file_name, s_parser->get_full_name(), file_size));
 
   uint64_t pos{};
 
   while ((pos + 5) < file_size) {
+    uint8_t nalu_header[2];
+
     auto nalu_size = in.read_uint32_be();
-    auto next_byte = in.read_uint8();
-    auto nalu_type = s_codec_type == codec_type_e::avc ? next_byte & 0x1f : (next_byte >> 1) & 0x3f;
+    in.read(nalu_header, 2);
+    auto nalu_type = s_parser->get_nalu_type(nalu_header);
 
     if (!nalu_size)
       return;
 
     in.setFilePointer(pos + 4);
     auto frame      = in.read(nalu_size);
-    auto inner_type = determine_inner_nalu_type(frame->get_buffer(), nalu_size, nalu_type);
+    auto inner_type = s_parser->determine_inner_nalu_type(frame->get_buffer(), nalu_size, nalu_type);
 
     show_nalu(nalu_type, nalu_size, pos, mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, *frame), std::nullopt, inner_type);
 
@@ -335,14 +421,6 @@ main(int argc,
     ;
 
   auto file_name = parse_args(args);
-
-  if (s_codec_type == codec_type_e::avc)
-    s_parser.reset(new mtx::avc::es_parser_c);
-
-  else if (s_codec_type == codec_type_e::hevc)
-    s_parser.reset(new mtx::hevc::es_parser_c);
-
-  s_parser->init_nalu_names();
 
   if (s_framing_type == framing_type_e::iso_14496_15)
     parse_file_iso_14496_15(file_name);

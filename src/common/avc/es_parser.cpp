@@ -24,8 +24,14 @@
 #include "common/list_utils.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
+#include <type_traits>
+#include <unordered_map>
 
 namespace mtx::avc {
+
+namespace {
+std::unordered_map<unsigned int, std::string> s_nalu_names_by_type, s_slice_names_by_type;
+}
 
 es_parser_c::es_parser_c()
   : mtx::xyzvc::es_parser_c{"avc"s, 11, 13}
@@ -33,6 +39,9 @@ es_parser_c::es_parser_c()
   m_all_i_slices_are_key_frames = mtx::hacks::is_engaged(mtx::hacks::ALL_I_SLICES_ARE_KEY_FRAMES);
 
   init_nalu_names();
+
+  m_nalu_names_by_type  = &s_nalu_names_by_type;
+  m_slice_names_by_type = &s_slice_names_by_type;
 }
 
 bool
@@ -606,35 +615,34 @@ es_parser_c::set_configuration_record(memory_cptr const &bytes) {
 }
 
 void
-es_parser_c::init_nalu_names()
-  const {
-  if (!ms_nalu_names_by_type.empty())
+es_parser_c::init_nalu_names() {
+  if (!s_nalu_names_by_type.empty())
     return;
 
-  ms_nalu_names_by_type[NALU_TYPE_NON_IDR_SLICE] = "non IDR slice";
-  ms_nalu_names_by_type[NALU_TYPE_DP_A_SLICE]    = "DP A slice";
-  ms_nalu_names_by_type[NALU_TYPE_DP_B_SLICE]    = "DP B slice";
-  ms_nalu_names_by_type[NALU_TYPE_DP_C_SLICE]    = "DP C slice";
-  ms_nalu_names_by_type[NALU_TYPE_IDR_SLICE]     = "IDR slice";
-  ms_nalu_names_by_type[NALU_TYPE_SEI]           = "SEI";
-  ms_nalu_names_by_type[NALU_TYPE_SEQ_PARAM]     = "SEQ param";
-  ms_nalu_names_by_type[NALU_TYPE_PIC_PARAM]     = "PIC param";
-  ms_nalu_names_by_type[NALU_TYPE_ACCESS_UNIT]   = "access unit";
-  ms_nalu_names_by_type[NALU_TYPE_END_OF_SEQ]    = "end of sequence";
-  ms_nalu_names_by_type[NALU_TYPE_END_OF_STREAM] = "end of stream";
-  ms_nalu_names_by_type[NALU_TYPE_FILLER_DATA]   = "filler";
+  s_nalu_names_by_type[NALU_TYPE_NON_IDR_SLICE] = "non IDR slice";
+  s_nalu_names_by_type[NALU_TYPE_DP_A_SLICE]    = "DP A slice";
+  s_nalu_names_by_type[NALU_TYPE_DP_B_SLICE]    = "DP B slice";
+  s_nalu_names_by_type[NALU_TYPE_DP_C_SLICE]    = "DP C slice";
+  s_nalu_names_by_type[NALU_TYPE_IDR_SLICE]     = "IDR slice";
+  s_nalu_names_by_type[NALU_TYPE_SEI]           = "SEI";
+  s_nalu_names_by_type[NALU_TYPE_SEQ_PARAM]     = "SEQ param";
+  s_nalu_names_by_type[NALU_TYPE_PIC_PARAM]     = "PIC param";
+  s_nalu_names_by_type[NALU_TYPE_ACCESS_UNIT]   = "access unit";
+  s_nalu_names_by_type[NALU_TYPE_END_OF_SEQ]    = "end of sequence";
+  s_nalu_names_by_type[NALU_TYPE_END_OF_STREAM] = "end of stream";
+  s_nalu_names_by_type[NALU_TYPE_FILLER_DATA]   = "filler";
 
-  ms_slice_names_by_type[0]                      = "P";
-  ms_slice_names_by_type[1]                      = "B";
-  ms_slice_names_by_type[2]                      = "I";
-  ms_slice_names_by_type[3]                      = "SP";
-  ms_slice_names_by_type[4]                      = "SI";
-  ms_slice_names_by_type[5]                      = "P2";
-  ms_slice_names_by_type[6]                      = "B2";
-  ms_slice_names_by_type[7]                      = "I2";
-  ms_slice_names_by_type[8]                      = "SP2";
-  ms_slice_names_by_type[9]                      = "SI2";
-  ms_slice_names_by_type[10]                     = "unknown";
+  s_slice_names_by_type[0]                      = "P";
+  s_slice_names_by_type[1]                      = "B";
+  s_slice_names_by_type[2]                      = "I";
+  s_slice_names_by_type[3]                      = "SP";
+  s_slice_names_by_type[4]                      = "SI";
+  s_slice_names_by_type[5]                      = "P2";
+  s_slice_names_by_type[6]                      = "B2";
+  s_slice_names_by_type[7]                      = "I2";
+  s_slice_names_by_type[8]                      = "SP2";
+  s_slice_names_by_type[9]                      = "SI2";
+  s_slice_names_by_type[10]                     = "unknown";
 }
 
 }

@@ -91,7 +91,7 @@ protected:
   virtual void calculate_frame_order() override;
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 
-  virtual void init_nalu_names() const override;
+  static void init_nalu_names();
 };
 
 }
