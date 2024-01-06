@@ -1055,7 +1055,7 @@ generic_packetizer_c::set_headers() {
   if (!m_track_entry) {
     m_track_entry    = !g_kax_last_entry ? &GetChild<libmatroska::KaxTrackEntry>(*g_kax_tracks) : &libebml::GetNextChild<libmatroska::KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
     g_kax_last_entry = m_track_entry;
-    m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
+    set_global_timestamp_scale(*m_track_entry, g_timestamp_scale);
   }
 
   if (!m_hserialno && !m_reader->m_appending) {
@@ -1401,7 +1401,7 @@ generic_packetizer_c::apply_block_addition_mappings() {
 
 void
 generic_packetizer_c::fix_headers() {
-  m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
+  set_global_timestamp_scale(*m_track_entry, g_timestamp_scale);
 }
 
 void

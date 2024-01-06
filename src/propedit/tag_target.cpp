@@ -14,6 +14,7 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/content_decoder.h"
+#include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/kax_analyzer.h"
 #include "common/kax_file.h"
@@ -294,7 +295,7 @@ tag_target_c::account_block_group(libmatroska::KaxBlockGroup &block_group,
 
   auto block_duration  = FindChild<libmatroska::KaxBlockDuration>(block_group);
   auto frame_duration  = block_duration ? static_cast<uint64_t>(block_duration->GetValue() * m_timestamp_scale / num_frames) : m_default_durations_by_number[block->TrackNum()];
-  auto first_timestamp = block->GlobalTimecode();
+  auto first_timestamp = get_global_timestamp(*block);
 
   for (int idx = 0; idx < static_cast<int>(num_frames); ++idx) {
     auto &data_buffer = block->GetBuffer(idx);
@@ -314,7 +315,7 @@ tag_target_c::account_simple_block(libmatroska::KaxSimpleBlock &simple_block,
   simple_block.SetParent(cluster);
 
   auto frame_duration  = m_default_durations_by_number[simple_block.TrackNum()];
-  auto first_timestamp = simple_block.GlobalTimecode();
+  auto first_timestamp = get_global_timestamp(simple_block);
 
   for (int idx = 0; idx < static_cast<int>(num_frames); ++idx) {
     auto &data_buffer = simple_block.GetBuffer(idx);
@@ -352,7 +353,7 @@ tag_target_c::account_all_clusters() {
     if (!cluster)
       break;
 
-    cluster->InitTimecode(FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), m_timestamp_scale);
+    init_timestamp(*cluster, FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), m_timestamp_scale);
 
     account_one_cluster(*cluster);
 

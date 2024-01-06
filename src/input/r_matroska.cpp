@@ -2351,7 +2351,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
 
       auto ctc = static_cast<libmatroska::KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(libmatroska::KaxClusterTimecode), false));
       if (ctc)
-        cluster->InitTimecode(ctc->GetValue(), m_tc_scale);
+        init_timestamp(*cluster, ctc->GetValue(), m_tc_scale);
 
       size_t bgidx;
       for (bgidx = 0; bgidx < cluster->ListSize(); bgidx++) {
@@ -2432,7 +2432,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
       return finish_file();
 
     auto cluster_ts = FindChildValue<libmatroska::KaxClusterTimecode>(*cluster);
-    cluster->InitTimecode(cluster_ts, m_tc_scale);
+    init_timestamp(*cluster, cluster_ts, m_tc_scale);
 
     size_t bgidx;
     for (bgidx = 0; bgidx < cluster->ListSize(); bgidx++) {
@@ -2474,7 +2474,7 @@ kax_reader_c::process_simple_block(libmatroska::KaxCluster *cluster,
 
   block_simple->SetParent(*cluster);
   auto block_track     = find_track_by_num(block_simple->TrackNum());
-  auto block_timestamp = mtx::math::to_signed(block_simple->GlobalTimecode()) - m_global_timestamp_offset;
+  auto block_timestamp = mtx::math::to_signed(get_global_timestamp(*block_simple)) - m_global_timestamp_offset;
 
   if (!block_track) {
     if (!m_known_bad_track_numbers[block_simple->TrackNum()])
@@ -2594,7 +2594,7 @@ kax_reader_c::process_block_group(libmatroska::KaxCluster *cluster,
 
   block->SetParent(*cluster);
   auto block_track     = find_track_by_num(block->TrackNum());
-  auto block_timestamp = mtx::math::to_signed(block->GlobalTimecode()) - m_global_timestamp_offset;
+  auto block_timestamp = mtx::math::to_signed(get_global_timestamp(*block)) - m_global_timestamp_offset;
 
   if (!block_track) {
     if (!m_known_bad_track_numbers[block->TrackNum()])
@@ -2725,7 +2725,7 @@ kax_reader_c::determine_minimum_timestamps() {
         break;
 
       auto cluster_ts = FindChildValue<libmatroska::KaxClusterTimecode>(*cluster);
-      cluster->InitTimecode(cluster_ts, m_tc_scale);
+      init_timestamp(*cluster, cluster_ts, m_tc_scale);
 
       for (auto const &element : *cluster) {
         uint64_t track_number{};
@@ -2734,7 +2734,7 @@ kax_reader_c::determine_minimum_timestamps() {
           auto block = static_cast<libmatroska::KaxSimpleBlock *>(element);
           block->SetParent(*cluster);
 
-          last_timestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
+          last_timestamp = timestamp_c::ns(mtx::math::to_signed(get_global_timestamp(*block)));
           track_number   = block->TrackNum();
 
         } else if (Is<libmatroska::KaxBlockGroup>(element)) {
@@ -2744,7 +2744,7 @@ kax_reader_c::determine_minimum_timestamps() {
 
           block->SetParent(*cluster);
 
-          last_timestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
+          last_timestamp = timestamp_c::ns(mtx::math::to_signed(get_global_timestamp(*block)));
           track_number   = block->TrackNum();
 
         } else

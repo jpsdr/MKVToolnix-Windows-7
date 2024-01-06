@@ -207,7 +207,7 @@ handle_blockgroup_timestamps(libmatroska::KaxBlockGroup &blockgroup,
 
   // Pass the block to the extractor.
   for (auto idx = 0u, end = block->NumberFrames(); idx < end; ++idx)
-    extractor->second->m_timestamps.push_back(timestamp_t(block->GlobalTimecode() + idx * duration / block->NumberFrames(), duration / block->NumberFrames()));
+    extractor->second->m_timestamps.push_back(timestamp_t(get_global_timestamp(*block) + idx * duration / block->NumberFrames(), duration / block->NumberFrames()));
 }
 
 static void
@@ -219,7 +219,7 @@ handle_simpleblock_timestamps(libmatroska::KaxSimpleBlock &simpleblock) {
   // Pass the block to the extractor.
   auto &extractor = *itr->second;
   for (auto idx = 0u, end = simpleblock.NumberFrames(); idx < end; ++idx)
-    extractor.m_timestamps.emplace_back(simpleblock.GlobalTimecode() + idx * extractor.m_default_duration, extractor.m_default_duration);
+    extractor.m_timestamps.emplace_back(get_global_timestamp(simpleblock) + idx * extractor.m_default_duration, extractor.m_default_duration);
 }
 
 static int64_t
@@ -274,10 +274,10 @@ handle_blockgroup(libmatroska::KaxBlockGroup &blockgroup,
     int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
-      this_timestamp = block->GlobalTimecode();
+      this_timestamp = get_global_timestamp(*block);
       this_duration = duration;
     } else {
-      this_timestamp = block->GlobalTimecode() + i * duration /
+      this_timestamp = get_global_timestamp(*block) + i * duration /
         block->NumberFrames();
       this_duration = duration / block->NumberFrames();
     }
@@ -321,11 +321,11 @@ handle_simpleblock(libmatroska::KaxSimpleBlock &simpleblock,
     int64_t this_timestamp, this_duration;
 
     if (0 > duration) {
-      this_timestamp = simpleblock.GlobalTimecode();
-      this_duration = duration;
+      this_timestamp = get_global_timestamp(simpleblock);
+      this_duration  = duration;
     } else {
-      this_timestamp = simpleblock.GlobalTimecode() + i * duration / simpleblock.NumberFrames();
-      this_duration = duration / simpleblock.NumberFrames();
+      this_timestamp = get_global_timestamp(simpleblock) + i * duration / simpleblock.NumberFrames();
+      this_duration  = duration / simpleblock.NumberFrames();
     }
 
     auto &data = simpleblock.GetBuffer(i);
@@ -490,7 +490,7 @@ extract_tracks(kax_analyzer_c &analyzer,
         break;
 
       auto ctc = static_cast<libmatroska::KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(libmatroska::KaxClusterTimecode), false));
-      cluster->InitTimecode(ctc ? ctc->GetValue() : 0, tc_scale);
+      init_timestamp(*cluster, ctc ? ctc->GetValue() : 0, tc_scale);
 
       if (0 == verbose) {
         auto current_percentage = in.getFilePointer() * 100 / file_size;

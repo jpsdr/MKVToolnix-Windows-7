@@ -34,7 +34,7 @@ kax_reference_block_c::UpdateSize(
 #if LIBEBML_VERSION >= 0x020000
   if (!bTimestampSet) {
     assert(-1 != m_value);
-    SetValue((m_value - static_cast<int64_t>(ParentBlock->GlobalTimecode())) / static_cast<int64_t>(ParentBlock->GlobalTimecodeScale()));
+    SetValue((m_value - static_cast<int64_t>(get_global_timestamp(*ParentBlock))) / static_cast<int64_t>(get_global_timestamp_scale(*ParentBlock)));
   }
 
   return libebml::EbmlSInteger::UpdateSize(writeFilter, bForceRender);

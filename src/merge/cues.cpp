@@ -153,7 +153,7 @@ cues_c::calculate_block_positions(libmatroska::KaxCluster &cluster)
     auto simple_block = dynamic_cast<libmatroska::KaxSimpleBlock *>(child);
     if (simple_block) {
       simple_block->SetParent(cluster);
-      positions.insert({ id_timestamp_t{ simple_block->TrackNum(), simple_block->GlobalTimecode()}, simple_block->GetElementPosition() });
+      positions.insert({ id_timestamp_t{ simple_block->TrackNum(), get_global_timestamp(*simple_block)}, simple_block->GetElementPosition() });
       continue;
     }
 
@@ -166,7 +166,7 @@ cues_c::calculate_block_positions(libmatroska::KaxCluster &cluster)
       continue;
 
     block->SetParent(cluster);
-    positions.insert({ id_timestamp_t{ block->TrackNum(), block->GlobalTimecode()}, block_group->GetElementPosition() });
+    positions.insert({ id_timestamp_t{ block->TrackNum(), get_global_timestamp(*block)}, block_group->GetElementPosition() });
   }
 
   return positions;

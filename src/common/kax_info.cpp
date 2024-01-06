@@ -596,7 +596,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   add_pre(EBML_ID(libmatroska::KaxCluster), ([this, p](libebml::EbmlElement &e) -> bool {
     p->m_cluster = static_cast<libmatroska::KaxCluster *>(&e);
-    p->m_cluster->InitTimecode(FindChildValue<libmatroska::KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
+    init_timestamp(*p->m_cluster, FindChildValue<libmatroska::KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
 
     ui_show_progress(100 * p->m_cluster->GetElementPosition() / p->m_file_size, Y("Parsing file"));
 
@@ -889,7 +889,7 @@ kax_info_c::pre_block(libebml::EbmlElement &e) {
 
   block.SetParent(*p->m_cluster);
 
-  p->m_lf_timestamp   = block.GlobalTimecode();
+  p->m_lf_timestamp   = get_global_timestamp(block);
   p->m_lf_tnum        = block.TrackNum();
   p->m_block_duration = std::nullopt;
 
@@ -1034,7 +1034,7 @@ kax_info_c::pre_simple_block(libebml::EbmlElement &e) {
 std::string
 kax_info_c::format_simple_block(libebml::EbmlElement &e) {
   auto &block       = static_cast<libmatroska::KaxSimpleBlock &>(e);
-  auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
+  auto timestamp_ns = mtx::math::to_signed(get_global_timestamp(block));
 
   std::string info;
   if (block.IsKeyframe())
@@ -1055,7 +1055,7 @@ kax_info_c::post_simple_block(libebml::EbmlElement &e) {
 
   auto &block       = static_cast<libmatroska::KaxSimpleBlock &>(e);
   auto &tinfo       = p->m_track_info[block.TrackNum()];
-  auto timestamp_ns = mtx::math::to_signed(block.GlobalTimecode());
+  auto timestamp_ns = mtx::math::to_signed(get_global_timestamp(block));
   int num_frames    = block.NumberFrames();
   auto frames_start = block.GetElementPosition() + block.ElementSize();
 
