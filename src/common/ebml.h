@@ -20,6 +20,14 @@
 
 #include <matroska/KaxTracks.h>
 
+namespace libmatroska {
+class KaxCluster;
+class KaxCues;
+class KaxBlockGroup;
+class KaxBlock;
+class KaxSimpleBlock;
+};
+
 int64_t kt_get_default_duration(libmatroska::KaxTrackEntry &track);
 int64_t kt_get_number(libmatroska::KaxTrackEntry &track);
 int64_t kt_get_uid(libmatroska::KaxTrackEntry &track);
@@ -488,9 +496,38 @@ bool has_default_value(libebml::EbmlElement const *elt);
 
 bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle);
 
+uint64_t get_global_timestamp_scale(libmatroska::KaxBlockGroup const &block);
+void init_timestamp(libmatroska::KaxCluster &cluster, uint64_t timestamp, int64_t timestamp_scale);
+void set_previous_timestamp(libmatroska::KaxCluster &cluster, uint64_t timestamp, int64_t timestamp_scale);
+
 #if LIBEBML_VERSION >= 0x020000
+
+template<typename T> uint64_t
+get_global_timestamp(T const &block) {
+  return block.GlobalTimestamp();
+}
+
+template<typename T> void
+set_global_timestamp_scale(T &elt,
+                           uint64_t timestamp_scale) {
+  elt.SetGlobalTimestampScale(timestamp_scale);
+}
+
 libebml::EbmlElement::ShouldWrite render_should_write_arg(bool with_default);
-#else
+
+#else // LIBEBML_VERSION >= 0x020000
+
+template<typename T> uint64_t
+get_global_timestamp(T const &block) {
+  return block.GlobalTimecode();
+}
+
+template<typename T> void
+set_global_timestamp_scale(T &elt,
+                           uint64_t timestamp_scale) {
+  elt.SetGlobalTimecodeScale(timestamp_scale);
+}
+
 bool render_should_write_arg(bool with_default);
 
 namespace libebml {

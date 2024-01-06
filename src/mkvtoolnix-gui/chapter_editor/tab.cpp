@@ -343,7 +343,7 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
     return true;
   }
 
-  cluster->InitTimecode(FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), timestampScale);
+  init_timestamp(*cluster, FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), timestampScale);
 
   auto minBlockTimestamp = timestamp_c::ns(0);
 
@@ -356,13 +356,13 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
 
       if (block) {
         block->SetParent(*cluster);
-        blockTimestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
+        blockTimestamp = timestamp_c::ns(mtx::math::to_signed(get_global_timestamp(*block)));
       }
 
     } else if (Is<libmatroska::KaxSimpleBlock>(child)) {
       auto &block = static_cast<libmatroska::KaxSimpleBlock &>(*child);
       block.SetParent(*cluster);
-      blockTimestamp = timestamp_c::ns(mtx::math::to_signed(block.GlobalTimecode()));
+      blockTimestamp = timestamp_c::ns(mtx::math::to_signed(get_global_timestamp(block)));
 
     }
 

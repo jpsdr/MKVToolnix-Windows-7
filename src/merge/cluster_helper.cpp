@@ -306,7 +306,7 @@ cluster_helper_c::prepare_new_cluster() {
   m->packets.clear();
 
   m->cluster->SetParent(*g_kax_segment);
-  m->cluster->SetPreviousTimecode(std::max<int64_t>(0, m->previous_cluster_ts), static_cast<int64_t>(g_timestamp_scale));
+  set_previous_timestamp(*m->cluster, std::max<int64_t>(0, m->previous_cluster_ts), static_cast<int64_t>(g_timestamp_scale));
 }
 
 int
@@ -403,7 +403,7 @@ cluster_helper_c::render() {
 
   std::vector<render_groups_cptr> render_groups;
   kax_cues_with_cleanup_c cues;
-  cues.SetGlobalTimecodeScale(g_timestamp_scale);
+  set_global_timestamp_scale(cues, g_timestamp_scale);
 
   bool use_simpleblock     = !mtx::hacks::is_engaged(mtx::hacks::NO_SIMPLE_BLOCKS);
 
@@ -584,7 +584,7 @@ cluster_helper_c::render() {
       for (auto &rg : render_groups)
         set_duration(rg.get());
 
-      m->cluster->SetPreviousTimecode(min_cl_timestamp - timestamp_offset - 1, (int64_t)g_timestamp_scale);
+      set_previous_timestamp(*m->cluster, min_cl_timestamp - timestamp_offset - 1, g_timestamp_scale);
       m->cluster->set_min_timestamp(min_cl_timestamp - timestamp_offset);
       m->cluster->set_max_timestamp(max_cl_timestamp - timestamp_offset);
 
@@ -599,7 +599,7 @@ cluster_helper_c::render() {
       if (g_kax_sh_cues)
         g_kax_sh_cues->IndexThis(*m->cluster, *g_kax_segment);
 
-      m->previous_cluster_ts = m->cluster->GlobalTimecode();
+      m->previous_cluster_ts = get_global_timestamp(*m->cluster);
 
       cues_c::get().postprocess_cues(cues, *m->cluster);
 

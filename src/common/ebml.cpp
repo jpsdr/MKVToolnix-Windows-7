@@ -24,6 +24,7 @@
 #include <ebml/EbmlVoid.h>
 
 #include <matroska/KaxBlock.h>
+#include <matroska/KaxCluster.h>
 #include <matroska/KaxSegment.h>
 
 #include "common/date_time.h"
@@ -819,7 +820,27 @@ has_default_value(libebml::EbmlElement const &elt) {
   return elt.ElementSpec().HasDefault();
 }
 
-#else
+uint64_t
+get_global_timestamp_scale(libmatroska::KaxBlockGroup const &block) {
+  return block.GlobalTimestampScale();
+}
+
+void
+init_timestamp(libmatroska::KaxCluster &cluster,
+               uint64_t timestamp,
+               int64_t timestamp_scale) {
+  cluster.InitTimestamp(timestamp, timestamp_scale);
+}
+
+void
+set_previous_timestamp(libmatroska::KaxCluster &cluster,
+                       uint64_t timestamp,
+                       int64_t timestamp_scale) {
+  cluster.SetPreviousTimestamp(timestamp, timestamp_scale);
+}
+
+#else // LIBEBML_VERSION >= 0x020000
+
 bool
 render_should_write_arg(bool with_default) {
   return with_default;
@@ -828,6 +849,25 @@ render_should_write_arg(bool with_default) {
 bool
 has_default_value(libebml::EbmlElement const &elt) {
   return elt.DefaultISset();
+}
+
+uint64_t
+get_global_timestamp_scale(libmatroska::KaxBlockGroup const &block) {
+  return block.GlobalTimecodeScale();
+}
+
+void
+init_timestamp(libmatroska::KaxCluster &cluster,
+               uint64_t timestamp,
+               int64_t timestamp_scale) {
+  cluster.InitTimecode(timestamp, timestamp_scale);
+}
+
+void
+set_previous_timestamp(libmatroska::KaxCluster &cluster,
+                       uint64_t timestamp,
+                       int64_t timestamp_scale) {
+  cluster.SetPreviousTimecode(timestamp, timestamp_scale);
 }
 
 #endif
