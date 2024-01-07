@@ -438,9 +438,6 @@ cluster_helper_c::render() {
       continue;
     }
 
-    if (source->contains_gap())
-      m->cluster->SetSilentTrackUsed();
-
     render_groups_c *render_group = nullptr;
     for (auto &rg : render_groups)
       if (rg->m_source == source) {
