@@ -515,6 +515,11 @@ set_global_timestamp_scale(T &elt,
 
 libebml::EbmlElement::ShouldWrite render_should_write_arg(bool with_default);
 
+using kax_cluster_timestamp_c     = libmatroska::KaxClusterTimestamp;
+using kax_reference_timestamp_c   = libmatroska::KaxReferenceTimestamp;
+using kax_timestamp_scale_c       = libmatroska::KaxTimestampScale;
+using kax_track_timestamp_scale_c = libmatroska::KaxTrackTimestampScale;
+
 #else // LIBEBML_VERSION >= 0x020000
 
 template<typename T> uint64_t
@@ -533,5 +538,10 @@ bool render_should_write_arg(bool with_default);
 namespace libebml {
 using filepos_t = ::filepos_t;
 }
+
+using kax_cluster_timestamp_c     = libmatroska::KaxClusterTimecode;
+using kax_reference_timestamp_c   = libmatroska::KaxReferenceTimecode;
+using kax_timestamp_scale_c       = libmatroska::KaxTimecodeScale;
+using kax_track_timestamp_scale_c = libmatroska::KaxTrackTimecodeScale;
 
 #endif

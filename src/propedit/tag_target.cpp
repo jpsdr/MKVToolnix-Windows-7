@@ -236,7 +236,7 @@ bool
 tag_target_c::read_segment_info_and_tracks() {
   auto tracks       = m_analyzer->read_all(EBML_INFO(libmatroska::KaxTracks));
   auto segment_info = m_analyzer->read_all(EBML_INFO(libmatroska::KaxInfo));
-  m_timestamp_scale = segment_info ? FindChildValue<libmatroska::KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
+  m_timestamp_scale = segment_info ? FindChildValue<kax_timestamp_scale_c>(*segment_info, 1000000ull) : 1000000ull;
 
   if (tracks && dynamic_cast<libmatroska::KaxTracks *>(tracks.get())) {
     for (int idx = 0, num_children = tracks->ListSize(); idx < num_children; ++idx) {
@@ -353,7 +353,7 @@ tag_target_c::account_all_clusters() {
     if (!cluster)
       break;
 
-    init_timestamp(*cluster, FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), m_timestamp_scale);
+    init_timestamp(*cluster, FindChildValue<kax_cluster_timestamp_c>(*cluster), m_timestamp_scale);
 
     account_one_cluster(*cluster);
 

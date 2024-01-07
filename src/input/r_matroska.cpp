@@ -1115,7 +1115,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   if (!found_in(*info, element_found))
     delete element_found;
 
-  m_tc_scale          = FindChildValue<libmatroska::KaxTimecodeScale, uint64_t>(info, 1000000);
+  m_tc_scale          = FindChildValue<kax_timestamp_scale_c, uint64_t>(info, 1000000);
   m_segment_duration  = std::llround(FindChildValue<libmatroska::KaxDuration>(info) * m_tc_scale);
   m_title             = to_utf8(FindChildValue<libmatroska::KaxTitle>(info));
   auto muxing_date    = FindChild<libmatroska::KaxDateUTC>(info);
@@ -2349,7 +2349,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
       if (!cluster)
         return;
 
-      auto ctc = static_cast<libmatroska::KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(libmatroska::KaxClusterTimecode), false));
+      auto ctc = static_cast<kax_cluster_timestamp_c *> (cluster->FindFirstElt(EBML_INFO(kax_cluster_timestamp_c), false));
       if (ctc)
         init_timestamp(*cluster, ctc->GetValue(), m_tc_scale);
 
@@ -2431,7 +2431,7 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     if (!cluster)
       return finish_file();
 
-    auto cluster_ts = FindChildValue<libmatroska::KaxClusterTimecode>(*cluster);
+    auto cluster_ts = FindChildValue<kax_cluster_timestamp_c>(*cluster);
     init_timestamp(*cluster, cluster_ts, m_tc_scale);
 
     size_t bgidx;
@@ -2724,7 +2724,7 @@ kax_reader_c::determine_minimum_timestamps() {
       if (!cluster)
         break;
 
-      auto cluster_ts = FindChildValue<libmatroska::KaxClusterTimecode>(*cluster);
+      auto cluster_ts = FindChildValue<kax_cluster_timestamp_c>(*cluster);
       init_timestamp(*cluster, cluster_ts, m_tc_scale);
 
       for (auto const &element : *cluster) {

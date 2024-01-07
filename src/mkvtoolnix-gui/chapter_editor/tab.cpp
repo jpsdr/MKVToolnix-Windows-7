@@ -326,7 +326,7 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
     return true;
   }
 
-  auto timestampScale = FindChildValue<libmatroska::KaxTimecodeScale, uint64_t>(static_cast<libmatroska::KaxInfo &>(*info), TIMESTAMP_SCALE);
+  auto timestampScale = FindChildValue<kax_timestamp_scale_c, uint64_t>(static_cast<libmatroska::KaxInfo &>(*info), TIMESTAMP_SCALE);
   auto duration       = timestamp_c::ns(durationKax->GetValue() * timestampScale);
 
   qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(mtx::string::format_timestamp(duration));
@@ -343,7 +343,7 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
     return true;
   }
 
-  init_timestamp(*cluster, FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), timestampScale);
+  init_timestamp(*cluster, FindChildValue<kax_cluster_timestamp_c>(*cluster), timestampScale);
 
   auto minBlockTimestamp = timestamp_c::ns(0);
 

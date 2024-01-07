@@ -518,7 +518,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   p->m_custom_element_post_processors.clear();
 
   // Simple processors:
-  add_pre(    EBML_ID(libmatroska::KaxInfo),        [p](libebml::EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<libmatroska::KaxTimecodeScale>(static_cast<libmatroska::KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
+  add_pre(    EBML_ID(libmatroska::KaxInfo),        [p](libebml::EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<kax_timestamp_scale_c>(static_cast<libmatroska::KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
   add_pre(    EBML_ID(libmatroska::KaxTracks),      [p](libebml::EbmlElement &)  -> bool { p->m_mkvmerge_track_id = 0; return true; });
   add_pre_mem(EBML_ID(libmatroska::KaxSimpleBlock), &kax_info_c::pre_simple_block);
   add_pre_mem(EBML_ID(libmatroska::KaxBlockGroup),  &kax_info_c::pre_block_group);
@@ -596,7 +596,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   add_pre(EBML_ID(libmatroska::KaxCluster), ([this, p](libebml::EbmlElement &e) -> bool {
     p->m_cluster = static_cast<libmatroska::KaxCluster *>(&e);
-    init_timestamp(*p->m_cluster, FindChildValue<libmatroska::KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
+    init_timestamp(*p->m_cluster, FindChildValue<kax_cluster_timestamp_c>(p->m_cluster), p->m_ts_scale);
 
     ui_show_progress(100 * p->m_cluster->GetElementPosition() / p->m_file_size, Y("Parsing file"));
 
@@ -682,7 +682,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   add_fmt_mem(EBML_ID(libmatroska::KaxCueRefTime),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
   add_fmt_mem(EBML_ID(libmatroska::KaxCodecDelay),       &kax_info_c::format_unsigned_integer_as_timestamp);
   add_fmt_mem(EBML_ID(libmatroska::KaxSeekPreRoll),      &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(EBML_ID(libmatroska::KaxClusterTimecode),  &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(kax_cluster_timestamp_c),          &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
   add_fmt_mem(EBML_ID(libmatroska::KaxSliceDelay),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
   add_fmt_mem(EBML_ID(libmatroska::KaxSliceDuration),    &kax_info_c::format_signed_integer_as_timestamp);
   add_fmt_mem(EBML_ID(libmatroska::KaxSimpleBlock),      &kax_info_c::format_simple_block);

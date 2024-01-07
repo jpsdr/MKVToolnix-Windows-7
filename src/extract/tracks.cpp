@@ -479,7 +479,7 @@ extract_tracks(kax_analyzer_c &analyzer,
     }
 
     auto previous_percentage = -1;
-    auto tc_scale            = FindChildValue<libmatroska::KaxTimecodeScale, uint64_t>(segment_info, 1000000);
+    auto tc_scale            = FindChildValue<kax_timestamp_scale_c, uint64_t>(segment_info, 1000000);
 
     file->set_timestamp_scale(tc_scale);
     file->set_segment_end(*l0);
@@ -489,7 +489,7 @@ extract_tracks(kax_analyzer_c &analyzer,
       if (!cluster)
         break;
 
-      auto ctc = static_cast<libmatroska::KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(libmatroska::KaxClusterTimecode), false));
+      auto ctc = static_cast<kax_cluster_timestamp_c *> (cluster->FindFirstElt(EBML_INFO(kax_cluster_timestamp_c), false));
       init_timestamp(*cluster, ctc ? ctc->GetValue() : 0, tc_scale);
 
       if (0 == verbose) {
