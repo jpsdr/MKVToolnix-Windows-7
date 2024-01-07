@@ -29,6 +29,7 @@
 #include <matroska/KaxTracks.h>
 #include <matroska/KaxVersion.h>
 
+#include "common/ebml.h"
 #include "common/kax_element_names.h"
 
 namespace mtx {
@@ -72,7 +73,7 @@ kax_element_names_c::init() {
 
   add(EBML_ID(libmatroska::KaxSegment),                      Y("Segment"));
   add(EBML_ID(libmatroska::KaxInfo),                         Y("Segment information"));
-  add(EBML_ID(libmatroska::KaxTimecodeScale),                Y("Timestamp scale"));
+  add(EBML_ID(kax_timestamp_scale_c),                        Y("Timestamp scale"));
   add(EBML_ID(libmatroska::KaxDuration),                     Y("Duration"));
   add(EBML_ID(libmatroska::KaxMuxingApp),                    Y("Multiplexing application"));
   add(EBML_ID(libmatroska::KaxWritingApp),                   Y("Writing application"));
@@ -199,7 +200,7 @@ kax_element_names_c::init() {
   add(EBML_ID(libmatroska::KaxTrackFlagForced),              Y("\"Forced display\" flag"));
   add(EBML_ID(libmatroska::KaxTrackLanguage),                Y("Language"));
   add(EBML_ID(libmatroska::KaxLanguageIETF),                 Y("Language (IETF BCP 47)"));
-  add(EBML_ID(libmatroska::KaxTrackTimecodeScale),           Y("Timestamp scale"));
+  add(EBML_ID(kax_track_timestamp_scale_c),                  Y("Timestamp scale"));
   add(EBML_ID(libmatroska::KaxMaxBlockAdditionID),           Y("Maximum block additional ID"));
   add(EBML_ID(libmatroska::KaxContentEncodings),             Y("Content encodings"));
   add(EBML_ID(libmatroska::KaxSeekPreRoll),                  Y("Seek pre-roll"));
@@ -264,7 +265,7 @@ kax_element_names_c::init() {
   add(EBML_ID(libmatroska::KaxSimpleBlock),                  Y("Simple block"));
 
   add(EBML_ID(libmatroska::KaxCluster),                      Y("Cluster"));
-  add(EBML_ID(libmatroska::KaxClusterTimecode),              Y("Cluster timestamp"));
+  add(EBML_ID(kax_cluster_timestamp_c),                      Y("Cluster timestamp"));
   add(EBML_ID(libmatroska::KaxClusterPosition),              Y("Cluster position"));
   add(EBML_ID(libmatroska::KaxClusterPrevSize),              Y("Cluster previous size"));
 

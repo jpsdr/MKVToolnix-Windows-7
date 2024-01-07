@@ -474,7 +474,7 @@ set_timestamp_scale() {
   }
 
   g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timestamp_scale, g_max_ns_per_cluster);
-  GetChild<libmatroska::KaxTimecodeScale>(*s_kax_infos).SetValue(g_timestamp_scale);
+  GetChild<kax_timestamp_scale_c>(*s_kax_infos).SetValue(g_timestamp_scale);
 
   mxdebug_if(debug, fmt::format("timestamp_scale: {0} max ns per cluster: {1}\n", g_timestamp_scale, g_max_ns_per_cluster));
 }

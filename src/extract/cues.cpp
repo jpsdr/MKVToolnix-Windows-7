@@ -104,7 +104,7 @@ find_timestamp_scale(kax_analyzer_c &analyzer) {
   auto info_m = analyzer.read_all(EBML_INFO(libmatroska::KaxInfo));
   auto info   = dynamic_cast<libmatroska::KaxInfo *>(info_m.get());
 
-  return info ? FindChildValue<libmatroska::KaxTimecodeScale>(info, 1000000ull) : 1000000ull;
+  return info ? FindChildValue<kax_timestamp_scale_c>(info, 1000000ull) : 1000000ull;
 }
 
 static std::unordered_map<int64_t, std::vector<cue_point_t> >

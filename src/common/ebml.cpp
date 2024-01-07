@@ -428,7 +428,7 @@ get_deprecated_elements_by_id() {
   s_elements[EBML_ID(libmatroska::KaxOldStereoMode).GetValue()]              = true;
   s_elements[EBML_ID(libmatroska::KaxReferenceFrame).GetValue()]             = true;
   s_elements[EBML_ID(libmatroska::KaxReferenceOffset).GetValue()]            = true;
-  s_elements[EBML_ID(libmatroska::KaxReferenceTimeCode).GetValue()]          = true;
+  s_elements[EBML_ID(kax_reference_timestamp_c).GetValue()]                  = true;
   s_elements[EBML_ID(libmatroska::KaxReferenceVirtual).GetValue()]           = true;
   s_elements[EBML_ID(libmatroska::KaxSliceBlockAddID).GetValue()]            = true;
   s_elements[EBML_ID(libmatroska::KaxSliceDelay).GetValue()]                 = true;
@@ -442,7 +442,7 @@ get_deprecated_elements_by_id() {
   s_elements[EBML_ID(libmatroska::KaxTrackMaxCache).GetValue()]              = true;
   s_elements[EBML_ID(libmatroska::KaxTrackMinCache).GetValue()]              = true;
   s_elements[EBML_ID(libmatroska::KaxTrackOffset).GetValue()]                = true;
-  s_elements[EBML_ID(libmatroska::KaxTrackTimecodeScale).GetValue()]         = true;
+  s_elements[EBML_ID(kax_track_timestamp_scale_c).GetValue()]                = true;
   s_elements[EBML_ID(libmatroska::KaxTrickMasterTrackSegmentUID).GetValue()] = true;
   s_elements[EBML_ID(libmatroska::KaxTrickMasterTrackUID).GetValue()]        = true;
   s_elements[EBML_ID(libmatroska::KaxTrickTrackFlag).GetValue()]             = true;
