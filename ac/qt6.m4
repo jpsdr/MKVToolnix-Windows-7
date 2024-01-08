@@ -270,7 +270,7 @@ check_qt6
 unset qmake_dir qt_bindir qt_libdir qt_searchpath
 
 if test $have_qt6 != yes; then
-  AC_MSG_ERROR([The Qt library version >= $qt_ver_min is required for building MKVToolNix.])
+  AC_MSG_ERROR([The Qt library version >= $qt_min_ver is required for building MKVToolNix.])
 fi
 
 if test x"$enable_gui" = xyes; then
