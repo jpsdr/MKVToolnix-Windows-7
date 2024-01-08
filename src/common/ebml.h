@@ -540,7 +540,7 @@ using filepos_t = ::filepos_t;
 }
 
 using kax_cluster_timestamp_c     = libmatroska::KaxClusterTimecode;
-using kax_reference_timestamp_c   = libmatroska::KaxReferenceTimecode;
+using kax_reference_timestamp_c   = libmatroska::KaxReferenceTimeCode;
 using kax_timestamp_scale_c       = libmatroska::KaxTimecodeScale;
 using kax_track_timestamp_scale_c = libmatroska::KaxTrackTimecodeScale;
 
