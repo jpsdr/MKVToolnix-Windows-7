@@ -2,7 +2,7 @@ dnl
 dnl Check for Qt 6
 dnl
 
-qt_min_ver=6.1.0
+qt_min_ver=6.2.0
 
 check_qt6() {
   AC_ARG_WITH(qmake6,
@@ -66,7 +66,7 @@ EOT
   old_wd="$PWD"
   cd "$qmake_dir"
 
-  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure_non_gui.pro 2>&5
+  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure_non_gui.pro 2>&5 > /dev/null
   result=$?
 
   if test $result = 0; then
@@ -77,7 +77,7 @@ EOT
     fi
   fi
 
-  for qt_module in dbus multimedia; do
+  for qt_module in dbus; do
     rm -f Makefile Makefile.Release
 
     cat > "$qmake_dir/configure.pro" <<EOT
@@ -90,7 +90,7 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-    "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5
+    "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5 > /dev/null
     result2=$?
 
     if test $result2 != 0; then
@@ -98,15 +98,13 @@ EOT
     elif test $qt_module = dbus; then
       qmake_qt_ui="$qmake_qt_ui dbus"
       AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
-    elif test $qt_module = multimedia; then
-      qmake_qt_ui="$qmake_qt_ui multimedia"
     fi
   done
 
   rm -f Makefile Makefile.Release
 
   cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $qmake_qt_ui gui widgets network concurrent svg
+QT = core $qmake_qt_ui gui widgets network concurrent svg multimedia
 QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui
@@ -115,17 +113,21 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5
+  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5 > /dev/null
   result2=$?
 
-  if test $result2 = 0; then
-    if test -f Makefile.Release; then
-      mv Makefile.Release Makefile
-    fi
-    if test -f configure_plugin_import.cpp; then
-      sed -i -e 's/Q_IMPORT_PLUGIN[(]QWindowsVistaStylePlugin[)]//' configure_plugin_import.cpp
-      cp configure_plugin_import.cpp "$old_wd/src/mkvtoolnix-gui/static_plugins.cpp"
-    fi
+  if test $result2 != 0; then
+    cd "$old_wd"
+    AC_MSG_RESULT(no: not all of the required Qt6 modules were found (needed: core gui widgets network concurrent svg multimedia))
+    return
+  fi
+
+  if test -f Makefile.Release; then
+    mv Makefile.Release Makefile
+  fi
+  if test -f configure_plugin_import.cpp; then
+    sed -i -e 's/Q_IMPORT_PLUGIN[(]QWindowsVistaStylePlugin[)]//' configure_plugin_import.cpp
+    cp configure_plugin_import.cpp "$old_wd/src/mkvtoolnix-gui/static_plugins.cpp"
   fi
 
   "$QMAKE6" -query $QMAKE_SPEC > "$qmake_dir/configure.properties" 2>&5
@@ -251,13 +253,6 @@ return 0;
     return
   fi
 
-  AC_LANG_PUSH(C++)
-  ac_save_CXXFLAGS="$CXXFLAGS"
-  CXXFLAGS="$STD_CXX $CXXFLAGS $QT_CFLAGS -fPIC"
-  AC_CHECK_HEADERS([QMediaPlayer])
-  CXXFLAGS="$ac_save_CXXFLAGS"
-  AC_LANG_POP()
-
   AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
   AC_MSG_CHECKING(for Qt 6)
   AC_MSG_RESULT(yes)
@@ -267,22 +262,27 @@ return 0;
 AC_ARG_ENABLE([gui],
   AS_HELP_STRING([--enable-gui],[compile the Qt-based GUI (yes)]),
   [],[enable_gui=yes])
-AC_ARG_ENABLE([qt6],
-  AS_HELP_STRING([--enable-qt6],[compile with Qt 6 (yes)]),
-  [],[enable_qt6=yes])
 
 have_qt6=no
 
-if test x"$enable_qt6" != "xyes"; then
-  AC_MSG_CHECKING(for Qt 6)
-  AC_MSG_RESULT(no: disabled by user request)
+check_qt6
+
+unset qmake_dir qt_bindir qt_libdir qt_searchpath
+
+if test $have_qt6 != yes; then
+  AC_MSG_ERROR([The Qt library version >= $qt_min_ver is required for building MKVToolNix.])
+fi
+
+if test x"$enable_gui" = xyes; then
+  BUILD_GUI=yes
+  opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI"
 
 else
-  check_qt6
-
-  unset qmake_dir qt_bindir qt_libdir qt_searchpath
-
-  if test $have_qt6 != yes; then
-    unset QT_CFLAGS QT_LIBS QT_LIBS_NON_GUI LCONVERT MOC RCC UIC ac_cv_path_LCONVERT ac_cv_path_MOC ac_cv_path_RCC ac_cv_path_UIC
-  fi
+  BUILD_GUI=no
+  opt_features_no="$opt_features_no\n   * MKVToolNix GUI"
 fi
+
+AC_SUBST(QT_CFLAGS)
+AC_SUBST(QT_LIBS)
+AC_SUBST(QT_LIBS_NON_GUI)
+AC_SUBST(BUILD_GUI)
