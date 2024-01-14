@@ -26,7 +26,9 @@
 #include <QRegularExpression>
 
 #include <ebml/EbmlHead.h>
-#include <ebml/EbmlSubHead.h>
+#if LIBEBML_VERSION < 0x020000
+# include <ebml/EbmlSubHead.h>
+#endif
 #include <ebml/EbmlVersion.h>
 #include <ebml/EbmlVoid.h>
 

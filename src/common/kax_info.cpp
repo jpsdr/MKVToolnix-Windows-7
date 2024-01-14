@@ -22,7 +22,6 @@
 
 #include <ebml/EbmlDummy.h>
 #include <ebml/EbmlHead.h>
-#include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlStream.h>
 #include <ebml/EbmlVoid.h>
 #include <ebml/EbmlCrc32.h>
