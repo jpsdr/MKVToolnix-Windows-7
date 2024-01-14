@@ -16,7 +16,9 @@
 #include <algorithm>
 
 #include <ebml/EbmlStream.h>
-#include <ebml/EbmlSubHead.h>
+#if LIBEBML_VERSION < 0x020000
+# include <ebml/EbmlSubHead.h>
+#endif
 #include <ebml/EbmlVoid.h>
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxCues.h>
