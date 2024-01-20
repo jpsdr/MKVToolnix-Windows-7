@@ -457,6 +457,8 @@ end
 # man pages from DocBook XML
 rule '.1' => '.xml' do |t|
   filter = lambda do |code, lines|
+    lines.reject! { |line| /^No localization exists for.*Using default/i.match(line) }
+
     if (0 == code) && lines.any? { |line| /^error|parser error/i.match(line) }
       File.unlink(t.name) if FileTest.exist?(t.name)
       result = 1
