@@ -243,3 +243,37 @@ def transifex_remove_fuzzy_and_push resource, language
 
   runq_git po_file, "checkout HEAD -- #{po_file}"
 end
+
+def create_new_po dir
+  %w{LANGUAGE EMAIL}.each { |e| fail "Variable '#{e}' is not set" if ENV[e].blank? }
+
+  language = ENV['LANGUAGE']
+  locale   = look_up_iso_639_1 language
+
+  puts_action "create", :target => "#{dir}/#{locale}.po"
+  File.open "#{dir}/#{locale}.po", "w" do |out|
+    now      = Time.now
+    email    = ENV['EMAIL']
+    email    = "YOUR NAME <#{email}>" unless /</.match(email)
+    header   = <<EOT
+# translation of mkvtoolnix.pot to #{language}
+# Copyright (C) #{now.year} Moritz Bunkus
+# This file is distributed under the same license as the MKVToolNix package.
+#
+msgid ""
+EOT
+
+    content = IO.
+      readlines("#{dir}/mkvtoolnix.pot").
+      join("").
+      gsub(/\A.*?msgid ""\n/m, header).
+      gsub(/^"PO-Revision-Date:.*?$/m, %{"PO-Revision-Date: #{now.strftime('%Y-%m-%d %H:%M%z')}\\n"}).
+      gsub(/^"Last-Translator:.*?$/m,  %{"Last-Translator: #{email}\\n"}).
+      gsub(/^"Language-Team:.*?$/m,    %{"Language-Team: #{language} <moritz@bunkus.org>\\n"}).
+      gsub(/^"Language: \\n"$/,        %{"Language: #{locale}\\n"})
+
+    out.puts content
+  end
+
+  puts "Remember to look up the plural forms in this document:\nhttp://docs.translatehouse.org/projects/localization-guide/en/latest/l10n/pluralforms.html"
+end

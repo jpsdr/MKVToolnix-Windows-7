@@ -194,3 +194,16 @@ EOT
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 end
+
+def look_up_iso_639_1 language
+  require 'rexml/document'
+
+  iso639_file = "/usr/share/xml/iso-codes/iso_639.xml"
+  node        = REXML::XPath.first REXML::Document.new(File.new(iso639_file)), "//iso_639_entry[@name='#{language}']"
+  locale      = node ? node.attributes['iso_639_1_code'] : nil
+
+  return locale   if !locale.blank?
+  return language if /^ [a-z]{2} (?: _ [A-Z]{2} )? $/x.match(language)
+
+  fail "Unknown language/ISO-639-1 code not found in #{iso639_file}"
+end
