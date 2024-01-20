@@ -1,4 +1,6 @@
-# File system layout #
+# MKVToolNix development
+
+## File system layout
 
 There's no dedicated include directory. Each include file is located
 in the same directory its accompanying cpp file is located in as well.
@@ -31,17 +33,17 @@ Directories in alphabetical order:
 * `tests`: Test suite (requires external data package not distributed
   freely)
 
-# Strings & encoding #
+## Strings & encoding
 
 Internally all strings are encoded in UTF-8. Strings must be re-coded
 during input/output.
 
-# Timestamps #
+## Timestamps
 
 All timestamps and durations are stored as `int64_t` variables with
 nanosecond precision.
 
-# Outputting messages to the user #
+## Outputting messages to the user
 
 There are basically four functions that output stuff: `mxinfo()`,
 `mxverb()`, `mxwarn()` and `mxerror()`. Each takes a
@@ -72,16 +74,16 @@ level 1. Therefore `mxverb(1, ...)` is equivalent to
 with `mxverb()` should not be translatable, meaning you shouldn't use
 the `_()` macro.
 
-# Classes #
+## Classes
 
-## General ##
+### General
 
 Most classes are nameed `*_c`, and the corresponding counted pointer
 implementation is called `*_cptr`. A counted pointer is a reference
 counter implementation that automatically deletes its instance once
 the counter reaches zero.
 
-## `memory_c` (from `common/memory.h`) ##
+### `memory_c` (from `common/memory.h`)
 
 Stores a pointer to a buffer and its size. Can free the memory if the
 buffer has been malloced.
@@ -95,13 +97,13 @@ Copying/reading something into it:
     memcpy(mem->get_buffer(), source_pointer, mem->get_size());
     file->read(mem, 20);
 
-## `mm_io_c` (from `common/mm_io.h`) ##
+### `mm_io_c` (from `common/mm_io.h`)
 
 Base class for input/output. Several derived classes implement access
 to binary files (`mm_file_io_c`), text files (`mm_text_io_c`,
 including BOM handling), memory buffers (`mm_mem_io_c`) etc.
 
-## `mm_file_io_c` (from `common/mm_io.h`) ##
+### `mm_file_io_c` (from `common/mm_io.h`)
 
 File input/output class. Opening a file for reading and retrieving its
 size:
@@ -120,7 +122,7 @@ Reading:
 
     size_t num_read = file->read(some_buffer, 12345);
 
-## `track_info_c` (from `src/merge/pr_generic.h`) ##
+### `track_info_c` (from `src/merge/pr_generic.h`)
 
 A file and track information storage class. It is created by the
 command line parser with the source file name and all the command line
@@ -131,7 +133,7 @@ The instance is then passed to the reader which stores a copy in the
 it creates which in turn stores its own copy (again in the `m_ti`
 variable).
 
-# Readers #
+## Readers
 
 A reader is a class that demuxes a certain file type. It has to parse
 the file content, create one packetizer for each track, report the
@@ -141,7 +143,7 @@ progress etc. Each reader class is derived from `generic_reader_c`
 An example for a rather minimal implementation is the MP3 reader in
 `src/input/r_mp3.h`.
 
-## Constructor & virtual destructor ##
+### Constructor & virtual destructor
 
 The constructor usually only takes a `track_info_c` argument.  A
 virtual destructor must be present, even if it is empty. Otherwise
@@ -151,7 +153,7 @@ The constructor must open the file and parse all its headers so that
 all track information has been processed. This will most likely be
 split up into a separate function in the future.
 
-## `read(generic_packetizer_c *ptzr, bool force = false)` ##
+### `read(generic_packetizer_c *ptzr, bool force = false)`
 
 Requests that the reader reads data for a specific track. mkvmerge
 uses a pulling model: the core asks each packetizer to provide
@@ -173,7 +175,7 @@ Each data packet is stored in an instance of `packet_c`. If the source
 container provides a timestamp then that timestamp should be set in the
 packet as well.
 
-## `create_packetizer(int64_t track_id)` ##
+### `create_packetizer(int64_t track_id)`
 
 Has to create a packetizer for the track with the specific ID. This ID
 is the same number that the user uses on the command line as well as
@@ -202,12 +204,12 @@ completely by the reader. This often requires that the reader
 processes at least a few packets. For a rather complex case see the
 MPEG PS reader's handling of h264 tracks.
 
-## `get_progress()` ##
+### `get_progress()`
 
 Returns the demuxing progress, a value between 0 and 100. Usually
 based on the number of bytes processed.
 
-## `identify()` ##
+### `identify()`
 
 File identification. Has to call `id_result_container()`
 once for the container type.
@@ -219,7 +221,7 @@ Both the container and the track identification can contain extended
 information. For an extensive example see the Matroska reader's
 identification function in `src/input/r_matroska.cpp`.
 
-# Translations #
+## Translations
 
 These are general hints for anyone wishing to translate
 MKVToolNix.
@@ -295,7 +297,7 @@ Once you have shown that you are comfortable with translating you can
 also get write access to the project's Git repository and push updates
 there yourself.
 
-# Adding new translations #
+## Adding new translations
 
 ### Programs
 
