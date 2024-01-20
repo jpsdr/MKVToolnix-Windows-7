@@ -519,7 +519,7 @@ end
 
 file "doc/development.html" => [ "doc/development.md", "doc/pandoc-template.html" ] do |t|
   runq "pandoc", t.prerequisites.first, <<COMMAND
-    #{c(:PANDOC)} -o #{t.name} --standalone --from markdown_strict --to html --number-sections --table-of-contents --css=pandoc.css --template=doc/pandoc-template.html doc/development.md
+    #{c(:PANDOC)} -o #{t.name} --standalone --from markdown_strict --to html --number-sections --table-of-contents --css=pandoc.css --template=doc/pandoc-template.html --metadata title='MKVToolNix development' doc/development.md
 COMMAND
 end
 
