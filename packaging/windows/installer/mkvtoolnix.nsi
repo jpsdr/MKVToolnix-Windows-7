@@ -85,6 +85,7 @@ Page custom showExternalLinks
 # language isn't supported.
 !insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "Basque"
+!insertmacro LANG_LOAD "Belarusian"
 !insertmacro LANG_LOAD "Bulgarian"
 !insertmacro LANG_LOAD "Catalan"
 !insertmacro LANG_LOAD "Czech"

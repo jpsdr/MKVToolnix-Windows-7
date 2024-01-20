@@ -73,7 +73,7 @@ translation_c::initialize_available_translations() {
 #if defined(HAVE_LIBINTL_H)
 //ms_available_translations.emplace_back("are", "ar_AE",       "ar",          "arabic",     "Arabic",               "اَلْعَرَبِيَّةُ",             false, 0x0001, 0x0e);
   ms_available_translations.emplace_back("baq", "eu_ES",       "eu",          "basque",     "Basque",               "Euskara",             false, 0x002d, 0x00);
-//ms_available_translations.emplace_back("bel", "be_BY",       "be",          "belarusian", "Belarusian",           "беларуская",          false, 0x0023, 0x00);
+  ms_available_translations.emplace_back("bel", "be_BY",       "be",          "belarusian", "Belarusian",           "беларуская",          false, 0x0023, 0x00);
   ms_available_translations.emplace_back("bul", "bg_BG",       "bg",          "bulgarian",  "Bulgarian",            "Български",           false, 0x0002, 0x01);
   ms_available_translations.emplace_back("cat", "ca_ES",       "ca",          "catalan",    "Catalan",              "Català",              false, 0x0003, 0x00);
   ms_available_translations.emplace_back("chi", "zh_CN",       "zh_CN",       "chinese",    "Chinese (Simplified)",      "中文 (简体)",            true,  0x0004, 0x02);

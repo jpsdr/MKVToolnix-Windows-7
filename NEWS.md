@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* translations: added a Belarusian translation of the programs & the man pages
+  by prydespar (see `AUTHORS`).
+
+
 # Version 82.0 "I'm The President" 2024-01-02
 
 ## New features and enhancements
