@@ -546,48 +546,16 @@ namespace :translations do
   desc "Create a template for translating the programs"
   task :pot => "po/mkvtoolnix.pot"
 
-  desc "Create a new .po file with an empty template"
-  task "new-po" => "po/mkvtoolnix.pot" do
-    %w{LANGUAGE EMAIL}.each { |e| fail "Variable '#{e}' is not set" if ENV[e].blank? }
 
-    require 'rexml/document'
-    iso639_file = "/usr/share/xml/iso-codes/iso_639.xml"
-    node        = REXML::XPath.first REXML::Document.new(File.new(iso639_file)), "//iso_639_entry[@name='#{ENV['LANGUAGE']}']"
-    locale      = node ? node.attributes['iso_639_1_code'] : nil
-    if locale.blank?
-      if /^ [a-z]{2} (?: _ [A-Z]{2} )? $/x.match(ENV['LANGUAGE'])
-        locale = ENV['LANGUAGE']
-      else
-        fail "Unknown language/ISO-639-1 code not found in #{iso639_file}"
-      end
-    end
 
-    puts_action "create", :target => "po/#{locale}.po"
-    File.open "po/#{locale}.po", "w" do |out|
-      now           = Time.now
-      email         = ENV['EMAIL']
-      email         = "YOUR NAME <#{email}>" unless /</.match(email)
-      header        = <<EOT
-# translation of mkvtoolnix.pot to #{ENV['LANGUAGE']}
-# Copyright (C) #{now.year} Moritz Bunkus
-# This file is distributed under the same license as the MKVToolNix package.
-#
-msgid ""
-EOT
+  desc "Create a new .po file for the programs with an empty template"
+  task "new-programs-po" => "po/mkvtoolnix.pot" do
+    create_new_po "po"
+  end
 
-      content = IO.
-        readlines("po/mkvtoolnix.pot").
-        join("").
-        gsub(/\A.*?msgid ""\n/m, header).
-        gsub(/^"PO-Revision-Date:.*?$/m, %{"PO-Revision-Date: #{now.strftime('%Y-%m-%d %H:%M%z')}\\n"}).
-        gsub(/^"Last-Translator:.*?$/m,  %{"Last-Translator: #{email}\\n"}).
-        gsub(/^"Language-Team:.*?$/m,    %{"Language-Team: #{ENV['LANGUAGE']} <moritz@bunkus.org>\\n"}).
-        gsub(/^"Language: \\n"$/,        %{"Language: #{locale}\\n"})
-
-      out.puts content
-    end
-
-    puts "Remember to look up the plural forms in this document:\nhttp://docs.translatehouse.org/projects/localization-guide/en/latest/l10n/pluralforms.html"
+  desc "Create a new .po file for the man pages with an empty template"
+  task "new-man-po" => "doc/man/po4a/po/mkvtoolnix.pot" do
+    create_new_po "doc/man/po4a/po"
   end
 
   def verify_format_strings languages
