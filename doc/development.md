@@ -297,16 +297,32 @@ there yourself.
 
 # Adding new translations #
 
-This is a TODO list for adding a new translation (a .po file) to MKVToolNix:
+### Programs
 
+This is a TODO list for adding a new translation for the programs
+MKVToolNix:
+
+* Run `rake translations:new-programs-po LANGUAGE=<English name of
+  language> EMAIL=<email address>`
 * Add new entry to `translation_c::initialize_available_translations()`
   in `src/common/translation.cpp`
-* Copy `.po` file to `po/` sub-directory
-* Add entry in `packaging/centos-fedora-opensuse/mkvtoolnix.spec`
-* Add installation and removal entries in `packaging/windows/installer/mkvtoolnix.nsi`
 * Add new language file to `packaging/windows/installer/translations/`
 * Include translation's author in `AUTHORS`
 * Include message in `NEWS.md`
 * Either re-run `configure` or add the new translation in `build-config`
   to `TRANSLATIONS`; afterwards verify the format strings with `rake
   translations:verify-format-strings`
+* Add new test case `ui_locale_<code>_<CODE>`
+
+### man pages
+
+This is a TODO list for adding a new translation of the man pages to
+MKVToolNix:
+
+* Run `rake translations:new-programs-po LANGUAGE=<English name of
+  language> EMAIL=<email address>`
+* Include translation's author in `AUTHORS`
+* Include message in `NEWS.md`
+* Either re-run `configure` or add the new translation in
+  `build-config` to `MANPAGES_TRANSLATIONS`; afterwards verify the
+  format strings with `rake translations:verify-format-strings`
