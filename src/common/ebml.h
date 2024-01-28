@@ -416,6 +416,7 @@ bool remove_master_from_parent_if_empty_or_only_defaults(libebml::EbmlMaster *pa
 void remove_ietf_language_elements(libebml::EbmlMaster &master);
 void remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master);
 void remove_dummy_elements(libebml::EbmlMaster &master);
+void remove_deprecated_elements(libebml::EbmlMaster &master);
 void remove_unrenderable_elements(libebml::EbmlMaster &master, bool with_default);
 
 libebml::EbmlId create_ebml_id_from(libebml::EbmlBinary const &b);

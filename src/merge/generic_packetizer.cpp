@@ -1056,6 +1056,7 @@ generic_packetizer_c::set_headers() {
     m_track_entry    = !g_kax_last_entry ? &GetChild<libmatroska::KaxTrackEntry>(*g_kax_tracks) : &libebml::GetNextChild<libmatroska::KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
     g_kax_last_entry = m_track_entry;
     set_global_timestamp_scale(*m_track_entry, g_timestamp_scale);
+    remove_deprecated_elements(*m_track_entry);
   }
 
   if (!m_hserialno && !m_reader->m_appending) {

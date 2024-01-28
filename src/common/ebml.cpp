@@ -797,8 +797,20 @@ remove_dummy_elements(libebml::EbmlMaster &master) {
 }
 
 void
+remove_deprecated_elements(libebml::EbmlMaster &master) {
+  auto const &deprecated_ids = get_deprecated_elements_by_id();
+  auto const &end            = deprecated_ids.end();
+
+  remove_elements_recursively_if(master, [&deprecated_ids, &end](auto &child) {
+    return deprecated_ids.find(get_ebml_id(child).GetValue()) != end;
+  });
+}
+
+void
 remove_unrenderable_elements(libebml::EbmlMaster &master,
                              bool with_default) {
+  remove_deprecated_elements(master);
+
   remove_elements_recursively_if(master, [with_default](auto &child) {
     auto renderable = child.ValueIsSet() || (with_default && has_default_value(child));
     return !renderable;
