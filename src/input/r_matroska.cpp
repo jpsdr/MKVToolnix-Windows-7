@@ -1505,7 +1505,10 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
       if (!k_id)
         continue;
 
-      libebml::EbmlId id(k_id->GetBuffer(), k_id->GetSize());
+      if (k_id->GetSize() > 4)
+        continue;
+
+      auto id = create_ebml_id_from(*k_id);
 
       deferred_l1_type_e type = Is<libmatroska::KaxAttachments>(id) ? dl1t_attachments
         :                       Is<libmatroska::KaxChapters>(id)    ? dl1t_chapters

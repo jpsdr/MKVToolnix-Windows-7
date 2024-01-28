@@ -14,6 +14,9 @@
 
 #include "common/common_pch.h"
 
+#include <ebml/EbmlId.h>
+
+#include "common/ebml.h"
 #include "common/vint.h"
 
 vint_c::vint_c()
@@ -114,7 +117,8 @@ vint_c::read_ebml_id(mm_io_cptr const &in) {
   return read(*in, rm_ebml_id);
 }
 
-vint_c::operator libebml::EbmlId()
+libebml::EbmlId
+vint_c::to_ebml_id()
   const {
-  return { static_cast<uint32_t>(m_value), static_cast<unsigned int>(m_coded_size) };
+  return create_ebml_id_from(m_value, m_coded_size);
 }

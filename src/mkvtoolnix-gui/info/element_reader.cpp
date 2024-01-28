@@ -33,7 +33,7 @@ ElementReader::run() {
   try {
     m_in.setFilePointer(m_element.GetElementPosition());
 
-    auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(m_element));
+    auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), get_ebml_id(m_element));
     if (!callbacks)
       callbacks = &EBML_CLASS_CALLBACK(libmatroska::KaxSegment);
 

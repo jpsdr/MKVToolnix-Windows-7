@@ -37,7 +37,7 @@ public:
   bool is_unknown();
   bool is_valid();
 
-  operator libebml::EbmlId() const;
+  libebml::EbmlId to_ebml_id() const;
 
 public:                         // static functions
   static vint_c read(mm_io_c &in, read_mode_e read_mode = rm_normal);

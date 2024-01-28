@@ -23,12 +23,8 @@ public:
   kax_element_names_c() = delete;
 
   static std::string get(uint32_t id);
-  static std::string get(libebml::EbmlId const &id) {
-    return get(id.GetValue());
-  }
-  static std::string get(libebml::EbmlElement const &elt) {
-    return get(libebml::EbmlId(elt).GetValue());
-  }
+  static std::string get(libebml::EbmlId const &id);
+  static std::string get(libebml::EbmlElement const &elt);
 
   static void init();
   static void reset();

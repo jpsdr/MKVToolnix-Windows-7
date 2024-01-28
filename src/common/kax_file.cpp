@@ -108,7 +108,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
 
       // If a specific level 1 is wanted, make sure it was actually
       // read. Otherwise try again.
-      if (!wanted_id || (wanted_id == libebml::EbmlId(*l1).GetValue()))
+      if (!wanted_id || (wanted_id == get_ebml_id(*l1).GetValue()))
         return l1;
       return read_next_level1_element(wanted_id);
     }
@@ -151,7 +151,7 @@ kax_file_c::read_one_element() {
   if (!l1)
     return {};
 
-  auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(*l1));
+  auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), get_ebml_id(*l1));
   if (!callbacks)
     callbacks = &EBML_CLASS_CALLBACK(libmatroska::KaxSegment);
 

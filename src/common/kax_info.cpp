@@ -307,7 +307,7 @@ std::string
 kax_info_c::format_element_value(libebml::EbmlElement &e) {
   auto p = p_func();
 
-  auto formatter = p->m_custom_element_value_formatters.find(libebml::EbmlId(e).GetValue());
+  auto formatter = p->m_custom_element_value_formatters.find(get_ebml_id(e).GetValue());
 
   return (formatter == p->m_custom_element_value_formatters.end()) || dynamic_cast<libebml::EbmlDummy *>(&e) ? format_element_value_default(e) : formatter->second(e);
 }
@@ -694,7 +694,10 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   // More complex formatters:
   add_fmt(EBML_ID(libmatroska::KaxSeekID), [](libebml::EbmlElement &e) -> std::string {
     auto &seek_id = static_cast<libmatroska::KaxSeekID &>(e);
-    libebml::EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
+    if (seek_id.GetSize() > 4)
+      return fmt::format("{0}", mtx::string::to_hex(seek_id));
+
+    auto id = create_ebml_id_from(seek_id);
 
     return fmt::format("{0} ({1})",
                        mtx::string::to_hex(seek_id),
@@ -1161,7 +1164,7 @@ kax_info_c::run_generic_pre_processors(libebml::EbmlElement &e) {
   if (is_dummy)
     return true;
 
-  auto pre_processor = p->m_custom_element_pre_processors.find(libebml::EbmlId(e).GetValue());
+  auto pre_processor = p->m_custom_element_pre_processors.find(get_ebml_id(e).GetValue());
   if (pre_processor != p->m_custom_element_pre_processors.end())
     if (!pre_processor->second(e))
       return false;
@@ -1177,7 +1180,7 @@ kax_info_c::run_generic_post_processors(libebml::EbmlElement &e) {
   if (is_dummy)
     return;
 
-  auto post_processor = p->m_custom_element_post_processors.find(libebml::EbmlId(e).GetValue());
+  auto post_processor = p->m_custom_element_post_processors.find(get_ebml_id(e).GetValue());
   if (post_processor != p->m_custom_element_post_processors.end())
     post_processor->second(e);
 }
