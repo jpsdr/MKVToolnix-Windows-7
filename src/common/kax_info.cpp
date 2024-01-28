@@ -225,7 +225,7 @@ kax_info_c::show_element(libebml::EbmlElement *l,
                          size               ? *size
                        : !l                 ? std::optional<int64_t>{}
                        : !l->IsFiniteSize() ? -2
-                       :                      static_cast<int64_t>(l->GetSizeLength() + EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(*l)) + l->GetSize()),
+                       :                      static_cast<int64_t>(l->GetSizeLength() + get_ebml_id(*l).GetLength() + l->GetSize()),
                          !l                 ? std::optional<int64_t>{}
                        : !l->IsFiniteSize() ? std::optional<int64_t>{}
                        :                      l->GetSize());

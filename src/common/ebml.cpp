@@ -615,7 +615,7 @@ int
 write_ebml_element_head(mm_io_c &out,
                         libebml::EbmlId const &id,
                         int64_t content_size) {
-  int id_size    = EBML_ID_LENGTH(id);
+  int id_size    = id.GetLength();
   int coded_size = libebml::CodedSizeLength(content_size, 0);
   uint8_t buffer[4 + 8];
 

@@ -52,9 +52,6 @@ libebml::EbmlId get_ebml_id(libebml::EbmlElement const &e);
 #if !defined(EBML_ID)
 #define EBML_ID(ref)  ref::ClassInfos.GlobalId
 #endif
-#if !defined(EBML_ID_LENGTH)
-#define EBML_ID_LENGTH(id)  id.Length
-#endif
 #if !defined(EBML_CLASS_CONTEXT)
 #define EBML_CLASS_CONTEXT(ref) ref::ClassInfos.Context
 #endif

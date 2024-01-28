@@ -256,21 +256,21 @@ cues_c::calculate_bytes_for_uint(uint64_t value)
 uint64_t
 cues_c::calculate_point_size(cue_point_t const &point)
   const {
-  uint64_t point_size = EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCuePoint))           + 1
-                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCuePoint))           + 1 + calculate_bytes_for_uint(point.timestamp / g_timestamp_scale)
-                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueTrackPositions))  + 1
-                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueTrack))           + 1 + calculate_bytes_for_uint(point.track_num)
-                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueClusterPosition)) + 1 + calculate_bytes_for_uint(point.cluster_position);
+  uint64_t point_size = EBML_ID(libmatroska::KaxCuePoint).GetLength()           + 1
+                      + EBML_ID(libmatroska::KaxCuePoint).GetLength()           + 1 + calculate_bytes_for_uint(point.timestamp / g_timestamp_scale)
+                      + EBML_ID(libmatroska::KaxCueTrackPositions).GetLength()  + 1
+                      + EBML_ID(libmatroska::KaxCueTrack).GetLength()           + 1 + calculate_bytes_for_uint(point.track_num)
+                      + EBML_ID(libmatroska::KaxCueClusterPosition).GetLength() + 1 + calculate_bytes_for_uint(point.cluster_position);
 
   auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
   if (codec_state_position != m_codec_state_position_map.end())
-    point_size += EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueCodecState)) + 1 + calculate_bytes_for_uint(codec_state_position->second);
+    point_size += EBML_ID(libmatroska::KaxCueCodecState).GetLength() + 1 + calculate_bytes_for_uint(codec_state_position->second);
 
   if (point.relative_position)
-    point_size += EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueRelativePosition)) + 1 + calculate_bytes_for_uint(point.relative_position);
+    point_size += EBML_ID(libmatroska::KaxCueRelativePosition).GetLength() + 1 + calculate_bytes_for_uint(point.relative_position);
 
   if (point.duration)
-    point_size += EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueDuration)) + 1 + calculate_bytes_for_uint(round_timestamp_scale(point.duration) / g_timestamp_scale);
+    point_size += EBML_ID(libmatroska::KaxCueDuration).GetLength() + 1 + calculate_bytes_for_uint(round_timestamp_scale(point.duration) / g_timestamp_scale);
 
   return point_size;
 }

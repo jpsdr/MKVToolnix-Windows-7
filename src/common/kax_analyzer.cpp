@@ -79,7 +79,7 @@ kax_analyzer_data_c::to_string() const {
     name = EBML_INFO_NAME(*callbacks);
 
   else
-    name = fmt::format("0x{0:0{1}x}", m_id.GetValue(), EBML_ID_LENGTH(m_id) * 2);
+    name = fmt::format("0x{0:0{1}x}", m_id.GetValue(), m_id.GetLength() * 2);
 
   return fmt::format("{0} size {1}{3} at {2}", name, m_size, m_pos, m_size_known ? "" : " (unknown)");
 }
@@ -712,7 +712,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     auto new_pos = m_data[data_idx + 1]->m_pos + (move_up ? -1 : 1);
 
     uint8_t head[4 + 8];         // Class D + 64 bits coded size
-    unsigned int head_size = EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(*e));
+    unsigned int head_size = get_ebml_id(*e).GetLength();
     get_ebml_id(*e).Fill(head);
 
     int coded_size = libebml::CodedSizeLength(e->GetSize(), move_up ? e->GetSizeLength() + 1 : 7, true);

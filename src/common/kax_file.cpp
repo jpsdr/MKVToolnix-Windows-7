@@ -315,9 +315,9 @@ kax_file_c::get_element_size(libebml::EbmlElement &e) {
   auto m = dynamic_cast<libebml::EbmlMaster *>(&e);
 
   if (!m || e.IsFiniteSize())
-    return e.GetSizeLength() + EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(e)) + e.GetSize();
+    return e.GetSizeLength() + static_cast<const libebml::EbmlId &>(e).GetLength() + e.GetSize();
 
-  auto max_end_pos = e.GetElementPosition() + EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(e));
+  auto max_end_pos = e.GetElementPosition() + get_ebml_id(e).GetLength();
   for (int idx = 0, end = m->ListSize(); end > idx; ++idx)
     max_end_pos = std::max(max_end_pos, (*m)[idx]->GetElementPosition() + get_element_size(*(*m)[idx]));
 
