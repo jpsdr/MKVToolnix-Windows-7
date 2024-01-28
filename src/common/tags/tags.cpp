@@ -320,7 +320,7 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
   while (idx < master.ListSize()) {
     auto e = master[idx];
 
-    if (e && s_supported_elements[ EBML_ID_VALUE(libebml::EbmlId(*e)) ] && !(is_simple && Is<libmatroska::KaxTagSimple>(e))) {
+    if (e && s_supported_elements[ EBML_ID_VALUE(get_ebml_id(*e)) ] && !(is_simple && Is<libmatroska::KaxTagSimple>(e))) {
       ++idx;
 
       auto sub_master = dynamic_cast<libebml::EbmlMaster *>(e);

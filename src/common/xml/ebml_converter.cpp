@@ -442,27 +442,25 @@ ebml_converter_c::verify_and_create_element(libebml::EbmlMaster &parent,
 
   auto debug_name = get_debug_name(name);
   auto &context   = EBML_CONTEXT(static_cast<libebml::EbmlElement *>(&parent));
-  bool found      = false;
-  libebml::EbmlId id(static_cast<uint32_t>(0), 0);
+  std::optional<libebml::EbmlId> id;
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (debug_name == libebml::EbmlCallbacks(EBML_CTX_IDX_INFO(context, i)).GetName()) {
-      found = true;
-      id    = EBML_CTX_IDX_ID(context, i);
+      id = EBML_CTX_IDX_ID(context, i);
       break;
     }
 
-  if (!found)
+  if (!id)
     throw invalid_child_node_x{ name, get_tag_name(parent), node.offset_debug() };
 
-  auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), id);
+  auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), *id);
   if (semantic && semantic->IsUnique())
     for (auto child : parent)
-      if (libebml::EbmlId(*child) == id)
+      if (get_ebml_id(*child) == *id)
         throw duplicate_child_node_x{ name, get_tag_name(parent), node.offset_debug() };
 
-  return create_ebml_element(EBML_INFO(libmatroska::KaxSegment), id);
+  return create_ebml_element(EBML_INFO(libmatroska::KaxSegment), *id);
 }
 
 void

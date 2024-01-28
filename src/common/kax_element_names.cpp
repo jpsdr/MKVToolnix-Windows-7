@@ -48,6 +48,16 @@ kax_element_names_c::get(uint32_t id) {
   return {};
 }
 
+std::string
+kax_element_names_c::get(libebml::EbmlId const &id) {
+  return get(id.GetValue());
+}
+
+std::string
+kax_element_names_c::get(libebml::EbmlElement const &elt) {
+  return get(get_ebml_id(elt).GetValue());
+}
+
 void
 kax_element_names_c::reset() {
   ms_names.clear();

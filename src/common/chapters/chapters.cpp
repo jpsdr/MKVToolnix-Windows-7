@@ -615,7 +615,7 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
   while (idx < master.ListSize()) {
     auto e = master[idx];
 
-    if (e && s_supported_elements[ EBML_ID_VALUE(libebml::EbmlId(*e)) ]) {
+    if (e && s_supported_elements[ EBML_ID_VALUE(get_ebml_id(*e)) ]) {
       auto sub_master = dynamic_cast<libebml::EbmlMaster *>(e);
       if (sub_master)
         remove_elements_unsupported_by_webm(*sub_master);
@@ -625,7 +625,7 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
       continue;
     }
 
-    if (e && s_readd_with_defaults[ EBML_ID_VALUE(libebml::EbmlId(*e)) ]) {
+    if (e && s_readd_with_defaults[ EBML_ID_VALUE(get_ebml_id(*e)) ]) {
       auto new_with_defaults = &(e->CreateElement());
       delete e;
       master.GetElementList()[idx] = new_with_defaults;

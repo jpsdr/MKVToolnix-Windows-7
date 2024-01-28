@@ -89,11 +89,11 @@ write_changes(options_cptr &options,
 
       libebml::EbmlMaster &l1_element = *target->get_level1_element();
 
-      if (id_to_write != libebml::EbmlId(l1_element))
+      if (id_to_write != get_ebml_id(l1_element))
         continue;
 
       auto result = l1_element.ListSize() ? analyzer->update_element(&l1_element, target->write_elements_set_to_default_value(), target->add_mandatory_elements_if_missing())
-                  :                         analyzer->remove_elements(libebml::EbmlId(l1_element));
+                  :                         analyzer->remove_elements(get_ebml_id(l1_element));
       if (kax_analyzer_c::uer_success != result)
         display_update_element_result(EBML_NAME(&l1_element), result);
 

@@ -14,6 +14,7 @@
 #pragma once
 
 #include "common/common_pch.h"
+#include "ebml/EbmlId.h"
 
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlUnicodeString.h>
@@ -43,6 +44,7 @@ int kt_get_v_pixel_width(libmatroska::KaxTrackEntry &track);
 int kt_get_v_pixel_height(libmatroska::KaxTrackEntry &track);
 
 int write_ebml_element_head(mm_io_c &out, libebml::EbmlId const &id, int64_t content_size);
+libebml::EbmlId get_ebml_id(libebml::EbmlElement const &e);
 
 #if !defined(EBML_INFO)
 #define EBML_INFO(ref)  ref::ClassInfos
@@ -117,7 +119,7 @@ Is(libebml::EbmlId const &id) {
 template<typename T>
 bool
 Is(libebml::EbmlElement *e) {
-  return !e ? false : (libebml::EbmlId(*e) == EBML_ID(T));
+  return !e ? false : (get_ebml_id(*e) == EBML_ID(T));
 }
 
 template<typename T1, typename T2, typename... Trest>
@@ -129,7 +131,7 @@ Is(libebml::EbmlElement *e) {
 template<typename T>
 bool
 Is(libebml::EbmlElement const &e) {
-  return libebml::EbmlId(e) == EBML_ID(T);
+  return get_ebml_id(e) == EBML_ID(T);
 }
 
 template<typename T1, typename T2, typename... Trest>
@@ -421,6 +423,9 @@ void remove_ietf_language_elements(libebml::EbmlMaster &master);
 void remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master);
 void remove_dummy_elements(libebml::EbmlMaster &master);
 void remove_unrenderable_elements(libebml::EbmlMaster &master, bool with_default);
+
+libebml::EbmlId create_ebml_id_from(libebml::EbmlBinary const &b);
+libebml::EbmlId create_ebml_id_from(uint32_t value, std::size_t length);
 
 const libebml::EbmlCallbacks *find_ebml_callbacks(const libebml::EbmlCallbacks &base, const libebml::EbmlId &id);
 const libebml::EbmlCallbacks *find_ebml_callbacks(const libebml::EbmlCallbacks &base, const char *debug_name);

@@ -29,6 +29,7 @@
 
 #include "common/date_time.h"
 #include "common/ebml.h"
+#include "common/endian.h"
 #include "common/memory.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
@@ -80,7 +81,7 @@ create_ebml_element(const libebml::EbmlCallbacks &callbacks,
   const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(callbacks);
   size_t i;
 
-//   if (id == libebml::EbmlId(*parent))
+//   if (id == get_ebml_id(*parent))
 //     return empty_ebml_master(&parent->Generic().Create());
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
@@ -368,7 +369,7 @@ libebml::EbmlElement *
 find_ebml_element_by_id(libebml::EbmlMaster *master,
                         const libebml::EbmlId &id) {
   for (auto child : *master)
-    if (libebml::EbmlId(*child) == id)
+    if (get_ebml_id(*child) == id)
       return child;
 
   return nullptr;
@@ -467,7 +468,7 @@ fix_elements_set_to_default_value_if_unset(libebml::EbmlElement *e) {
 
   mxdebug_if(s_debug,
              fmt::format("fix_elements_in_master: element has default, but value is no set; setting: ID {0:08x} name {1}\n",
-                         libebml::EbmlId(*t).GetValue(), EBML_NAME(t)));
+                         get_ebml_id(*t).GetValue(), EBML_NAME(t)));
   t->SetValue(t->GetValue());
 }
 
@@ -478,9 +479,9 @@ fix_elements_in_master(libebml::EbmlMaster *master) {
   if (!master)
     return;
 
-  auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(*master));
+  auto callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), get_ebml_id(*master));
   if (!callbacks) {
-    mxdebug_if(s_debug, fmt::format("fix_elements_in_master: No callbacks found for ID {0:08x}\n", libebml::EbmlId(*master).GetValue()));
+    mxdebug_if(s_debug, fmt::format("fix_elements_in_master: No callbacks found for ID {0:08x}\n", get_ebml_id(*master).GetValue()));
     return;
   }
 
@@ -497,7 +498,7 @@ fix_elements_in_master(libebml::EbmlMaster *master) {
 
   while (idx < master->ListSize()) {
     auto child    = (*master)[idx];
-    auto child_id = libebml::EbmlId(*child).GetValue();
+    auto child_id = get_ebml_id(*child).GetValue();
     auto itr      = deprecated_elements.find(child_id);
 
     if (itr != deprecated_elements_end) {
@@ -689,12 +690,12 @@ remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
       continue;
     }
 
-    ++num_elements_by_type[ libebml::EbmlId(*child).GetValue() ];
+    ++num_elements_by_type[ get_ebml_id(*child).GetValue() ];
 
     if (!child->IsDefaultValue())
       continue;
 
-    auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), libebml::EbmlId(*child));
+    auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), get_ebml_id(*child));
 
     if (!semantic || !semantic->IsMandatory())
       continue;
@@ -718,7 +719,7 @@ remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
       continue;
     }
 
-    if (num_elements_by_type[ libebml::EbmlId(*child).GetValue() ] == 1) {
+    if (num_elements_by_type[ get_ebml_id(*child).GetValue() ] == 1) {
       delete child;
       master.Remove(idx);
 
@@ -763,7 +764,7 @@ must_be_present_in_master(libebml::EbmlId const &id) {
 
 bool
 must_be_present_in_master(libebml::EbmlElement const &element) {
-  return must_be_present_in_master(libebml::EbmlId(element));
+  return must_be_present_in_master(get_ebml_id(element));
 }
 
 bool
@@ -839,6 +840,23 @@ set_previous_timestamp(libmatroska::KaxCluster &cluster,
   cluster.SetPreviousTimestamp(timestamp, timestamp_scale);
 }
 
+libebml::EbmlId
+create_ebml_id_from(libebml::EbmlBinary const &b) {
+  uint32_t raw_id = get_uint_be(b.GetBuffer(), b.GetSize());
+  return { raw_id };
+}
+
+libebml::EbmlId
+create_ebml_id_from(uint32_t value,
+             [[maybe_unused]] std::size_t length) {
+  return { value };
+}
+
+libebml::EbmlId
+get_ebml_id(libebml::EbmlElement const &e) {
+  return e.GetClassId();
+}
+
 #else // LIBEBML_VERSION >= 0x020000
 
 bool
@@ -868,6 +886,22 @@ set_previous_timestamp(libmatroska::KaxCluster &cluster,
                        uint64_t timestamp,
                        int64_t timestamp_scale) {
   cluster.SetPreviousTimecode(timestamp, timestamp_scale);
+}
+
+libebml::EbmlId
+create_ebml_id_from(libebml::EbmlBinary const &b) {
+  return { b.GetBuffer(), static_cast<unsigned int>(b.GetSize()) };
+}
+
+libebml::EbmlId
+create_ebml_id_from(uint32_t value,
+             std::size_t length) {
+  return { value, static_cast<unsigned int>(length) };
+}
+
+libebml::EbmlId
+get_ebml_id(libebml::EbmlElement const &e) {
+  return EbmlId(e);
 }
 
 #endif

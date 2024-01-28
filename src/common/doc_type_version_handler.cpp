@@ -58,7 +58,7 @@ doc_type_version_handler_c::account(libebml::EbmlElement &element,
     return element;
 
   auto p  = p_func();
-  auto id = libebml::EbmlId(element).GetValue();
+  auto id = get_ebml_id(element).GetValue();
 
   if (p->s_version_by_element[id] > p->version) {
     mxdebug_if(p->debug, fmt::format("account: bumping version from {0} to {1} due to ID 0x{2:x}\n", p->version, p->s_version_by_element[id], id));

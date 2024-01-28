@@ -372,7 +372,7 @@ kax_analyzer_c::process_internal() {
     if (!l1 || (0 < upper_lvl_el))
       break;
 
-    m_data.push_back(kax_analyzer_data_c::create(libebml::EbmlId(*l1), l1->GetElementPosition(), l1->ElementSize(render_should_write_arg(true)), l1->IsFiniteSize()));
+    m_data.push_back(kax_analyzer_data_c::create(get_ebml_id(*l1), l1->GetElementPosition(), l1->ElementSize(render_should_write_arg(true)), l1->IsFiniteSize()));
 
     cluster_found   |= Is<libmatroska::KaxCluster>(l1);
     meta_seek_found |= Is<libmatroska::KaxSeekHead>(l1);
@@ -435,7 +435,7 @@ kax_analyzer_c::read_element(kax_analyzer_data_c const &element_data) {
   ebml_element_cptr e            = ebml_element_cptr(es.FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el_found, 0xFFFFFFFFL, true, 1));
   const libebml::EbmlCallbacks *callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), element_data.m_id);
 
-  if (!e || !callbacks || (libebml::EbmlId(*e) != EBML_INFO_ID(*callbacks))) {
+  if (!e || !callbacks || (get_ebml_id(*e) != EBML_INFO_ID(*callbacks))) {
     e.reset();
     return e;
   }
@@ -486,7 +486,7 @@ kax_analyzer_c::update_element(libebml::EbmlElement *e,
     if (validate_and_break("update_element_1"))
       return uer_success;
 
-    overwrite_all_instances(libebml::EbmlId(*e));
+    overwrite_all_instances(get_ebml_id(*e));
     if (validate_and_break("update_element_2"))
       return uer_success;
 
@@ -498,7 +498,7 @@ kax_analyzer_c::update_element(libebml::EbmlElement *e,
     if (validate_and_break("update_element_4"))
       return uer_success;
 
-    remove_from_meta_seeks(libebml::EbmlId(*e));
+    remove_from_meta_seeks(get_ebml_id(*e));
     if (validate_and_break("update_element_5"))
       return uer_success;
 
@@ -713,7 +713,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
     uint8_t head[4 + 8];         // Class D + 64 bits coded size
     unsigned int head_size = EBML_ID_LENGTH(static_cast<const libebml::EbmlId &>(*e));
-    libebml::EbmlId(*e).Fill(head);
+    get_ebml_id(*e).Fill(head);
 
     int coded_size = libebml::CodedSizeLength(e->GetSize(), move_up ? e->GetSizeLength() + 1 : 7, true);
     libebml::CodedValueLength(e->GetSize(), coded_size, &head[head_size]);
@@ -749,7 +749,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
     mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): void_size == 1: element re-read; now removing from meta seeks, merging void elements etc.\n", data_idx));
 
-    remove_from_meta_seeks(libebml::EbmlId(*e));
+    remove_from_meta_seeks(get_ebml_id(*e));
     merge_void_elements();
     add_to_meta_seek(e.get());
     merge_void_elements();
@@ -1083,7 +1083,7 @@ kax_analyzer_c::write_element(libebml::EbmlElement *e,
       m_doc_type_version_handler->account(*e, write_defaults);
 
     // Update the internal records.
-    m_data[data_idx]->m_id   = libebml::EbmlId(*e);
+    m_data[data_idx]->m_id   = get_ebml_id(*e);
     m_data[data_idx]->m_size = e->ElementSize(render_should_write_arg(write_defaults));
 
     // Create a new void element after the element we've just written.
@@ -1099,7 +1099,7 @@ kax_analyzer_c::write_element(libebml::EbmlElement *e,
   e->Render(*m_file, render_should_write_arg(write_defaults), false, true);
   if (m_doc_type_version_handler)
     m_doc_type_version_handler->account(*e, write_defaults);
-  m_data.push_back(kax_analyzer_data_c::create(libebml::EbmlId(*e), m_file->getFilePointer() - e->ElementSize(render_should_write_arg(write_defaults)), e->ElementSize(render_should_write_arg(write_defaults))));
+  m_data.push_back(kax_analyzer_data_c::create(get_ebml_id(*e), m_file->getFilePointer() - e->ElementSize(render_should_write_arg(write_defaults)), e->ElementSize(render_should_write_arg(write_defaults))));
 
   // Adjust the segment's size.
   adjust_segment_size();
@@ -1535,7 +1535,7 @@ kax_analyzer_c::read_all(const libebml::EbmlCallbacks &callbacks) {
     if (!element)
       continue;
 
-    if (libebml::EbmlId(*element) != EBML_INFO_ID(callbacks)) {
+    if (get_ebml_id(*element) != EBML_INFO_ID(callbacks)) {
       delete element;
       continue;
     }
@@ -1618,7 +1618,7 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
     if (positions_found[seek_pos])
       continue;
 
-    libebml::EbmlId the_id(seek_id->GetBuffer(), seek_id->GetSize());
+    auto the_id = create_ebml_id_from(*seek_id);
     m_data.push_back(kax_analyzer_data_c::create(the_id, seek_pos, -1));
     positions_found[seek_pos] = true;
 

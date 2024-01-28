@@ -7,6 +7,7 @@
 #include <matroska/KaxSegment.h>
 
 #include "common/checksums/base.h"
+#include "common/ebml.h"
 #include "common/kax_element_names.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/info/model.h"
@@ -123,7 +124,7 @@ Model::setItemsFromElement(QList<QStandardItem *> &items,
   items[4]->setTextAlignment(Qt::AlignRight);
 
   items[0]->setData(reinterpret_cast<qulonglong>(&element),          Roles::Element);
-  items[0]->setData(static_cast<qint64>(libebml::EbmlId(element).GetValue()), Roles::EbmlId);
+  items[0]->setData(static_cast<qint64>(get_ebml_id(element).GetValue()), Roles::EbmlId);
 }
 
 void

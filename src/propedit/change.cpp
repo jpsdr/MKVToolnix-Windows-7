@@ -242,7 +242,7 @@ change_c::execute_delete() {
   size_t idx               = 0;
   unsigned int num_deleted = 0;
   while (m_master->ListSize() > idx) {
-    if (m_property.m_callbacks->ClassId() == libebml::EbmlId(*(*m_master)[idx])) {
+    if (m_property.m_callbacks->ClassId() == get_ebml_id(*(*m_master)[idx])) {
       delete (*m_master)[idx];
       m_master->Remove(idx);
       ++num_deleted;
@@ -269,7 +269,7 @@ change_c::execute_add_or_set() {
   size_t idx;
   unsigned int num_found = 0;
   for (idx = 0; m_master->ListSize() > idx; ++idx) {
-    if (m_property.m_callbacks->ClassId() != libebml::EbmlId(*(*m_master)[idx]))
+    if (m_property.m_callbacks->ClassId() != get_ebml_id(*(*m_master)[idx]))
       continue;
 
     if (change_c::ct_set == m_type) {

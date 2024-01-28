@@ -326,7 +326,7 @@ Tab::showElementHexDumpInViewer() {
   auto dlg    = new ElementViewerDialog{this};
   auto result = dlg
     ->setContent(mem, !!element)
-    .setId(element ? libebml::EbmlId(*element).GetValue() : pseudoType.toUInt())
+    .setId(element ? get_ebml_id(*element).GetValue() : pseudoType.toUInt())
     .setPosition(effectiveElementPosition)
     .setSize(signaledElementSize, effectiveElementSize)
     .exec();

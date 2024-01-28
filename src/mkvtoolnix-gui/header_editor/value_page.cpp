@@ -258,7 +258,7 @@ ValuePage::modifyThis() {
 
   if (m_present && m_cbAddOrRemove->isChecked()) {
     for (auto i = 0u; m_master.ListSize() > i; ++i) {
-      if (libebml::EbmlId(*m_master[i]) != m_callbacks.ClassId())
+      if (get_ebml_id(*m_master[i]) != m_callbacks.ClassId())
         continue;
 
       auto e = m_master[i];
