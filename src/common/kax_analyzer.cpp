@@ -79,7 +79,7 @@ kax_analyzer_data_c::to_string() const {
     name = EBML_INFO_NAME(*callbacks);
 
   else
-    name = fmt::format("0x{0:0{1}x}", EBML_ID_VALUE(m_id), EBML_ID_LENGTH(m_id) * 2);
+    name = fmt::format("0x{0:0{1}x}", m_id.GetValue(), EBML_ID_LENGTH(m_id) * 2);
 
   return fmt::format("{0} size {1}{3} at {2}", name, m_size, m_pos, m_size_known ? "" : " (unknown)");
 }

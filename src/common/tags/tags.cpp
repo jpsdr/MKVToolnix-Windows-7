@@ -299,19 +299,19 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
   static auto s_supported_elements = std::map<uint32_t, bool>{};
 
   if (s_supported_elements.empty()) {
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTags))               ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTag))                ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagTargets))         ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagTargetTypeValue)) ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagTargetType))      ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagTrackUID))        ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagSimple))          ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagName))            ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagLangue))          ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagLanguageIETF))    ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagDefault))         ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagString))          ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxTagBinary))          ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTags).GetValue()               ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTag).GetValue()                ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagTargets).GetValue()         ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagTargetTypeValue).GetValue() ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagTargetType).GetValue()      ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagTrackUID).GetValue()        ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagSimple).GetValue()          ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagName).GetValue()            ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagLangue).GetValue()          ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagLanguageIETF).GetValue()    ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagDefault).GetValue()         ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagString).GetValue()          ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxTagBinary).GetValue()          ] = true;
   }
 
   auto is_simple = Is<libmatroska::KaxTagSimple>(master);
@@ -320,7 +320,7 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
   while (idx < master.ListSize()) {
     auto e = master[idx];
 
-    if (e && s_supported_elements[ EBML_ID_VALUE(get_ebml_id(*e)) ] && !(is_simple && Is<libmatroska::KaxTagSimple>(e))) {
+    if (e && s_supported_elements[ get_ebml_id(*e).GetValue() ] && !(is_simple && Is<libmatroska::KaxTagSimple>(e))) {
       ++idx;
 
       auto sub_master = dynamic_cast<libebml::EbmlMaster *>(e);
