@@ -144,6 +144,8 @@ setup_help() {
     "                         deriving its type from its file name extension\n"
     "  -5, --h265, --hevc     Treat input file as an HEVC/H.265 file instead of\n"
     "                         deriving its type from its file name extension\n"
+    "  -6, --h266, --vvc      Treat input file as an VVC/H.266 file instead of\n"
+    "                         deriving its type from its file name extension\n"
     "  -a, --annex-b          Treat input file as an ITU-T H.264/H.265 Annex B\n"
     "                         bitstream instead of trying to derive the type\n"
     "                         from the content\n"
