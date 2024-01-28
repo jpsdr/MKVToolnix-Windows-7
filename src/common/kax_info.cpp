@@ -238,7 +238,7 @@ kax_info_c::format_ebml_id_as_hex(uint32_t id) {
 
 std::string
 kax_info_c::format_ebml_id_as_hex(libebml::EbmlId const &id) {
-  return format_ebml_id_as_hex(EBML_ID_VALUE(id));
+  return format_ebml_id_as_hex(id.GetValue());
 }
 
 std::string

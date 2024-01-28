@@ -232,10 +232,10 @@ ElementHighlighter::highlightsForElement(memory_c const &mem) {
 
     highlights << Highlight{ position, length, "#000000", "#ffff7f", text };
 
-    if (id == EBML_ID_VALUE(EBML_ID(libmatroska::KaxSimpleBlock)))
+    if (id == EBML_ID(libmatroska::KaxSimpleBlock).GetValue())
       highlightBlockOrSimpleBlock(r, highlights, true);
 
-    else if (id == EBML_ID_VALUE(EBML_ID(libmatroska::KaxBlock)))
+    else if (id == EBML_ID(libmatroska::KaxBlock).GetValue())
       highlightBlockOrSimpleBlock(r, highlights, false);
 
   } catch (mtx::mm_io::end_of_file_x &) {

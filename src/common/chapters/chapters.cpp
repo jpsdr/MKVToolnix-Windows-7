@@ -592,22 +592,22 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
   static std::unordered_map<uint32_t, bool> s_supported_elements, s_readd_with_defaults;
 
   if (s_supported_elements.empty()) {
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapters))            ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxEditionEntry))        ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterAtom))         ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterUID))          ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterStringUID))    ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterTimeStart))    ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterTimeEnd))      ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterDisplay))      ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterString))       ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterLanguage))     ] = true;
-    s_supported_elements[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterCountry))      ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapters).GetValue()            ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxEditionEntry).GetValue()        ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterAtom).GetValue()         ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterUID).GetValue()          ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterStringUID).GetValue()    ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterTimeStart).GetValue()    ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterTimeEnd).GetValue()      ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterDisplay).GetValue()      ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterString).GetValue()       ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterLanguage).GetValue()     ] = true;
+    s_supported_elements[ EBML_ID(libmatroska::KaxChapterCountry).GetValue()      ] = true;
 
-    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxEditionFlagDefault)) ] = true;
-    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxEditionFlagHidden))  ] = true;
-    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterFlagEnabled)) ] = true;
-    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(libmatroska::KaxChapterFlagHidden))  ] = true;
+    s_readd_with_defaults[ EBML_ID(libmatroska::KaxEditionFlagDefault).GetValue() ] = true;
+    s_readd_with_defaults[ EBML_ID(libmatroska::KaxEditionFlagHidden).GetValue()  ] = true;
+    s_readd_with_defaults[ EBML_ID(libmatroska::KaxChapterFlagEnabled).GetValue() ] = true;
+    s_readd_with_defaults[ EBML_ID(libmatroska::KaxChapterFlagHidden).GetValue()  ] = true;
   }
 
   auto idx = 0u;
@@ -615,7 +615,7 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
   while (idx < master.ListSize()) {
     auto e = master[idx];
 
-    if (e && s_supported_elements[ EBML_ID_VALUE(get_ebml_id(*e)) ]) {
+    if (e && s_supported_elements[ get_ebml_id(*e).GetValue() ]) {
       auto sub_master = dynamic_cast<libebml::EbmlMaster *>(e);
       if (sub_master)
         remove_elements_unsupported_by_webm(*sub_master);
@@ -625,7 +625,7 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
       continue;
     }
 
-    if (e && s_readd_with_defaults[ EBML_ID_VALUE(get_ebml_id(*e)) ]) {
+    if (e && s_readd_with_defaults[ get_ebml_id(*e).GetValue() ]) {
       auto new_with_defaults = &(e->CreateElement());
       delete e;
       master.GetElementList()[idx] = new_with_defaults;
