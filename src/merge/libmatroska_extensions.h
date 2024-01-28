@@ -69,7 +69,7 @@ public:
   }
 
 #if LIBEBML_VERSION >= 0x020000
-  virtual libebml::filepos_t UpdateSize(ShouldWrite writeFilter = WriteSkipDefault, bool bForceRender = false) override;
+  virtual libebml::filepos_t UpdateSize(ShouldWrite const &writeFilter = WriteSkipDefault, bool bForceRender = false) override;
 #else
   virtual libebml::filepos_t UpdateSize(bool bSaveDefault, bool bForceRender) override;
 #endif

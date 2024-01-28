@@ -26,7 +26,7 @@ kax_reference_block_c::kax_reference_block_c():
 libebml::filepos_t
 kax_reference_block_c::UpdateSize(
 #if LIBEBML_VERSION >= 0x020000
-                                  ShouldWrite writeFilter,
+                                  ShouldWrite const &writeFilter,
 #else
                                   bool bSaveDefault,
 #endif
