@@ -5,6 +5,7 @@
 
 #include "common/list_utils.h"
 #include "common/qt.h"
+#include "common/qt6_compat/meta_type.h"
 #include "mkvtoolnix-gui/util/json.h"
 
 namespace mtx::gui::Util {
@@ -38,7 +39,7 @@ nlohmannJsonToVariant(nlohmann::json const &json) {
 
 static nlohmann::json
 logUnsupportedVariantType(QVariant const &variant) {
-  qDebug() << "varianttonlohmannjson: unsupported variant type" << variant.metaType().id() << variant;
+  qDebug() << "varianttonlohmannjson: unsupported variant type" << mtxMetaTypeIdForVariant(variant) << variant;
   throw std::domain_error{"unsupported QVariant type"};
   return {};
 }
@@ -48,7 +49,7 @@ variantToNlohmannJson(QVariant const &variant) {
   if (variant.isNull() || !variant.isValid())
     return {};
 
-  if (variant.metaType().id() == QMetaType::QVariantMap) {
+  if (mtxDoesVariantContain(variant, QMetaType::QVariantMap)) {
     auto values = nlohmann::json::object();
     auto map    = variant.toMap();
 
@@ -58,8 +59,8 @@ variantToNlohmannJson(QVariant const &variant) {
     return values;
   }
 
-  if (   variant.metaType().id() == QMetaType::QStringList
-      || variant.metaType().id() == QMetaType::QVariantList) {
+  if (   mtxDoesVariantContain(variant, QMetaType::QStringList)
+      || mtxDoesVariantContain(variant, QMetaType::QVariantList)) {
     auto values = nlohmann::json::array();
 
     for (auto const &value : variant.toList())
@@ -68,13 +69,13 @@ variantToNlohmannJson(QVariant const &variant) {
     return values;
   }
 
-  return variant.metaType().id() == QMetaType::Bool                                 ? nlohmann::json(variant.toBool())
-       : variant.metaType().id() == QMetaType::QString                              ? nlohmann::json(to_utf8(variant.toString()))
-       : variant.metaType().id() == QMetaType::Double                               ? nlohmann::json(variant.toDouble())
-       : variant.metaType().id() == QMetaType::Float                                ? nlohmann::json(variant.toDouble())
-       : QMetaType::canConvert(variant.metaType(), QMetaType(QMetaType::ULongLong)) ? nlohmann::json(variant.toULongLong())
-       : QMetaType::canConvert(variant.metaType(), QMetaType(QMetaType::QString))   ? nlohmann::json(to_utf8(variant.toString()))
-       :                                                                              logUnsupportedVariantType(variant);
+  return mtxDoesVariantContain(variant, QMetaType::Bool)       ? nlohmann::json(variant.toBool())
+       : mtxDoesVariantContain(variant, QMetaType::QString)    ? nlohmann::json(to_utf8(variant.toString()))
+       : mtxDoesVariantContain(variant, QMetaType::Double)     ? nlohmann::json(variant.toDouble())
+       : mtxDoesVariantContain(variant, QMetaType::Float)      ? nlohmann::json(variant.toDouble())
+       : mtxCanConvertVariantTo(variant, QMetaType::ULongLong) ? nlohmann::json(variant.toULongLong())
+       : mtxCanConvertVariantTo(variant, QMetaType::QString)   ? nlohmann::json(to_utf8(variant.toString()))
+       :                                                         logUnsupportedVariantType(variant);
 }
 
 }
