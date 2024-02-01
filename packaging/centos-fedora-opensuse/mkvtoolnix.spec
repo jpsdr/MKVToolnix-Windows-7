@@ -34,6 +34,21 @@ BuildRequires: zlib-devel
 
 %if 0%{?rhel}
 # RHEL, CentOS, AlmaLinux, RockyLinux
+%if 0%{?rhel} <= 7
+BuildRequires: boost169-devel
+BuildRequires: devtoolset-10-gcc-c++
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtmultimedia-devel
+BuildRequires: qt5-qtsvg
+%endif
+
+%if 0%{?rhel} == 8
+BuildRequires: boost-devel >= 1.66.0
+BuildRequires: gcc-toolset-11-gcc-c++
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtmultimedia-devel
+BuildRequires: qt5-qtsvg
+%endif
 
 %if 0%{?rhel} == 9
 BuildRequires: gcc-c++
@@ -92,10 +107,20 @@ for SUB_DIR in gcc-toolset-11 gcc-toolset 10 devtoolset-10; do
 done
 
 %build
+%if 0%{?rhel} && 0%{?rhel} < 9
+export DISABLE_QT=--disable-qt6
+%endif
+%if 0%{?rhel} && 0%{?rhel} >= 9
+export DISABLE_QT=--disable-qt5
+%endif
+%if 0%{?fedora}
+export DISABLE_QT=--disable-qt5
+%endif
 %configure \
   --disable-optimization \
   --enable-debug \
   --with-tools \
+  "$DISABLE_QT" \
   "$CONFIGURE_ARGS"
 # if [[ -f ~/mtx-rpm-compiled.tar.gz ]]; then
 #   tar xzf ~/mtx-rpm-compiled.tar.gz
@@ -176,13 +201,12 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_datadir}/mkvtoolnix
 
 %changelog -n mkvtoolnix
-* Tue Jan  2 2024 Moritz Bunkus <moritz@bunkus.org> 82.0-1
+ Tue Jan  2 2024 Moritz Bunkus <moritz@bunkus.org> 82.0-1
 - New version
 
 * Sun Dec 10 2023 Moritz Bunkus <moritz@bunkus.org> 81.0-2
 - Removed support for AlmaLinux/RockyLinux/CentOS <= 8 due to support
   for Qt 5 being dropped.
-
 * Sat Dec  2 2023 Moritz Bunkus <moritz@bunkus.org> 81.0-1
 - New version
 

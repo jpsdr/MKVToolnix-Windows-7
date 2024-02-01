@@ -3,8 +3,9 @@
 #include "common/common_pch.h"
 
 #include <QHash>
-#include <QRecursiveMutex>
 #include <QVariant>
+
+#include "common/qt6_compat/mutex.h"
 
 namespace mtx::gui::Util {
 
@@ -27,7 +28,7 @@ public:
 private:
   static QString cacheDirLocation(QString const &category);
   static QString cacheFileName(QString const &category, QString const &key);
-  static QRecursiveMutex &cacheDirMutex();
+  static MtxQRecursiveMutex &cacheDirMutex();
   static QString currentVersionString();
 };
 

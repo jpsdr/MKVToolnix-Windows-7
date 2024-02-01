@@ -70,7 +70,7 @@
 * Qt 6 detection: `configure` will now fail to detect Qt 6 if the 'multimedia'
   module is not found by `qmake` (e.g. due to development packages not being
   installed). See #3649.
-* The bundled `fmt` library was updated to v10.1.1.
+ The bundled `fmt` library was updated to v10.1.1.
 
 
 # Version 81.0 "Milliontown" 2023-12-02

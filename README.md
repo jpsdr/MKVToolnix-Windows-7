@@ -137,7 +137,7 @@ These libraries are:
 - [nlohmann's JSON](https://github.com/nlohmann/json) — JSON for
   Modern C++
 
-- [Qt](http://www.qt.io/) v6.2.0 or newer — a cross-platform library
+- [Qt](http://www.qt.io/) v5.9.0 or newer — a cross-platform library
   including a UI toolkit. The library is needed for all programs, even
   if you decide not to build MKVToolNix GUI.
 

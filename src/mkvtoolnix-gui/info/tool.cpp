@@ -202,7 +202,7 @@ Tool::dragEnterEvent(QDragEnterEvent *event) {
 void
 Tool::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true))
-    filesDropped(m_filesDDHandler.fileNames(), event->buttons());
+    filesDropped(m_filesDDHandler.fileNames(), mtxMouseButtonsFor(event));
 }
 
 void

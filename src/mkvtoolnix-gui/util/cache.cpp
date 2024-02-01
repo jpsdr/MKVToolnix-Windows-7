@@ -31,12 +31,12 @@ Cache::currentVersionString() {
   return Q(get_current_version().to_string());
 }
 
-QRecursiveMutex &
+MtxQRecursiveMutex &
 Cache::cacheDirMutex() {
-  static std::unique_ptr<QRecursiveMutex> s_mutex;
+  static std::unique_ptr<MtxQRecursiveMutex> s_mutex;
 
   if (!s_mutex)
-    s_mutex.reset(new QRecursiveMutex{});
+    s_mutex.reset(new MtxQRecursiveMutex{MTX_QT_RECURSIVE_MUTEX_INIT});
 
   return *s_mutex;
 }
