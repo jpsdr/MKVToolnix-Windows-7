@@ -80,6 +80,7 @@
       <xsl:number format="1. " value="position()"/>
       <xsl:value-of select="title"/>
      </a>
+     <a class="headerlink" href="#{$anchor}" title="Link to this heading">#</a>
     </h1>
 
     <xsl:apply-templates/>
@@ -96,6 +97,7 @@
     <xsl:number level="multiple" format="1. " count="refsynopsisdiv|refsect1|refsect2"/>
     <xsl:value-of select="title"/>
    </a>
+   <a class="headerlink" href="#{$anchor}" title="Link to this heading">#</a>
   </h2>
 
   <xsl:apply-templates/>
@@ -140,7 +142,7 @@
   <tr>
    <td class="varlistoption">
     <xsl:choose>
-     <xsl:when test="@id"><a name="{@id}"><xsl:apply-templates select="term"/></a></xsl:when>
+     <xsl:when test="@id"><a name="{@id}"><xsl:apply-templates select="term"/></a><a class="headerlink" href="#{@id}" title="Link to this option">#</a></xsl:when>
      <xsl:otherwise><xsl:apply-templates select="term"/></xsl:otherwise>
     </xsl:choose>
    </td>

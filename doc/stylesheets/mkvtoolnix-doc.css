@@ -156,3 +156,28 @@ td p:first-child {
 td p:last-child {
   margin-bottom: 0;
 }
+
+a.headerlink {
+  visibility: hidden;
+  font-size: .8em;
+  margin-left: .2em;
+  opacity: .7;
+  padding: 0 4px;
+  text-decoration: none;
+  transition: all .2s ease-out;
+  user-select: none;
+}
+
+h1:hover > a.headerlink,
+h2:hover > a.headerlink,
+h3:hover > a.headerlink,
+h4:hover > a.headerlink,
+h5:hover > a.headerlink,
+h6:hover > a.headerlink,
+dt:hover > a.headerlink,
+td:hover > a.headerlink,
+caption:hover > a.headerlink,
+p.caption:hover > a.headerlink,
+div.code-block-caption:hover > a.headerlink {
+  visibility: visible;
+}
