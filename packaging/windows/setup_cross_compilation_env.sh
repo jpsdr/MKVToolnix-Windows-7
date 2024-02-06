@@ -17,7 +17,7 @@ set -e
 # outside the script to something like "x86_64-w64-mingw32.static".
 ARCHITECTURE=${ARCHITECTURE:-64}
 # Installation defaults to ~/mxe.
-INSTALL_DIR=${INSTALL_DIR:-$HOME/mxe}
+INSTALL_DIR=${INSTALL_DIR:-$HOME/MKVToolNixQT6/mxe}
 # Leave PARALLEL empty if you want the script to use all of your CPU
 # cores.
 PARALLEL=${PARALLEL:-$(nproc --all)}
@@ -27,7 +27,7 @@ PARALLEL=${PARALLEL:-$(nproc --all)}
 #
 
 if [[ -z $HOST ]]; then
-  if [[ "$ARCHITECTURE" == 32 ]]; then
+  if [[ "$ARCHITECTURE" == 64 ]]; then
     HOST=i686-w64-mingw32.static
   else
     HOST=x86_64-w64-mingw32.static
@@ -48,7 +48,9 @@ function update_mingw_cross_env {
       && git reset --hard origin/master >> $LOGFILE 2>&1 \
       && git config branch.$(git branch --show-current).merge refs/heads/master >> $LOGFILE 2>&1
   fi
+}
 
+function write_mxe_settings {
   cd ${INSTALL_DIR}
   cat > settings.mk <<EOF
 MXE_TARGETS = ${HOST}
@@ -141,7 +143,8 @@ function build_libraries {
 # main
 
 echo "Cross-compiling MKVToolNix. Log output can be found in ${LOGFILE}"
-update_mingw_cross_env
+#update_mingw_cross_env
+write_mxe_settings
 build_libraries
 create_run_configure_script
 configure_mkvtoolnix
