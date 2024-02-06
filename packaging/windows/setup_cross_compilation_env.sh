@@ -17,7 +17,7 @@ set -e
 # outside the script to something like "x86_64-w64-mingw32.static".
 ARCHITECTURE=${ARCHITECTURE:-64}
 # Installation defaults to ~/mxe.
-INSTALL_DIR=${INSTALL_DIR:-$HOME/MKVToolNix/mxe}
+INSTALL_DIR=${INSTALL_DIR:-$HOME/MKVToolNixQT5/mxe}
 # Leave PARALLEL empty if you want the script to use all of your CPU
 # cores.
 PARALLEL=${PARALLEL:-$(nproc --all)}
