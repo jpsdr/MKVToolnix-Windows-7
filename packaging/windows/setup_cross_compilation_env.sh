@@ -27,7 +27,7 @@ PARALLEL=${PARALLEL:-$(nproc --all)}
 #
 
 if [[ -z $HOST ]]; then
-  if [[ "$ARCHITECTURE" == 64 ]]; then
+  if [[ "$ARCHITECTURE" == 32 ]]; then
     HOST=i686-w64-mingw32.static
   else
     HOST=x86_64-w64-mingw32.static
