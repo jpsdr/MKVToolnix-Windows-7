@@ -40,13 +40,13 @@ LOGFILE=${LOGFILE:-$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)
 function update_mingw_cross_env {
   if [[ ! -d $INSTALL_DIR ]]; then
     echo Retrieving the M cross environment build scripts >> $LOGFILE
-    git clone --branch master https://gitlab.com/mbunkus/mxe $INSTALL_DIR >> $LOGFILE 2>&1
+    git clone --branch QT6_Windows7 https://github.com/jpsdr/mxe-Windows-7.git $INSTALL_DIR >> $LOGFILE 2>&1
   else
     echo Updating the M cross environment build scripts >> $LOGFILE
     cd $INSTALL_DIR
     git fetch >> $LOGFILE 2>&1 \
-      && git reset --hard origin/master >> $LOGFILE 2>&1 \
-      && git config branch.$(git branch --show-current).merge refs/heads/master >> $LOGFILE 2>&1
+      && git reset --hard origin/QT6_Windows7 >> $LOGFILE 2>&1 \
+      && git config branch.$(git branch --show-current).merge refs/heads/QT6_Windows7 >> $LOGFILE 2>&1
   fi
 }
 
@@ -143,7 +143,7 @@ function build_libraries {
 # main
 
 echo "Cross-compiling MKVToolNix. Log output can be found in ${LOGFILE}"
-#update_mingw_cross_env
+update_mingw_cross_env
 write_mxe_settings
 build_libraries
 create_run_configure_script
