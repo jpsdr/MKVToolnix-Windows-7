@@ -286,7 +286,7 @@ sighandler(int /* signum */) {
 
   mxinfo(Y("The file is being fixed, part 4/4..."));
   // Set the correct size for the segment.
-  if (g_kax_segment->ForceSize(s_out->getFilePointer() - g_kax_segment->GetElementPosition() - g_kax_segment->HeadSize()))
+  if (g_kax_segment->ForceSize(s_out->getFilePointer() - g_kax_segment->GetDataStart()))
     g_kax_segment->OverwriteHead(*s_out);
 
   mxinfo(Y(" done\n"));
@@ -1720,7 +1720,7 @@ finish_file(bool last_file,
         libebml::EbmlVoid void_after_infos;
         void_after_infos.SetSize(info_size);
         void_after_infos.UpdateSize();
-        void_after_infos.SetSize(info_size - void_after_infos.HeadSize());
+        void_after_infos.SetSize(info_size - get_head_size(void_after_infos));
         void_after_infos.Render(*s_out);
 
       } else if (0 < info_size) {
@@ -1799,7 +1799,7 @@ finish_file(bool last_file,
 
   // Set the correct size for the segment.
   int64_t final_file_size = s_out->getFilePointer();
-  if (g_kax_segment->ForceSize(final_file_size - g_kax_segment->GetElementPosition() - g_kax_segment->HeadSize()))
+  if (g_kax_segment->ForceSize(final_file_size - g_kax_segment->GetDataStart()))
     g_kax_segment->OverwriteHead(*s_out);
 
   update_ebml_head();

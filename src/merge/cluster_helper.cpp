@@ -865,7 +865,7 @@ cluster_helper_c::generate_one_chapter(timestamp_c const &timestamp) {
 #if LIBEBML_VERSION >= 0x020000
 bool
 cluster_helper_c::write_element_pred(libebml::EbmlElement const &elt) {
-  if (elt.GetClassId() == libmatroska::KaxBlockAddID::ClassId())
+  if (elt.GetClassId() == EBML_ID(libmatroska::KaxBlockAddID))
     return m->always_write_block_add_ids || !elt.IsDefaultValue();
 
   return libebml::EbmlElement::WriteSkipDefault(elt);

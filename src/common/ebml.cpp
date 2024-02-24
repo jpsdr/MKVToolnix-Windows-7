@@ -793,7 +793,7 @@ found_in(libebml::EbmlElement &haystack,
 
 void
 remove_dummy_elements(libebml::EbmlMaster &master) {
-  remove_elements_recursively_if(master, [](auto &child) { return Is<libebml::EbmlDummy>(child); });
+  remove_elements_recursively_if(master, [](auto &child) { return IsDummy(child); });
 }
 
 void
@@ -869,6 +869,11 @@ get_ebml_id(libebml::EbmlElement const &e) {
   return e.GetClassId();
 }
 
+std::size_t
+get_head_size(libebml::EbmlElement const &e) {
+  return e.GetDataStart() - e.GetElementPosition();
+}
+
 #else // LIBEBML_VERSION >= 0x020000
 
 bool
@@ -916,4 +921,8 @@ get_ebml_id(libebml::EbmlElement const &e) {
   return EbmlId(e);
 }
 
+std::size_t
+get_head_size(libebml::EbmlElement const &e) {
+  return e.HeadSize();
+}
 #endif

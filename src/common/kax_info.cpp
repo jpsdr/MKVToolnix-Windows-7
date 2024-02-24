@@ -248,12 +248,12 @@ kax_info_c::format_ebml_id_as_hex(libebml::EbmlElement &e) {
 
 std::string
 kax_info_c::create_unknown_element_text(libebml::EbmlElement &e) {
-  return fmt::format(Y("(Unknown element: {0}; ID: 0x{1} size: {2})"), EBML_NAME(&e), format_ebml_id_as_hex(e), (e.GetSize() + e.HeadSize()));
+  return fmt::format(Y("(Unknown element: {0}; ID: 0x{1} size: {2})"), EBML_NAME(&e), format_ebml_id_as_hex(e), (e.GetSize() + get_head_size(e)));
 }
 
 std::string
 kax_info_c::create_known_element_but_not_allowed_here_text(libebml::EbmlElement &e) {
-  return fmt::format(Y("(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"), kax_element_names_c::get(e), format_ebml_id_as_hex(e), e.GetSize() + e.HeadSize());
+  return fmt::format(Y("(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"), kax_element_names_c::get(e), format_ebml_id_as_hex(e), e.GetSize() + get_head_size(e));
 }
 
 std::string
@@ -297,7 +297,7 @@ kax_info_c::create_text_representation(libebml::EbmlElement &e) {
       text += ": "s + value;
   }
 
-  auto size      = e.IsFiniteSize() ? e.HeadSize() + e.GetSize()          : -2ll;
+  auto size      = e.IsFiniteSize() ? get_head_size(e) + e.GetSize()      : -2ll;
   auto data_size = e.IsFiniteSize() ? std::optional<int64_t>{e.GetSize()} : std::optional<int64_t>{};
 
   return create_element_text(text, e.GetElementPosition(), size, data_size);
@@ -1117,15 +1117,15 @@ kax_info_c::post_simple_block(libebml::EbmlElement &e) {
 }
 
 kax_info_c::result_e
-kax_info_c::handle_segment(libebml::EbmlElement *l0) {
-  ui_show_element(*l0);
+kax_info_c::handle_segment(libmatroska::KaxSegment &l0) {
+  ui_show_element(l0);
 
   auto p        = p_func();
   auto l1       = std::shared_ptr<libebml::EbmlElement>{};
   auto kax_file = std::make_shared<kax_file_c>(*p->m_in);
   p->m_level    = 1;
 
-  kax_file->set_segment_end(*l0);
+  kax_file->set_segment_end(l0);
 
   // Prevent reporting "first timestamp after resync":
   kax_file->set_timestamp_scale(-1);
@@ -1143,8 +1143,8 @@ kax_info_c::handle_segment(libebml::EbmlElement *l0) {
     if (!p->m_in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(*l1)))
       break;
 
-    auto in_parent = !l0->IsFiniteSize()
-                  || (p->m_in->getFilePointer() < (l0->GetElementPosition() + l0->HeadSize() + l0->GetSize()));
+    auto in_parent = !l0.IsFiniteSize()
+                  || (p->m_in->getFilePointer() < (l0.GetDataStart() + l0.GetSize()));
     if (!in_parent)
       break;
 
@@ -1284,7 +1284,7 @@ kax_info_c::process_file() {
       continue;
     }
 
-    auto result = handle_segment(l0.get());
+    auto result = handle_segment(static_cast<libmatroska::KaxSegment &>(*l0));
     if (result == result_e::aborted)
       return result;
 
