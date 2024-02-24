@@ -481,7 +481,7 @@ extract_tracks(kax_analyzer_c &analyzer,
     auto tc_scale            = FindChildValue<kax_timestamp_scale_c, uint64_t>(segment_info, 1000000);
 
     file->set_timestamp_scale(tc_scale);
-    file->set_segment_end(*l0);
+    file->set_segment_end(static_cast<libmatroska::KaxSegment &>(*l0));
 
     while (true) {
       auto cluster = file->read_next_cluster();

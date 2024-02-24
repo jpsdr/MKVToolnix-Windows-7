@@ -301,7 +301,7 @@ Tab::showElementHexDumpInViewer() {
 
     if (element) {
       if (element->IsFiniteSize())
-        signaledElementSize = element->HeadSize() + element->GetSize();
+        signaledElementSize = get_head_size(*element) + element->GetSize();
 
       effectiveElementPosition = element->GetElementPosition();
       effectiveElementSize     = signaledElementSize ? *signaledElementSize : p->m_file->get_size() - effectiveElementPosition;

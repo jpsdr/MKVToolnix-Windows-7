@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2023-12-20 21:26+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Germano Fonseca <celger@bol.com.br>, 2016,2023\n"
+"Last-Translator: Fúlvio Alves <fga.fulvio@gmail.com>, 2021-2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -577,7 +577,7 @@ msgid ""
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --hearing-impaired-flag <TID[:bool]>\n"
-"                           Define a flag \"hearing impaired\" para esta faixa ou\n"
+"                           Define a flag \"deficientes auditivos\" para esta faixa ou\n"
 "                           força-a a não estar presente se bool for 0.\n"
 
 #: src/merge/mkvmerge.cpp:273
@@ -2051,7 +2051,7 @@ msgstr "&Oculto"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #, no-c-format
 msgid "&Ignore playlists meant for menus"
-msgstr ""
+msgstr "&Ignorar listas de reprodução destinadas a menus"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
 #, no-c-format
@@ -3186,7 +3186,7 @@ msgstr "Um bloco Matroska único contém, ou um quadro completo (para conteúdo 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:602
 #, no-c-format
 msgid "A subtitle track is considered to be 'forced' track if any of the following conditions are met:"
-msgstr ""
+msgstr "Uma faixa de legenda é considerada faixa 'forced' se alguma das seguintes condições for atendida:"
 
 #: src/merge/generic_reader.cpp:177
 #, no-c-format, c++-format
@@ -3844,7 +3844,7 @@ msgstr "Sempre permitir cópia para todas as faixas dos tipos a seguir, independ
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
-msgstr ""
+msgstr "Sempre ativar a cópia de faixas de legendas &forçadas"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
@@ -4086,9 +4086,9 @@ msgid "Audio"
 msgstr "Áudio"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio and subtitle files often contain the words 'cc' or 'sdh' in their file name to signal that they're intended for hearing impaired people."
-msgstr "Arquivos de legendas geralmente contêm a palavra 'forced' no seu nome para sinalizar que eles voltados apenas para 'exibição forçada' (por exemplo, quando eles falam Élfico em 'O Senhor dos Anéis')."
+msgstr "Arquivos de áudio e legendas geralmente contém as palavras 'cc' ou 'sdh' no nome do arquivo para sinalizar que são destinados a pessoas com deficiência auditiva."
 
 #: src/common/property_element.cpp:214
 #, no-c-format
@@ -4335,7 +4335,7 @@ msgstr "Boleano (sim/não, on/off etc)"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
 #, no-c-format
 msgid "Both of the schemes used by older models (e.g. GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) & by current ones (e.g. GH019876.mp4, GH029876.mp4, GH039876.mp4…) are supported."
-msgstr ""
+msgstr "Ambos os esquemas usados por modelos mais antigos (por exemplo, GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) e pelos atuais (por exemplo, GH019876.mp4, GH029876.mp4, GH039876.mp4…) são suportados."
 
 #: src/merge/generic_packetizer.cpp:206
 #, no-c-format
@@ -5798,9 +5798,9 @@ msgid "Depending on this setting the language can also be derived from the file 
 msgstr "Dependendo dessa configuração, o idioma também pode ser derivado do nome do arquivo se o idioma no arquivo de origem for 'indeterminado' ('und')."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"&hearing impair\" flag for audio/subtitles from file names:"
-msgstr "Derivar dos nomes dos arquivos a fla&g \"exibição forçada\" para as legendas:"
+msgstr "Derivar a flag \"deficientes a&uditivos\" para áudio/legendas a partir de nomes de arquivos:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, no-c-format
@@ -5813,9 +5813,9 @@ msgid "Derive &end timestamps from start timestamps"
 msgstr "Derivar códigos de tempo finais de códigos de tempo iniciais"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:605
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Deriving the 'forced display' flag from file names is active & the file name matches the corresponding pattern."
-msgstr "O GUI pode definir a flag 'exibição forçada' para as faixas se o nome do arquivo coincidir com a expressão regular."
+msgstr "A derivação da flag 'exibição forçada' dos nomes dos arquivos está ativa e o nome do arquivo corresponde ao padrão correspondente."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #, no-c-format
@@ -7546,9 +7546,9 @@ msgid "If enabled, files and tracks will be sorted by track types when they're a
 msgstr "Se habilitado, os arquivos e faixas serão classificados por tipo de faixa quando forem adicionados às configurações de multiplexação."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:601
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, forced subtitle tracks will always be set to be copied."
-msgstr "Se ativado, esses arquivos sempre serão ignorados sem perguntas."
+msgstr "Se ativado, as faixas de legenda forçada sempre serão configuradas para serem copiadas."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:402
 #, no-c-format
@@ -7568,7 +7568,7 @@ msgstr "Se ativado, esses arquivos sempre serão ignorados sem perguntas."
 #: src/common/hacks.cpp:70
 #, no-c-format
 msgid "If enabled, the BlockAddID element will be written even if it's set to its default value of 1."
-msgstr ""
+msgstr "Se ativado, o elemento BlockAddID será gravado mesmo se estiver definido com seu valor padrão de 1."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:332
 #, no-c-format
@@ -7852,7 +7852,7 @@ msgstr "Se quiser anexá-los ou adicioná-los como partes adicionais, você deve
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:551
 #, no-c-format
 msgid "Ignores playlists which are likely meant for menus."
-msgstr ""
+msgstr "Ignora listas de reprodução que provavelmente são destinadas a menus."
 
 #: src/output/p_textsubs.cpp:152
 #, no-c-format, c++-format
@@ -8368,7 +8368,7 @@ msgstr "Ele tenta detectar sequências de nomes que provavelmente pertencem ao m
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:603
 #, no-c-format
 msgid "Its 'forced display' property is set in the source file."
-msgstr ""
+msgstr "Sua propriedade 'exibição forçada' está definida no arquivo de origem."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:2247
 #, no-c-format
@@ -8378,7 +8378,7 @@ msgstr "Seu local de instalação não pode ser determinado automaticamente."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:604
 #, no-c-format
 msgid "Its name contains the word 'forced' (in English)."
-msgstr ""
+msgstr "Seu nome contém a palavra 'forced' (em inglês)."
 
 #: src/common/command_line.cpp:61
 #: src/common/command_line.cpp:65
@@ -11399,7 +11399,7 @@ msgstr "Define se a faixa (áudio, vídeo ou legendas) DEVE ser usada, se não f
 #: src/common/property_element.cpp:153
 #, no-c-format
 msgid "Set if the BlockAdditional element with BlockAddID of '1' contains alpha channel data."
-msgstr ""
+msgstr "Defina se o elemento BlockAdditional com BlockAddID de '1' contém dados do canal alfa."
 
 #: src/common/property_element.cpp:137
 #, no-c-format
@@ -12232,9 +12232,9 @@ msgid "The GUI can set the 'forced display' flag for such tracks if the file nam
 msgstr "O GUI pode definir a flag 'exibição forçada' para as faixas se o nome do arquivo coincidir com a expressão regular."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:523
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."
-msgstr "O GUI pode definir a flag 'exibição forçada' para as faixas se o nome do arquivo coincidir com a expressão regular."
+msgstr "A GUI pode definir a flag 'deficientes auditivos' para essas faixas se o nome do arquivo corresponder a esta expressão regular."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:949
 #: src/mkvtoolnix-gui/merge/tool.cpp:964
@@ -13117,7 +13117,7 @@ msgstr "O formato pode ser 'HH:MM:SS.nnnnnnnnn' ou um número seguido por uma da
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:425
 #, no-c-format
 msgid "The format used by GoPro cameras for chaptered video files is recognized as well."
-msgstr ""
+msgstr "O formato usado pelas câmeras GoPro para arquivos de vídeo em capítulos também é reconhecido."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:294
 #, no-c-format
@@ -13872,9 +13872,9 @@ msgid "The value for deriving the 'forced display' flag for subtitles from file 
 msgstr "O valor para derivar dos nomes dos arquivos a flag 'exibição forçada' para as legendas precisa ser uma expressão regular válida."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1526
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value for deriving the 'hearing impaired' flag from file names must be a valid regular expression."
-msgstr "O valor para derivar dos nomes dos arquivos a flag 'exibição forçada' para as legendas precisa ser uma expressão regular válida."
+msgstr "O valor para derivar a flag 'deficientes auditivos' dos nomes dos arquivos deve ser uma expressão regular válida."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
@@ -14128,7 +14128,7 @@ msgstr "Este é um nome arbitrário que a GUI pode usar para se referir a esta c
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:552
 #, no-c-format
 msgid "This is considered to be the case when a playlist contains the same item at least five times."
-msgstr ""
+msgstr "Este é considerado o caso quando uma lista de reprodução contém o mesmo item pelo menos cinco vezes."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
 #, no-c-format
@@ -15047,9 +15047,9 @@ msgstr "Vídeo"
 
 #: src/common/kax_element_names.cpp:156
 #: src/common/property_element.cpp:153
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video alpha mode"
-msgstr "Modo estéreo do vídeo"
+msgstr "Modo de vídeo alfa"
 
 #: src/common/property_element.cpp:164
 #, no-c-format

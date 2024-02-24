@@ -125,7 +125,7 @@ protected:
 
   void handle_block_group(libebml::EbmlElement *&l2, libmatroska::KaxCluster *&cluster);
   void handle_elements_generic(libebml::EbmlElement &e);
-  result_e handle_segment(libebml::EbmlElement *l0);
+  result_e handle_segment(libmatroska::KaxSegment &l0);
 
   void display_track_info();
 

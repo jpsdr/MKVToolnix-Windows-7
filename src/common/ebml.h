@@ -14,8 +14,9 @@
 #pragma once
 
 #include "common/common_pch.h"
-#include "ebml/EbmlId.h"
 
+#include <ebml/EbmlId.h>
+#include <ebml/EbmlDummy.h>
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlUnicodeString.h>
 
@@ -132,6 +133,16 @@ template<typename T1, typename T2, typename... Trest>
 bool
 Is(libebml::EbmlElement const &e) {
   return Is<T1>(e) || Is<T2, Trest...>(e);
+}
+
+inline bool
+IsDummy(libebml::EbmlElement const &e) {
+  return !!dynamic_cast<libebml::EbmlDummy const *>(&e);
+}
+
+inline bool
+IsDummy(libebml::EbmlElement const *e) {
+  return !!dynamic_cast<libebml::EbmlDummy const *>(e);
 }
 
 template <typename type>type &
@@ -499,6 +510,9 @@ bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle
 uint64_t get_global_timestamp_scale(libmatroska::KaxBlockGroup const &block);
 void init_timestamp(libmatroska::KaxCluster &cluster, uint64_t timestamp, int64_t timestamp_scale);
 void set_previous_timestamp(libmatroska::KaxCluster &cluster, uint64_t timestamp, int64_t timestamp_scale);
+
+std::size_t get_head_size(libebml::EbmlElement const &e);
+
 
 #if LIBEBML_VERSION >= 0x020000
 
