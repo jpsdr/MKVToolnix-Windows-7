@@ -1656,7 +1656,7 @@ kax_reader_c::read_headers_internal() {
       if (Is<libmatroska::KaxSegment>(*l0))
         break;
 
-      if (Is<libebml::EbmlDummy>(*l0) || Is<libebml::EbmlCrc32>(*l0) || Is<libebml::EbmlVoid>(*l0)) {
+      if (Is<libebml::EbmlCrc32>(*l0) || Is<libebml::EbmlVoid>(*l0) || IsDummy(*l0)) {
         l0->SkipData(*m_es, EBML_CONTEXT(l0));
         continue;
       }

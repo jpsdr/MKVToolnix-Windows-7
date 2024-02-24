@@ -14,8 +14,9 @@
 #pragma once
 
 #include "common/common_pch.h"
-#include "ebml/EbmlId.h"
 
+#include <ebml/EbmlId.h>
+#include <ebml/EbmlDummy.h>
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlUnicodeString.h>
 
@@ -132,6 +133,16 @@ template<typename T1, typename T2, typename... Trest>
 bool
 Is(libebml::EbmlElement const &e) {
   return Is<T1>(e) || Is<T2, Trest...>(e);
+}
+
+inline bool
+IsDummy(libebml::EbmlElement const &e) {
+  return !!dynamic_cast<libebml::EbmlDummy const *>(&e);
+}
+
+inline bool
+IsDummy(libebml::EbmlElement const *e) {
+  return !!dynamic_cast<libebml::EbmlDummy const *>(e);
 }
 
 template <typename type>type &

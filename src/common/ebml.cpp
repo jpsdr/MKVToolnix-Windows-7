@@ -793,7 +793,7 @@ found_in(libebml::EbmlElement &haystack,
 
 void
 remove_dummy_elements(libebml::EbmlMaster &master) {
-  remove_elements_recursively_if(master, [](auto &child) { return Is<libebml::EbmlDummy>(child); });
+  remove_elements_recursively_if(master, [](auto &child) { return IsDummy(child); });
 }
 
 void
