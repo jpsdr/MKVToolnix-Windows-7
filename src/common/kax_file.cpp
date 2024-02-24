@@ -24,6 +24,7 @@
 #include "common/kax_file.h"
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
+#include "matroska/KaxSegment.h"
 
 kax_file_c::kax_file_c(mm_io_c &in)
   : m_in(in)
@@ -335,8 +336,8 @@ kax_file_c::set_last_timestamp(int64_t last_timestamp) {
 }
 
 void
-kax_file_c::set_segment_end(libebml::EbmlElement const &segment) {
-  m_segment_end = segment.IsFiniteSize() ? segment.GetElementPosition() + segment.HeadSize() + segment.GetSize() : m_in.get_size();
+kax_file_c::set_segment_end(libmatroska::KaxSegment const &segment) {
+  m_segment_end = segment.IsFiniteSize() ? segment.GetDataStart() + segment.GetSize() : m_in.get_size();
 }
 
 uint64_t

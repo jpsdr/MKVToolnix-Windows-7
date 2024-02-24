@@ -116,8 +116,8 @@ Model::setItemsFromElement(QList<QStandardItem *> &items,
   items[0]->setText(nameAndStatus.first);
   items[1]->setText(Q(content));
   items[2]->setText(locale.toString(static_cast<quint64>(element.GetElementPosition())));
-  items[3]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(element.HeadSize() + element.GetSize())) : QY("unknown"));
-  items[4]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(                     element.GetSize())) : QY("unknown"));
+  items[3]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(get_head_size(element) + element.GetSize())) : QY("unknown"));
+  items[4]->setText(element.IsFiniteSize() ? locale.toString(static_cast<quint64>(                         element.GetSize())) : QY("unknown"));
 
   items[2]->setTextAlignment(Qt::AlignRight);
   items[3]->setTextAlignment(Qt::AlignRight);

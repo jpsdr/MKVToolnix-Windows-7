@@ -352,7 +352,7 @@ kax_analyzer_c::process_internal() {
   bool aborted         = false;
   bool cluster_found   = false;
   bool meta_seek_found = false;
-  m_segment_end        = m_segment->IsFiniteSize() ? m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize() : m_file->get_size();
+  m_segment_end        = m_segment->IsFiniteSize() ? m_segment->GetDataStart() + m_segment->GetSize() : m_file->get_size();
   upper_lvl_el         = 0;
   libebml::EbmlElement *l1{};
 
@@ -362,7 +362,7 @@ kax_analyzer_c::process_internal() {
   // should take care of re-syncing to a known level 1 element. But
   // take care not to start before the segment's data start position.
   if (m_parser_start_position)
-    m_file->setFilePointer(std::max<uint64_t>(*m_parser_start_position, m_segment->GetElementPosition() + m_segment->HeadSize()));
+    m_file->setFilePointer(std::max<uint64_t>(*m_parser_start_position, m_segment->GetDataStart()));
 
   // We've got our segment, so let's find all level 1 elements.
   while (m_file->getFilePointer() < m_segment_end) {
@@ -384,7 +384,7 @@ kax_analyzer_c::process_internal() {
     aborted = !show_progress_running((int)(m_file->getFilePointer() * 100 / file_size));
 
     auto in_parent = !m_segment->IsFiniteSize()
-                  || (m_file->getFilePointer() < (m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize()));
+                  || (m_file->getFilePointer() < (m_segment->GetDataStart() + m_segment->GetSize()));
 
     if (!in_parent || aborted || (cluster_found && meta_seek_found && !parse_fully))
       break;
@@ -595,10 +595,10 @@ kax_analyzer_c::adjust_segment_size() {
 
   auto new_segment = std::make_shared<libmatroska::KaxSegment>();
   m_file->setFilePointer(m_segment->GetElementPosition());
-  new_segment->WriteHead(*m_file, m_segment->HeadSize() - 4);
+  new_segment->WriteHead(*m_file, get_head_size(*m_segment) - 4);
 
   m_file->setFilePointer(0, libebml::seek_end);
-  if (!new_segment->ForceSize(m_file->getFilePointer() - m_segment->HeadSize() - m_segment->GetElementPosition())) {
+  if (!new_segment->ForceSize(m_file->getFilePointer() - m_segment->GetDataStart())) {
     m_segment->OverwriteHead(*m_file);
     throw uer_error_segment_size_for_element;
   }
@@ -1012,7 +1012,7 @@ kax_analyzer_c::merge_void_elements() {
     libebml::EbmlVoid evoid;
     evoid.SetSize(new_size);
     evoid.UpdateSize();
-    evoid.SetSize(new_size - evoid.HeadSize());
+    evoid.SetSize(new_size - get_head_size(evoid));
     evoid.Render(*m_file);
 
     // Update the internal records to reflect the changes.
@@ -1322,7 +1322,7 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(libebml::EbmlE
     libebml::EbmlVoid evoid;
     evoid.SetSize(data.m_size);
     evoid.UpdateSize();
-    evoid.SetSize(data.m_size - evoid.HeadSize());
+    evoid.SetSize(data.m_size - get_head_size(evoid));
     evoid.Render(*m_file);
 
     // Update the internal records to reflect the changes.
@@ -1610,7 +1610,7 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
 
     auto seek        = static_cast<libmatroska::KaxSeek *>((*master)[i]);
     auto seek_id     = FindChild<libmatroska::KaxSeekID>(seek);
-    int64_t seek_pos = seek->Location() + m_segment->GetElementPosition() + m_segment->HeadSize();
+    int64_t seek_pos = seek->Location() + m_segment->GetDataStart();
 
     if ((0 == pos) || !seek_id)
       continue;
@@ -1652,7 +1652,7 @@ kax_analyzer_c::fix_unknown_size_for_last_level1_element() {
   if (!elt)
     throw uer_error_fixing_last_element_unknown_size_failed;
 
-  auto head_size       = static_cast<unsigned int>(elt->HeadSize());
+  auto head_size       = static_cast<unsigned int>(get_head_size(*elt));
   auto actual_size     = m_segment_end - (elt->GetElementPosition() + head_size);
   auto required_bytes  = libebml::CodedSizeLength(actual_size, 0);
   auto available_bytes = elt->GetSizeLength();
@@ -1699,7 +1699,7 @@ kax_analyzer_c::get_segment_data_start_pos()
   if (!m_segment)
     return 0;
 
-  return m_segment->GetElementPosition() + m_segment->HeadSize();
+  return m_segment->GetDataStart();
 }
 
 mtx::bits::value_cptr

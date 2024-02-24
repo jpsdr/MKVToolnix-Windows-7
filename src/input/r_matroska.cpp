@@ -1666,7 +1666,7 @@ kax_reader_c::read_headers_internal() {
       return false;
     }
 
-    m_in_file->set_segment_end(*l0);
+    m_in_file->set_segment_end(static_cast<libmatroska::KaxSegment &>(*l0));
 
     // We've got our segment, so let's find the m_tracks
     m_tc_scale = TIMESTAMP_SCALE;
@@ -1703,7 +1703,7 @@ kax_reader_c::read_headers_internal() {
       if (cluster)              // we've found the first cluster, so get out
         break;
 
-      auto in_parent = !l0->IsFiniteSize() || (m_in->getFilePointer() < (l0->GetElementPosition() + l0->HeadSize() + l0->GetSize()));
+      auto in_parent = !l0->IsFiniteSize() || (m_in->getFilePointer() < (l0->GetElementPosition() + get_head_size(*l0) + l0->GetSize()));
 
       if (!in_parent)
         break;

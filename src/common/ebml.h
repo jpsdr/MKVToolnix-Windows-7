@@ -511,6 +511,9 @@ uint64_t get_global_timestamp_scale(libmatroska::KaxBlockGroup const &block);
 void init_timestamp(libmatroska::KaxCluster &cluster, uint64_t timestamp, int64_t timestamp_scale);
 void set_previous_timestamp(libmatroska::KaxCluster &cluster, uint64_t timestamp, int64_t timestamp_scale);
 
+std::size_t get_head_size(libebml::EbmlElement const &e);
+
+
 #if LIBEBML_VERSION >= 0x020000
 
 template<typename T> uint64_t

@@ -84,12 +84,12 @@ to_hex(memory_cptr const &buf,
   return to_hex(buf->get_buffer(), buf->get_size(), compact);
 }
 inline std::string
-to_hex(libebml::EbmlBinary *bin,
+to_hex(libebml::EbmlBinary const *bin,
        bool compact = false) {
   return to_hex(bin->GetBuffer(), bin->GetSize(), compact);
 }
 inline std::string
-to_hex(libebml::EbmlBinary &bin,
+to_hex(libebml::EbmlBinary const &bin,
        bool compact = false) {
   return to_hex(bin.GetBuffer(), bin.GetSize(), compact);
 }

@@ -180,7 +180,7 @@ cues_c::postprocess_cues(libmatroska::KaxCues &cues,
   if (m_no_cue_duration && m_no_cue_relative_position)
     return;
 
-  auto cluster_data_start_pos = cluster.GetElementPosition() + cluster.HeadSize();
+  auto cluster_data_start_pos = cluster.GetDataStart();
   auto block_positions        = calculate_block_positions(cluster);
   std::map<id_timestamp_t, size_t> nblocks_processed; //# blocks processed so far with given track #/timestamp
 

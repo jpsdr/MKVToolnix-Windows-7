@@ -45,7 +45,7 @@ public:
 
   virtual void set_timestamp_scale(int64_t timestamp_scale);
   virtual void set_last_timestamp(int64_t last_timestamp);
-  virtual void set_segment_end(libebml::EbmlElement const &segment);
+  virtual void set_segment_end(libmatroska::KaxSegment const &segment);
   virtual uint64_t get_segment_end() const;
 
   virtual void enable_reporting(bool enable);

@@ -167,7 +167,7 @@ determine_cluster_data_start_positions(mm_io_c &file,
         auto elt = std::shared_ptr<libebml::EbmlElement>(es->FindNextElement(EBML_CLASS_CONTEXT(libmatroska::KaxSegment), upper_lvl_el, std::numeric_limits<int64_t>::max(), true));
 
         if (elt && Is<libmatroska::KaxCluster>(*elt))
-          cue_point.relative_position = cue_point.relative_position.value() + elt->HeadSize();
+          cue_point.relative_position = cue_point.relative_position.value() + get_head_size(*elt);
 
       } catch (mtx::mm_io::exception &) {
       }
