@@ -1642,7 +1642,7 @@ kax_reader_c::read_headers_internal() {
 
     m_is_webm = FindChildValue<libebml::EDocType>(head) == "webm";
 
-    l0->SkipData(*m_es, EBML_CONTEXT(l0));
+    l0->SkipData(*m_es, EBML_CONTEXT(l0.get()));
 
     while (true) {
       // Next element must be a segment
@@ -1657,7 +1657,7 @@ kax_reader_c::read_headers_internal() {
         break;
 
       if (Is<libebml::EbmlCrc32>(*l0) || Is<libebml::EbmlVoid>(*l0) || IsDummy(*l0)) {
-        l0->SkipData(*m_es, EBML_CONTEXT(l0));
+        l0->SkipData(*m_es, EBML_CONTEXT(l0.get()));
         continue;
       }
 
@@ -1698,7 +1698,7 @@ kax_reader_c::read_headers_internal() {
         cluster = std::static_pointer_cast<libmatroska::KaxCluster>(l1);
 
       else
-        l1->SkipData(*m_es, EBML_CONTEXT(l1));
+        l1->SkipData(*m_es, EBML_CONTEXT(l1.get()));
 
       if (cluster)              // we've found the first cluster, so get out
         break;
@@ -1708,7 +1708,7 @@ kax_reader_c::read_headers_internal() {
       if (!in_parent)
         break;
 
-      l1->SkipData(*m_es, EBML_CONTEXT(l1));
+      l1->SkipData(*m_es, EBML_CONTEXT(l1.get()));
 
     } // while (l1)
 

@@ -432,7 +432,7 @@ kax_analyzer_c::read_element(kax_analyzer_data_c const &element_data) {
   m_file->setFilePointer(element_data.m_pos);
 
   int upper_lvl_el_found         = 0;
-  ebml_element_cptr e            = ebml_element_cptr(es.FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el_found, 0xFFFFFFFFL, true, 1));
+  ebml_element_cptr e            = ebml_element_cptr(es.FindNextElement(EBML_CONTEXT(m_segment.get()), upper_lvl_el_found, 0xFFFFFFFFL, true, 1));
   const libebml::EbmlCallbacks *callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), element_data.m_id);
 
   if (!e || !callbacks || (get_ebml_id(*e) != EBML_INFO_ID(*callbacks))) {
@@ -1589,7 +1589,7 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
   m_file->setFilePointer(pos);
 
   int upper_lvl_el = 0;
-  auto l1          = m_stream->FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el, 0xFFFFFFFFL, true, 1);
+  auto l1          = m_stream->FindNextElement(EBML_CONTEXT(m_segment.get()), upper_lvl_el, 0xFFFFFFFFL, true, 1);
 
   if (!l1)
     return;

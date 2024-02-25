@@ -1261,13 +1261,13 @@ kax_info_c::process_file() {
   int upper_lvl_el           = 0;
   libebml::EbmlElement *element_found = nullptr;
 
-  read_master(static_cast<libebml::EbmlMaster *>(l0.get()), EBML_CONTEXT(l0), upper_lvl_el, element_found);
+  read_master(static_cast<libebml::EbmlMaster *>(l0.get()), EBML_CONTEXT(l0.get()), upper_lvl_el, element_found);
   delete element_found;
 
   retain_element(l0);
 
   handle_elements_generic(*l0);
-  l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
+  l0->SkipData(*p->m_es, EBML_CONTEXT(l0.get()));
 
   while (true) {
     // NEXT element must be a segment
@@ -1279,7 +1279,7 @@ kax_info_c::process_file() {
 
     if (!Is<libmatroska::KaxSegment>(*l0)) {
       handle_elements_generic(*l0);
-      l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
+      l0->SkipData(*p->m_es, EBML_CONTEXT(l0.get()));
 
       continue;
     }
@@ -1288,7 +1288,7 @@ kax_info_c::process_file() {
     if (result == result_e::aborted)
       return result;
 
-    l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
+    l0->SkipData(*p->m_es, EBML_CONTEXT(l0.get()));
 
     if (!p->m_continue_at_cluster && !p->m_show_summary)
       break;

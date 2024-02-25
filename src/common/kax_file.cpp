@@ -105,7 +105,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
     if (l1) {
       mxdebug_if(m_debug_read_next,
                  fmt::format("kax_file::read_next_level1_element() case 1: other level 1 element {0} new pos {1} fsize {2} epos {3} esize {4}\n",
-                             EBML_NAME(l1), l1->GetElementPosition() + get_element_size(*l1), m_file_size, l1->GetElementPosition(), get_element_size(*l1)));
+                             EBML_NAME(l1.get()), l1->GetElementPosition() + get_element_size(*l1), m_file_size, l1->GetElementPosition(), get_element_size(*l1)));
 
       // If a specific level 1 is wanted, make sure it was actually
       // read. Otherwise try again.
@@ -128,7 +128,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
 
       mxdebug_if(m_debug_read_next,
                  fmt::format("kax_file::read_next_level1_element() case 2: other level 1 element {0} new pos {1} fsize {2} epos {3} esize {4}\n",
-                             EBML_NAME(l1), l1->GetElementPosition() + element_size, m_file_size, l1->GetElementPosition(), element_size));
+                             EBML_NAME(l1.get()), l1->GetElementPosition() + element_size, m_file_size, l1->GetElementPosition(), element_size));
 
       return ok ? read_next_level1_element(wanted_id) : nullptr;
     }
