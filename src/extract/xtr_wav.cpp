@@ -171,7 +171,7 @@ xtr_wavpack4_c::create_file(xtr_base_c *master,
 
   init_content_decoder(track);
 
-  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (priv)
     mpriv = decode_codec_private(priv);
 
@@ -271,12 +271,12 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
 
   // support hybrid mode data
   if (m_corr_out && (f.additions)) {
-    auto block_more = FindChild<libmatroska::KaxBlockMore>(f.additions);
+    auto block_more = find_child<libmatroska::KaxBlockMore>(f.additions);
 
     if (!block_more)
       return;
 
-    auto block_addition = FindChild<libmatroska::KaxBlockAdditional>(block_more);
+    auto block_addition = find_child<libmatroska::KaxBlockAdditional>(block_more);
     if (!block_addition)
       return;
 

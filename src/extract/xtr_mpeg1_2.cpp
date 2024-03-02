@@ -30,7 +30,7 @@ xtr_mpeg1_2_video_c::create_file(xtr_base_c *master,
 
   xtr_base_c::create_file(master, track);
 
-  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (priv)
     m_seq_hdr = decode_codec_private(priv);
 }

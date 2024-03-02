@@ -533,23 +533,23 @@ cluster_helper_c::render() {
     if (new_block_group) {
       // Set the reference priority if it was wanted.
       if ((0 < pack->ref_priority) && new_block_group->replace_simple_by_group())
-        libebml::GetChild<libmatroska::KaxReferencePriority>(*new_block_group).SetValue(pack->ref_priority);
+        get_child<libmatroska::KaxReferencePriority>(*new_block_group).SetValue(pack->ref_priority);
 
       // Handle BlockAdditions if needed
       if (!pack->data_adds.empty() && new_block_group->ReplaceSimpleByGroup()) {
-        auto &additions = AddEmptyChild<libmatroska::KaxBlockAdditions>(*new_block_group);
+        auto &additions = add_empty_child<libmatroska::KaxBlockAdditions>(*new_block_group);
 
         for (auto const &add : pack->data_adds) {
-          auto &block_more = AddEmptyChild<libmatroska::KaxBlockMore>(additions);
+          auto &block_more = add_empty_child<libmatroska::KaxBlockMore>(additions);
 
           block_more.PushElement(*new kax_block_add_id_c{m->always_write_block_add_ids});
           static_cast<kax_block_add_id_c &>(*block_more.GetElementList().back()).SetValue(add.id.value_or(1));
-          GetChild<libmatroska::KaxBlockAdditional>(block_more).CopyBuffer(static_cast<uint8_t *>(add.data->get_buffer()), add.data->get_size());
+          get_child<libmatroska::KaxBlockAdditional>(block_more).CopyBuffer(static_cast<uint8_t *>(add.data->get_buffer()), add.data->get_size());
         }
       }
 
       if (pack->has_discard_padding()) {
-        libebml::GetChild<libmatroska::KaxDiscardPadding>(*new_block_group).SetValue(pack->discard_padding.to_ns());
+        get_child<libmatroska::KaxDiscardPadding>(*new_block_group).SetValue(pack->discard_padding.to_ns());
         render_group->m_has_discard_padding = true;
       }
     }

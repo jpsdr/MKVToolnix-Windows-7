@@ -40,7 +40,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
   int sfreq  = (int)kt_get_a_sfreq(track);
 
   if (m_codec_id == MKV_A_AAC) {
-    auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+    auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
     if (!priv)
       mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 

@@ -476,7 +476,7 @@ set_timestamp_scale() {
   }
 
   g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timestamp_scale, g_max_ns_per_cluster);
-  GetChild<kax_timestamp_scale_c>(*s_kax_infos).SetValue(g_timestamp_scale);
+  get_child<kax_timestamp_scale_c>(*s_kax_infos).SetValue(g_timestamp_scale);
 
   mxdebug_if(debug, fmt::format("timestamp_scale: {0} max ns per cluster: {1}\n", g_timestamp_scale, g_max_ns_per_cluster));
 }
@@ -486,9 +486,9 @@ render_ebml_head(mm_io_c *out) {
   if (!s_head)
     s_head = std::make_unique<libebml::EbmlHead>();
 
-  GetChild<libebml::EDocType           >(*s_head).SetValue(outputting_webm() ? "webm" : "matroska");
-  GetChild<libebml::EDocTypeVersion    >(*s_head).SetValue(1);
-  GetChild<libebml::EDocTypeReadVersion>(*s_head).SetValue(1);
+  get_child<libebml::EDocType           >(*s_head).SetValue(outputting_webm() ? "webm" : "matroska");
+  get_child<libebml::EDocTypeVersion    >(*s_head).SetValue(1);
+  get_child<libebml::EDocTypeReadVersion>(*s_head).SetValue(1);
 
 #if LIBEBML_VERSION >= 0x020000
   s_head->Render(*out, render_should_write_arg(true));
@@ -566,8 +566,8 @@ create_type_based_track_order() {
 static void
 sort_tracks_by_track_number() {
   std::stable_sort(g_kax_tracks->begin(), g_kax_tracks->end(), [](auto a, auto b) {
-    return GetChildValue<libmatroska::KaxTrackNumber>(dynamic_cast<libmatroska::KaxTrackEntry &>(*a))
-         < GetChildValue<libmatroska::KaxTrackNumber>(dynamic_cast<libmatroska::KaxTrackEntry &>(*b));
+    return get_child_value<libmatroska::KaxTrackNumber>(dynamic_cast<libmatroska::KaxTrackEntry &>(*a))
+         < get_child_value<libmatroska::KaxTrackNumber>(dynamic_cast<libmatroska::KaxTrackEntry &>(*b));
   });
 }
 
@@ -602,16 +602,16 @@ render_headers(mm_io_c *out) {
       s_writing_date = info_data.writing_date;
     }
 
-    GetChild<libmatroska::KaxMuxingApp >(*s_kax_infos).SetValueUTF8(s_muxing_app);
-    GetChild<libmatroska::KaxWritingApp>(*s_kax_infos).SetValueUTF8(s_writing_app);
+    get_child<libmatroska::KaxMuxingApp >(*s_kax_infos).SetValueUTF8(s_muxing_app);
+    get_child<libmatroska::KaxWritingApp>(*s_kax_infos).SetValueUTF8(s_writing_app);
 
     if (g_write_date)
-      GetChild<libmatroska::KaxDateUTC>(*s_kax_infos).SetEpochDate(s_writing_date.toSecsSinceEpoch());
+      get_child<libmatroska::KaxDateUTC>(*s_kax_infos).SetEpochDate(s_writing_date.toSecsSinceEpoch());
     else
-      DeleteChildren<libmatroska::KaxDateUTC>(*s_kax_infos);
+      delete_children<libmatroska::KaxDateUTC>(*s_kax_infos);
 
     if (!g_segment_title.empty())
-      GetChild<libmatroska::KaxTitle>(*s_kax_infos).SetValueUTF8(g_segment_title.c_str());
+      get_child<libmatroska::KaxTitle>(*s_kax_infos).SetValueUTF8(g_segment_title.c_str());
 
     bool first_file = (1 == g_file_num);
 
@@ -619,7 +619,7 @@ render_headers(mm_io_c *out) {
 
     if (!outputting_webm()) {
       // Set the segment UIDs.
-      GetChild<libmatroska::KaxSegmentUID>(*s_kax_infos).CopyBuffer(s_seguid_current.data(), 128 / 8);
+      get_child<libmatroska::KaxSegmentUID>(*s_kax_infos).CopyBuffer(s_seguid_current.data(), 128 / 8);
 
       // Set the segment family
       if (!g_segfamily_uids.empty()) {
@@ -631,7 +631,7 @@ render_headers(mm_io_c *out) {
       // Set the chaptertranslate elements
       if (g_kax_info_chap) {
         // copy the libmatroska::KaxChapterTranslates in the current libmatroska::KaxInfo
-        auto *chapter_translate = FindChild<libmatroska::KaxChapterTranslate>(g_kax_info_chap.get());
+        auto *chapter_translate = find_child<libmatroska::KaxChapterTranslate>(g_kax_info_chap.get());
         while (chapter_translate) {
           s_kax_infos->PushElement(*new libmatroska::KaxChapterTranslate(*chapter_translate));
           chapter_translate = FindNextChild(*g_kax_info_chap, *chapter_translate);
@@ -639,30 +639,30 @@ render_headers(mm_io_c *out) {
       }
 
       if (first_file && g_seguid_link_previous)
-        GetChild<libmatroska::KaxPrevUID>(*s_kax_infos).CopyBuffer(g_seguid_link_previous->data(), 128 / 8);
+        get_child<libmatroska::KaxPrevUID>(*s_kax_infos).CopyBuffer(g_seguid_link_previous->data(), 128 / 8);
 
       // The next segment UID is also set in finish_file(). This is not
       // redundant! It is set here as well in order to reserve enough space
       // for the libmatroska::KaxInfo structure in the file. If it is removed later then
       // an libebml::EbmlVoid element will be used for the freed space.
       if (g_seguid_link_next)
-        GetChild<libmatroska::KaxNextUID>(*s_kax_infos).CopyBuffer(g_seguid_link_next->data(), 128 / 8);
+        get_child<libmatroska::KaxNextUID>(*s_kax_infos).CopyBuffer(g_seguid_link_next->data(), 128 / 8);
 
       if (!g_no_linking && g_cluster_helper->splitting()) {
-        GetChild<libmatroska::KaxNextUID>(*s_kax_infos).CopyBuffer(s_seguid_next.data(), 128 / 8);
+        get_child<libmatroska::KaxNextUID>(*s_kax_infos).CopyBuffer(s_seguid_next.data(), 128 / 8);
 
         if (!first_file)
-          GetChild<libmatroska::KaxPrevUID>(*s_kax_infos).CopyBuffer(s_seguid_prev.data(), 128 / 8);
+          get_child<libmatroska::KaxPrevUID>(*s_kax_infos).CopyBuffer(s_seguid_prev.data(), 128 / 8);
       }
 
       if (!g_segment_filename.empty())
-        GetChild<libmatroska::KaxSegmentFilename>(*s_kax_infos).SetValueUTF8(g_segment_filename);
+        get_child<libmatroska::KaxSegmentFilename>(*s_kax_infos).SetValueUTF8(g_segment_filename);
 
       if (!g_next_segment_filename.empty())
-        GetChild<libmatroska::KaxNextFilename>(*s_kax_infos).SetValueUTF8(g_next_segment_filename);
+        get_child<libmatroska::KaxNextFilename>(*s_kax_infos).SetValueUTF8(g_next_segment_filename);
 
       if (!g_previous_segment_filename.empty())
-        GetChild<libmatroska::KaxPrevFilename>(*s_kax_infos).SetValueUTF8(g_previous_segment_filename);
+        get_child<libmatroska::KaxPrevFilename>(*s_kax_infos).SetValueUTF8(g_previous_segment_filename);
 
       g_segment_filename.clear();
       g_next_segment_filename.clear();
@@ -738,7 +738,7 @@ adjust_cluster_seekhead_positions(uint64_t data_start_pos,
     if (!seek_entry)
       continue;
 
-    auto seek_position = FindChild<libmatroska::KaxSeekPosition>(*seek_entry);
+    auto seek_position = find_child<libmatroska::KaxSeekPosition>(*seek_entry);
     if (!seek_position)
       continue;
 
@@ -923,13 +923,13 @@ render_attachments(mm_io_c &out) {
     auto attch = *attachment_p;
 
     if ((1 == g_file_num) || attch.to_all_files) {
-      kax_a = !kax_a ? &GetChild<libmatroska::KaxAttached>(*s_kax_as) : &libebml::GetNextChild<libmatroska::KaxAttached>(*s_kax_as, *kax_a);
+      kax_a = !kax_a ? &get_child<libmatroska::KaxAttached>(*s_kax_as) : &libebml::GetNextChild<libmatroska::KaxAttached>(*s_kax_as, *kax_a);
 
       if (attch.description != "")
-        GetChild<libmatroska::KaxFileDescription>(kax_a).SetValueUTF8(attch.description);
+        get_child<libmatroska::KaxFileDescription>(kax_a).SetValueUTF8(attch.description);
 
       if (attch.mime_type != "")
-        GetChild<libmatroska::KaxMimeType>(kax_a).SetValue(attch.mime_type);
+        get_child<libmatroska::KaxMimeType>(kax_a).SetValue(attch.mime_type);
 
       std::string name;
       if (attch.stored_name == "")
@@ -938,10 +938,10 @@ render_attachments(mm_io_c &out) {
       else
         name = attch.stored_name;
 
-      GetChild<libmatroska::KaxFileName>(kax_a).SetValueUTF8(name);
-      GetChild<libmatroska::KaxFileUID >(kax_a).SetValue(attch.id);
+      get_child<libmatroska::KaxFileName>(kax_a).SetValueUTF8(name);
+      get_child<libmatroska::KaxFileUID >(kax_a).SetValue(attch.id);
 
-      GetChild<libmatroska::KaxFileData>(*kax_a).CopyBuffer(attch.data->get_buffer(), attch.data->get_size());
+      get_child<libmatroska::KaxFileData>(*kax_a).CopyBuffer(attch.data->get_buffer(), attch.data->get_size());
     }
   }
 
@@ -1253,15 +1253,15 @@ get_first_chapter_name_in_this_file() {
         continue;
 
       auto &chapter_atom     = *static_cast<libmatroska::KaxChapterAtom *>(edition_child);
-      auto chapter_timestamp = static_cast<int64_t>(FindChildValue<libmatroska::KaxChapterTimeStart>(chapter_atom));
-      auto chapter_display   = FindChild<libmatroska::KaxChapterDisplay>(chapter_atom);
+      auto chapter_timestamp = static_cast<int64_t>(find_child_value<libmatroska::KaxChapterTimeStart>(chapter_atom));
+      auto chapter_display   = find_child<libmatroska::KaxChapterDisplay>(chapter_atom);
 
       if (   !chapter_display
           || (   first_chapter
               && (chapter_timestamp >= first_chapter->first)))
         continue;
 
-      first_chapter = std::make_pair(chapter_timestamp, to_utf8(FindChildValue<libmatroska::KaxChapterString>(*chapter_display)));
+      first_chapter = std::make_pair(chapter_timestamp, to_utf8(find_child_value<libmatroska::KaxChapterString>(*chapter_display)));
     }
   }
 
@@ -1336,7 +1336,7 @@ add_tags_from_cue_chapters() {
     tuid = ptzrs_in_header_order[0]->get_uid();
 
   for (auto tag : *g_tags_from_cue_chapters)
-    GetChild<libmatroska::KaxTagTrackUID>(GetChild<libmatroska::KaxTagTargets>(*static_cast<libmatroska::KaxTag *>(tag))).SetValue(tuid);
+    get_child<libmatroska::KaxTagTrackUID>(get_child<libmatroska::KaxTagTargets>(*static_cast<libmatroska::KaxTag *>(tag))).SetValue(tuid);
 
   if (!s_kax_tags)
     s_kax_tags.swap(g_tags_from_cue_chapters);
@@ -1459,7 +1459,7 @@ add_split_points_from_remainig_chapter_numbers() {
       if (!atom)
         continue;
 
-      chapter_start_timestamps.push_back(FindChildValue<libmatroska::KaxChapterTimeStart, uint64_t>(atom, 0));
+      chapter_start_timestamps.push_back(find_child_value<libmatroska::KaxChapterTimeStart, uint64_t>(atom, 0));
     }
   }
 
@@ -1542,26 +1542,26 @@ prepare_additional_chapter_atoms_for_rendering() {
     s_first_file_minimum_timestamp = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0);
 
   auto offset   = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timestamp_in_file() + g_cluster_helper->get_discarded_duration() : 0) - s_first_file_minimum_timestamp;
-  auto &edition = GetChild<libmatroska::KaxEditionEntry>(*s_chapters_in_this_file);
+  auto &edition = get_child<libmatroska::KaxEditionEntry>(*s_chapters_in_this_file);
 
-  if (!FindChild<libmatroska::KaxEditionUID>(edition))
-    GetChild<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+  if (!find_child<libmatroska::KaxEditionUID>(edition))
+    get_child<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
   for (auto const &[ch_timestamp, ch_name, ch_language] : s_additional_chapter_atoms) {
     auto atom = cons<libmatroska::KaxChapterAtom>(new libmatroska::KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
                                                   new libmatroska::KaxChapterTimeStart, (ch_timestamp - offset).to_ns());
 
     if (!ch_name.empty()) {
-      auto &display = GetChild<libmatroska::KaxChapterDisplay>(*atom);
+      auto &display = get_child<libmatroska::KaxChapterDisplay>(*atom);
 
-      GetChild<libmatroska::KaxChapterString>(display).SetValueUTF8(ch_name);
+      get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(ch_name);
 
       if (ch_language.is_valid()) {
-        GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(ch_language.get_closest_iso639_2_alpha_3_code());
+        get_child<libmatroska::KaxChapterLanguage>(display).SetValue(ch_language.get_closest_iso639_2_alpha_3_code());
         if (!mtx::bcp47::language_c::is_disabled())
-          GetChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(ch_language.format());
+          get_child<libmatroska::KaxChapLanguageIETF>(display).SetValue(ch_language.format());
         else
-          DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
+          delete_children<libmatroska::KaxChapLanguageIETF>(display);
       }
     }
 
@@ -1696,13 +1696,13 @@ finish_file(bool last_file,
   int changed       = 0;
 
   if (last_file && g_seguid_link_next) {
-    GetChild<libmatroska::KaxNextUID>(*s_kax_infos).CopyBuffer(g_seguid_link_next->data(), 128 / 8);
+    get_child<libmatroska::KaxNextUID>(*s_kax_infos).CopyBuffer(g_seguid_link_next->data(), 128 / 8);
     changed = 1;
 
   } else if (last_file || g_no_linking) {
     size_t i;
     for (i = 0; s_kax_infos->ListSize() > i; ++i)
-      if (Is<libmatroska::KaxNextUID>((*s_kax_infos)[i])) {
+      if (is_type<libmatroska::KaxNextUID>((*s_kax_infos)[i])) {
         delete (*s_kax_infos)[i];
         s_kax_infos->Remove(i);
         changed = 2;

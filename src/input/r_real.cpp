@@ -698,13 +698,13 @@ real_reader_c::set_dimensions(real_demuxer_cptr const &dmx,
 
     }
 
-    auto video = GetChild<libmatroska::KaxTrackVideo>(*ptzr(dmx->ptzr).get_track_entry());
-    GetChild<libmatroska::KaxVideoPixelWidth>(video).SetValue(width);
-    GetChild<libmatroska::KaxVideoPixelHeight>(video).SetValue(height);
+    auto video = get_child<libmatroska::KaxTrackVideo>(*ptzr(dmx->ptzr).get_track_entry());
+    get_child<libmatroska::KaxVideoPixelWidth>(video).SetValue(width);
+    get_child<libmatroska::KaxVideoPixelHeight>(video).SetValue(height);
 
     if ((0 != disp_width) && (0 != disp_height)) {
-      GetChild<libmatroska::KaxVideoDisplayWidth>(video).SetValue(disp_width);
-      GetChild<libmatroska::KaxVideoDisplayHeight>(video).SetValue(disp_height);
+      get_child<libmatroska::KaxVideoDisplayWidth>(video).SetValue(disp_width);
+      get_child<libmatroska::KaxVideoDisplayHeight>(video).SetValue(disp_height);
     }
 
     rerender_track_headers();

@@ -71,7 +71,7 @@ std::string
 kax_analyzer_data_c::to_string() const {
   const libebml::EbmlCallbacks *callbacks = find_ebml_callbacks(EBML_INFO(libmatroska::KaxSegment), m_id);
 
-  if (!callbacks && Is<libebml::EbmlVoid>(m_id))
+  if (!callbacks && is_type<libebml::EbmlVoid>(m_id))
     callbacks = &EBML_CLASS_CALLBACK(libebml::EbmlVoid);
 
   std::string name;
@@ -319,7 +319,7 @@ kax_analyzer_c::process_internal() {
 
   // Find the libebml::EbmlHead element. Must be the first one.
   m_ebml_head.reset(static_cast<libebml::EbmlHead *>(m_stream->FindNextID(EBML_INFO(libebml::EbmlHead), 0xFFFFFFFFL)));
-  if (!m_ebml_head || !Is<libebml::EbmlHead>(*m_ebml_head))
+  if (!m_ebml_head || !is_type<libebml::EbmlHead>(*m_ebml_head))
     throw mtx::kax_analyzer_x(Y("Not a valid Matroska file (no EBML head found)"));
 
   libebml::EbmlElement *l0{};
@@ -341,7 +341,7 @@ kax_analyzer_c::process_internal() {
     if (!l0)
       throw mtx::kax_analyzer_x(Y("Not a valid Matroska file (no segment/level 0 element found)"));
 
-    if (Is<libmatroska::KaxSegment>(l0))
+    if (is_type<libmatroska::KaxSegment>(l0))
       break;
 
     l0->SkipData(*m_stream, EBML_CONTEXT(l0));
@@ -374,8 +374,8 @@ kax_analyzer_c::process_internal() {
 
     m_data.push_back(kax_analyzer_data_c::create(get_ebml_id(*l1), l1->GetElementPosition(), l1->ElementSize(render_should_write_arg(true)), l1->IsFiniteSize()));
 
-    cluster_found   |= Is<libmatroska::KaxCluster>(l1);
-    meta_seek_found |= Is<libmatroska::KaxSeekHead>(l1);
+    cluster_found   |= is_type<libmatroska::KaxCluster>(l1);
+    meta_seek_found |= is_type<libmatroska::KaxSeekHead>(l1);
 
     l1->SkipData(*m_stream, EBML_CONTEXT(l1));
     delete l1;
@@ -658,7 +658,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
   // Are the following elements libebml::EbmlVoid elements?
   size_t end_idx = data_idx + 1;
-  while ((m_data.size() > end_idx) && Is<libebml::EbmlVoid>(m_data[end_idx]->m_id))
+  while ((m_data.size() > end_idx) && is_type<libebml::EbmlVoid>(m_data[end_idx]->m_id))
     ++end_idx;
 
   if (end_idx > data_idx + 1) {
@@ -754,7 +754,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
     add_to_meta_seek(e.get());
     merge_void_elements();
 
-    if (Is<libmatroska::KaxCluster>(*e)) {
+    if (is_type<libmatroska::KaxCluster>(*e)) {
       mxdebug_if(s_debug_void,
                  fmt::format("handle_void_elements({0}): shifted element is cluster; adjusting cues; original relative position {1} new relative position {2}\n",
                              data_idx, m_segment->GetRelativePosition(original_position), m_segment->GetRelativePosition(e->GetElementPosition())));
@@ -851,7 +851,7 @@ kax_analyzer_c::adjust_cues_for_cluster(libmatroska::KaxCluster const &cluster,
       if (!dynamic_cast<libmatroska::KaxCueTrackPositions *>(potential_track_positions))
         continue;
 
-      auto cluster_position = FindChild<libmatroska::KaxCueClusterPosition>(static_cast<libmatroska::KaxCueTrackPositions &>(*potential_track_positions));
+      auto cluster_position = find_child<libmatroska::KaxCueClusterPosition>(static_cast<libmatroska::KaxCueTrackPositions &>(*potential_track_positions));
       if (!cluster_position || (cluster_position->GetValue() != original_relative_position))
         continue;
 
@@ -882,7 +882,7 @@ kax_analyzer_c::remove_from_meta_seeks(libebml::EbmlId id) {
 
   for (data_idx = 0; m_data.size() > data_idx; ++data_idx) {
     // We only have to do work on SeekHead elements. Skip the others.
-    if (!Is<libmatroska::KaxSeekHead>(m_data[data_idx]->m_id))
+    if (!is_type<libmatroska::KaxSeekHead>(m_data[data_idx]->m_id))
       continue;
 
     // Read the element from the file. Remember its size so that a new
@@ -898,7 +898,7 @@ kax_analyzer_c::remove_from_meta_seeks(libebml::EbmlId id) {
     bool modified = false;
     size_t sh_idx = 0;
     while (seek_head->ListSize() > sh_idx) {
-      if (!Is<libmatroska::KaxSeek>((*seek_head)[sh_idx])) {
+      if (!is_type<libmatroska::KaxSeek>((*seek_head)[sh_idx])) {
         ++sh_idx;
         continue;
       }
@@ -986,7 +986,7 @@ kax_analyzer_c::merge_void_elements() {
 
   while (m_data.size() > start_idx) {
     // We only have to do work on libebml::EbmlVoid elements. Skip the others.
-    if (!Is<libebml::EbmlVoid>(m_data[start_idx]->m_id)) {
+    if (!is_type<libebml::EbmlVoid>(m_data[start_idx]->m_id)) {
       ++start_idx;
       continue;
     }
@@ -995,7 +995,7 @@ kax_analyzer_c::merge_void_elements() {
     // there are at this position and calculate the combined size.
     size_t end_idx  = start_idx + 1;
     size_t new_size = m_data[start_idx]->m_size;
-    while ((m_data.size() > end_idx) && Is<libebml::EbmlVoid>(m_data[end_idx]->m_id)) {
+    while ((m_data.size() > end_idx) && is_type<libebml::EbmlVoid>(m_data[end_idx]->m_id)) {
       new_size += m_data[end_idx]->m_size;
       ++end_idx;
     }
@@ -1025,7 +1025,7 @@ kax_analyzer_c::merge_void_elements() {
   // See how many void elements there are at the end of the file.
   start_idx = m_data.size();
 
-  while ((0 < start_idx) && Is<libebml::EbmlVoid>(m_data[start_idx - 1]->m_id))
+  while ((0 < start_idx) && is_type<libebml::EbmlVoid>(m_data[start_idx - 1]->m_id))
     --start_idx;
 
   // If there are none then we're done.
@@ -1069,7 +1069,7 @@ kax_analyzer_c::write_element(libebml::EbmlElement *e,
   size_t data_idx;
   for (data_idx = (ps_anywhere == strategy ? 0 : m_data.size() - 1); m_data.size() > data_idx; ++data_idx) {
     // We're only interested in libebml::EbmlVoid elements. Skip the others.
-    if (!Is<libebml::EbmlVoid>(m_data[data_idx]->m_id))
+    if (!is_type<libebml::EbmlVoid>(m_data[data_idx]->m_id))
       continue;
 
     // Skip the element if it doesn't provide enough space.
@@ -1121,13 +1121,13 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
   for (int data_idx = 0, end = m_data.size(); end > data_idx; ++data_idx) {
     auto const &data = *m_data[data_idx];
 
-    if (Is<libmatroska::KaxSeekHead>(data.m_id)) {
+    if (is_type<libmatroska::KaxSeekHead>(data.m_id)) {
       if (static_cast<unsigned int>(data_idx) == seek_head_idx)
         return seek_head_idx;
 
       first_seek_head_idx = data_idx;
 
-    } else if (Is<libmatroska::KaxCluster>(data.m_id))
+    } else if (is_type<libmatroska::KaxCluster>(data.m_id))
       break;
   }
 
@@ -1161,10 +1161,10 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
     for (int data_idx = 0, end = m_data.size(); data_idx < end; ++data_idx) {
       auto &data = *m_data[data_idx];
 
-      if (Is<libmatroska::KaxCluster>(data.m_id))
+      if (is_type<libmatroska::KaxCluster>(data.m_id))
         break;
 
-      if (!Is<libebml::EbmlVoid>(data.m_id))
+      if (!is_type<libebml::EbmlVoid>(data.m_id))
         continue;
 
       // Avoid the case with the space being only one byte larger than
@@ -1210,7 +1210,7 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(libebml::EbmlElement *e) {
 
   for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
     // We only have to do work on SeekHead elements. Skip the others.
-    if (!Is<libmatroska::KaxSeekHead>(m_data[data_idx]->m_id))
+    if (!is_type<libmatroska::KaxSeekHead>(m_data[data_idx]->m_id))
       continue;
 
     // Calculate how much free space there is behind the seek head.
@@ -1218,7 +1218,7 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(libebml::EbmlElement *e) {
     // at the end of the file and that all consecutive libebml::EbmlVoid elements
     // have been merged into a single element.
     size_t available_space = m_data[data_idx]->m_size;
-    if (((data_idx + 1) < m_data.size()) && Is<libebml::EbmlVoid>(m_data[data_idx + 1]->m_id))
+    if (((data_idx + 1) < m_data.size()) && is_type<libebml::EbmlVoid>(m_data[data_idx + 1]->m_id))
       available_space += m_data[data_idx + 1]->m_size;
 
     // Read the seek head, index the element and see how much space it needs.
@@ -1373,7 +1373,7 @@ kax_analyzer_c::create_new_meta_seek_at_start(libebml::EbmlElement *e) {
     auto &data = *m_data[data_idx];
 
     // We can only overwrite void elements. Skip the others.
-    if (!Is<libebml::EbmlVoid>(data.m_id))
+    if (!is_type<libebml::EbmlVoid>(data.m_id))
       continue;
 
     // Skip the element if it doesn't offer enough space for the seek head.
@@ -1410,7 +1410,7 @@ kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
   for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
     auto const &id = m_data[data_idx]->m_id;
 
-    if (Is<libmatroska::KaxCluster>(id))
+    if (is_type<libmatroska::KaxCluster>(id))
       break;
 
     if (mtx::included_in(id, EBML_ID(libmatroska::KaxAttachments)))
@@ -1572,7 +1572,7 @@ kax_analyzer_c::read_all_meta_seeks() {
     positions_found[m_data[i]->m_pos] = true;
 
   for (i = 0; i < num_entries; i++)
-    if (Is<libmatroska::KaxSeekHead>(m_data[i]->m_id))
+    if (is_type<libmatroska::KaxSeekHead>(m_data[i]->m_id))
       read_meta_seek(m_data[i]->m_pos, positions_found);
 
   std::sort(m_data.begin(), m_data.end());
@@ -1594,7 +1594,7 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
   if (!l1)
     return;
 
-  if (!Is<libmatroska::KaxSeekHead>(l1)) {
+  if (!is_type<libmatroska::KaxSeekHead>(l1)) {
     delete l1;
     return;
   }
@@ -1605,11 +1605,11 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
 
   unsigned int i;
   for (i = 0; master->ListSize() > i; i++) {
-    if (!Is<libmatroska::KaxSeek>((*master)[i]))
+    if (!is_type<libmatroska::KaxSeek>((*master)[i]))
       continue;
 
     auto seek        = static_cast<libmatroska::KaxSeek *>((*master)[i]);
-    auto seek_id     = FindChild<libmatroska::KaxSeekID>(seek);
+    auto seek_id     = find_child<libmatroska::KaxSeekID>(seek);
     int64_t seek_pos = seek->Location() + m_segment->GetDataStart();
 
     if ((0 == pos) || !seek_id)
@@ -1622,7 +1622,7 @@ kax_analyzer_c::read_meta_seek(uint64_t pos,
     m_data.push_back(kax_analyzer_data_c::create(the_id, seek_pos, -1));
     positions_found[seek_pos] = true;
 
-    if (Is<libmatroska::KaxSeekHead>(the_id))
+    if (is_type<libmatroska::KaxSeekHead>(the_id))
       read_meta_seek(seek_pos, positions_found);
   }
 
@@ -1670,7 +1670,7 @@ kax_analyzer_c::fix_unknown_size_for_last_level1_element() {
 
 kax_analyzer_c::placement_strategy_e
 kax_analyzer_c::get_placement_strategy_for(libebml::EbmlElement *e) {
-  return Is<libmatroska::KaxTags>(e) ? ps_end : ps_anywhere;
+  return is_type<libmatroska::KaxTags>(e) ? ps_end : ps_anywhere;
 }
 
 libebml::EbmlHead &
@@ -1714,7 +1714,7 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
     if (ok) {
       auto element      = analyzer->read_all(EBML_INFO(libmatroska::KaxInfo));
       auto segment_info = dynamic_cast<libmatroska::KaxInfo *>(element.get());
-      auto segment_uid  = segment_info ? FindChild<libmatroska::KaxSegmentUID>(segment_info) : nullptr;
+      auto segment_uid  = segment_info ? find_child<libmatroska::KaxSegmentUID>(segment_info) : nullptr;
 
       if (segment_uid)
         return std::make_shared<mtx::bits::value_c>(*segment_uid);
@@ -1754,7 +1754,7 @@ kax_analyzer_c::with_elements(const libebml::EbmlId &id,
 
 void
 kax_analyzer_c::determine_webm() {
-  auto doc_type = FindChild<libebml::EDocType>(*m_ebml_head);
+  auto doc_type = find_child<libebml::EDocType>(*m_ebml_head);
   m_is_webm     = doc_type && (doc_type->GetValue() == "webm");
 }
 

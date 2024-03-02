@@ -41,7 +41,7 @@ bool
 content_decoder_c::initialize(libmatroska::KaxTrackEntry &ktentry) {
   encodings.clear();
 
-  auto kcencodings = FindChild<libmatroska::KaxContentEncodings>(&ktentry);
+  auto kcencodings = find_child<libmatroska::KaxContentEncodings>(&ktentry);
   if (!kcencodings)
     return true;
 
@@ -54,14 +54,14 @@ content_decoder_c::initialize(libmatroska::KaxTrackEntry &ktentry) {
 
     kax_content_encoding_t enc;
 
-    enc.order    = FindChildValue<libmatroska::KaxContentEncodingOrder>(kcenc);
-    enc.type     = FindChildValue<libmatroska::KaxContentEncodingType >(kcenc);
-    enc.scope    = FindChildValue<libmatroska::KaxContentEncodingScope>(kcenc, 1u);
+    enc.order    = find_child_value<libmatroska::KaxContentEncodingOrder>(kcenc);
+    enc.type     = find_child_value<libmatroska::KaxContentEncodingType >(kcenc);
+    enc.scope    = find_child_value<libmatroska::KaxContentEncodingScope>(kcenc, 1u);
 
-    auto ce_comp = FindChild<libmatroska::KaxContentCompression>(kcenc);
+    auto ce_comp = find_child<libmatroska::KaxContentCompression>(kcenc);
     if (ce_comp) {
-      enc.comp_algo     = FindChildValue<libmatroska::KaxContentCompAlgo    >(ce_comp);
-      enc.comp_settings = FindChildValue<libmatroska::KaxContentCompSettings>(ce_comp);
+      enc.comp_algo     = find_child_value<libmatroska::KaxContentCompAlgo    >(ce_comp);
+      enc.comp_settings = find_child_value<libmatroska::KaxContentCompSettings>(ce_comp);
     }
 
     if (1 == enc.type) {

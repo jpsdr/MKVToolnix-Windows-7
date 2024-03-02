@@ -58,16 +58,16 @@ attachment_t::parse(libmatroska::KaxAttached &att) {
   for (k = 0; att.ListSize() > k; ++k) {
     libebml::EbmlElement *e = att[k];
 
-    if (Is<libmatroska::KaxFileName>(e))
+    if (is_type<libmatroska::KaxFileName>(e))
       name = static_cast<libmatroska::KaxFileName *>(e)->GetValueUTF8();
 
-    else if (Is<libmatroska::KaxMimeType>(e))
+    else if (is_type<libmatroska::KaxMimeType>(e))
       type = static_cast<libmatroska::KaxMimeType *>(e)->GetValue();
 
-    else if (Is<libmatroska::KaxFileUID>(e))
+    else if (is_type<libmatroska::KaxFileUID>(e))
       id = static_cast<libmatroska::KaxFileUID *>(e)->GetValue();
 
-    else if (Is<libmatroska::KaxFileData>(e)) {
+    else if (is_type<libmatroska::KaxFileData>(e)) {
       fdata = static_cast<libmatroska::KaxFileData *>(e);
       size  = fdata->GetSize();
     }

@@ -61,13 +61,13 @@ track_statistics_c::find_or_create_tag(libmatroska::KaxTags &tags)
     if (!tag)
       continue;
 
-    auto targets = FindChild<libmatroska::KaxTagTargets>(*tag);
+    auto targets = find_child<libmatroska::KaxTagTargets>(*tag);
     if (!targets)
       continue;
 
-    auto actual_target_type_value = static_cast<mtx::tags::target_type_e>(FindChildValue<libmatroska::KaxTagTargetTypeValue>(*targets, 0ull));
-    auto actual_id                = FindChildValue<libmatroska::KaxTagTrackUID>(*targets, 0ull);
-    auto actual_target_type       = FindChild<libmatroska::KaxTagTargetType>(*targets);
+    auto actual_target_type_value = static_cast<mtx::tags::target_type_e>(find_child_value<libmatroska::KaxTagTargetTypeValue>(*targets, 0ull));
+    auto actual_id                = find_child_value<libmatroska::KaxTagTrackUID>(*targets, 0ull);
+    auto actual_target_type       = find_child<libmatroska::KaxTagTargetType>(*targets);
 
     if (   (actual_target_type_value == mtx::tags::Movie)
         && (actual_id                == m_track_uid)

@@ -451,33 +451,33 @@ guess_mime_type_and_report(std::string file_name) {
 static void
 handle_segmentinfo() {
   // segment families
-  libmatroska::KaxSegmentFamily *family = FindChild<libmatroska::KaxSegmentFamily>(g_kax_info_chap.get());
+  libmatroska::KaxSegmentFamily *family = find_child<libmatroska::KaxSegmentFamily>(g_kax_info_chap.get());
   while (family) {
     g_segfamily_uids.add_family_uid(*family);
     family = FindNextChild(*g_kax_info_chap, *family);
   }
 
-  libebml::EbmlBinary *uid = FindChild<libmatroska::KaxSegmentUID>(g_kax_info_chap.get());
+  libebml::EbmlBinary *uid = find_child<libmatroska::KaxSegmentUID>(g_kax_info_chap.get());
   if (uid)
     g_forced_seguids.push_back(mtx::bits::value_cptr(new mtx::bits::value_c(*uid)));
 
-  uid = FindChild<libmatroska::KaxNextUID>(g_kax_info_chap.get());
+  uid = find_child<libmatroska::KaxNextUID>(g_kax_info_chap.get());
   if (uid)
     g_seguid_link_next = mtx::bits::value_cptr(new mtx::bits::value_c(*uid));
 
-  uid = FindChild<libmatroska::KaxPrevUID>(g_kax_info_chap.get());
+  uid = find_child<libmatroska::KaxPrevUID>(g_kax_info_chap.get());
   if (uid)
     g_seguid_link_previous = mtx::bits::value_cptr(new mtx::bits::value_c(*uid));
 
-  auto segment_filename = FindChild<libmatroska::KaxSegmentFilename>(g_kax_info_chap.get());
+  auto segment_filename = find_child<libmatroska::KaxSegmentFilename>(g_kax_info_chap.get());
   if (segment_filename)
     g_segment_filename = segment_filename->GetValueUTF8();
 
-  auto next_segment_filename = FindChild<libmatroska::KaxNextFilename>(g_kax_info_chap.get());
+  auto next_segment_filename = find_child<libmatroska::KaxNextFilename>(g_kax_info_chap.get());
   if (next_segment_filename)
     g_next_segment_filename = next_segment_filename->GetValueUTF8();
 
-  auto previous_segment_filename = FindChild<libmatroska::KaxPrevFilename>(g_kax_info_chap.get());
+  auto previous_segment_filename = find_child<libmatroska::KaxPrevFilename>(g_kax_info_chap.get());
   if (previous_segment_filename)
     g_previous_segment_filename = previous_segment_filename->GetValueUTF8();
 }

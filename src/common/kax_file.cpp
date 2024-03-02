@@ -48,7 +48,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
 
     if (element && report_cluster_timestamp && (-1 != m_timestamp_scale) && (EBML_ID(libmatroska::KaxCluster).GetValue() == wanted_id))
       report(fmt::format(Y("The first cluster timestamp after the resync is {0}.\n"),
-                         mtx::string::format_timestamp(FindChildValue<kax_cluster_timestamp_c>(static_cast<libmatroska::KaxCluster *>(element.get())) * m_timestamp_scale)));
+                         mtx::string::format_timestamp(find_child_value<kax_cluster_timestamp_c>(static_cast<libmatroska::KaxCluster *>(element.get())) * m_timestamp_scale)));
 
     return element;
 

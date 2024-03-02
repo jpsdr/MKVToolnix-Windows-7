@@ -52,19 +52,19 @@ cues_c::add(libmatroska::KaxCues &cues) {
 
 void
 cues_c::add(libmatroska::KaxCuePoint &point) {
-  uint64_t timestamp = FindChildValue<libmatroska::KaxCueTime>(point) * g_timestamp_scale;
+  uint64_t timestamp = find_child_value<libmatroska::KaxCueTime>(point) * g_timestamp_scale;
 
   for (auto point_child : point) {
     auto positions = dynamic_cast<libmatroska::KaxCueTrackPositions *>(point_child);
     if (!positions)
       continue;
 
-    uint64_t track_num = FindChildValue<libmatroska::KaxCueTrack>(*positions);
+    uint64_t track_num = find_child_value<libmatroska::KaxCueTrack>(*positions);
     assert(track_num <= static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
 
-    m_points.push_back({ timestamp, 0, FindChildValue<libmatroska::KaxCueClusterPosition>(*positions), static_cast<uint32_t>(track_num), 0 });
+    m_points.push_back({ timestamp, 0, find_child_value<libmatroska::KaxCueClusterPosition>(*positions), static_cast<uint32_t>(track_num), 0 });
 
-    uint64_t codec_state_position = FindChildValue<libmatroska::KaxCueCodecState>(*positions);
+    uint64_t codec_state_position = find_child_value<libmatroska::KaxCueCodecState>(*positions);
     if (codec_state_position)
       m_codec_state_position_map[ id_timestamp_t{ track_num, timestamp } ] = codec_state_position;
   }
@@ -101,21 +101,21 @@ cues_c::write(mm_io_c &out,
   for (auto &point : m_points) {
     libmatroska::KaxCuePoint kc_point;
 
-    GetChild<libmatroska::KaxCueTime>(kc_point).SetValue(point.timestamp / g_timestamp_scale);
+    get_child<libmatroska::KaxCueTime>(kc_point).SetValue(point.timestamp / g_timestamp_scale);
 
-    auto &positions = GetChild<libmatroska::KaxCueTrackPositions>(kc_point);
-    GetChild<libmatroska::KaxCueTrack>(positions).SetValue(point.track_num);
-    GetChild<libmatroska::KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
+    auto &positions = get_child<libmatroska::KaxCueTrackPositions>(kc_point);
+    get_child<libmatroska::KaxCueTrack>(positions).SetValue(point.track_num);
+    get_child<libmatroska::KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
 
     auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
     if (codec_state_position != m_codec_state_position_map.end())
-      GetChild<libmatroska::KaxCueCodecState>(positions).SetValue(codec_state_position->second);
+      get_child<libmatroska::KaxCueCodecState>(positions).SetValue(codec_state_position->second);
 
     if (point.relative_position)
-      GetChild<libmatroska::KaxCueRelativePosition>(positions).SetValue(point.relative_position);
+      get_child<libmatroska::KaxCueRelativePosition>(positions).SetValue(point.relative_position);
 
     if (point.duration)
-      GetChild<libmatroska::KaxCueDuration>(positions).SetValue(round_timestamp_scale(point.duration) / g_timestamp_scale);
+      get_child<libmatroska::KaxCueDuration>(positions).SetValue(round_timestamp_scale(point.duration) / g_timestamp_scale);
 
     g_doc_type_version_handler->render(kc_point, out);
   }
@@ -161,7 +161,7 @@ cues_c::calculate_block_positions(libmatroska::KaxCluster &cluster)
     if (!block_group)
       continue;
 
-    auto block = FindChild<libmatroska::KaxBlock>(block_group);
+    auto block = find_child<libmatroska::KaxBlock>(block_group);
     if (!block)
       continue;
 

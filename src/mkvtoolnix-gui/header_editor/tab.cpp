@@ -472,7 +472,7 @@ Tab::hasBeenModified() {
 
 void
 Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
-  auto trackType = FindChildValue<libmatroska::KaxTrackType>(page.m_master);
+  auto trackType = find_child_value<libmatroska::KaxTrackType>(page.m_master);
 
   if (!mtx::included_in(trackType, track_video, track_audio))
     return;
@@ -480,10 +480,10 @@ Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
   std::unordered_map<libebml::EbmlMaster *, bool> handled;
 
   if (trackType == track_video) {
-    auto trackVideo           = &GetChildEmptyIfNew<libmatroska::KaxTrackVideo>(page.m_master);
-    auto videoColor           = &GetChildEmptyIfNew<libmatroska::KaxVideoColour>(trackVideo);
-    auto videoColorMasterMeta = &GetChildEmptyIfNew<libmatroska::KaxVideoColourMasterMeta>(videoColor);
-    auto videoProjection      = &GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(trackVideo);
+    auto trackVideo           = &get_child_empty_if_new<libmatroska::KaxTrackVideo>(page.m_master);
+    auto videoColor           = &get_child_empty_if_new<libmatroska::KaxVideoColour>(trackVideo);
+    auto videoColorMasterMeta = &get_child_empty_if_new<libmatroska::KaxVideoColourMasterMeta>(videoColor);
+    auto videoProjection      = &get_child_empty_if_new<libmatroska::KaxVideoProjection>(trackVideo);
 
     remove_master_from_parent_if_empty_or_only_defaults(videoColor,     videoColorMasterMeta, handled);
     remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoColor,           handled);
@@ -492,7 +492,7 @@ Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
 
   } else
     // trackType is track_audio
-    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, &GetChildEmptyIfNew<libmatroska::KaxTrackAudio>(page.m_master), handled);
+    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, &get_child_empty_if_new<libmatroska::KaxTrackAudio>(page.m_master), handled);
 }
 
 void
@@ -606,7 +606,7 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
     if (!kTrackEntry)
       continue;
 
-    auto kTrackType = FindChild<libmatroska::KaxTrackType>(kTrackEntry);
+    auto kTrackType = find_child<libmatroska::KaxTrackType>(kTrackEntry);
     if (!kTrackType)
       continue;
 
@@ -636,10 +636,10 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       projectionPage->setParentPage(*page);
       projectionPage->init();
 
-      parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]            = &GetChildEmptyIfNew<libmatroska::KaxTrackVideo>(kTrackEntry);
-      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]           = &GetChildEmptyIfNew<libmatroska::KaxVideoColour>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]);
-      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColourMasterMeta)] = &GetChildEmptyIfNew<libmatroska::KaxVideoColourMasterMeta>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]);
-      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoProjection)]       = &GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]            = &get_child_empty_if_new<libmatroska::KaxTrackVideo>(kTrackEntry);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]           = &get_child_empty_if_new<libmatroska::KaxVideoColour>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColourMasterMeta)] = &get_child_empty_if_new<libmatroska::KaxVideoColourMasterMeta>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoProjection)]       = &get_child_empty_if_new<libmatroska::KaxVideoProjection>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]);
 
       parentPagesByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]              = page;
       parentPagesByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]             = colorPage;
@@ -647,7 +647,7 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       parentPagesByCallback[&EBML_INFO(libmatroska::KaxVideoProjection)]         = projectionPage;
 
     } else if (track_audio == trackType) {
-      parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackAudio)]            = &GetChildEmptyIfNew<libmatroska::KaxTrackAudio>(kTrackEntry);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackAudio)]            = &get_child_empty_if_new<libmatroska::KaxTrackAudio>(kTrackEntry);
       parentPagesByCallback[&EBML_INFO(libmatroska::KaxTrackAudio)]              = page;
     }
 
@@ -970,7 +970,7 @@ void
 Tab::updateTracksElementToMatchTrackOrder() {
   auto &tracks = static_cast<libebml::EbmlMaster &>(*m_eTracks);
 
-  RemoveChildren<libmatroska::KaxTrackEntry>(tracks);
+  remove_children<libmatroska::KaxTrackEntry>(tracks);
 
   for (auto page : m_model->topLevelPages())
     if (dynamic_cast<TrackTypePage *>(page))

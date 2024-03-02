@@ -147,16 +147,16 @@ unify_legacy_and_bcp47_languages_and_countries(libebml::EbmlElement &elt) {
   std::sort(bcp47_languages.begin(),  bcp47_languages.end());
 
   for (auto const &legacy_language : legacy_languages)
-    AddEmptyChild<libmatroska::KaxChapterLanguage>(display).SetValue(legacy_language);
+    add_empty_child<libmatroska::KaxChapterLanguage>(display).SetValue(legacy_language);
 
   for (auto const &legacy_country : legacy_countries)
-    AddEmptyChild<libmatroska::KaxChapterCountry>(display).SetValue(legacy_country);
+    add_empty_child<libmatroska::KaxChapterCountry>(display).SetValue(legacy_country);
 
   if (mtx::bcp47::language_c::is_disabled())
     return;
 
   for (auto const &bcp47_language : bcp47_languages)
-    AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(bcp47_language.format());
+    add_empty_child<libmatroska::KaxChapLanguageIETF>(display).SetValue(bcp47_language.format());
 }
 
 /** \brief Throw a special chapter parser exception.
@@ -322,25 +322,25 @@ parse_simple(mm_text_io_c *in,
 
       if ((start >= min_ts) && ((start <= max_ts) || (max_ts == -1))) {
         if (!edition)
-          edition = &GetChild<libmatroska::KaxEditionEntry>(*chaps);
+          edition = &get_child<libmatroska::KaxEditionEntry>(*chaps);
 
-        atom = &GetFirstOrNextChild<libmatroska::KaxChapterAtom>(*edition, atom);
-        GetChild<libmatroska::KaxChapterUID>(*atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
-        GetChild<libmatroska::KaxChapterTimeStart>(*atom).SetValue(start - offset);
+        atom = &get_first_or_next_child<libmatroska::KaxChapterAtom>(*edition, atom);
+        get_child<libmatroska::KaxChapterUID>(*atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+        get_child<libmatroska::KaxChapterTimeStart>(*atom).SetValue(start - offset);
 
-        auto &display = GetChild<libmatroska::KaxChapterDisplay>(*atom);
+        auto &display = get_child<libmatroska::KaxChapterDisplay>(*atom);
 
-        GetChild<libmatroska::KaxChapterString>(display).SetValueUTF8(name);
+        get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(name);
         if (use_language.is_valid()) {
-          GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(use_language.get_closest_iso639_2_alpha_3_code());
+          get_child<libmatroska::KaxChapterLanguage>(display).SetValue(use_language.get_closest_iso639_2_alpha_3_code());
           if (!mtx::bcp47::language_c::is_disabled())
-            GetChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(use_language.format());
+            get_child<libmatroska::KaxChapLanguageIETF>(display).SetValue(use_language.format());
           else
-            DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
+            delete_children<libmatroska::KaxChapLanguageIETF>(display);
         }
 
         if (!g_default_country.empty())
-          GetChild<libmatroska::KaxChapterCountry>(display).SetValue(g_default_country);
+          get_child<libmatroska::KaxChapterCountry>(display).SetValue(g_default_country);
 
         ++num;
       }
@@ -525,7 +525,7 @@ parse(mm_text_io_c *in,
 int64_t
 get_start(libmatroska::KaxChapterAtom &atom,
           int64_t value_if_not_found) {
-  auto start = FindChild<libmatroska::KaxChapterTimeStart>(&atom);
+  auto start = find_child<libmatroska::KaxChapterTimeStart>(&atom);
 
   return !start ? value_if_not_found : static_cast<int64_t>(start->GetValue());
 }
@@ -544,7 +544,7 @@ get_start(libmatroska::KaxChapterAtom &atom,
 int64_t
 get_end(libmatroska::KaxChapterAtom &atom,
         int64_t value_if_not_found) {
-  auto end = FindChild<libmatroska::KaxChapterTimeEnd>(&atom);
+  auto end = find_child<libmatroska::KaxChapterTimeEnd>(&atom);
 
   return !end ? value_if_not_found : static_cast<int64_t>(end->GetValue());
 }
@@ -560,11 +560,11 @@ get_end(libmatroska::KaxChapterAtom &atom,
 */
 std::string
 get_name(libmatroska::KaxChapterAtom &atom) {
-  auto display = FindChild<libmatroska::KaxChapterDisplay>(&atom);
+  auto display = find_child<libmatroska::KaxChapterDisplay>(&atom);
   if (!display)
     return "";
 
-  auto name = FindChild<libmatroska::KaxChapterString>(display);
+  auto name = find_child<libmatroska::KaxChapterString>(display);
   if (!name)
     return "";
 
@@ -582,7 +582,7 @@ get_name(libmatroska::KaxChapterAtom &atom) {
 */
 int64_t
 get_uid(libmatroska::KaxChapterAtom &atom) {
-  auto uid = FindChild<libmatroska::KaxChapterUID>(&atom);
+  auto uid = find_child<libmatroska::KaxChapterUID>(&atom);
 
   return !uid ? -1 : static_cast<int64_t>(uid->GetValue());
 }
@@ -843,7 +843,7 @@ merge_entries(libebml::EbmlMaster &master) {
       auto num_children    = merge_this->ListSize();
 
       while (merge_child_idx < num_children) {
-        if (Is<libmatroska::KaxChapterAtom>((*merge_this)[merge_child_idx])) {
+        if (is_type<libmatroska::KaxChapterAtom>((*merge_this)[merge_child_idx])) {
           atom->PushElement(*(*merge_this)[merge_child_idx]);
           merge_this->Remove(merge_child_idx);
           --num_children;
@@ -862,9 +862,9 @@ merge_entries(libebml::EbmlMaster &master) {
     // Assign the start and end timestamp to the chapter. Only assign an
     // end timestamp if one was present in at least one of the merged
     // chapter atoms.
-    GetChild<libmatroska::KaxChapterTimeStart>(*atom).SetValue(start_ts);
+    get_child<libmatroska::KaxChapterTimeStart>(*atom).SetValue(start_ts);
     if (-1 != end_ts)
-      GetChild<libmatroska::KaxChapterTimeEnd>(*atom).SetValue(end_ts);
+      get_child<libmatroska::KaxChapterTimeEnd>(*atom).SetValue(end_ts);
   }
 
   // Recusively merge atoms.
@@ -956,7 +956,7 @@ libmatroska::KaxEditionEntry *
 find_edition_with_uid(libmatroska::KaxChapters &chapters,
                       uint64_t uid) {
   if (0 == uid)
-    return FindChild<libmatroska::KaxEditionEntry>(&chapters);
+    return find_child<libmatroska::KaxEditionEntry>(&chapters);
 
   size_t eentry_idx;
   for (eentry_idx = 0; chapters.ListSize() > eentry_idx; eentry_idx++) {
@@ -964,7 +964,7 @@ find_edition_with_uid(libmatroska::KaxChapters &chapters,
     if (!eentry)
       continue;
 
-    auto euid = FindChild<libmatroska::KaxEditionUID>(eentry);
+    auto euid = find_child<libmatroska::KaxEditionUID>(eentry);
     if (euid && (euid->GetValue() == uid))
       return eentry;
   }
@@ -986,10 +986,10 @@ libmatroska::KaxChapterAtom *
 find_chapter_with_uid(libmatroska::KaxChapters &chapters,
                       uint64_t uid) {
   if (0 == uid) {
-    auto eentry = FindChild<libmatroska::KaxEditionEntry>(&chapters);
+    auto eentry = find_child<libmatroska::KaxEditionEntry>(&chapters);
     if (!eentry)
       return nullptr;
-    return FindChild<libmatroska::KaxChapterAtom>(eentry);
+    return find_child<libmatroska::KaxChapterAtom>(eentry);
   }
 
   size_t eentry_idx;
@@ -1004,7 +1004,7 @@ find_chapter_with_uid(libmatroska::KaxChapters &chapters,
       if (!atom)
         continue;
 
-      auto cuid = FindChild<libmatroska::KaxChapterUID>(atom);
+      auto cuid = find_child<libmatroska::KaxChapterUID>(atom);
       if (cuid && (cuid->GetValue() == uid))
         return atom;
     }
@@ -1038,7 +1038,7 @@ move_by_edition(libmatroska::KaxChapters &dst,
 
     // Find an edition to which these atoms will be added.
     libmatroska::KaxEditionEntry *ee_dst = nullptr;
-    auto euid_src                        = FindChild<libmatroska::KaxEditionUID>(m);
+    auto euid_src                        = find_child<libmatroska::KaxEditionUID>(m);
     if (euid_src)
       ee_dst = find_edition_with_uid(dst, euid_src->GetValue());
 
@@ -1050,7 +1050,7 @@ move_by_edition(libmatroska::KaxChapters &dst,
       // Move all atoms from the old edition to the new one.
       size_t master_idx;
       for (master_idx = 0; m->ListSize() > master_idx; master_idx++)
-        if (Is<libmatroska::KaxChapterAtom>((*m)[master_idx]))
+        if (is_type<libmatroska::KaxChapterAtom>((*m)[master_idx]))
           ee_dst->PushElement(*(*m)[master_idx]);
         else
           delete (*m)[master_idx];
@@ -1082,12 +1082,12 @@ adjust_timestamps(libebml::EbmlMaster &master,
                   mtx_mp_rational_t const &factor) {
   size_t master_idx;
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
-    if (!Is<libmatroska::KaxChapterAtom>(master[master_idx]))
+    if (!is_type<libmatroska::KaxChapterAtom>(master[master_idx]))
       continue;
 
     auto atom  = static_cast<libmatroska::KaxChapterAtom *>(master[master_idx]);
-    auto start = FindChild<libmatroska::KaxChapterTimeStart>(atom);
-    auto end   = FindChild<libmatroska::KaxChapterTimeEnd>(atom);
+    auto start = find_child<libmatroska::KaxChapterTimeStart>(atom);
+    auto end   = find_child<libmatroska::KaxChapterTimeEnd>(atom);
 
     if (start)
       start->SetValue(std::max<int64_t>(mtx::to_int(factor * mtx_mp_rational_t{start->GetValue()}) + offset, 0));
@@ -1109,7 +1109,7 @@ count_atoms_recursively(libebml::EbmlMaster &master,
   size_t master_idx;
 
   for (master_idx = 0; master.ListSize() > master_idx; ++master_idx)
-    if (Is<libmatroska::KaxChapterAtom>(master[master_idx]))
+    if (is_type<libmatroska::KaxChapterAtom>(master[master_idx]))
       ++count;
 
     else if (dynamic_cast<libebml::EbmlMaster *>(master[master_idx]))
@@ -1152,7 +1152,7 @@ align_uids(libmatroska::KaxChapters *chapters) {
     if (!edition_entry)
       continue;
 
-    GetChild<libmatroska::KaxEditionUID>(*edition_entry).SetValue(s_shared_edition_uid);
+    get_child<libmatroska::KaxEditionUID>(*edition_entry).SetValue(s_shared_edition_uid);
   }
 }
 
@@ -1176,7 +1176,7 @@ align_uids(libmatroska::KaxChapters &reference,
     if (!ee_modify)
       return;
 
-    GetChild<libmatroska::KaxEditionUID>(*ee_modify).SetValue(GetChild<libmatroska::KaxEditionUID>(*ee_reference).GetValue());
+    get_child<libmatroska::KaxEditionUID>(*ee_modify).SetValue(get_child<libmatroska::KaxEditionUID>(*ee_reference).GetValue());
     ++reference_idx;
     ++modify_idx;
   }
@@ -1290,7 +1290,7 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 
     chapters->PushElement(*edition);
 
-    GetChild<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+    get_child<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
     for (auto const &timestamp : timestamps) {
       ++chapter_number;
@@ -1314,13 +1314,13 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 void
 set_languages_in_display(libmatroska::KaxChapterDisplay &display,
                          std::vector<mtx::bcp47::language_c> const &parsed_languages) {
-  DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
-  DeleteChildren<libmatroska::KaxChapterLanguage>(display);
-  DeleteChildren<libmatroska::KaxChapterCountry>(display);
+  delete_children<libmatroska::KaxChapLanguageIETF>(display);
+  delete_children<libmatroska::KaxChapterLanguage>(display);
+  delete_children<libmatroska::KaxChapterCountry>(display);
 
   for (auto const &parsed_language : parsed_languages)
     if (parsed_language.is_valid())
-      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
+      add_empty_child<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
 
   unify_legacy_and_bcp47_languages_and_countries(display);
 }
@@ -1341,9 +1341,9 @@ set_languages_in_display(libmatroska::KaxChapterDisplay &display,
 mtx::bcp47::language_c
 get_language_from_display(libmatroska::KaxChapterDisplay &display,
                           std::string const &default_if_missing) {
-  auto language = FindChildValue<libmatroska::KaxChapLanguageIETF>(display);
+  auto language = find_child_value<libmatroska::KaxChapLanguageIETF>(display);
   if (language.empty())
-    language = FindChildValue<libmatroska::KaxChapterLanguage>(display);
+    language = find_child_value<libmatroska::KaxChapterLanguage>(display);
 
   return mtx::bcp47::language_c::parse(!language.empty() ? language : default_if_missing);
 }

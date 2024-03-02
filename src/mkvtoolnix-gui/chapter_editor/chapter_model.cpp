@@ -67,9 +67,9 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
     return;
 
   auto flags     = QStringList{};
-  auto isDefault = edition && FindChildValue<libmatroska::KaxEditionFlagDefault>(*edition);
-  auto isHidden  = edition && FindChildValue<libmatroska::KaxEditionFlagHidden>(*edition);
-  auto isOrdered = edition && FindChildValue<libmatroska::KaxEditionFlagOrdered>(*edition);
+  auto isDefault = edition && find_child_value<libmatroska::KaxEditionFlagDefault>(*edition);
+  auto isHidden  = edition && find_child_value<libmatroska::KaxEditionFlagHidden>(*edition);
+  auto isOrdered = edition && find_child_value<libmatroska::KaxEditionFlagOrdered>(*edition);
 
   if (isOrdered)
     flags << QY("Ordered");
@@ -100,11 +100,11 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
 
   auto flags     = QStringList{};
 
-  auto isEnabled = FindChildValue<libmatroska::KaxChapterFlagEnabled>(*chapter, 1);
-  auto isHidden  = FindChildValue<libmatroska::KaxChapterFlagHidden>(*chapter);
+  auto isEnabled = find_child_value<libmatroska::KaxChapterFlagEnabled>(*chapter, 1);
+  auto isHidden  = find_child_value<libmatroska::KaxChapterFlagHidden>(*chapter);
 
-  auto kStart    = FindChild<libmatroska::KaxChapterTimeStart>(*chapter);
-  auto kEnd      = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
+  auto kStart    = find_child<libmatroska::KaxChapterTimeStart>(*chapter);
+  auto kEnd      = find_child<libmatroska::KaxChapterTimeEnd>(*chapter);
 
   if (!isEnabled)
     flags << QY("Disabled");
@@ -189,7 +189,7 @@ ChapterModel::chapterNameForLanguage(libmatroska::KaxChapterAtom &chapter,
               return (language == actualLanguage.get_language())
                   || (language == actualLanguage.get_iso639_alpha_3_code());
             }) != lists.languageCodes.end()))
-      return Q(FindChildValue<libmatroska::KaxChapterString>(kDisplay));
+      return Q(find_child_value<libmatroska::KaxChapterString>(kDisplay));
   }
 
   return Q("");
@@ -341,7 +341,7 @@ ChapterModel::collectUsedEditionAndChapterUIDs(QModelIndex const &parentIdx,
   for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
     auto elementIdx  = index(row, 0, parentIdx);
     auto elementItem = itemFromIndex(elementIdx);
-    auto uid         = !parentIdx.isValid() ? FindChildValue<libmatroska::KaxEditionUID>(*editionFromItem(elementItem)) : FindChildValue<libmatroska::KaxChapterUID>(*chapterFromItem(elementItem));
+    auto uid         = !parentIdx.isValid() ? find_child_value<libmatroska::KaxEditionUID>(*editionFromItem(elementItem)) : find_child_value<libmatroska::KaxChapterUID>(*chapterFromItem(elementItem));
 
     if (uid) {
       if (!parentIdx.isValid())
@@ -359,7 +359,7 @@ ChapterModel::fixEditionAndChapterUIDs(libebml::EbmlMaster &master,
                                        QSet<uint64_t> &usedEditionUIDs,
                                        QSet<uint64_t> &usedChapterUIDs) {
   auto isEdition  = dynamic_cast<libmatroska::KaxEditionEntry *>(&master);
-  auto uidElement = isEdition ? static_cast<libebml::EbmlUInteger *>(FindChild<libmatroska::KaxEditionUID>(master)) : static_cast<libebml::EbmlUInteger *>(FindChild<libmatroska::KaxChapterUID>(master));
+  auto uidElement = isEdition ? static_cast<libebml::EbmlUInteger *>(find_child<libmatroska::KaxEditionUID>(master)) : static_cast<libebml::EbmlUInteger *>(find_child<libmatroska::KaxChapterUID>(master));
 
   if (uidElement && uidElement->GetValue()) {
     auto &set = isEdition ? usedEditionUIDs : usedChapterUIDs;
@@ -406,11 +406,11 @@ ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
     if (!element)
       return;
 
-    if (Is<libmatroska::KaxChapterAtom>(*element) && !FindChildValue<libmatroska::KaxChapterUID>(*element, 0))
-      DeleteChildren<libmatroska::KaxChapterUID>(*element);
+    if (is_type<libmatroska::KaxChapterAtom>(*element) && !find_child_value<libmatroska::KaxChapterUID>(*element, 0))
+      delete_children<libmatroska::KaxChapterUID>(*element);
 
-    else if (Is<libmatroska::KaxEditionEntry>(*element) && !FindChildValue<libmatroska::KaxEditionUID>(*element, 0))
-      DeleteChildren<libmatroska::KaxEditionUID>(*element);
+    else if (is_type<libmatroska::KaxEditionEntry>(*element) && !find_child_value<libmatroska::KaxEditionUID>(*element, 0))
+      delete_children<libmatroska::KaxEditionUID>(*element);
 
     fix_mandatory_elements(element.get());
   });

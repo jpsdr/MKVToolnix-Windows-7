@@ -81,7 +81,7 @@ KaxInfo::ui_show_element(libebml::EbmlElement &e) {
   auto p = p_func();
 
   if (p->m_use_gui) {
-    if ((p->m_scanType == ScanType::StartOfFile) && Is<libmatroska::KaxCluster>(e))
+    if ((p->m_scanType == ScanType::StartOfFile) && is_type<libmatroska::KaxCluster>(e))
       p->m_firstLevel1ElementPosition = e.GetElementPosition();
     else
       Q_EMIT elementFound(p->m_level, &e, p->m_scanType == ScanType::StartOfFile);

@@ -314,10 +314,10 @@ kax_info_c::format_element_value(libebml::EbmlElement &e) {
 
 std::string
 kax_info_c::format_element_value_default(libebml::EbmlElement &e) {
-  if (Is<libebml::EbmlVoid>(e))
+  if (is_type<libebml::EbmlVoid>(e))
     return format_element_size(e);
 
-  if (Is<libebml::EbmlCrc32>(e))
+  if (is_type<libebml::EbmlCrc32>(e))
     return fmt::format("0x{0:08x}", static_cast<libebml::EbmlCrc32 &>(e).GetCrc32());
 
   if (dynamic_cast<libebml::EbmlUInteger *>(&e))
@@ -517,7 +517,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   p->m_custom_element_post_processors.clear();
 
   // Simple processors:
-  add_pre(    EBML_ID(libmatroska::KaxInfo),        [p](libebml::EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<kax_timestamp_scale_c>(static_cast<libmatroska::KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
+  add_pre(    EBML_ID(libmatroska::KaxInfo),        [p](libebml::EbmlElement &e) -> bool { p->m_ts_scale = find_child_value<kax_timestamp_scale_c>(static_cast<libmatroska::KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
   add_pre(    EBML_ID(libmatroska::KaxTracks),      [p](libebml::EbmlElement &)  -> bool { p->m_mkvmerge_track_id = 0; return true; });
   add_pre_mem(EBML_ID(libmatroska::KaxSimpleBlock), &kax_info_c::pre_simple_block);
   add_pre_mem(EBML_ID(libmatroska::KaxBlockGroup),  &kax_info_c::pre_block_group);
@@ -541,9 +541,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
     auto &master                 = static_cast<libebml::EbmlMaster &>(e);
     p->m_track                   = std::make_shared<kax_info::track_t>();
-    p->m_track->tuid             = FindChildValue<libmatroska::KaxTrackUID>(master);
-    p->m_track->codec_id         = FindChildValue<libmatroska::KaxCodecID>(master);
-    p->m_track->default_duration = FindChildValue<libmatroska::KaxTrackDefaultDuration>(master);
+    p->m_track->tuid             = find_child_value<libmatroska::KaxTrackUID>(master);
+    p->m_track->codec_id         = find_child_value<libmatroska::KaxCodecID>(master);
+    p->m_track->default_duration = find_child_value<libmatroska::KaxTrackDefaultDuration>(master);
 
     return true;
   });
@@ -595,7 +595,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   add_pre(EBML_ID(libmatroska::KaxCluster), ([this, p](libebml::EbmlElement &e) -> bool {
     p->m_cluster = static_cast<libmatroska::KaxCluster *>(&e);
-    init_timestamp(*p->m_cluster, FindChildValue<kax_cluster_timestamp_c>(p->m_cluster), p->m_ts_scale);
+    init_timestamp(*p->m_cluster, find_child_value<kax_cluster_timestamp_c>(p->m_cluster), p->m_ts_scale);
 
     ui_show_progress(100 * p->m_cluster->GetElementPosition() / p->m_file_size, Y("Parsing file"));
 
@@ -701,15 +701,15 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
     return fmt::format("{0} ({1})",
                        mtx::string::to_hex(seek_id),
-                         Is<libmatroska::KaxInfo>(id)        ? "KaxInfo"
-                       : Is<libmatroska::KaxCluster>(id)     ? "KaxCluster"
-                       : Is<libmatroska::KaxTracks>(id)      ? "KaxTracks"
-                       : Is<libmatroska::KaxCues>(id)        ? "KaxCues"
-                       : Is<libmatroska::KaxAttachments>(id) ? "KaxAttachments"
-                       : Is<libmatroska::KaxChapters>(id)    ? "KaxChapters"
-                       : Is<libmatroska::KaxTags>(id)        ? "KaxTags"
-                       : Is<libmatroska::KaxSeekHead>(id)    ? "KaxSeekHead"
-                       :                                       "unknown");
+                         is_type<libmatroska::KaxInfo>(id)        ? "KaxInfo"
+                       : is_type<libmatroska::KaxCluster>(id)     ? "KaxCluster"
+                       : is_type<libmatroska::KaxTracks>(id)      ? "KaxTracks"
+                       : is_type<libmatroska::KaxCues>(id)        ? "KaxCues"
+                       : is_type<libmatroska::KaxAttachments>(id) ? "KaxAttachments"
+                       : is_type<libmatroska::KaxChapters>(id)    ? "KaxChapters"
+                       : is_type<libmatroska::KaxTags>(id)        ? "KaxTags"
+                       : is_type<libmatroska::KaxSeekHead>(id)    ? "KaxSeekHead"
+                       :                                            "unknown");
   });
 
   add_fmt(EBML_ID(libmatroska::KaxEmphasis), [](libebml::EbmlElement &e) -> std::string {
@@ -1133,7 +1133,7 @@ kax_info_c::handle_segment(libmatroska::KaxSegment &l0) {
   while ((l1 = kax_file->read_next_level1_element())) {
     retain_element(l1);
 
-    if (Is<libmatroska::KaxCluster>(*l1) && !p->m_continue_at_cluster && !p->m_show_summary) {
+    if (is_type<libmatroska::KaxCluster>(*l1) && !p->m_continue_at_cluster && !p->m_show_summary) {
       ui_show_element(*l1);
       return result_e::succeeded;
 
@@ -1253,7 +1253,7 @@ kax_info_c::process_file() {
 
   // Find the libebml::EbmlHead element. Must be the first one.
   auto l0 = ebml_element_cptr{ p->m_es->FindNextID(EBML_INFO(libebml::EbmlHead), 0xFFFFFFFFL) };
-  if (!l0 || !Is<libebml::EbmlHead>(*l0)) {
+  if (!l0 || !is_type<libebml::EbmlHead>(*l0)) {
     ui_show_error(fmt::format("{0} {1}", Y("No EBML head found."), Y("This file is probably not a Matroska file.")));
     return result_e::failed;
   }
@@ -1277,7 +1277,7 @@ kax_info_c::process_file() {
 
     retain_element(l0);
 
-    if (!Is<libmatroska::KaxSegment>(*l0)) {
+    if (!is_type<libmatroska::KaxSegment>(*l0)) {
       handle_elements_generic(*l0);
       l0->SkipData(*p->m_es, EBML_CONTEXT(l0.get()));
 

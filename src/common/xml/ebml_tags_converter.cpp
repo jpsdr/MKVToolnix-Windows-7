@@ -104,18 +104,18 @@ ebml_tags_converter_c::fix_tag(libmatroska::KaxTag &tag)
 void
 ebml_tags_converter_c::fix_simple_tag(libmatroska::KaxTagSimple &simple_tag)
   const {
-  if (!FindChild<libmatroska::KaxTagName>(simple_tag))
+  if (!find_child<libmatroska::KaxTagName>(simple_tag))
     throw conversion_x{ Y("<Simple> is missing the <Name> child.") };
 
-  auto string = FindChild<libmatroska::KaxTagString>(simple_tag);
-  auto binary = FindChild<libmatroska::KaxTagBinary>(simple_tag);
+  auto string = find_child<libmatroska::KaxTagString>(simple_tag);
+  auto binary = find_child<libmatroska::KaxTagBinary>(simple_tag);
   if (string && binary)
     throw conversion_x{ Y("Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time.") };
-  if (!string && !binary && !FindChild<libmatroska::KaxTagSimple>(simple_tag))
+  if (!string && !binary && !find_child<libmatroska::KaxTagSimple>(simple_tag))
     throw conversion_x{ Y("<Simple> must contain either a <String> or a <Binary> child.") };
 
-  auto tlanguage_ietf  = FindChild<libmatroska::KaxTagLanguageIETF>(simple_tag);
-  auto tlanguage       = FindChild<libmatroska::KaxTagLangue>(simple_tag);
+  auto tlanguage_ietf  = find_child<libmatroska::KaxTagLanguageIETF>(simple_tag);
+  auto tlanguage       = find_child<libmatroska::KaxTagLangue>(simple_tag);
   auto value_to_parse  = tlanguage_ietf ? tlanguage_ietf->GetValue()
                        : tlanguage      ? tlanguage->GetValue()
                        :                  "und"s;

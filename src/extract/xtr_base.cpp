@@ -205,11 +205,11 @@ xtr_base_c::create_extractor(const std::string &new_codec_id,
 
 mtx::bcp47::language_c
 xtr_base_c::get_track_language(libmatroska::KaxTrackEntry &track) {
-  auto language_bcp47 = FindChild<libmatroska::KaxLanguageIETF>(&track);
+  auto language_bcp47 = find_child<libmatroska::KaxLanguageIETF>(&track);
   if (language_bcp47)
     return mtx::bcp47::language_c::parse(language_bcp47->GetValue());
 
-  auto language = FindChild<libmatroska::KaxTrackLanguage>(&track);
+  auto language = find_child<libmatroska::KaxTrackLanguage>(&track);
 
   return mtx::bcp47::language_c::parse(language ? language->GetValue() : "eng"s);
 }
@@ -219,7 +219,7 @@ xtr_fullraw_c::create_file(xtr_base_c *master,
                            libmatroska::KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
 
-  libmatroska::KaxCodecPrivate *priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  libmatroska::KaxCodecPrivate *priv = find_child<libmatroska::KaxCodecPrivate>(&track);
 
   if (priv && (0 != priv->GetSize())) {
     auto mem = memory_c::borrow(priv->GetBuffer(), priv->GetSize());
