@@ -24,7 +24,6 @@
 #endif
 
 #include <matroska/KaxVersion.h>
-#include <matroska/FileKax.h>
 
 #include "common/audio_emphasis.h"
 #include "common/fs_sys_helpers.h"
