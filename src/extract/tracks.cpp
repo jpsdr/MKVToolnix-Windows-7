@@ -78,7 +78,7 @@ create_extractors(libmatroska::KaxTracks &kax_tracks,
   int64_t track_id = -1;
 
   for (i = 0; i < kax_tracks.ListSize(); i++) {
-    if (!Is<libmatroska::KaxTrackEntry>(kax_tracks[i]))
+    if (!is_type<libmatroska::KaxTrackEntry>(kax_tracks[i]))
       continue;
 
     ++track_id;
@@ -162,7 +162,7 @@ create_timestamp_files(libmatroska::KaxTracks &kax_tracks,
     int track_number     = -1;
     libmatroska::KaxTrackEntry *track = nullptr;
     for (i = 0; kax_tracks.ListSize() > i; ++i) {
-      if (!Is<libmatroska::KaxTrackEntry>(kax_tracks[i]))
+      if (!is_type<libmatroska::KaxTrackEntry>(kax_tracks[i]))
         continue;
 
       ++track_number;
@@ -191,7 +191,7 @@ create_timestamp_files(libmatroska::KaxTracks &kax_tracks,
 static void
 handle_blockgroup_timestamps(libmatroska::KaxBlockGroup &blockgroup,
                              int64_t tc_scale) {
-  auto block = FindChild<libmatroska::KaxBlock>(blockgroup);
+  auto block = find_child<libmatroska::KaxBlock>(blockgroup);
   if (!block)
     return;
 
@@ -201,7 +201,7 @@ handle_blockgroup_timestamps(libmatroska::KaxBlockGroup &blockgroup,
     return;
 
   // Next find the block duration if there is one.
-  auto kduration   = FindChild<libmatroska::KaxBlockDuration>(blockgroup);
+  auto kduration   = find_child<libmatroska::KaxBlockDuration>(blockgroup);
   int64_t duration = !kduration ? extractor->second->m_default_duration * block->NumberFrames() : kduration->GetValue() * tc_scale;
 
   // Pass the block to the extractor.
@@ -226,7 +226,7 @@ handle_blockgroup(libmatroska::KaxBlockGroup &blockgroup,
                   libmatroska::KaxCluster &cluster,
                   int64_t tc_scale) {
   // Only continue if this block group actually contains a block.
-  libmatroska::KaxBlock *block = FindChild<libmatroska::KaxBlock>(&blockgroup);
+  libmatroska::KaxBlock *block = find_child<libmatroska::KaxBlock>(&blockgroup);
   if (!block || (0 == block->NumberFrames()))
     return -1;
 
@@ -241,14 +241,14 @@ handle_blockgroup(libmatroska::KaxBlockGroup &blockgroup,
 
   // Next find the block duration if there is one.
   auto &extractor       = *extractor_itr->second;
-  auto kduration        = FindChild<libmatroska::KaxBlockDuration>(&blockgroup);
+  auto kduration        = find_child<libmatroska::KaxBlockDuration>(&blockgroup);
   int64_t duration      = !kduration ? -1 : static_cast<int64_t>(kduration->GetValue() * tc_scale);
   int64_t max_timestamp = 0;
 
   // Now find backward and forward references.
   int64_t bref    = 0;
   int64_t fref    = 0;
-  auto kreference = FindChild<libmatroska::KaxReferenceBlock>(&blockgroup);
+  auto kreference = find_child<libmatroska::KaxReferenceBlock>(&blockgroup);
   for (int i = 0; (2 > i) && kreference; i++) {
     if (0 > kreference->GetValue())
       bref = kreference->GetValue();
@@ -258,12 +258,12 @@ handle_blockgroup(libmatroska::KaxBlockGroup &blockgroup,
   }
 
   // Any block additions present?
-  auto kadditions = FindChild<libmatroska::KaxBlockAdditions>(&blockgroup);
+  auto kadditions = find_child<libmatroska::KaxBlockAdditions>(&blockgroup);
 
   if (0 > duration)
     duration = extractor.m_default_duration * block->NumberFrames();
 
-  auto kcstate = FindChild<libmatroska::KaxCodecState>(&blockgroup);
+  auto kcstate = find_child<libmatroska::KaxCodecState>(&blockgroup);
   if (kcstate) {
     auto ctstate = memory_c::borrow(kcstate->GetBuffer(), kcstate->GetSize());
     extractor.handle_codec_state(ctstate);
@@ -282,7 +282,7 @@ handle_blockgroup(libmatroska::KaxBlockGroup &blockgroup,
     }
 
     auto discard_padding  = timestamp_c::ns(0);
-    auto kdiscard_padding = FindChild<libmatroska::KaxDiscardPadding>(blockgroup);
+    auto kdiscard_padding = find_child<libmatroska::KaxDiscardPadding>(blockgroup);
     if (kdiscard_padding)
       discard_padding = timestamp_c::ns(kdiscard_padding->GetValue());
 
@@ -470,7 +470,7 @@ extract_tracks(kax_analyzer_c &analyzer,
         return false;
       }
 
-      if (Is<libmatroska::KaxSegment>(l0))
+      if (is_type<libmatroska::KaxSegment>(l0))
         break;
 
       l0->SkipData(*es, EBML_CONTEXT(l0));
@@ -478,7 +478,7 @@ extract_tracks(kax_analyzer_c &analyzer,
     }
 
     auto previous_percentage = -1;
-    auto tc_scale            = FindChildValue<kax_timestamp_scale_c, uint64_t>(segment_info, 1000000);
+    auto tc_scale            = find_child_value<kax_timestamp_scale_c, uint64_t>(segment_info, 1000000);
 
     file->set_timestamp_scale(tc_scale);
     file->set_segment_end(static_cast<libmatroska::KaxSegment &>(*l0));
@@ -511,10 +511,10 @@ extract_tracks(kax_analyzer_c &analyzer,
         int64_t max_bg_timestamp = -1;
         libebml::EbmlElement *el          = (*cluster)[i];
 
-        if (Is<libmatroska::KaxBlockGroup>(el))
+        if (is_type<libmatroska::KaxBlockGroup>(el))
           max_bg_timestamp = handle_blockgroup(*static_cast<libmatroska::KaxBlockGroup *>(el), *cluster, tc_scale);
 
-        else if (Is<libmatroska::KaxSimpleBlock>(el))
+        else if (is_type<libmatroska::KaxSimpleBlock>(el))
           max_bg_timestamp = handle_simpleblock(*static_cast<libmatroska::KaxSimpleBlock *>(el), *cluster);
 
         max_timestamp = std::max(max_timestamp, max_bg_timestamp);

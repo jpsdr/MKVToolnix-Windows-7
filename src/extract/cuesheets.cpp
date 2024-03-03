@@ -42,7 +42,7 @@ find_tag_for_track(int idx,
 
   size_t i;
   for (i = 0; i < m.ListSize(); i++) {
-    if (!Is<libmatroska::KaxTag>(m[i]))
+    if (!is_type<libmatroska::KaxTag>(m[i]))
       continue;
 
     int64_t tag_cuid = mtx::tags::get_cuid(*static_cast<libmatroska::KaxTag *>(m[i]));
@@ -77,7 +77,7 @@ get_chapter_index(int idx,
   size_t i;
   std::string sidx = fmt::format("INDEX {0:02}", idx);
   for (i = 0; i < atom.ListSize(); i++)
-    if (   Is<libmatroska::KaxChapterAtom>(atom[i])
+    if (   is_type<libmatroska::KaxChapterAtom>(atom[i])
         && (mtx::chapters::get_name(*static_cast<libmatroska::KaxChapterAtom *>(atom[i])) == sidx))
       return mtx::chapters::get_start(*static_cast<libmatroska::KaxChapterAtom *>(atom[i]));
 
@@ -109,7 +109,7 @@ write_cuesheet(std::string file_name,
 
   auto print_comments = [&out, &tag](char const *prefix) {
     for (auto simple : *tag)
-      if (Is<libmatroska::KaxTagSimple>(simple)
+      if (is_type<libmatroska::KaxTagSimple>(simple)
           && (   (mtx::tags::get_simple_name(*static_cast<libmatroska::KaxTagSimple *>(simple)) == "COMMENT")
               || (mtx::tags::get_simple_name(*static_cast<libmatroska::KaxTagSimple *>(simple)) == "COMMENTS")))
         out.puts(fmt::format("{0}REM \"{1}\"\n", prefix, mtx::tags::get_simple_value(*static_cast<libmatroska::KaxTagSimple *>(simple))));

@@ -144,8 +144,8 @@ create_simple_tag(cue_parser_args_t &a,
                   const std::string &value) {
   auto simple = new libmatroska::KaxTagSimple;
 
-  GetChild<libmatroska::KaxTagName>(*simple).SetValue(cue_str_internal_to_utf(a, name));
-  GetChild<libmatroska::KaxTagString>(*simple).SetValue(cue_str_internal_to_utf(a, value));
+  get_child<libmatroska::KaxTagName>(*simple).SetValue(cue_str_internal_to_utf(a, name));
+  get_child<libmatroska::KaxTagString>(*simple).SetValue(cue_str_internal_to_utf(a, value));
 
   return simple;
 }
@@ -181,11 +181,11 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
     *tags = std::make_unique<libmatroska::KaxTags>();
 
   auto tag      = new libmatroska::KaxTag;
-  auto &targets = GetChild<libmatroska::KaxTagTargets>(*tag);
+  auto &targets = get_child<libmatroska::KaxTagTargets>(*tag);
 
-  GetChild<libmatroska::KaxTagChapterUID>(targets).SetValue(cuid);
-  GetChild<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Track);
-  GetChild<libmatroska::KaxTagTargetType>(targets).SetValue("track");
+  get_child<libmatroska::KaxTagChapterUID>(targets).SetValue(cuid);
+  get_child<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Track);
+  get_child<libmatroska::KaxTagTargetType>(targets).SetValue("track");
 
   create_tag1(a, *tag, a.title, "TITLE");
   tag->PushElement(*create_simple_tag(a, "PART_NUMBER", fmt::to_string(a.num)));
@@ -202,7 +202,7 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
   for (i = 0; i < a.comment.size(); i++)
     create_tag1(a, *tag, a.comment[i], "COMMENT");
 
-  if (FindChild<libmatroska::KaxTagSimple>(tag))
+  if (find_child<libmatroska::KaxTagSimple>(tag))
     (*tags)->PushElement(*tag);
   else
     delete tag;
@@ -218,10 +218,10 @@ add_tag_for_global_cue_settings(cue_parser_args_t &a,
     *tags = std::make_unique<libmatroska::KaxTags>();
 
   auto tag      = new libmatroska::KaxTag;
-  auto &targets = GetChild<libmatroska::KaxTagTargets>(*tag);
+  auto &targets = get_child<libmatroska::KaxTagTargets>(*tag);
 
-  GetChild<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Album);
-  GetChild<libmatroska::KaxTagTargetType>(targets).SetValue("ALBUM");
+  get_child<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Album);
+  get_child<libmatroska::KaxTagTargetType>(targets).SetValue("ALBUM");
 
   create_tag1(a, *tag, a.global_performer, "ARTIST");
   create_tag1(a, *tag, a.global_title,     "TITLE");
@@ -233,7 +233,7 @@ add_tag_for_global_cue_settings(cue_parser_args_t &a,
   for (i = 0; i < a.global_rem.size(); i++)
     create_tag1(a, *tag, a.global_rem[i], "COMMENT");
 
-  if (FindChild<libmatroska::KaxTagSimple>(tag))
+  if (find_child<libmatroska::KaxTagSimple>(tag))
     (*tags)->PushElement(*tag);
   else
     delete tag;
@@ -248,16 +248,16 @@ add_subchapters_for_index_entries(cue_parser_args_t &a) {
   size_t offset        = a.index00_missing ? 1 : 0;
   size_t i;
   for (i = 0; i < a.start_indices.size(); i++) {
-    atom = &GetFirstOrNextChild<libmatroska::KaxChapterAtom>(a.atom, atom);
+    atom = &get_first_or_next_child<libmatroska::KaxChapterAtom>(*a.atom, atom);
 
-    GetChild<libmatroska::KaxChapterUID>(*atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
-    GetChild<libmatroska::KaxChapterTimeStart>(*atom).SetValue(a.start_indices[i] - a.offset);
-    GetChild<libmatroska::KaxChapterFlagHidden>(*atom).SetValue(1);
-    GetChild<libmatroska::KaxChapterPhysicalEquiv>(*atom).SetValue(mtx::chapters::PHYSEQUIV_INDEX);
+    get_child<libmatroska::KaxChapterUID>(*atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+    get_child<libmatroska::KaxChapterTimeStart>(*atom).SetValue(a.start_indices[i] - a.offset);
+    get_child<libmatroska::KaxChapterFlagHidden>(*atom).SetValue(1);
+    get_child<libmatroska::KaxChapterPhysicalEquiv>(*atom).SetValue(mtx::chapters::PHYSEQUIV_INDEX);
 
-    auto &display = GetChild<libmatroska::KaxChapterDisplay>(*atom);
-    GetChild<libmatroska::KaxChapterString>(display).SetValueUTF8(fmt::format("INDEX {0:02}", i + offset));
-    GetChild<libmatroska::KaxChapterLanguage>(display).SetValue("eng");
+    auto &display = get_child<libmatroska::KaxChapterDisplay>(*atom);
+    get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(fmt::format("INDEX {0:02}", i + offset));
+    get_child<libmatroska::KaxChapterLanguage>(display).SetValue("eng");
   }
 }
 
@@ -273,20 +273,20 @@ add_elements_for_cue_entry(cue_parser_args_t &a,
   mtx::chapters::cue_entries_to_name(a.performer, a.title, a.global_performer, a.global_title, a.name, a.num);
 
   if (!a.edition) {
-    a.edition = &GetChild<libmatroska::KaxEditionEntry>(*a.chapters);
-    GetChild<libmatroska::KaxEditionUID>(*a.edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+    a.edition = &get_child<libmatroska::KaxEditionEntry>(*a.chapters);
+    get_child<libmatroska::KaxEditionUID>(*a.edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
   }
 
-  a.atom = &GetFirstOrNextChild<libmatroska::KaxChapterAtom>(*a.edition, a.atom);
-  GetChild<libmatroska::KaxChapterPhysicalEquiv>(*a.atom).SetValue(mtx::chapters::PHYSEQUIV_TRACK);
+  a.atom = &get_first_or_next_child<libmatroska::KaxChapterAtom>(*a.edition, a.atom);
+  get_child<libmatroska::KaxChapterPhysicalEquiv>(*a.atom).SetValue(mtx::chapters::PHYSEQUIV_TRACK);
 
   auto cuid = create_unique_number(UNIQUE_CHAPTER_IDS);
-  GetChild<libmatroska::KaxChapterUID>(*a.atom).SetValue(cuid);
-  GetChild<libmatroska::KaxChapterTimeStart>(*a.atom).SetValue(a.start_of_track - a.offset);
+  get_child<libmatroska::KaxChapterUID>(*a.atom).SetValue(cuid);
+  get_child<libmatroska::KaxChapterTimeStart>(*a.atom).SetValue(a.start_of_track - a.offset);
 
-  auto &display = GetChild<libmatroska::KaxChapterDisplay>(*a.atom);
-  GetChild<libmatroska::KaxChapterString>(display).SetValue(cue_str_internal_to_utf(a, a.name));
-  GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(a.language.get_closest_iso639_2_alpha_3_code());
+  auto &display = get_child<libmatroska::KaxChapterDisplay>(*a.atom);
+  get_child<libmatroska::KaxChapterString>(display).SetValue(cue_str_internal_to_utf(a, a.name));
+  get_child<libmatroska::KaxChapterLanguage>(display).SetValue(a.language.get_closest_iso639_2_alpha_3_code());
 
   add_subchapters_for_index_entries(a);
 

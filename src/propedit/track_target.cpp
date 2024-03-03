@@ -133,19 +133,19 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
 
   size_t i;
   for (i = 0; track_headers->ListSize() > i; ++i) {
-    if (!Is<libmatroska::KaxTrackEntry>((*track_headers)[i]))
+    if (!is_type<libmatroska::KaxTrackEntry>((*track_headers)[i]))
       continue;
 
     libmatroska::KaxTrackEntry *track = dynamic_cast<libmatroska::KaxTrackEntry *>((*track_headers)[i]);
     assert(track);
 
-    libmatroska::KaxTrackType *kax_track_type     = dynamic_cast<libmatroska::KaxTrackType *>(FindChild<libmatroska::KaxTrackType>(track));
+    libmatroska::KaxTrackType *kax_track_type     = dynamic_cast<libmatroska::KaxTrackType *>(find_child<libmatroska::KaxTrackType>(track));
     track_type this_track_type       = !kax_track_type ? track_video : static_cast<track_type>(uint8_t(*kax_track_type));
 
-    libmatroska::KaxTrackUID *kax_track_uid       = dynamic_cast<libmatroska::KaxTrackUID *>(FindChild<libmatroska::KaxTrackUID>(track));
+    libmatroska::KaxTrackUID *kax_track_uid       = dynamic_cast<libmatroska::KaxTrackUID *>(find_child<libmatroska::KaxTrackUID>(track));
     uint64_t track_uid               = !kax_track_uid ? 0 : uint64_t(*kax_track_uid);
 
-    libmatroska::KaxTrackNumber *kax_track_number = dynamic_cast<libmatroska::KaxTrackNumber *>(FindChild<libmatroska::KaxTrackNumber>(track));
+    libmatroska::KaxTrackNumber *kax_track_number = dynamic_cast<libmatroska::KaxTrackNumber *>(find_child<libmatroska::KaxTrackNumber>(track));
 
     ++num_tracks_total;
     ++num_tracks_by_type[this_track_type];
@@ -161,8 +161,8 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     m_track_uid  = track_uid;
     m_track_type = this_track_type;
     m_master     = track;
-    m_sub_master = track_video == m_track_type ? static_cast<libebml::EbmlMaster *>(&GetChild<libmatroska::KaxTrackVideo>(track))
-                 : track_audio == m_track_type ? static_cast<libebml::EbmlMaster *>(&GetChild<libmatroska::KaxTrackAudio>(track))
+    m_sub_master = track_video == m_track_type ? static_cast<libebml::EbmlMaster *>(&get_child<libmatroska::KaxTrackVideo>(track))
+                 : track_audio == m_track_type ? static_cast<libebml::EbmlMaster *>(&get_child<libmatroska::KaxTrackAudio>(track))
                  :                               nullptr;
 
     look_up_property_elements();
@@ -175,8 +175,8 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoColour)     ? &GetChildEmptyIfNew<libmatroska::KaxVideoColour>(m_sub_master)
-                                : prop.m_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoProjection) ? &GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(m_sub_master)
+        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoColour)     ? &get_child_empty_if_new<libmatroska::KaxVideoColour>(m_sub_master)
+                                : prop.m_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoProjection) ? &get_child_empty_if_new<libmatroska::KaxVideoProjection>(m_sub_master)
                                 :                                                                                  static_cast<libebml::EbmlMaster*>(nullptr);
 
         if (!change.m_sub_sub_master)
@@ -185,7 +185,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoColourMasterMeta) ? &GetChildEmptyIfNew<libmatroska::KaxVideoColourMasterMeta>(change.m_sub_sub_master)
+        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &EBML_INFO(libmatroska::KaxVideoColourMasterMeta) ? &get_child_empty_if_new<libmatroska::KaxVideoColourMasterMeta>(change.m_sub_sub_master)
                                     :                                                                                            nullptr;
       }
 

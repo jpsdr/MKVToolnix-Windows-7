@@ -320,13 +320,13 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
     return false;
   }
 
-  auto durationKax = FindChild<libmatroska::KaxDuration>(*info);
+  auto durationKax = find_child<libmatroska::KaxDuration>(static_cast<libmatroska::KaxInfo &>(*info));
   if (!durationKax) {
     qDebug() << "readFileEndTimestampForMatroska: no duration found";
     return true;
   }
 
-  auto timestampScale = FindChildValue<kax_timestamp_scale_c, uint64_t>(static_cast<libmatroska::KaxInfo &>(*info), TIMESTAMP_SCALE);
+  auto timestampScale = find_child_value<kax_timestamp_scale_c, uint64_t>(static_cast<libmatroska::KaxInfo &>(*info), TIMESTAMP_SCALE);
   auto duration       = timestamp_c::ns(durationKax->GetValue() * timestampScale);
 
   qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(mtx::string::format_timestamp(duration));
@@ -343,23 +343,23 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
     return true;
   }
 
-  init_timestamp(*cluster, FindChildValue<kax_cluster_timestamp_c>(*cluster), timestampScale);
+  init_timestamp(*cluster, find_child_value<kax_cluster_timestamp_c>(*cluster), timestampScale);
 
   auto minBlockTimestamp = timestamp_c::ns(0);
 
   for (auto const &child : *cluster) {
     timestamp_c blockTimestamp;
 
-    if (Is<libmatroska::KaxBlockGroup>(child)) {
+    if (is_type<libmatroska::KaxBlockGroup>(child)) {
       auto &group = static_cast<libmatroska::KaxBlockGroup &>(*child);
-      auto block  = FindChild<libmatroska::KaxBlock>(group);
+      auto block  = find_child<libmatroska::KaxBlock>(group);
 
       if (block) {
         block->SetParent(*cluster);
         blockTimestamp = timestamp_c::ns(mtx::math::to_signed(get_global_timestamp(*block)));
       }
 
-    } else if (Is<libmatroska::KaxSimpleBlock>(child)) {
+    } else if (is_type<libmatroska::KaxSimpleBlock>(child)) {
       auto &block = static_cast<libmatroska::KaxSimpleBlock &>(*child);
       block.SetParent(*cluster);
       blockTimestamp = timestamp_c::ns(mtx::math::to_signed(get_global_timestamp(block)));
@@ -932,24 +932,24 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
   }
 
   if (uid)
-    GetChild<libmatroska::KaxChapterUID>(*chapter).SetValue(uid);
+    get_child<libmatroska::KaxChapterUID>(*chapter).SetValue(uid);
   else
-    DeleteChildren<libmatroska::KaxChapterUID>(*chapter);
+    delete_children<libmatroska::KaxChapterUID>(*chapter);
 
   if (!p->ui->cbChFlagEnabled->isChecked())
-    GetChild<libmatroska::KaxChapterFlagEnabled>(*chapter).SetValue(0);
+    get_child<libmatroska::KaxChapterFlagEnabled>(*chapter).SetValue(0);
   else
-    DeleteChildren<libmatroska::KaxChapterFlagEnabled>(*chapter);
+    delete_children<libmatroska::KaxChapterFlagEnabled>(*chapter);
 
   if (p->ui->cbChFlagHidden->isChecked())
-    GetChild<libmatroska::KaxChapterFlagHidden>(*chapter).SetValue(1);
+    get_child<libmatroska::KaxChapterFlagHidden>(*chapter).SetValue(1);
   else
-    DeleteChildren<libmatroska::KaxChapterFlagHidden>(*chapter);
+    delete_children<libmatroska::KaxChapterFlagHidden>(*chapter);
 
   auto startTimestamp = int64_t{};
   if (!mtx::string::parse_timestamp(to_utf8(fixAndGetTimestampString(*p->ui->leChStart)), startTimestamp))
     return { false, QY("The start time could not be parsed: %1").arg(Q(mtx::string::timestamp_parser_error)) };
-  GetChild<libmatroska::KaxChapterTimeStart>(*chapter).SetValue(startTimestamp);
+  get_child<libmatroska::KaxChapterTimeStart>(*chapter).SetValue(startTimestamp);
 
   if (!p->ui->leChEnd->text().isEmpty()) {
     auto endTimestamp = int64_t{};
@@ -959,22 +959,22 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     if (endTimestamp <= startTimestamp)
       return { false, QY("The end time must be greater than the start time.") };
 
-    GetChild<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(endTimestamp);
+    get_child<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(endTimestamp);
 
   } else
-    DeleteChildren<libmatroska::KaxChapterTimeEnd>(*chapter);
+    delete_children<libmatroska::KaxChapterTimeEnd>(*chapter);
 
   if (!p->ui->leChSegmentUid->text().isEmpty()) {
     try {
       auto value = mtx::bits::value_c{to_utf8(p->ui->leChSegmentUid->text())};
-      GetChild<libmatroska::KaxChapterSegmentUID>(*chapter).CopyBuffer(value.data(), value.byte_size());
+      get_child<libmatroska::KaxChapterSegmentUID>(*chapter).CopyBuffer(value.data(), value.byte_size());
 
     } catch (mtx::bits::value_parser_x const &ex) {
       return { false, QY("The segment UID could not be parsed: %1").arg(ex.what()) };
     }
 
   } else
-    DeleteChildren<libmatroska::KaxChapterSegmentUID>(*chapter);
+    delete_children<libmatroska::KaxChapterSegmentUID>(*chapter);
 
   if (!p->ui->leChSegmentEditionUid->text().isEmpty()) {
     auto ok = false;
@@ -982,10 +982,10 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     if (!ok || !uid)
       return { false, QY("The segment edition UID must be a positive number if given.") };
 
-    GetChild<libmatroska::KaxChapterSegmentEditionUID>(*chapter).SetValue(uid);
+    get_child<libmatroska::KaxChapterSegmentEditionUID>(*chapter).SetValue(uid);
   }
 
-  RemoveChildren<libmatroska::KaxChapterDisplay>(*chapter);
+  remove_children<libmatroska::KaxChapterDisplay>(*chapter);
   for (auto row = 0, numRows = p->nameModel->rowCount(); row < numRows; ++row)
     chapter->PushElement(*p->nameModel->displayFromIndex(p->nameModel->index(row, 0)));
 
@@ -1009,24 +1009,24 @@ Tab::copyEditionControlsToStorage(EditionPtr const &edition) {
   }
 
   if (uid)
-    GetChild<libmatroska::KaxEditionUID>(*edition).SetValue(uid);
+    get_child<libmatroska::KaxEditionUID>(*edition).SetValue(uid);
   else
-    DeleteChildren<libmatroska::KaxEditionUID>(*edition);
+    delete_children<libmatroska::KaxEditionUID>(*edition);
 
   if (p->ui->cbEdFlagDefault->isChecked())
-    GetChild<libmatroska::KaxEditionFlagDefault>(*edition).SetValue(1);
+    get_child<libmatroska::KaxEditionFlagDefault>(*edition).SetValue(1);
   else
-    DeleteChildren<libmatroska::KaxEditionFlagDefault>(*edition);
+    delete_children<libmatroska::KaxEditionFlagDefault>(*edition);
 
   if (p->ui->cbEdFlagHidden->isChecked())
-    GetChild<libmatroska::KaxEditionFlagHidden>(*edition).SetValue(1);
+    get_child<libmatroska::KaxEditionFlagHidden>(*edition).SetValue(1);
   else
-    DeleteChildren<libmatroska::KaxEditionFlagHidden>(*edition);
+    delete_children<libmatroska::KaxEditionFlagHidden>(*edition);
 
   if (p->ui->cbEdFlagOrdered->isChecked())
-    GetChild<libmatroska::KaxEditionFlagOrdered>(*edition).SetValue(1);
+    get_child<libmatroska::KaxEditionFlagOrdered>(*edition).SetValue(1);
   else
-    DeleteChildren<libmatroska::KaxEditionFlagOrdered>(*edition);
+    delete_children<libmatroska::KaxEditionFlagOrdered>(*edition);
 
   return { true, QString{} };
 }
@@ -1059,17 +1059,17 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   if (!chapter)
     return true;
 
-  auto uid               = FindChildValue<libmatroska::KaxChapterUID>(*chapter);
-  auto end               = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
-  auto segmentEditionUid = FindChild<libmatroska::KaxChapterSegmentEditionUID>(*chapter);
+  auto uid               = find_child_value<libmatroska::KaxChapterUID>(*chapter);
+  auto end               = find_child<libmatroska::KaxChapterTimeEnd>(*chapter);
+  auto segmentEditionUid = find_child<libmatroska::KaxChapterSegmentEditionUID>(*chapter);
 
   p->ui->lChapter->setText(p->chapterModel->chapterDisplayName(*chapter));
-  p->ui->leChStart->setText(Q(mtx::string::format_timestamp(FindChildValue<libmatroska::KaxChapterTimeStart>(*chapter))));
+  p->ui->leChStart->setText(Q(mtx::string::format_timestamp(find_child_value<libmatroska::KaxChapterTimeStart>(*chapter))));
   p->ui->leChEnd->setText(end ? Q(mtx::string::format_timestamp(end->GetValue())) : Q(""));
-  p->ui->cbChFlagEnabled->setChecked(!!FindChildValue<libmatroska::KaxChapterFlagEnabled>(*chapter, 1));
-  p->ui->cbChFlagHidden->setChecked(!!FindChildValue<libmatroska::KaxChapterFlagHidden>(*chapter));
+  p->ui->cbChFlagEnabled->setChecked(!!find_child_value<libmatroska::KaxChapterFlagEnabled>(*chapter, 1));
+  p->ui->cbChFlagHidden->setChecked(!!find_child_value<libmatroska::KaxChapterFlagHidden>(*chapter));
   p->ui->leChUid->setText(uid ? QString::number(uid) : Q(""));
-  p->ui->leChSegmentUid->setText(formatEbmlBinary(FindChild<libmatroska::KaxChapterSegmentUID>(*chapter)));
+  p->ui->leChSegmentUid->setText(formatEbmlBinary(find_child<libmatroska::KaxChapterSegmentUID>(*chapter)));
   p->ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : Q(""));
 
   auto nameSelectionModel        = p->ui->tvChNames->selectionModel();
@@ -1102,12 +1102,12 @@ Tab::setEditionControlsFromStorage(EditionPtr const &edition) {
   if (!edition)
     return true;
 
-  auto uid = FindChildValue<libmatroska::KaxEditionUID>(*edition);
+  auto uid = find_child_value<libmatroska::KaxEditionUID>(*edition);
 
   p->ui->leEdUid->setText(uid ? QString::number(uid) : Q(""));
-  p->ui->cbEdFlagDefault->setChecked(!!FindChildValue<libmatroska::KaxEditionFlagDefault>(*edition));
-  p->ui->cbEdFlagHidden->setChecked(!!FindChildValue<libmatroska::KaxEditionFlagHidden>(*edition));
-  p->ui->cbEdFlagOrdered->setChecked(!!FindChildValue<libmatroska::KaxEditionFlagOrdered>(*edition));
+  p->ui->cbEdFlagDefault->setChecked(!!find_child_value<libmatroska::KaxEditionFlagDefault>(*edition));
+  p->ui->cbEdFlagHidden->setChecked(!!find_child_value<libmatroska::KaxEditionFlagHidden>(*edition));
+  p->ui->cbEdFlagOrdered->setChecked(!!find_child_value<libmatroska::KaxEditionFlagOrdered>(*edition));
 
   p->ui->pageContainer->setCurrentWidget(p->ui->editionPage);
 
@@ -1163,7 +1163,7 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
 
   p.ignoreChapterNameChanges = true;
 
-  p.ui->leChName->setText(Q(GetChildValue<libmatroska::KaxChapterString>(display)));
+  p.ui->leChName->setText(Q(get_child_value<libmatroska::KaxChapterString>(display)));
 
   auto lists             = NameModel::effectiveLanguagesForDisplay(*display);
   auto usedLanguageCodes = usedNameLanguages();
@@ -1231,7 +1231,7 @@ Tab::chapterNameEdited(QString const &text) {
   auto p = p_func();
 
   withSelectedName([p, &text](QModelIndex const &idx, libmatroska::KaxChapterDisplay &display) {
-    GetChild<libmatroska::KaxChapterString>(display).SetValueUTF8(to_utf8(text));
+    get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(to_utf8(text));
     p->nameModel->updateRow(idx.row());
   });
 }
@@ -1367,7 +1367,7 @@ Tab::addEdition(bool before) {
     row = selectedIdx.row() + (before ? 0 : 1);
   }
 
-  GetChild<libmatroska::KaxEditionUID>(*edition).SetValue(0);
+  get_child<libmatroska::KaxEditionUID>(*edition).SetValue(0);
 
   p->chapterModel->insertEdition(row, edition);
 
@@ -1399,13 +1399,13 @@ Tab::createEmptyChapter(int64_t startTime,
   auto chapter = std::make_shared<libmatroska::KaxChapterAtom>();
   auto name    = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timestamp_c::ns(startTime));
 
-  GetChild<libmatroska::KaxChapterUID>(*chapter).SetValue(0);
-  GetChild<libmatroska::KaxChapterTimeStart>(*chapter).SetValue(startTime);
+  get_child<libmatroska::KaxChapterUID>(*chapter).SetValue(0);
+  get_child<libmatroska::KaxChapterTimeStart>(*chapter).SetValue(startTime);
   if (!name.isEmpty()) {
-    auto &display        = GetChild<libmatroska::KaxChapterDisplay>(*chapter);
+    auto &display        = get_child<libmatroska::KaxChapterDisplay>(*chapter);
     auto actual_language = language.is_valid() ? language : cfg.m_defaultChapterLanguage;
 
-    GetChild<libmatroska::KaxChapterString>(display).SetValue(to_wide(name));
+    get_child<libmatroska::KaxChapterString>(display).SetValue(to_wide(name));
     mtx::chapters::set_languages_in_display(display, actual_language);
   }
 
@@ -1478,8 +1478,8 @@ Tab::applyModificationToTimestamps(QStandardItem *item,
   if (item->parent()) {
     auto chapter = p->chapterModel->chapterFromItem(item);
     if (chapter) {
-      auto kStart = FindChild<libmatroska::KaxChapterTimeStart>(*chapter);
-      auto kEnd   = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
+      auto kStart = find_child<libmatroska::KaxChapterTimeStart>(*chapter);
+      auto kEnd   = find_child<libmatroska::KaxChapterTimeEnd>(*chapter);
 
       if (kStart)
         kStart->SetValue(std::max<int64_t>(unaryOp(static_cast<int64_t>(kStart->GetValue())), 0));
@@ -1523,8 +1523,8 @@ Tab::constrictTimestamps(QStandardItem *item,
     return;
   }
 
-  auto kStart   = &GetChild<libmatroska::KaxChapterTimeStart>(*chapter);
-  auto kEnd     = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
+  auto kStart   = &get_child<libmatroska::KaxChapterTimeStart>(*chapter);
+  auto kEnd     = find_child<libmatroska::KaxChapterTimeEnd>(*chapter);
   auto newStart = !constrictStart ? kStart->GetValue()
                 : !constrictEnd   ? std::max(*constrictStart, kStart->GetValue())
                 :                   std::min(*constrictEnd, std::max(*constrictStart, kStart->GetValue()));
@@ -1534,7 +1534,7 @@ Tab::constrictTimestamps(QStandardItem *item,
 
   kStart->SetValue(newStart);
   if (newEnd)
-    GetChild<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(*newEnd);
+    get_child<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(*newEnd);
 
   p->chapterModel->updateRow(item->index());
 
@@ -1556,8 +1556,8 @@ Tab::expandTimestamps(QStandardItem *item) {
     return {};
   }
 
-  auto kStart   = chapter ? FindChild<libmatroska::KaxChapterTimeStart>(*chapter) : nullptr;
-  auto kEnd     = chapter ? FindChild<libmatroska::KaxChapterTimeEnd>(*chapter)   : nullptr;
+  auto kStart   = chapter ? find_child<libmatroska::KaxChapterTimeStart>(*chapter) : nullptr;
+  auto kEnd     = chapter ? find_child<libmatroska::KaxChapterTimeEnd>(*chapter)   : nullptr;
   auto newStart = kStart  ? std::optional<uint64_t>{kStart->GetValue()}           : std::optional<uint64_t>{};
   auto newEnd   = kEnd    ? std::optional<uint64_t>{kEnd->GetValue()}             : std::optional<uint64_t>{};
   auto modified = false;
@@ -1573,12 +1573,12 @@ Tab::expandTimestamps(QStandardItem *item) {
   }
 
   if (newStart && (!kStart || (kStart->GetValue() > *newStart))) {
-    GetChild<libmatroska::KaxChapterTimeStart>(*chapter).SetValue(*newStart);
+    get_child<libmatroska::KaxChapterTimeStart>(*chapter).SetValue(*newStart);
     modified = true;
   }
 
   if (newEnd && (!kEnd || (kEnd->GetValue() < *newEnd))) {
-    GetChild<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(*newEnd);
+    get_child<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(*newEnd);
     modified = true;
   }
 
@@ -1623,7 +1623,7 @@ Tab::setEndTimestamps(QStandardItem *startItem) {
       if (chapter) {
         auto data = allAtomData[chapter.get()];
         if (data && data->calculatedEnd.valid()) {
-          GetChild<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(data->calculatedEnd.to_ns());
+          get_child<libmatroska::KaxChapterTimeEnd>(*chapter).SetValue(data->calculatedEnd.to_ns());
           p->chapterModel->updateRow(item->index());
         }
       }
@@ -1648,7 +1648,7 @@ Tab::removeEndTimestamps(QStandardItem *startItem) {
   std::function<void(QStandardItem *)> setter = [chapterModel, &setter](QStandardItem *item) {
     auto chapter = chapterModel->chapterFromItem(item);
     if (chapter) {
-      DeleteChildren<libmatroska::KaxChapterTimeEnd>(*chapter);
+      delete_children<libmatroska::KaxChapterTimeEnd>(*chapter);
       chapterModel->updateRow(item->index());
     }
 
@@ -1671,7 +1671,7 @@ Tab::removeNames(QStandardItem *startItem) {
   std::function<void(QStandardItem *)> worker = [chapterModel, &worker](QStandardItem *item) {
     auto chapter = chapterModel->chapterFromItem(item);
     if (chapter) {
-      DeleteChildren<libmatroska::KaxChapterDisplay>(*chapter);
+      delete_children<libmatroska::KaxChapterDisplay>(*chapter);
       chapterModel->updateRow(item->index());
     }
 
@@ -1782,13 +1782,13 @@ Tab::generateSubChapters() {
 
   auto selectedItem    = p->chapterModel->itemFromIndex(selectedIdx);
   auto selectedChapter = p->chapterModel->chapterFromItem(selectedItem);
-  auto maxEndTimestamp = selectedChapter ? FindChildValue<libmatroska::KaxChapterTimeStart>(*selectedChapter, 0ull) : 0ull;
+  auto maxEndTimestamp = selectedChapter ? find_child_value<libmatroska::KaxChapterTimeStart>(*selectedChapter, 0ull) : 0ull;
   auto numRows         = selectedItem->rowCount();
 
   for (auto row = 0; row < numRows; ++row) {
     auto chapter = p->chapterModel->chapterFromItem(selectedItem->child(row));
     if (chapter)
-      maxEndTimestamp = std::max(maxEndTimestamp, std::max(FindChildValue<libmatroska::KaxChapterTimeStart>(*chapter, 0ull), FindChildValue<libmatroska::KaxChapterTimeEnd>(*chapter, 0ull)));
+      maxEndTimestamp = std::max(maxEndTimestamp, std::max(find_child_value<libmatroska::KaxChapterTimeStart>(*chapter, 0ull), find_child_value<libmatroska::KaxChapterTimeEnd>(*chapter, 0ull)));
   }
 
   GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimestamp, usedNameLanguages()};
@@ -1834,16 +1834,16 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
     return false;
 
   if (skipHidden) {
-    auto flagHidden = FindChild<libmatroska::KaxChapterFlagHidden>(*chapter);
+    auto flagHidden = find_child<libmatroska::KaxChapterFlagHidden>(*chapter);
     if (flagHidden && flagHidden->GetValue())
       return false;
   }
 
-  auto startTimestamp = FindChildValue<libmatroska::KaxChapterTimeStart>(*chapter);
+  auto startTimestamp = find_child_value<libmatroska::KaxChapterTimeStart>(*chapter);
   auto name           = to_wide(formatChapterName(nameTemplate, chapterNumber, timestamp_c::ns(startTimestamp)));
 
   if (RenumberSubChaptersParametersDialog::NameMatch::First == nameMatchingMode) {
-    GetChild<libmatroska::KaxChapterString>(GetChild<libmatroska::KaxChapterDisplay>(*chapter)).SetValue(name);
+    get_child<libmatroska::KaxChapterString>(get_child<libmatroska::KaxChapterDisplay>(*chapter)).SetValue(name);
     p->chapterModel->updateRow(idx);
 
     return true;
@@ -1860,7 +1860,7 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
         || (std::find_if(lists.languageCodes.begin(), lists.languageCodes.end(), [&languageOfNamesToReplace](auto const &actualLanguage) {
               return (languageOfNamesToReplace == actualLanguage);
             }) != lists.languageCodes.end()))
-      GetChild<libmatroska::KaxChapterString>(*kDisplay).SetValue(name);
+      get_child<libmatroska::KaxChapterString>(*kDisplay).SetValue(name);
   }
 
   p->chapterModel->updateRow(idx);
@@ -1890,8 +1890,8 @@ Tab::renumberSubChapters() {
     if (!chapter)
       continue;
 
-    auto start = GetChild<libmatroska::KaxChapterTimeStart>(*chapter).GetValue();
-    auto end   = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
+    auto start = get_child<libmatroska::KaxChapterTimeStart>(*chapter).GetValue();
+    auto end   = find_child<libmatroska::KaxChapterTimeEnd>(*chapter);
     auto name  = ChapterModel::chapterDisplayName(*chapter);
 
     if (firstName.isEmpty())
@@ -2228,20 +2228,20 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
 
     auto chapter = p->chapterModel->chapterFromItem(currentItem);
     if (chapter && currentItem->parent()) {
-      auto timeEndKax     = FindChild<libmatroska::KaxChapterTimeEnd>(*chapter);
-      auto displayKax     = FindChild<libmatroska::KaxChapterDisplay>(*chapter);
+      auto timeEndKax     = find_child<libmatroska::KaxChapterTimeEnd>(*chapter);
+      auto displayKax     = find_child<libmatroska::KaxChapterDisplay>(*chapter);
 
       auto data           = std::make_shared<ChapterAtomData>();
       data->atom          = chapter.get();
       data->parentAtom    = parentAtom;
       data->level         = level - 1;
-      data->start         = timestamp_c::ns(GetChildValue<libmatroska::KaxChapterTimeStart>(*chapter));
+      data->start         = timestamp_c::ns(get_child_value<libmatroska::KaxChapterTimeStart>(*chapter));
 
       if (timeEndKax)
         data->end         = timestamp_c::ns(timeEndKax->GetValue());
 
       if (displayKax)
-        data->primaryName = Q(FindChildValue<libmatroska::KaxChapterString>(*displayKax));
+        data->primaryName = Q(find_child_value<libmatroska::KaxChapterString>(*displayKax));
 
       allAtoms.insert(chapter.get(), data);
       atomsByParent[parentAtom].append(data);

@@ -306,63 +306,63 @@ move_children(libebml::EbmlMaster &source,
 
 int64_t
 kt_get_default_duration(libmatroska::KaxTrackEntry &track) {
-  return FindChildValue<libmatroska::KaxTrackDefaultDuration>(track);
+  return find_child_value<libmatroska::KaxTrackDefaultDuration>(track);
 }
 
 int64_t
 kt_get_number(libmatroska::KaxTrackEntry &track) {
-  return FindChildValue<libmatroska::KaxTrackNumber>(track);
+  return find_child_value<libmatroska::KaxTrackNumber>(track);
 }
 
 int64_t
 kt_get_uid(libmatroska::KaxTrackEntry &track) {
-  return FindChildValue<libmatroska::KaxTrackUID>(track);
+  return find_child_value<libmatroska::KaxTrackUID>(track);
 }
 
 std::string
 kt_get_codec_id(libmatroska::KaxTrackEntry &track) {
-  return FindChildValue<libmatroska::KaxCodecID>(track);
+  return find_child_value<libmatroska::KaxCodecID>(track);
 }
 
 int
 kt_get_max_blockadd_id(libmatroska::KaxTrackEntry &track) {
-  return FindChildValue<libmatroska::KaxMaxBlockAdditionID>(track);
+  return find_child_value<libmatroska::KaxMaxBlockAdditionID>(track);
 }
 
 int
 kt_get_a_channels(libmatroska::KaxTrackEntry &track) {
-  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
-  return audio ? FindChildValue<libmatroska::KaxAudioChannels>(audio, 1u) : 1;
+  auto audio = find_child<libmatroska::KaxTrackAudio>(track);
+  return audio ? find_child_value<libmatroska::KaxAudioChannels>(audio, 1u) : 1;
 }
 
 double
 kt_get_a_sfreq(libmatroska::KaxTrackEntry &track) {
-  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
-  return audio ? FindChildValue<libmatroska::KaxAudioSamplingFreq>(audio, 8000.0) : 8000.0;
+  auto audio = find_child<libmatroska::KaxTrackAudio>(track);
+  return audio ? find_child_value<libmatroska::KaxAudioSamplingFreq>(audio, 8000.0) : 8000.0;
 }
 
 double
 kt_get_a_osfreq(libmatroska::KaxTrackEntry &track) {
-  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
-  return audio ? FindChildValue<libmatroska::KaxAudioOutputSamplingFreq>(audio, 8000.0) : 8000.0;
+  auto audio = find_child<libmatroska::KaxTrackAudio>(track);
+  return audio ? find_child_value<libmatroska::KaxAudioOutputSamplingFreq>(audio, 8000.0) : 8000.0;
 }
 
 int
 kt_get_a_bps(libmatroska::KaxTrackEntry &track) {
-  auto audio = FindChild<libmatroska::KaxTrackAudio>(track);
-  return audio ? FindChildValue<libmatroska::KaxAudioBitDepth, int>(audio, -1) : -1;
+  auto audio = find_child<libmatroska::KaxTrackAudio>(track);
+  return audio ? find_child_value<libmatroska::KaxAudioBitDepth, int>(audio, -1) : -1;
 }
 
 int
 kt_get_v_pixel_width(libmatroska::KaxTrackEntry &track) {
-  auto video = FindChild<libmatroska::KaxTrackVideo>(track);
-  return video ? FindChildValue<libmatroska::KaxVideoPixelWidth>(video) : 0;
+  auto video = find_child<libmatroska::KaxTrackVideo>(track);
+  return video ? find_child_value<libmatroska::KaxVideoPixelWidth>(video) : 0;
 }
 
 int
 kt_get_v_pixel_height(libmatroska::KaxTrackEntry &track) {
-  auto video = FindChild<libmatroska::KaxTrackVideo>(track);
-  return video ? FindChildValue<libmatroska::KaxVideoPixelHeight>(video) : 0;
+  auto video = find_child<libmatroska::KaxTrackVideo>(track);
+  return video ? find_child_value<libmatroska::KaxVideoPixelHeight>(video) : 0;
 }
 
 libebml::EbmlElement *
@@ -542,59 +542,59 @@ fix_elements_in_master(libebml::EbmlMaster *master) {
     auto info_data = get_default_segment_info_data();
 
     if (!is_present[EBML_ID(libmatroska::KaxMuxingApp).GetValue()])
-      AddEmptyChild<libmatroska::KaxMuxingApp>(master).SetValueUTF8(info_data.muxing_app);
+      add_empty_child<libmatroska::KaxMuxingApp>(master).SetValueUTF8(info_data.muxing_app);
 
     if (!is_present[EBML_ID(libmatroska::KaxWritingApp).GetValue()])
-      AddEmptyChild<libmatroska::KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
+      add_empty_child<libmatroska::KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
   }
 
   // 4.2. Tracks
   else if (dynamic_cast<libmatroska::KaxTrackEntry *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxTrackUID).GetValue()])
-      AddEmptyChild<libmatroska::KaxTrackUID>(master).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
+      add_empty_child<libmatroska::KaxTrackUID>(master).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
   }
 
   // 4.3. Chapters
   else if (dynamic_cast<libmatroska::KaxEditionEntry *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxEditionUID).GetValue()])
-      AddEmptyChild<libmatroska::KaxEditionUID>(master).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+      add_empty_child<libmatroska::KaxEditionUID>(master).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
 
   } else if (dynamic_cast<libmatroska::KaxChapterAtom *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxChapterUID).GetValue()])
-      AddEmptyChild<libmatroska::KaxChapterUID>(master).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+      add_empty_child<libmatroska::KaxChapterUID>(master).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
 
     if (!is_present[EBML_ID(libmatroska::KaxChapterTimeStart).GetValue()])
-      AddEmptyChild<libmatroska::KaxChapterTimeStart>(master).SetValue(0);
+      add_empty_child<libmatroska::KaxChapterTimeStart>(master).SetValue(0);
 
   } else if (dynamic_cast<libmatroska::KaxChapterDisplay *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxChapterString).GetValue()])
-      AddEmptyChild<libmatroska::KaxChapterString>(master).SetValueUTF8("");
+      add_empty_child<libmatroska::KaxChapterString>(master).SetValueUTF8("");
 
   }
 
   // 4.4. Tags
   else if (dynamic_cast<libmatroska::KaxTag *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxTagTargets).GetValue()])
-      fix_elements_in_master(&AddEmptyChild<libmatroska::KaxTagTargets>(master));
+      fix_elements_in_master(&add_empty_child<libmatroska::KaxTagTargets>(master));
 
     else if (!is_present[EBML_ID(libmatroska::KaxTagSimple).GetValue()])
-      fix_elements_in_master(&AddEmptyChild<libmatroska::KaxTagSimple>(master));
+      fix_elements_in_master(&add_empty_child<libmatroska::KaxTagSimple>(master));
 
   } else if (dynamic_cast<libmatroska::KaxTagTargets *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxTagTargetTypeValue).GetValue()])
-      AddEmptyChild<libmatroska::KaxTagTargetTypeValue>(master).SetValue(50); // = movie
+      add_empty_child<libmatroska::KaxTagTargetTypeValue>(master).SetValue(50); // = movie
 
   } else if (dynamic_cast<libmatroska::KaxTagSimple *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxTagName).GetValue()])
-      AddEmptyChild<libmatroska::KaxTagName>(master).SetValueUTF8("");
+      add_empty_child<libmatroska::KaxTagName>(master).SetValueUTF8("");
 
   }
 
   // 4.5. Attachments
   else if (dynamic_cast<libmatroska::KaxAttached *>(master)) {
     if (!is_present[EBML_ID(libmatroska::KaxFileUID).GetValue()])
-      AddEmptyChild<libmatroska::KaxFileUID>(master).SetValue(create_unique_number(UNIQUE_ATTACHMENT_IDS));
+      add_empty_child<libmatroska::KaxFileUID>(master).SetValue(create_unique_number(UNIQUE_ATTACHMENT_IDS));
   }
 }
 
@@ -608,7 +608,7 @@ void
 remove_voids_from_master(libebml::EbmlElement *element) {
   auto master = dynamic_cast<libebml::EbmlMaster *>(element);
   if (master)
-    DeleteChildren<libebml::EbmlVoid>(master);
+    delete_children<libebml::EbmlVoid>(master);
 }
 
 int
@@ -793,7 +793,7 @@ found_in(libebml::EbmlElement &haystack,
 
 void
 remove_dummy_elements(libebml::EbmlMaster &master) {
-  remove_elements_recursively_if(master, [](auto &child) { return IsDummy(child); });
+  remove_elements_recursively_if(master, [](auto &child) { return is_dummy(child); });
 }
 
 void

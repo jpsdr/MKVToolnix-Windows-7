@@ -36,7 +36,7 @@ select_for_chapters(libmatroska::KaxTags &tags,
       continue;
 
     bool copy              = true;
-    libmatroska::KaxTagTargets *targets = FindChild<libmatroska::KaxTagTargets>(tag);
+    libmatroska::KaxTagTargets *targets = find_child<libmatroska::KaxTagTargets>(tag);
 
     if (targets) {
       for (auto child : *targets) {
@@ -74,15 +74,15 @@ find_simple(const std::string &name,
 libmatroska::KaxTagSimple &
 find_simple(const libebml::UTFstring &name,
             libebml::EbmlMaster &m) {
-  if (Is<libmatroska::KaxTagSimple>(&m)) {
-    libmatroska::KaxTagName *tname = FindChild<libmatroska::KaxTagName>(&m);
+  if (is_type<libmatroska::KaxTagSimple>(&m)) {
+    libmatroska::KaxTagName *tname = find_child<libmatroska::KaxTagName>(&m);
     if (tname && (name == libebml::UTFstring(*tname)))
       return *static_cast<libmatroska::KaxTagSimple *>(&m);
   }
 
   size_t i;
   for (i = 0; i < m.ListSize(); i++)
-    if (Is<libmatroska::KaxTag, libmatroska::KaxTagSimple>(m[i]))
+    if (is_type<libmatroska::KaxTag, libmatroska::KaxTagSimple>(m[i]))
       try {
         return find_simple(name, *static_cast<libebml::EbmlMaster *>(m[i]));
       } catch (...) {
@@ -95,7 +95,7 @@ std::string
 get_simple_value(const std::string &name,
                  libebml::EbmlMaster &m) {
   try {
-    auto tvalue = FindChild<libmatroska::KaxTagString>(&find_simple(name, m));
+    auto tvalue = find_child<libmatroska::KaxTagString>(&find_simple(name, m));
     if (tvalue)
       return tvalue->GetValueUTF8();
   } catch (...) {
@@ -106,26 +106,26 @@ get_simple_value(const std::string &name,
 
 std::string
 get_simple_name(const libmatroska::KaxTagSimple &tag) {
-  auto tname = FindChild<libmatroska::KaxTagName>(&tag);
+  auto tname = find_child<libmatroska::KaxTagName>(&tag);
   return tname ? tname->GetValueUTF8() : ""s;
 }
 
 std::string
 get_simple_value(const libmatroska::KaxTagSimple &tag) {
-  auto tstring = FindChild<libmatroska::KaxTagString>(&tag);
+  auto tstring = find_child<libmatroska::KaxTagString>(&tag);
   return tstring ? tstring->GetValueUTF8() : ""s;
 }
 
 void
 set_simple_name(libmatroska::KaxTagSimple &tag,
                 const std::string &name) {
-  GetChild<libmatroska::KaxTagName>(tag).SetValueUTF8(name);
+  get_child<libmatroska::KaxTagName>(tag).SetValueUTF8(name);
 }
 
 void
 set_simple_value(libmatroska::KaxTagSimple &tag,
                  const std::string &value) {
-  GetChild<libmatroska::KaxTagString>(tag).SetValueUTF8(value);
+  get_child<libmatroska::KaxTagString>(tag).SetValueUTF8(value);
 }
 
 void
@@ -138,11 +138,11 @@ set_simple(libmatroska::KaxTagSimple &tag,
 
 int64_t
 get_tuid(const libmatroska::KaxTag &tag) {
-  auto targets = FindChild<libmatroska::KaxTagTargets>(&tag);
+  auto targets = find_child<libmatroska::KaxTagTargets>(&tag);
   if (!targets)
     return -1;
 
-  auto tuid = FindChild<libmatroska::KaxTagTrackUID>(targets);
+  auto tuid = find_child<libmatroska::KaxTagTrackUID>(targets);
   if (!tuid)
     return -1;
 
@@ -151,11 +151,11 @@ get_tuid(const libmatroska::KaxTag &tag) {
 
 int64_t
 get_cuid(const libmatroska::KaxTag &tag) {
-  auto targets = FindChild<libmatroska::KaxTagTargets>(&tag);
+  auto targets = find_child<libmatroska::KaxTagTargets>(&tag);
   if (!targets)
     return -1;
 
-  auto cuid = FindChild<libmatroska::KaxTagChapterUID>(targets);
+  auto cuid = find_child<libmatroska::KaxTagChapterUID>(targets);
   if (!cuid)
     return -1;
 
@@ -175,7 +175,7 @@ convert_old(libmatroska::KaxTags &tags) {
 
   size_t tags_idx;
   for (tags_idx = 0; tags_idx < tags.ListSize(); tags_idx++) {
-    if (!Is<libmatroska::KaxTag>(tags[tags_idx]))
+    if (!is_type<libmatroska::KaxTag>(tags[tags_idx]))
       continue;
 
     libmatroska::KaxTag &tag = *static_cast<libmatroska::KaxTag *>(tags[tags_idx]);
@@ -184,7 +184,7 @@ convert_old(libmatroska::KaxTags &tags) {
     size_t tag_idx         = 0;
     while (tag_idx < tag.ListSize()) {
       tag_idx++;
-      if (!Is<libmatroska::KaxTagSimple>(tag[tag_idx - 1]))
+      if (!is_type<libmatroska::KaxTagSimple>(tag[tag_idx - 1]))
         continue;
 
       libmatroska::KaxTagSimple &simple = *static_cast<libmatroska::KaxTagSimple *>(tag[tag_idx - 1]);
@@ -210,9 +210,9 @@ convert_old(libmatroska::KaxTags &tags) {
     if (!has_level_type)
       continue;
 
-    auto targets = FindChild<libmatroska::KaxTagTargets>(&tag);
+    auto targets = find_child<libmatroska::KaxTagTargets>(&tag);
     if (targets)
-      GetChild<libmatroska::KaxTagTargetTypeValue>(*targets).SetValue(target_type_value);
+      get_child<libmatroska::KaxTagTargetTypeValue>(*targets).SetValue(target_type_value);
   }
 }
 
@@ -221,7 +221,7 @@ count_simple(libebml::EbmlMaster &master) {
   int count = 0;
 
   for (auto child : master)
-    if (Is<libmatroska::KaxTagSimple>(child))
+    if (is_type<libmatroska::KaxTagSimple>(child))
       ++count;
 
     else if (dynamic_cast<libebml::EbmlMaster *>(child))
@@ -233,7 +233,7 @@ count_simple(libebml::EbmlMaster &master) {
 void
 remove_track_uid_targets(libebml::EbmlMaster *tag) {
   for (auto el : *tag) {
-    if (!Is<libmatroska::KaxTagTargets>(el))
+    if (!is_type<libmatroska::KaxTagTargets>(el))
       continue;
 
     libmatroska::KaxTagTargets *targets = static_cast<libmatroska::KaxTagTargets *>(el);
@@ -241,7 +241,7 @@ remove_track_uid_targets(libebml::EbmlMaster *tag) {
 
     while (targets->ListSize() > idx_target) {
       libebml::EbmlElement *uid_el = (*targets)[idx_target];
-      if (Is<libmatroska::KaxTagTrackUID>(uid_el)) {
+      if (is_type<libmatroska::KaxTagTrackUID>(uid_el)) {
         targets->Remove(idx_target);
         delete uid_el;
 
@@ -260,7 +260,7 @@ set_simple(libmatroska::KaxTag &tag,
 
   for (auto const &element : tag) {
     auto s_tag = dynamic_cast<libmatroska::KaxTagSimple *>(element);
-    if (!s_tag || (to_utf8(FindChildValue<libmatroska::KaxTagName>(s_tag)) != name))
+    if (!s_tag || (to_utf8(find_child_value<libmatroska::KaxTagName>(s_tag)) != name))
       continue;
 
     k_simple_tag = s_tag;
@@ -272,26 +272,26 @@ set_simple(libmatroska::KaxTag &tag,
     tag.PushElement(*k_simple_tag);
   }
 
-  GetChild<libmatroska::KaxTagName>(k_simple_tag).SetValueUTF8(name);
-  GetChild<libmatroska::KaxTagString>(k_simple_tag).SetValueUTF8(value);
+  get_child<libmatroska::KaxTagName>(k_simple_tag).SetValueUTF8(name);
+  get_child<libmatroska::KaxTagString>(k_simple_tag).SetValueUTF8(value);
 
   if (!language.is_valid())
     return;
 
-  GetChild<libmatroska::KaxTagLangue>(k_simple_tag).SetValue(language.get_closest_iso639_2_alpha_3_code());
+  get_child<libmatroska::KaxTagLangue>(k_simple_tag).SetValue(language.get_closest_iso639_2_alpha_3_code());
 
   if (!mtx::bcp47::language_c::is_disabled())
-    GetChild<libmatroska::KaxTagLanguageIETF>(k_simple_tag).SetValue(language.format());
+    get_child<libmatroska::KaxTagLanguageIETF>(k_simple_tag).SetValue(language.format());
 }
 
 void
 set_target_type(libmatroska::KaxTag &tag,
                 target_type_e target_type_value,
                 std::string const &target_type) {
-  auto &targets = GetChild<libmatroska::KaxTagTargets>(tag);
+  auto &targets = get_child<libmatroska::KaxTagTargets>(tag);
 
-  GetChild<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(target_type_value);
-  GetChild<libmatroska::KaxTagTargetType>(targets).SetValue(target_type);
+  get_child<libmatroska::KaxTagTargetTypeValue>(targets).SetValue(target_type_value);
+  get_child<libmatroska::KaxTagTargetType>(targets).SetValue(target_type);
 }
 
 void
@@ -314,13 +314,13 @@ remove_elements_unsupported_by_webm(libebml::EbmlMaster &master) {
     s_supported_elements[ EBML_ID(libmatroska::KaxTagBinary).GetValue()          ] = true;
   }
 
-  auto is_simple = Is<libmatroska::KaxTagSimple>(master);
+  auto is_simple = is_type<libmatroska::KaxTagSimple>(master);
   auto idx       = 0u;
 
   while (idx < master.ListSize()) {
     auto e = master[idx];
 
-    if (e && s_supported_elements[ get_ebml_id(*e).GetValue() ] && !(is_simple && Is<libmatroska::KaxTagSimple>(e))) {
+    if (e && s_supported_elements[ get_ebml_id(*e).GetValue() ] && !(is_simple && is_type<libmatroska::KaxTagSimple>(e))) {
       ++idx;
 
       auto sub_master = dynamic_cast<libebml::EbmlMaster *>(e);
@@ -353,8 +353,8 @@ remove_track_statistics(libmatroska::KaxTags *tags,
     if (!tag)
       continue;
 
-    auto targets = FindChild<libmatroska::KaxTagTargets>(tag);
-    if (!targets || (FindChildValue<libmatroska::KaxTagTargetTypeValue>(targets, wanted_target_type) != wanted_target_type))
+    auto targets = find_child<libmatroska::KaxTagTargets>(tag);
+    if (!targets || (find_child_value<libmatroska::KaxTagTargetTypeValue>(targets, wanted_target_type) != wanted_target_type))
       continue;
 
     for (auto const &simple_tag_elt : *tag) {
@@ -387,8 +387,8 @@ std::string
 convert_tagets_to_index(libmatroska::KaxTagTargets const &targets) {
   std::vector<std::string> properties;
 
-  properties.emplace_back(fmt::format("TargetTypeValue:{}", FindChildValue<libmatroska::KaxTagTargetTypeValue>(targets, 50)));
-  properties.emplace_back(fmt::format("TargetType:{}",      FindChildValue<libmatroska::KaxTagTargetType>(     targets, ""s)));
+  properties.emplace_back(fmt::format("TargetTypeValue:{}", find_child_value<libmatroska::KaxTagTargetTypeValue>(targets, 50)));
+  properties.emplace_back(fmt::format("TargetType:{}",      find_child_value<libmatroska::KaxTagTargetType>(     targets, ""s)));
 
   for (auto const &child : targets)
     if (dynamic_cast<libebml::EbmlUInteger *>(child) && !dynamic_cast<libmatroska::KaxTagTargetTypeValue *>(child))
@@ -421,7 +421,7 @@ merge(std::shared_ptr<libmatroska::KaxTags> const &t1,
       }
 
       auto tag              = static_cast<libmatroska::KaxTag *>(src_child);
-      auto &targets         = GetChild<libmatroska::KaxTagTargets>(*tag);
+      auto &targets         = get_child<libmatroska::KaxTagTargets>(*tag);
       auto idx              = convert_tagets_to_index(targets);
       auto existing_tag_itr = tag_by_target_type.find(idx);
 

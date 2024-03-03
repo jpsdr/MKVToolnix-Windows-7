@@ -55,7 +55,7 @@ kax_block_group_c::add_frame(const libmatroska::KaxTrackEntry &track,
                              int64_t past_block,
                              int64_t forw_block,
                              libmatroska::LacingType lacing) {
-  libmatroska::KaxBlock & block = GetChild<libmatroska::KaxBlock>(*this);
+  libmatroska::KaxBlock & block = get_child<libmatroska::KaxBlock>(*this);
   assert(ParentCluster);
   block.SetParent(*ParentCluster);
 
@@ -64,7 +64,7 @@ kax_block_group_c::add_frame(const libmatroska::KaxTrackEntry &track,
   kax_reference_block_c *past_ref = nullptr;
 
   if (0 <= past_block) {
-    past_ref = FindChild<kax_reference_block_c>(*this);
+    past_ref = find_child<kax_reference_block_c>(*this);
     if (!past_ref) {
       past_ref = new kax_reference_block_c;
       PushElement(*past_ref);
@@ -74,7 +74,7 @@ kax_block_group_c::add_frame(const libmatroska::KaxTrackEntry &track,
   }
 
   if (0 <= forw_block) {
-    kax_reference_block_c *forw_ref = FindChild<kax_reference_block_c>(*this);
+    kax_reference_block_c *forw_ref = find_child<kax_reference_block_c>(*this);
     if (past_ref == forw_ref) {
       forw_ref = new kax_reference_block_c;
       PushElement(*forw_ref);

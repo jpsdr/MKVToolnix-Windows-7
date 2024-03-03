@@ -18,7 +18,7 @@ TrackNamePage::TrackNamePage(Tab &parent,
                              translatable_string_c const &title,
                              translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
-  , m_trackType{FindChildValue<libmatroska::KaxTrackType>(m_master)}
+  , m_trackType{find_child_value<libmatroska::KaxTrackType>(m_master)}
 {
 }
 

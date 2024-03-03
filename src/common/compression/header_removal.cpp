@@ -16,6 +16,7 @@
 #include "common/ac3.h"
 #include "common/dirac.h"
 #include "common/dts.h"
+#include "common/ebml.h"
 #include "common/endian.h"
 #include "common/compression/header_removal.h"
 
@@ -71,7 +72,7 @@ header_removal_compressor_c::set_track_headers(libmatroska::KaxContentEncoding &
   compressor_c::set_track_headers(c_encoding);
 
   // Set compression parameters.
-  libebml::GetChild<libmatroska::KaxContentCompSettings>(libebml::GetChild<libmatroska::KaxContentCompression>(c_encoding)).CopyBuffer(m_bytes->get_buffer(), m_bytes->get_size());
+  get_child<libmatroska::KaxContentCompSettings>(get_child<libmatroska::KaxContentCompression>(c_encoding)).CopyBuffer(m_bytes->get_buffer(), m_bytes->get_size());
 }
 
 // ------------------------------------------------------------

@@ -84,7 +84,7 @@ NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
 
   lists.languageNames.sort();
 
-  rowItems[0]->setText(Q(GetChildValue<libmatroska::KaxChapterString>(display)));
+  rowItems[0]->setText(Q(get_child_value<libmatroska::KaxChapterString>(display)));
   rowItems[1]->setText(lists.languageNames.join(Q("; ")));
 }
 
@@ -116,7 +116,7 @@ NameModel::addNew() {
   auto &cfg     = Util::Settings::get();
   auto display = new libmatroska::KaxChapterDisplay;
 
-  GetChild<libmatroska::KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
+  get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
   mtx::chapters::set_languages_in_display(*display, cfg.m_defaultChapterLanguage);
 
   m_chapter->PushElement(*display);
@@ -133,7 +133,7 @@ NameModel::remove(QModelIndex const &idx) {
   m_displayRegistry.remove(registryIdFromItem(displayItem));
 
   removeRow(idx.row());
-  DeleteChild(*m_chapter, display);
+  delete_child(*m_chapter, display);
 }
 
 void

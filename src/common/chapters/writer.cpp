@@ -27,13 +27,13 @@ static void
 handle_atom(libmatroska::KaxChapterAtom const &atom,
             chapter_entry_storage_c &chapter_entries,
             mtx::bcp47::language_c const &language_to_extract) {
-  if (FindChildValue<libmatroska::KaxChapterFlagHidden>(atom) != 0)
+  if (find_child_value<libmatroska::KaxChapterFlagHidden>(atom) != 0)
     return;
 
-  if (FindChildValue<libmatroska::KaxChapterFlagEnabled>(atom, 1llu) != 1)
+  if (find_child_value<libmatroska::KaxChapterFlagEnabled>(atom, 1llu) != 1)
     return;
 
-  auto start = timestamp_c::ns(FindChildValue<libmatroska::KaxChapterTimeStart>(atom));
+  auto start = timestamp_c::ns(find_child_value<libmatroska::KaxChapterTimeStart>(atom));
   auto name  = std::string{};
 
   for (auto const &child : atom) {
@@ -41,11 +41,11 @@ handle_atom(libmatroska::KaxChapterAtom const &atom,
     if (!display)
       continue;
 
-    auto language = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxChapterLanguage>(display, "eng"s));
+    auto language = mtx::bcp47::language_c::parse(find_child_value<libmatroska::KaxChapterLanguage>(display, "eng"s));
     if (language_to_extract.is_valid() && (language != language_to_extract))
       continue;
 
-    name = to_utf8(FindChildValue<libmatroska::KaxChapterString>(display));
+    name = to_utf8(find_child_value<libmatroska::KaxChapterString>(display));
     break;
   }
 

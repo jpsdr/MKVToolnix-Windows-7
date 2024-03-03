@@ -28,9 +28,9 @@ convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &mpls_cha
   auto name_template  = name_template_.empty() ? mtx::chapters::g_chapter_generation_name_template.get_translated() : name_template_;
   auto chapter_number = 0;
   auto kax_chapters   = std::make_shared<libmatroska::KaxChapters>();
-  auto &edition       = GetChild<libmatroska::KaxEditionEntry>(*kax_chapters);
+  auto &edition       = get_child<libmatroska::KaxEditionEntry>(*kax_chapters);
 
-  GetChild<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+  get_child<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
   for (auto const &entry : mpls_chapters) {
     ++chapter_number;
