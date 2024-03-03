@@ -87,7 +87,7 @@ create_ebml_element(const libebml::EbmlCallbacks &callbacks,
   if (EBML_CTX_SIZE(context_e) == 0)
     return nullptr;
 
-  const auto &context = EBML_INFO_CONTEXT(static_cast<const libebml::EbmlCallbacksMaster &>(callbacks));
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(callbacks));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
@@ -120,7 +120,7 @@ do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
   if (EBML_CTX_SIZE(context_e) == 0)
     return nullptr;
 
-  const auto &context = EBML_INFO_CONTEXT(static_cast<const libebml::EbmlCallbacksMaster &>(base));
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
@@ -165,7 +165,7 @@ do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
   if (EBML_CTX_SIZE(context_e) == 0)
     return nullptr;
 
-  const auto &context = EBML_INFO_CONTEXT(static_cast<const libebml::EbmlCallbacksMaster &>(base));
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (!strcmp(debug_name, EBML_INFO_NAME(EBML_CTX_IDX_INFO(context, i))))
@@ -207,7 +207,7 @@ do_find_ebml_parent_callbacks(libebml::EbmlCallbacks const &base,
   if (EBML_CTX_SIZE(context_e) == 0)
     return nullptr;
 
-  const auto &context = EBML_INFO_CONTEXT(static_cast<const libebml::EbmlCallbacksMaster &>(base));
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
@@ -249,7 +249,7 @@ do_find_ebml_semantic(libebml::EbmlCallbacks const &base,
   if (EBML_CTX_SIZE(context_e) == 0)
     return nullptr;
 
-  const auto &context = EBML_INFO_CONTEXT(static_cast<const libebml::EbmlCallbacksMaster &>(base));
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
