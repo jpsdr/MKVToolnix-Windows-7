@@ -78,12 +78,12 @@ AttachedFilePage::init() {
 
 void
 AttachedFilePage::setControlsFromAttachment() {
-  auto mimeType = Q(FindChildValue<libmatroska::KaxMimeType>(*m_attachment));
+  auto mimeType = Q(find_child_value<libmatroska::KaxMimeType>(*m_attachment));
 
-  ui->name->setText(Q(FindChildValue<libmatroska::KaxFileName>(*m_attachment)));
-  ui->description->setText(Q(FindChildValue<libmatroska::KaxFileDescription>(*m_attachment)));
+  ui->name->setText(Q(find_child_value<libmatroska::KaxFileName>(*m_attachment)));
+  ui->description->setText(Q(find_child_value<libmatroska::KaxFileDescription>(*m_attachment)));
   ui->mimeType->setEditText(mimeType);
-  ui->uid->setText(QString::number(FindChildValue<libmatroska::KaxFileUID>(*m_attachment)));
+  ui->uid->setText(QString::number(find_child_value<libmatroska::KaxFileUID>(*m_attachment)));
 
   Util::setComboBoxTextByData(ui->mimeType, mimeType);
 
@@ -106,7 +106,7 @@ AttachedFilePage::dropEvent(QDropEvent *event) {
 QString
 AttachedFilePage::title()
   const {
-  auto name = Q(FindChildValue<libmatroska::KaxFileName>(*m_attachment));
+  auto name = Q(find_child_value<libmatroska::KaxFileName>(*m_attachment));
   return !name.isEmpty() ? name : QY("<Unnamed>");
 }
 
@@ -132,7 +132,7 @@ AttachedFilePage::formatSize()
   if (m_newFileContent)
     return QNY("%1 byte (%2)", "%1 bytes (%2)", m_newFileContent->get_size()).arg(m_newFileContent->get_size()).arg(Q(mtx::string::format_file_size(m_newFileContent->get_size())));
 
-  auto content = FindChild<libmatroska::KaxFileData>(*m_attachment);
+  auto content = find_child<libmatroska::KaxFileData>(*m_attachment);
   if (content)
     return QNY("%1 byte (%2)", "%1 bytes (%2)", content->GetSize()).arg(content->GetSize()).arg(Q(mtx::string::format_file_size(content->GetSize())));
 
@@ -143,27 +143,27 @@ bool
 AttachedFilePage::hasThisBeenModified()
   const {
   return m_newFileContent
-    || (Q(FindChildValue<libmatroska::KaxFileName>(*m_attachment))              != ui->name->text())
-    || (Q(FindChildValue<libmatroska::KaxFileDescription>(*m_attachment))       != ui->description->text())
-    || (Q(FindChildValue<libmatroska::KaxMimeType>(*m_attachment))              != ui->mimeType->currentText())
-    || (QString::number(FindChildValue<libmatroska::KaxFileUID>(*m_attachment)) != ui->uid->text());
+    || (Q(find_child_value<libmatroska::KaxFileName>(*m_attachment))              != ui->name->text())
+    || (Q(find_child_value<libmatroska::KaxFileDescription>(*m_attachment))       != ui->description->text())
+    || (Q(find_child_value<libmatroska::KaxMimeType>(*m_attachment))              != ui->mimeType->currentText())
+    || (QString::number(find_child_value<libmatroska::KaxFileUID>(*m_attachment)) != ui->uid->text());
 }
 
 void
 AttachedFilePage::modifyThis() {
   auto description = ui->description->text();
 
-  GetChild<libmatroska::KaxFileName>(*m_attachment).SetValueUTF8(to_utf8(ui->name->text()));
-  GetChild<libmatroska::KaxMimeType>(*m_attachment).SetValue(to_utf8(ui->mimeType->currentText()));
-  GetChild<libmatroska::KaxFileUID>(*m_attachment).SetValue(ui->uid->text().toULongLong());
+  get_child<libmatroska::KaxFileName>(*m_attachment).SetValueUTF8(to_utf8(ui->name->text()));
+  get_child<libmatroska::KaxMimeType>(*m_attachment).SetValue(to_utf8(ui->mimeType->currentText()));
+  get_child<libmatroska::KaxFileUID>(*m_attachment).SetValue(ui->uid->text().toULongLong());
 
   if (description.isEmpty())
-    DeleteChildren<libmatroska::KaxFileDescription>(*m_attachment);
+    delete_children<libmatroska::KaxFileDescription>(*m_attachment);
   else
-    GetChild<libmatroska::KaxFileDescription>(*m_attachment).SetValueUTF8(to_utf8(description));
+    get_child<libmatroska::KaxFileDescription>(*m_attachment).SetValueUTF8(to_utf8(description));
 
   if (m_newFileContent)
-    GetChild<libmatroska::KaxFileData>(*m_attachment).CopyBuffer(m_newFileContent->get_buffer(), m_newFileContent->get_size());
+    get_child<libmatroska::KaxFileData>(*m_attachment).CopyBuffer(m_newFileContent->get_buffer(), m_newFileContent->get_size());
 }
 
 bool
@@ -182,7 +182,7 @@ AttachedFilePage::validateThis()
 
 void
 AttachedFilePage::saveContent() {
-  auto content = FindChild<libmatroska::KaxFileData>(*m_attachment);
+  auto content = find_child<libmatroska::KaxFileData>(*m_attachment);
 
   if (!m_newFileContent && !content)
     return;

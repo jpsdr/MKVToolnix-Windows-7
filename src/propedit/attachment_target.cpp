@@ -241,18 +241,18 @@ attachment_target_c::delete_by_id() {
 bool
 attachment_target_c::matches_by_uid_name_or_mime_type(libmatroska::KaxAttached &att) {
   if (st_uid == m_selector_type) {
-    auto file_uid = FindChild<libmatroska::KaxFileUID>(att);
+    auto file_uid = find_child<libmatroska::KaxFileUID>(att);
     auto uid      = file_uid ? uint64_t(*file_uid) : static_cast<uint64_t>(0);
     return uid == m_selector_num_arg;
   }
 
   if (st_name == m_selector_type) {
-    auto file_name = FindChild<libmatroska::KaxFileName>(att);
+    auto file_name = find_child<libmatroska::KaxFileName>(att);
     return file_name && (libebml::UTFstring(*file_name).GetUTF8() == m_selector_string_arg);
   }
 
   if (st_mime_type == m_selector_type) {
-    auto mime_type = FindChild<libmatroska::KaxMimeType>(att);
+    auto mime_type = find_child<libmatroska::KaxMimeType>(att);
     return mime_type && (std::string(*mime_type) == m_selector_string_arg);
   }
 
@@ -317,29 +317,29 @@ void
 attachment_target_c::replace_attachment_values(libmatroska::KaxAttached &att) {
   if (m_options.m_name) {
     auto file_name = !m_options.m_name->empty() ? *m_options.m_name : to_utf8(mtx::fs::to_path(m_file_name).filename().string());
-    GetChild<libmatroska::KaxFileName>(att).SetValueUTF8(file_name);
+    get_child<libmatroska::KaxFileName>(att).SetValueUTF8(file_name);
   }
 
-  auto current_mime_type = FindChildValue<libmatroska::KaxMimeType>(att);
+  auto current_mime_type = find_child_value<libmatroska::KaxMimeType>(att);
   auto new_mime_type     = !m_options.m_mime_type         ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(current_mime_type, g_use_legacy_font_mime_types)
                          : m_options.m_mime_type->empty() ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(::mtx::mime::guess_type_for_file(m_file_name), g_use_legacy_font_mime_types)
                          :                                  *m_options.m_mime_type;
 
   if (!new_mime_type.empty() && (new_mime_type != current_mime_type))
-    GetChild<libmatroska::KaxMimeType>(att).SetValue(new_mime_type);
+    get_child<libmatroska::KaxMimeType>(att).SetValue(new_mime_type);
 
   if (m_options.m_description) {
     if (m_options.m_description->empty())
-      DeleteChildren<libmatroska::KaxFileDescription>(att);
+      delete_children<libmatroska::KaxFileDescription>(att);
     else
-      GetChild<libmatroska::KaxFileDescription>(att).SetValueUTF8(*m_options.m_description);
+      get_child<libmatroska::KaxFileDescription>(att).SetValueUTF8(*m_options.m_description);
   }
 
   if (m_options.m_uid)
-    GetChild<libmatroska::KaxFileUID>(att).SetValue(*m_options.m_uid);
+    get_child<libmatroska::KaxFileUID>(att).SetValue(*m_options.m_uid);
 
   if (m_file_content)
-    GetChild<libmatroska::KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
+    get_child<libmatroska::KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
 }
 
 std::string

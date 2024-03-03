@@ -26,20 +26,20 @@ TrackTypePage::TrackTypePage(Tab &parent,
   , ui{new Ui::TrackTypePage}
   , m_master(master)
   , m_trackIdxMkvmerge{trackIdxMkvmerge}
-  , m_trackType{FindChildValue<libmatroska::KaxTrackType>(m_master)}
-  , m_trackNumber{FindChildValue<libmatroska::KaxTrackNumber>(m_master)}
-  , m_trackUid{FindChildValue<libmatroska::KaxTrackUID>(m_master)}
-  , m_codecId{Q(FindChildValue<libmatroska::KaxCodecID>(m_master))}
-  , m_name{Q(FindChildValue<libmatroska::KaxTrackName>(m_master))}
-  , m_defaultTrackFlag{!!FindChildValue<libmatroska::KaxTrackFlagDefault>(m_master, 1u)}
-  , m_forcedTrackFlag{!!FindChildValue<libmatroska::KaxTrackFlagForced>(m_master, 0u)}
-  , m_enabledTrackFlag{!!FindChildValue<libmatroska::KaxTrackFlagEnabled>(m_master, 1u)}
+  , m_trackType{find_child_value<libmatroska::KaxTrackType>(m_master)}
+  , m_trackNumber{find_child_value<libmatroska::KaxTrackNumber>(m_master)}
+  , m_trackUid{find_child_value<libmatroska::KaxTrackUID>(m_master)}
+  , m_codecId{Q(find_child_value<libmatroska::KaxCodecID>(m_master))}
+  , m_name{Q(find_child_value<libmatroska::KaxTrackName>(m_master))}
+  , m_defaultTrackFlag{!!find_child_value<libmatroska::KaxTrackFlagDefault>(m_master, 1u)}
+  , m_forcedTrackFlag{!!find_child_value<libmatroska::KaxTrackFlagForced>(m_master, 0u)}
+  , m_enabledTrackFlag{!!find_child_value<libmatroska::KaxTrackFlagEnabled>(m_master, 1u)}
   , m_yesIcon{Util::fixStandardItemIcon(MainWindow::yesIcon())}
   , m_noIcon{Util::fixStandardItemIcon(MainWindow::noIcon())}
 {
-  m_language = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxLanguageIETF>(m_master));
+  m_language = mtx::bcp47::language_c::parse(find_child_value<libmatroska::KaxLanguageIETF>(m_master));
   if (!m_language.is_valid())
-    m_language = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxTrackLanguage>(m_master, "eng"s));
+    m_language = mtx::bcp47::language_c::parse(find_child_value<libmatroska::KaxTrackLanguage>(m_master, "eng"s));
 
   ui->setupUi(this);
 }

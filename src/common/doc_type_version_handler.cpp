@@ -119,9 +119,9 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
     head->SkipData(*stream, context);
 
     auto old_size          = file.getFilePointer() - head->GetElementPosition();
-    auto &dt_version       = GetChild<libebml::EDocTypeVersion>(*head);
+    auto &dt_version       = get_child<libebml::EDocTypeVersion>(*head);
     auto file_version      = dt_version.GetValue();
-    auto &dt_read_version  = GetChild<libebml::EDocTypeReadVersion>(*head);
+    auto &dt_read_version  = get_child<libebml::EDocTypeReadVersion>(*head);
     auto file_read_version = dt_read_version.GetValue();
     auto changed           = false;
 

@@ -74,8 +74,8 @@ remove_simple_tags_for(libmatroska::KaxTags &tags,
     }
 
     if (id) {
-      auto targets   = FindChild<libmatroska::KaxTagTargets>(*tag);
-      auto actual_id = targets ? std::optional<uint64_t>{ FindChildValue<T>(*targets, 0llu) } : std::optional<uint64_t>{ std::nullopt };
+      auto targets   = find_child<libmatroska::KaxTagTargets>(*tag);
+      auto actual_id = targets ? std::optional<uint64_t>{ find_child_value<T>(*targets, 0llu) } : std::optional<uint64_t>{ std::nullopt };
 
       if (!targets || !actual_id || (*actual_id != *id)) {
         ++tag_idx;

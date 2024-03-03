@@ -117,17 +117,17 @@ ebml_chapters_converter_c::fix_atom(libmatroska::KaxChapterAtom &atom)
     if (dynamic_cast<libmatroska::KaxChapterAtom *>(element))
       fix_atom(*static_cast<libmatroska::KaxChapterAtom *>(element));
 
-  if (!FindChild<libmatroska::KaxChapterTimeStart>(atom))
+  if (!find_child<libmatroska::KaxChapterTimeStart>(atom))
     throw conversion_x{Y("<ChapterAtom> is missing the <ChapterTimeStart> child.")};
 
-  if (!FindChild<libmatroska::KaxChapterUID>(atom))
+  if (!find_child<libmatroska::KaxChapterUID>(atom))
     atom.PushElement((new libmatroska::KaxChapterUID)->SetValue(create_unique_number(UNIQUE_CHAPTER_IDS)));
 
-  auto ctrack = FindChild<libmatroska::KaxChapterTrack>(atom);
-  if (ctrack && !FindChild<libmatroska::KaxChapterTrackNumber>(ctrack))
+  auto ctrack = find_child<libmatroska::KaxChapterTrack>(atom);
+  if (ctrack && !find_child<libmatroska::KaxChapterTrackNumber>(ctrack))
     throw conversion_x{Y("<ChapterTrack> is missing the <ChapterTrackNumber> child.")};
 
-  auto cdisplay = FindChild<libmatroska::KaxChapterDisplay>(atom);
+  auto cdisplay = find_child<libmatroska::KaxChapterDisplay>(atom);
   if (cdisplay)
     fix_chapter_display(*cdisplay);
 }
@@ -167,7 +167,7 @@ ebml_chapters_converter_c::fix_chapter_display_languages_and_countries(libmatros
 void
 ebml_chapters_converter_c::fix_chapter_display(libmatroska::KaxChapterDisplay &display)
   const {
-  if (!FindChild<libmatroska::KaxChapterString>(display))
+  if (!find_child<libmatroska::KaxChapterString>(display))
     throw conversion_x{Y("<ChapterDisplay> is missing the <ChapterString> child.")};
 
   fix_chapter_display_languages_and_countries(display);
@@ -188,7 +188,7 @@ ebml_chapters_converter_c::fix_edition_display_languages(libmatroska::KaxEdition
 void
 ebml_chapters_converter_c::fix_edition_display(libmatroska::KaxEditionDisplay &display)
   const {
-  if (!FindChild<libmatroska::KaxEditionString>(display))
+  if (!find_child<libmatroska::KaxEditionString>(display))
     throw conversion_x{Y("<EditionDisplay> is missing the <EditionString> child.")};
 
   fix_edition_display_languages(display);

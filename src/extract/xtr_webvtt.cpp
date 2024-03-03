@@ -29,7 +29,7 @@ xtr_webvtt_c::xtr_webvtt_c(const std::string &codec_id,
 void
 xtr_webvtt_c::create_file(xtr_base_c *master,
                           libmatroska::KaxTrackEntry &track) {
-  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
@@ -53,8 +53,8 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
   std::string label, settings_list, local_blocks;
 
   if (f.additions) {
-    auto &block_more    = GetChild<libmatroska::KaxBlockMore>(f.additions);
-    auto block_addition = FindChild<libmatroska::KaxBlockAdditional>(block_more);
+    auto &block_more    = get_child<libmatroska::KaxBlockMore>(f.additions);
+    auto block_addition = find_child<libmatroska::KaxBlockAdditional>(block_more);
 
     if (block_addition) {
       auto content = std::string{reinterpret_cast<char const *>(block_addition->GetBuffer()), static_cast<std::string::size_type>(block_addition->GetSize())};

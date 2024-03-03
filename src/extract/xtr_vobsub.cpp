@@ -64,7 +64,7 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
                           libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
-  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (priv) {
     m_private_data = decode_codec_private(priv);
     m_private_data->take_ownership();

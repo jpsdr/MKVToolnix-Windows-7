@@ -26,7 +26,7 @@ xtr_rmff_c::xtr_rmff_c(const std::string &codec_id,
 void
 xtr_rmff_c::create_file(xtr_base_c *master,
                         libmatroska::KaxTrackEntry &track) {
-  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
     mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 

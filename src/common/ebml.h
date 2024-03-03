@@ -101,52 +101,52 @@ libebml::EbmlId get_ebml_id(libebml::EbmlElement const &e);
 
 template<typename T>
 bool
-Is(libebml::EbmlId const &id) {
+is_type(libebml::EbmlId const &id) {
   return id == EBML_ID(T);
 }
 
 template<typename T1, typename T2, typename... Trest>
 bool
-Is(libebml::EbmlId const &id) {
-  return Is<T1>(id) || Is<T2, Trest...>(id);
+is_type(libebml::EbmlId const &id) {
+  return is_type<T1>(id) || is_type<T2, Trest...>(id);
 }
 
 template<typename T>
 bool
-Is(libebml::EbmlElement *e) {
+is_type(libebml::EbmlElement *e) {
   return !e ? false : (get_ebml_id(*e) == EBML_ID(T));
 }
 
 template<typename T1, typename T2, typename... Trest>
 bool
-Is(libebml::EbmlElement *e) {
-  return !e ? false : Is<T1>(e) || Is<T2, Trest...>(e);
+is_type(libebml::EbmlElement *e) {
+  return !e ? false : is_type<T1>(e) || is_type<T2, Trest...>(e);
 }
 
 template<typename T>
 bool
-Is(libebml::EbmlElement const &e) {
+is_type(libebml::EbmlElement const &e) {
   return get_ebml_id(e) == EBML_ID(T);
 }
 
 template<typename T1, typename T2, typename... Trest>
 bool
-Is(libebml::EbmlElement const &e) {
-  return Is<T1>(e) || Is<T2, Trest...>(e);
+is_type(libebml::EbmlElement const &e) {
+  return is_type<T1>(e) || is_type<T2, Trest...>(e);
 }
 
 inline bool
-IsDummy(libebml::EbmlElement const &e) {
+is_dummy(libebml::EbmlElement const &e) {
   return !!dynamic_cast<libebml::EbmlDummy const *>(&e);
 }
 
 inline bool
-IsDummy(libebml::EbmlElement const *e) {
+is_dummy(libebml::EbmlElement const *e) {
   return !!dynamic_cast<libebml::EbmlDummy const *>(e);
 }
 
 template <typename type>type &
-GetEmptyChild(libebml::EbmlMaster &master) {
+get_empty_child(libebml::EbmlMaster &master) {
   libebml::EbmlElement *e;
   libebml::EbmlMaster *m;
 
@@ -161,24 +161,9 @@ GetEmptyChild(libebml::EbmlMaster &master) {
   return *(static_cast<type *>(e));
 }
 
-template <typename type>type &
-GetNextEmptyChild(libebml::EbmlMaster &master,
-                  const type &past_elt) {
-  libebml::EbmlMaster *m;
-  libebml::EbmlElement *e = master.FindNextElt(past_elt, true);
-  if ((m = dynamic_cast<libebml::EbmlMaster *>(e))) {
-    while (m->ListSize() > 0) {
-      delete (*m)[0];
-      m->Remove(0);
-    }
-  }
-
-  return *(static_cast<type *>(e));
-}
-
 template <typename T>
 T &
-AddEmptyChild(libebml::EbmlMaster &master) {
+add_empty_child(libebml::EbmlMaster &master) {
   libebml::EbmlMaster *m;
   libebml::EbmlElement *e = new T;
   if ((m = dynamic_cast<libebml::EbmlMaster *>(e))) {
@@ -194,69 +179,57 @@ AddEmptyChild(libebml::EbmlMaster &master) {
 
 template <typename T>
 T &
-AddEmptyChild(libebml::EbmlMaster *master) {
-  return AddEmptyChild<T>(*master);
+add_empty_child(libebml::EbmlMaster *master) {
+  return add_empty_child<T>(*master);
 }
 
 template <typename T>
 T *
-FindChild(libebml::EbmlMaster const &m) {
+find_child(libebml::EbmlMaster const &m) {
   return static_cast<T *>(m.FindFirstElt(EBML_INFO(T)));
 }
 
 template <typename T>
-T *
-FindChild(libebml::EbmlElement const &e) {
-  auto &m = dynamic_cast<libebml::EbmlMaster const &>(e);
-  return static_cast<T *>(m.FindFirstElt(EBML_INFO(T)));
+T*
+find_child(libebml::EbmlMaster const *m) {
+  return static_cast<T *>(m->FindFirstElt(EBML_INFO(T)));
 }
 
-template <typename A> A*
-FindChild(libebml::EbmlMaster const *m) {
-  return static_cast<A *>(m->FindFirstElt(EBML_INFO(A)));
+template<typename T>
+T &
+get_child(libebml::EbmlMaster *m) {
+  return libebml::GetChild<T>(*m);
 }
 
-template <typename A> A*
-FindChild(libebml::EbmlElement const *e) {
-  auto m = dynamic_cast<libebml::EbmlMaster const *>(e);
-  assert(m);
-  return static_cast<A *>(m->FindFirstElt(EBML_INFO(A)));
-}
-
-template<typename A> A &
-GetChild(libebml::EbmlMaster *m) {
-  return GetChild<A>(*m);
+template<typename T>
+T &
+get_child(libebml::EbmlMaster &m) {
+  return libebml::GetChild<T>(m);
 }
 
 template<typename A> A &
-GetChildEmptyIfNew(libebml::EbmlMaster &m) {
-  auto *child = FindChild<A>(m);
-  return child ? *child : GetEmptyChild<A>(m);
+get_child_empty_if_new(libebml::EbmlMaster &m) {
+  auto *child = find_child<A>(m);
+  return child ? *child : get_empty_child<A>(m);
 }
 
 template<typename A> A &
-GetChildEmptyIfNew(libebml::EbmlMaster *m) {
-  return GetChildEmptyIfNew<A>(*m);
+get_child_empty_if_new(libebml::EbmlMaster *m) {
+  return get_child_empty_if_new<A>(*m);
 }
 
 template <typename A>A &
-GetFirstOrNextChild(libebml::EbmlMaster &master,
+get_first_or_next_child(libebml::EbmlMaster &master,
                     A *previous_child) {
-  return !previous_child ? GetChild<A>(master) : libebml::GetNextChild<A>(master, *previous_child);
-}
-
-template <typename A>A &
-GetFirstOrNextChild(libebml::EbmlMaster *master,
-                    A *previous_child) {
-  return !previous_child ? GetChild<A>(*master) : libebml::GetNextChild<A>(*master, *previous_child);
+  return !previous_child ? get_child<A>(master) : libebml::GetNextChild<A>(master, *previous_child);
 }
 
 template<typename T>
 void
-DeleteChildren(libebml::EbmlMaster &master) {
+delete_children(libebml::EbmlMaster &master) {
   for (auto idx = master.ListSize(); 0 < idx; --idx) {
     auto element = master[idx - 1];
-    if (Is<T>(element)) {
+    if (is_type<T>(element)) {
       delete element;
       master.Remove(idx - 1);
     }
@@ -265,30 +238,30 @@ DeleteChildren(libebml::EbmlMaster &master) {
 
 template<typename T>
 void
-DeleteChildren(libebml::EbmlMaster *master) {
+delete_children(libebml::EbmlMaster *master) {
   if (master)
-    DeleteChildren<T>(*master);
+    delete_children<T>(*master);
 }
 
 template<typename T>
 void
-RemoveChildren(libebml::EbmlMaster &master) {
+remove_children(libebml::EbmlMaster &master) {
   for (auto idx = master.ListSize(); 0 < idx; --idx)
-    if (Is<T>(master[idx - 1]))
+    if (is_type<T>(master[idx - 1]))
       master.Remove(idx - 1);
 }
 
 template<typename T>
 void
-RemoveChildren(libebml::EbmlMaster *master) {
+remove_children(libebml::EbmlMaster *master) {
   if (master)
-    RemoveChildren<T>(*master);
+    remove_children<T>(*master);
 }
 
 inline void
-RemoveDeleteChildImpl(libebml::EbmlMaster &master,
-                      libebml::EbmlElement *element,
-                      bool do_delete) {
+remove_delete_child_impl(libebml::EbmlMaster &master,
+                         libebml::EbmlElement *element,
+                         bool do_delete) {
   if (!element)
     return;
 
@@ -302,65 +275,35 @@ RemoveDeleteChildImpl(libebml::EbmlMaster &master,
 }
 
 inline void
-RemoveChild(libebml::EbmlMaster &master,
-            libebml::EbmlElement *element) {
-  RemoveDeleteChildImpl(master, element, false);
-}
-
-inline void
-DeleteChild(libebml::EbmlMaster &master,
-            libebml::EbmlElement *element) {
-  RemoveDeleteChildImpl(master, element, true);
-}
-
-template<typename T>
-void
-FixMandatoryElement(libebml::EbmlMaster &master) {
-  auto &element = GetChild<T>(master);
-  element.SetValue(element.GetValue());
-}
-
-template<typename Tfirst,
-         typename Tsecond,
-         typename... Trest>
-void
-FixMandatoryElement(libebml::EbmlMaster &master) {
-  FixMandatoryElement<Tfirst>(master);
-  FixMandatoryElement<Tsecond, Trest...>(master);
-}
-
-template<typename... Trest>
-void
-FixMandatoryElement(libebml::EbmlMaster *master) {
-  if (!master)
-    return;
-  FixMandatoryElement<Trest...>(*master);
+delete_child(libebml::EbmlMaster &master,
+             libebml::EbmlElement *element) {
+  remove_delete_child_impl(master, element, true);
 }
 
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 Tvalue
-FindChildValue(libebml::EbmlMaster const &master,
+find_child_value(libebml::EbmlMaster const &master,
                Tvalue const &default_value = Tvalue{}) {
-  auto child = FindChild<Telement>(master);
+  auto child = find_child<Telement>(master);
   return child ? static_cast<Tvalue>(child->GetValue()) : default_value;
 }
 
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 Tvalue
-FindChildValue(libebml::EbmlMaster const *master,
+find_child_value(libebml::EbmlMaster const *master,
                Tvalue const &default_value = Tvalue{}) {
-  auto child = FindChild<Telement>(*master);
+  auto child = find_child<Telement>(*master);
   return child ? static_cast<Tvalue>(child->GetValue()) : default_value;
 }
 
 template<typename T>
 memory_cptr
-FindChildValue(libebml::EbmlMaster const &master,
+find_child_value(libebml::EbmlMaster const &master,
                bool clone = true,
                typename std::enable_if< std::is_base_of<libebml::EbmlBinary, T>::value >::type * = nullptr) {
-  auto child = FindChild<T>(master);
+  auto child = find_child<T>(master);
   return !child ? memory_cptr()
        : clone  ? memory_c::clone(child->GetBuffer(), child->GetSize())
        :          memory_c::borrow(child->GetBuffer(), child->GetSize());
@@ -368,17 +311,17 @@ FindChildValue(libebml::EbmlMaster const &master,
 
 template<typename T>
 memory_cptr
-FindChildValue(libebml::EbmlMaster const *master,
+find_child_value(libebml::EbmlMaster const *master,
                bool clone = true,
                typename std::enable_if< std::is_base_of<libebml::EbmlBinary, T>::value >::type * = nullptr) {
-  return FindChildValue<T>(*master, clone);
+  return find_child_value<T>(*master, clone);
 }
 
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 std::optional<Tvalue>
-FindOptionalChildValue(libebml::EbmlMaster const &master) {
-  auto child = FindChild<Telement>(master);
+find_optional_child_value(libebml::EbmlMaster const &master) {
+  auto child = find_child<Telement>(master);
   if (child)
     return static_cast<Tvalue>(child->GetValue());
   return std::nullopt;
@@ -387,14 +330,14 @@ FindOptionalChildValue(libebml::EbmlMaster const &master) {
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 std::optional<Tvalue>
-FindOptionalChildValue(libebml::EbmlMaster const *master) {
-  return FindOptionalChildValue<Telement>(*master);
+find_optional_child_value(libebml::EbmlMaster const *master) {
+  return find_optional_child_value<Telement>(*master);
 }
 
 template<typename Telement>
 std::optional<bool>
-FindOptionalChildBoolValue(libebml::EbmlMaster const &master) {
-  auto child = FindChild<Telement>(master);
+find_optional_child_bool_value(libebml::EbmlMaster const &master) {
+  auto child = find_child<Telement>(master);
   if (child)
     return static_cast<bool>(!!child->GetValue());
   return std::nullopt;
@@ -402,20 +345,20 @@ FindOptionalChildBoolValue(libebml::EbmlMaster const &master) {
 
 template<typename Telement>
 std::optional<bool>
-FindOptionalChildBoolValue(libebml::EbmlMaster const *master) {
-  return FindOptionalChildBoolValue<Telement>(*master);
+find_optional_child_bool_value(libebml::EbmlMaster const *master) {
+  return find_optional_child_bool_value<Telement>(*master);
 }
 
 template<typename Telement>
 decltype(Telement().GetValue())
-GetChildValue(libebml::EbmlMaster &master) {
-  return GetChild<Telement>(master).GetValue();
+get_child_value(libebml::EbmlMaster &master) {
+  return get_child<Telement>(master).GetValue();
 }
 
 template<typename Telement>
 decltype(Telement().GetValue())
-GetChildValue(libebml::EbmlMaster *master) {
-  return GetChild<Telement>(master).GetValue();
+get_child_value(libebml::EbmlMaster *master) {
+  return get_child<Telement>(master).GetValue();
 }
 
 libebml::EbmlElement *empty_ebml_master(libebml::EbmlElement *e);

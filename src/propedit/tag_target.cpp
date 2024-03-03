@@ -200,7 +200,7 @@ tag_target_c::add_or_replace_global_tags(libmatroska::KaxTags *tags) {
 
 void
 tag_target_c::add_or_replace_track_tags(libmatroska::KaxTags *tags) {
-  int64_t track_uid = GetChild<libmatroska::KaxTrackUID>(m_sub_master).GetValue();
+  int64_t track_uid = get_child<libmatroska::KaxTrackUID>(m_sub_master).GetValue();
 
   size_t idx = 0;
   while (m_level1_element->ListSize() > idx) {
@@ -223,7 +223,7 @@ tag_target_c::add_or_replace_track_tags(libmatroska::KaxTags *tags) {
       if (!tag)
         ++idx;
       else {
-        GetChild<libmatroska::KaxTagTrackUID>(GetChild<libmatroska::KaxTagTargets>(tag)).SetValue(track_uid);
+        get_child<libmatroska::KaxTagTrackUID>(get_child<libmatroska::KaxTagTargets>(tag)).SetValue(track_uid);
         m_level1_element->PushElement(*tag);
         tags->Remove(idx);
         m_tags_modified = true;
@@ -236,7 +236,7 @@ bool
 tag_target_c::read_segment_info_and_tracks() {
   auto tracks       = m_analyzer->read_all(EBML_INFO(libmatroska::KaxTracks));
   auto segment_info = m_analyzer->read_all(EBML_INFO(libmatroska::KaxInfo));
-  m_timestamp_scale = segment_info ? FindChildValue<kax_timestamp_scale_c>(*segment_info, 1000000ull) : 1000000ull;
+  m_timestamp_scale = segment_info ? find_child_value<kax_timestamp_scale_c>(*segment_info, 1000000ull) : 1000000ull;
 
   if (tracks && dynamic_cast<libmatroska::KaxTracks *>(tracks.get())) {
     for (int idx = 0, num_children = tracks->ListSize(); idx < num_children; ++idx) {
@@ -245,9 +245,9 @@ tag_target_c::read_segment_info_and_tracks() {
       if (!track)
         continue;
 
-      auto track_number     = FindChildValue<libmatroska::KaxTrackNumber>(*track);
-      auto track_uid        = FindChildValue<libmatroska::KaxTrackUID>(*track);
-      auto default_duration = FindChildValue<libmatroska::KaxTrackDefaultDuration>(*track);
+      auto track_number     = find_child_value<libmatroska::KaxTrackNumber>(*track);
+      auto track_uid        = find_child_value<libmatroska::KaxTrackUID>(*track);
+      auto default_duration = find_child_value<libmatroska::KaxTrackDefaultDuration>(*track);
 
       m_default_durations_by_number[track_number] = default_duration;
       m_track_statistics_by_number.emplace(track_number, track_statistics_c{track_uid});
@@ -281,7 +281,7 @@ tag_target_c::account_frame(uint64_t track_num,
 void
 tag_target_c::account_block_group(libmatroska::KaxBlockGroup &block_group,
                                   libmatroska::KaxCluster &cluster) {
-  auto block = FindChild<libmatroska::KaxBlock>(block_group);
+  auto block = find_child<libmatroska::KaxBlock>(block_group);
   if (!block)
     return;
 
@@ -293,7 +293,7 @@ tag_target_c::account_block_group(libmatroska::KaxBlockGroup &block_group,
 
   block->SetParent(cluster);
 
-  auto block_duration  = FindChild<libmatroska::KaxBlockDuration>(block_group);
+  auto block_duration  = find_child<libmatroska::KaxBlockDuration>(block_group);
   auto frame_duration  = block_duration ? static_cast<uint64_t>(block_duration->GetValue() * m_timestamp_scale / num_frames) : m_default_durations_by_number[block->TrackNum()];
   auto first_timestamp = get_global_timestamp(*block);
 
@@ -328,10 +328,10 @@ tag_target_c::account_one_cluster(libmatroska::KaxCluster &cluster) {
   for (int idx = 0, num_children = cluster.ListSize(); idx < num_children; ++idx) {
     auto child = cluster[idx];
 
-    if (Is<libmatroska::KaxBlockGroup>(child))
+    if (is_type<libmatroska::KaxBlockGroup>(child))
       account_block_group(*static_cast<libmatroska::KaxBlockGroup *>(child), cluster);
 
-    else if (Is<libmatroska::KaxSimpleBlock>(child))
+    else if (is_type<libmatroska::KaxSimpleBlock>(child))
       account_simple_block(*static_cast<libmatroska::KaxSimpleBlock *>(child), cluster);
   }
 }
@@ -353,7 +353,7 @@ tag_target_c::account_all_clusters() {
     if (!cluster)
       break;
 
-    init_timestamp(*cluster, FindChildValue<kax_cluster_timestamp_c>(*cluster), m_timestamp_scale);
+    init_timestamp(*cluster, find_child_value<kax_cluster_timestamp_c>(*cluster), m_timestamp_scale);
 
     account_one_cluster(*cluster);
 

@@ -50,7 +50,7 @@ compressor_c::~compressor_c() {
 void
 compressor_c::set_track_headers(libmatroska::KaxContentEncoding &c_encoding) {
   // Set compression method.
-  GetChild<libmatroska::KaxContentCompAlgo>(GetChild<libmatroska::KaxContentCompression>(c_encoding)).SetValue(compression_method_map[method]);
+  get_child<libmatroska::KaxContentCompAlgo>(get_child<libmatroska::KaxContentCompression>(c_encoding)).SetValue(compression_method_map[method]);
 }
 
 compressor_ptr
