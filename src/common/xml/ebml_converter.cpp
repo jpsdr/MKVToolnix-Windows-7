@@ -523,7 +523,7 @@ ebml_converter_c::dump_semantics_recursively(int level,
 
   visited_masters[tag_name] = true;
 
-  auto &context = EBML_CONTEXT(static_cast<EbmlMaster *>(&element));
+  auto &context = EBML_CONTEXT(static_cast<libebml::EbmlMaster *>(&element));
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {

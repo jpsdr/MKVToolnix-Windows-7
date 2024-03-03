@@ -81,7 +81,7 @@ kax_analyzer_data_c::to_string() const {
   else
     name = fmt::format("0x{0:0{1}x}", m_id.GetValue(), m_id.GetLength() * 2);
 
-  return fmt::format("{0} size {1}{3} at {2}", name, m_size, m_pos, m_size_known ? "" : " (unknown)");
+  return fmt::format("{0} size {1} at {2}", name, m_size_known ? fmt::to_string(m_size) : "unknown"s, m_pos);
 }
 
 kax_analyzer_c::kax_analyzer_c(std::string file_name)
@@ -167,6 +167,8 @@ kax_analyzer_c::debug_dump_elements_maybe(const std::string &hook_name) {
 
 void
 kax_analyzer_c::validate_data_structures(const std::string &hook_name) {
+  debug_dump_elements_maybe(hook_name);
+
   if (m_data.empty())
     return;
 
@@ -377,14 +379,23 @@ kax_analyzer_c::process_internal() {
     cluster_found   |= is_type<libmatroska::KaxCluster>(l1);
     meta_seek_found |= is_type<libmatroska::KaxSeekHead>(l1);
 
+    // auto id = l1->GetClassId().GetValue();
+    auto pos_before = m_file->getFilePointer();
+    auto is_unknown = !l1->IsFiniteSize();
     l1->SkipData(*m_stream, EBML_CONTEXT(l1));
     delete l1;
     l1 = nullptr;
+
+    if (is_unknown) {
+      mxinfo(fmt::format("skip unknown before {0} after {1}\n", pos_before, m_file->getFilePointer()));
+    }
 
     aborted = !show_progress_running((int)(m_file->getFilePointer() * 100 / file_size));
 
     auto in_parent = !m_segment->IsFiniteSize()
                   || (m_file->getFilePointer() < (m_segment->GetDataStart() + m_segment->GetSize()));
+
+    // mxdebug_if(m_debug, fmt::format("dings read at {0} elt 0x{6:x} in_parent {1} aborted {2} cluster_found {3} meta_seek_found {4} parse_fully {5}\n", m_file->getFilePointer(), in_parent, aborted, cluster_found, meta_seek_found, parse_fully, id));
 
     if (!in_parent || aborted || (cluster_found && meta_seek_found && !parse_fully))
       break;
