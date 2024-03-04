@@ -78,11 +78,16 @@ empty_ebml_master(libebml::EbmlElement *e) {
 libebml::EbmlElement *
 create_ebml_element(const libebml::EbmlCallbacks &callbacks,
                     const libebml::EbmlId &id) {
-  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(callbacks);
+  const libebml::EbmlSemanticContext &context_e = EBML_INFO_CONTEXT(callbacks);
   size_t i;
 
 //   if (id == get_ebml_id(*parent))
 //     return empty_ebml_master(&parent->Generic().Create());
+
+  if (EBML_CTX_SIZE(context_e) == 0)
+    return nullptr;
+
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(callbacks));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
@@ -105,12 +110,17 @@ create_ebml_element(const libebml::EbmlCallbacks &callbacks,
 static libebml::EbmlCallbacks const *
 do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
                        libebml::EbmlId const &id) {
-  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlSemanticContext &context_e = EBML_INFO_CONTEXT(base);
   const libebml::EbmlCallbacks *result;
   size_t i;
 
   if (EBML_INFO_ID(base) == id)
     return &base;
+
+  if (EBML_CTX_SIZE(context_e) == 0)
+    return nullptr;
+
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
@@ -145,12 +155,17 @@ find_ebml_callbacks(libebml::EbmlCallbacks const &base,
 static libebml::EbmlCallbacks const *
 do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
                        char const *debug_name) {
-  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlSemanticContext &context_e = EBML_INFO_CONTEXT(base);
   const libebml::EbmlCallbacks *result;
   size_t i;
 
   if (!strcmp(debug_name, EBML_INFO_NAME(base)))
     return &base;
+
+  if (EBML_CTX_SIZE(context_e) == 0)
+    return nullptr;
+
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (!strcmp(debug_name, EBML_INFO_NAME(EBML_CTX_IDX_INFO(context, i))))
@@ -185,9 +200,14 @@ find_ebml_callbacks(libebml::EbmlCallbacks const &base,
 static libebml::EbmlCallbacks const *
 do_find_ebml_parent_callbacks(libebml::EbmlCallbacks const &base,
                               libebml::EbmlId const &id) {
-  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlSemanticContext &context_e = EBML_INFO_CONTEXT(base);
   const libebml::EbmlCallbacks *result;
   size_t i;
+
+  if (EBML_CTX_SIZE(context_e) == 0)
+    return nullptr;
+
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))
@@ -222,9 +242,14 @@ find_ebml_parent_callbacks(libebml::EbmlCallbacks const &base,
 static libebml::EbmlSemantic const *
 do_find_ebml_semantic(libebml::EbmlCallbacks const &base,
                       libebml::EbmlId const &id) {
-  const libebml::EbmlSemanticContext &context = EBML_INFO_CONTEXT(base);
+  const libebml::EbmlSemanticContext &context_e = EBML_INFO_CONTEXT(base);
   const libebml::EbmlSemantic *result;
   size_t i;
+
+  if (EBML_CTX_SIZE(context_e) == 0)
+    return nullptr;
+
+  const auto &context = EBML_INFO_CONTEXT(static_cast<ebml_callbacks_master_c const &>(base));
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
     if (id == EBML_CTX_IDX_ID(context,i))

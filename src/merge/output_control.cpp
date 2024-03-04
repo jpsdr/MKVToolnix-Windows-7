@@ -32,7 +32,6 @@
 #include <ebml/EbmlVersion.h>
 #include <ebml/EbmlVoid.h>
 
-#include <matroska/FileKax.h>
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxCues.h>

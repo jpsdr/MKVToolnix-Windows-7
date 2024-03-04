@@ -18,7 +18,6 @@
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlStream.h>
 #include <ebml/EbmlVoid.h>
-#include <matroska/FileKax.h>
 
 #include "common/ebml.h"
 #include "common/kax_analyzer.h"
