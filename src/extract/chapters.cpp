@@ -18,8 +18,6 @@
 #include <ebml/EbmlStream.h>
 #include <ebml/EbmlVoid.h>
 
-#include <matroska/FileKax.h>
-
 #include "avilib.h"
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"

@@ -14,6 +14,7 @@
 #pragma once
 
 #include "common/common_pch.h"
+#include "ebml/EbmlElement.h"
 
 #include <ebml/EbmlId.h>
 #include <ebml/EbmlDummy.h>
@@ -472,6 +473,7 @@ set_global_timestamp_scale(T &elt,
 
 libebml::EbmlElement::ShouldWrite render_should_write_arg(bool with_default);
 
+using ebml_callbacks_master_c     = libebml::EbmlCallbacksMaster;
 using kax_cluster_timestamp_c     = libmatroska::KaxClusterTimestamp;
 using kax_reference_timestamp_c   = libmatroska::KaxReferenceTimestamp;
 using kax_timestamp_scale_c       = libmatroska::KaxTimestampScale;
@@ -496,6 +498,7 @@ namespace libebml {
 using filepos_t = ::filepos_t;
 }
 
+using ebml_callbacks_master_c     = libebml::EbmlCallbacks;
 using kax_cluster_timestamp_c     = libmatroska::KaxClusterTimecode;
 using kax_reference_timestamp_c   = libmatroska::KaxReferenceTimeCode;
 using kax_timestamp_scale_c       = libmatroska::KaxTimecodeScale;

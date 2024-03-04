@@ -441,7 +441,7 @@ ebml_converter_c::verify_and_create_element(libebml::EbmlMaster &parent,
     throw invalid_child_node_x{ name, get_tag_name(parent), node.offset_debug() };
 
   auto debug_name = get_debug_name(name);
-  auto &context   = EBML_CONTEXT(static_cast<libebml::EbmlElement *>(&parent));
+  auto &context   = EBML_CONTEXT(&parent);
   std::optional<libebml::EbmlId> id;
   size_t i;
 
@@ -523,7 +523,7 @@ ebml_converter_c::dump_semantics_recursively(int level,
 
   visited_masters[tag_name] = true;
 
-  auto &context = EBML_CONTEXT(&element);
+  auto &context = EBML_CONTEXT(static_cast<libebml::EbmlMaster *>(&element));
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++) {
