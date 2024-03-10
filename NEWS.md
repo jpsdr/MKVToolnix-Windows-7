@@ -13,6 +13,11 @@
 
 * The bundled `fmt` library was updated to v10.2.1.
 
+## Other changes
+
+* Tons of changes were made to support the latest development versions of
+  libEBML & libMatroska.
+
 
 # Version 82.0 "I'm The President" 2024-01-02
 
