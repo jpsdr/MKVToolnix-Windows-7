@@ -6,6 +6,8 @@
   by prydespar (see `AUTHORS`).
 * mkvmerge, MKVToolNix GUI's chapter editor: added support for reading
   chapters from ffmpeg metadata files. Implements #3676.
+* MKVToolNix GUI: added a new action type for execution after jobs or the
+  queue finishes: quitting MKVToolNix. Implements #3677.
 
 
 # Version 82.0 "I'm The President" 2024-01-02
