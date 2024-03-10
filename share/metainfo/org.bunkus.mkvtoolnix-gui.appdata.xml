@@ -7,7 +7,9 @@
   <name xml:lang="bg">MKVToolNix</name>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <developer_name>Moritz Bunkus</developer_name>
+  <developer id="org.bunkus">
+    <name>Moritz Bunkus</name>
+  </developer>
   <summary>Matroska files creator and tools</summary>
   <summary xml:lang="de">Werkzeuge zum Erzeugen und Bearbeiten von Matroska-Dateien</summary>
   <summary xml:lang="bg">Инструменти за създаване и редактиране на Matroska файлове</summary>
@@ -30,14 +32,6 @@
   <categories>
    <category>AudioVideo</category>
   </categories>
-  <mimetypes>
-   <mimetype>application/x-mkvtoolnix-gui-settings</mimetype>
-   <mimetype>video/x-matroska-3d</mimetype>
-   <mimetype>video/x-matroska</mimetype>
-   <mimetype>audio/x-matroska</mimetype>
-   <mimetype>video/webm</mimetype>
-   <mimetype>audio/webm</mimetype>
-  </mimetypes>
   <url type="bugtracker">https://gitlab.com/mbunkus/mkvtoolnix/issues/</url>
   <url type="contact">https://mkvtoolnix.download/community.html</url>
   <url type="faq">https://gitlab.com/mbunkus/mkvtoolnix/wikis/FAQ</url>
@@ -46,6 +40,7 @@
   <url type="translate">https://www.transifex.com/moritz-bunkus/mkvtoolnix/dashboard/</url>
   <screenshots>
     <screenshot type="default">
+      <caption>The MKVToolNix main windows.</caption>
       <image>https://mkvtoolnix.download/images/mkvtoolnix-gui-official-screenshot.png</image>
     </screenshot>
   </screenshots>
@@ -55,6 +50,12 @@
    <binary>mkvextract</binary>
    <binary>mkvpropedit</binary>
    <binary>mkvtoolnix-gui</binary>
+   <mediatype>application/x-mkvtoolnix-gui-settings</mediatype>
+   <mediatype>video/x-matroska-3d</mediatype>
+   <mediatype>video/x-matroska</mediatype>
+   <mediatype>audio/x-matroska</mediatype>
+   <mediatype>video/webm</mediatype>
+   <mediatype>audio/webm</mediatype>
   </provides>
   <update_contact>moritz_AT_bunkus.org</update_contact>
   <translation type="gettext">mkvtoolnix</translation>
