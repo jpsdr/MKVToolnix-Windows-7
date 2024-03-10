@@ -9,6 +9,10 @@
 * MKVToolNix GUI: added a new action type for execution after jobs or the
   queue finishes: quitting MKVToolNix. Implements #3677.
 
+## Build system changes
+
+* The bundled `fmt` library was updated to v10.2.1.
+
 
 # Version 82.0 "I'm The President" 2024-01-02
 
