@@ -4,6 +4,8 @@
 
 * translations: added a Belarusian translation of the programs & the man pages
   by prydespar (see `AUTHORS`).
+* mkvmerge, MKVToolNix GUI's chapter editor: added support for reading
+  chapters from ffmpeg metadata files. Implements #3676.
 
 
 # Version 82.0 "I'm The President" 2024-01-02

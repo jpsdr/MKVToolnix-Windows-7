@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <optional>
 
 #include <QRegularExpression>
 
@@ -29,6 +30,7 @@
 #include "common/error.h"
 #include "common/iso3166.h"
 #include "common/locale.h"
+#include "common/math_fwd.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
@@ -350,6 +352,146 @@ parse_simple(mm_text_io_c *in,
   return 0 == num ? kax_cptr{} : chaps;
 }
 
+bool
+probe_ffmpeg_meta(mm_text_io_c *in) {
+  std::string line;
+
+  in->setFilePointer(0);
+
+  if (!in->getline2(line))
+    return false;
+
+  mtx::string::strip(line);
+
+  return line == ";FFMETADATA1";
+}
+
+kax_cptr
+parse_ffmpeg_meta(mm_text_io_c *in,
+                  int64_t min_ts,
+                  int64_t max_ts,
+                  int64_t offset,
+                  mtx::bcp47::language_c const &language,
+                  std::string const &charset) {
+  in->setFilePointer(0);
+
+  std::string line, title;
+  std::optional<int64_t> start_scaled, end_scaled;
+  mtx_mp_rational_t time_base;
+  kax_cptr chapters;
+  libmatroska::KaxEditionEntry *edition{};
+  charset_converter_cptr cc_utf8;
+  bool in_chapter = false;
+  bool do_convert = in->get_byte_order_mark() == byte_order_mark_e::none;
+
+  if (do_convert)
+    cc_utf8 = charset_converter_c::init(charset);
+
+  auto use_language = language.is_valid()           ? language
+                    : g_default_language.is_valid() ? g_default_language
+                    :                                 mtx::bcp47::language_c::parse("eng"s);
+
+  QRegularExpression
+    start_line_re{     Q("^start *=([0-9]+)"),             QRegularExpression::CaseInsensitiveOption},
+    end_line_re{       Q("^end *=([0-9]+)"),               QRegularExpression::CaseInsensitiveOption},
+    title_line_re{     Q("^title *=(.*)"),                 QRegularExpression::CaseInsensitiveOption},
+    time_base_line_re{ Q("^timebase *=([0-9]+)/([0-9]+)"), QRegularExpression::CaseInsensitiveOption};
+  QRegularExpressionMatch matches;
+
+  auto reset_values = [&]() {
+    start_scaled.reset();
+    end_scaled.reset();
+    title.clear();
+
+    time_base = mtx::rational(1, 1);
+  };
+
+  auto add_chapter_atom = [&]() {
+    if (!start_scaled || !in_chapter) {
+      reset_values();
+      return;
+    }
+
+    auto start = mtx::to_int_rounded(*start_scaled * time_base);
+
+    if ((start < min_ts) || ((max_ts != -1) && (start > max_ts))) {
+      reset_values();
+      return;
+    }
+
+    if (!chapters) {
+      chapters   = std::make_shared<libmatroska::KaxChapters>();
+      edition = &get_child<libmatroska::KaxEditionEntry>(*chapters);
+    }
+
+    auto &atom = add_empty_child<libmatroska::KaxChapterAtom>(*edition);
+    get_child<libmatroska::KaxChapterUID>(atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+    get_child<libmatroska::KaxChapterTimeStart>(atom).SetValue(start - offset);
+
+    if (end_scaled) {
+      auto end = mtx::to_int_rounded(*end_scaled * time_base);
+      get_child<libmatroska::KaxChapterTimeEnd>(atom).SetValue(end - offset);
+    }
+
+    auto &display = get_child<libmatroska::KaxChapterDisplay>(atom);
+    get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(title);
+
+    if (use_language.is_valid()) {
+      get_child<libmatroska::KaxChapterLanguage>(display).SetValue(use_language.get_closest_iso639_2_alpha_3_code());
+      if (!mtx::bcp47::language_c::is_disabled())
+        get_child<libmatroska::KaxChapLanguageIETF>(display).SetValue(use_language.format());
+      else
+        delete_children<libmatroska::KaxChapLanguageIETF>(display);
+    }
+
+    if (!g_default_country.empty())
+      get_child<libmatroska::KaxChapterCountry>(display).SetValue(g_default_country);
+
+    reset_values();
+  };
+
+  while (in->getline2(line)) {
+    if (do_convert)
+      line = cc_utf8->utf8(line);
+
+    mtx::string::strip(line);
+    if (line.empty() || (line[0] == ';') || (line[0] == '#'))
+      continue;
+
+    if (mtx::string::to_lower_ascii(line) == "[chapter]") {
+      add_chapter_atom();
+      in_chapter = true;
+
+    } else if (line[0] == '[') {
+      add_chapter_atom();
+      in_chapter = false;
+
+    } else if (!in_chapter)
+      continue;
+
+    else if ((matches = title_line_re.match(Q(line))).hasMatch())
+      title = to_utf8(matches.captured(1));
+
+    else if ((matches = start_line_re.match(Q(line))).hasMatch())
+      start_scaled = matches.captured(1).toLongLong();
+
+    else if ((matches = end_line_re.match(Q(line))).hasMatch())
+      end_scaled = matches.captured(1).toLongLong();
+
+    else if ((matches = time_base_line_re.match(Q(line))).hasMatch()) {
+      auto numerator   = matches.captured(1).toLongLong();
+      auto deniminator = matches.captured(2).toLongLong();
+
+      if ((numerator != 0) && (deniminator != 0))
+        time_base = mtx::rational(numerator, deniminator) * 1'000'000'000;
+    }
+  }
+
+  add_chapter_atom();
+
+  return chapters;
+}
+
 /** \brief Probe a file for different chapter formats and parse the file.
 
    The file \a file_name is opened and checked for supported chapter formats.
@@ -482,6 +624,11 @@ parse(mm_text_io_c *in,
       if (format)
         *format = format_e::cue;
       return parse_cue(in, min_ts, max_ts, offset, language, charset, tags);
+
+    } else if (probe_ffmpeg_meta(in)) {
+      if (format)
+        *format = format_e::ffmpeg_meta;
+      return parse_ffmpeg_meta(in, min_ts, max_ts, offset, language, charset);
 
     } else if (format)
       *format = format_e::xml;
