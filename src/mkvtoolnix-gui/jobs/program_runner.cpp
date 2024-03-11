@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QTimer>
 
 #include "common/fs_sys_helpers.h"
 #include "common/list_utils.h"
@@ -119,6 +120,9 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
 
     else if (runConfig->m_type == Util::Settings::RunProgramType::ShowDesktopNotification)
       showDesktopNotification(forEvent, variables);
+
+    else if (runConfig->m_type == Util::Settings::RunProgramType::QuitMKVToolNix)
+      QTimer::singleShot(0, MainWindow::get(), []() { MainWindow::get()->forceClose(); });
   }
 }
 
@@ -180,7 +184,7 @@ ProgramRunner::create() {
 
 bool
 ProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType type) {
-  return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram, Util::Settings::RunProgramType::PlayAudioFile, Util::Settings::RunProgramType::DeleteSourceFiles);
+  return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram, Util::Settings::RunProgramType::PlayAudioFile, Util::Settings::RunProgramType::DeleteSourceFiles, Util::Settings::RunProgramType::QuitMKVToolNix);
 }
 
 bool

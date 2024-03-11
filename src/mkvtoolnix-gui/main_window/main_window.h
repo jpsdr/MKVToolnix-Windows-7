@@ -109,6 +109,8 @@ public Q_SLOTS:
   virtual void startQueueSpinner();
   virtual void stopQueueSpinner();
 
+  virtual void forceClose();
+
 public:                         // static
   static MainWindow *get();
   static Ui::MainWindow *getUi();

@@ -199,6 +199,7 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
   addItemIfSupported(QY("Hibernate the computer"),                   Util::Settings::RunProgramType::HibernateComputer);
   addItemIfSupported(QY("Sleep the computer"),                       Util::Settings::RunProgramType::SleepComputer);
   addItemIfSupported(QY("Delete source files for multiplexer jobs"), Util::Settings::RunProgramType::DeleteSourceFiles);
+  addItemIfSupported(QY("Quit MKVToolNix"),                          Util::Settings::RunProgramType::QuitMKVToolNix);
 
   p->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]          = p->ui->executeProgramTypePage;
   p->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]           = p->ui->playAudioFileTypePage;
@@ -207,6 +208,7 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
   p->pagesByType[Util::Settings::RunProgramType::HibernateComputer]       = p->ui->emptyTypePage;
   p->pagesByType[Util::Settings::RunProgramType::SleepComputer]           = p->ui->emptyTypePage;
   p->pagesByType[Util::Settings::RunProgramType::DeleteSourceFiles]       = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::QuitMKVToolNix]          = p->ui->emptyTypePage;
 
   showPageForType(cfg.m_type);
 

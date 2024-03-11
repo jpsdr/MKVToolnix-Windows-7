@@ -26,7 +26,7 @@ class FileIdentificationWorkerPrivate {
   QVector<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
   QAtomicInteger<bool> m_abortPlaylistScan;
-  QRegularExpression m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
+  QRegularExpression m_simpleChaptersRE, m_ffmpegMetaChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
 
   explicit FileIdentificationWorkerPrivate()
   {
@@ -39,11 +39,12 @@ FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
   : QObject{parent}
   , p_ptr{new FileIdentificationWorkerPrivate{}}
 {
-  auto p                = p_func();
-  p->m_simpleChaptersRE = QRegularExpression{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
-  p->m_xmlChaptersRE    = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Chapters>)"};
-  p->m_xmlSegmentInfoRE = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Info>)"};
-  p->m_xmlTagsRE        = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Tags>)"};
+  auto p                    = p_func();
+  p->m_simpleChaptersRE     = QRegularExpression{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
+  p->m_xmlChaptersRE        = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Chapters>)"};
+  p->m_xmlSegmentInfoRE     = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Info>)"};
+  p->m_xmlTagsRE            = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Tags>)"};
+  p->m_ffmpegMetaChaptersRE = QRegularExpression{R"(;FFMETADATA1)"};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {
@@ -179,7 +180,7 @@ FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString c
 
   auto content = QString::fromUtf8(bytes);
 
-  if (content.contains(p->m_simpleChaptersRE) || content.contains(p->m_xmlChaptersRE))
+  if (content.contains(p->m_simpleChaptersRE) || content.contains(p->m_ffmpegMetaChaptersRE) || content.contains(p->m_xmlChaptersRE))
     return IdentificationPack::FileType::Chapters;
 
   else if (content.contains(p->m_xmlSegmentInfoRE))

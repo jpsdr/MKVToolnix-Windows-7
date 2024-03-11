@@ -33,6 +33,7 @@ public:
     SleepComputer,
     DeleteSourceFiles,
     ShowDesktopNotification,
+    QuitMKVToolNix,
     Max,
     Default = ExecuteProgram,
   };
