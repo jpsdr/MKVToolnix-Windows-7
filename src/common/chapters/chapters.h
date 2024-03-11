@@ -54,6 +54,7 @@ enum class format_e {
   xml,
   ogg,
   cue,
+  ffmpeg_meta,
 };
 
 mtx::chapters::kax_cptr

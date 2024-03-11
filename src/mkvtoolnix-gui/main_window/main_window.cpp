@@ -69,6 +69,8 @@ class MainWindowPrivate {
   QHash<QObject *, QString> helpURLs;
   QHash<ToolBase *, QTabWidget *> subWindowWidgets;
 
+  bool forceClosing{};
+
   explicit MainWindowPrivate()
     : ui{new Ui::MainWindow}
   {
@@ -448,8 +450,17 @@ MainWindow::retranslateUi() {
   p->ui->tool->setUpdatesEnabled(true);
 }
 
+void
+MainWindow::forceClose() {
+  auto &p = *p_func();
+
+  p.forceClosing = true;
+  close();
+}
+
 bool
 MainWindow::beforeCloseCheckRunningJobs() {
+  auto &p   = *p_func();
   auto tool = jobTool();
   if (!tool)
     return true;
@@ -458,7 +469,8 @@ MainWindow::beforeCloseCheckRunningJobs() {
   if (!model->hasRunningJobs())
     return true;
 
-  if (   Util::Settings::get().m_warnBeforeAbortingJobs
+  if (   !p.forceClosing
+      && Util::Settings::get().m_warnBeforeAbortingJobs
       && (Util::MessageBox::question(this)
             ->title(QY("Abort running jobs"))
             .text(Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you really want to abort all currently running jobs?")))
@@ -480,7 +492,14 @@ MainWindow::beforeCloseCheckRunningJobs() {
 
 void
 MainWindow::closeEvent(QCloseEvent *event) {
+  auto &p = *p_func();
+
   Q_EMIT aboutToClose();
+
+  if (p.forceClosing) {
+    Util::saveWidgetGeometry(this);
+    return;
+  }
 
   auto ok =       mergeTool()->closeAllTabs();
   ok      = ok && headerEditorTool()->closeAllTabs();
