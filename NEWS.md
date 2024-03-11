@@ -1,3 +1,13 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: added a new file-specific option `--regenerate-track-uids`. When
+  used for Matroska files, `mkvmerge` will generate new random track UIDs
+  instead of keeping existing track UIDs. This is done automatically when a
+  Matroska file was created by MakeMKV.
+
+
 # Version 83.0 "Circle Of Friends" 2024-03-10
 
 ## New features and enhancements

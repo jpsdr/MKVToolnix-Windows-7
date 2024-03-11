@@ -32,6 +32,7 @@
 
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxCluster.h>
+#include <unordered_map>
 
 namespace mtx::id {
 class info_c;
@@ -224,7 +225,8 @@ private:
 
   file_status_e m_file_status{FILE_STATUS_MOREDATA};
 
-  bool m_opus_experimental_warning_shown{}, m_regenerate_chapter_uids{}, m_is_webm{};
+  bool m_opus_experimental_warning_shown{}, m_regenerate_chapter_uids{}, m_regenerate_track_uids{}, m_is_webm{};
+  std::unordered_map<uint64_t, uint64_t> m_track_uid_mapping;
 
   debugging_option_c m_debug_minimum_timestamp{"kax_reader|kax_reader_minimum_timestamp"}, m_debug_track_headers{"kax_reader|kax_reader_track_headers"};
 

@@ -58,6 +58,7 @@
 #include "common/mime.h"
 #include "common/mm_io.h"
 #include "common/qt.h"
+#include "common/random.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -131,6 +132,24 @@ map_track_type_string(char c) {
        : c == 'b' ? Y("buttons")
        : c == 'v' ? Y("video")
        :            Y("subtitle");
+}
+
+template<typename T>
+void
+remap_uids(libebml::EbmlMaster &master,
+           std::unordered_map<uint64_t, uint64_t> const &map) {
+  for (auto const &child : master) {
+    if (is_type<T>(child)) {
+      auto &e_uint = static_cast<libebml::EbmlUInteger &>(*child);
+      auto itr     = map.find(e_uint.GetValue());
+
+      if (itr != map.end())
+        e_uint.SetValue(itr->second);
+
+    } else if (dynamic_cast<libebml::EbmlMaster *>(child)) {
+      remap_uids<T>(static_cast<libebml::EbmlMaster &>(*child), map);
+    }
+  }
 }
 
 constexpr auto MAGIC_MKV = 0x1a45dfa3;
@@ -945,6 +964,9 @@ kax_reader_c::handle_chapters(mm_io_c *io,
   if (m_regenerate_chapter_uids)
     mtx::chapters::regenerate_uids(*tmp_chapters, m_tags.get());
 
+  if (m_regenerate_track_uids)
+    remap_uids<libmatroska::KaxChapterTrackNumber>(*tmp_chapters, m_track_uid_mapping);
+
   if (!m_chapters)
     m_chapters = mtx::chapters::kax_cptr{new libmatroska::KaxChapters};
 
@@ -975,6 +997,9 @@ kax_reader_c::handle_tags(mm_io_c *io,
   tags->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxTags), upper_lvl_el, element_found, true);
   if (!found_in(*tags, element_found))
     delete element_found;
+
+  if (m_regenerate_track_uids)
+    remap_uids<libmatroska::KaxTagTrackUID>(*tags, m_track_uid_mapping);
 
   while (tags->ListSize() > 0) {
     if (!is_type<libmatroska::KaxTag>((*tags)[0])) {
@@ -1152,6 +1177,9 @@ kax_reader_c::read_headers_info(mm_io_c *io,
     // files that aren't created by known-good applications.
     if (!Q(m_writing_app).contains(QRegularExpression{"^(?:mkvmerge|no_variable_data)", QRegularExpression::CaseInsensitiveOption}))
       m_regenerate_chapter_uids = true;
+
+    if (!g_identifying && (mtx::string::to_lower_ascii(m_writing_app).find("makemkv") != std::string::npos))
+      m_regenerate_track_uids = true;
   }
 
   auto km_muxing_app = find_child<libmatroska::KaxMuxingApp>(info);
@@ -1366,8 +1394,19 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       mxwarn_fn(m_ti.m_fname,
                 fmt::format(Y("Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"),
                             track->tnum));
-    else
+    else {
       track->track_uid = ktuid->GetValue();
+
+      if (m_regenerate_track_uids) {
+        uint64_t new_id{};
+        do {
+          new_id = random_c::generate_64bits();
+        } while ((new_id == 0) || (m_track_uid_mapping.find(new_id) != m_track_uid_mapping.end()));
+
+        m_track_uid_mapping.insert({ track->track_uid, new_id });
+        track->track_uid = new_id;
+      }
+    }
 
     auto kttype = find_child<libmatroska::KaxTrackType>(ktentry);
     if (!kttype) {
@@ -1617,6 +1656,9 @@ kax_reader_c::read_deferred_level1_elements(libmatroska::KaxSegment &segment) {
 bool
 kax_reader_c::read_headers_internal() {
   // Elements for different levels
+
+  if (!g_identifying)
+    m_regenerate_track_uids = m_ti.m_regenerate_track_uids;
 
   auto cluster = std::shared_ptr<libmatroska::KaxCluster>{};
   try {

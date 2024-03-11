@@ -233,6 +233,8 @@ set_usage() {
   usage_text += Y("  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n");
   usage_text += Y("  --no-global-tags         Don't keep global tags from the source file.\n");
   usage_text += Y("  --no-chapters            Don't keep chapters from the source file.\n");
+  usage_text += Y("  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
+                  "                           existing ones.\n");
   usage_text += Y("  -y, --sync <TID:d[,o[/p]]>\n"
                   "                           Synchronize, adjust the track's timestamps with\n"
                   "                           the id TID by 'd' ms.\n"
@@ -2520,6 +2522,9 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--no-global-tags")
       ti->m_no_global_tags = true;
+
+    else if (this_arg == "--regenerate-track-uids")
+      ti->m_regenerate_track_uids = true;
 
     else if (this_arg == "--meta-seek-size") {
       mxwarn(Y("The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"));
