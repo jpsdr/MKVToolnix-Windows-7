@@ -34,6 +34,7 @@ track_info_c::track_info_c()
   , m_compression{COMPRESSION_UNSPECIFIED}
   , m_no_chapters{}
   , m_no_global_tags{}
+  , m_regenerate_track_uids{}
   , m_avi_audio_sync_enabled{}
   , m_avi_audio_data_rate{}
 {
@@ -199,6 +200,7 @@ track_info_c::operator =(const track_info_c &src) {
 
   m_no_chapters                      = src.m_no_chapters;
   m_no_global_tags                   = src.m_no_global_tags;
+  m_regenerate_track_uids            = src.m_regenerate_track_uids;
 
   m_chapter_charset                  = src.m_chapter_charset;
   m_chapter_language                 = src.m_chapter_language;
