@@ -1398,6 +1398,22 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.regenerate_track_uids">
+     <term><option>--regenerate-track-uids</option></term>
+     <listitem>
+      <para>
+       When this option is used for a Matroska source file, &mkvmerge; will create new random unique track IDs instead of keeping the
+       existing ones in the file. Existing track UIDs in chapters &amp; tags read from the same file will be remapped to the newly generated
+       values.
+      </para>
+
+      <para>
+       This behavior is enabled automatically for Matroska files created by the MakeMKV software. The reason is that MakeMKV uses
+       consecutive numbers (1, 2, 3…) as UIDs instead of generating random ones.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.sync">
      <term><option>-y</option>, <option>--sync</option> <parameter>TID:d<optional>,o<optional>/p</optional></optional></parameter></term>
      <listitem>

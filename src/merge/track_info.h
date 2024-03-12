@@ -375,7 +375,7 @@ public:
 
   std::map<int64_t, bool> m_reduce_to_core, m_remove_dialog_normalization_gain;
 
-  bool m_no_chapters, m_no_global_tags;
+  bool m_no_chapters, m_no_global_tags, m_regenerate_track_uids;
 
   // Some file formats can contain chapters, but for some the charset
   // cannot be identified unambiguously (*cough* OGM *cough*).
