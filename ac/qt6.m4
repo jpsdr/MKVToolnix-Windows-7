@@ -77,7 +77,13 @@ EOT
     fi
   fi
 
-  for qt_module in dbus; do
+  modules_to_test=dbus
+
+  if test x"$enable_gui" = xno; then
+    modules_to_test=
+  fi
+
+  for qt_module in $modules_to_test; do
     rm -f Makefile Makefile.Release
 
     cat > "$qmake_dir/configure.pro" <<EOT
@@ -103,8 +109,13 @@ EOT
 
   rm -f Makefile Makefile.Release
 
+  modules_to_test="gui widgets network concurrent svg multimedia"
+  if test x"$enable_gui" = xno; then
+    modules_to_test=
+  fi
+
   cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $qmake_qt_ui gui widgets network concurrent svg multimedia
+QT = core $qmake_qt_ui $modules_to_test
 QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui
@@ -118,7 +129,7 @@ EOT
 
   if test $result2 != 0; then
     cd "$old_wd"
-    AC_MSG_RESULT(no: not all of the required Qt6 modules were found (needed: core gui widgets network concurrent svg multimedia))
+    AC_MSG_RESULT(no: not all of the required Qt6 modules were found (needed: core $modules_to_test))
     return
   fi
 
