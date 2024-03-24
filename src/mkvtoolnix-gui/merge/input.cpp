@@ -720,6 +720,8 @@ Tab::onTrackSelectionChanged() {
   p.ui->moveTracksDown->setEnabled(false);
   p.ui->subtitleCharacterSetPreview->setEnabled(false);
 
+  MainWindow::get()->mergeTool()->enableMenuActions();
+
   auto selection = p.ui->tracks->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
   if (!numRows) {
