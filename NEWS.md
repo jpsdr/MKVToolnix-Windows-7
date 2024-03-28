@@ -15,6 +15,10 @@
 * MKVToolNix GUI: multiplexer: the keyboard shortcuts from the "modify
   selected tracks" sub-menu didn't work right after opening a file. They only
   started working after opening the "multiplexer" menu. Fixes #3681.
+* mkvmerge: several color-related track header properties were parsed into &
+  stored as a wrong integer type internally. This could result in wrong values
+  being copied when very large values were present in source files, or in
+  error messages when very large values were used as command-line parameters.
 
 
 # Version 83.0 "Circle Of Friends" 2024-03-10
