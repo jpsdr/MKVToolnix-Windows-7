@@ -64,10 +64,8 @@ struct kax_track_t {
   unsigned int v_display_unit;
   uint64_t v_pcleft, v_pctop, v_pcright, v_pcbottom;
   std::optional<int64_t> v_color_matrix, v_bits_per_channel;
-  chroma_subsample_t v_chroma_subsample;
-  cb_subsample_t v_cb_subsample;
-  chroma_siting_t v_chroma_siting;
-  std::optional<int64_t> v_color_range, v_transfer_character, v_color_primaries, v_max_cll, v_max_fall;
+  subsample_or_siting_t v_chroma_subsample, v_cb_subsample, v_chroma_siting;
+  std::optional<uint64_t> v_color_range, v_transfer_character, v_color_primaries, v_max_cll, v_max_fall;
   chroma_coordinates_t v_chroma_coordinates;
   white_color_coordinates_t v_white_color_coordinates;
   std::optional<double> v_max_luminance, v_min_luminance;

@@ -7,6 +7,19 @@
   instead of keeping existing track UIDs. This is done automatically when a
   Matroska file was created by MakeMKV.
 
+## Bug fixes
+
+* configure: when called with `--disable-gui` the build system still ran the
+  check for the GUI libraries & failed if they weren't found. This check is
+  now skipped when the option is given. Fixes #3680.
+* MKVToolNix GUI: multiplexer: the keyboard shortcuts from the "modify
+  selected tracks" sub-menu didn't work right after opening a file. They only
+  started working after opening the "multiplexer" menu. Fixes #3681.
+* mkvmerge: several color-related track header properties were parsed into &
+  stored as a wrong integer type internally. This could result in wrong values
+  being copied when very large values were present in source files, or in
+  error messages when very large values were used as command-line parameters.
+
 
 # Version 83.0 "Circle Of Friends" 2024-03-10
 
