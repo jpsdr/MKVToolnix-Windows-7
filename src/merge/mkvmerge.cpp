@@ -820,7 +820,7 @@ parse_arg_cropping(std::string const &s,
 static void
 parse_arg_color_matrix_coefficients(std::string const &s,
                                      track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_matrix_coeff_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_color_matrix_coeff_list))
     mxerror(fmt::format("Color matrix coefficients parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -830,7 +830,7 @@ parse_arg_color_matrix_coefficients(std::string const &s,
 static void
 parse_arg_color_bits_per_channel(std::string const &s,
                                   track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_bits_per_channel_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_bits_per_channel_list))
     mxerror(fmt::format("Bits per channel parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -840,8 +840,7 @@ parse_arg_color_bits_per_channel(std::string const &s,
 static void
 parse_arg_chroma_subsample(std::string const &s,
                            track_info_c &ti) {
-  if (!mtx::string::parse_property_to_struct<chroma_subsample_t, int>(
-          s, ti.m_chroma_subsample_list))
+  if (!mtx::string::parse_property_to_struct<subsample_or_siting_t, uint64_t>(s, ti.m_chroma_subsample_list))
     mxerror(fmt::format("Chroma subsampling parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -851,7 +850,7 @@ parse_arg_chroma_subsample(std::string const &s,
 static void
 parse_arg_cb_subsample(std::string const &s,
                        track_info_c &ti) {
-  if (!mtx::string::parse_property_to_struct<cb_subsample_t, int>(s, ti.m_cb_subsample_list))
+  if (!mtx::string::parse_property_to_struct<subsample_or_siting_t, uint64_t>(s, ti.m_cb_subsample_list))
     mxerror(fmt::format("Cb subsampling parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -861,7 +860,7 @@ parse_arg_cb_subsample(std::string const &s,
 static void
 parse_arg_chroma_siting(std::string const &s,
                         track_info_c &ti) {
-  if (!mtx::string::parse_property_to_struct<chroma_siting_t, int>(s, ti.m_chroma_siting_list))
+  if (!mtx::string::parse_property_to_struct<subsample_or_siting_t, uint64_t>(s, ti.m_chroma_siting_list))
     mxerror(fmt::format("Chroma siting parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -870,8 +869,8 @@ parse_arg_chroma_siting(std::string const &s,
 */
 static void
 parse_arg_color_range(std::string const &s,
-                       track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_range_list))
+                      track_info_c &ti) {
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_color_range_list))
     mxerror(fmt::format("Color range parameters: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -881,7 +880,7 @@ parse_arg_color_range(std::string const &s,
 static void
 parse_arg_color_transfer(std::string const &s,
                           track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_transfer_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_color_transfer_list))
     mxerror(fmt::format("Color transfer characteristics parameter : not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -891,7 +890,7 @@ parse_arg_color_transfer(std::string const &s,
 static void
 parse_arg_color_primaries(std::string const &s,
                            track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_primaries_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_color_primaries_list))
     mxerror(fmt::format("Color primaries parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -901,7 +900,7 @@ parse_arg_color_primaries(std::string const &s,
 static void
 parse_arg_max_content_light(std::string const &s,
                             track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_max_cll_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_max_cll_list))
     mxerror(fmt::format("Max content light parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -911,7 +910,7 @@ parse_arg_max_content_light(std::string const &s,
 static void
 parse_arg_max_frame_light(std::string const &s,
                           track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_max_fall_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_max_fall_list))
     mxerror(fmt::format("Max frame light parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 

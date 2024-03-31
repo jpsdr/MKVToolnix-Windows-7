@@ -82,20 +82,22 @@ struct pixel_crop_t {
   }
 };
 
-struct chroma_subsample_t {
-  int hori, vert;
+template<typename T>
+struct property_pair_t {
+  std::optional<T> hori, vert;
 
-  chroma_subsample_t()
-  : hori{-1}
-  , vert{-1}
-  {
-  }
-  chroma_subsample_t(int p_hori, int p_vert)
+  property_pair_t() = default;
+  property_pair_t(std::optional<T> const &p_hori, std::optional<T> const &p_vert)
   : hori{p_hori}
   , vert{p_vert}
   {
   }
-  chroma_subsample_t(std::vector<int> data)
+  property_pair_t(T p_hori, T p_vert)
+  : hori{p_hori}
+  , vert{p_vert}
+  {
+  }
+  property_pair_t(std::vector<T> data)
   : hori{data[0]}
   , vert{data[1]}
   {
@@ -103,59 +105,22 @@ struct chroma_subsample_t {
   static int const num_properties = 2;
 };
 
-struct cb_subsample_t {
-  int hori, vert;
-
-  cb_subsample_t()
-  : hori{-1}
-  , vert{-1}
-  {
-  }
-  cb_subsample_t(int p_hori, int p_vert)
-  : hori{p_hori}
-  , vert{p_vert}
-  {
-  }
-  cb_subsample_t(std::vector<int> data)
-  : hori{data[0]}
-  , vert{data[1]}
-  {
-  }
-  static int const num_properties = 2;
-};
-
-
-struct chroma_siting_t {
-  int hori, vert;
-
-  chroma_siting_t()
-  : hori{-1}
-  , vert{-1}
-  {
-  }
-  chroma_siting_t(int p_hori, int p_vert)
-  : hori{p_hori}
-  , vert{p_vert}
-  {
-  }
-  chroma_siting_t(std::vector<int> data)
-  : hori{data[0]}
-  , vert{data[1]}
-  {
-  }
-  static int const num_properties = 2;
-};
+using subsample_or_siting_t     = property_pair_t<uint64_t>;
+using white_color_coordinates_t = property_pair_t<double>;
 
 struct chroma_coordinates_t {
-  double red_x, red_y, green_x, green_y, blue_x, blue_y;
+  std::optional<double> red_x, red_y, green_x, green_y, blue_x, blue_y;
 
-  chroma_coordinates_t()
-  : red_x{-1.0}
-  , red_y{-1.0}
-  , green_x{-1.0}
-  , green_y{-1.0}
-  , blue_x{-1.0}
-  , blue_y{-1.0}
+  chroma_coordinates_t() = default;
+  chroma_coordinates_t(std::optional<double> const &p_red_x,   std::optional<double> const &p_red_y,
+                       std::optional<double> const &p_green_x, std::optional<double> const &p_green_y,
+                       std::optional<double> const &p_blue_x,  std::optional<double> const &p_blue_y)
+  : red_x{p_red_x}
+  , red_y{p_red_y}
+  , green_x{p_green_x}
+  , green_y{p_green_y}
+  , blue_x{p_blue_x}
+  , blue_y{p_blue_y}
   {
   }
   chroma_coordinates_t(double p_red_x,   double p_red_y,
@@ -179,27 +144,6 @@ struct chroma_coordinates_t {
   {
   }
   static int const num_properties = 6;
-};
-
-struct white_color_coordinates_t {
-  double x, y;
-
-  white_color_coordinates_t()
-  : x{-1.0}
-  , y{-1.0}
-  {
-  }
-  white_color_coordinates_t(double p_x, double p_y)
-  : x{p_x}
-  , y{p_y}
-  {
-  }
-  white_color_coordinates_t(std::vector<double> data)
-  : x{data[0]}
-  , y{data[1]}
-  {
-  }
-  static int const num_properties = 2;
 };
 
 enum attach_mode_e {
@@ -309,35 +253,35 @@ public:
   std::map<int64_t, uint64_t> m_field_order_list; // As given on the command line
   option_with_source_c<uint64_t> m_field_order;   // For this very track
 
-  std::map<int64_t, int> m_color_matrix_coeff_list; // As given on the command line
-  option_with_source_c<int> m_color_matrix_coeff; // For this very track
+  std::map<int64_t, uint64_t> m_color_matrix_coeff_list; // As given on the command line
+  option_with_source_c<uint64_t> m_color_matrix_coeff; // For this very track
 
-  std::map<int64_t, int> m_bits_per_channel_list; // As given on the command line
-  option_with_source_c<int> m_bits_per_channel; // For this very track
+  std::map<int64_t, uint64_t> m_bits_per_channel_list; // As given on the command line
+  option_with_source_c<uint64_t> m_bits_per_channel; // For this very track
 
-  std::map<int64_t, chroma_subsample_t> m_chroma_subsample_list; // As given on the command line
-  option_with_source_c<chroma_subsample_t> m_chroma_subsample; // For this very track
+  std::map<int64_t, subsample_or_siting_t> m_chroma_subsample_list; // As given on the command line
+  option_with_source_c<subsample_or_siting_t> m_chroma_subsample; // For this very track
 
-  std::map<int64_t, cb_subsample_t> m_cb_subsample_list; // As given on the command line
-  option_with_source_c<cb_subsample_t> m_cb_subsample; // For this very track
+  std::map<int64_t, subsample_or_siting_t> m_cb_subsample_list; // As given on the command line
+  option_with_source_c<subsample_or_siting_t> m_cb_subsample; // For this very track
 
-  std::map<int64_t, chroma_siting_t> m_chroma_siting_list; // As given on the command line
-  option_with_source_c<chroma_siting_t> m_chroma_siting; // For this very track
+  std::map<int64_t, subsample_or_siting_t> m_chroma_siting_list; // As given on the command line
+  option_with_source_c<subsample_or_siting_t> m_chroma_siting; // For this very track
 
-  std::map<int64_t, int> m_color_range_list; // As given on the command line
-  option_with_source_c<int> m_color_range; // For this very track
+  std::map<int64_t, uint64_t> m_color_range_list; // As given on the command line
+  option_with_source_c<uint64_t> m_color_range; // For this very track
 
-  std::map<int64_t, int> m_color_transfer_list; // As given on the command line
-  option_with_source_c<int> m_color_transfer; // For this very track
+  std::map<int64_t, uint64_t> m_color_transfer_list; // As given on the command line
+  option_with_source_c<uint64_t> m_color_transfer; // For this very track
 
-  std::map<int64_t, int> m_color_primaries_list; // As given on the command line
-  option_with_source_c<int> m_color_primaries; // For this very track
+  std::map<int64_t, uint64_t> m_color_primaries_list; // As given on the command line
+  option_with_source_c<uint64_t> m_color_primaries; // For this very track
 
-  std::map<int64_t, int> m_max_cll_list; // As given on the command line
-  option_with_source_c<int> m_max_cll; // For this very track
+  std::map<int64_t, uint64_t> m_max_cll_list; // As given on the command line
+  option_with_source_c<uint64_t> m_max_cll; // For this very track
 
-  std::map<int64_t, int> m_max_fall_list; // As given on the command line
-  option_with_source_c<int> m_max_fall; // For this very track
+  std::map<int64_t, uint64_t> m_max_fall_list; // As given on the command line
+  option_with_source_c<uint64_t> m_max_fall; // For this very track
 
   std::map<int64_t, chroma_coordinates_t> m_chroma_coordinates_list; // As given on the command line
   option_with_source_c<chroma_coordinates_t> m_chroma_coordinates; // For this very track

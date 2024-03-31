@@ -178,11 +178,11 @@ kax_track_t::handle_packetizer_color() {
     ptzr_ptr->set_video_color_matrix(*v_color_matrix, option_source_e::container);
   if (v_bits_per_channel)
     ptzr_ptr->set_video_bits_per_channel(*v_bits_per_channel, option_source_e::container);
-  if ((v_chroma_subsample.hori != -1) || (v_chroma_subsample.vert != -1))
+  if (v_chroma_subsample.hori || v_chroma_subsample.vert)
     ptzr_ptr->set_video_chroma_subsample(v_chroma_subsample, option_source_e::container);
-  if ((v_cb_subsample.hori != -1) || (v_cb_subsample.vert != -1))
+  if (v_cb_subsample.hori || v_cb_subsample.vert)
     ptzr_ptr->set_video_cb_subsample(v_cb_subsample, option_source_e::container);
-  if ((v_chroma_siting.hori != -1) || (v_chroma_siting.vert != -1))
+  if (v_chroma_siting.hori || v_chroma_siting.vert)
     ptzr_ptr->set_video_chroma_siting(v_chroma_siting, option_source_e::container);
   if (v_color_range)
     ptzr_ptr->set_video_color_range(*v_color_range, option_source_e::container);
@@ -194,12 +194,12 @@ kax_track_t::handle_packetizer_color() {
     ptzr_ptr->set_video_max_cll(*v_max_cll, option_source_e::container);
   if (v_max_fall)
     ptzr_ptr->set_video_max_fall(*v_max_fall, option_source_e::container);
-  if (   (v_chroma_coordinates.red_x   != -1) || (v_chroma_coordinates.red_y   != -1)
-      || (v_chroma_coordinates.green_x != -1) || (v_chroma_coordinates.green_y != -1)
-      || (v_chroma_coordinates.blue_x  != -1) || (v_chroma_coordinates.blue_y  != -1)) {
+  if (   v_chroma_coordinates.red_x   || v_chroma_coordinates.red_y
+      || v_chroma_coordinates.green_x || v_chroma_coordinates.green_y
+      || v_chroma_coordinates.blue_x  || v_chroma_coordinates.blue_y) {
     ptzr_ptr->set_video_chroma_coordinates(v_chroma_coordinates, option_source_e::container);
   }
-  if ((v_white_color_coordinates.x != -1) && (v_white_color_coordinates.y != -1))
+  if (v_white_color_coordinates.hori && v_white_color_coordinates.vert)
     ptzr_ptr->set_video_white_color_coordinates(v_white_color_coordinates, option_source_e::container);
   if (v_max_luminance)
     ptzr_ptr->set_video_max_luminance(*v_max_luminance, option_source_e::container);
@@ -1286,12 +1286,12 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   if (color) {
     track->v_color_matrix          = find_optional_child_value<libmatroska::KaxVideoColourMatrix>(color);
     track->v_bits_per_channel      = find_optional_child_value<libmatroska::KaxVideoBitsPerChannel>(color);
-    track->v_chroma_subsample.hori = find_child_value<libmatroska::KaxVideoChromaSubsampHorz>(color, -1.0);
-    track->v_chroma_subsample.vert = find_child_value<libmatroska::KaxVideoChromaSubsampVert>(color, -1.0);
-    track->v_cb_subsample.hori     = find_child_value<libmatroska::KaxVideoCbSubsampHorz>(color,     -1.0);
-    track->v_cb_subsample.vert     = find_child_value<libmatroska::KaxVideoCbSubsampVert>(color,     -1.0);
-    track->v_chroma_siting.hori    = find_child_value<libmatroska::KaxVideoChromaSitHorz>(color,     -1.0);
-    track->v_chroma_siting.vert    = find_child_value<libmatroska::KaxVideoChromaSitVert>(color,     -1.0);
+    track->v_chroma_subsample.hori = find_optional_child_value<libmatroska::KaxVideoChromaSubsampHorz>(color);
+    track->v_chroma_subsample.vert = find_optional_child_value<libmatroska::KaxVideoChromaSubsampVert>(color);
+    track->v_cb_subsample.hori     = find_optional_child_value<libmatroska::KaxVideoCbSubsampHorz>(color);
+    track->v_cb_subsample.vert     = find_optional_child_value<libmatroska::KaxVideoCbSubsampVert>(color);
+    track->v_chroma_siting.hori    = find_optional_child_value<libmatroska::KaxVideoChromaSitHorz>(color);
+    track->v_chroma_siting.vert    = find_optional_child_value<libmatroska::KaxVideoChromaSitVert>(color);
     track->v_color_range           = find_optional_child_value<libmatroska::KaxVideoColourRange>(color);
     track->v_transfer_character    = find_optional_child_value<libmatroska::KaxVideoColourTransferCharacter>(color);
     track->v_color_primaries       = find_optional_child_value<libmatroska::KaxVideoColourPrimaries>(color);
@@ -1301,16 +1301,16 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
     auto color_meta                = find_child<libmatroska::KaxVideoColourMasterMeta>(*color);
 
     if (color_meta) {
-      track->v_chroma_coordinates.red_x   = find_child_value<libmatroska::KaxVideoRChromaX>(color_meta, -1.0);
-      track->v_chroma_coordinates.red_y   = find_child_value<libmatroska::KaxVideoRChromaY>(color_meta, -1.0);
-      track->v_chroma_coordinates.green_x = find_child_value<libmatroska::KaxVideoGChromaX>(color_meta, -1.0);
-      track->v_chroma_coordinates.green_y = find_child_value<libmatroska::KaxVideoGChromaY>(color_meta, -1.0);
-      track->v_chroma_coordinates.blue_x  = find_child_value<libmatroska::KaxVideoBChromaX>(color_meta, -1.0);
-      track->v_chroma_coordinates.blue_y  = find_child_value<libmatroska::KaxVideoBChromaY>(color_meta, -1.0);
-      track->v_white_color_coordinates.x  = find_child_value<libmatroska::KaxVideoWhitePointChromaX>(color_meta, -1.0);
-      track->v_white_color_coordinates.y  = find_child_value<libmatroska::KaxVideoWhitePointChromaY>(color_meta, -1.0);
-      track->v_max_luminance              = find_optional_child_value<libmatroska::KaxVideoLuminanceMax>(color_meta);
-      track->v_min_luminance              = find_optional_child_value<libmatroska::KaxVideoLuminanceMin>(color_meta);
+      track->v_chroma_coordinates.red_x     = find_optional_child_value<libmatroska::KaxVideoRChromaX>(color_meta);
+      track->v_chroma_coordinates.red_y     = find_optional_child_value<libmatroska::KaxVideoRChromaY>(color_meta);
+      track->v_chroma_coordinates.green_x   = find_optional_child_value<libmatroska::KaxVideoGChromaX>(color_meta);
+      track->v_chroma_coordinates.green_y   = find_optional_child_value<libmatroska::KaxVideoGChromaY>(color_meta);
+      track->v_chroma_coordinates.blue_x    = find_optional_child_value<libmatroska::KaxVideoBChromaX>(color_meta);
+      track->v_chroma_coordinates.blue_y    = find_optional_child_value<libmatroska::KaxVideoBChromaY>(color_meta);
+      track->v_white_color_coordinates.hori = find_optional_child_value<libmatroska::KaxVideoWhitePointChromaX>(color_meta);
+      track->v_white_color_coordinates.vert = find_optional_child_value<libmatroska::KaxVideoWhitePointChromaY>(color_meta);
+      track->v_max_luminance                = find_optional_child_value<libmatroska::KaxVideoLuminanceMax>(color_meta);
+      track->v_min_luminance                = find_optional_child_value<libmatroska::KaxVideoLuminanceMin>(color_meta);
     }
   }
 
@@ -2939,9 +2939,14 @@ kax_reader_c::identify() {
       }
 
     } else if ('v' == track->type) {
-      auto maybe_set = [&info](std::string const &key, double v1, double v2) {
-        if ((v1 != -1) || (v2 != -1))
-          info.set(key, fmt::format("{0},{1}", mtx::string::normalize_fmt_double_output(v1), mtx::string::normalize_fmt_double_output(v2)));
+      auto maybe_set_int = [&info](std::string const &key, std::optional<uint64_t> const &v1, std::optional<uint64_t> const &v2) {
+        if (v1 || v2)
+          info.set(key, fmt::format("{0},{1}", v1.value_or(0), v2.value_or(0)));
+      };
+
+      auto maybe_set_float = [&info](std::string const &key, std::optional<double> const &v1, std::optional<double> const &v2) {
+        if (v1 || v2)
+          info.set(key, fmt::format("{0},{1}", mtx::string::normalize_fmt_double_output(v1.value_or(0)), mtx::string::normalize_fmt_double_output(v2.value_or(0))));
       };
 
       info.add(mtx::id::color_bits_per_channel,         track->v_bits_per_channel);
@@ -2959,18 +2964,18 @@ kax_reader_c::identify() {
       info.add(mtx::id::projection_private,             track->v_projection_private);
       info.add(mtx::id::projection_type,                track->v_projection_type);
 
-      maybe_set(mtx::id::cb_subsample,            track->v_cb_subsample.hori,         track->v_cb_subsample.vert);
-      maybe_set(mtx::id::chroma_siting,           track->v_chroma_siting.hori,        track->v_chroma_siting.vert);
-      maybe_set(mtx::id::chroma_subsample,        track->v_chroma_subsample.hori,     track->v_chroma_subsample.vert);
-      maybe_set(mtx::id::white_color_coordinates, track->v_white_color_coordinates.x, track->v_white_color_coordinates.y);
+      maybe_set_int(  mtx::id::cb_subsample,            track->v_cb_subsample.hori,            track->v_cb_subsample.vert);
+      maybe_set_int(  mtx::id::chroma_siting,           track->v_chroma_siting.hori,           track->v_chroma_siting.vert);
+      maybe_set_int(  mtx::id::chroma_subsample,        track->v_chroma_subsample.hori,        track->v_chroma_subsample.vert);
+      maybe_set_float(mtx::id::white_color_coordinates, track->v_white_color_coordinates.hori, track->v_white_color_coordinates.vert);
 
-      if (   (track->v_chroma_coordinates.red_x   != -1) || (track->v_chroma_coordinates.red_y   != -1)
-          || (track->v_chroma_coordinates.green_x != -1) || (track->v_chroma_coordinates.green_y != -1)
-          || (track->v_chroma_coordinates.blue_x  != -1) || (track->v_chroma_coordinates.blue_y  != -1))
+      if (   track->v_chroma_coordinates.red_x   || track->v_chroma_coordinates.red_y
+          || track->v_chroma_coordinates.green_x || track->v_chroma_coordinates.green_y
+          || track->v_chroma_coordinates.blue_x  || track->v_chroma_coordinates.blue_y)
         info.set(mtx::id::chromaticity_coordinates, fmt::format("{0},{1},{2},{3},{4},{5}",
-                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.red_x),   mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.red_y),
-                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.green_x), mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.green_y),
-                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.blue_x),  mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.blue_y)));
+                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.red_x.value_or(0)),   mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.red_y.value_or(0)),
+                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.green_x.value_or(0)), mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.green_y.value_or(0)),
+                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.blue_x.value_or(0)),  mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.blue_y.value_or(0))));
     }
 
     if (track->content_decoder.has_encodings())

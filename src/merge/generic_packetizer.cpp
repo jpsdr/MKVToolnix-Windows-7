@@ -698,8 +698,8 @@ generic_packetizer_c::set_video_pixel_cropping(int left,
 }
 
 void
-generic_packetizer_c::set_video_color_matrix(int matrix_index,
-                                              option_source_e source) {
+generic_packetizer_c::set_video_color_matrix(uint64_t matrix_index,
+                                             option_source_e source) {
   m_ti.m_color_matrix_coeff.set(matrix_index, source);
   if (   m_track_entry
       && (matrix_index >= 0)
@@ -711,7 +711,7 @@ generic_packetizer_c::set_video_color_matrix(int matrix_index,
 }
 
 void
-generic_packetizer_c::set_video_bits_per_channel(int num_bits,
+generic_packetizer_c::set_video_bits_per_channel(uint64_t num_bits,
                                                  option_source_e source) {
   m_ti.m_bits_per_channel.set(num_bits, source);
   if (m_track_entry && (num_bits >= 0)) {
@@ -722,58 +722,56 @@ generic_packetizer_c::set_video_bits_per_channel(int num_bits,
 }
 
 void
-generic_packetizer_c::set_video_chroma_subsample(const chroma_subsample_t &subsample,
+generic_packetizer_c::set_video_chroma_subsample(subsample_or_siting_t const &subsample,
                                                  option_source_e source) {
-  m_ti.m_chroma_subsample.set(chroma_subsample_t(subsample.hori, subsample.vert), source);
+  m_ti.m_chroma_subsample.set(subsample_or_siting_t(subsample.hori, subsample.vert), source);
   if (   m_track_entry
-      && (   (subsample.hori >= 0)
-          || (subsample.vert >= 0))) {
+      && (subsample.hori || subsample.vert)) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
-    if (subsample.hori >= 0)
-      get_child<libmatroska::KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
-    if (subsample.vert >= 0)
-      get_child<libmatroska::KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
+    if (subsample.hori)
+      get_child<libmatroska::KaxVideoChromaSubsampHorz>(color).SetValue(*subsample.hori);
+    if (subsample.vert)
+      get_child<libmatroska::KaxVideoChromaSubsampVert>(color).SetValue(*subsample.vert);
   }
 }
 
 void
-generic_packetizer_c::set_video_cb_subsample(const cb_subsample_t &subsample,
+generic_packetizer_c::set_video_cb_subsample(subsample_or_siting_t const &subsample,
                                              option_source_e source) {
-  m_ti.m_cb_subsample.set(cb_subsample_t(subsample.hori, subsample.vert), source);
+  m_ti.m_cb_subsample.set(subsample_or_siting_t(subsample.hori, subsample.vert), source);
   if (   m_track_entry
-      && (   (subsample.hori >= 0)
-          || (subsample.vert >= 0))) {
+      && (subsample.hori || subsample.vert)) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
-    if (subsample.hori >= 0)
-      get_child<libmatroska::KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
-    if (subsample.vert >= 0)
-      get_child<libmatroska::KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
+    if (subsample.hori)
+      get_child<libmatroska::KaxVideoCbSubsampHorz>(color).SetValue(*subsample.hori);
+    if (subsample.vert)
+      get_child<libmatroska::KaxVideoCbSubsampVert>(color).SetValue(*subsample.vert);
   }
 }
 
 void
-generic_packetizer_c::set_video_chroma_siting(const chroma_siting_t &siting,
+generic_packetizer_c::set_video_chroma_siting(subsample_or_siting_t const &siting,
                                               option_source_e source) {
-  m_ti.m_chroma_siting.set(chroma_siting_t(siting.hori, siting.vert), source);
+  m_ti.m_chroma_siting.set(subsample_or_siting_t(siting.hori, siting.vert), source);
   if (   m_track_entry
-      && (   ((siting.hori >= 0) && (siting.hori <= 2))
-          || ((siting.vert >= 0) && (siting.hori <= 2)))) {
+      && (   (siting.hori && (siting.hori >= 0) && (siting.hori <= 2))
+          || (siting.vert && (siting.vert >= 0) && (siting.hori <= 2)))) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
-    if ((siting.hori >= 0) && (siting.hori <= 2))
-      get_child<libmatroska::KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
-    if ((siting.vert >= 0) && (siting.hori <= 2))
-      get_child<libmatroska::KaxVideoChromaSitVert>(color).SetValue(siting.vert);
+    if (siting.hori && (siting.hori >= 0) && (siting.hori <= 2))
+      get_child<libmatroska::KaxVideoChromaSitHorz>(color).SetValue(*siting.hori);
+    if (siting.vert && (siting.vert >= 0) && (siting.hori <= 2))
+      get_child<libmatroska::KaxVideoChromaSitVert>(color).SetValue(*siting.vert);
   }
 }
 
 void
-generic_packetizer_c::set_video_color_range(int range,
-                                             option_source_e source) {
+generic_packetizer_c::set_video_color_range(uint64_t range,
+                                            option_source_e source) {
   m_ti.m_color_range.set(range, source);
-  if (m_track_entry && (range >= 0) && (range <= 3)) {
+  if (m_track_entry && (range <= 3)) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
     get_child<libmatroska::KaxVideoColourRange>(color).SetValue(range);
@@ -781,10 +779,10 @@ generic_packetizer_c::set_video_color_range(int range,
 }
 
 void
-generic_packetizer_c::set_video_color_transfer_character(int transfer_index,
-                                                          option_source_e source) {
+generic_packetizer_c::set_video_color_transfer_character(uint64_t transfer_index,
+                                                         option_source_e source) {
   m_ti.m_color_transfer.set(transfer_index, source);
-  if (m_track_entry && (transfer_index >= 0) && (transfer_index <= 18)) {
+  if (m_track_entry && (transfer_index <= 18)) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
     get_child<libmatroska::KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
@@ -792,11 +790,10 @@ generic_packetizer_c::set_video_color_transfer_character(int transfer_index,
 }
 
 void
-generic_packetizer_c::set_video_color_primaries(int primary_index,
-                                                 option_source_e source) {
+generic_packetizer_c::set_video_color_primaries(uint64_t primary_index,
+                                                option_source_e source) {
   m_ti.m_color_primaries.set(primary_index, source);
   if (     m_track_entry
-      && (primary_index >= 0)
       && ((primary_index <= 10) || (primary_index == 22))) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
@@ -805,10 +802,10 @@ generic_packetizer_c::set_video_color_primaries(int primary_index,
 }
 
 void
-generic_packetizer_c::set_video_max_cll(int max_cll,
+generic_packetizer_c::set_video_max_cll(uint64_t max_cll,
                                         option_source_e source) {
   m_ti.m_max_cll.set(max_cll, source);
-  if (m_track_entry && (max_cll >= 0)) {
+  if (m_track_entry) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
     get_child<libmatroska::KaxVideoColourMaxCLL>(color).SetValue(max_cll);
@@ -816,10 +813,10 @@ generic_packetizer_c::set_video_max_cll(int max_cll,
 }
 
 void
-generic_packetizer_c::set_video_max_fall(int max_fall,
+generic_packetizer_c::set_video_max_fall(uint64_t max_fall,
                                          option_source_e source) {
   m_ti.m_max_fall.set(max_fall, source);
-  if (m_track_entry && (max_fall >= 0)) {
+  if (m_track_entry) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
     get_child<libmatroska::KaxVideoColourMaxFALL>(color).SetValue(max_fall);
@@ -831,42 +828,42 @@ generic_packetizer_c::set_video_chroma_coordinates(chroma_coordinates_t const &c
                                                    option_source_e source) {
   m_ti.m_chroma_coordinates.set(coordinates, source);
   if (   m_track_entry
-      && (   ((coordinates.red_x   >= 0) && (coordinates.red_x   <= 1))
-          || ((coordinates.red_y   >= 0) && (coordinates.red_y   <= 1))
-          || ((coordinates.green_x >= 0) && (coordinates.green_x <= 1))
-          || ((coordinates.green_y >= 0) && (coordinates.green_y <= 1))
-          || ((coordinates.blue_x  >= 0) && (coordinates.blue_x  <= 1))
-          || ((coordinates.blue_y  >= 0) && (coordinates.blue_y  <= 1)))) {
+      && (   (coordinates.red_x   && (coordinates.red_x   >= 0) && (coordinates.red_x   <= 1))
+          || (coordinates.red_y   && (coordinates.red_y   >= 0) && (coordinates.red_y   <= 1))
+          || (coordinates.green_x && (coordinates.green_x >= 0) && (coordinates.green_x <= 1))
+          || (coordinates.green_y && (coordinates.green_y >= 0) && (coordinates.green_y <= 1))
+          || (coordinates.blue_x  && (coordinates.blue_x  >= 0) && (coordinates.blue_x  <= 1))
+          || (coordinates.blue_y  && (coordinates.blue_y  >= 0) && (coordinates.blue_y  <= 1)))) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
-    if ((coordinates.red_x >= 0) && (coordinates.red_x <= 1))
-      get_child<libmatroska::KaxVideoRChromaX>(color).SetValue(coordinates.red_x);
-    if ((coordinates.red_y >= 0) && (coordinates.red_y <= 1))
-      get_child<libmatroska::KaxVideoRChromaY>(color).SetValue(coordinates.red_y);
-    if ((coordinates.green_x >= 0) && (coordinates.green_x <= 1))
-      get_child<libmatroska::KaxVideoGChromaX>(color).SetValue(coordinates.green_x);
-    if ((coordinates.green_y >= 0) && (coordinates.green_y <= 1))
-      get_child<libmatroska::KaxVideoGChromaY>(color).SetValue(coordinates.green_y);
-    if ((coordinates.blue_x >= 0) && (coordinates.blue_x <= 1))
-      get_child<libmatroska::KaxVideoBChromaX>(color).SetValue(coordinates.blue_x);
-    if ((coordinates.blue_y >= 0) && (coordinates.blue_y <= 1))
-      get_child<libmatroska::KaxVideoBChromaY>(color).SetValue(coordinates.blue_y);
+    if (coordinates.red_x && (coordinates.red_x >= 0) && (coordinates.red_x <= 1))
+      get_child<libmatroska::KaxVideoRChromaX>(color).SetValue(*coordinates.red_x);
+    if (coordinates.red_y && (coordinates.red_y >= 0) && (coordinates.red_y <= 1))
+      get_child<libmatroska::KaxVideoRChromaY>(color).SetValue(*coordinates.red_y);
+    if (coordinates.green_x && (coordinates.green_x >= 0) && (coordinates.green_x <= 1))
+      get_child<libmatroska::KaxVideoGChromaX>(color).SetValue(*coordinates.green_x);
+    if (coordinates.green_y && (coordinates.green_y >= 0) && (coordinates.green_y <= 1))
+      get_child<libmatroska::KaxVideoGChromaY>(color).SetValue(*coordinates.green_y);
+    if (coordinates.blue_x && (coordinates.blue_x >= 0) && (coordinates.blue_x <= 1))
+      get_child<libmatroska::KaxVideoBChromaX>(color).SetValue(*coordinates.blue_x);
+    if (coordinates.blue_y && (coordinates.blue_y >= 0) && (coordinates.blue_y <= 1))
+      get_child<libmatroska::KaxVideoBChromaY>(color).SetValue(*coordinates.blue_y);
   }
 }
 
 void
 generic_packetizer_c::set_video_white_color_coordinates(white_color_coordinates_t const &coordinates,
                                                          option_source_e source) {
-  m_ti.m_white_coordinates.set(white_color_coordinates_t(coordinates.x, coordinates.y), source);
+  m_ti.m_white_coordinates.set(white_color_coordinates_t(coordinates.hori, coordinates.vert), source);
   if (   m_track_entry
-      && (   ((coordinates.x >= 0) && (coordinates.x <= 1))
-          || ((coordinates.y >= 0) && (coordinates.y <= 1)))) {
+      && (   (coordinates.hori && (coordinates.hori >= 0) && (coordinates.hori <= 1))
+          || (coordinates.vert && (coordinates.vert >= 0) && (coordinates.vert <= 1)))) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
-    if ((coordinates.x >= 0) && (coordinates.x <= 1))
-      get_child<libmatroska::KaxVideoWhitePointChromaX>(color).SetValue(coordinates.x);
-    if ((coordinates.y >= 0) && (coordinates.y <= 1))
-      get_child<libmatroska::KaxVideoWhitePointChromaY>(color).SetValue(coordinates.y);
+    if (coordinates.hori && (coordinates.hori >= 0) && (coordinates.hori <= 1))
+      get_child<libmatroska::KaxVideoWhitePointChromaX>(color).SetValue(*coordinates.hori);
+    if (coordinates.vert && (coordinates.vert >= 0) && (coordinates.vert <= 1))
+      get_child<libmatroska::KaxVideoWhitePointChromaY>(color).SetValue(*coordinates.vert);
   }
 }
 
@@ -1200,51 +1197,51 @@ generic_packetizer_c::set_headers() {
       if (m_ti.m_chroma_subsample) {
         auto const &subsample = m_ti.m_chroma_subsample.get();
         auto &color           = get_child<libmatroska::KaxVideoColour>(video);
-        get_child<libmatroska::KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
-        get_child<libmatroska::KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
+        get_child<libmatroska::KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori.value_or(0));
+        get_child<libmatroska::KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert.value_or(0));
       }
 
       if (m_ti.m_cb_subsample) {
         auto const &subsample = m_ti.m_cb_subsample.get();
         auto &color           = get_child<libmatroska::KaxVideoColour>(video);
-        get_child<libmatroska::KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
-        get_child<libmatroska::KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
+        get_child<libmatroska::KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori.value_or(0));
+        get_child<libmatroska::KaxVideoCbSubsampVert>(color).SetValue(subsample.vert.value_or(0));
       }
 
       if (m_ti.m_chroma_siting) {
         auto const &siting = m_ti.m_chroma_siting.get();
         auto &color        = get_child<libmatroska::KaxVideoColour>(video);
-        get_child<libmatroska::KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
-        get_child<libmatroska::KaxVideoChromaSitVert>(color).SetValue(siting.vert);
+        get_child<libmatroska::KaxVideoChromaSitHorz>(color).SetValue(siting.hori.value_or(0));
+        get_child<libmatroska::KaxVideoChromaSitVert>(color).SetValue(siting.vert.value_or(0));
       }
 
       if (m_ti.m_color_range) {
-        int range_index = m_ti.m_color_range.get();
-        auto &color     = get_child<libmatroska::KaxVideoColour>(video);
+        auto range_index = m_ti.m_color_range.get();
+        auto &color      = get_child<libmatroska::KaxVideoColour>(video);
         get_child<libmatroska::KaxVideoColourRange>(color).SetValue(range_index);
       }
 
       if (m_ti.m_color_transfer) {
-        int transfer_index = m_ti.m_color_transfer.get();
-        auto &color        = get_child<libmatroska::KaxVideoColour>(video);
+        auto transfer_index = m_ti.m_color_transfer.get();
+        auto &color         = get_child<libmatroska::KaxVideoColour>(video);
         get_child<libmatroska::KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
       }
 
       if (m_ti.m_color_primaries) {
-        int primary_index = m_ti.m_color_primaries.get();
-        auto &color       = get_child<libmatroska::KaxVideoColour>(video);
+        auto primary_index = m_ti.m_color_primaries.get();
+        auto &color        = get_child<libmatroska::KaxVideoColour>(video);
         get_child<libmatroska::KaxVideoColourPrimaries>(color).SetValue(primary_index);
       }
 
       if (m_ti.m_max_cll) {
-        int cll_index = m_ti.m_max_cll.get();
-        auto &color   = get_child<libmatroska::KaxVideoColour>(video);
+        auto cll_index = m_ti.m_max_cll.get();
+        auto &color    = get_child<libmatroska::KaxVideoColour>(video);
         get_child<libmatroska::KaxVideoColourMaxCLL>(color).SetValue(cll_index);
       }
 
       if (m_ti.m_max_fall) {
-        int fall_index = m_ti.m_max_fall.get();
-        auto &color    = get_child<libmatroska::KaxVideoColour>(video);
+        auto fall_index = m_ti.m_max_fall.get();
+        auto &color     = get_child<libmatroska::KaxVideoColour>(video);
         get_child<libmatroska::KaxVideoColourMaxFALL>(color).SetValue(fall_index);
       }
 
@@ -1252,20 +1249,20 @@ generic_packetizer_c::set_headers() {
         auto const &coordinates = m_ti.m_chroma_coordinates.get();
         auto &color             = get_child<libmatroska::KaxVideoColour>(video);
         auto &master_meta       = get_child<libmatroska::KaxVideoColourMasterMeta>(color);
-        get_child<libmatroska::KaxVideoRChromaX>(master_meta).SetValue(coordinates.red_x);
-        get_child<libmatroska::KaxVideoRChromaY>(master_meta).SetValue(coordinates.red_y);
-        get_child<libmatroska::KaxVideoGChromaX>(master_meta).SetValue(coordinates.green_x);
-        get_child<libmatroska::KaxVideoGChromaY>(master_meta).SetValue(coordinates.green_y);
-        get_child<libmatroska::KaxVideoBChromaX>(master_meta).SetValue(coordinates.blue_x);
-        get_child<libmatroska::KaxVideoBChromaY>(master_meta).SetValue(coordinates.blue_y);
+        get_child<libmatroska::KaxVideoRChromaX>(master_meta).SetValue(coordinates.red_x.value_or(0));
+        get_child<libmatroska::KaxVideoRChromaY>(master_meta).SetValue(coordinates.red_y.value_or(0));
+        get_child<libmatroska::KaxVideoGChromaX>(master_meta).SetValue(coordinates.green_x.value_or(0));
+        get_child<libmatroska::KaxVideoGChromaY>(master_meta).SetValue(coordinates.green_y.value_or(0));
+        get_child<libmatroska::KaxVideoBChromaX>(master_meta).SetValue(coordinates.blue_x.value_or(0));
+        get_child<libmatroska::KaxVideoBChromaY>(master_meta).SetValue(coordinates.blue_y.value_or(0));
       }
 
       if (m_ti.m_white_coordinates) {
         auto const &coordinates = m_ti.m_white_coordinates.get();
         auto &color             = get_child<libmatroska::KaxVideoColour>(video);
         auto &master_meta       = get_child<libmatroska::KaxVideoColourMasterMeta>(color);
-        get_child<libmatroska::KaxVideoWhitePointChromaX>(master_meta).SetValue(coordinates.x);
-        get_child<libmatroska::KaxVideoWhitePointChromaY>(master_meta).SetValue(coordinates.y);
+        get_child<libmatroska::KaxVideoWhitePointChromaX>(master_meta).SetValue(coordinates.hori.value_or(0));
+        get_child<libmatroska::KaxVideoWhitePointChromaY>(master_meta).SetValue(coordinates.vert.value_or(0));
       }
 
       if (m_ti.m_max_luminance) {

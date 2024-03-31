@@ -94,6 +94,8 @@ public Q_SLOTS:
   virtual void setupHorizontalTwoColumnsInputLayout();
   virtual void setupVerticalTabWidgetInputLayout();
 
+  virtual void enableMenuActions();
+
 protected:
   virtual void setupModifySelectedTracksMenu();
   virtual void setupFileIdentificationThread();
@@ -102,7 +104,6 @@ protected:
   virtual Tab *tabForAddingOrAppending(uint64_t wantedId);
   virtual void forEachTab(std::function<void(Tab &)> const &worker);
 
-  virtual void enableMenuActions();
   virtual void enableCopyMenuActions();
   virtual void showMergeWidget();
 
