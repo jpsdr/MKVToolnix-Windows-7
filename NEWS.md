@@ -6,6 +6,8 @@
   used for Matroska files, `mkvmerge` will generate new random track UIDs
   instead of keeping existing track UIDs. This is done automatically when a
   Matroska file was created by MakeMKV.
+* translations: added a Norwegian Bokmål translation of the programs by Roger
+  Knutsen (see `AUTHORS`).
 
 ## Bug fixes
 
