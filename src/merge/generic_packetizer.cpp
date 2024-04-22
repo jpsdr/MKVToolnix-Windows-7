@@ -702,7 +702,6 @@ generic_packetizer_c::set_video_color_matrix(uint64_t matrix_index,
                                              option_source_e source) {
   m_ti.m_color_matrix_coeff.set(matrix_index, source);
   if (   m_track_entry
-      && (matrix_index >= 0)
       && (matrix_index <= 10)) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
@@ -714,7 +713,7 @@ void
 generic_packetizer_c::set_video_bits_per_channel(uint64_t num_bits,
                                                  option_source_e source) {
   m_ti.m_bits_per_channel.set(num_bits, source);
-  if (m_track_entry && (num_bits >= 0)) {
+  if (m_track_entry) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
     get_child<libmatroska::KaxVideoBitsPerChannel>(color).SetValue(m_ti.m_bits_per_channel.get());
