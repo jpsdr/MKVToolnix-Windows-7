@@ -33,12 +33,6 @@
 
 #include <stdint.h>
 
-#if !defined(HAVE_FMT_V8) || !HAVE_FMT_V8
-// Don't support user-defined literals in fmt as they aren't used by
-// MKVToolNix and produce a compiler warning in -Wpedantic with fmt < v8
-#  define FMT_USE_USER_DEFINED_LITERALS 0
-#endif
-
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 

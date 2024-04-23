@@ -22,6 +22,11 @@
   being copied when very large values were present in source files, or in
   error messages when very large values were used as command-line parameters.
 
+## Build system changes
+
+* Release v8.0.0 of the `fmt` library is now required. If not found, the
+  bundled copy will be used.
+
 
 # Version 83.0 "Circle Of Friends" 2024-03-10
 
