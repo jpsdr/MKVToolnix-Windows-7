@@ -55,7 +55,7 @@ parse_dvd(std::string const &file_name) {
       DVDClose(dvd);
   }};
 
-  auto error = fmt::format(Y("Could not open '{0}' for reading.\n"), file_name);
+  auto error = fmt::format(FY("Could not open '{0}' for reading.\n"), file_name);
 
   dvd = DVDOpen(file_name.c_str());
   if (!dvd)
@@ -130,7 +130,7 @@ maybe_parse_dvd(std::string const &file_name,
     cleaned_file_name = to_utf8(matches.captured(1));
 
     if (!mtx::string::parse_number(to_utf8(matches.captured(2)), title) || (title < 1))
-      throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), to_utf8(matches.captured(2)))};
+      throw parser_x{fmt::format(FY("'{0}' is not a valid DVD title number."), to_utf8(matches.captured(2)))};
   }
 
   auto dvd_dir = mtx::fs::to_path(cleaned_file_name);
@@ -146,7 +146,7 @@ maybe_parse_dvd(std::string const &file_name,
   auto titles_and_timestamps = parse_dvd(dvd_dir.string());
 
   if (title > titles_and_timestamps.size())
-    throw parser_x{fmt::format(Y("The title number '{0}' is higher than the number of titles on the DVD ({1})."), title, titles_and_timestamps.size())};
+    throw parser_x{fmt::format(FY("The title number '{0}' is higher than the number of titles on the DVD ({1})."), title, titles_and_timestamps.size())};
 
   return create_editions_and_chapters({ titles_and_timestamps[title - 1] }, language, {});
 }

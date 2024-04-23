@@ -48,7 +48,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
   m_bps           = kt_get_a_bps(track);
 
   if (-1 == m_bps)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   if (m_codec_id == MKV_A_PCM_BE)
     m_byte_swapper = [this](uint8_t const *src, uint8_t *dst, std::size_t num_bytes) {
@@ -134,7 +134,7 @@ xtr_wav_c::finish_file() {
   }
 
   if (!m_w64_requested)
-    mxinfo(fmt::format(Y("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().string()));
+    mxinfo(fmt::format(FY("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().string()));
 
   write_w64_header();
 }
@@ -176,7 +176,7 @@ xtr_wavpack4_c::create_file(xtr_base_c *master,
     mpriv = decode_codec_private(priv);
 
   if (!priv || (2 > mpriv->get_size()))
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
   memcpy(m_version, mpriv->get_buffer(), 2);
 
   xtr_base_c::create_file(master, track);
@@ -194,7 +194,7 @@ xtr_wavpack4_c::create_file(xtr_base_c *master,
     try {
       m_corr_out = mm_write_buffer_io_c::open(corr_name, 5 * 1024 * 1024);
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), corr_name, ex));
+      mxerror(fmt::format(FY("The file '{0}' could not be opened for writing: {1}.\n"), corr_name, ex));
     }
   }
 }

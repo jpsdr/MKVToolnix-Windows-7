@@ -167,7 +167,7 @@ unify_legacy_and_bcp47_languages_and_countries(libebml::EbmlElement &elt) {
 */
 inline void
 chapter_error(const std::string &error) {
-  throw parser_x(fmt::format(Y("Simple chapter parser: {0}\n"), error));
+  throw parser_x(fmt::format(FY("Simple chapter parser: {0}\n"), error));
 }
 
 /** \brief Reads the start of a file and checks for OGM style comments.
@@ -290,7 +290,7 @@ parse_simple(mm_text_io_c *in,
     if (0 == mode) {
       matches = timestamp_line_re.match(Q(line));
       if (!matches.hasMatch())
-        chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
+        chapter_error(fmt::format(FY("'{0}' is not a CHAPTERxx=... line."), line));
 
       int64_t hour = 0, minute = 0, second = 0, nsecs = 0;
       mtx::string::parse_number(to_utf8(matches.captured(1)), hour);
@@ -299,9 +299,9 @@ parse_simple(mm_text_io_c *in,
       mtx::string::parse_number(to_utf8(matches.captured(4)), nsecs);
 
       if (59 < minute)
-        chapter_error(fmt::format(Y("Invalid minute: {0}"), minute));
+        chapter_error(fmt::format(FY("Invalid minute: {0}"), minute));
       if (59 < second)
-        chapter_error(fmt::format(Y("Invalid second: {0}"), second));
+        chapter_error(fmt::format(FY("Invalid second: {0}"), second));
 
       for (int idx = matches.capturedLength(4); idx < 9; ++idx)
         nsecs *= 10;
@@ -310,11 +310,11 @@ parse_simple(mm_text_io_c *in,
       mode  = 1;
 
       if (matches = timestamp_re.match(Q(line)); !matches.hasMatch())
-        chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
+        chapter_error(fmt::format(FY("'{0}' is not a CHAPTERxx=... line."), line));
 
     } else {
       if (matches = name_line_re.match(Q(line)); !matches.hasMatch())
-        chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxxNAME=... line."), line));
+        chapter_error(fmt::format(FY("'{0}' is not a CHAPTERxxNAME=... line."), line));
 
       auto name = to_utf8(matches.captured(1));
       if (name.empty())
@@ -555,13 +555,13 @@ parse(const std::string &file_name,
   } catch (parser_x &e) {
     if (exception_on_error)
       throw;
-    mxerror(fmt::format(Y("Could not parse the chapters in '{0}': {1}\n"), file_name, e.error()));
+    mxerror(fmt::format(FY("Could not parse the chapters in '{0}': {1}\n"), file_name, e.error()));
 
   } catch (...) {
     if (exception_on_error)
-      throw parser_x(fmt::format(Y("Could not open '{0}' for reading.\n"), file_name));
+      throw parser_x(fmt::format(FY("Could not open '{0}' for reading.\n"), file_name));
     else
-      mxerror(fmt::format(Y("Could not open '{0}' for reading.\n"), file_name));
+      mxerror(fmt::format(FY("Could not open '{0}' for reading.\n"), file_name));
   }
 
   return {};
@@ -638,15 +638,15 @@ parse(mm_text_io_c *in,
       return select_in_timeframe(chapters.get(), min_ts, max_ts, offset) ? chapters : nullptr;
     }
 
-    error = fmt::format(Y("Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"), in->get_file_name());
+    error = fmt::format(FY("Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"), in->get_file_name());
   } catch (mtx::chapters::parser_x &e) {
     error = e.error();
   } catch (mtx::mm_io::exception &ex) {
-    error = fmt::format(Y("The XML chapter file '{0}' could not be read.\n"), in->get_file_name());
+    error = fmt::format(FY("The XML chapter file '{0}' could not be read.\n"), in->get_file_name());
   } catch (mtx::xml::xml_parser_x &ex) {
-    error = fmt::format(Y("The XML chapter file '{0}' contains an error at position {2}: {1}\n"), in->get_file_name(), ex.result().description(), ex.result().offset);
+    error = fmt::format(FY("The XML chapter file '{0}' contains an error at position {2}: {1}\n"), in->get_file_name(), ex.result().description(), ex.result().offset);
   } catch (mtx::xml::exception &ex) {
-    error = fmt::format(Y("The XML chapter file '{0}' contains an error: {1}\n"), in->get_file_name(), ex.what());
+    error = fmt::format(FY("The XML chapter file '{0}' contains an error: {1}\n"), in->get_file_name(), ex.what());
   }
 
   if (!error.empty()) {

@@ -59,7 +59,7 @@ mp3_reader_c::read_headers() {
     show_demuxer_info();
 
     if ((0 < pos) && verbose)
-      mxwarn_fn(m_ti.m_fname, fmt::format(Y("Skipping {0} bytes at the beginning (no valid MP3 header found).\n"), pos));
+      mxwarn_fn(m_ti.m_fname, fmt::format(FY("Skipping {0} bytes at the beginning (no valid MP3 header found).\n"), pos));
 
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();

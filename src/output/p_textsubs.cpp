@@ -135,7 +135,7 @@ textsubs_packetizer_c::recode(std::string subs) {
 
   if (emit_invalid_utf8_warning) {
     m_invalid_utf8_warned = true;
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
   }
 
   return subs;
@@ -147,7 +147,7 @@ textsubs_packetizer_c::process_one_packet(packet_cptr const &packet) {
 
   if (0 > packet->duration) {
     subtitle_number_packet_extension_c *extension = dynamic_cast<subtitle_number_packet_extension_c *>(packet->find_extension(packet_extension_c::SUBTITLE_NUMBER));
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Ignoring an entry which starts after it ends ({0}).\n"), extension ? extension->get_number() : static_cast<unsigned int>(m_packetno)));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("Ignoring an entry which starts after it ends ({0}).\n"), extension ? extension->get_number() : static_cast<unsigned int>(m_packetno)));
     return;
   }
 

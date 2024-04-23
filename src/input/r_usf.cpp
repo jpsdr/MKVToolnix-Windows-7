@@ -85,7 +85,7 @@ usf_reader_c::parse_metadata(mtx::xml::document_cptr &doc) {
       m_default_language = language;
 
     else if (!g_identifying)
-      mxwarn_fn(m_ti.m_fname, fmt::format(Y("The default language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
+      mxwarn_fn(m_ti.m_fname, fmt::format(FY("The default language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
   }
 }
 
@@ -103,7 +103,7 @@ usf_reader_c::parse_subtitles(mtx::xml::document_cptr &doc) {
         track->m_language = language;
 
       else if (!g_identifying)
-        mxwarn_tid(m_ti.m_fname, m_tracks.size() - 1, fmt::format(Y("The language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
+        mxwarn_tid(m_ti.m_fname, m_tracks.size() - 1, fmt::format(FY("The language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
     }
 
     for (auto subtitle = subtitles.child("subtitle"); subtitle; subtitle = subtitle.next_sibling("subtitle")) {

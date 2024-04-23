@@ -106,13 +106,13 @@ vobsub_reader_c::read_headers() {
   try {
     m_in = std::make_shared<mm_file_io_c>(idx_name);
   } catch (...) {
-    throw mtx::input::extended_x(fmt::format(Y("Could not open '{0}' for reading.\n"), idx_name));
+    throw mtx::input::extended_x(fmt::format(FY("Could not open '{0}' for reading.\n"), idx_name));
   }
 
   try {
     m_sub_file = std::make_shared<mm_file_io_c>(sub_name);
   } catch (...) {
-    throw mtx::input::extended_x(fmt::format(Y("Could not open '{0}' for reading.\n"), sub_name));
+    throw mtx::input::extended_x(fmt::format(FY("Could not open '{0}' for reading.\n"), sub_name));
   }
 
   idx_data = "";
@@ -248,7 +248,7 @@ vobsub_reader_c::parse_headers() {
 
       int64_t timestamp;
       if (!mtx::string::parse_timestamp(line, timestamp, true))
-        mxerror_fn(m_ti.m_fname, fmt::format(Y("line {0}: The 'delay' timestamp could not be parsed.\n"), line_no));
+        mxerror_fn(m_ti.m_fname, fmt::format(FY("line {0}: The 'delay' timestamp could not be parsed.\n"), line_no));
       delay += timestamp * factor;
     }
 
@@ -261,7 +261,7 @@ vobsub_reader_c::parse_headers() {
       auto parts = mtx::string::split(line.c_str(), " ");
 
       if ((4 != parts.size()) || (13 > parts[1].length()) || !balg::iequals(parts[2], "filepos:")) {
-        mxwarn_fn(m_ti.m_fname, fmt::format(Y("Line {0}: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"), line_no));
+        mxwarn_fn(m_ti.m_fname, fmt::format(FY("Line {0}: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"), line_no));
         continue;
       }
 
@@ -284,7 +284,7 @@ vobsub_reader_c::parse_headers() {
       int64_t timestamp;
       if (!mtx::string::parse_timestamp(parts[1], timestamp)) {
         mxwarn_fn(m_ti.m_fname,
-                  fmt::format(Y("Line {0}: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"), line_no));
+                  fmt::format(FY("Line {0}: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"), line_no));
         continue;
       }
 
@@ -301,8 +301,8 @@ vobsub_reader_c::parse_headers() {
 
       if (0 > entry.timestamp) {
         mxwarn_fn(m_ti.m_fname,
-                  fmt::format(Y("Line {0}: The line seems to be a subtitle entry but the timestamp was negative even after adding the track "
-                                "delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"), line_no));
+                  fmt::format(FY("Line {0}: The line seems to be a subtitle entry but the timestamp was negative even after adding the track "
+                                 "delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"), line_no));
         continue;
       }
 
@@ -311,10 +311,10 @@ vobsub_reader_c::parse_headers() {
       if ((entry.timestamp < last_timestamp) &&
           demuxing_requested('s', tracks.size())) {
         mxwarn_fn(m_ti.m_fname,
-                  fmt::format(Y("Line {0}: The current timestamp ({1}) is smaller than the previous one ({2}). "
-                                "The entries will be sorted according to their timestamps. "
-                                "This might result in the wrong order for some subtitle entries. "
-                                "If this is the case then you have to fix the .idx file manually.\n"),
+                  fmt::format(FY("Line {0}: The current timestamp ({1}) is smaller than the previous one ({2}). "
+                                 "The entries will be sorted according to their timestamps. "
+                                 "This might result in the wrong order for some subtitle entries. "
+                                 "If this is the case then you have to fix the .idx file manually.\n"),
                               line_no, mtx::string::format_timestamp(entry.timestamp, 3), mtx::string::format_timestamp(last_timestamp, 3)));
         sort_required = true;
       }
@@ -507,8 +507,8 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
         else {
           if (!track->mpeg_version_warning_printed) {
             mxwarn_tid(m_ti.m_fname, track_id,
-                       fmt::format(Y("Unsupported MPEG mpeg_version: 0x{0:02x} in packet {1} for timestamp {2}, assuming MPEG2. "
-                                     "No further warnings will be printed for this track.\n"),
+                       fmt::format(FY("Unsupported MPEG mpeg_version: 0x{0:02x} in packet {1} for timestamp {2}, assuming MPEG2. "
+                                      "No further warnings will be printed for this track.\n"),
                                    c, track->packet_num, mtx::string::format_timestamp(timestamp, 3)));
             track->mpeg_version_warning_printed = true;
           }
@@ -560,7 +560,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
           hdrlen  = c;
           dataidx = m_sub_file->getFilePointer() - extraction_start_pos + hdrlen;
           if (dataidx > idx + len) {
-            mxwarn_fn(m_ti.m_fname, fmt::format(Y("Invalid header length: {0} (total length: {1}, idx: {2}, dataidx: {3})\n"), hdrlen, len, idx, dataidx));
+            mxwarn_fn(m_ti.m_fname, fmt::format(FY("Invalid header length: {0} (total length: {1}, idx: {2}, dataidx: {3})\n"), hdrlen, len, idx, dataidx));
             return deliver();
           }
 
@@ -568,7 +568,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
             if (m_sub_file->read(buf, 5) != 5)
               return deliver();
             if (!(((buf[0] & 0xf0) == 0x20) && (buf[0] & 1) && (buf[2] & 1) && (buf[4] & 1))) {
-              mxwarn_fn(m_ti.m_fname, fmt::format(Y("PTS error: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"), buf[0], buf[1], buf[2], buf[3], buf[4]));
+              mxwarn_fn(m_ti.m_fname, fmt::format(FY("PTS error: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"), buf[0], buf[1], buf[2], buf[3], buf[4]));
               pts = 0;
             } else
               pts = ((int64_t)((buf[0] & 0x0e) << 29 | buf[1] << 22 | (buf[2] & 0xfe) << 14 | buf[3] << 7 | (buf[4] >> 1))) * 100000 / 9;
@@ -577,7 +577,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
           m_sub_file->setFilePointer2(dataidx + extraction_start_pos);
           packet_aid = m_sub_file->getch();
           if (0 > packet_aid) {
-            mxwarn_fn(m_ti.m_fname, fmt::format(Y("Bogus aid {0}\n"), packet_aid));
+            mxwarn_fn(m_ti.m_fname, fmt::format(FY("Bogus aid {0}\n"), packet_aid));
             return deliver();
           }
 
@@ -638,7 +638,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
             return deliver();
 
         } else {
-          mxwarn_fn(m_ti.m_fname, fmt::format(Y("Unknown header 0x{0:02x}{1:02x}{2:02x}{3:02x}\n"), buf[0], buf[1], buf[2], buf[3]));
+          mxwarn_fn(m_ti.m_fname, fmt::format(FY("Unknown header 0x{0:02x}{1:02x}{2:02x}{3:02x}\n"), buf[0], buf[1], buf[2], buf[3]));
           return deliver();
         }
     }

@@ -37,7 +37,7 @@ xtr_flac_c::create_file(xtr_base_c *_master,
                         libmatroska::KaxTrackEntry &track) {
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   xtr_base_c::create_file(_master, track);
 
@@ -73,7 +73,7 @@ xtr_oggbase_c::create_standard_file(xtr_base_c *master,
                                     libmatroska::LacingType lacing) {
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   init_content_decoder(track);
   memory_cptr mpriv = decode_codec_private(priv);
@@ -94,7 +94,7 @@ xtr_oggbase_c::create_standard_file(xtr_base_c *master,
     header_packets_unlaced(header_packets);
 
   } catch (...) {
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' does not contain valid headers.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' does not contain valid headers.\n"), m_tid, m_codec_id));
   }
 
   xtr_oggbase_c::create_file(master, track);

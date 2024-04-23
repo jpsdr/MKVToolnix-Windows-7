@@ -128,15 +128,15 @@ iconv_charset_converter_c::iconv_charset_converter_c(const std::string &charset)
 
   m_to_utf8_handle = iconv_open("UTF-8", charset.c_str());
   if (s_iconv_t_error_value == m_to_utf8_handle)
-    mxwarn(fmt::format(Y("Could not initialize the iconv library for the conversion from {0} to UTF-8. "
-                         "Some strings will not be converted to UTF-8 and the resulting Matroska file "
-                         "might not comply with the Matroska specs (error: {1}, {2}).\n"),
+    mxwarn(fmt::format(FY("Could not initialize the iconv library for the conversion from {0} to UTF-8. "
+                          "Some strings will not be converted to UTF-8 and the resulting Matroska file "
+                          "might not comply with the Matroska specs (error: {1}, {2}).\n"),
                        charset, errno, strerror(errno)));
 
   m_from_utf8_handle = iconv_open(charset.c_str(), "UTF-8");
   if (s_iconv_t_error_value == m_from_utf8_handle)
-    mxwarn(fmt::format(Y("Could not initialize the iconv library for the conversion from UTF-8 to {0}. "
-                         "Some strings cannot be converted from UTF-8 and might be displayed incorrectly (error: {1}, {2}).\n"),
+    mxwarn(fmt::format(FY("Could not initialize the iconv library for the conversion from UTF-8 to {0}. "
+                          "Some strings cannot be converted from UTF-8 and might be displayed incorrectly (error: {1}, {2}).\n"),
                        charset, errno, strerror(errno)));
 }
 

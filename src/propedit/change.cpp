@@ -53,7 +53,7 @@ change_c::change_c(change_c::change_type_e type,
 void
 change_c::validate() {
   if (m_property.m_name.empty())
-    mxerror(fmt::format(Y("The name '{0}' is not a valid property name for the current edit specification in '{1}'.\n"), m_name, get_spec()));
+    mxerror(fmt::format(FY("The name '{0}' is not a valid property name for the current edit specification in '{1}'.\n"), m_name, get_spec()));
 
   if (change_c::ct_delete == m_type)
     validate_deletion_of_mandatory();
@@ -113,7 +113,7 @@ change_c::parse_ascii_string() {
   size_t i;
   for (i = 0; m_value.length() > i; ++i)
     if (127 < static_cast<uint8_t>(m_value[i]))
-      mxerror(fmt::format(Y("The property value contains non-ASCII characters, but the property is not a Unicode string in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+      mxerror(fmt::format(FY("The property value contains non-ASCII characters, but the property is not a Unicode string in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 
   m_s_value = m_value;
 }
@@ -126,13 +126,13 @@ change_c::parse_unicode_string() {
 void
 change_c::parse_unsigned_integer() {
   if (!mtx::string::parse_number(m_value, m_ui_value))
-    mxerror(fmt::format(Y("The property value is not a valid unsigned integer in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("The property value is not a valid unsigned integer in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 }
 
 void
 change_c::parse_signed_integer() {
   if (!mtx::string::parse_number(m_value, m_si_value))
-    mxerror(fmt::format(Y("The property value is not a valid signed integer in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("The property value is not a valid signed integer in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 }
 
 void
@@ -140,14 +140,14 @@ change_c::parse_boolean() {
   try {
     m_b_value = mtx::string::parse_bool(m_value);
   } catch (...) {
-    mxerror(fmt::format(Y("The property value is not a valid boolean in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("The property value is not a valid boolean in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
   }
 }
 
 void
 change_c::parse_floating_point_number() {
   if (!mtx::string::parse_number(m_value, m_fp_value))
-    mxerror(fmt::format(Y("The property value is not a valid floating point number in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("The property value is not a valid floating point number in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 }
 
 void
@@ -156,8 +156,8 @@ change_c::parse_binary() {
     m_x_value = mtx::bits::value_c(m_value, m_property.m_bit_length);
   } catch (...) {
     if (m_property.m_bit_length)
-      mxerror(fmt::format(Y("The property value is not a valid binary spec or it is not exactly {2} bits long in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified."), m_property.m_bit_length));
-    mxerror(fmt::format(Y("The property value is not a valid binary spec in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+      mxerror(fmt::format(FY("The property value is not a valid binary spec or it is not exactly {2} bits long in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified."), m_property.m_bit_length));
+    mxerror(fmt::format(FY("The property value is not a valid binary spec in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
   }
 }
 
@@ -206,7 +206,7 @@ change_c::parse_date_time() {
 
   if (!valid)
     mxerror(fmt::format("{0} {1} {2} {3}\n",
-                        fmt::format(Y("The property value is not a valid date & time string in '{0}'."), get_spec()),
+                        fmt::format(FY("The property value is not a valid date & time string in '{0}'."), get_spec()),
                         Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."),
                         Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
                         Y("The file has not been modified.")));
@@ -251,7 +251,7 @@ change_c::execute_delete() {
   }
 
   if (1 < verbose)
-    mxinfo(fmt::format(Y("Change for '{0}' executed. Number of entries deleted: {1}\n"), get_spec(), num_deleted));
+    mxinfo(fmt::format(FY("Change for '{0}' executed. Number of entries deleted: {1}\n"), get_spec(), num_deleted));
 }
 
 void
@@ -283,24 +283,24 @@ change_c::execute_add_or_set() {
   if (0 == num_found) {
     do_add_element();
     if (1 < verbose)
-      mxinfo(fmt::format(Y("Change for '{0}' executed. No property of this type found. One entry added.\n"), get_spec()));
+      mxinfo(fmt::format(FY("Change for '{0}' executed. No property of this type found. One entry added.\n"), get_spec()));
     return;
   }
 
   if (change_c::ct_set == m_type) {
     if (1 < verbose)
-      mxinfo(fmt::format(Y("Change for '{0}' executed. Number of entries set: {1}.\n"), get_spec(), num_found));
+      mxinfo(fmt::format(FY("Change for '{0}' executed. Number of entries set: {1}.\n"), get_spec(), num_found));
     return;
   }
 
   const libebml::EbmlSemantic *semantic = get_semantic();
   if (semantic && semantic->IsUnique())
-    mxerror(fmt::format(Y("This property is unique. More instances cannot be added in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("This property is unique. More instances cannot be added in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 
   do_add_element();
 
  if (1 < verbose)
-    mxinfo(fmt::format(Y("Change for '{0}' executed. One entry added.\n"), get_spec()));
+    mxinfo(fmt::format(FY("Change for '{0}' executed. One entry added.\n"), get_spec()));
 }
 
 void
@@ -339,7 +339,7 @@ change_c::validate_deletion_of_mandatory() {
   std::unique_ptr<libebml::EbmlElement> elt(&semantic->Create());
 
   if (!has_default_value(*elt))
-    mxerror(fmt::format(Y("This property is mandatory and cannot be deleted in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("This property is mandatory and cannot be deleted in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 }
 
 const libebml::EbmlSemantic *
@@ -390,7 +390,7 @@ change_c::make_change_for_language(change_c::change_type_e type,
 
   auto language = mtx::bcp47::language_c::parse(value);
   if (!language.is_valid())
-    throw std::runtime_error{fmt::format(Y("invalid language tag '{0}': {1}"), value, language.get_error())};
+    throw std::runtime_error{fmt::format(FY("invalid language tag '{0}': {1}"), value, language.get_error())};
 
   if (name == "language")
     changes.push_back(std::make_shared<change_c>(type, "language", language.get_closest_iso639_2_alpha_3_code()));

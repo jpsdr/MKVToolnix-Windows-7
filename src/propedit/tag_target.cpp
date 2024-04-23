@@ -161,7 +161,7 @@ tag_target_c::execute() {
 
   fix_mandatory_elements(m_level1_element);
   if (!m_level1_element->CheckMandatory())
-    mxerror(fmt::format(Y("Error parsing the tags in '{0}': some mandatory elements are missing.\n"), m_file_name));
+    mxerror(fmt::format(FY("Error parsing the tags in '{0}': some mandatory elements are missing.\n"), m_file_name));
 
   remove_mandatory_elements_set_to_their_default(*m_level1_element);
 
@@ -346,7 +346,7 @@ tag_target_c::account_all_clusters() {
   file.setFilePointer(m_analyzer->get_segment_data_start_pos());
 
   mxinfo(Y("The file is read in order to create track statistics.\n"));
-  mxinfo(fmt::format(Y("Progress: {0}%{1}"), 0, "\r"));
+  mxinfo(fmt::format(FY("Progress: {0}%{1}"), 0, "\r"));
 
   while (true) {
     auto cluster = kax_file->read_next_cluster();
@@ -359,12 +359,12 @@ tag_target_c::account_all_clusters() {
 
     auto current_progress = std::lround(file.getFilePointer() * 100ull / static_cast<double>(file_size));
     if (current_progress != previous_progress) {
-      mxinfo(fmt::format(Y("Progress: {0}%{1}"), current_progress, "\r"));
+      mxinfo(fmt::format(FY("Progress: {0}%{1}"), current_progress, "\r"));
       previous_progress = current_progress;
     }
   }
 
-  mxinfo(fmt::format(Y("Progress: {0}%{1}"), 100, "\n"));
+  mxinfo(fmt::format(FY("Progress: {0}%{1}"), 100, "\n"));
 }
 
 void

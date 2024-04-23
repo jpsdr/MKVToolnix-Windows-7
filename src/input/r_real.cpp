@@ -193,7 +193,7 @@ real_reader_c::parse_headers() {
         p++;
 
         if (4 != slen) {
-          mxwarn(fmt::format(Y("real_reader: Couldn't find RealAudio FourCC for id {0} (description length: {1}) Skipping track.\n"), track->id, slen));
+          mxwarn(fmt::format(FY("real_reader: Couldn't find RealAudio FourCC for id {0} (description length: {1}) Skipping track.\n"), track->id, slen));
           ok = false;
 
         } else {
@@ -217,7 +217,7 @@ real_reader_c::parse_headers() {
           dmx->extra_data = memory_c::clone(reinterpret_cast<uint8_t *>(dmx->ra5p) + 4 + sizeof(real_audio_v5_props_t), ts_size - 4 - sizeof(real_audio_v5_props_t));
 
       } else {
-        mxwarn(fmt::format(Y("real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"),
+        mxwarn(fmt::format(FY("real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"),
                            track->id, version));
         ok = false;
       }
@@ -402,7 +402,7 @@ real_reader_c::read(generic_packetizer_c *,
   int size = rmff_get_next_frame_size(file);
   if (0 >= size) {
     if (file->num_packets_read < file->num_packets_in_chunk)
-      mxwarn_fn(m_ti.m_fname, fmt::format(Y("File contains fewer frames than expected or is corrupt after frame {0}.\n"), file->num_packets_read));
+      mxwarn_fn(m_ti.m_fname, fmt::format(FY("File contains fewer frames than expected or is corrupt after frame {0}.\n"), file->num_packets_read));
     return finish();
   }
 
@@ -411,7 +411,7 @@ real_reader_c::read(generic_packetizer_c *,
 
   if (!frame) {
     if (file->num_packets_read < file->num_packets_in_chunk)
-      mxwarn_fn(m_ti.m_fname, fmt::format(Y("File contains fewer frames than expected or is corrupt after frame {0}.\n"), file->num_packets_read));
+      mxwarn_fn(m_ti.m_fname, fmt::format(FY("File contains fewer frames than expected or is corrupt after frame {0}.\n"), file->num_packets_read));
     return finish();
   }
 
@@ -517,14 +517,14 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr const &dmx,
   auto chunk  = mem.get_buffer();
   auto length = mem.get_size();
   if (2 > length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < 2)\n"), length));
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(FY("Short AAC audio packet (length: {0} < 2)\n"), length));
     return;
   }
 
   std::size_t num_sub_packets = chunk[1] >> 4;
   mxdebug_if(s_debug, fmt::format("real_reader: num_sub_packets = {0}\n", num_sub_packets));
   if ((2 + num_sub_packets * 2) > length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < {1})\n"), length, 2 + num_sub_packets * 2));
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(FY("Short AAC audio packet (length: {0} < {1})\n"), length, 2 + num_sub_packets * 2));
     return;
   }
 
@@ -537,7 +537,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr const &dmx,
   }
 
   if (len_check != length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Inconsistent AAC audio packet (length: {0} != {1})\n"), length, len_check));
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(FY("Inconsistent AAC audio packet (length: {0} != {1})\n"), length, len_check));
     return;
   }
 
@@ -579,7 +579,7 @@ real_reader_c::assemble_video_packet(real_demuxer_cptr const &dmx,
                                      rmff_frame_t *frame) {
   int result = rmff_assemble_packed_video_frame(dmx->track, frame);
   if (0 > result) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Video packet assembly failed. Error code: {0} ({1})\n"), rmff_last_error, rmff_last_error_msg));
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(FY("Video packet assembly failed. Error code: {0} ({1})\n"), rmff_last_error, rmff_last_error_msg));
     return;
   }
 

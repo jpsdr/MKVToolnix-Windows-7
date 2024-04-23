@@ -113,7 +113,7 @@ format_timestamp(int64_t timestamp,
           result += temp;
 
         } else
-          result += fmt::format(std::isupper(c) ? "{0:02}" : "{0}", value);
+          result += fmt::format(fmt::runtime(std::isupper(c) ? "{0:02}" : "{0}"), value);
 
       } else {
         result  += c;
@@ -263,7 +263,7 @@ to_hex(const uint8_t *buf,
 
   std::string hex;
   for (int idx = 0; idx < static_cast<int>(size); ++idx)
-    hex += (compact || hex.empty() ? ""s : " "s) + fmt::format(compact ?  "{0:02x}" : "0x{0:02x}", static_cast<unsigned int>(buf[idx]));
+    hex += (compact || hex.empty() ? ""s : " "s) + fmt::format(fmt::runtime(compact ?  "{0:02x}" : "0x{0:02x}"), static_cast<unsigned int>(buf[idx]));
 
   return hex;
 }
@@ -274,12 +274,12 @@ create_minutes_seconds_time_string(unsigned int seconds,
   unsigned int minutes = seconds / 60;
   seconds              = seconds % 60;
 
-  std::string  result  = fmt::format(NY("{0} second", "{0} seconds", seconds), seconds);
+  std::string  result  = fmt::format(FNY("{0} second", "{0} seconds", seconds), seconds);
 
   if (!minutes && omit_minutes_if_zero)
     return result;
 
-  return fmt::format("{0} {1}", fmt::format(NY("{0} minute", "{0} minutes", minutes), minutes), result);
+  return fmt::format("{0} {1}", fmt::format(FNY("{0} minute", "{0} minutes", minutes), minutes), result);
 }
 
 std::string
@@ -289,15 +289,15 @@ format_file_size(int64_t size,
   std::string bytes, suffix;
 
   if ((size < 1024) || full)
-    bytes = fmt::format(NY("{0} byte", "{0} bytes", size), format_thousands(size));
+    bytes = fmt::format(FNY("{0} byte", "{0} bytes", size), format_thousands(size));
 
   if ((size >= 1024) && full)
     suffix = fmt::format(" ({0})", bytes);
 
   auto formatted = size <       1024ll ? bytes
-                 : size <    1048576ll ? fmt::format(Y("{0}.{1} KiB"), format_thousands(size / 1024),               (size * 10 /               1024) % 10)
-                 : size < 1073741824ll ? fmt::format(Y("{0}.{1} MiB"), format_thousands(size / 1024 / 1024),        (size * 10 /        1024 / 1024) % 10)
-                 :                       fmt::format(Y("{0}.{1} GiB"), format_thousands(size / 1024 / 1024 / 1024), (size * 10 / 1024 / 1024 / 1024) % 10);
+                 : size <    1048576ll ? fmt::format(FY("{0}.{1} KiB"), format_thousands(size / 1024),               (size * 10 /               1024) % 10)
+                 : size < 1073741824ll ? fmt::format(FY("{0}.{1} MiB"), format_thousands(size / 1024 / 1024),        (size * 10 /        1024 / 1024) % 10)
+                 :                       fmt::format(FY("{0}.{1} GiB"), format_thousands(size / 1024 / 1024 / 1024), (size * 10 / 1024 / 1024 / 1024) % 10);
 
   return formatted + suffix;
 }
@@ -335,7 +335,7 @@ elide_string(std::string s,
     return s;
 
   s.resize(max_length - 1);
-  s += u8"…";
+  s += "…";
 
   return s;
 }

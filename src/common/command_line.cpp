@@ -50,7 +50,7 @@ read_args_from_json_file(std::vector<std::string> &args,
     io->read(buffer, io->get_size());
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), filename, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for reading: {1}.\n"), filename, ex));
   }
 
   try {
@@ -232,7 +232,7 @@ handle_common_args(std::vector<std::string> &args,
         ((redirect_output_short != "") &&
          (args[i] == redirect_output_short))) {
       if ((i + 1) == args.size())
-        mxerror(fmt::format(Y("'{0}' is missing the file name.\n"), args[i]));
+        mxerror(fmt::format(FY("'{0}' is missing the file name.\n"), args[i]));
       try {
         if (!stdio_redirected()) {
           mm_io_cptr file = mm_write_buffer_io_c::open(args[i + 1], 128 * 1024);
@@ -241,7 +241,7 @@ handle_common_args(std::vector<std::string> &args,
         }
         args.erase(args.begin() + i, args.begin() + i + 2);
       } catch(mtx::mm_io::exception &) {
-        mxerror(fmt::format(Y("Could not open the file '{0}' for directing the output.\n"), args[i + 1]));
+        mxerror(fmt::format(FY("Could not open the file '{0}' for directing the output.\n"), args[i + 1]));
       }
     } else
       ++i;
@@ -265,7 +265,7 @@ handle_common_args(std::vector<std::string> &args,
       }
 
       if (-1 == translation_c::look_up_translation(args[i + 1]))
-        mxerror(fmt::format(Y("There is no translation available for '{0}'.\n"), args[i + 1]));
+        mxerror(fmt::format(FY("There is no translation available for '{0}'.\n"), args[i + 1]));
 
       init_locales(args[i + 1]);
 

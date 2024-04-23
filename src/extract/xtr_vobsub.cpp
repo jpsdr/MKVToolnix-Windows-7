@@ -77,21 +77,21 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
     try {
       m_out = mm_write_buffer_io_c::open(m_sub_file_name.string(), 128 * 1024);
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(fmt::format(Y("Failed to create the VobSub data file '{0}': {1}\n"), m_sub_file_name.string(), ex));
+      mxerror(fmt::format(FY("Failed to create the VobSub data file '{0}': {1}\n"), m_sub_file_name.string(), ex));
     }
 
   } else {
     xtr_vobsub_c *vmaster = dynamic_cast<xtr_vobsub_c *>(m_master);
 
     if (!vmaster)
-      mxerror(fmt::format(Y("Cannot extract tracks of different kinds to the same file. This was requested for the tracks {0} and {1}.\n"),
+      mxerror(fmt::format(FY("Cannot extract tracks of different kinds to the same file. This was requested for the tracks {0} and {1}.\n"),
                           m_tid, m_master->m_tid));
 
     if (   (!m_private_data != !vmaster->m_private_data)
         || (m_private_data && (m_private_data->get_size() != vmaster->m_private_data->get_size()))
         || (m_private_data && memcmp(m_private_data->get_buffer(), vmaster->m_private_data->get_buffer(), m_private_data->get_size())))
-      mxerror(fmt::format(Y("Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. "
-                            "This is not the case for the tracks {0} and {1}.\n"), m_tid, m_master->m_tid));
+      mxerror(fmt::format(FY("Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. "
+                             "This is not the case for the tracks {0} and {1}.\n"), m_tid, m_master->m_tid));
 
     vmaster->m_slaves.push_back(this);
     m_stream_id = vmaster->m_stream_id + 1;
@@ -234,7 +234,7 @@ xtr_vobsub_c::finish_file() {
     m_out.reset();
 
     mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.string(), libebml::MODE_CREATE), 128 * 1024);
-    mxinfo(fmt::format(Y("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.string()));
+    mxinfo(fmt::format(FY("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.string()));
 
     std::string header;
 
@@ -264,7 +264,7 @@ xtr_vobsub_c::finish_file() {
       m_slaves[slave]->write_idx(idx, slave + 1);
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("Failed to create the file '{0}': {1}\n"), m_idx_file_name.string(), ex));
+    mxerror(fmt::format(FY("Failed to create the file '{0}': {1}\n"), m_idx_file_name.string(), ex));
   }
 }
 

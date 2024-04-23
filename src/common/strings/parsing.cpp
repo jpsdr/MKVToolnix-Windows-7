@@ -174,7 +174,7 @@ parse_timestamp(const std::string &src,
       num_digits = 0;
 
     } else
-      return set_tcp_error(fmt::format(Y("Invalid format: unknown character '{0}' found"), src[i]));
+      return set_tcp_error(fmt::format(FY("Invalid format: unknown character '{0}' found"), src[i]));
   }
 
   if (1 > num_colons)
@@ -217,9 +217,9 @@ parse_timestamp(const std::string &src,
   }
 
   if (m > 59)
-    return set_tcp_error(fmt::format(Y("Invalid number of minutes: {0} > 59"), m));
+    return set_tcp_error(fmt::format(FY("Invalid number of minutes: {0} > 59"), m));
   if (s > 59)
-    return set_tcp_error(fmt::format(Y("Invalid number of seconds: {0} > 59"), s));
+    return set_tcp_error(fmt::format(FY("Invalid number of seconds: {0} > 59"), s));
 
   timestamp              = (((int64_t)h * 60 * 60 + (int64_t)m * 60 + (int64_t)s) * 1000000000ll + n) * negative;
   timestamp_parser_error = Y("no error");

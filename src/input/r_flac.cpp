@@ -125,7 +125,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
     progress = m_in->getFilePointer() * 100 / (m_size - tag_size_end);
     if ((progress - old_progress) >= 5) {
-      mxinfo(fmt::format(Y("+-> Pre-parsing FLAC file: {0}%{1}"), progress, "\r"));
+      mxinfo(fmt::format(FY("+-> Pre-parsing FLAC file: {0}%{1}"), progress, "\r"));
       old_progress = progress;
     }
 

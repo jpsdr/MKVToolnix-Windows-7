@@ -81,8 +81,12 @@ using namespace std::string_literals;
 
 #undef Y
 #undef NY
-#define Y(s)                            gettext(u8##s)
-#define NY(s_singular, s_plural, count) ngettext(u8##s_singular, u8##s_plural, count)
+#undef FY
+#undef FNY
+#define Y(s)                             gettext(s)
+#define FY(s)                            fmt::runtime(gettext(s))
+#define NY(s_singular, s_plural, count)  ngettext(s_singular, s_plural, count)
+#define FNY(s_singular, s_plural, count) fmt::runtime(ngettext(s_singular, s_plural, count))
 
 #define BUGMSG Y("This should not have happened. Please file an issue at " \
                  "https://mkvtoolnix.download/issues with this error/warning " \

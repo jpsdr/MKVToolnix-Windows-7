@@ -197,7 +197,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     return;
   }
 
-  mxerror(fmt::format(Y("No track corresponding to the edit specification '{0}' was found. {1}\n"), m_spec, Y("The file has not been modified.")));
+  mxerror(fmt::format(FY("No track corresponding to the edit specification '{0}' was found. {1}\n"), m_spec, Y("The file has not been modified.")));
 }
 
 void

@@ -149,7 +149,7 @@ parse_file(std::string const &file_name) {
                          lfe_type_to_string(dtsheader.lfe_type),
                          dtsheader.core_sampling_frequency,
                          dtsheader.extension_sampling_frequency.value_or(0),
-                         dtsheader.extended_coding ? extension_audio_descriptor_to_string(dtsheader.extension_audio_descriptor) : u8"—"s,
+                         dtsheader.extended_coding ? extension_audio_descriptor_to_string(dtsheader.extension_audio_descriptor) : "—"s,
                          dtsheader.dialog_normalization_gain,
                          dtsheader.extension_dialog_normalization_gain,
                          dtsheader.has_core,

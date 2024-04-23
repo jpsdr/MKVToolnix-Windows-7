@@ -516,13 +516,17 @@ MuxConfig::saveProperties(Util::ConfigFile &settings,
 void
 MuxConfig::save(Util::ConfigFile &settings)
   const {
+  QList<QVariant> trackOrder;
+  for (auto const &track : m_tracks)
+    trackOrder << QVariant{reinterpret_cast<qulonglong>(track)};
+
   setSettingsVersion(settings, Util::ConfigFile::MtxCfgVersion);
 
   settings.beginGroup("input");
   saveSettingsGroup("files",       m_files,       settings);
   saveSettingsGroup("attachments", m_attachments, settings);
 
-  settings.setValue("trackOrder",         std::accumulate(m_tracks.begin(), m_tracks.end(), QList<QVariant>{}, [](QList<QVariant> &accu, Track *track) { accu << QVariant{reinterpret_cast<qulonglong>(track)}; return accu; }));
+  settings.setValue("trackOrder",         trackOrder);
   settings.setValue("firstInputFileName", m_firstInputFileName);
   settings.endGroup();
 

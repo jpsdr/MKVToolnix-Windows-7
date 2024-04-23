@@ -64,7 +64,7 @@ attachment_target_c::validate() {
   try {
     m_file_content = mm_file_io_c::slurp(m_file_name);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), m_file_name, ex.what()));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for reading: {1}.\n"), m_file_name, ex.what()));
   }
 }
 
@@ -203,7 +203,7 @@ attachment_target_c::execute_delete() {
   bool deleted_something = st_id == m_selector_type ? delete_by_id() : delete_by_uid_name_mime_type();
 
   if (!deleted_something)
-    mxwarn(fmt::format(Y("No attachment matched the spec '{0}'.\n"), m_spec));
+    mxwarn(fmt::format(FY("No attachment matched the spec '{0}'.\n"), m_spec));
 
   else
     m_attachments_modified = true;
@@ -214,7 +214,7 @@ attachment_target_c::execute_replace() {
   bool replaced_something = st_id == m_selector_type ? replace_by_id() : replace_by_uid_name_mime_type();
 
   if (!replaced_something)
-    mxwarn(fmt::format(Y("No attachment matched the spec '{0}'.\n"), m_spec));
+    mxwarn(fmt::format(FY("No attachment matched the spec '{0}'.\n"), m_spec));
 
   else
     m_attachments_modified = true;

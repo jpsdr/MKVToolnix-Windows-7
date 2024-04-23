@@ -87,7 +87,7 @@ table_formatter_c::format()
       if (column >= 1)
         output += separator;
 
-      output += fmt::format(column_formats[column], row[column]);
+      output += fmt::format(fmt::runtime(column_formats[column]), row[column]);
     }
 
     output += "\n";

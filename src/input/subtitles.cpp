@@ -79,7 +79,7 @@ subtitles_c::recode(std::string const &s,
 
   if (!m_invalid_utf8_warned) {
     m_invalid_utf8_warned = true;
-    mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+    mxwarn_tid(m_file_name, m_track_id, fmt::format(FY("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
   }
 
   return mtx::utf8::fix_invalid(recoded, replacement_marker);
@@ -186,7 +186,7 @@ srt_parser_c::parse() {
 
     if (STATE_INITIAL == state) {
       if (!Q(s).contains(number_re)) {
-        mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
+        mxwarn_tid(m_file_name, m_track_id, fmt::format(FY("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
         break;
       }
       state = STATE_TIME;
@@ -195,7 +195,7 @@ srt_parser_c::parse() {
     } else if (STATE_TIME == state) {
       auto matches = timestamp_re.match(Q(s));
       if (!matches.hasMatch()) {
-        mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
+        mxwarn_tid(m_file_name, m_track_id, fmt::format(FY("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
         break;
       }
 
@@ -256,7 +256,7 @@ srt_parser_c::parse() {
 
       if (0 > start) {
         mxwarn_tid(m_file_name, m_track_id,
-                   fmt::format(Y("Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"), line_number));
+                   fmt::format(FY("Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"), line_number));
         end   -= start;
         start  = 0;
         if (0 > end)
@@ -268,8 +268,8 @@ srt_parser_c::parse() {
       // of this function, but warn the user that the original order is being
       // changed.
       if (!timestamp_warning_printed && (start < previous_start)) {
-        mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Warning in line {0}: The start timestamp is smaller than that of the previous entry. "
-                                                     "All entries from this file will be sorted by their start time.\n"), line_number));
+        mxwarn_tid(m_file_name, m_track_id, fmt::format(FY("Warning in line {0}: The start timestamp is smaller than that of the previous entry. "
+                                                           "All entries from this file will be sorted by their start time.\n"), line_number));
         timestamp_warning_printed = true;
       }
 
@@ -438,7 +438,7 @@ ssa_parser_c::parse() {
         if (   (0     > start)
             || (0     > end)
             || (start > end)) {
-          mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"), orig_line));
+          mxwarn_tid(m_file_name, m_track_id, fmt::format(FY("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"), orig_line));
           continue;
         }
 
@@ -575,7 +575,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
 
   attachment.ui_id        = m_attachment_id;
   attachment.name         = name;
-  attachment.description  = fmt::format(SSA_SECTION_FONTS == section ? Y("Imported font from {0}") : Y("Imported picture from {0}"), short_name);
+  attachment.description  = fmt::format(fmt::runtime(SSA_SECTION_FONTS == section ? Y("Imported font from {0}") : Y("Imported picture from {0}")), short_name);
   attachment.to_all_files = true;
   attachment.source_file  = m_file_name;
 

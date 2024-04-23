@@ -45,7 +45,7 @@ fhe_read_cb(const FLAC__StreamDecoder *,
       return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
 
   if (*bytes < static_cast<size_t>(op.bytes))
-    mxerror(fmt::format(Y("flac_header_extraction: bytes ({0}) < op.bytes ({1}). Could not read the FLAC headers.\n"), *bytes, op.bytes));
+    mxerror(fmt::format(FY("flac_header_extraction: bytes ({0}) < op.bytes ({1}). Could not read the FLAC headers.\n"), *bytes, op.bytes));
 
   int offset = 0;
 

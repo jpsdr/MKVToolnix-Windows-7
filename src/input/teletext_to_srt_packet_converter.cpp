@@ -596,7 +596,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
       break;
 
     if (m_data_length != 0x2c) {
-      mxdebug_if(m_debug_conversion, fmt::format("pos {0} invalid data length {1} != {2}\n", m_data_length, 0x2c));
+      mxdebug_if(m_debug_conversion, fmt::format("pos {0} invalid data length {1} != {2}\n", m_pos, m_data_length, 0x2c));
       m_pos = m_pos + 2 + 0x2c;
       continue;
     }

@@ -108,7 +108,7 @@ parse_args(std::vector<std::string> &args) {
       } else {
         uint32_t id = element_name_to_id(*arg);
         if (0 == id)
-          mxerror(fmt::format(Y("Unknown element name in '--master {0}'\n"), *arg));
+          mxerror(fmt::format(FY("Unknown element name in '--master {0}'\n"), *arg));
         g_is_master[id] = true;
       }
 
@@ -265,11 +265,11 @@ parse_content(unsigned int level,
       if (element_name.empty())
         element_name      = Y("unknown");
 
-      mxinfo(fmt::format(Y("{0}pos {1} id 0x{2:x} size {3} header size {4} ({5})\n"),
+      mxinfo(fmt::format(FY("{0}pos {1} id 0x{2:x} size {3} header size {4} ({5})\n"),
                          level_string(level), element_start_pos, id.value, size.value, id.coded_size + size.coded_size, element_name));
 
       if (size.is_unknown()) {
-        mxinfo(fmt::format(Y("{0}  Warning: size is coded as 'unknown' (all bits are set)\n"), level_string(level)));
+        mxinfo(fmt::format(FY("{0}  Warning: size is coded as 'unknown' (all bits are set)\n"), level_string(level)));
 
         // In Matroska segments often have an unknown size – so don't
         // warn about it.
@@ -280,10 +280,10 @@ parse_content(unsigned int level,
       auto content_end_pos = size.is_unknown() ? end_pos : g_in->getFilePointer() + size.value;
 
       if (content_end_pos > end_pos) {
-        mxinfo(fmt::format(Y("{0}  Error: Element ends after scope\n"), level_string(level)));
+        mxinfo(fmt::format(FY("{0}  Error: Element ends after scope\n"), level_string(level)));
         g_errors_found = true;
         if (!g_in->setFilePointer2(end_pos))
-          mxerror(fmt::format(Y("Error: Seek to {0}\n"), end_pos));
+          mxerror(fmt::format(FY("Error: Seek to {0}\n"), end_pos));
         return;
       }
 
@@ -291,7 +291,7 @@ parse_content(unsigned int level,
         parse_content(level + 1, content_end_pos);
 
       if (!g_in->setFilePointer2(content_end_pos))
-        mxerror(fmt::format(Y("Error: Seek to {0}\n"), content_end_pos));
+        mxerror(fmt::format(FY("Error: Seek to {0}\n"), content_end_pos));
 
     } catch (id_error_c &error) {
       std::string message
@@ -301,11 +301,11 @@ parse_content(unsigned int level,
         : id_error_c::longer_than_four_bytes == error.code ? Y("ID is longer than four bytes")
         :                                                    Y("reason is unknown");
 
-      mxinfo(fmt::format(Y("{0}Error at {1}: error reading the element ID ({2})\n"), level_string(level), element_start_pos, message));
+      mxinfo(fmt::format(FY("{0}Error at {1}: error reading the element ID ({2})\n"), level_string(level), element_start_pos, message));
       g_errors_found = true;
 
       if (!g_in->setFilePointer2(end_pos))
-        mxerror(fmt::format(Y("Error: Seek to {0}\n"), end_pos));
+        mxerror(fmt::format(FY("Error: Seek to {0}\n"), end_pos));
       return;
 
     } catch (size_error_c &error) {
@@ -314,11 +314,11 @@ parse_content(unsigned int level,
         : size_error_c::end_of_scope == error.code ? Y("End of scope")
         :                                            Y("reason is unknown");
 
-      mxinfo(fmt::format(Y("{0}Error at {1}: error reading the element size ({2})\n"), level_string(level), element_start_pos, message));
+      mxinfo(fmt::format(FY("{0}Error at {1}: error reading the element size ({2})\n"), level_string(level), element_start_pos, message));
       g_errors_found = true;
 
       if (!g_in->setFilePointer2(end_pos))
-        mxerror(fmt::format(Y("Error: Seek to {0}\n"), end_pos));
+        mxerror(fmt::format(FY("Error: Seek to {0}\n"), end_pos));
       return;
 
     } catch (...) {
@@ -338,7 +338,7 @@ parse_file(const std::string &file_name) {
   g_end       = std::min(g_file_size, g_end);
 
   if (!in.setFilePointer2(g_start))
-    mxerror(fmt::format(Y("Error: Seek to {0}\n"), g_start));
+    mxerror(fmt::format(FY("Error: Seek to {0}\n"), g_start));
 
   parse_content(0, g_end);
 

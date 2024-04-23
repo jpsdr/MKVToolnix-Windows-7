@@ -47,8 +47,8 @@ header_removal_compressor_c::do_compress(uint8_t const *buffer,
 
   size_t to_remove_size = m_bytes->get_size();
   if (size < to_remove_size)
-    throw mtx::compression_x(fmt::format(Y("Header removal compression not possible because the buffer contained {0} bytes "
-                                           "which is less than the size of the headers that should be removed, {1}."), size, to_remove_size));
+    throw mtx::compression_x(fmt::format(FY("Header removal compression not possible because the buffer contained {0} bytes "
+                                            "which is less than the size of the headers that should be removed, {1}."), size, to_remove_size));
 
   auto bytes_ptr = m_bytes->get_buffer();
 
@@ -60,8 +60,8 @@ header_removal_compressor_c::do_compress(uint8_t const *buffer,
       b_buffer += fmt::format(" {0:02x}", static_cast<unsigned int>(buffer[i]));
       b_bytes  += fmt::format(" {0:02x}", static_cast<unsigned int>(bytes_ptr[i]));
     }
-    throw mtx::compression_x(fmt::format(Y("Header removal compression not possible because the buffer did not start with the bytes that should be removed. "
-                                           "Wanted bytes:{0}; found:{1}."), b_bytes, b_buffer));
+    throw mtx::compression_x(fmt::format(FY("Header removal compression not possible because the buffer did not start with the bytes that should be removed. "
+                                            "Wanted bytes:{0}; found:{1}."), b_bytes, b_buffer));
   }
 
   return memory_c::clone(buffer + size, size - to_remove_size);

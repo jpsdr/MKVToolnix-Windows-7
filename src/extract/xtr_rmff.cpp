@@ -28,7 +28,7 @@ xtr_rmff_c::create_file(xtr_base_c *master,
                         libmatroska::KaxTrackEntry &track) {
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   init_content_decoder(track);
   memory_cptr mpriv = decode_codec_private(priv);
@@ -37,14 +37,14 @@ xtr_rmff_c::create_file(xtr_base_c *master,
   if (!m_master) {
     m_file = rmff_open_file(m_file_name.c_str(), RMFF_OPEN_MODE_WRITING);
     if (!m_file)
-      mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, strerror(errno)));
+      mxerror(fmt::format(FY("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, strerror(errno)));
 
   } else
     m_file = static_cast<xtr_rmff_c *>(m_master)->m_file;
 
   m_rmtrack = rmff_add_track(m_file, 1);
   if (!m_rmtrack)
-    mxerror(fmt::format(Y("Memory allocation error: {0} ({1}).\n"), rmff_last_error, rmff_last_error_msg));
+    mxerror(fmt::format(FY("Memory allocation error: {0} ({1}).\n"), rmff_last_error, rmff_last_error_msg));
 
   rmff_set_type_specific_data(m_rmtrack, mpriv->get_buffer(), mpriv->get_size());
 

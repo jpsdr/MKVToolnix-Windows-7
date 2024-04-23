@@ -100,7 +100,7 @@ ElementViewerDialog::elementName()
   if (!name.isEmpty())
     return name;
 
-  return Q(fmt::format(Y("Unknown element (ID: 0x{0})"), kax_info_c::format_ebml_id_as_hex(p->m_elementId)));
+  return Q(fmt::format(FY("Unknown element (ID: 0x{0})"), kax_info_c::format_ebml_id_as_hex(p->m_elementId)));
 }
 
 void

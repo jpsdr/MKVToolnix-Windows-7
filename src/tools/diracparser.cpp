@@ -46,31 +46,31 @@ protected:
 void
 dirac_info_c::handle_auxiliary_data_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Auxiliary data at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
+  mxinfo(fmt::format(FY("Auxiliary data at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_end_of_sequence_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
+  mxinfo(fmt::format(FY("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_padding_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Padding at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
+  mxinfo(fmt::format(FY("Padding at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_picture_unit(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(*packet);
-  mxinfo(fmt::format(Y("Picture at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
+  mxinfo(fmt::format(FY("Picture at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 dirac_info_c::handle_sequence_header_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n" ),m_stream_pos, packet.get_size(), checksum));
+  mxinfo(fmt::format(FY("Sequence header at {0} size {1}{2}\n" ),m_stream_pos, packet.get_size(), checksum));
 
   m_seqhdr_found = mtx::dirac::parse_sequence_header(packet.get_buffer(), packet.get_size(), m_seqhdr);
 
@@ -85,7 +85,7 @@ dirac_info_c::handle_sequence_header_unit(memory_c const &packet) {
 void
 dirac_info_c::handle_unknown_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Unknown (0x{0:02x}) at {1} size {2}{3}\n"), static_cast<int>(packet.get_buffer()[4]), m_stream_pos, packet.get_size(), checksum));
+  mxinfo(fmt::format(FY("Unknown (0x{0:02x}) at {1} size {2}{3}\n"), static_cast<int>(packet.get_buffer()[4]), m_stream_pos, packet.get_size(), checksum));
 }
 
 std::string
@@ -93,30 +93,30 @@ dirac_info_c::create_checksum_info(memory_c const &packet) {
   if (!g_opt_checksum)
     return "";
 
-  return fmt::format(Y(" checksum 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, packet));
+  return fmt::format(FY(" checksum 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, packet));
 }
 
 void
 dirac_info_c::dump_sequence_header(mtx::dirac::sequence_header_t &seqhdr) {
-  mxinfo(fmt::format(Y("  Sequence header dump:\n"
-                       "    major_version:            {0}\n"
-                       "    minor_version:            {1}\n"
-                       "    profile:                  {2}\n"
-                       "    level:                    {3}\n"
-                       "    base_video_format:        {4}\n"
-                       "    pixel_width:              {5}\n"
-                       "    pixel_height:             {6}\n"
-                       "    chroma_format:            {7}\n"
-                       "    interlaced:               {8}\n"
-                       "    top_field_first:          {9}\n"
-                       "    frame_rate_numerator:     {10}\n"
-                       "    frame_rate_denominator:   {11}\n"
-                       "    aspect_ratio_numerator:   {12}\n"
-                       "    aspect_ratio_denominator: {13}\n"
-                       "    clean_width:              {14}\n"
-                       "    clean_height:             {15}\n"
-                       "    left_offset:              {16}\n"
-                       "    top_offset:               {17}\n"),
+  mxinfo(fmt::format(FY("  Sequence header dump:\n"
+                        "    major_version:            {0}\n"
+                        "    minor_version:            {1}\n"
+                        "    profile:                  {2}\n"
+                        "    level:                    {3}\n"
+                        "    base_video_format:        {4}\n"
+                        "    pixel_width:              {5}\n"
+                        "    pixel_height:             {6}\n"
+                        "    chroma_format:            {7}\n"
+                        "    interlaced:               {8}\n"
+                        "    top_field_first:          {9}\n"
+                        "    frame_rate_numerator:     {10}\n"
+                        "    frame_rate_denominator:   {11}\n"
+                        "    aspect_ratio_numerator:   {12}\n"
+                        "    aspect_ratio_denominator: {13}\n"
+                        "    clean_width:              {14}\n"
+                        "    clean_height:             {15}\n"
+                        "    left_offset:              {16}\n"
+                        "    top_offset:               {17}\n"),
                      seqhdr.major_version,
                      seqhdr.minor_version,
                      seqhdr.profile,

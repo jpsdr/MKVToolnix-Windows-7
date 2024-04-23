@@ -36,12 +36,12 @@ xtr_hdmv_textst_c::create_file(xtr_base_c *master,
 
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   auto mpriv = decode_codec_private(priv);
 
   if (mpriv->get_size() < 6)
-    mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
+    mxerror(fmt::format(FY("Track {0} CodecPrivate is too small.\n"), m_tid));
 
   // Older files created by MakeMKV have a different layout:
   // 1 byte language code
@@ -60,7 +60,7 @@ xtr_hdmv_textst_c::create_file(xtr_base_c *master,
   auto style_segment_size  = get_uint16_be(&buf[style_segment_start + 1]);
 
   if (mpriv->get_size() < static_cast<uint64_t>(3 + style_segment_size + (old_style ? 1 + 2 : 0)))
-    mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
+    mxerror(fmt::format(FY("Track {0} CodecPrivate is too small.\n"), m_tid));
 
   m_out->write("TextST"s);
 

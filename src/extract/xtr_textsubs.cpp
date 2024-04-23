@@ -96,7 +96,7 @@ xtr_ssa_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   xtr_base_c::create_file(master, track);
   m_out->write_bom(m_sub_charset);
@@ -136,7 +136,7 @@ xtr_ssa_c::create_file(xtr_base_c *master,
   // correct field order.
   int pos1 = sconv.find("Format:", sconv.find("[Events]"));
   if (0 > pos1)
-    mxerror(fmt::format(Y("Internal bug: tracks.cpp SSA #1. {0}"), BUGMSG));
+    mxerror(fmt::format(FY("Internal bug: tracks.cpp SSA #1. {0}"), BUGMSG));
 
   int pos2 = sconv.find("\n", pos1);
   if (0 > pos2)
@@ -174,8 +174,8 @@ xtr_ssa_c::create_file(xtr_base_c *master,
 void
 xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   if (0 > f.duration) {
-    mxwarn(fmt::format(Y("Subtitle track {0} is missing some duration elements. "
-                         "Please check the resulting SSA/ASS file for entries that have the same start and end time.\n"),
+    mxwarn(fmt::format(FY("Subtitle track {0} is missing some duration elements. "
+                          "Please check the resulting SSA/ASS file for entries that have the same start and end time.\n"),
                        m_tid));
     m_warning_printed = true;
   }
@@ -197,7 +197,7 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   // Convert the ReadOrder entry so that we can re-order the entries later.
   int num;
   if (!mtx::string::parse_number(fields[0], num)) {
-    mxwarn(fmt::format(Y("Invalid format for a SSA line ('{0}') at timestamp {1}: The first field is not an integer. This entry will be skipped.\n"),
+    mxwarn(fmt::format(FY("Invalid format for a SSA line ('{0}') at timestamp {1}: The first field is not an integer. This entry will be skipped.\n"),
                        s, mtx::string::format_timestamp(f.timestamp * 1000000, 3)));
     return;
   }
@@ -274,7 +274,7 @@ xtr_usf_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   init_content_decoder(track);
 
@@ -286,13 +286,13 @@ xtr_usf_c::create_file(xtr_base_c *master,
   if (master) {
     xtr_usf_c *usf_master = dynamic_cast<xtr_usf_c *>(master);
     if (!usf_master)
-      mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
-                            "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
+      mxerror(fmt::format(FY("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
+                             "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
                           m_tid, m_codec_id, m_file_name, master->m_tid, master->m_codec_id));
 
     if (m_codec_private != usf_master->m_codec_private)
-      mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already "
-                            "being written to the same file, and their CodecPrivate data (the USF styles etc.) do not match.\n"),
+      mxerror(fmt::format(FY("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already "
+                             "being written to the same file, and their CodecPrivate data (the USF styles etc.) do not match.\n"),
                           m_tid, m_codec_id, m_file_name, master->m_tid, master->m_codec_id));
 
     m_doc    = usf_master->m_doc;
@@ -336,10 +336,10 @@ xtr_usf_c::create_file(xtr_base_c *master,
       stylesheet_node.append_attribute("href").set_value("USFV100.xsl");
 
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(fmt::format(Y("Failed to create the file '{0}': {1}\n"), m_file_name, ex));
+      mxerror(fmt::format(FY("Failed to create the file '{0}': {1}\n"), m_file_name, ex));
 
     } catch (mtx::xml::exception &ex) {
-      mxerror(fmt::format(Y("Failed to parse the USF codec private data for track {0}: {1}\n"), m_tid, ex.what()));
+      mxerror(fmt::format(FY("Failed to parse the USF codec private data for track {0}: {1}\n"), m_tid, ex.what()));
     }
   }
 }
@@ -363,7 +363,7 @@ xtr_usf_c::finish_track() {
     std::stringstream text_in(text);
     pugi::xml_document subtitle_doc;
     if (!subtitle_doc.load(text_in, pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments)) {
-      mxwarn(fmt::format(Y("Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"), m_tid, mtx::string::format_timestamp(entry.m_start, 3)));
+      mxwarn(fmt::format(FY("Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"), m_tid, mtx::string::format_timestamp(entry.m_start, 3)));
       continue;
     }
 
