@@ -265,7 +265,7 @@ HeaderViewManager::showContextMenu(QPoint const &pos) {
 
     menu->addAction(action);
 
-    connect(action, &QAction::triggered, [=]() {
+    connect(action, &QAction::triggered, [this, column]() {
       toggleColumn(column);
     });
   }

@@ -35,7 +35,7 @@ ChapterModel::retranslateUi() {
     { QY("Flags"),           Q("flags")          },
   });
 
-  Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
+  Util::walkTree(*this, QModelIndex{}, [this](QModelIndex const &currentIdx) {
     updateRow(currentIdx);
   });
 }

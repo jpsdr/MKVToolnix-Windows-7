@@ -172,7 +172,7 @@ PageModel::retranslateUi() {
 
   horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-  Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
+  Util::walkTree(*this, QModelIndex{}, [this](QModelIndex const &currentIdx) {
     auto page = selectedPage(currentIdx);
     if (page)
       page->setItems(itemsForIndex(currentIdx));
