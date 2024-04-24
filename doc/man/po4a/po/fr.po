@@ -41,10 +41,8 @@ msgstr "83.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2024-01-02"
 msgid "2024-03-10"
-msgstr "2024-01-02"
+msgstr "2024-03-10"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -1747,7 +1745,7 @@ msgstr "Ce mode fonctionne aussi avec les modes de scission « <literal>parts:<
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:267
 msgid "&mkvmerge; requires a video or an audio track to be present in order to be able to determine when a new file is appended.  If one or more video tracks are muxed the first one is used.  Otherwise the first audio track is used."
-msgstr "&mkvmerge; nécessite une piste vidéo ou audio présente pour être en mesure de déterminer quand un nouveau fichier est ajouté. Si une piste vidéo ou plus sont mixées, la première est utilisée. Sinon la première piste audio est utilisée."
+msgstr "&mkvmerge; nécessite une piste vidéo ou audio présente pour être en mesure de déterminer quand un nouveau fichier est ajouté. Si une piste vidéo ou plus sont multiplexées, la première est utilisée. Sinon la première piste audio est utilisée."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:275
@@ -2050,19 +2048,19 @@ msgstr "<option>--normalize-language-ietf</option> <parameter>mode</parameter>"
 #: doc/man/mkvmerge.xml:567
 #: doc/man/mkvpropedit.xml:405
 msgid "Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>', to their extended language subtags form with mode '<literal>extlang</literal>' or turns it off with mode '<literal>off</literal>'. By default normalization to the canonical form is applied."
-msgstr "Active la normalisation de toutes les étiquettes de langue IETF BCP 47 soit en leur forme canonique avec le mode '<literal>canonique</literal>', soit en leur forme de sous-étiquettes de langue étendue avec le mode '<literal>extlang</literal>' soit en le désactivant avec le mode '<literal>off</literal>'. Par défaut la normalisation en forme canonique est appliquée."
+msgstr "Active la normalisation de toutes les balises de langue IETF BCP 47 soit en leur forme canonique avec le mode '<literal>canonique</literal>', soit en leur forme de sous-balises de langue étendue avec le mode '<literal>extlang</literal>' soit en le désactivant avec le mode '<literal>off</literal>'. Par défaut la normalisation en forme canonique est appliquée."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:573
 #: doc/man/mkvpropedit.xml:411
 msgid "In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'."
-msgstr "Dans la forme canonique, toutes les sous-étiquettes avec des valeurs préférées existantes sont remplacées par ces dernières. Ceci convertit par ex. '<literal>zh-yue-jyutping</literal>' en '<literal>yue-jyutping</literal>' ou '<literal>fr-FX</literal>' en '<literal>fr-FR</literal>'."
+msgstr "Dans la forme canonique, toutes les sous-balises avec des valeurs préférées existantes sont remplacées par ces dernières. Ceci convertit par ex. '<literal>zh-yue-jyutping</literal>' en '<literal>yue-jyutping</literal>' ou '<literal>fr-FX</literal>' en '<literal>fr-FR</literal>'."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:578
 #: doc/man/mkvpropedit.xml:416
 msgid "For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended language subtag exists are replaced by that extended language subtag and its prefix. This converts e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>' as '<literal>fr</literal>' is not an extended language subtag."
-msgstr "Pour la forme des sous-étiquettes de langue étendue, la forme canonique est d'abord construite. Ensuite toutes les langues primaires pour lesquelles des étiquettes de langue étendue existent sont remplacées par cette sous-étiquettes de langue étendue et son préfixe. Ceci reconvertit par ex. '<literal>yue-jyutping</literal>' en '<literal>zh-yue-jyutping</literal>' mais n'a pas d'effet sur '<literal>fr-FR</literal>' car '<literal>fr</literal>' n'est pas une sous-étiquette de langue étendue."
+msgstr "Pour la forme des sous-balises de langue étendue, la forme canonique est d'abord construite. Ensuite toutes les langues primaires pour lesquelles des balises de langue étendue existent sont remplacées par cette sous-balises de langue étendue et son préfixe. Ceci reconvertit par ex. '<literal>yue-jyutping</literal>' en '<literal>zh-yue-jyutping</literal>' mais n'a pas d'effet sur '<literal>fr-FR</literal>' car '<literal>fr</literal>' n'est pas une sous-balise de langue étendue."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:587
@@ -2836,20 +2834,18 @@ msgstr "Ne copie aucune balises globales de ce fichier."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1402
-#, fuzzy
-#| msgid "<option>--enable-durations</option>"
 msgid "<option>--regenerate-track-uids</option>"
-msgstr "<option>--enable-durations</option>"
+msgstr "<option>--regenerate-track-uids</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1405
 msgid "When this option is used for a Matroska source file, &mkvmerge; will create new random unique track IDs instead of keeping the existing ones in the file. Existing track UIDs in chapters &amp; tags read from the same file will be remapped to the newly generated values."
-msgstr ""
+msgstr "Lorsque cette option est utilisée pour un fichier source Matroska, &mkvmerge; créera de nouvelles ID de pistes aléatoires et uniques au lieu de conserver celles présentes dans le fichier. Les UID de pistes existantes dans les chapitres et les balises lues depuis le même fichier seront remappées aux nouvelles valeurs générées."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1411
 msgid "This behavior is enabled automatically for Matroska files created by the MakeMKV software. The reason is that MakeMKV uses consecutive numbers (1, 2, 3…) as UIDs instead of generating random ones."
-msgstr ""
+msgstr "Ce comportement est automatiquement activé pour les fichiers créés par le logiciel MakeMKV. La raison en est que MakeMKV utilise des entiers consécutifs (1, 2, 3…) comme UID plutôt que d'en générer des aléatoires."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1418
@@ -3957,7 +3953,7 @@ msgstr "ID de pistes normales"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2648
 msgid "Some of the options for &mkvmerge; need a track ID to specify which track they should be applied to.  Those track IDs are printed by the readers when demuxing the current input file, or if &mkvmerge; is called with the <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link> option.  An example for such output:"
-msgstr "Quelques unes des options pour &mkvmerge; nécessitent un ID de piste pour spécifier à quelle piste elles devraient s'appliquer. Ces ID de pistes sont imprimés par les lecteurs lors du démuxage du fichier source actuel., ou si &mkvmerge; est appelé avec l'option <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link>. Un exemple d'une telle sortie :"
+msgstr "Quelques unes des options pour &mkvmerge; nécessitent un ID de piste pour spécifier à quelle piste elles devraient s'appliquer. Ces ID de pistes sont imprimés par les lecteurs lors du démultiplexage du fichier source actuel., ou si &mkvmerge; est appelé avec l'option <link linkend=\"mkvmerge.description.identify\"><option>--identify</option></link>. Un exemple d'une telle sortie :"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:2653
@@ -4916,7 +4912,7 @@ msgstr "<constant>0</constant> -- Ce code de sortie signifie que le multiplexage
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3479
 msgid "<constant>1</constant> -- In this case &mkvmerge; has output at least one warning, but muxing did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting file might be ok or not.  The user is urged to check both the warning and the resulting file."
-msgstr "<constant>1</constant> -- Dans ce cas &mkvmerge; a émis au moins un avertissement, mais le multiplexage s'est poursuivi.  une avertissement est préfixé avec le texte '<literal>Avertissement :</literal>'.  Selon les problèmes le fichier résultant pourrait être OK ou pas. Il est fortement recommandé à l'utilisateur de vérifier l'avertissement et le fichier résultant."
+msgstr "<constant>1</constant> -- Dans ce cas &mkvmerge; a émis au moins un avertissement, mais le multiplexage s'est poursuivi. Un avertissement est préfixé avec le texte '<literal>Avertissement :</literal>'.  Selon les problèmes le fichier résultant pourrait être OK ou pas. Il est fortement recommandé de vérifier et l'avertissement et le fichier résultant."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3487
@@ -4961,7 +4957,7 @@ msgstr "mkvpropedit"
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvpropedit.xml:45
 msgid "Modify properties of existing &matroska; files without a complete remux"
-msgstr "Modifier les propriétés des fichiers &matroska; existants sans un remixage complet"
+msgstr "Modifier les propriétés des fichiers &matroska; existants sans un remultiplexage complet"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvpropedit.xml:51
@@ -5268,12 +5264,12 @@ msgstr "En édition de chapitres, tous les éléments de langues de tous les él
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
 msgid "When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace global tags then existing track tags aren't affected."
-msgstr "En édition d'étiquettes, seuls les éléments de langues des étiquettes réellement remplacés sont affectés. Par exemple, en remplaçant les étiquettes globales les étiquettes de pistes existantes ne sont pas affectées."
+msgstr "En édition de balises, seuls les éléments de langues des balises réellement remplacés sont affectés. Par exemple, en remplaçant les balises globales les balises de pistes existantes ne sont pas affectées."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
 msgid "The best way to normalize all existing language tags in a file is to remux it with &mkvmerge; and set its '<literal>--normalize-language-ietf</literal>' option to the desired mode."
-msgstr "La meilleure solution pour normaliser toutes les étiquettes existantes d'un fichier est de le remixer avec &mkvmerge; en définissant son option « <literal>--normalize-language-ietf</literal> » selon le mode souhaité."
+msgstr "La meilleure solution pour normaliser toutes les balises existantes d'un fichier est de le remultiplexer avec &mkvmerge; en définissant son option « <literal>--normalize-language-ietf</literal> » selon le mode souhaité."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:480
