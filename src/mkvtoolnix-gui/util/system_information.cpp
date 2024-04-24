@@ -111,7 +111,7 @@ gatherOperatingSystemInfo(QStringList &info) {
   QString osName, osVersion;
   auto versionInfo = QOperatingSystemVersion::current();
 
-  if (versionInfo.type() != QOperatingSystemVersion::Unknown) {
+  if (static_cast<QOperatingSystemVersion::OSType>(versionInfo.type()) != QOperatingSystemVersion::Unknown) {
     osName = versionInfo.name();
   } else {
     osName = QSysInfo::productType();
