@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2024-03-11 20:00+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: tmtisfree <tmtisfree@free.fr>, 2016-2023\n"
+"Last-Translator: tmtisfree <tmtisfree@free.fr>, 2016-2024\n"
 "Language-Team: French (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -692,8 +692,8 @@ msgid ""
 "                           form or not at all (default: canonical form).\n"
 msgstr ""
 "  --normalize-language-ietf <canonical|extlang>\n"
-"                           Normalise toutes les étiquettes de langue IETF BCP 47 soit\n"
-"                           en leur forme canonique soit en leur forme d'étiquettes de langue étendue\n"
+"                           Normalise toutes les balises de langue IETF BCP 47 soit\n"
+"                           en leur forme canonique soit en leur forme de balises de langue étendue\n"
 "                           soit pas du tout (par défaut : forme canonique).\n"
 
 #: src/merge/mkvmerge.cpp:263
@@ -794,6 +794,8 @@ msgid ""
 "  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
 "                           existing ones.\n"
 msgstr ""
+"  --regenerate-track-uids  Génère de nouvelles UID de pistes aléatoires au lieu de\n"
+"                          conserver celles existantes.\n"
 
 #: src/merge/mkvmerge.cpp:286
 #, no-c-format
@@ -1178,9 +1180,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:230
 #, no-c-format
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
-msgstr ""
-"  -t, --tags <TID:name> Lit les balises pour la piste\n"
-"                           depuis un fichier XML.\n"
+msgstr "  -t, --tags <TID:file>    Lit les balises pour la piste depuis un fichier XML.\n"
 
 #: src/merge/mkvmerge.cpp:90
 #, no-c-format
@@ -3817,7 +3817,7 @@ msgstr "Toujours automatiquement remplacer avec la forme canonique"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
 #, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "Toujours automatiquement remplacer avec la forme de sous-étiquettes de langue étendue"
+msgstr "Toujours automatiquement remplacer avec la forme de sous-balises de langue étendue"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
 #, no-c-format
@@ -6711,7 +6711,7 @@ msgstr "forme de sous-étiquettes de langue étendue"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
 #, no-c-format
 msgid "Extended language subtags form"
-msgstr "Forme de sous-étiquettes de langue étendue"
+msgstr "Forme de sous-balises de langue étendue"
 
 #: src/common/bcp47.cpp:476
 #, no-c-format
@@ -9480,7 +9480,7 @@ msgstr "Priorité normale"
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr "Normalise toutes les étiquettes de langue IETF BCP 47 des éléments modifiés soit en leur forme canonique (mode « canonique ») soit en leur forme d'étiquettes de langue étendue (mode « extlang ») soit pas du tout (mode « désactivé »)"
+msgstr "Normalise toutes les balises de langue IETF BCP 47 des éléments modifiés soit en leur forme canonique (mode « canonique ») soit en leur forme de balises de langue étendue (mode « extlang ») soit pas du tout (mode « désactivé »)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:350
 #, no-c-format
@@ -10560,9 +10560,9 @@ msgstr "Lecteur Quicktime/MP4 : des données manquent à la piste {0}. Atomes d'
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:202
 #: src/mkvtoolnix-gui/util/settings.cpp:319
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Quit MKVToolNix"
-msgstr "MKVToolNix &GUI"
+msgstr "Quitter MKVToolNix"
 
 #: src/common/file_types.cpp:79
 #, no-c-format
@@ -10835,7 +10835,7 @@ msgstr "Remplacer avec la forme canonique une fois"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
 #, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "Remplacer avec la forme de sous-étiquettes de langue étendue une fois"
+msgstr "Remplacer avec la forme de sous-balises de langue étendue une fois"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:693
 #, no-c-format
@@ -12525,7 +12525,7 @@ msgstr "L'entête de correction n'a pas été lu correctement.\n"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:501
 #, no-c-format
 msgid "The corresponding canonical & extended language subtags forms are: %1."
-msgstr "Les formes correspondantes canonique et de sous-étiquettes de langue étendue sont : %1."
+msgstr "Les formes des sous-balises de langue canonique et étendue correspondantes sont : %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:506
 #, no-c-format
@@ -12535,7 +12535,7 @@ msgstr "La forme correspondante canonique est : %1."
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:511
 #, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
-msgstr "La forme correspondante de sous-étiquettes de langue étendue est : %1."
+msgstr "La forme des sous-balises de langue étendue correspondante est : %1."
 
 #: src/merge/output_control.cpp:1678
 #, no-c-format
@@ -12718,7 +12718,7 @@ msgstr "La sous-balise étendue de langue « {} » doit seulement être utilis
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:490
 #, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
-msgstr "La forme de sous-étiquettes de langue étendue utilise un préfixe adapté"
+msgstr "La forme des sous-balises de langue étendue utilise un préfixe adapté."
 
 #: src/output/p_mpeg4_p2.cpp:359
 #, no-c-format, c++-format
@@ -15998,12 +15998,12 @@ msgstr "équirectangulaire"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:957
 #, no-c-format
 msgid "extended language subtags form"
-msgstr "forme de sous-étiquettes de langue étendue"
+msgstr "forme de sous-balises de langue étendue"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:204
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ffmpeg metadata files"
-msgstr "Concaténer des fichiers multimédia"
+msgstr "fichiers de métadonnées de ffmpeg"
 
 #: src/merge/output_control.cpp:429
 #, no-c-format, c++-format
