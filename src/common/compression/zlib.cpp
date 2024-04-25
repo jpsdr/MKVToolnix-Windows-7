@@ -34,7 +34,7 @@ zlib_compressor_c::do_decompress(uint8_t const *buffer,
   int result      = inflateInit2(&d_stream, 15 + 32); // 15: window size; 32: look for zlib/gzip headers automatically
 
   if (Z_OK != result)
-    mxerror(fmt::format(Y("inflateInit() failed. Result: {0}\n"), result));
+    mxerror(fmt::format(FY("inflateInit() failed. Result: {0}\n"), result));
 
   d_stream.next_in   = const_cast<Bytef *>(buffer);
   d_stream.avail_in  = size;
@@ -49,7 +49,7 @@ zlib_compressor_c::do_decompress(uint8_t const *buffer,
     result             = inflate(&d_stream, Z_NO_FLUSH);
 
     if ((Z_OK != result) && (Z_STREAM_END != result))
-      throw mtx::compression_x(fmt::format(Y("Zlib decompression failed. Result: {0}\n"), result));
+      throw mtx::compression_x(fmt::format(FY("Zlib decompression failed. Result: {0}\n"), result));
 
   } while ((0 == d_stream.avail_out) && (0 != d_stream.avail_in) && (Z_STREAM_END != result));
 
@@ -72,7 +72,7 @@ zlib_compressor_c::do_compress(uint8_t const *buffer,
   int result      = deflateInit(&c_stream, 9);
 
   if (Z_OK != result)
-    mxerror(fmt::format(Y("deflateInit() failed. Result: {0}\n"), result));
+    mxerror(fmt::format(FY("deflateInit() failed. Result: {0}\n"), result));
 
   c_stream.next_in   = (Bytef *)buffer;
   c_stream.avail_in  = size;
@@ -87,7 +87,7 @@ zlib_compressor_c::do_compress(uint8_t const *buffer,
     result             = deflate(&c_stream, Z_FINISH);
 
     if ((Z_OK != result) && (Z_STREAM_END != result))
-      mxerror(fmt::format(Y("Zlib decompression failed. Result: {0}\n"), result));
+      mxerror(fmt::format(FY("Zlib decompression failed. Result: {0}\n"), result));
 
   } while ((c_stream.avail_out == 0) && (result != Z_STREAM_END));
 

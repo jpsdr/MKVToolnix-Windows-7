@@ -113,7 +113,7 @@ parser_c::parse_args_pass(bool first_pass) {
 
       if (option.m_needs_arg) {
         if (no_next_arg)
-          mxerror(fmt::format(Y("Missing argument to '{0}'.\n"), m_current_arg));
+          mxerror(fmt::format(FY("Missing argument to '{0}'.\n"), m_current_arg));
         ++sit;
       }
 
@@ -122,7 +122,7 @@ parser_c::parse_args_pass(bool first_pass) {
         option.m_callback();
 
     } else if (!first_pass && !run_hooks(parser_c::ht_unknown_option))
-      mxerror(fmt::format(Y("Unknown option '{0}'.\n"), m_current_arg));
+      mxerror(fmt::format(FY("Unknown option '{0}'.\n"), m_current_arg));
   }
 }
 

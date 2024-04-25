@@ -1732,17 +1732,17 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
     }
 
   } catch (mtx::mm_io::exception &ex) {
-    throw mtx::kax_analyzer_x{fmt::format(Y("The file '{0}' could not be opened for reading: {1}."), file_name, ex)};
+    throw mtx::kax_analyzer_x{fmt::format(FY("The file '{0}' could not be opened for reading: {1}."), file_name, ex)};
 
   } catch (mtx::kax_analyzer_x &ex) {
-    throw mtx::kax_analyzer_x{fmt::format(Y("The file '{0}' could not be opened for reading: {1}."), file_name, ex)};
+    throw mtx::kax_analyzer_x{fmt::format(FY("The file '{0}' could not be opened for reading: {1}."), file_name, ex)};
 
   } catch (...) {
-    throw mtx::kax_analyzer_x{fmt::format(Y("The file '{0}' could not be opened or parsed."), file_name)};
+    throw mtx::kax_analyzer_x{fmt::format(FY("The file '{0}' could not be opened or parsed."), file_name)};
 
   }
 
-  throw mtx::kax_analyzer_x{fmt::format(Y("No segment UID could be found in the file '{0}'."), file_name)};
+  throw mtx::kax_analyzer_x{fmt::format(FY("No segment UID could be found in the file '{0}'."), file_name)};
 }
 
 int
@@ -1805,7 +1805,7 @@ console_kax_analyzer_c::show_progress_running(int percentage) {
   std::string full_bar(        percentage  * CONSOLE_PERCENTAGE_WIDTH / 100, '=');
   std::string empty_bar((100 - percentage) * CONSOLE_PERCENTAGE_WIDTH / 100, ' ');
 
-  mxinfo(fmt::format(Y("Progress: [{0}{1}] {2}%"), full_bar, empty_bar, percentage));
+  mxinfo(fmt::format(FY("Progress: [{0}{1}] {2}%"), full_bar, empty_bar, percentage));
   mxinfo("\r");
 
   m_previous_percentage = percentage;

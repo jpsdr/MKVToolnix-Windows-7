@@ -21,11 +21,11 @@ namespace mtx::iso3166 {
 namespace {
 
 std::vector<region_t> const s_cctlds_only{
-  { "AC"s, {}, 0, u8"Ascension Island"s,     {}, false },
-  { "AN"s, {}, 0, u8"Netherlands Antilles"s, {}, false },
-  { "EU"s, {}, 0, u8"European Union"s,       {}, false },
-  { "SU"s, {}, 0, u8"Soviet Union"s,         {}, false },
-  { "UK"s, {}, 0, u8"United Kingdom"s,       {}, false },
+  { "AC"s, {}, 0, "Ascension Island"s,     {}, false },
+  { "AN"s, {}, 0, "Netherlands Antilles"s, {}, false },
+  { "EU"s, {}, 0, "European Union"s,       {}, false },
+  { "SU"s, {}, 0, "Soviet Union"s,         {}, false },
+  { "UK"s, {}, 0, "United Kingdom"s,       {}, false },
 };
 
 std::map<std::string, std::string> const s_deprecated_cctlds{

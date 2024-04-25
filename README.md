@@ -81,15 +81,16 @@ In order to compile MKVToolNix, you need a couple of libraries. Most of
 them should be available pre-compiled for your distribution. The
 programs and libraries you absolutely need are:
 
-- A C++ compiler that supports several features of the C++11, C++14
-  and C++17 standards: initializer lists, range-based `for` loops,
+- A C++ compiler that supports several features of the C++11, C++14,
+  C++17 & C++20 standards: initializer lists, range-based `for` loops,
   right angle brackets, the `auto` keyword, lambda functions, the
   `nullptr` keyword, tuples, alias declarations, `std::make_unique()`,
   digit separators, binary literals, generic lambdas, user-defined
   literals for `std::string`, `[[maybe_unused]]` attribute, nested
   namespace definition, structured bindings, `std::optional`,
-  `std::regex`. Others may be needed, too. For GCC this means at least
-  v8; for clang v7 or later.
+  designated initializers, concepts, three-way comparison
+  operators. Others may be needed, too. For GCC this means at least
+  v10; for clang v10 or later.
 
 - [libOgg](http://downloads.xiph.org/releases/ogg/) and
   [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM
@@ -124,7 +125,7 @@ distribution instead of relying on the bundled versions.
 These libraries are:
 
 - [fmt](http://fmtlib.net/) — a small, safe and fast formatting
-  library. Version 6.1.0 or later is required.
+  library. Version 8.0.0 or later is required.
 
 - [libEBML v1.4.4](http://dl.matroska.org/downloads/libebml/) or later
   and [libMatroska v1.7.1](http://dl.matroska.org/downloads/libmatroska/)

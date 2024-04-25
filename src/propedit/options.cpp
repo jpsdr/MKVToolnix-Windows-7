@@ -120,7 +120,7 @@ options_c::add_delete_track_statistics_tags(tag_target_c::tag_operation_mode_e o
 void
 options_c::set_file_name(const std::string &file_name) {
   if (!m_file_name.empty())
-    mxerror(fmt::format(Y("More than one file name has been given ('{0}' and '{1}').\n"), m_file_name, file_name));
+    mxerror(fmt::format(FY("More than one file name has been given ('{0}' and '{1}').\n"), m_file_name, file_name));
 
   m_file_name = file_name;
 }
@@ -176,7 +176,7 @@ read_element(kax_analyzer_c *analyzer,
     e = analyzer->read_element(index);
 
   if (require_existance && (!e || !dynamic_cast<T *>(e.get())))
-    mxerror(fmt::format(Y("Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"), category, Y("The file has not been modified.")));
+    mxerror(fmt::format(FY("Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"), category, Y("The file has not been modified.")));
 
   return e;
 }
@@ -259,7 +259,7 @@ options_c::merge_targets() {
 
     existing_target_it->second->merge_changes(*track_target);
 
-    mxwarn(fmt::format(Y("The edit specifications '{0}' and '{1}' resolve to the same track with the UID {2}.\n"),
+    mxwarn(fmt::format(FY("The edit specifications '{0}' and '{1}' resolve to the same track with the UID {2}.\n"),
                        existing_target_it->second->get_spec(), track_target->get_spec(), track_uid));
   }
 

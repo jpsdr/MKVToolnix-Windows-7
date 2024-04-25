@@ -117,7 +117,7 @@ generic_reader_c::attachment_requested(int64_t id) {
 int
 generic_reader_c::add_packetizer(generic_packetizer_c *packetizer) {
   if (outputting_webm() && !packetizer->is_compatible_with(OC_WEBM))
-    mxerror(fmt::format(Y("The codec type '{0}' cannot be used in a WebM compliant file.\n"), packetizer->get_format_name()));
+    mxerror(fmt::format(FY("The codec type '{0}' cannot be used in a WebM compliant file.\n"), packetizer->get_format_name()));
 
   m_reader_packetizers.emplace_back(packetizer);
   m_used_track_ids.push_back(packetizer->m_ti.m_id);
@@ -174,7 +174,7 @@ generic_reader_c::check_track_ids_and_packetizers() {
 
   for (auto requested_id : m_requested_track_ids)
     if (available_ids.find(requested_id) == not_found)
-      mxwarn_fn(m_ti.m_fname, fmt::format(Y("A track with the ID {0} was requested but not found in the file. The corresponding option will be ignored.\n"), requested_id));
+      mxwarn_fn(m_ti.m_fname, fmt::format(FY("A track with the ID {0} was requested but not found in the file. The corresponding option will be ignored.\n"), requested_id));
 }
 
 void
@@ -275,37 +275,37 @@ generic_reader_c::display_identification_results() {
 
 void
 generic_reader_c::display_identification_results_as_text() {
-  mxinfo(fmt::format(Y("File '{0}': container: {1}"), m_ti.m_fname, m_id_results_container.info));
+  mxinfo(fmt::format(FY("File '{0}': container: {1}"), m_ti.m_fname, m_id_results_container.info));
   mxinfo("\n");
 
   for (auto &result : m_id_results_tracks) {
-    mxinfo(fmt::format(Y("Track ID {0}: {1} ({2})"), result.id, result.type, result.info));
+    mxinfo(fmt::format(FY("Track ID {0}: {1} ({2})"), result.id, result.type, result.info));
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_attachments) {
-    mxinfo(fmt::format(Y("Attachment ID {0}: type '{1}', size {2} bytes"), result.id, result.type, result.size));
+    mxinfo(fmt::format(FY("Attachment ID {0}: type '{1}', size {2} bytes"), result.id, result.type, result.size));
 
     if (!result.description.empty())
-      mxinfo(fmt::format(Y(", description '{0}'"), result.description));
+      mxinfo(fmt::format(FY(", description '{0}'"), result.description));
 
     if (!result.info.empty())
-      mxinfo(fmt::format(Y(", file name '{0}'"), result.info));
+      mxinfo(fmt::format(FY(", file name '{0}'"), result.info));
 
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_chapters) {
-    mxinfo(fmt::format(NY("Chapters: {0} entry", "Chapters: {0} entries", result.size), result.size));
+    mxinfo(fmt::format(FNY("Chapters: {0} entry", "Chapters: {0} entries", result.size), result.size));
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_tags) {
     if (ID_RESULT_GLOBAL_TAGS_ID == result.id)
-      mxinfo(fmt::format(NY("Global tags: {0} entry", "Global tags: {0} entries", result.size), result.size));
+      mxinfo(fmt::format(FNY("Global tags: {0} entry", "Global tags: {0} entries", result.size), result.size));
 
     else
-      mxinfo(fmt::format(NY("Tags for track ID {0}: {1} entry", "Tags for track ID {0}: {1} entries", result.size), result.id, result.size));
+      mxinfo(fmt::format(FNY("Tags for track ID {0}: {1} entry", "Tags for track ID {0}: {1} entries", result.size), result.id, result.size));
 
     mxinfo("\n");
   }
@@ -497,13 +497,13 @@ generic_reader_c::add_track_tags_to_identification(libmatroska::KaxTags const &t
 void
 generic_reader_c::show_demuxer_info() {
   if (verbose)
-    mxinfo_fn(m_ti.m_fname, fmt::format(Y("Using the demultiplexer for the format '{0}'.\n"), get_format_name()));
+    mxinfo_fn(m_ti.m_fname, fmt::format(FY("Using the demultiplexer for the format '{0}'.\n"), get_format_name()));
 }
 
 void
 generic_reader_c::show_packetizer_info(int64_t track_id,
                                        generic_packetizer_c const &packetizer) {
-  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(Y("Using the output module for the format '{0}'.\n"), packetizer.get_format_name()));
+  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(FY("Using the output module for the format '{0}'.\n"), packetizer.get_format_name()));
 }
 
 generic_packetizer_c &

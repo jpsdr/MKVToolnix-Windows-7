@@ -30,13 +30,13 @@ parse_split_parts(const std::string &arg,
     s.erase(0, 13);
 
   if (s.empty())
-    throw format_x{fmt::format(Y("Missing start/end specifications for '--split' in '--split {0}'.\n"), arg)};
+    throw format_x{fmt::format(FY("Missing start/end specifications for '--split' in '--split {0}'.\n"), arg)};
 
   std::vector<std::tuple<int64_t, int64_t, bool> > requested_split_points;
   for (auto const &part_spec : mtx::string::split(s, ",")) {
     auto pair = mtx::string::split(part_spec, "-");
     if (pair.size() != 2)
-      throw format_x{fmt::format(Y("Invalid start/end specification for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
+      throw format_x{fmt::format(FY("Invalid start/end specification for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
 
     bool create_new_file = true;
     if (pair[0].substr(0, 1) == "+") {
@@ -50,33 +50,33 @@ parse_split_parts(const std::string &arg,
       start = requested_split_points.empty() ? 0 : std::get<1>(requested_split_points.back());
 
     else if (!frames_fields && !mtx::string::parse_timestamp(pair[0], start))
-      throw format_x{fmt::format(Y("Invalid start time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, mtx::string::timestamp_parser_error)};
+      throw format_x{fmt::format(FY("Invalid start time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, mtx::string::timestamp_parser_error)};
 
     else if (frames_fields && (!mtx::string::parse_number(pair[0], start) || (0 > start)))
-      throw format_x{fmt::format(Y("Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
+      throw format_x{fmt::format(FY("Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
 
     int64_t end;
     if (pair[1].empty())
       end = std::numeric_limits<int64_t>::max();
 
     else if (!frames_fields && !mtx::string::parse_timestamp(pair[1], end))
-      throw format_x{fmt::format(Y("Invalid end time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, mtx::string::timestamp_parser_error)};
+      throw format_x{fmt::format(FY("Invalid end time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, mtx::string::timestamp_parser_error)};
 
     else if (frames_fields && (!mtx::string::parse_number(pair[1], end) || (0 > end)))
-      throw format_x{fmt::format(Y("Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
+      throw format_x{fmt::format(FY("Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
 
     if (end <= start) {
       if (frames_fields)
-        throw format_x{fmt::format(Y("Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}). The end number must be bigger than the start number.\n"), arg, part_spec)};
+        throw format_x{fmt::format(FY("Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}). The end number must be bigger than the start number.\n"), arg, part_spec)};
       else
-        throw format_x{fmt::format(Y("Invalid end time for '--split' in '--split {0}' (current part: {1}). The end time must be bigger than the start time.\n"), arg, part_spec)};
+        throw format_x{fmt::format(FY("Invalid end time for '--split' in '--split {0}' (current part: {1}). The end time must be bigger than the start time.\n"), arg, part_spec)};
     }
 
     if (!requested_split_points.empty() && (start < std::get<1>(requested_split_points.back()))) {
       if (frames_fields)
-        throw format_x{fmt::format(Y("Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}). The start number must be bigger than or equal to the previous part's end number.\n"), arg, part_spec)};
+        throw format_x{fmt::format(FY("Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}). The start number must be bigger than or equal to the previous part's end number.\n"), arg, part_spec)};
       else
-        throw format_x{fmt::format(Y("Invalid start time for '--split' in '--split {0}' (current part: {1}). The start time must be bigger than or equal to the previous part's end time.\n"), arg, part_spec)};
+        throw format_x{fmt::format(FY("Invalid start time for '--split' in '--split {0}' (current part: {1}). The start time must be bigger than or equal to the previous part's end time.\n"), arg, part_spec)};
     }
 
     requested_split_points.emplace_back(start, end, create_new_file);

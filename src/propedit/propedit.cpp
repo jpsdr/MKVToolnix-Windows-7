@@ -23,7 +23,7 @@
 static void
 display_update_element_result(std::string const &element_name,
                               kax_analyzer_c::update_element_result_e result) {
-  std::string message(fmt::format(Y("Updating the '{0}' element failed. Reason:"), element_name));
+  std::string message(fmt::format(FY("Updating the '{0}' element failed. Reason:"), element_name));
   message += " ";
 
   switch (result) {
@@ -123,11 +123,11 @@ run(options_cptr &options) {
 
   try {
     if (!kax_analyzer_c::probe(options->m_file_name))
-      mxerror(fmt::format(Y("The file '{0}' is not a Matroska file or it could not be found.\n"), options->m_file_name));
+      mxerror(fmt::format(FY("The file '{0}' is not a Matroska file or it could not be found.\n"), options->m_file_name));
 
     analyzer = console_kax_analyzer_cptr(new console_kax_analyzer_c(options->m_file_name));
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading and writing: {1}.\n"), options->m_file_name, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for reading and writing: {1}.\n"), options->m_file_name, ex));
   }
 
   mxinfo(fmt::format("{0}\n", Y("The file is being analyzed.")));
@@ -143,7 +143,7 @@ run(options_cptr &options) {
       .set_doc_type_version_handler(g_doc_type_version_handler.get())
       .process();
   } catch (mtx::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading and writing, or a read/write operation on it failed: {1}.\n"), options->m_file_name, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for reading and writing, or a read/write operation on it failed: {1}.\n"), options->m_file_name, ex));
   } catch (...) {
   }
 
@@ -172,7 +172,7 @@ run(options_cptr &options) {
 
       update_ebml_head(analyzer->get_file());
     } catch (mtx::exception &ex) {
-      mxerror(fmt::format(Y("The file '{0}' could not be opened for reading and writing, or a read/write operation on it failed: {1}.\n"), options->m_file_name, ex));
+      mxerror(fmt::format(FY("The file '{0}' could not be opened for reading and writing, or a read/write operation on it failed: {1}.\n"), options->m_file_name, ex));
     } catch (...) {
     }
 

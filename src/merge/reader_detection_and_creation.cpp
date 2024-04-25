@@ -84,11 +84,11 @@ open_input_file(filelist_t &file) {
     }
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));
     return mm_io_cptr{};
 
   } catch (...) {
-    mxerror(fmt::format(Y("The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"), file.name));
+    mxerror(fmt::format(FY("The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"), file.name));
     return mm_io_cptr{};
   }
 }
@@ -236,10 +236,10 @@ detect_text_file_formats(filelist_t const &file) {
         return create_and_prepare_reader<srt_reader_c>(text_io);
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));
 
   } catch (...) {
-    mxerror(fmt::format(Y("The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"), file.name));
+    mxerror(fmt::format(FY("The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"), file.name));
   }
 
   return {};
@@ -420,19 +420,19 @@ read_file_headers() {
                  fmt::format("Timestamp restrictions for {2}: min {0} max {1}\n", file->restricted_timestamp_min, file->restricted_timestamp_max, file->ti->m_fname));
 
     } catch (mtx::mm_io::open_x &error) {
-      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file could not be opened for reading, or there was not enough data to parse its headers.")));
+      mxerror(fmt::format(FY("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file could not be opened for reading, or there was not enough data to parse its headers.")));
 
     } catch (mtx::input::open_x &error) {
-      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file could not be opened for reading, or there was not enough data to parse its headers.")));
+      mxerror(fmt::format(FY("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file could not be opened for reading, or there was not enough data to parse its headers.")));
 
     } catch (mtx::input::invalid_format_x &error) {
-      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file content does not match its format type and was not recognized.")));
+      mxerror(fmt::format(FY("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file content does not match its format type and was not recognized.")));
 
     } catch (mtx::input::header_parsing_x &error) {
-      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged.")));
+      mxerror(fmt::format(FY("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, Y("The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged.")));
 
     } catch (mtx::input::exception &error) {
-      mxerror(fmt::format(Y("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, error.error()));
+      mxerror(fmt::format(FY("The demultiplexer for the file '{0}' failed to initialize:\n{1}\n"), file->ti->m_fname, error.error()));
     }
   }
 }

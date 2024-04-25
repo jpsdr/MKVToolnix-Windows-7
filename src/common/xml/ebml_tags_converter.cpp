@@ -122,7 +122,7 @@ ebml_tags_converter_c::fix_simple_tag(libmatroska::KaxTagSimple &simple_tag)
   auto parsed_language = mtx::bcp47::language_c::parse(value_to_parse);
 
   if (!parsed_language.is_valid())
-    throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), value_to_parse, parsed_language.get_error())};
+    throw conversion_x{fmt::format(FY("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), value_to_parse, parsed_language.get_error())};
 
   if (!tlanguage_ietf && !mtx::bcp47::language_c::is_disabled()) {
     tlanguage_ietf = new libmatroska::KaxTagLanguageIETF;
@@ -156,13 +156,13 @@ ebml_tags_converter_c::parse_file(std::string const &file_name,
     return parse();
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The XML tag file '{0}' could not be read.\n"), file_name));
+    mxerror(fmt::format(FY("The XML tag file '{0}' could not be read.\n"), file_name));
 
   } catch (mtx::xml::xml_parser_x &ex) {
-    mxerror(fmt::format(Y("The XML tag file '{0}' contains an error at position {2}: {1}\n"), file_name, ex.result().description(), ex.result().offset));
+    mxerror(fmt::format(FY("The XML tag file '{0}' contains an error at position {2}: {1}\n"), file_name, ex.result().description(), ex.result().offset));
 
   } catch (mtx::xml::exception &ex) {
-    mxerror(fmt::format(Y("The XML tag file '{0}' contains an error: {1}\n"), file_name, ex.what()));
+    mxerror(fmt::format(FY("The XML tag file '{0}' contains an error: {1}\n"), file_name, ex.what()));
   }
 
   return {};

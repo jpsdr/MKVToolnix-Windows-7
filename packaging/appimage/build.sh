@@ -128,21 +128,33 @@ if [[ ! -f configure ]]; then
   ./autogen.sh
 fi
 
-if [[ -f /etc/centos-release ]]; then
-  devtoolset=$(ls -1d /opt/rh/*toolset-* | tail -n 1)
-  export CC=${devtoolset}/root/bin/gcc
-  export CXX=${devtoolset}/root/bin/g++
-fi
+boost_dir=
+EXTRA_INCLUDES=
+EXTRA_LIBS=
 
 export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 export LD_LIBRARY_PATH="${QTDIR}/lib:${LD_LIBRARY_PATH}"
 export LDFLAGS="-L${QTDIR}/lib ${LDFLAGS}"
 export PATH="${QTDIR}/bin:${PATH}"
 
+if [[ -f /etc/centos-release ]]; then
+  devtoolset=$(ls -1d /opt/rh/*toolset-* | tail -n 1)
+  export CC=${devtoolset}/root/bin/gcc
+  export CXX=${devtoolset}/root/bin/g++
+
+  boost_dir=/srv/build/opt/almalinux/8/boost
+  EXTRA_INCLUDES=${boost_dir}/include
+  EXTRA_LIBS=${boost_dir}/lib
+
+  LD_LIBRARY_PATH="${boost_dir}/lib:${LD_LIBRARY_PATH}"
+fi
+
 if [[ ( ! -f build-config ) && ( "$NO_BUILD" != 1 ) ]]; then
   ./configure \
     --prefix=/usr \
-    --enable-optimization
+    --enable-optimization \
+    --with-extra-includes=${EXTRA_INCLUDES} \
+    --with-extra-libs=${EXTRA_LIBS}
 
   ./drake clean
 fi
@@ -182,6 +194,9 @@ mkdir all_libs
 mv ./home all_libs
 mv ./lib* all_libs
 mv ./usr all_libs
+if [[ -n ${boost_dir} ]]; then
+  cp ${boost_dir}/lib/libboost* all_libs
+fi
 mkdir lib
 # inefficient loop due to the same lib potentially being present in
 # several directories & mv throwing a fit about it ("will not
@@ -208,6 +223,8 @@ cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png .
 cp ./usr/share/applications/org.bunkus.mkvtoolnix-gui.desktop mkvtoolnix-gui.desktop
 
 fix_desktop mkvtoolnix-gui.desktop
+
+rm -rf ./usr/srv
 
 cd ..
 generate_type2_appimage

@@ -92,7 +92,7 @@ create_extractors(libmatroska::KaxTracks &kax_tracks,
 
     // Is there more than one track with the same track number?
     if (track_extractors_by_track_number.find(tnum) != track_extractors_by_track_number.end()) {
-      mxwarn(fmt::format(Y("More than one track with the track number {0} found.\n"), tnum));
+      mxwarn(fmt::format(FY("More than one track with the track number {0} found.\n"), tnum));
       continue;
     }
 
@@ -104,11 +104,11 @@ create_extractors(libmatroska::KaxTracks &kax_tracks,
     // Let's find the codec ID and create an extractor for it.
     std::string codec_id = kt_get_codec_id(track);
     if (codec_id.empty())
-      mxerror(fmt::format(Y("The track ID {0} does not have a valid CodecID.\n"), track_id));
+      mxerror(fmt::format(FY("The track ID {0} does not have a valid CodecID.\n"), track_id));
 
     auto extractor = xtr_base_c::create_extractor(codec_id, track_id, *tspec_itr);
     if (!extractor)
-      mxerror(fmt::format(Y("Extraction of track ID {0} with the CodecID '{1}' is not supported.\n"), track_id, codec_id));
+      mxerror(fmt::format(FY("Extraction of track ID {0} with the CodecID '{1}' is not supported.\n"), track_id, codec_id));
 
     extractor->m_track_num = tnum;
 
@@ -123,7 +123,7 @@ create_extractors(libmatroska::KaxTracks &kax_tracks,
     track_extractors_by_track_number.insert({ tnum, extractor });
     track_extractor_list.push_back(extractor);
 
-    mxinfo(fmt::format(Y("Extracting track {0} with the CodecID '{1}' to the file '{2}'. Container format: {3}\n"),
+    mxinfo(fmt::format(FY("Extracting track {0} with the CodecID '{1}' to the file '{2}'. Container format: {3}\n"),
                        track_id, codec_id, extractor->get_file_name().string(), extractor->get_container_name()));
   }
 
@@ -183,7 +183,7 @@ create_timestamp_files(libmatroska::KaxTracks &kax_tracks,
 
     } catch(mtx::mm_io::exception &ex) {
       close_timestamp_files();
-      mxerror(fmt::format(Y("Could not open the timestamp file '{0}' for writing ({1}).\n"), tspec.out_name, ex));
+      mxerror(fmt::format(FY("Could not open the timestamp file '{0}' for writing ({1}).\n"), tspec.out_name, ex));
     }
   }
 }
@@ -383,11 +383,11 @@ write_all_cuesheets(libmatroska::KaxChapters &chapters,
 
       try {
         mm_io_cptr out = mm_write_buffer_io_c::open(cue_file_name, 128 * 1024);
-        mxinfo(fmt::format(Y("The cue sheet for track {0} will be written to '{1}'.\n"), tspecs[i].tid, cue_file_name));
+        mxinfo(fmt::format(FY("The cue sheet for track {0} will be written to '{1}'.\n"), tspecs[i].tid, cue_file_name));
         write_cuesheet(file_name, chapters, tags, tspecs[i].tuid, *out);
 
       } catch(mtx::mm_io::open_x &ex) {
-        mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), cue_file_name, ex));
+        mxerror(fmt::format(FY("The file '{0}' could not be opened for writing: {1}.\n"), cue_file_name, ex));
       }
     }
   }
@@ -417,7 +417,7 @@ find_and_verify_track_uids(libmatroska::KaxTracks &tracks,
 
   for (auto &tspec : tspecs)
     if (!available_track_ids[ tspec.tid ])
-      mxerror(fmt::format(Y("No track with the ID {0} was found in the source file.\n"), tspec.tid));
+      mxerror(fmt::format(FY("No track with the ID {0} was found in the source file.\n"), tspec.tid));
 }
 
 bool
@@ -498,7 +498,7 @@ extract_tracks(kax_analyzer_c &analyzer,
           if (mtx::cli::g_gui_mode)
             mxinfo(fmt::format("#GUI#progress {0}%\n", current_percentage));
           else
-            mxinfo(fmt::format(Y("Progress: {0}%{1}"), current_percentage, "\r"));
+            mxinfo(fmt::format(FY("Progress: {0}%{1}"), current_percentage, "\r"));
 
           previous_percentage = current_percentage;
         }
@@ -545,7 +545,7 @@ extract_tracks(kax_analyzer_c &analyzer,
       if (mtx::cli::g_gui_mode)
         mxinfo(fmt::format("#GUI#progress {0}%\n", 100));
       else
-        mxinfo(fmt::format(Y("Progress: {0}%{1}"), 100, "\n"));
+        mxinfo(fmt::format(FY("Progress: {0}%{1}"), 100, "\n"));
     }
 
     return true;

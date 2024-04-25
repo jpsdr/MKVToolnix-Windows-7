@@ -417,7 +417,7 @@ Tab::setupInputControls() {
   connect(p.ui->aacIsSBR,                      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onAacIsSBRChanged);
   connect(p.ui->audioEmphasis,                 static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onAudioEmphasisChanged);
   connect(p.ui->addFiles,                      &QToolButton::clicked,                                                  this,                       &Tab::onAddFiles);
-  connect(p.ui->addToJobQueue,                 &QPushButton::clicked,                                                  this,                       [=]() { addToJobQueue(false); });
+  connect(p.ui->addToJobQueue,                 &QPushButton::clicked,                                                  this,                       [this]() { addToJobQueue(false); });
   connect(p.ui->additionalTrackOptions,        &QLineEdit::textChanged,                                                this,                       &Tab::onAdditionalTrackOptionsChanged);
   connect(p.ui->aspectRatio,                   &QComboBox::currentTextChanged,                                         this,                       &Tab::onAspectRatioChanged);
   connect(p.ui->aspectRatio,                   &QComboBox::editTextChanged,                                            this,                       &Tab::onAspectRatioChanged);
@@ -457,7 +457,7 @@ Tab::setupInputControls() {
   connect(p.ui->removeDialogNormalizationGain, &QCheckBox::toggled,                                                    this,                       &Tab::onRemoveDialogNormalizationGainChanged);
   connect(p.ui->setAspectRatio,                &QPushButton::clicked,                                                  this,                       &Tab::onSetAspectRatio);
   connect(p.ui->setDisplayWidthHeight,         &QPushButton::clicked,                                                  this,                       &Tab::onSetDisplayDimensions);
-  connect(p.ui->startMuxing,                   &QPushButton::clicked,                                                  this,                       [=]() { addToJobQueue(true); });
+  connect(p.ui->startMuxing,                   &QPushButton::clicked,                                                  this,                       [this]() { addToJobQueue(true); });
   connect(p.ui->stereoscopy,                   static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onStereoscopyChanged);
   connect(p.ui->stretchBy,                     &QLineEdit::textChanged,                                                this,                       &Tab::onStretchByChanged);
   connect(p.ui->subtitleCharacterSet,          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onSubtitleCharacterSetChanged);
@@ -513,15 +513,15 @@ Tab::setupInputControls() {
   connect(p.enableAllTracksAction,             &QAction::triggered,                                                    this,                       &Tab::enableAllTracks);
   connect(p.disableAllTracksAction,            &QAction::triggered,                                                    this,                       &Tab::disableAllTracks);
 
-  connect(p.startMuxingLeaveAsIs,              &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(true,  CMSAction::None); });
-  connect(p.startMuxingCreateNewSettings,      &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(true,  CMSAction::NewSettings); });
-  connect(p.startMuxingCloseSettings,          &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(true,  CMSAction::CloseSettings); });
-  connect(p.startMuxingRemoveInputFiles,       &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(true,  CMSAction::RemoveInputFiles); });
+  connect(p.startMuxingLeaveAsIs,              &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(true,  CMSAction::None); });
+  connect(p.startMuxingCreateNewSettings,      &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(true,  CMSAction::NewSettings); });
+  connect(p.startMuxingCloseSettings,          &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(true,  CMSAction::CloseSettings); });
+  connect(p.startMuxingRemoveInputFiles,       &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(true,  CMSAction::RemoveInputFiles); });
 
-  connect(p.addToJobQueueLeaveAsIs,            &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(false, CMSAction::None); });
-  connect(p.addToJobQueueCreateNewSettings,    &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(false, CMSAction::NewSettings); });
-  connect(p.addToJobQueueCloseSettings,        &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(false, CMSAction::CloseSettings); });
-  connect(p.addToJobQueueRemoveInputFiles,     &QAction::triggered,                                                    this,                       [=]() { addToJobQueue(false, CMSAction::RemoveInputFiles); });
+  connect(p.addToJobQueueLeaveAsIs,            &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(false, CMSAction::None); });
+  connect(p.addToJobQueueCreateNewSettings,    &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(false, CMSAction::NewSettings); });
+  connect(p.addToJobQueueCloseSettings,        &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(false, CMSAction::CloseSettings); });
+  connect(p.addToJobQueueRemoveInputFiles,     &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(false, CMSAction::RemoveInputFiles); });
 
   connect(p.addFilesMenu,                      &QMenu::aboutToShow,                                                    this,                       &Tab::enableFilesActions);
 

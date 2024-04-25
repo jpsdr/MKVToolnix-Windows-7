@@ -63,7 +63,7 @@ wavpack_reader_c::read_headers() {
     }
   } catch (...) {
     if (verbose)
-      mxinfo_fn(m_ti.m_fname, fmt::format(Y("Could not open the corresponding correction file '{0}c'.\n"), m_ti.m_fname));
+      mxinfo_fn(m_ti.m_fname, fmt::format(FY("Could not open the corresponding correction file '{0}c'.\n"), m_ti.m_fname));
   }
 
   if (!verbose)
@@ -71,7 +71,7 @@ wavpack_reader_c::read_headers() {
 
   show_demuxer_info();
   if (meta.has_correction)
-    mxinfo_fn(m_ti.m_fname, fmt::format(Y("Also using the correction file '{0}c'.\n"), m_ti.m_fname));
+    mxinfo_fn(m_ti.m_fname, fmt::format(FY("Also using the correction file '{0}c'.\n"), m_ti.m_fname));
 }
 
 void

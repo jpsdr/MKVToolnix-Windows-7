@@ -31,7 +31,7 @@ xtr_webvtt_c::create_file(xtr_base_c *master,
                           libmatroska::KaxTrackEntry &track) {
   auto priv = find_child<libmatroska::KaxCodecPrivate>(&track);
   if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
+    mxerror(fmt::format(FY("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   xtr_base_c::create_file(master, track);
 
@@ -46,7 +46,7 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
   ++m_num_entries;
 
   if (-1 == f.duration) {
-    mxwarn(fmt::format(Y("Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"), m_tid, m_num_entries));
+    mxwarn(fmt::format(FY("Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"), m_tid, m_num_entries));
     f.duration = 1000000000;
   }
 

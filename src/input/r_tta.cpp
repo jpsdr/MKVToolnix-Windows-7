@@ -48,7 +48,7 @@ tta_reader_c::read_headers() {
   try {
     int tag_size = mtx::id3::skip_v2_tag(*m_in);
     if (0 > tag_size)
-      mxerror_fn(m_ti.m_fname, fmt::format(Y("tta_reader: tag_size < 0 in the c'tor. {0}\n"), BUGMSG));
+      mxerror_fn(m_ti.m_fname, fmt::format(FY("tta_reader: tag_size < 0 in the c'tor. {0}\n"), BUGMSG));
     m_size -= tag_size;
 
     if (m_in->read(&header, sizeof(mtx::tta::file_header_t)) != sizeof(mtx::tta::file_header_t))

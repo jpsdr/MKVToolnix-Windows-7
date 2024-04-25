@@ -6,6 +6,8 @@
   used for Matroska files, `mkvmerge` will generate new random track UIDs
   instead of keeping existing track UIDs. This is done automatically when a
   Matroska file was created by MakeMKV.
+* translations: added a Norwegian Bokmål translation of the programs by Roger
+  Knutsen (see `AUTHORS`).
 
 ## Bug fixes
 
@@ -19,6 +21,13 @@
   stored as a wrong integer type internally. This could result in wrong values
   being copied when very large values were present in source files, or in
   error messages when very large values were used as command-line parameters.
+
+## Build system changes
+
+* Release v8.0.0 of the `fmt` library is now required. If not found, the
+  bundled copy will be used.
+* A C++20 compatible compiler is now required for several but certainly not
+  all C++20 features. g++ v10 & clang++ v10 should suffice.
 
 
 # Version 83.0 "Circle Of Friends" 2024-03-10

@@ -147,7 +147,7 @@ _safememdup(const void *s,
 
   auto copy = reinterpret_cast<uint8_t *>(malloc(size));
   if (!copy)
-    mxerror(fmt::format(Y("memory.cpp/safememdup() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
+    mxerror(fmt::format(FY("memory.cpp/safememdup() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
   memcpy(copy, s, size);        // NOLINT(clang-analyzer-core.NonNullParamChecker) as mxerror() terminates the program
 
   return copy;
@@ -159,7 +159,7 @@ _safemalloc(size_t size,
             int line) {
   auto mem = reinterpret_cast<uint8_t *>(malloc(size));
   if (!mem)
-    mxerror(fmt::format(Y("memory.cpp/safemalloc() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
+    mxerror(fmt::format(FY("memory.cpp/safemalloc() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 
   return mem;
 }
@@ -175,7 +175,7 @@ _saferealloc(void *mem,
 
   mem = realloc(mem, size);
   if (!mem)
-    mxerror(fmt::format(Y("memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
+    mxerror(fmt::format(FY("memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 
   return reinterpret_cast<uint8_t *>(mem);
 }

@@ -99,7 +99,7 @@ avc_video_packetizer_c::extract_aspect_ratio() {
                                option_source_e::bitstream);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-             fmt::format(Y("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"),
+             fmt::format(FY("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"),
                          m_ti.m_display_width, m_ti.m_display_height));
 }
 
@@ -125,7 +125,7 @@ avc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
     return CAN_CONNECT_NO_FORMAT;
 
   if (m_ti.m_private_data && vsrc->m_ti.m_private_data && memcmp(m_ti.m_private_data->get_buffer(), vsrc->m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size())) {
-    error_message = fmt::format(Y("The codec's private data does not match. Both have the same length ({0}) but different content."), m_ti.m_private_data->get_size());
+    error_message = fmt::format(FY("The codec's private data does not match. Both have the same length ({0}) but different content."), m_ti.m_private_data->get_size());
     return CAN_CONNECT_MAYBE_CODECPRIVATE;
   }
 

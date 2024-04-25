@@ -140,7 +140,7 @@ xyzvc_es_video_packetizer_c::check_if_default_duration_available()
 void
 xyzvc_es_video_packetizer_c::handle_delayed_headers() {
   if (0 < m_parser_base->get_num_skipped_frames())
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"), m_parser_base->get_num_skipped_frames()));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"), m_parser_base->get_num_skipped_frames()));
 
   set_codec_private(m_parser_base->get_configuration_record());
 
@@ -163,7 +163,7 @@ xyzvc_es_video_packetizer_c::handle_aspect_ratio() {
   set_video_display_dimensions(dimensions.first, dimensions.second, generic_packetizer_c::ddu_pixels, option_source_e::bitstream);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-             fmt::format(Y("Extracted the aspect ratio information from the video bitstream and set the display dimensions to {0}/{1}.\n"),
+             fmt::format(FY("Extracted the aspect ratio information from the video bitstream and set the display dimensions to {0}/{1}.\n"),
                          m_ti.m_display_width, m_ti.m_display_height));
 
   mxdebug_if(m_debug_aspect_ratio,

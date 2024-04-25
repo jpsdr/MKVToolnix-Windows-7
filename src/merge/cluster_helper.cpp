@@ -224,7 +224,7 @@ cluster_helper_c::split(packet_cptr const &packet) {
   if (mtx::cli::g_gui_mode)
     mxinfo(fmt::format("#GUI#splitting_before_timestamp {0}\n", formatted_splitting_before));
 
-  mxinfo(fmt::format(Y("Timestamp used in split decision: {0}\n"), formatted_splitting_before));
+  mxinfo(fmt::format(FY("Timestamp used in split decision: {0}\n"), formatted_splitting_before));
 
   if (current_split_point.m_use_once) {
     if (   !current_split_point.m_discard
@@ -786,7 +786,7 @@ cluster_helper_c::verify_and_report_chapter_generation_parameters()
   if (!m->chapter_generation_reference_track)
     mxerror(Y("Chapter generation is only possible if at least one video or audio track is copied.\n"));
 
-  mxinfo(fmt::format(Y("Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"),
+  mxinfo(fmt::format(FY("Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"),
                      m->chapter_generation_reference_track->m_ti.m_id, m->chapter_generation_reference_track->m_ti.m_fname));
 }
 

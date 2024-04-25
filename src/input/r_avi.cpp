@@ -448,7 +448,7 @@ avi_reader_c::add_audio_demuxer(int aid) {
 
   AVI_set_audio_track(m_avi, aid);
   if (AVI_read_audio_chunk(m_avi, nullptr) < 0) {
-    mxwarn(fmt::format(Y("Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"), aid + 1, AVI_strerror()));
+    mxwarn(fmt::format(FY("Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"), aid + 1, AVI_strerror()));
     return;
   }
 
@@ -502,7 +502,7 @@ avi_reader_c::add_audio_demuxer(int aid) {
     packetizer = create_vorbis_packetizer(aid);
 
   else
-    mxerror_tid(m_ti.m_fname, aid + 1, fmt::format(Y("Unknown/unsupported audio format 0x{0:04x} for this audio track.\n"), audio_format));
+    mxerror_tid(m_ti.m_fname, aid + 1, fmt::format(FY("Unknown/unsupported audio format 0x{0:04x} for this audio track.\n"), audio_format));
 
   packetizer->enable_avi_audio_sync(true);
 

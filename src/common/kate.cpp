@@ -42,12 +42,12 @@ parse_identification_header(uint8_t const *buffer,
 
   header.headertype = bc.get_bits(8);
   if (HEADERTYPE_IDENTIFICATION != header.headertype)
-    throw mtx::kate::header_parsing_x(fmt::format(Y("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, HEADERTYPE_IDENTIFICATION));
+    throw mtx::kate::header_parsing_x(fmt::format(FY("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, HEADERTYPE_IDENTIFICATION));
 
   for (i = 0; 7 > i; ++i)
     header.kate_string[i] = bc.get_bits(8);
   if (memcmp(header.kate_string, "kate\0\0\0", 7))
-    throw mtx::kate::header_parsing_x(fmt::format(Y("Wrong identification string: '{0:7s}' != 'kate\\0\\0\\0'"), header.kate_string)); /* won't print NULs well, but hey */
+    throw mtx::kate::header_parsing_x(fmt::format(FY("Wrong identification string: '{0:7s}' != 'kate\\0\\0\\0'"), header.kate_string)); /* won't print NULs well, but hey */
 
   bc.get_bits(8); // we don't need those - they are reserved
 
@@ -57,7 +57,7 @@ parse_identification_header(uint8_t const *buffer,
   // do not test vmin, as the header is stable for minor version changes
   static const int supported_version = 0;
   if (header.vmaj > supported_version)
-    throw mtx::kate::header_parsing_x(fmt::format(Y("Wrong Kate version: {0}.{1} > {2}.x"), header.vmaj, header.vmin, supported_version));
+    throw mtx::kate::header_parsing_x(fmt::format(FY("Wrong Kate version: {0}.{1} > {2}.x"), header.vmaj, header.vmin, supported_version));
 
   header.nheaders = bc.get_bits(8);
   header.tenc     = bc.get_bits(8);

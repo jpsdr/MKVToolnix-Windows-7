@@ -22,7 +22,7 @@ class String
   end
 
   def to_u8_c_string
-  'u8' + self.to_c_string
+    to_c_string # 'u8' + self.to_c_string
   end
 
   def to_cpp_string
@@ -30,7 +30,7 @@ class String
   end
 
   def to_u8_cpp_string
-    "u8" + self.to_c_string + "s"
+    to_cpp_string # "u8" + self.to_c_string + "s"
   end
 end
 

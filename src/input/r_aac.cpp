@@ -66,7 +66,7 @@ aac_reader_c::read_headers() {
     }
 
     if ((!m_aacheader.config.sample_rate || !m_aacheader.config.channels) && !g_identifying)
-      mxerror(fmt::format(Y("The AAC file '{0}' contains invalid header data: the sampling frequency or the number of channels is 0.\n"), m_ti.m_fname));
+      mxerror(fmt::format(FY("The AAC file '{0}' contains invalid header data: the sampling frequency or the number of channels is 0.\n"), m_ti.m_fname));
 
     m_parser             = mtx::aac::parser_c{};
 

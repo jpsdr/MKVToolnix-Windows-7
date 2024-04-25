@@ -279,7 +279,7 @@ sighandler(int /* signum */) {
   if ((g_kax_sh_main->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_main->UpdateSize();
     if (s_kax_sh_void->ReplaceWith(*g_kax_sh_main, *s_out, true) == INVALID_FILEPOS_T)
-      mxwarn(fmt::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"), BUGMSG));
+      mxwarn(fmt::format(FY("This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"), BUGMSG));
   }
   mxinfo(Y(" done\n"));
 
@@ -328,7 +328,7 @@ display_progress(bool is_100percent = false) {
     if (mtx::cli::g_gui_mode)
       mxinfo(fmt::format("#GUI#progress 100%\n"));
     else
-      mxinfo(fmt::format(Y("Progress: 100%{0}"), "\r"));
+      mxinfo(fmt::format(FY("Progress: 100%{0}"), "\r"));
     return;
   }
 
@@ -351,7 +351,7 @@ display_progress(bool is_100percent = false) {
   if (mtx::cli::g_gui_mode)
     mxinfo(fmt::format("#GUI#progress {0}%\n", current_percentage));
   else
-    mxinfo(fmt::format(Y("Progress: {0}%{1}"), current_percentage, "\r"));
+    mxinfo(fmt::format(FY("Progress: {0}%{1}"), current_percentage, "\r"));
 
   s_previous_percentage  = current_percentage;
   s_previous_progress_on = current_time;
@@ -426,7 +426,7 @@ add_packetizer_globally(generic_packetizer_c *packetizer) {
       ++idx;
 
   if (-1 == pack.file)
-    mxerror(fmt::format(Y("filelist_t not found for generic_packetizer_c. {0}\n"), BUGMSG));
+    mxerror(fmt::format(FY("filelist_t not found for generic_packetizer_c. {0}\n"), BUGMSG));
 
   g_packetizers.push_back(pack);
 }
@@ -723,7 +723,7 @@ render_headers(mm_io_c *out) {
     }
 
   } catch (...) {
-    mxerror(fmt::format(Y("The track headers could not be rendered correctly. {0}\n"), BUGMSG));
+    mxerror(fmt::format(FY("The track headers could not be rendered correctly. {0}\n"), BUGMSG));
   }
 }
 
@@ -798,7 +798,7 @@ relocate_written_data(uint64_t data_start_pos,
     auto num_read = s_out->read(buffer, to_copy);
 
     if (num_read != to_copy) {
-      mxinfo(fmt::format(Y("Error reading from the file '{0}'.\n"), s_out->get_file_name()));
+      mxinfo(fmt::format(FY("Error reading from the file '{0}'.\n"), s_out->get_file_name()));
       mxdebug_if(s_debug_rerender_track_headers, fmt::format("[rerender]   relocation failed; read only {0} bytes\n", num_read));
     }
 
@@ -964,17 +964,17 @@ check_append_mapping() {
 
     // 1. Is there a file with the src_file_id?
     if (g_files.size() <= amap.src_file_id)
-      mxerror(fmt::format(Y("There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"), amap.src_file_id));
+      mxerror(fmt::format(FY("There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"), amap.src_file_id));
 
     // 2. Is the "source" file in "append mode", meaning does its file name
     // start with a '+'?
     auto src_file = g_files.begin() + amap.src_file_id;
     if (!(*src_file)->appending)
-      mxerror(fmt::format(Y("The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name));
+      mxerror(fmt::format(FY("The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name));
 
     // 3. Is there a file with the dst_file_id?
     if (g_files.size() <= amap.dst_file_id)
-      mxerror(fmt::format(Y("There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"), amap.dst_file_id));
+      mxerror(fmt::format(FY("There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"), amap.dst_file_id));
 
     // 4. G_Files cannot be appended to itself.
     if (amap.src_file_id == amap.dst_file_id)
@@ -991,8 +991,8 @@ check_append_mapping() {
     size_t count = std::accumulate(g_append_mapping.begin(), g_append_mapping.end(), 0, [&src_file](auto count, auto const &e) { return count + (e.src_file_id == src_file->id ? 1 : 0); });
 
     if ((0 < count) && (src_file-> reader->m_used_track_ids.size() > count))
-      mxerror(fmt::format(Y("Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the "
-                            "default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"), src_file-> id, src_file-> name));
+      mxerror(fmt::format(FY("Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the "
+                             "default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"), src_file-> id, src_file-> name));
     else if (0 == count) {
       std::string missing_mappings;
 
@@ -1010,8 +1010,8 @@ check_append_mapping() {
           missing_mappings += ",";
         missing_mappings += fmt::format("{0}:{1}:{2}:{3}", new_amap.src_file_id, new_amap.src_track_id, new_amap.dst_file_id, new_amap.dst_track_id);
       }
-      mxinfo(fmt::format(Y("No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. "
-                           "Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"),
+      mxinfo(fmt::format(FY("No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. "
+                            "Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"),
                          src_file-> id, src_file-> name, missing_mappings));
     }
   }
@@ -1024,14 +1024,14 @@ check_append_mapping() {
     // 5. Does the "source" file have a track with the src_track_id, and is
     // that track selected for copying?
     if (!mtx::includes((*src_file)->reader->m_used_track_ids, amap.src_track_id))
-      mxerror(fmt::format(Y("The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. "
-                            "The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name, amap.src_track_id));
+      mxerror(fmt::format(FY("The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. "
+                             "The argument for '--append-to' was invalid.\n"), amap.src_file_id, (*src_file)->name, amap.src_track_id));
 
     // 6. Does the "destination" file have a track with the dst_track_id, and
     // that track selected for copying?
     if (!mtx::includes((*dst_file)->reader->m_used_track_ids, amap.dst_track_id))
-      mxerror(fmt::format(Y("The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no "
-                            "track can be appended to it. The argument for '--append-to' was invalid.\n"), amap.dst_file_id, (*dst_file)->name, amap.dst_track_id));
+      mxerror(fmt::format(FY("The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no "
+                             "track can be appended to it. The argument for '--append-to' was invalid.\n"), amap.dst_file_id, (*dst_file)->name, amap.dst_track_id));
 
     // 7. Is this track already mapped to somewhere else?
     for (auto &cmp_amap : g_append_mapping) {
@@ -1040,7 +1040,7 @@ check_append_mapping() {
 
       if (   (cmp_amap.src_file_id  == amap.src_file_id)
           && (cmp_amap.src_track_id == amap.src_track_id))
-        mxerror(fmt::format(Y("The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"),
+        mxerror(fmt::format(FY("The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"),
                             amap.src_track_id, amap.src_file_id, (*src_file)->name));
     }
 
@@ -1051,7 +1051,7 @@ check_append_mapping() {
 
       if (   (cmp_amap.dst_file_id  == amap.dst_file_id)
           && (cmp_amap.dst_track_id == amap.dst_track_id))
-        mxerror(fmt::format(Y("More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"),
+        mxerror(fmt::format(FY("More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"),
                             amap.dst_track_id, amap.dst_file_id, (*dst_file)->name));
     }
   }
@@ -1072,9 +1072,9 @@ check_append_mapping() {
     std::string error_message;
     auto result = src_ptzr->can_connect_to(dst_ptzr, error_message);
     if (CAN_CONNECT_MAYBE_CODECPRIVATE == result)
-      mxwarn(fmt::format(Y("The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} "
-                           "Please make sure that the resulting file plays correctly the whole time. "
-                           "The author of this program will probably not give support for playback issues with the resulting file.\n"),
+      mxwarn(fmt::format(FY("The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} "
+                            "Please make sure that the resulting file plays correctly the whole time. "
+                            "The author of this program will probably not give support for playback issues with the resulting file.\n"),
                          amap.src_track_id, g_files[amap.src_file_id]->name,
                          amap.dst_track_id, g_files[amap.dst_file_id]->name,
                          error_message));
@@ -1086,7 +1086,7 @@ check_append_mapping() {
                       : result == CAN_CONNECT_NO_UNSUPPORTED ? Y("Appending tracks of this type is not supported.")
                       :                                        Y("The reason is unknown.");
 
-      mxerror(fmt::format(Y("The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"),
+      mxerror(fmt::format(FY("The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"),
                           amap.src_track_id, g_files[amap.src_file_id]->name,
                           amap.dst_track_id, g_files[amap.dst_file_id]->name,
                           error_message));
@@ -1139,7 +1139,7 @@ check_split_support() {
     if (error_message.empty())
       error_message = Y("Splitting tracks of this type is not supported.");
 
-    mxerror(fmt::format(Y("The track ID {0} from the file '{1}' cannot be split. {2}\n"), packetizer.m_ti.m_id, packetizer.m_ti.m_fname, error_message));
+    mxerror(fmt::format(FY("The track ID {0} from the file '{1}' cannot be split. {2}\n"), packetizer.m_ti.m_id, packetizer.m_ti.m_fname, error_message));
   }
 }
 
@@ -1289,7 +1289,7 @@ create_output_name() {
   // Now search for something like %02d
   auto converted = to_utf8(Q(s).replace(QRegularExpression{"%(\\d+)d"}, "{0:\\1}"));
   if (converted != s)
-    return fmt::format(converted, g_file_num);
+    return fmt::format(fmt::runtime(converted), g_file_num);
 
   // If chapter names are requested, don't force a numeric suffix. The
   // chapter name template is replaced when closing the file.
@@ -1389,7 +1389,7 @@ prepare_tags_for_rendering() {
   remove_dummy_elements(*s_kax_tags);
   sort_ebml_master(s_kax_tags.get());
   if (!s_kax_tags->CheckMandatory())
-    mxerror(fmt::format(Y("Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"), BUGMSG));
+    mxerror(fmt::format(FY("Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"), BUGMSG));
 
   s_kax_tags->UpdateSize();
   g_tags_size = s_kax_tags->ElementSize();
@@ -1415,11 +1415,11 @@ create_next_output_file() {
   try {
     s_out = !g_cluster_helper->discarding() ? mm_write_buffer_io_c::open(this_outfile, 20 * 1024 * 1024) : mm_io_cptr{ new mm_null_io_c{this_outfile} };
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), this_outfile, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for writing: {1}.\n"), this_outfile, ex));
   }
 
   if (verbose && !g_cluster_helper->discarding())
-    mxinfo(fmt::format(Y("The file '{0}' has been opened for writing.\n"), this_outfile));
+    mxinfo(fmt::format(FY("The file '{0}' has been opened for writing.\n"), this_outfile));
 
   g_cluster_helper->set_output(s_out.get());
 
@@ -1637,9 +1637,9 @@ insert_chapter_name_in_output_file_name(boost::filesystem::path const &original_
 
   try {
     boost::filesystem::rename(original_file_name, new_file_name);
-    mxinfo(fmt::format(Y("The file '{0}' was renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
+    mxinfo(fmt::format(FY("The file '{0}' was renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
   } catch (boost::filesystem::filesystem_error &) {
-    mxerror(fmt::format(Y("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
+    mxerror(fmt::format(FY("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
   }
 }
 
@@ -1792,7 +1792,7 @@ finish_file(bool last_file,
   if ((g_kax_sh_main->ListSize() > 0) && !mtx::hacks::is_engaged(mtx::hacks::NO_META_SEEK)) {
     g_kax_sh_main->UpdateSize();
     if (s_kax_sh_void->ReplaceWith(*g_kax_sh_main, *s_out, true) == INVALID_FILEPOS_T)
-      mxwarn(fmt::format(Y("This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"),
+      mxwarn(fmt::format(FY("This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"),
                          g_kax_sh_main->ElementSize(), BUGMSG));
   }
 
@@ -1879,7 +1879,7 @@ append_track(packetizer_t &ptzr,
   });
 
   if (src_file.reader->m_reader_packetizers.end() == gptzr)
-    mxerror(fmt::format(Y("Could not find gptzr when appending. {0}\n"), BUGMSG));
+    mxerror(fmt::format(FY("Could not find gptzr when appending. {0}\n"), BUGMSG));
 
   // If we're dealing with a subtitle track or if the appending file contains
   // chapters then we have to suck the previous file dry. See below for the
@@ -1953,7 +1953,7 @@ append_track(packetizer_t &ptzr,
       return;
   }
 
-  mxinfo(fmt::format(Y("Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"),
+  mxinfo(fmt::format(FY("Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"),
                      (*gptzr)->m_ti.m_id, amap.src_file_id, (*gptzr)->m_ti.m_fname, ptzr.packetizer->m_ti.m_id, amap.dst_file_id, ptzr.packetizer->m_ti.m_fname));
 
   // Also fix the ptzr structure and reset the ptzr's state to "I want more".
