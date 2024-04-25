@@ -109,7 +109,7 @@ hevc_video_packetizer_c::extract_aspect_ratio() {
                                option_source_e::bitstream);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-             fmt::format(Y("Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"),
+             fmt::format(FY("Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"),
                          m_ti.m_display_width, m_ti.m_display_height));
 }
 

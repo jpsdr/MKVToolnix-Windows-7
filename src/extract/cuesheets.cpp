@@ -97,13 +97,13 @@ write_cuesheet(std::string file_name,
   auto print_if_global = [&out, &tags, &tuid](char const *name, char const *format) {
     auto global = get_global_tag(name, tuid, tags);
     if (!global.empty())
-      out.puts(fmt::format(format, global));
+      out.puts(fmt::format(fmt::runtime(format), global));
   };
 
   auto print_if_available = [&out, &tags, &tag, &tuid](char const *name, char const *format) {
     auto value = mtx::tags::get_simple_value(name, *tag);
     if (!value.empty() && (value != get_global_tag(name, tuid, tags)))
-      out.puts(fmt::format(format, value));
+      out.puts(fmt::format(fmt::runtime(format), value));
   };
 
   auto print_comments = [&out, &tag](char const *prefix) {

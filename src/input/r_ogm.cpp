@@ -428,7 +428,7 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
   ogg_packet op;
 
   if (ogg_stream_init(&os, ogg_page_serialno(og))) {
-    mxwarn_fn(m_ti.m_fname, fmt::format(Y("ogg_stream_init for stream number {0} failed. Will try to continue and ignore this stream.\n"), sdemuxers.size()));
+    mxwarn_fn(m_ti.m_fname, fmt::format(FY("ogg_stream_init for stream number {0} failed. Will try to continue and ignore this stream.\n"), sdemuxers.size()));
     return;
   }
 
@@ -507,7 +507,7 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
         dmx = new ogm_a_aac_demuxer_c(this);
 
       else
-        mxwarn_fn(m_ti.m_fname, fmt::format(Y("Unknown audio stream type 0x{0:04x}. Stream ID {1} will be ignored.\n"), codec_id, sdemuxers.size()));
+        mxwarn_fn(m_ti.m_fname, fmt::format(FY("Unknown audio stream type 0x{0:04x}. Stream ID {1} will be ignored.\n"), codec_id, sdemuxers.size()));
 
     } else if (!strncmp(sth->streamtype, "text", 4))
       dmx = new ogm_s_text_demuxer_c(this);
@@ -1186,7 +1186,7 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
       packets.emplace_back(packet, toc);
 
     } catch (mtx::opus::decode_error &ex) {
-      mxwarn_fn(m_ti.m_fname, fmt::format(Y("Error decoding an Ogg Opus page at source timestamp {0}; page will be skipped: {1}\n"), page_end_timestamp, ex));
+      mxwarn_fn(m_ti.m_fname, fmt::format(FY("Error decoding an Ogg Opus page at source timestamp {0}; page will be skipped: {1}\n"), page_end_timestamp, ex));
     }
   }
 
@@ -1477,7 +1477,7 @@ ogm_v_theora_demuxer_c::initialize() {
     display_width  = theora.display_width;
     display_height = theora.display_height;
   } catch (mtx::theora::header_parsing_x &e) {
-    mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(Y("The Theora identification header could not be parsed ({0}).\n"), e.error()));
+    mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(FY("The Theora identification header could not be parsed ({0}).\n"), e.error()));
   }
 }
 
@@ -1666,7 +1666,7 @@ ogm_s_kate_demuxer_c::initialize() {
       language = mtx::bcp47::language_c::parse(kate.language);
 
   } catch (mtx::kate::header_parsing_x &e) {
-    mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(Y("The Kate identification header could not be parsed ({0}).\n"), e.error()));
+    mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(FY("The Kate identification header could not be parsed ({0}).\n"), e.error()));
   }
 }
 

@@ -153,10 +153,10 @@ extract_cli_parser_c::init_parser() {
 void
 extract_cli_parser_c::assert_mode(options_c::extraction_mode_e mode) {
   if      ((options_c::em_tracks   == mode) && (m_current_mode->m_extraction_mode != mode))
-    mxerror(fmt::format(Y("'{0}' is only allowed when extracting tracks.\n"),   m_current_arg));
+    mxerror(fmt::format(FY("'{0}' is only allowed when extracting tracks.\n"),   m_current_arg));
 
   else if ((options_c::em_chapters == mode) && (m_current_mode->m_extraction_mode != mode))
-    mxerror(fmt::format(Y("'{0}' is only allowed when extracting chapters.\n"), m_current_arg));
+    mxerror(fmt::format(FY("'{0}' is only allowed when extracting chapters.\n"), m_current_arg));
 }
 
 void
@@ -180,7 +180,7 @@ void
 extract_cli_parser_c::set_blockadd() {
   assert_mode(options_c::em_tracks);
   if (!mtx::string::parse_number(m_next_arg, m_extract_blockadd_level) || (-1 > m_extract_blockadd_level))
-    mxerror(fmt::format(Y("Invalid BlockAddition level in argument '{0}'.\n"), m_next_arg));
+    mxerror(fmt::format(FY("Invalid BlockAddition level in argument '{0}'.\n"), m_next_arg));
 }
 
 void
@@ -207,7 +207,7 @@ extract_cli_parser_c::set_simple_language() {
 
   m_current_mode->m_simple_chapter_language = mtx::bcp47::language_c::parse(m_next_arg);
   if (!m_current_mode->m_simple_chapter_language.has_valid_iso639_code())
-    mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), m_next_arg));
+    mxerror(fmt::format(FY("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), m_next_arg));
 }
 
 std::optional<options_c::extraction_mode_e>
@@ -267,7 +267,7 @@ extract_cli_parser_c::set_cli_mode() {
     mxdebug_if(m_debug, fmt::format("set_cli_mode: new mode is multiple\n"));
 
   } else
-    mxerror(fmt::format(Y("Unknown mode '{0}'.\n"), m_current_arg));
+    mxerror(fmt::format(FY("Unknown mode '{0}'.\n"), m_current_arg));
 }
 
 void
@@ -338,7 +338,7 @@ extract_cli_parser_c::add_extraction_spec() {
       && (options_c::em_cues          != m_current_mode->m_extraction_mode)
       && (options_c::em_timestamps_v2 != m_current_mode->m_extraction_mode)
       && (options_c::em_attachments   != m_current_mode->m_extraction_mode))
-    mxerror(fmt::format(Y("Unrecognized command line option '{0}'.\n"), m_current_arg));
+    mxerror(fmt::format(FY("Unrecognized command line option '{0}'.\n"), m_current_arg));
 
   QRegularExpression s_track_id_re{"^(\\d+)(?::(.+))?$"};
 
@@ -346,9 +346,9 @@ extract_cli_parser_c::add_extraction_spec() {
 
   if (!matches.hasMatch()) {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
-      mxerror(fmt::format(Y("Invalid attachment ID/file name specification in argument '{0}'.\n"), m_current_arg));
+      mxerror(fmt::format(FY("Invalid attachment ID/file name specification in argument '{0}'.\n"), m_current_arg));
     else
-      mxerror(fmt::format(Y("Invalid track ID/file name specification in argument '{0}'.\n"), m_current_arg));
+      mxerror(fmt::format(FY("Invalid track ID/file name specification in argument '{0}'.\n"), m_current_arg));
   }
 
   track_spec_t track;
@@ -356,7 +356,7 @@ extract_cli_parser_c::add_extraction_spec() {
   mtx::string::parse_number(to_utf8(matches.captured(1)), track.tid);
 
   if (m_used_tids[m_current_mode->m_extraction_mode][track.tid])
-    mxerror(fmt::format(Y("The ID '{0}' has already been used for another destination file.\n"), track.tid));
+    mxerror(fmt::format(FY("The ID '{0}' has already been used for another destination file.\n"), track.tid));
   m_used_tids[m_current_mode->m_extraction_mode][track.tid] = true;
 
   std::string output_file_name;
@@ -367,7 +367,7 @@ extract_cli_parser_c::add_extraction_spec() {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
       mxinfo(Y("No destination file name specified, will use attachment name.\n"));
     else
-      mxerror(fmt::format(Y("Missing destination file name in argument '{0}'.\n"), m_current_arg));
+      mxerror(fmt::format(FY("Missing destination file name in argument '{0}'.\n"), m_current_arg));
   }
 
   track.out_name               = output_file_name;
@@ -389,11 +389,11 @@ extract_cli_parser_c::check_for_identical_source_and_destination_file_names() {
 
   for (auto const &mode_option : m_options.m_modes) {
     if (!mode_option.m_output_file_name.empty() && (boost::filesystem::absolute(mtx::fs::to_path(mode_option.m_output_file_name)) == source_file_name))
-      mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
+      mxerror(fmt::format(FY("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
 
     for (auto const &track_spec : mode_option.m_tracks)
       if (!track_spec.out_name.empty() && (boost::filesystem::absolute(mtx::fs::to_path(track_spec.out_name)) == source_file_name))
-        mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
+        mxerror(fmt::format(FY("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
   }
 }
 

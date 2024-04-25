@@ -91,7 +91,7 @@ ebml_chapters_converter_c::fix_edition_entry(libmatroska::KaxEditionEntry &eentr
     if (dynamic_cast<libmatroska::KaxEditionUID *>(element)) {
       euid = static_cast<libmatroska::KaxEditionUID *>(element);
       if (!is_unique_number(euid->GetValue(), UNIQUE_EDITION_IDS)) {
-        mxwarn(fmt::format(Y("Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"), euid->GetValue()));
+        mxwarn(fmt::format(FY("Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"), euid->GetValue()));
         euid->SetValue(create_unique_number(UNIQUE_EDITION_IDS));
       }
 
@@ -140,20 +140,20 @@ ebml_chapters_converter_c::fix_chapter_display_languages_and_countries(libmatros
       auto parsed_language = mtx::bcp47::language_c::parse(kax_ietf_language->GetValue());
 
       if (!parsed_language.is_valid())
-        throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), kax_ietf_language->GetValue(), parsed_language.get_error())};
+        throw conversion_x{fmt::format(FY("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), kax_ietf_language->GetValue(), parsed_language.get_error())};
 
     } else if (auto kax_legacy_language = dynamic_cast<libmatroska::KaxChapterLanguage *>(child); kax_legacy_language) {
       auto code         = kax_legacy_language->GetValue();
       auto language_opt = mtx::iso639::look_up(code);
 
       if (!language_opt || !language_opt->is_part_of_iso639_2)
-        throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), code)};
+        throw conversion_x{fmt::format(FY("'{0}' is not a valid ISO 639-2 language code."), code)};
 
     } else if (auto kax_country = dynamic_cast<libmatroska::KaxChapterCountry *>(child); kax_country) {
       auto country     = kax_country->GetValue();
       auto country_opt = mtx::iso3166::look_up_cctld(country);
       if (!country_opt)
-        throw conversion_x{fmt::format(Y("'{0}' is not a valid ccTLD country code."), country)};
+        throw conversion_x{fmt::format(FY("'{0}' is not a valid ccTLD country code."), country)};
 
       auto cctld = mtx::string::to_lower_ascii(country_opt->alpha_2_code);
 
@@ -181,7 +181,7 @@ ebml_chapters_converter_c::fix_edition_display_languages(libmatroska::KaxEdition
       auto parsed_language = mtx::bcp47::language_c::parse(kax_ietf_language->GetValue());
 
       if (!parsed_language.is_valid())
-        throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), kax_ietf_language->GetValue(), parsed_language.get_error())};
+        throw conversion_x{fmt::format(FY("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), kax_ietf_language->GetValue(), parsed_language.get_error())};
     }
 }
 
@@ -249,13 +249,13 @@ ebml_chapters_converter_c::parse_file(std::string const &file_name,
     return parse();
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The XML chapter file '{0}' could not be read.\n"), file_name));
+    mxerror(fmt::format(FY("The XML chapter file '{0}' could not be read.\n"), file_name));
 
   } catch (mtx::xml::xml_parser_x &ex) {
-    mxerror(fmt::format(Y("The XML chapter file '{0}' contains an error at position {2}: {1}\n"), file_name, ex.result().description(), ex.result().offset));
+    mxerror(fmt::format(FY("The XML chapter file '{0}' contains an error at position {2}: {1}\n"), file_name, ex.result().description(), ex.result().offset));
 
   } catch (mtx::xml::exception &ex) {
-    mxerror(fmt::format(Y("The XML chapter file '{0}' contains an error: {1}\n"), file_name, ex.what()));
+    mxerror(fmt::format(FY("The XML chapter file '{0}' contains an error: {1}\n"), file_name, ex.what()));
   }
 
   return mtx::chapters::kax_cptr{};

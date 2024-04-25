@@ -52,8 +52,8 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   mxdebug_if(m_debug, fmt::format("frame rate determination: default duration {0} numerator {1} denominator {2}\n", default_duration, m_frame_rate_num, m_frame_rate_den));
 
   if (master)
-    mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
-                          "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
+    mxerror(fmt::format(FY("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "
+                           "track {3} with the CodecID '{4}' is already being written to the same file.\n"),
                         m_tid, m_codec_id, m_file_name, master->m_tid, master->m_codec_id));
 
   auto fourcc = m_is_av1                ? "AV01"

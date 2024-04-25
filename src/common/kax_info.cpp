@@ -247,12 +247,12 @@ kax_info_c::format_ebml_id_as_hex(libebml::EbmlElement &e) {
 
 std::string
 kax_info_c::create_unknown_element_text(libebml::EbmlElement &e) {
-  return fmt::format(Y("(Unknown element: {0}; ID: 0x{1} size: {2})"), EBML_NAME(&e), format_ebml_id_as_hex(e), (e.GetSize() + get_head_size(e)));
+  return fmt::format(FY("(Unknown element: {0}; ID: 0x{1} size: {2})"), EBML_NAME(&e), format_ebml_id_as_hex(e), (e.GetSize() + get_head_size(e)));
 }
 
 std::string
 kax_info_c::create_known_element_but_not_allowed_here_text(libebml::EbmlElement &e) {
-  return fmt::format(Y("(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"), kax_element_names_c::get(e), format_ebml_id_as_hex(e), e.GetSize() + get_head_size(e));
+  return fmt::format(FY("(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"), kax_element_names_c::get(e), format_ebml_id_as_hex(e), e.GetSize() + get_head_size(e));
 }
 
 std::string
@@ -265,17 +265,17 @@ kax_info_c::create_element_text(const std::string &text,
   std::string additional_text;
 
   if (position && p->m_show_positions)
-    additional_text += fmt::format(p->m_hex_positions ? Y(" at 0x{0:x}") : Y(" at {0}"), *position);
+    additional_text += fmt::format(p->m_hex_positions ? FY(" at 0x{0:x}") : FY(" at {0}"), *position);
 
   if (p->m_show_size && size) {
     if (-2 != *size)
-      additional_text += fmt::format(Y(" size {0}"), *size);
+      additional_text += fmt::format(FY(" size {0}"), *size);
     else
       additional_text += Y(" size is unknown");
   }
 
   if (p->m_show_size && data_size)
-    additional_text += fmt::format(Y(" data size {0}"), *data_size);
+    additional_text += fmt::format(FY(" data size {0}"), *data_size);
 
   return text + additional_text;
 }
@@ -365,16 +365,16 @@ kax_info_c::create_codec_dependent_private_info(libmatroska::KaxCodecPrivate &c_
                                                 std::string const &codec_id) {
   if ((codec_id == MKV_V_MSCOMP) && ('v' == track_type) && (c_priv.GetSize() >= sizeof(alBITMAPINFOHEADER))) {
     auto bih = reinterpret_cast<alBITMAPINFOHEADER *>(c_priv.GetBuffer());
-    return fmt::format(Y(" (FourCC: {0})"), fourcc_c{&bih->bi_compression}.description());
+    return fmt::format(FY(" (FourCC: {0})"), fourcc_c{&bih->bi_compression}.description());
 
   } else if ((codec_id == MKV_A_ACM) && ('a' == track_type) && (c_priv.GetSize() >= sizeof(alWAVEFORMATEX))) {
     auto wfe = reinterpret_cast<alWAVEFORMATEX *>(c_priv.GetBuffer());
-    return fmt::format(Y(" (format tag: 0x{0:04x})"), get_uint16_le(&wfe->w_format_tag));
+    return fmt::format(FY(" (format tag: 0x{0:04x})"), get_uint16_le(&wfe->w_format_tag));
 
   } else if ((codec_id == MKV_V_MPEG4_AVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
     auto avcc = mtx::avc::avcc_c::unpack(memory_c::borrow(c_priv.GetBuffer(), c_priv.GetSize()));
 
-    return fmt::format(Y(" (H.264 profile: {0} @L{1}.{2})"),
+    return fmt::format(FY(" (H.264 profile: {0} @L{1}.{2})"),
                           avcc.m_profile_idc ==  44 ? "CAVLC 4:4:4 Intra"
                         : avcc.m_profile_idc ==  66 ? "Baseline"
                         : avcc.m_profile_idc ==  77 ? "Main"
@@ -393,7 +393,7 @@ kax_info_c::create_codec_dependent_private_info(libmatroska::KaxCodecPrivate &c_
   } else if ((codec_id == MKV_V_MPEGH_HEVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
     auto hevcc = mtx::hevc::hevcc_c::unpack(memory_c::borrow(c_priv.GetBuffer(), c_priv.GetSize()));
 
-    return fmt::format(Y(" (HEVC profile: {0} @L{1}.{2})"),
+    return fmt::format(FY(" (HEVC profile: {0} @L{1}.{2})"),
                           hevcc.m_general_profile_idc == 1 ? "Main"
                         : hevcc.m_general_profile_idc == 2 ? "Main 10"
                         : hevcc.m_general_profile_idc == 3 ? "Main Still Picture"
@@ -434,13 +434,13 @@ kax_info_c::format_binary(libebml::EbmlBinary &bin) {
   auto &p      = *p_func();
   auto len     = std::min<std::size_t>(p.m_hexdump_max_size, bin.GetSize());
   auto const b = bin.GetBuffer();
-  auto result  = fmt::format(Y("length {0}, data: {1}"), bin.GetSize(), mtx::string::to_hex(b, len));
+  auto result  = fmt::format(FY("length {0}, data: {1}"), bin.GetSize(), mtx::string::to_hex(b, len));
 
   if (len < bin.GetSize())
-    result += u8"…";
+    result += "…";
 
   if (p.m_calc_checksums)
-    result += fmt::format(Y(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, bin.GetBuffer(), bin.GetSize()));
+    result += fmt::format(FY(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, bin.GetBuffer(), bin.GetSize()));
 
   mtx::string::strip(result);
 
@@ -455,7 +455,7 @@ kax_info_c::format_binary_as_hex(libebml::EbmlElement &e) {
 std::string
 kax_info_c::format_element_size(libebml::EbmlElement &e) {
   if (e.IsFiniteSize())
-    return fmt::format(Y("size {0}"), e.GetSize());
+    return fmt::format(FY("size {0}"), e.GetSize());
   return Y("size unknown");
 }
 
@@ -560,7 +560,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     } else
       track_id = existing_track->mkvmerge_track_id;
 
-    p->m_summary.push_back(fmt::format(Y("mkvmerge/mkvextract track ID: {0}"), track_id));
+    p->m_summary.push_back(fmt::format(FY("mkvmerge/mkvextract track ID: {0}"), track_id));
 
     p->m_track_by_element[&e] = p->m_track;
 
@@ -582,7 +582,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     p->m_track-> fourcc = create_codec_dependent_private_info(c_priv, p->m_track->type, p->m_track->codec_id);
 
     if (p->m_calc_checksums && !p->m_show_summary)
-      p->m_track->fourcc += fmt::format(Y(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, c_priv.GetBuffer(), c_priv.GetSize()));
+      p->m_track->fourcc += fmt::format(FY(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, c_priv.GetBuffer(), c_priv.GetSize()));
 
     if (p->m_show_hexdump)
       p->m_track->fourcc += create_hexdump(c_priv.GetBuffer(), c_priv.GetSize());
@@ -601,21 +601,21 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_post(EBML_ID(libmatroska::KaxAudioSamplingFreq),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<libmatroska::KaxAudioSamplingFreq &>(e).GetValue()))); });
-  add_post(EBML_ID(libmatroska::KaxAudioOutputSamplingFreq), [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<libmatroska::KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
-  add_post(EBML_ID(libmatroska::KaxAudioChannels),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<libmatroska::KaxAudioChannels &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxAudioBitDepth),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<libmatroska::KaxAudioBitDepth &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxAudioSamplingFreq),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<libmatroska::KaxAudioSamplingFreq &>(e).GetValue()))); });
+  add_post(EBML_ID(libmatroska::KaxAudioOutputSamplingFreq), [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<libmatroska::KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
+  add_post(EBML_ID(libmatroska::KaxAudioChannels),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("channels: {0}"), static_cast<libmatroska::KaxAudioChannels &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxAudioBitDepth),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("bits per sample: {0}"), static_cast<libmatroska::KaxAudioBitDepth &>(e).GetValue())); });
 
-  add_post(EBML_ID(libmatroska::KaxVideoPixelWidth),         [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel width: {0}"), static_cast<libmatroska::KaxVideoPixelWidth &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoPixelHeight),        [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel height: {0}"), static_cast<libmatroska::KaxVideoPixelHeight &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoDisplayWidth),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display width: {0}"), static_cast<libmatroska::KaxVideoDisplayWidth &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoDisplayHeight),      [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display height: {0}"), static_cast<libmatroska::KaxVideoDisplayHeight &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoPixelCropLeft),      [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop left: {0}"), static_cast<libmatroska::KaxVideoPixelCropLeft &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoPixelCropTop),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop top: {0}"), static_cast<libmatroska::KaxVideoPixelCropTop &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoPixelCropRight),     [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop right: {0}"), static_cast<libmatroska::KaxVideoPixelCropRight &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxVideoPixelCropBottom),    [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop bottom: {0}"), static_cast<libmatroska::KaxVideoPixelCropBottom &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxTrackLanguage),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language: {0}"), static_cast<libmatroska::KaxTrackLanguage &>(e).GetValue())); });
-  add_post(EBML_ID(libmatroska::KaxLanguageIETF),            [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language (IETF BCP 47): {0}"), static_cast<libmatroska::KaxLanguageIETF &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelWidth),         [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("pixel width: {0}"), static_cast<libmatroska::KaxVideoPixelWidth &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelHeight),        [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("pixel height: {0}"), static_cast<libmatroska::KaxVideoPixelHeight &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoDisplayWidth),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("display width: {0}"), static_cast<libmatroska::KaxVideoDisplayWidth &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoDisplayHeight),      [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("display height: {0}"), static_cast<libmatroska::KaxVideoDisplayHeight &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropLeft),      [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("pixel crop left: {0}"), static_cast<libmatroska::KaxVideoPixelCropLeft &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropTop),       [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("pixel crop top: {0}"), static_cast<libmatroska::KaxVideoPixelCropTop &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropRight),     [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("pixel crop right: {0}"), static_cast<libmatroska::KaxVideoPixelCropRight &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxVideoPixelCropBottom),    [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("pixel crop bottom: {0}"), static_cast<libmatroska::KaxVideoPixelCropBottom &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxTrackLanguage),           [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("language: {0}"), static_cast<libmatroska::KaxTrackLanguage &>(e).GetValue())); });
+  add_post(EBML_ID(libmatroska::KaxLanguageIETF),            [p](libebml::EbmlElement &e) { p->m_summary.push_back(fmt::format(FY("language (IETF BCP 47): {0}"), static_cast<libmatroska::KaxLanguageIETF &>(e).GetValue())); });
   add_post(EBML_ID(libmatroska::KaxBlockDuration),           [p](libebml::EbmlElement &e) { p->m_block_duration = static_cast<double>(static_cast<libmatroska::KaxBlockDuration &>(e).GetValue()) * p->m_ts_scale; });
   add_post(EBML_ID(libmatroska::KaxReferenceBlock),          [p](libebml::EbmlElement &)  { ++p->m_num_references; });
 
@@ -624,7 +624,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   add_post_mem(EBML_ID(libmatroska::KaxBlockGroup),          &kax_info_c::post_block_group);
 
   add_post(EBML_ID(libmatroska::KaxTrackDefaultDuration),    [p](libebml::EbmlElement &) {
-    p->m_summary.push_back(fmt::format(Y("default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"),
+    p->m_summary.push_back(fmt::format(FY("default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"),
                                        static_cast<double>(p->m_track->default_duration) / 1'000'000.0,
                                        1'000'000'000.0 / static_cast<double>(p->m_track->default_duration)));
   });
@@ -633,7 +633,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     if (!p->m_show_summary)
       return;
 
-    p->m_out->puts(fmt::format(Y("Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"),
+    p->m_out->puts(fmt::format(FY("Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"),
                                p->m_track->tnum,
                                  'a' == p->m_track->type ? Y("audio")
                       : 'v' == p->m_track->type ? Y("video")
@@ -834,7 +834,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                Y("unknown"));
   });
 
-  add_fmt(EBML_ID(libmatroska::KaxTrackNumber), [p](libebml::EbmlElement &e) -> std::string { return fmt::format(Y("{0} (track ID for mkvmerge & mkvextract: {1})"), p->m_track_by_element[&e]->tnum, p->m_track_by_element[&e]->mkvmerge_track_id); });
+  add_fmt(EBML_ID(libmatroska::KaxTrackNumber), [p](libebml::EbmlElement &e) -> std::string { return fmt::format(FY("{0} (track ID for mkvmerge & mkvextract: {1})"), p->m_track_by_element[&e]->tnum, p->m_track_by_element[&e]->mkvmerge_track_id); });
 
   add_fmt(EBML_ID(libmatroska::KaxTrackType), [](libebml::EbmlElement &e) -> std::string {
     auto ttype = static_cast<libmatroska::KaxTrackType &>(e).GetValue();
@@ -846,12 +846,12 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   });
 
   add_fmt(EBML_ID(libmatroska::KaxCodecPrivate), [p](libebml::EbmlElement &e) -> std::string {
-    return fmt::format(Y("size {0}"), e.GetSize()) + p->m_track_by_element[&e]->fourcc;
+    return fmt::format(FY("size {0}"), e.GetSize()) + p->m_track_by_element[&e]->fourcc;
   });
 
   add_fmt(EBML_ID(libmatroska::KaxTrackDefaultDuration), [](libebml::EbmlElement &e) -> std::string {
     auto default_duration = static_cast<libmatroska::KaxTrackDefaultDuration &>(e).GetValue();
-    return fmt::format(Y("{0} ({1:.3f} frames/fields per second for a video track)"),
+    return fmt::format(FY("{0} ({1:.3f} frames/fields per second for a video track)"),
                        mtx::string::format_timestamp(default_duration),
                        1'000'000'000.0 / static_cast<double>(default_duration));
   });
@@ -903,7 +903,7 @@ kax_info_c::format_block(libebml::EbmlElement &e) {
 
   auto &block = static_cast<libmatroska::KaxBlock &>(e);
 
-  return fmt::format(Y("track number {0}, {1} frame(s), timestamp {2}"), block.TrackNum(), block.NumberFrames(), mtx::string::format_timestamp(p->m_lf_timestamp));
+  return fmt::format(FY("track number {0}, {1} frame(s), timestamp {2}"), block.TrackNum(), block.NumberFrames(), mtx::string::format_timestamp(p->m_lf_timestamp));
 }
 
 void
@@ -921,14 +921,14 @@ kax_info_c::post_block(libebml::EbmlElement &e) {
 
     std::string adler_str;
     if (p->m_calc_checksums)
-      adler_str = fmt::format(Y(" (adler: 0x{0:08x})"), adler);
+      adler_str = fmt::format(FY(" (adler: 0x{0:08x})"), adler);
 
     std::string hex;
     if (p->m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    auto text = p->m_show_size ? fmt::format(Y("Frame{0}{1}"),                            adler_str, hex)
-              :                  fmt::format(Y("Frame with size {0}{1}{2}"), data.Size(), adler_str, hex);
+    auto text = p->m_show_size ? fmt::format(FY("Frame{0}{1}"),                            adler_str, hex)
+              :                  fmt::format(FY("Frame with size {0}{1}{2}"), data.Size(), adler_str, hex);
     show_element(nullptr, p->m_level + 1, text, frame_pos, data.Size());
 
     p->m_frame_sizes.push_back(data.Size());
@@ -951,12 +951,12 @@ kax_info_c::show_frame_summary(libebml::EbmlElement &e) {
     std::string position;
 
     if (p->m_show_positions) {
-      position   = fmt::format(p->m_hex_positions ? Y(", position 0x{0:x}") : Y(", position {0}"), frame_pos);
+      position   = fmt::format(p->m_hex_positions ? FY(", position 0x{0:x}") : FY(", position {0}"), frame_pos);
       frame_pos += p->m_frame_sizes[fidx];
     }
 
     if (p->m_block_duration)
-      p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"),
+      p->m_out->puts(fmt::format(FY("{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"),
                                  (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
                                  p->m_lf_tnum,
                                  mtx::string::format_timestamp(p->m_lf_timestamp),
@@ -966,7 +966,7 @@ kax_info_c::show_frame_summary(libebml::EbmlElement &e) {
                                  p->m_frame_hexdumps[fidx],
                                  position));
     else
-      p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"),
+      p->m_out->puts(fmt::format(FY("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"),
                                  (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
                                  p->m_lf_tnum,
                                  mtx::string::format_timestamp(p->m_lf_timestamp),
@@ -1043,7 +1043,7 @@ kax_info_c::format_simple_block(libebml::EbmlElement &e) {
   if (block.IsDiscardable())
     info += Y("discardable, ");
 
-  return fmt::format(Y("{0}track number {1}, {2} frame(s), timestamp {3}"),
+  return fmt::format(FY("{0}track number {1}, {2} frame(s), timestamp {3}"),
                      info,
                      block.TrackNum(),
                      block.NumberFrames(),
@@ -1071,14 +1071,14 @@ kax_info_c::post_simple_block(libebml::EbmlElement &e) {
 
     std::string adler_str;
     if (p->m_calc_checksums)
-      adler_str = fmt::format(Y(" (adler: 0x{0:08x})"), adler);
+      adler_str = fmt::format(FY(" (adler: 0x{0:08x})"), adler);
 
     std::string hex;
     if (p->m_show_hexdump)
       hex = create_hexdump(data.Buffer(), data.Size());
 
-    auto text = p->m_show_size ? fmt::format(Y("Frame{0}{1}"),                            adler_str, hex)
-              :                  fmt::format(Y("Frame with size {0}{1}{2}"), data.Size(), adler_str, hex);
+    auto text = p->m_show_size ? fmt::format(FY("Frame{0}{1}"),                            adler_str, hex)
+              :                  fmt::format(FY("Frame with size {0}{1}{2}"), data.Size(), adler_str, hex);
     show_element(nullptr, p->m_level + 1, text, frame_pos, data.Size());
 
     p->m_frame_sizes.push_back(data.Size());
@@ -1093,11 +1093,11 @@ kax_info_c::post_simple_block(libebml::EbmlElement &e) {
 
     for (int idx = 0; idx < num_frames; idx++) {
       if (p->m_show_positions) {
-        position   = fmt::format(p->m_hex_positions ? Y(", position 0x{0:x}") : Y(", position {0}"), frame_pos);
+        position   = fmt::format(p->m_hex_positions ? FY(", position 0x{0:x}") : FY(", position {0}"), frame_pos);
         frame_pos += p->m_frame_sizes[idx];
       }
 
-      p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"),
+      p->m_out->puts(fmt::format(FY("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"),
                                  (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P'),
                                  block.TrackNum(),
                                  mtx::string::format_timestamp(timestamp_ns),
@@ -1223,7 +1223,7 @@ kax_info_c::display_track_info() {
     int64_t duration  = *tinfo.m_max_timestamp - *tinfo.m_min_timestamp;
     duration         += tinfo.m_add_duration_for_n_packets * track->default_duration;
 
-    p->m_out->puts(fmt::format(Y("Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"),
+    p->m_out->puts(fmt::format(FY("Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"),
                                track->tnum,
                                tinfo.m_blocks,
                                tinfo.m_size,
@@ -1317,7 +1317,7 @@ kax_info_c::open_and_process_file() {
   try {
     p->m_in = std::make_shared<mm_read_buffer_io_c>(mm_file_io_c::open(p->m_source_file_name));
   } catch (mtx::mm_io::exception &ex) {
-    ui_show_error(fmt::format(Y("Error: Couldn't open source file {0} ({1})."), p->m_source_file_name, ex));
+    ui_show_error(fmt::format(FY("Error: Couldn't open source file {0} ({1})."), p->m_source_file_name, ex));
     return result_e::failed;
   }
 
@@ -1333,7 +1333,7 @@ kax_info_c::open_and_process_file() {
       p->m_out = std::make_shared<mm_write_buffer_io_c>(mm_file_io_c::open(p->m_destination_file_name, libebml::MODE_CREATE), 1024 * 1024);
 
     } catch (mtx::mm_io::exception &ex) {
-      ui_show_error(fmt::format(Y("The file '{0}' could not be opened for writing: {1}."), p->m_destination_file_name, ex));
+      ui_show_error(fmt::format(FY("The file '{0}' could not be opened for writing: {1}."), p->m_destination_file_name, ex));
       return result_e::failed;
     }
   }

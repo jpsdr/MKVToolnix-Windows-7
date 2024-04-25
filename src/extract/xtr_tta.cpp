@@ -42,7 +42,7 @@ xtr_tta_c::create_file(xtr_base_c *,
   try {
     m_out = mm_write_buffer_io_c::open(m_temp_file_name, 5 * 1024 * 1024);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("Failed to create the temporary file '{0}': {1}\n"), m_temp_file_name, ex));
+    mxerror(fmt::format(FY("Failed to create the temporary file '{0}': {1}\n"), m_temp_file_name, ex));
   }
 
   m_bps      = kt_get_a_bps(track);
@@ -67,13 +67,13 @@ xtr_tta_c::finish_file() {
   try {
     in = mm_file_io_c::open(m_temp_file_name);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The temporary file '{0}' could not be opened for reading: {1}.\n"), m_temp_file_name, ex));
+    mxerror(fmt::format(FY("The temporary file '{0}' could not be opened for reading: {1}.\n"), m_temp_file_name, ex));
   }
 
   try {
     m_out = mm_write_buffer_io_c::open(m_file_name, 5 * 1024 * 1024);
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, ex));
+    mxerror(fmt::format(FY("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, ex));
   }
 
   mtx::tta::file_header_t tta_header;
@@ -104,7 +104,7 @@ xtr_tta_c::finish_file() {
 
   safefree(buffer);
 
-  mxinfo(fmt::format(Y("\nThe temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"), m_tid));
+  mxinfo(fmt::format(FY("\nThe temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"), m_tid));
 
   auto mem = memory_c::alloc(128000);
   buffer   = mem->get_buffer();

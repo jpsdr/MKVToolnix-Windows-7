@@ -54,8 +54,8 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
 
     if (0 < offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-                 fmt::format(Y("This MPEG audio track contains {0} bytes of non-MP3 data at the beginning. "
-                               "This corresponds to a delay of {1}ms. This delay will be used instead of the garbage data.\n"), bytes, offset / 1000000));
+                 fmt::format(FY("This MPEG audio track contains {0} bytes of non-MP3 data at the beginning. "
+                                "This corresponds to a delay of {1}ms. This delay will be used instead of the garbage data.\n"), bytes, offset / 1000000));
       warning_printed             = true;
       m_ti.m_tcsync.displacement += offset;
     }
@@ -65,8 +65,8 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
     m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timestamp_offset) {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  fmt::format("{0} {1}\n",
-                             fmt::format(NY("This audio track contains {0} byte of invalid data which was skipped before timestamp {1}.",
-                                            "This audio track contains {0} bytes of invalid data which were skipped before timestamp {1}.", bytes),
+                             fmt::format(FNY("This audio track contains {0} byte of invalid data which was skipped before timestamp {1}.",
+                                             "This audio track contains {0} bytes of invalid data which were skipped before timestamp {1}.", bytes),
                                          bytes, mtx::string::format_timestamp(packet->assigned_timestamp - timestamp_offset)),
                              Y("The audio/video synchronization may have been lost.")));
     }));

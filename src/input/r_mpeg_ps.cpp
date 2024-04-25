@@ -1229,7 +1229,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, ptzr(track->ptzr));
 
     } else
-      mxerror(fmt::format(Y("mpeg_ps_reader: Should not have happened #1. {0}"), BUGMSG));
+      mxerror(fmt::format(FY("mpeg_ps_reader: Should not have happened #1. {0}"), BUGMSG));
 
   } else {                      // if (track->type == 'a')
     if (track->codec.is(codec_c::type_e::V_MPEG12)) {
@@ -1250,7 +1250,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, ptzr(track->ptzr));
 
     } else
-      mxerror(fmt::format(Y("mpeg_ps_reader: Should not have happened #2. {0}"), BUGMSG));
+      mxerror(fmt::format(FY("mpeg_ps_reader: Should not have happened #2. {0}"), BUGMSG));
   }
 
   if (-1 != track->timestamp_offset)

@@ -86,7 +86,7 @@ dts_packetizer_c::get_dts_packet(bool flushing) {
       }
 
     if (!all_zeroes)
-      mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Skipping {0} bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"), pos));
+      mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("Skipping {0} bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"), pos));
   }
 
   auto bytes_to_remove = pos + dtsheader.frame_byte_size;

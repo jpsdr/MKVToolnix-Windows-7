@@ -47,26 +47,26 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
     auto element = read_next_level1_element_internal(wanted_id);
 
     if (element && report_cluster_timestamp && (-1 != m_timestamp_scale) && (EBML_ID(libmatroska::KaxCluster).GetValue() == wanted_id))
-      report(fmt::format(Y("The first cluster timestamp after the resync is {0}.\n"),
+      report(fmt::format(FY("The first cluster timestamp after the resync is {0}.\n"),
                          mtx::string::format_timestamp(find_child_value<kax_cluster_timestamp_c>(static_cast<libmatroska::KaxCluster *>(element.get())) * m_timestamp_scale)));
 
     return element;
 
   } catch (mtx::mm_io::exception &e) {
     mxwarn(fmt::format("{0} {1} {2}\n",
-                       fmt::format(Y("{0}: an exception occurred (message: {1}; type: {2})."), "kax_file_c::read_next_level1_element()", fmt::format("{0} / {1}", e.what(), e.error()), typeid(e).name()),
+                       fmt::format(FY("{0}: an exception occurred (message: {1}; type: {2})."), "kax_file_c::read_next_level1_element()", fmt::format("{0} / {1}", e.what(), e.error()), typeid(e).name()),
                        Y("This usually indicates a damaged file structure."),
                        Y("The file will not be processed further.")));
 
   } catch (std::exception &e) {
     mxwarn(fmt::format("{0} {1} {2}\n",
-                       fmt::format(Y("{0}: an exception occurred (message: {1}; type: {2})."), "kax_file_c::read_next_level1_element()", e.what(), typeid(e).name()),
+                       fmt::format(FY("{0}: an exception occurred (message: {1}; type: {2})."), "kax_file_c::read_next_level1_element()", e.what(), typeid(e).name()),
                        Y("This usually indicates a damaged file structure."),
                        Y("The file will not be processed further.")));
 
   } catch (...) {
     mxwarn(fmt::format("{0} {1} {2}\n",
-                       fmt::format(Y("{0}: an unknown exception occurred."), "kax_file_c::read_next_level1_element()"),
+                       fmt::format(FY("{0}: an unknown exception occurred."), "kax_file_c::read_next_level1_element()"),
                        Y("This usually indicates a damaged file structure."),
                        Y("The file will not be processed further.")));
   }
@@ -217,11 +217,11 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   auto start_time    = mtx::sys::get_current_time_millis();
   auto is_cluster_id = !wanted_id || (EBML_ID(libmatroska::KaxCluster).GetValue() == wanted_id); // 0 means: any level 1 element will do
 
-  report(fmt::format(Y("{0}: Error in the Matroska file structure at position {1}. Resyncing to the next level 1 element.\n"),
+  report(fmt::format(FY("{0}: Error in the Matroska file structure at position {1}. Resyncing to the next level 1 element.\n"),
                      m_in.get_file_name(), m_resync_start_pos));
 
   if (is_cluster_id && (-1 != m_last_timestamp)) {
-    report(fmt::format(Y("The last timestamp processed before the error was encountered was {0}.\n"), mtx::string::format_timestamp(m_last_timestamp)));
+    report(fmt::format(FY("The last timestamp processed before the error was encountered was {0}.\n"), mtx::string::format_timestamp(m_last_timestamp)));
     m_last_timestamp = -1;
   }
 
@@ -278,7 +278,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
     }
 
     if ((4 == num_headers) || valid_unknown_size) {
-      report(fmt::format(Y("Resyncing successful at position {0}.\n"), current_start_pos));
+      report(fmt::format(FY("Resyncing successful at position {0}.\n"), current_start_pos));
       m_in.setFilePointer(current_start_pos);
       return read_next_level1_element(wanted_id, is_cluster_id);
     }

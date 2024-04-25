@@ -37,7 +37,7 @@ propedit_cli_parser_c::set_parse_mode() {
   try {
     m_options->set_parse_mode(m_next_arg);
   } catch (...) {
-    mxerror(fmt::format(Y("Unknown parse mode in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Unknown parse mode in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -46,7 +46,7 @@ propedit_cli_parser_c::add_target() {
   try {
     m_target = m_options->add_track_or_segmentinfo_target(m_next_arg);
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -58,7 +58,7 @@ propedit_cli_parser_c::add_change() {
                                  :                                                         change_c::ct_delete;
     m_target->add_change(type, m_next_arg);
   } catch (std::runtime_error &error) {
-    mxerror(fmt::format(Y("Invalid change spec ({2}) in '{0} {1}'.\n"), m_current_arg, m_next_arg, error.what()));
+    mxerror(fmt::format(FY("Invalid change spec ({2}) in '{0} {1}'.\n"), m_current_arg, m_next_arg, error.what()));
   }
 }
 
@@ -67,7 +67,7 @@ propedit_cli_parser_c::add_tags() {
   try {
     m_options->add_tags(m_next_arg);
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -81,7 +81,7 @@ propedit_cli_parser_c::add_chapters() {
   try {
     m_options->add_chapters(m_next_arg);
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -104,7 +104,7 @@ void
 propedit_cli_parser_c::set_attachment_uid() {
   auto uid = uint64_t{};
   if (!mtx::string::parse_number(m_next_arg, uid))
-    mxerror(fmt::format(Y("The value '{0}' is not a number.\n"), m_next_arg));
+    mxerror(fmt::format(FY("The value '{0}' is not a number.\n"), m_next_arg));
 
   m_attachment.m_uid = uid;
 }
@@ -115,7 +115,7 @@ propedit_cli_parser_c::add_attachment() {
     m_options->add_attachment_command(attachment_target_c::ac_add, m_next_arg, m_attachment);
     m_attachment = attachment_target_c::options_t();
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -124,7 +124,7 @@ propedit_cli_parser_c::delete_attachment() {
   try {
     m_options->add_attachment_command(attachment_target_c::ac_delete, m_next_arg, m_attachment);
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -134,7 +134,7 @@ propedit_cli_parser_c::replace_attachment() {
     m_options->add_attachment_command(m_current_arg == "--update-attachment" ? attachment_target_c::ac_update : attachment_target_c::ac_replace, m_next_arg, m_attachment);
     m_attachment = attachment_target_c::options_t();
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
+    mxerror(fmt::format(FY("Invalid selector in '{0} {1}'.\n"), m_current_arg, m_next_arg));
   }
 }
 
@@ -193,7 +193,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
   std::string indent_string = std::string(max_name_len, ' ') + " |    | ";
 
   mxinfo("\n");
-  mxinfo(fmt::format(Y("Elements in the category '{0}' ('--edit {1}'):\n"), title, edit_spec));
+  mxinfo(fmt::format(FY("Elements in the category '{0}' ('--edit {1}'):\n"), title, edit_spec));
 
   for (auto &property : table) {
     if (property.m_title.get_untranslated().empty())
@@ -218,10 +218,10 @@ propedit_cli_parser_c::disable_language_ietf() {
 void
 propedit_cli_parser_c::set_language_ietf_normalization_mode() {
   if (m_next_arg.empty())
-    mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--normalize-language-ietf"));
+    mxerror(fmt::format(FY("'{0}' lacks its argument.\n"), "--normalize-language-ietf"));
 
   if (!mtx::included_in(m_next_arg, "canonical"s, "extlang"s, "no"s, "off"s, "none"s))
-    mxerror(fmt::format(Y("'{0}' is not a valid language normalization mode.\n"), m_next_arg));
+    mxerror(fmt::format(FY("'{0}' is not a valid language normalization mode.\n"), m_next_arg));
 
   auto mode = m_next_arg == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical
             : m_next_arg == "extlang"s   ? mtx::bcp47::normalization_mode_e::extlang

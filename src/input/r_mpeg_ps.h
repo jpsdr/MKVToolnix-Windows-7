@@ -21,6 +21,7 @@
 #include "common/dts.h"
 #include "common/mm_multi_file_io.h"
 #include "common/mpeg1_2.h"
+#include "common/strings/formatting.h"
 #include "merge/packet_extensions.h"
 #include "merge/generic_reader.h"
 
@@ -37,14 +38,6 @@ struct mpeg_ps_id_t {
     return ((id & 0xff) << 8) | (sub_id & 0xff);
   }
 };
-
-inline std::ostream &
-operator <<(std::ostream &out,
-            mpeg_ps_id_t const &id) {
-  out << fmt::format("{0:02x}.{1:02x}", id.id, id.sub_id);
-
-  return out;
-}
 
 class mpeg_ps_packet_c {
 public:
@@ -93,8 +86,8 @@ public:
 inline std::ostream &
 operator <<(std::ostream &out,
             mpeg_ps_packet_c const &p) {
-  out << fmt::format("[ID {0} PTS {1} DTS {2} length {3} full_length {4} valid? {5} read? {6}]",
-                     p.m_id,
+  out << fmt::format("[ID {0:02x}.{1:02x} PTS {2} DTS {3} length {4} full_length {5} valid? {6} read? {7}]",
+                     p.m_id.id, p.m_id.sub_id,
                      p.has_pts() ? mtx::string::format_timestamp(p.pts()) : "none"s,
                      p.has_dts() ? mtx::string::format_timestamp(p.dts()) : "none"s,
                      p.m_length, p.m_full_length, p.m_valid,

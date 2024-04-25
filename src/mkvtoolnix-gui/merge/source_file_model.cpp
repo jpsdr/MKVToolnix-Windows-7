@@ -384,7 +384,11 @@ SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
       createAndAppendRow(itemToAddTo, additionalPart, row++);
   }
 
-  m_attachedFilesModel->addAttachedFiles(std::accumulate(files.begin(), files.end(), QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_attachedFiles; }));
+  QList<TrackPtr> attachedFiles;
+  for (auto const &file : files)
+    attachedFiles << file->m_attachedFiles;
+
+  m_attachedFilesModel->addAttachedFiles(attachedFiles);
 }
 
 void

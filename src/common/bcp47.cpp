@@ -236,7 +236,7 @@ bool
 language_c::parse_language(std::string const &code) {
   auto language = mtx::iso639::look_up(code);
   if (!language) {
-    m_parser_error = fmt::format(Y("The value '{}' is not a valid ISO 639 language code."), code);
+    m_parser_error = fmt::format(FY("The value '{}' is not a valid ISO 639 language code."), code);
     return false;
   }
 
@@ -249,7 +249,7 @@ bool
 language_c::parse_script(std::string const &code) {
   auto script = mtx::iso15924::look_up(code);
   if (!script) {
-    m_parser_error = fmt::format(Y("The value '{}' is not a valid ISO 15924 script code."), code);
+    m_parser_error = fmt::format(FY("The value '{}' is not a valid ISO 15924 script code."), code);
     return false;
   }
 
@@ -263,7 +263,7 @@ language_c::parse_region(std::string const &code) {
   if (code.length() == 2) {
     auto region = mtx::iso3166::look_up(code);
     if (!region) {
-      m_parser_error = fmt::format(Y("The value '{}' is not a valid ISO 3166-1 country code."), code);
+      m_parser_error = fmt::format(FY("The value '{}' is not a valid ISO 3166-1 country code."), code);
       return false;
     }
 
@@ -281,7 +281,7 @@ language_c::parse_region(std::string const &code) {
 
   auto region = mtx::iso3166::look_up(number);
   if (!region) {
-    m_parser_error = fmt::format(Y("The value '{}' is not a valid UN M.49 country number code."), code);
+    m_parser_error = fmt::format(FY("The value '{}' is not a valid UN M.49 country number code."), code);
     return false;
   }
 
@@ -298,7 +298,7 @@ language_c::parse_extlang(std::string const &str) {
   auto entry = mtx::iana::language_subtag_registry::look_up_extlang(str);
 
   if (!entry) {
-    m_parser_error = fmt::format(Y("The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."), str);
+    m_parser_error = fmt::format(FY("The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."), str);
     return false;
   }
 
@@ -313,7 +313,7 @@ language_c::parse_variants(std::string const &str) {
     auto entry = mtx::iana::language_subtag_registry::look_up_variant(code);
 
     if (!entry) {
-      m_parser_error = fmt::format(Y("The value '{}' is not part of the IANA Language Subtag Registry for language variants."), code);
+      m_parser_error = fmt::format(FY("The value '{}' is not part of the IANA Language Subtag Registry for language variants."), code);
       return false;
     }
 
@@ -446,7 +446,7 @@ language_c::validate_extlang() {
     return true;
 
   auto message   = Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.");
-  m_parser_error = fmt::format(message, m_extended_language_subtag, fmt::join(extlang->prefixes, ", "));
+  m_parser_error = fmt::format(fmt::runtime(message), m_extended_language_subtag, fmt::join(extlang->prefixes, ", "));
 
   return false;
 }
@@ -457,7 +457,7 @@ language_c::validate_variants() {
 
   for (auto const &variant : m_variants) {
     if (variants_seen[variant]) {
-      m_parser_error = fmt::format(Y("The variant '{}' occurs more than once."), variant);
+      m_parser_error = fmt::format(FY("The variant '{}' occurs more than once."), variant);
       return false;
     }
 
@@ -491,7 +491,7 @@ language_c::validate_extensions() {
     // https://www.iana.org/assignments/language-tag-extensions-registry/language-tag-extensions-registry
     // only contains the following registered identifiers:
     if (!mtx::included_in(extension.identifier, "t"s, "u"s)) {
-      m_parser_error = fmt::format(Y("The value '{0}' is not a registered IANA language tag identifier."), extension.identifier);
+      m_parser_error = fmt::format(FY("The value '{0}' is not a registered IANA language tag identifier."), extension.identifier);
       return false;
     }
   }

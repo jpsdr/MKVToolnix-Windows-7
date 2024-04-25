@@ -114,7 +114,7 @@ public:
     return "create_directory() failed";
   }
   virtual std::string error() const noexcept {
-    return fmt::format(Y("Creating directory '{0}' failed: {1}"), m_path, code().message());
+    return fmt::format(FY("Creating directory '{0}' failed: {1}"), m_path, code().message());
   }
 };
 
@@ -143,7 +143,7 @@ public:
   }
 
   virtual std::string error() const noexcept {
-    return fmt::format(Y("Invalid UTF-8 char. First byte: 0x{0:02x}"), static_cast<unsigned int>(m_first_char));
+    return fmt::format(FY("Invalid UTF-8 char. First byte: 0x{0:02x}"), static_cast<unsigned int>(m_first_char));
   }
 };
 

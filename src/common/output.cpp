@@ -205,40 +205,40 @@ mxerror(std::string const &error) {
 void
 mxinfo_fn(const std::string &file_name,
           const std::string &info) {
-  mxinfo(fmt::format(Y("'{0}': {1}"), file_name, info));
+  mxinfo(fmt::format(FY("'{0}': {1}"), file_name, info));
 }
 
 void
 mxinfo_tid(const std::string &file_name,
            int64_t track_id,
            const std::string &info) {
-  mxinfo(fmt::format(Y("'{0}' track {1}: {2}"), file_name, track_id, info));
+  mxinfo(fmt::format(FY("'{0}' track {1}: {2}"), file_name, track_id, info));
 }
 
 void
 mxwarn_fn(const std::string &file_name,
           const std::string &warning) {
-  mxwarn(fmt::format(Y("'{0}': {1}"), file_name, warning));
+  mxwarn(fmt::format(FY("'{0}': {1}"), file_name, warning));
 }
 
 void
 mxwarn_tid(const std::string &file_name,
            int64_t track_id,
            const std::string &warning) {
-  mxwarn(fmt::format(Y("'{0}' track {1}: {2}"), file_name, track_id, warning));
+  mxwarn(fmt::format(FY("'{0}' track {1}: {2}"), file_name, track_id, warning));
 }
 
 void
 mxerror_fn(const std::string &file_name,
            const std::string &error) {
-  mxerror(fmt::format(Y("'{0}': {1}"), file_name, error));
+  mxerror(fmt::format(FY("'{0}': {1}"), file_name, error));
 }
 
 void
 mxerror_tid(const std::string &file_name,
             int64_t track_id,
             const std::string &error) {
-  mxerror(fmt::format(Y("'{0}' track {1}: {2}"), file_name, track_id, error));
+  mxerror(fmt::format(FY("'{0}' track {1}: {2}"), file_name, track_id, error));
 }
 
 void

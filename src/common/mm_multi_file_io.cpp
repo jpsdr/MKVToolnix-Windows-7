@@ -173,7 +173,7 @@ mm_multi_file_io_c::display_other_file_info() {
     }
 
   if (!out.str().empty())
-    mxinfo(fmt::format(Y("'{0}': Processing the following files as well: {1}\n"), p->display_file_name, out.str()));
+    mxinfo(fmt::format(FY("'{0}': Processing the following files as well: {1}\n"), p->display_file_name, out.str()));
 }
 
 void

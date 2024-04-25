@@ -28,20 +28,20 @@ private:
   T m_timestamp;
   bool m_valid;
 
-  explicit basic_timestamp_c<T>(T timestamp)
+  explicit basic_timestamp_c(T timestamp)
     : m_timestamp{timestamp}
     , m_valid{true}
   {
   }
 
-  basic_timestamp_c<T>(T timestamp, bool valid)
+  basic_timestamp_c(T timestamp, bool valid)
     : m_timestamp{timestamp}
     , m_valid{valid}
   {
   }
 
 public:
-  basic_timestamp_c<T>()
+  basic_timestamp_c()
     : m_timestamp{}
     , m_valid{}
   {

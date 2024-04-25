@@ -70,7 +70,7 @@ flac_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->duration = mtx::flac::get_num_samples(packet->data->get_buffer(), packet->data->get_size(), m_stream_info);
 
   if (-1 == packet->duration) {
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Packet number {0} contained an invalid FLAC header and is being skipped.\n"), m_num_packets));
+    mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("Packet number {0} contained an invalid FLAC header and is being skipped.\n"), m_num_packets));
     return;
   }
 

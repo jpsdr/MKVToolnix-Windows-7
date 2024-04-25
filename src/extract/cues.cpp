@@ -47,16 +47,16 @@ write_cues(std::vector<track_spec_t> const &tracks,
   for (auto const &track : tracks) {
     auto track_number_itr = track_number_map.find(track.tid);
     if (track_number_itr == track_number_map.end())
-      mxerror(fmt::format(Y("The file does not contain track ID {0}.\n"), track.tid));
+      mxerror(fmt::format(FY("The file does not contain track ID {0}.\n"), track.tid));
 
     auto cue_points_itr = cue_points.find(track_number_itr->second);
     if (cue_points_itr == cue_points.end())
-      mxerror(fmt::format(Y("There are no cues for track ID {0}.\n"), track.tid));
+      mxerror(fmt::format(FY("There are no cues for track ID {0}.\n"), track.tid));
 
     auto &track_cue_points = cue_points_itr->second;
 
     try {
-      mxinfo(fmt::format(Y("The cues for track {0} are written to '{1}'.\n"), track.tid, track.out_name));
+      mxinfo(fmt::format(FY("The cues for track {0} are written to '{1}'.\n"), track.tid, track.out_name));
 
        mm_file_io_c out{track.out_name, libebml::MODE_CREATE};
 
@@ -70,7 +70,7 @@ write_cues(std::vector<track_spec_t> const &tracks,
       }
 
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), track.out_name, ex));
+      mxerror(fmt::format(FY("The file '{0}' could not be opened for writing: {1}.\n"), track.out_name, ex));
     }
   }
 }

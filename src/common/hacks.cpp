@@ -93,7 +93,7 @@ engage(const std::string &hacks) {
     mxinfo(Y("Valid hacks are:\n"));
 
     for (auto const &hack : list_of_hacks)
-      mxinfo(fmt::format(u8"  • {0} — {1}\n", hack.name, mtx::string::join(hack.description, " ")));
+      mxinfo(fmt::format("  • {0} — {1}\n", hack.name, mtx::string::join(hack.description, " ")));
 
     mxexit();
   }
@@ -114,7 +114,7 @@ engage(const std::string &hacks) {
     if (itr != hacks_end)
       s_engaged_hacks[std::distance(hacks_begin, itr)] = true;
     else
-      mxerror(fmt::format(Y("'{0}' is not a valid hack.\n"), name));
+      mxerror(fmt::format(FY("'{0}' is not a valid hack.\n"), name));
   }
 }
 

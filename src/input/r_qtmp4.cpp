@@ -108,7 +108,7 @@ static void
 print_atom_too_small_error(std::string const &name,
                            qt_atom_t const &atom,
                            std::size_t actual_size) {
-  mxerror(fmt::format(Y("Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"), name, actual_size, atom.size));
+  mxerror(fmt::format(FY("Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"), name, actual_size, atom.size));
 }
 
 static std::string
@@ -135,7 +135,7 @@ read_qtmp4_atom(mm_io_c *read_from,
 
   if (a.size < a.hsize) {
     if (exit_on_error)
-      mxerror(fmt::format(Y("Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"), a.size, a.pos));
+      mxerror(fmt::format(FY("Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"), a.size, a.pos));
     else
       throw mtx::atom_chunk_size_x{a.size, a.pos};
   }
@@ -453,8 +453,8 @@ qtmp4_reader_c::handle_cmvd_atom(qt_atom_t atom,
   mxdebug_if(m_debug_headers, fmt::format("{0}Uncompressed size: {1}\n", space((level + 1) * 2 + 1), moov_size));
 
   if (m_compression_algorithm != "zlib")
-    mxerror(fmt::format(Y("Quicktime/MP4 reader: This file uses compressed headers with an unknown "
-                          "or unsupported compression algorithm '{0}'. Aborting.\n"), m_compression_algorithm));
+    mxerror(fmt::format(FY("Quicktime/MP4 reader: This file uses compressed headers with an unknown "
+                           "or unsupported compression algorithm '{0}'. Aborting.\n"), m_compression_algorithm));
 
   auto old_in      = m_in;
   auto cmov_size   = atom.size - atom.hsize;
@@ -477,17 +477,17 @@ qtmp4_reader_c::handle_cmvd_atom(qt_atom_t atom,
 
   int zret = inflateInit(&zs);
   if (Z_OK != zret)
-    mxerror(fmt::format(Y("Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. "
-                          "Error code from zlib: {0}. Aborting.\n"), zret));
+    mxerror(fmt::format(FY("Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. "
+                           "Error code from zlib: {0}. Aborting.\n"), zret));
 
   zret = inflate(&zs, Z_NO_FLUSH);
   if ((Z_OK != zret) && (Z_STREAM_END != zret))
-    mxerror(fmt::format(Y("Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. "
-                          "Error code from zlib: {0}. Aborting.\n"), zret));
+    mxerror(fmt::format(FY("Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. "
+                           "Error code from zlib: {0}. Aborting.\n"), zret));
 
   if (moov_size != zs.total_out)
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size ({0}) "
-                         "was not what is available after uncompressing ({1}).\n"), moov_size, zs.total_out));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size ({0}) "
+                          "was not what is available after uncompressing ({1}).\n"), moov_size, zs.total_out));
 
   zret = inflateEnd(&zs);
 
@@ -677,7 +677,7 @@ qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_c &dmx,
     dmx.language        = decode_and_verify_language(get_uint16_be(&mdhd.language));
 
   } else
-    mxerror(fmt::format(Y("Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version {0}.\n"), version));
+    mxerror(fmt::format(FY("Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version {0}.\n"), version));
 
   mxdebug_if(m_debug_headers, fmt::format("{0}Time scale: {1}, duration: {2}, language: {3}\n", space(level * 2 + 1), dmx.time_scale, dmx.global_duration, dmx.language));
 
@@ -1069,7 +1069,7 @@ qtmp4_reader_c::handle_4dashes_atom(qt_atom_t parent,
 void
 qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
                                  int level) {
-  process_atom(parent, level, [&](qt_atom_t const &atom) {
+  process_atom(parent, level, [this, level](qt_atom_t const &atom) {
     if (atom.fourcc != "data")
       return;
 
@@ -1090,8 +1090,8 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
       auto attachment          = std::make_shared<attachment_t>();
 
-      attachment->name         = fmt::format("cover.{}", type == mtx::mp4::ATOM_DATA_TYPE_PNG ? "png" : type == mtx::mp4::ATOM_DATA_TYPE_BMP ? "bmp" : "jpg");
-      attachment->mime_type    = fmt::format("image/{}", type == mtx::mp4::ATOM_DATA_TYPE_PNG ? "png" : type == mtx::mp4::ATOM_DATA_TYPE_BMP ? "bmp" : "jpeg");
+      attachment->name         = fmt::format(fmt::runtime("cover.{}"), type == mtx::mp4::ATOM_DATA_TYPE_PNG ? "png" : type == mtx::mp4::ATOM_DATA_TYPE_BMP ? "bmp" : "jpg");
+      attachment->mime_type    = fmt::format(fmt::runtime("image/{}"), type == mtx::mp4::ATOM_DATA_TYPE_PNG ? "png" : type == mtx::mp4::ATOM_DATA_TYPE_BMP ? "bmp" : "jpeg");
       attachment->data         = m_in->read(data_size);
       attachment->ui_id        = m_attachment_id++;
       attachment->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
@@ -1101,7 +1101,7 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
         add_attachment(attachment);
 
     } catch (mtx::exception const &ex) {
-      mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading cover art: {}\n", ex.what()));
+      mxdebug_if(m_debug_headers, fmt::format(fmt::runtime("{0}exception while reading cover art: {1}\n"), space((level + 1) * 2 + 1), ex.what()));
     }
   });
 }
@@ -1132,7 +1132,7 @@ qtmp4_reader_c::handle_ilst_metadata_atom(qt_atom_t parent,
         m_comment = content;
 
     } catch (mtx::exception const &ex) {
-      mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading title: {}\n", ex.what()));
+      mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading title: {1}\n", space((level + 1) * 2 + 1), ex.what()));
     }
   });
 }
@@ -1232,7 +1232,7 @@ qtmp4_reader_c::process_chapter_entries(int level,
     mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.factor);
 
   } catch (mtx::chapters::parser_x &ex) {
-    mxerror(fmt::format(Y("The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"), m_ti.m_fname));
+    mxerror(fmt::format(FY("The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"), m_ti.m_fname));
   }
 }
 
@@ -1362,14 +1362,14 @@ qtmp4_reader_c::handle_stsd_atom(qtmp4_demuxer_c &dmx,
     uint32_t size = m_in->read_uint32_be();
 
     if (4 > size)
-      mxerror(fmt::format(Y("Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"), dmx.id));
+      mxerror(fmt::format(FY("Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"), dmx.id));
 
     dmx.stsd = memory_c::alloc(size);
     auto priv     = dmx.stsd->get_buffer();
 
     put_uint32_be(priv, size);
     if (m_in->read(priv + sizeof(uint32_t), size - sizeof(uint32_t)) != (size - sizeof(uint32_t)))
-      mxerror(fmt::format(Y("Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"), dmx.id));
+      mxerror(fmt::format(FY("Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"), dmx.id));
 
     dmx.handle_stsd_atom(size, level);
 
@@ -1668,7 +1668,7 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
   }
 
   if (m_in->read(buffer->get_buffer() + buffer_offset, index.size) != static_cast<uint64_t>(index.size)) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"),
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"),
                        dmx.pos, dmx.m_index.size(), index.size, index.file_pos));
     return finish();
   }
@@ -2885,7 +2885,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
   auto size     = stsd->get_size();
 
   if (sizeof(sound_v0_stsd_atom_t) > atom_size)
-    mxerror(fmt::format(Y("Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"), id));
+    mxerror(fmt::format(FY("Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"), id));
 
   sound_v1_stsd_atom_t sv1_stsd;
   sound_v2_stsd_atom_t sv2_stsd;
@@ -2893,7 +2893,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
   memcpy(&sv2_stsd, stsd_raw, sizeof(sound_v0_stsd_atom_t));
 
   if (fourcc)
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
                        id, fourcc.description(), fourcc_c{sv1_stsd.v0.base.fourcc}.description()));
   else
     fourcc = fourcc_c{sv1_stsd.v0.base.fourcc};
@@ -2919,7 +2919,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
 
   else if (1 == version) {
     if (sizeof(sound_v1_stsd_atom_t) > size)
-      mxerror(fmt::format(Y("Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"), id));
+      mxerror(fmt::format(FY("Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"), id));
 
     stsd_non_priv_struct_size = sizeof(sound_v1_stsd_atom_t);
     memcpy(&sv1_stsd, stsd_raw, stsd_non_priv_struct_size);
@@ -2933,7 +2933,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
 
   } else if (2 == version) {
     if (sizeof(sound_v2_stsd_atom_t) > size)
-      mxerror(fmt::format(Y("Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"), id));
+      mxerror(fmt::format(FY("Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"), id));
 
     stsd_non_priv_struct_size = sizeof(sound_v2_stsd_atom_t);
     memcpy(&sv2_stsd, stsd_raw, stsd_non_priv_struct_size);
@@ -2967,14 +2967,14 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
   stsd_non_priv_struct_size = sizeof(video_stsd_atom_t);
 
   if (sizeof(video_stsd_atom_t) > atom_size)
-    mxerror(fmt::format(Y("Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"), id));
+    mxerror(fmt::format(FY("Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"), id));
 
   video_stsd_atom_t v_stsd;
   auto stsd_raw = stsd->get_buffer();
   memcpy(&v_stsd, stsd_raw, sizeof(video_stsd_atom_t));
 
   if (fourcc)
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
                        id, fourcc.description(), fourcc_c{v_stsd.base.fourcc}.description()));
 
   else
@@ -3056,7 +3056,7 @@ qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
 
   a_aac_audio_config = mtx::aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size());
   if (!a_aac_audio_config) {
-    mxwarn(fmt::format(Y("Track {0}: The AAC information could not be parsed.\n"), id));
+    mxwarn(fmt::format(FY("Track {0}: The AAC information could not be parsed.\n"), id));
     return;
   }
 
@@ -3536,7 +3536,7 @@ qtmp4_demuxer_c::verify_audio_parameters() {
   }
 
   if ((0 == a_channels) || (0.0 == a_samplerate)) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
     return false;
   }
 
@@ -3555,7 +3555,7 @@ qtmp4_demuxer_c::verify_audio_parameters() {
 bool
 qtmp4_demuxer_c::verify_alac_audio_parameters() {
   if (!stsd || (stsd->get_size() < (stsd_non_priv_struct_size + 12 + sizeof(mtx::alac::codec_config_t)))) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
     return false;
   }
 
@@ -3585,12 +3585,12 @@ bool
 qtmp4_demuxer_c::verify_mp4a_audio_parameters() {
   auto cdc = codec_c::look_up_object_type_id(esds.object_type_id);
   if (!cdc.is(codec_c::type_e::A_AAC) && !cdc.is(codec_c::type_e::A_DTS) && !cdc.is(codec_c::type_e::A_MP2) && !cdc.is(codec_c::type_e::A_MP3)) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"), id, static_cast<unsigned int>(esds.object_type_id)));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"), id, static_cast<unsigned int>(esds.object_type_id)));
     return false;
   }
 
   if (cdc.is(codec_c::type_e::A_AAC) && (!esds.decoder_config || !a_aac_audio_config)) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"), id));
     return false;
   }
 
@@ -3603,7 +3603,7 @@ qtmp4_demuxer_c::verify_video_parameters() {
     check_for_hevc_video_annex_b_bitstream();
 
   if (!v_width || !v_height || !fourcc) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
     return false;
   }
 
@@ -3652,14 +3652,14 @@ qtmp4_demuxer_c::verify_avc_video_parameters() {
   if (derive_track_params_from_avc_bitstream())
     return true;
 
-  mxwarn(fmt::format(Y("Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"), id));
+  mxwarn(fmt::format(FY("Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"), id));
   return false;
 }
 
 bool
 qtmp4_demuxer_c::verify_hevc_video_parameters() {
   if (priv.empty() || (23 > priv[0]->get_size())) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"), id));
     return false;
   }
 
@@ -3669,13 +3669,13 @@ qtmp4_demuxer_c::verify_hevc_video_parameters() {
 bool
 qtmp4_demuxer_c::verify_mp4v_video_parameters() {
   if (!esds_parsed) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"), id));
     return false;
   }
 
   if (codec.is(codec_c::type_e::V_MPEG4_P2) && !esds.decoder_config) {
     // This is MPEG4 video, and we need header data for it.
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"), id));
     return false;
   }
 
@@ -3696,7 +3696,7 @@ qtmp4_demuxer_c::verify_subtitles_parameters() {
 bool
 qtmp4_demuxer_c::verify_vobsub_subtitles_parameters() {
   if (!esds.decoder_config || (64 > esds.decoder_config->get_size())) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"), id));
     return false;
   }
 

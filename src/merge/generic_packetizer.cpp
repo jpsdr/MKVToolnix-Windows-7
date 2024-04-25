@@ -199,9 +199,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
 
   if (m_ti.m_aspect_ratio_given && m_ti.m_display_dimensions_given) {
     if (m_ti.m_aspect_ratio_is_factor)
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Both the aspect ratio factor and '--display-dimensions' were given.\n")));
+      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("Both the aspect ratio factor and '--display-dimensions' were given.\n")));
     else
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Both the aspect ratio and '--display-dimensions' were given.\n")));
+      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("Both the aspect ratio and '--display-dimensions' were given.\n")));
   }
 
   // Let's see if the user has specified a FourCC for this track.
@@ -368,7 +368,7 @@ generic_packetizer_c::set_tag_track_uid() {
     fix_mandatory_elements(tag);
 
     if (!tag->CheckMandatory())
-      mxerror(fmt::format(Y("The tags in '{0}' could not be parsed: some mandatory elements are missing.\n"),
+      mxerror(fmt::format(FY("The tags in '{0}' could not be parsed: some mandatory elements are missing.\n"),
                           m_ti.m_tags_file_name != "" ? m_ti.m_tags_file_name : m_ti.m_fname));
   }
 }
@@ -702,7 +702,6 @@ generic_packetizer_c::set_video_color_matrix(uint64_t matrix_index,
                                              option_source_e source) {
   m_ti.m_color_matrix_coeff.set(matrix_index, source);
   if (   m_track_entry
-      && (matrix_index >= 0)
       && (matrix_index <= 10)) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
@@ -714,7 +713,7 @@ void
 generic_packetizer_c::set_video_bits_per_channel(uint64_t num_bits,
                                                  option_source_e source) {
   m_ti.m_bits_per_channel.set(num_bits, source);
-  if (m_track_entry && (num_bits >= 0)) {
+  if (m_track_entry) {
     auto &video = get_child<libmatroska::KaxTrackVideo>(m_track_entry);
     auto &color = get_child<libmatroska::KaxVideoColour>(video);
     get_child<libmatroska::KaxVideoBitsPerChannel>(color).SetValue(m_ti.m_bits_per_channel.get());
@@ -1415,7 +1414,7 @@ generic_packetizer_c::compress_packet(packet_t &packet) {
       packet.data_adds[i].data = m_compressor->compress(packet.data_adds[i].data);
 
   } catch (mtx::compression_x &e) {
-    mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Compression failed: {0}\n"), e.error()));
+    mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(FY("Compression failed: {0}\n"), e.error()));
   }
 }
 
@@ -1499,14 +1498,14 @@ generic_packetizer_c::add_packet2(packet_cptr const &pack) {
         pack->fref += needed_timestamp_offset;
 
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-                 fmt::format(Y("The current packet's timestamp is smaller than that of the previous packet. "
-                               "This usually means that the source file is a Matroska file that has not been created 100% correctly. "
-                               "The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. "
-                               "This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. "
-                               "If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. "
-                               "If this error happens more than once and you get this message more than once for a particular track "
-                               "then either is the source file badly mastered, or mkvmerge contains a bug. "
-                               "In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"),
+                 fmt::format(FY("The current packet's timestamp is smaller than that of the previous packet. "
+                                "This usually means that the source file is a Matroska file that has not been created 100% correctly. "
+                                "The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. "
+                                "This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. "
+                                "If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. "
+                                "If this error happens more than once and you get this message more than once for a particular track "
+                                "then either is the source file badly mastered, or mkvmerge contains a bug. "
+                                "In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"),
                              (needed_timestamp_offset + 500000) / 1000000));
 
     } else
@@ -1785,7 +1784,7 @@ generic_packetizer_c::show_experimental_status_version(std::string const &codec_
     return;
 
   s_experimental_status_warning_shown[idx] = true;
-  mxwarn(fmt::format(Y("Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. "
+  mxwarn(fmt::format(FY("Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. "
                        "mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. "
                        "This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"),
                      get_format_name().get_translated(), codec_id));

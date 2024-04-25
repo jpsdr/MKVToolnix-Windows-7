@@ -316,7 +316,7 @@ mpeg4_p2_video_packetizer_c::extract_aspect_ratio(const uint8_t *buffer,
     generic_packetizer_c::set_headers();
     rerender_track_headers();
     mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-               fmt::format(Y("Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"),
+               fmt::format(FY("Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"),
                            m_hvideo_display_width, m_hvideo_display_height));
 
   } else if (50 <= m_frames_output)
@@ -356,8 +356,8 @@ mpeg4_p2_video_packetizer_c::extract_size(const uint8_t *buffer,
       rerender_track_headers();
 
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-                 fmt::format(Y("The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values "
-                               "in the source container. The ones from the video data bitstream ({0}x{1}) will be used.\n"), xtr_width, xtr_height));
+                 fmt::format(FY("The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values "
+                                "in the source container. The ones from the video data bitstream ({0}x{1}) will be used.\n"), xtr_width, xtr_height));
     }
 
   } else if (50 <= m_frames_output)
