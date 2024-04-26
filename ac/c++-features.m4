@@ -1,10 +1,10 @@
 AC_DEFUN([AX_CXX_STD_CXX_FLAG],[
-  AC_CACHE_CHECK([for support for the "-std=c++20" or "-std=c++17" flag], [ax_cv_std_cxx_flag],[
+  AC_CACHE_CHECK([for support for the "-std=c++17" flag], [ax_cv_std_cxx_flag],[
 
     AC_LANG_PUSH(C++)
     CXXFLAGS_SAVED="$CXXFLAGS"
 
-    for flag in c++20 c++17; do
+    for flag in c++17; do
       CXXFLAGS="$CXXFLAGS_SAVED -std=$flag"
       AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[true;]])],[ax_cv_std_cxx_flag="-std=$flag"],[ax_cv_std_cxx_flag="undecided"])
 
