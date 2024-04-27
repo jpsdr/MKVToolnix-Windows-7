@@ -1866,12 +1866,14 @@ qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_c &dmx) {
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
+#if defined(HAVE_FLAC_FORMAT_H)
 void
 qtmp4_reader_c::create_audio_packetizer_flac(qtmp4_demuxer_c &dmx) {
   auto const &priv = *dmx.priv.at(0);
   dmx.ptzr         = add_packetizer(new flac_packetizer_c{this, m_ti, priv.get_buffer(), priv.get_size()});
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
+#endif
 
 void
 qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx) {
@@ -2025,8 +2027,10 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     else if (dmx.codec.is(codec_c::type_e::A_DTS))
       packetizer_ok = create_audio_packetizer_dts(dmx);
 
+#if defined(HAVE_FLAC_FORMAT_H)
     else if (dmx.codec.is(codec_c::type_e::A_FLAC))
       create_audio_packetizer_flac(dmx);
+#endif
 
     else if (dmx.codec.is(codec_c::type_e::A_OPUS))
       create_audio_packetizer_opus(dmx);
@@ -3561,8 +3565,10 @@ qtmp4_demuxer_c::verify_audio_parameters() {
   else if (codec.is(codec_c::type_e::A_DTS))
     derive_track_params_from_dts_audio_bitstream();
 
+#if defined(HAVE_FLAC_FORMAT_H)
   else if (codec.is(codec_c::type_e::A_FLAC))
     return priv.size() == 1;
+#endif
 
   else if (codec.is(codec_c::type_e::A_VORBIS))
     return derive_track_params_from_vorbis_private_data();

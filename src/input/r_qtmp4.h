@@ -571,7 +571,9 @@ protected:
   virtual bool create_audio_packetizer_ac3(qtmp4_demuxer_c &dmx);
   virtual bool create_audio_packetizer_alac(qtmp4_demuxer_c &dmx);
   virtual bool create_audio_packetizer_dts(qtmp4_demuxer_c &dmx);
+#if defined(HAVE_FLAC_FORMAT_H)
   virtual void create_audio_packetizer_flac(qtmp4_demuxer_c &dmx);
+#endif
   virtual void create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_opus(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx);
