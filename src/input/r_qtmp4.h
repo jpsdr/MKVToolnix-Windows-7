@@ -353,6 +353,7 @@ struct qtmp4_demuxer_c {
   void parse_subtitles_header_priv_atoms(uint64_t atom_size, int level);
 
   void parse_esds_audio_header_priv_atom(mm_io_c &io, int level);
+  void parse_dfla_audio_header_priv_atom(mm_io_c &io, int level);
   void parse_dops_audio_header_priv_atom(mm_io_c &io, int level);
   void parse_aac_esds_decoder_config();
   void parse_vorbis_esds_decoder_config();
@@ -570,6 +571,7 @@ protected:
   virtual bool create_audio_packetizer_ac3(qtmp4_demuxer_c &dmx);
   virtual bool create_audio_packetizer_alac(qtmp4_demuxer_c &dmx);
   virtual bool create_audio_packetizer_dts(qtmp4_demuxer_c &dmx);
+  virtual void create_audio_packetizer_flac(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_opus(qtmp4_demuxer_c &dmx);
   virtual void create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx);

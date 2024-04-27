@@ -61,6 +61,7 @@
 #include "output/p_av1.h"
 #include "output/p_avc.h"
 #include "output/p_dts.h"
+#include "output/p_flac.h"
 #include "output/p_hevc.h"
 #include "output/p_hevc_es.h"
 #include "output/p_mp3.h"
@@ -1866,6 +1867,13 @@ qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_audio_packetizer_flac(qtmp4_demuxer_c &dmx) {
+  auto const &priv = *dmx.priv.at(0);
+  dmx.ptzr         = add_packetizer(new flac_packetizer_c{this, m_ti, priv.get_buffer(), priv.get_size()});
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx) {
   dmx.ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, dmx.a_samplerate, dmx.a_channels, true));
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
@@ -2016,6 +2024,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     else if (dmx.codec.is(codec_c::type_e::A_DTS))
       packetizer_ok = create_audio_packetizer_dts(dmx);
+
+    else if (dmx.codec.is(codec_c::type_e::A_FLAC))
+      create_audio_packetizer_flac(dmx);
 
     else if (dmx.codec.is(codec_c::type_e::A_OPUS))
       create_audio_packetizer_opus(dmx);
@@ -3125,6 +3136,29 @@ qtmp4_demuxer_c::parse_dops_audio_header_priv_atom(mm_io_c &io,
 }
 
 void
+qtmp4_demuxer_c::parse_dfla_audio_header_priv_atom(mm_io_c &io,
+                                                   int level) {
+  auto size = io.get_size();
+
+  mxdebug_if(m_debug_headers, fmt::format("{0}FLAC box size: {1}\n", space((level + 1) * 2 + 1), size));
+
+  if (size <= 4)
+    return;
+
+  io.skip(4);
+  size -= 4;
+
+  auto flac_priv = memory_c::alloc(size);
+  if (io.read(flac_priv, size) != size)
+    return;
+
+  priv.clear();
+  priv.emplace_back(flac_priv);
+
+  mxdebug_if(m_debug_headers, fmt::format("{0}FLAC private data: {1}\n", space((level + 1) * 2 + 1), mtx::string::to_hex(priv.at(0))));
+}
+
+void
 qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
                                                int level) {
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
@@ -3164,6 +3198,9 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(mm_mem_io_c &mio,
 
       else if (atom.fourcc == "dOps")
         parse_dops_audio_header_priv_atom(sub_io, level + 1);
+
+      else if (atom.fourcc == "dfLa")
+        parse_dfla_audio_header_priv_atom(sub_io, level + 1);
 
       mio.setFilePointer(atom.pos + atom.size);
     }
@@ -3523,6 +3560,9 @@ qtmp4_demuxer_c::verify_audio_parameters() {
 
   else if (codec.is(codec_c::type_e::A_DTS))
     derive_track_params_from_dts_audio_bitstream();
+
+  else if (codec.is(codec_c::type_e::A_FLAC))
+    return priv.size() == 1;
 
   else if (codec.is(codec_c::type_e::A_VORBIS))
     return derive_track_params_from_vorbis_private_data();
