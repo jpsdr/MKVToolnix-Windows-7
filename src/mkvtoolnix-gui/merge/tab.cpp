@@ -129,6 +129,8 @@ Tab::Tab(QWidget *parent)
 
   p.ui->trackLanguage->registerBuddyLabel(*p.ui->trackLanguageLabel);
   p.ui->chapterLanguage->registerBuddyLabel(*p.ui->chapterLanguageLabel);
+
+  updateAttachmentsTabTitle();
 }
 
 Tab::~Tab() {

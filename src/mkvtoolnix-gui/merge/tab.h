@@ -251,6 +251,7 @@ public Q_SLOTS:
 
   virtual void retranslateUi();
   virtual void handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action);
+  virtual void updateAttachmentsTabTitle();
 
   virtual void signalRemovalOfThisTab();
 

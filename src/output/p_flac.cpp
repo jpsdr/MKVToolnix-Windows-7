@@ -27,8 +27,8 @@
 
 flac_packetizer_c::flac_packetizer_c(generic_reader_c *p_reader,
                                      track_info_c &p_ti,
-                                     uint8_t *header,
-                                     int l_header)
+                                     uint8_t const *header,
+                                     std::size_t l_header)
   : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_header{memory_c::clone(header, l_header)}
 {

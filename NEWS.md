@@ -8,6 +8,10 @@
   Matroska file was created by MakeMKV.
 * translations: added a Norwegian Bokmål translation of the programs by Roger
   Knutsen (see `AUTHORS`).
+* mkvmerge: MP4 reader: added support for FLAC in MP4. Implements #3692.
+* MKVToolNix GUI: multiplexer: the "Attachments" tab's title will now include
+  the total number of attachments (both from source files & to newly
+  attach). Implements #3693.
 
 ## Bug fixes
 

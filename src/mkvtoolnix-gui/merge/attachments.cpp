@@ -6,6 +6,7 @@
 #include "common/mime.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
+#include "mkvtoolnix-gui/merge/attachment_model.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
@@ -101,6 +102,10 @@ Tab::setupAttachmentsControls() {
   connect(p.ui->attachedFiles,                  &Util::BasicTreeView::allSelectedActivated,                             this, &Tab::toggleMuxThisForSelectedAttachedFiles);
   connect(p.ui->attachedFiles,                  &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showAttachedFilesContextMenu);
   connect(p.attachedFilesModel,                 &AttachedFileModel::itemChanged,                                        this, &Tab::attachedFileItemChanged);
+  connect(p.attachedFilesModel,                 &QStandardItemModel::rowsInserted,                                      this, &Tab::updateAttachmentsTabTitle);
+  connect(p.attachedFilesModel,                 &QStandardItemModel::rowsRemoved,                                       this, &Tab::updateAttachmentsTabTitle);
+  connect(p.attachmentsModel,                   &QStandardItemModel::rowsInserted,                                      this, &Tab::updateAttachmentsTabTitle);
+  connect(p.attachmentsModel,                   &QStandardItemModel::rowsRemoved,                                       this, &Tab::updateAttachmentsTabTitle);
 
   onAttachmentSelectionChanged();
 
@@ -594,6 +599,14 @@ Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const 
   attachment->m_name = Q("cover%2").arg(Q(fileName.extension().string()).toLower());
 
   p_func()->attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
+}
+
+void
+Tab::updateAttachmentsTabTitle() {
+  auto &p             = *p_func();
+  auto numAttachments = p.attachedFilesModel->rowCount() + p.attachmentsModel->rowCount();
+
+  p.ui->tabs->setTabText(2, Q("%1 (%2)").arg(QY("Attachments")).arg(numAttachments));
 }
 
 }
