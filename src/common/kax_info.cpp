@@ -742,13 +742,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     auto field_order = static_cast<libmatroska::KaxVideoFieldOrder &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        field_order,
-                          0 == field_order ? Y("progressive")
-                       :  1 == field_order ? Y("top field displayed first, top field stored first")
-                       :  2 == field_order ? Y("unspecified")
-                       :  6 == field_order ? Y("bottom field displayed first, bottom field stored first")
-                       :  9 == field_order ? Y("bottom field displayed first, top field stored first")
-                       : 14 == field_order ? Y("top field displayed first, bottom field stored first")
-                       :                     Y("unknown"));
+                          0 == field_order ? fmt::to_string(Y("progressive"))
+                       :  1 == field_order ? fmt::format("tff ({})", Y("top field displayed first, top field stored first"))
+                       :  2 == field_order ? fmt::to_string(Y("undetermined"))
+                       :  6 == field_order ? fmt::format("bff ({})", Y("bottom field displayed first, bottom field stored first"))
+                       :  9 == field_order ? fmt::format("tff ({})", Y("interleaved; top field displayed first; fields are interleaved in storage with the top line of the top field stored first"))
+                       : 14 == field_order ? fmt::format("bff ({})", Y("interleaved; bottom field displayed first; fields are interleaved in storage with the top line of the top field stored first"))
+                       :                     fmt::to_string(Y("unknown")));
   });
 
   add_fmt(EBML_ID(libmatroska::KaxVideoStereoMode), [](libebml::EbmlElement &e) -> std::string {
