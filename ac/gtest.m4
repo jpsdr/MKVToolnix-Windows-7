@@ -1,13 +1,20 @@
 AC_DEFUN([AX_GTEST],[
-  GTEST_TYPE=system
+  GTEST_CFLAGS=
+  GTEST_LIBS=
+  GTEST_TYPE=no
 
   CPPFLAGS_SAVED="$CPPFLAGS"
   AC_LANG_PUSH(C++)
 
-  AC_CHECK_LIB([gtest_main],[main],[true],[GTEST_TYPE=no],[-lpthread])
-  AC_CHECK_HEADERS([gtest/gtest.h],[true],[GTEST_TYPE=no])
+  PKG_CHECK_EXISTS([gtest],[gtest_found=yes],[gtest_found=no])
 
-  if test $GTEST_TYPE = no && test -d lib/gtest/include && test -d lib/gtest/src ; then
+  if test x"$gtest_found" = xyes; then
+    PKG_CHECK_MODULES([gtest],[gtest],[gtest_found=yes])
+    GTEST_CFLAGS="`$PKG_CONFIG --cflags gtest`"
+    GTEST_LIBS="`$PKG_CONFIG --libs gtest`"
+    GTEST_TYPE=system
+
+  elif test -d lib/gtest/include && test -d lib/gtest/src ; then
     AC_MSG_CHECKING(for internal gtest)
     AC_CACHE_VAL(ax_cv_gtest_internal,[
       CPPFLAGS="$CPPFLAGS_SAVED -Ilib/gtest/include"
@@ -23,6 +30,8 @@ AC_DEFUN([AX_GTEST],[
   AC_LANG_POP
   CPPFLAGS="$CPPFLAGS_SAVED"
 
+  AC_SUBST(GTEST_CFLAGS)
+  AC_SUBST(GTEST_LIBS)
   AC_SUBST(GTEST_TYPE)
 ])
 

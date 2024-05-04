@@ -158,6 +158,7 @@ class Target
       case entry
       when nil               then nil
       when :flac             then c(:FLAC_LIBS)
+      when :gtest            then $gtest_internal ? [ '-Llib/gtest/src', '-lgtest' ] : c(:GTEST_LIBS)
       when :iconv            then c(:ICONV_LIBS)
       when :intl             then c(:LIBINTL_LIBS)
       when :cmark            then c(:CMARK_LIBS)
