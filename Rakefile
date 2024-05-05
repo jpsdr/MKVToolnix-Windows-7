@@ -171,7 +171,7 @@ def setup_globals
   cxxflags                += " -Wmisleading-indentation -Wduplicated-cond"                               if check_compiler_version("gcc", "6.0.0")
   cxxflags                += " -Wshadow-compatible-local -Wduplicated-branches"                          if check_compiler_version("gcc", "7.0.0")
   cxxflags                += " -Wno-deprecated-copy -Wno-stringop-overflow"                              if check_compiler_version("gcc", "9.0.0")
-  cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)}"
+  cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)} #{c(:GTEST_CFLAGS)}"
 
   ldflags                  = ""
   ldflags                 += determine_stack_protector_flags

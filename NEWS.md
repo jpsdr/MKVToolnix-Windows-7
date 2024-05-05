@@ -4,6 +4,9 @@
 
 * fixed compilation of `src/common/sorting.h` with certain compilers due to
   the deprecation & removal of `std::result_of<>` in C++20. Fixes #3695.
+* fixed compilation with the `gtest` library when `gtest` requires additional
+  libraries by querying `pkg-config` for the correct flags & libraries to
+  build with. See #3696.
 
 
 # Version 84.0 "Sleeper" 2024-04-28
