@@ -24,7 +24,6 @@ $build_system_modules[:gtest] = {
   :setup => lambda do
     if $gtest_internal
       $flags[:cxxflags] += " -Ilib/gtest -Ilib/gtest/include"
-      $flags[:ldflags]  += " -Llib/gtest/src"
     end
   end,
 
