@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2024-04-27 21:40+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2023\n"
+"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -769,7 +769,7 @@ msgstr ""
 msgid ""
 "  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
 "                           existing ones.\n"
-msgstr ""
+msgstr "  --regenerate-track-uids  重新生成随机的轨道 UID，而不是保留已有的值。\n"
 
 #: src/merge/mkvmerge.cpp:286
 #, no-c-format
@@ -1965,7 +1965,7 @@ msgstr "隐藏(&H)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #, no-c-format
 msgid "&Ignore playlists meant for menus"
-msgstr ""
+msgstr "忽略用于菜单功能的播放列表(&I)"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
 #, no-c-format
@@ -3090,7 +3090,7 @@ msgstr "单个 Matroska 区块可包含一个完整帧 (对于逐行扫描的内
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:602
 #, no-c-format
 msgid "A subtitle track is considered to be 'forced' track if any of the following conditions are met:"
-msgstr ""
+msgstr "对于字幕轨道，如果它满足以下条件，则认为其属于 ｢强制｣ 轨道:"
 
 #: src/merge/generic_reader.cpp:177
 #, no-c-format, c++-format
@@ -3748,7 +3748,7 @@ msgstr "总将以下类型的轨道选中用于复制，而不考虑其语言:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
-msgstr ""
+msgstr "自动选中强制字幕轨，将其复制到输出文件(&F)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:263
 #, no-c-format
@@ -3993,9 +3993,9 @@ msgid "Audio"
 msgstr "音频"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio and subtitle files often contain the words 'cc' or 'sdh' in their file name to signal that they're intended for hearing impaired people."
-msgstr "字幕文件常在文件名中以 ｢forced｣ (强制) 字样表明它们应该 ｢强制显示｣ (例如《指环王》中角色讲精灵语时的字幕)。"
+msgstr "音频文件与字幕文件通常会用关键词 ｢cc｣ 或 ｢sdh｣ (｢供听障人士使用的字幕｣) 来表明其系为听觉障碍人群而准备。"
 
 #: src/common/property_element.cpp:214
 #, no-c-format
@@ -4242,7 +4242,7 @@ msgstr "布尔值 (是/否、开/关等)"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
 #, no-c-format
 msgid "Both of the schemes used by older models (e.g. GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) & by current ones (e.g. GH019876.mp4, GH029876.mp4, GH039876.mp4…) are supported."
-msgstr ""
+msgstr "同时支持旧款型号的命名格式 (例如 GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) 和新款的格式 (例如 GH019876.mp4, GH029876.mp4, GH039876.mp4…)。"
 
 #: src/merge/generic_packetizer.cpp:204
 #, no-c-format
@@ -5703,9 +5703,9 @@ msgid "Depending on this setting the language can also be derived from the file 
 msgstr "根据此项设置，输入文件中语言为「未定」(“und”) 时，也可根据文件名推断语言。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"&hearing impair\" flag for audio/subtitles from file names:"
-msgstr "根据文件名推断 ｢强制显示｣ 标记 (&G):"
+msgstr "根据音频、字幕文件的名称推断 ｢听觉障碍｣ 标签(&H):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, no-c-format
@@ -5718,9 +5718,9 @@ msgid "Derive &end timestamps from start timestamps"
 msgstr "根据各起始时间戳推算终止时间戳(&E)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:605
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Deriving the 'forced display' flag from file names is active & the file name matches the corresponding pattern."
-msgstr "GUI 可将文件名与此处的正则表达式匹配的轨道设置 ｢强制显示｣ 标记。"
+msgstr "已启用『根据文件名推断 ｢强制显示｣ 标签』功能，且文件名命中相应的匹配规则。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #, no-c-format
@@ -7449,9 +7449,9 @@ msgid "If enabled, files and tracks will be sorted by track types when they're a
 msgstr "若启用，则在将文件添加到混流设置时，其轨道将按轨道类型排序。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:601
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, forced subtitle tracks will always be set to be copied."
-msgstr "若启用，将不经询问直接跳过此类文件。"
+msgstr "如果启用，将自动选中强制字幕轨道用于复制。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:402
 #, no-c-format
@@ -7471,7 +7471,7 @@ msgstr "若启用，将不经询问直接跳过此类文件。"
 #: src/common/hacks.cpp:70
 #, no-c-format
 msgid "If enabled, the BlockAddID element will be written even if it's set to its default value of 1."
-msgstr ""
+msgstr "如果启用，则将强制写入 BlockAddID 元素，即使它是通常可以省略的默认值 ｢1｣。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:332
 #, no-c-format
@@ -7645,17 +7645,17 @@ msgstr "如果数字后紧接着 ms 则表示在每个簇中最多置入 n 毫�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:493
 #, no-c-format
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "若输入文件的字幕轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
+msgstr "若输入文件的字幕轨道没有此属性，但文件名匹配特定规则 (例如 ｢…[ger]…｣ 表示德语)，则可根据文件名推断语言。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:487
 #, no-c-format
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "若输入文件的视频轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
+msgstr "若输入文件的视频轨道没有此属性，但文件名匹配特定规则 (例如 ｢…[ger]…｣ 表示德语)，则可根据文件名推断语言。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:481
 #, no-c-format
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "若输入文件的音频轨道没有此属性，但文件名匹配特定规则（例如「…[ger]…」表示德语），则可从文件名称推断语言。"
+msgstr "若输入文件的音频轨道没有此属性，但文件名匹配特定规则 (例如 ｢…[ger]…｣ 表示德语)，则可根据文件名推断语言。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
@@ -7755,7 +7755,7 @@ msgstr "如果想要追加（作为其余部分添加），请选择追加到哪
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:551
 #, no-c-format
 msgid "Ignores playlists which are likely meant for menus."
-msgstr ""
+msgstr "忽略可能是用于菜单功能的播放列表。"
 
 #: src/output/p_textsubs.cpp:150
 #, no-c-format, c++-format
@@ -8271,7 +8271,7 @@ msgstr "它将尝试侦测按顺序排列的可能属于同一部影片的文件
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:603
 #, no-c-format
 msgid "Its 'forced display' property is set in the source file."
-msgstr ""
+msgstr "该轨道在输入文件中已设置 ｢强制显示｣ 属性。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:2249
 #, no-c-format
@@ -8281,7 +8281,7 @@ msgstr "其安装位置无法自动检测。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:604
 #, no-c-format
 msgid "Its name contains the word 'forced' (in English)."
-msgstr ""
+msgstr "轨道名称包含英文单词 ｢forced｣ (意为 ｢强制的｣)。"
 
 #: src/common/command_line.cpp:61
 #: src/common/command_line.cpp:65
@@ -9705,7 +9705,7 @@ msgstr "仅显示开头 %1 字节。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:500
 #, no-c-format
 msgid "Only the languages in the 'selected' list on the right will be recognized as track languages in file names."
-msgstr "只有右侧「选中」列表范围内的语言可从文件名中识别为轨道语言。"
+msgstr "根据文件名推断语言时，只有右侧 ｢选中｣ 列表范围内的语言会被识别为轨道语言。"
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
@@ -10462,9 +10462,9 @@ msgstr "Quicktime/MP4 读取器: 轨道 {0} 缺少一些数据。头部单元损
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:202
 #: src/mkvtoolnix-gui/util/settings.cpp:319
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Quit MKVToolNix"
-msgstr "MKVToolNix &GUI"
+msgstr "退出 MKVToolNix"
 
 #: src/common/file_types.cpp:79
 #, no-c-format
@@ -11285,7 +11285,7 @@ msgstr "当轨道 (音频、视频或字幕) 的语言与用户的偏好设置�
 #: src/common/property_element.cpp:153
 #, no-c-format
 msgid "Set if the BlockAdditional element with BlockAddID of '1' contains alpha channel data."
-msgstr ""
+msgstr "如果 BlockAddID 为 ｢1｣ 的 BlockAdditional 元素包含 alpha 通道数据，则设置此元素。"
 
 #: src/common/property_element.cpp:137
 #, no-c-format
@@ -12112,9 +12112,9 @@ msgid "The GUI can set the 'forced display' flag for such tracks if the file nam
 msgstr "GUI 可将文件名与此处的正则表达式匹配的轨道设置 ｢强制显示｣ 标记。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:523
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."
-msgstr "GUI 可将文件名与此处的正则表达式匹配的轨道设置 ｢强制显示｣ 标记。"
+msgstr "GUI 可以在文件名匹配此处的正则表达式时，自动为此类轨道设置 ｢听觉障碍｣ 标签。"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:949
 #: src/mkvtoolnix-gui/merge/tool.cpp:964
@@ -12995,7 +12995,7 @@ msgstr "格式可以为 'HH:MM:SS.nnnnnnnnn'，或数字后加单位 's'、'ms' 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:425
 #, no-c-format
 msgid "The format used by GoPro cameras for chaptered video files is recognized as well."
-msgstr ""
+msgstr "GoPro 相机所使用的分章视频文件也可以识别。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:294
 #, no-c-format
@@ -13070,17 +13070,17 @@ msgstr "该轨道的语言，播放器可以用来进行自动轨道选择，及
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:506
 #, no-c-format
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此处选择的语言用于输入文件中未指定语言属性、且无法从文件名中推断语言的音频轨道。"
+msgstr "此处选择的语言用于输入文件中未指定语言属性、且无法根据文件名推断语言的音频轨道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:518
 #, no-c-format
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此处选择的语言用于输入文件中未指定语言属性、且无法从文件名中推断语言的字幕轨道。"
+msgstr "此处选择的语言用于输入文件中未指定语言属性、且无法根据文件名推断语言的字幕轨道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:512
 #, no-c-format
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此处选择的语言用于输入文件中未指定语言属性、且无法从文件名中推断语言的视频轨道。"
+msgstr "此处选择的语言用于输入文件中未指定语言属性、且无法根据文件名推断语言的视频轨道。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:213
 #, no-c-format
@@ -13750,9 +13750,9 @@ msgid "The value for deriving the 'forced display' flag for subtitles from file 
 msgstr "用于根据字幕文件名推断 ｢强制显示｣ 标记的值必须是有效的正则表达式。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1526
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value for deriving the 'hearing impaired' flag from file names must be a valid regular expression."
-msgstr "用于根据字幕文件名推断 ｢强制显示｣ 标记的值必须是有效的正则表达式。"
+msgstr "用于根据文件名推断 ｢听觉障碍｣ 标记的值必须是有效的正则表达式。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
@@ -14004,7 +14004,7 @@ msgstr "GUI 用来准确定位该配置的字面名称。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:552
 #, no-c-format
 msgid "This is considered to be the case when a playlist contains the same item at least five times."
-msgstr ""
+msgstr "对播放列表的判断标准是，考察它是否包含相同内容 ≥ 5 次。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
 #, no-c-format
@@ -14923,9 +14923,9 @@ msgstr "视频"
 
 #: src/common/kax_element_names.cpp:167
 #: src/common/property_element.cpp:153
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video alpha mode"
-msgstr "视频立体模式"
+msgstr "视频 alpha 模式"
 
 #: src/common/property_element.cpp:164
 #, no-c-format
@@ -15373,7 +15373,7 @@ msgstr "在追加文件时: 文件开头为第一章，随后每追加一个文�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:497
 #, no-c-format
 msgid "When deriving the track language from the file name, the file name is split into parts on the characters in this list."
-msgstr "从文件名推断轨道语言时，文件名将根据此列表中的字符切割成小段。"
+msgstr "根据文件名推断轨道语言时，文件名将根据此列表中的各字符切割成小段。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
@@ -15878,9 +15878,9 @@ msgid "extended language subtags form"
 msgstr "扩展语言子标签形式"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:204
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ffmpeg metadata files"
-msgstr "追加媒体文件"
+msgstr "ffmpeg 元数据文件"
 
 #: src/merge/output_control.cpp:429
 #, no-c-format, c++-format
@@ -15970,12 +15970,12 @@ msgstr "inflateInit() 失败。结果: {0}\n"
 #: src/common/kax_info.cpp:750
 #, no-c-format
 msgid "interleaved; bottom field displayed first; fields are interleaved in storage with the top line of the top field stored first"
-msgstr ""
+msgstr "交错; 先显示底场; 顶场与底场交错存储，存储顺序中最靠前的是顶场的首行"
 
 #: src/common/kax_info.cpp:749
 #, no-c-format
 msgid "interleaved; top field displayed first; fields are interleaved in storage with the top line of the top field stored first"
-msgstr ""
+msgstr "交错; 先显示顶场; 顶场与底场交错存储，存储顺序中最靠前的是顶场的首行"
 
 #: src/propedit/change.cpp:393
 #, no-c-format, c++-format
@@ -16618,7 +16618,7 @@ msgid "tta_reader: tag_size < 0 in the c'tor. {0}\n"
 msgstr "tta_reader: c’tor 中 tag_size < 0。 {0}\n"
 
 #: src/common/kax_info.cpp:747
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "undetermined"
 msgstr "未定"
 
