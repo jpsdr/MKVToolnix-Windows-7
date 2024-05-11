@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2024-04-28 12:18+0200\n"
-"PO-Revision-Date: 2023-10-29 21:16+0100\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2023\n"
+"PO-Revision-Date: 2016-02-03 20:53+0000\n"
+"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -1905,7 +1905,7 @@ msgstr "此选项更改输入文件创建时轨道的顺序。变量为逗号分
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:429
 msgid "If this option isn't given, tracks will be sorted by their type first &amp; the order of their source file second. Video tracks come first followed by audio &amp; subtitle tracks. Other rarely used track types come last."
-msgstr "若未指定该选项，那么轨道将首先按照其类型，其次按照其源文件的顺序排序。视频轨道最先，音轨和字幕轨道其次，其他较少用的类型的轨道最后。"
+msgstr "若未指定该选项，各轨道将先按其类型排序，其次按照轨道所在的输入文件的次序排序。对于轨道类型，视频轨道排在最前面，其次是音频、字幕轨道。其他罕见的轨道类型排在最后。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:436
@@ -2065,7 +2065,7 @@ msgstr "<option>--stop-after-video-ends</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:590
 msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
-msgstr "主要视频轨道结束后停止处理，丢弃任何其他轨道剩余的包。"
+msgstr "主体视频轨道写入完毕后立刻停止处理，丢弃其他轨道在此时间戳以后的数据。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:598
@@ -2829,20 +2829,18 @@ msgstr "不要从此文件中复制全局标签。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1402
-#, fuzzy
-#| msgid "<option>--enable-durations</option>"
 msgid "<option>--regenerate-track-uids</option>"
-msgstr "<option>--enable-durations</option>"
+msgstr "<option>--regenerate-track-uids</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1405
 msgid "When this option is used for a Matroska source file, &mkvmerge; will create new random unique track IDs instead of keeping the existing ones in the file. Existing track UIDs in chapters &amp; tags read from the same file will be remapped to the newly generated values."
-msgstr ""
+msgstr "对 Matroska 格式的输入文件启用此选项时，&mkvmerge; 将生成全新的随机轨道 UID，而非保留文件中现有的 UID。同一个输入文件内读取到的章节、标签中出现的现有 UID 将会重新映射至新生成的 UID。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1411
 msgid "This behavior is enabled automatically for Matroska files created by the MakeMKV software. The reason is that MakeMKV uses consecutive numbers (1, 2, 3…) as UIDs instead of generating random ones."
-msgstr ""
+msgstr "对于由 MakeMKV 软件生成的 Matroska 文件，此选项会自动启用。因为 MakeMKV 采用顺序编号 (1, 2, 3…) 作为 UID，而非生成随机的 UID。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1418
@@ -4027,17 +4025,17 @@ msgstr "语言处理"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2724
 msgid "&matroska; has support for two different types of language elements: the old, deprecated \"Language\" element containing ISO 639-2 alpha 3 codes and the new \"LanguageIETF\" tags containing IETF BCP 47 language tags. All of &mkvmerge;'s options that accept a language accept a BCP 47 language tag. &mkvmerge; will derive the value for the deprecated \"Language\" element from the BCP 47 language tags wherever possible."
-msgstr "&matroska;支持两种不同类型的语言元素：古旧不再推荐使用的“Language”元素，其使用的是ISO 639-2 alpha 3语言代码，以及包含IETF BCP 47语言标签的新加入的“LanguageIETF”标签。所有接受语言的&mkvmerge;选项都接受BCP 47语言标签。&mkvmerge;会在可能的情况下推导出不推荐的“Language”元素的值。"
+msgstr "&matroska; 支持两种的语言元素: ①旧版、已废弃的 ｢Language｣ 元素，其值为 ISO 639-2 alpha 3 语言代码；②新版的 ｢LanguageIETF｣ 标签，包含 IETF BCP 47 语言标签。&mkvmerge; 的所有选项中，接受语言参数的选项都接受 BCP 47 格式的语言标签。&mkvmerge; 会在可能的情况下根据 BCP 47 语言标签推断出相应的旧版 ｢Language｣ 元素值。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2730
 msgid "When identifying a file in JSON mode, existing \"LanguageIETF\" track header elements will be output as the <literal>language_ietf</literal> track property."
-msgstr "在JSON模式中识别文件时，现存的“LanguageIETF”轨道头元素会被输出作<literal>language_ietf</literal>轨道属性。"
+msgstr "以 JSON 模式识别文件时，现有的 ｢LanguageIETF｣ 轨道头部元素值将作为 <literal>language_ietf</literal> 轨道属性输出。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2735
 msgid "When writing a file &mkvmerge; will always write the \"LanguageIETF\", \"ChapLanguageIETF\" and \"TagLanguageIETF\" elements (the latter two only if chapters or tags are written respectively). In addition to those elements the corresponding old elements will be written; they'll be set to the ISO 639-2 code portion of the BCP 47 language tag. For example, when the track language is set to <literal>sr-Cyrl-RS</literal> \"LanguageIETF\" will be set to <literal>sr-Cyrl-RS</literal> and the old \"Language\" element will be set to <literal>srp</literal>."
-msgstr "写入文件时，&mkvmerge;总会写入“LanguageIETF”、“ChapLanguageIETF”和“TagLanguageIETF”元素（如果章节和标签分别写入，那么仅会写入这三项的后两个）。除这些元素外，也会对应的古旧元素，它们会被设为BCP 47语言标签中的ISO 639-2代码部分。比如轨道语言设为<literal>sr-Cyrl-RS1</literal>时，“LanguageIETF”会被设为<literal>sr-Cyrl-RS</literal>，而古旧的“Language”元素会被设为<literal>srp</literal>。."
+msgstr "在写入文件时，&mkvmerge; 总会写入 ｢LanguageIETF｣ ｢ChapLanguageIETF｣ 以及 ｢TagLanguageIETF｣ 元素 (后两者分别仅在写入章节、标签时出现)。此外，还将写入与之对应的旧版元素; 旧版元素将被设置为 BCP 47 语言标签中的 ISO 639-2 代码部分。例如，若将轨道语言设为 <literal>sr-Cyrl-RS</literal>，则 ｢LanguageIETF｣ 元素会被设为 <literal>sr-Cyrl-RS</literal>，而旧版的 ｢Language｣ 元素将被设为 <literal>srp</literal>。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2743
@@ -5734,7 +5732,7 @@ msgstr " -- "
 #: doc/stylesheets/docbook-to-html.xsl:83
 #: doc/stylesheets/docbook-to-html.xsl:100
 msgid "Link to this heading"
-msgstr ""
+msgstr "指向此标题的链接"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><tr><td><xsl:choose><xsl:when><a>
 #: doc/stylesheets/docbook-to-html.xsl:83
@@ -5742,7 +5740,7 @@ msgstr ""
 #: doc/stylesheets/docbook-to-html.xsl:145
 #, no-wrap
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><table><thead><tr><th>
 #: doc/stylesheets/docbook-to-html.xsl:130
@@ -5753,7 +5751,7 @@ msgstr "选项"
 #. type: Attribute 'title' of: <xsl:stylesheet><xsl:template><tr><td><xsl:choose><xsl:when><a>
 #: doc/stylesheets/docbook-to-html.xsl:145
 msgid "Link to this option"
-msgstr ""
+msgstr "指向此选项的链接"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:choose><xsl:otherwise><a><xsl:text>
 #: doc/stylesheets/docbook-to-html.xsl:185
