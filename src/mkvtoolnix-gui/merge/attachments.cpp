@@ -457,6 +457,7 @@ Tab::retranslateAttachmentsUI() {
   p.ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
 
   setupAttachmentsToolTips();
+  updateAttachmentsTabTitle();
 }
 
 void
