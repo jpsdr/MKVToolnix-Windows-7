@@ -7,6 +7,8 @@
 * fixed compilation with the `gtest` library when `gtest` requires additional
   libraries by querying `pkg-config` for the correct flags & libraries to
   build with. See #3696.
+* MKVToolNix GUI: multiplexer: restored the keyboard shortcut for switching to
+  the "Attachments" tab (Alt+C for the English interface). Fixes #3702.
 
 
 # Version 84.0 "Sleeper" 2024-04-28
