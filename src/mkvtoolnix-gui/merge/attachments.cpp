@@ -457,6 +457,7 @@ Tab::retranslateAttachmentsUI() {
   p.ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
 
   setupAttachmentsToolTips();
+  updateAttachmentsTabTitle();
 }
 
 void
@@ -606,7 +607,7 @@ Tab::updateAttachmentsTabTitle() {
   auto &p             = *p_func();
   auto numAttachments = p.attachedFilesModel->rowCount() + p.attachmentsModel->rowCount();
 
-  p.ui->tabs->setTabText(2, Q("%1 (%2)").arg(QY("Attachments")).arg(numAttachments));
+  p.ui->tabs->setTabText(2, Q("%1 (%2)").arg(QY("Atta&chments")).arg(numAttachments));
 }
 
 }
