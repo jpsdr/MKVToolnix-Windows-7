@@ -5,7 +5,6 @@
 #include <QStringList>
 
 #include "common/bcp47.h"
-#include "common/bitvalue.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
@@ -16,7 +15,6 @@
 #include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/language_display_widget.h"
-#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
