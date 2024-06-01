@@ -13,6 +13,7 @@
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/language_display_widget.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -366,6 +367,7 @@ Tab::setupSplitModeLabelAndToolTips() {
 void
 Tab::onTitleChanged(QString newValue) {
   p_func()->config.m_title = newValue;
+  MainWindow::get()->mergeTool()->enableMenuActions();
 }
 
 void
@@ -374,6 +376,7 @@ Tab::setDestination(QString const &newValue) {
 
   if (newValue.isEmpty()) {
     p.config.m_destination.clear();
+    MainWindow::get()->mergeTool()->enableMenuActions();
     Q_EMIT titleChanged();
     return;
   }
@@ -390,6 +393,8 @@ Tab::setDestination(QString const &newValue) {
   }
 
   Q_EMIT titleChanged();
+
+  MainWindow::get()->mergeTool()->enableMenuActions();
 
   if (p.config.m_destination == newValue)
     return;
@@ -409,6 +414,8 @@ Tab::clearDestination() {
   setDestination(Q(""));
   p.config.m_destinationAuto.clear();
   p.config.m_destinationUniquenessSuffix.clear();
+
+  MainWindow::get()->mergeTool()->enableMenuActions();
 }
 
 void

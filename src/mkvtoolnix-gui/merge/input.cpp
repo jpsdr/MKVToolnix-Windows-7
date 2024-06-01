@@ -1715,6 +1715,7 @@ Tab::onRemoveAllFiles() {
 void
 Tab::reinitFilesTracksControls() {
   onTrackSelectionChanged();
+  MainWindow::get()->mergeTool()->enableMenuActions();
 }
 
 void
