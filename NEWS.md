@@ -9,6 +9,10 @@
   build with. See #3696.
 * MKVToolNix GUI: multiplexer: restored the keyboard shortcut for switching to
   the "Attachments" tab (Alt+C for the English interface). Fixes #3702.
+* MKVToolNix GUI: multiplexer: fixed several cases when the keyboard shortcuts
+  for copying the first source file's name/the destination file's name to the
+  title (Ctrl+F & Ctrl+D) and the one for copying the title to the destination
+  file name (Ctrl+T) were not enabled. Fixes #3705.
 
 
 # Version 84.0 "Sleeper" 2024-04-28
