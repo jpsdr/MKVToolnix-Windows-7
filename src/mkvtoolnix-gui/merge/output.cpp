@@ -5,7 +5,6 @@
 #include <QStringList>
 
 #include "common/bcp47.h"
-#include "common/bitvalue.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
@@ -14,9 +13,9 @@
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/language_display_widget.h"
-#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -368,6 +367,7 @@ Tab::setupSplitModeLabelAndToolTips() {
 void
 Tab::onTitleChanged(QString newValue) {
   p_func()->config.m_title = newValue;
+  MainWindow::get()->mergeTool()->enableMenuActions();
 }
 
 void
@@ -376,6 +376,7 @@ Tab::setDestination(QString const &newValue) {
 
   if (newValue.isEmpty()) {
     p.config.m_destination.clear();
+    MainWindow::get()->mergeTool()->enableMenuActions();
     Q_EMIT titleChanged();
     return;
   }
@@ -392,6 +393,8 @@ Tab::setDestination(QString const &newValue) {
   }
 
   Q_EMIT titleChanged();
+
+  MainWindow::get()->mergeTool()->enableMenuActions();
 
   if (p.config.m_destination == newValue)
     return;
@@ -411,6 +414,8 @@ Tab::clearDestination() {
   setDestination(Q(""));
   p.config.m_destinationAuto.clear();
   p.config.m_destinationUniquenessSuffix.clear();
+
+  MainWindow::get()->mergeTool()->enableMenuActions();
 }
 
 void
