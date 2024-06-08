@@ -22,12 +22,23 @@ protected:
   Util::CommandLineOptions const m_options;
 
 public:
+  struct Mode {
+    int index;
+    QString title;
+    Util::EscapeMode escapeMode;
+  };
+
+public:
   explicit CommandLineDialog(QWidget *parent, Util::CommandLineOptions const &options, QString const &title);
   ~CommandLineDialog();
 
 public Q_SLOTS:
   void onEscapeModeChanged(int index);
   void copyToClipboard();
+
+public:
+  static QVector<Mode> supportedModes();
+  static int platformDependentDefaultMode();
 };
 
 }

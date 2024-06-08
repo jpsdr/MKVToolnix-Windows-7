@@ -216,6 +216,7 @@ public:
   RecentlyUsedStrings m_mergeLastRelativeOutputDirs{10}, m_mergeLastFixedOutputDirs{10}, m_mergeLastOutputDirs{10};
   bool m_mergeUseFileAndTrackColors;
   QVector<QColor> m_mergeFileColors;
+  int m_mergeDefaultCommandLineEscapeMode;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   bool m_autoDestinationOnlyForVideoFiles, m_mergeSetDestinationFromTitle, m_mergeSetDestinationFromDirectory;

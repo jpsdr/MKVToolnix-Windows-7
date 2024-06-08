@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -24,12 +25,12 @@ CommandLineDialog::CommandLineDialog(QWidget *parent,
 
   setWindowTitle(title);
 
+  ui->escapeMode->clear();
+  for (auto const &mode : supportedModes())
+    ui->escapeMode->addItem(mode.title);
+
   // Set initial escaping mode according to platform's native mode.
-#if defined(SYS_WINDOWS)
-  int index = 0;
-#else
-  int index = 1;
-#endif
+  auto index = Util::Settings::get().m_mergeDefaultCommandLineEscapeMode;
 
   ui->escapeMode->setCurrentIndex(index);
   onEscapeModeChanged(index);
@@ -45,6 +46,27 @@ CommandLineDialog::CommandLineDialog(QWidget *parent,
 
 CommandLineDialog::~CommandLineDialog() {
   Util::saveWidgetGeometry(this);
+}
+
+QVector<CommandLineDialog::Mode>
+CommandLineDialog::supportedModes() {
+  QVector<Mode> modes;
+
+  modes << Mode{0, QY("Windows (cmd.exe)"),                        Util::EscapeShellCmdExeArgument }
+        << Mode{1, QY("Linux/Unix shells (bash, zsh etc.)"),       Util::EscapeShellUnix           }
+        << Mode{2, QY("MKVToolNix option files (JSON-formatted)"), Util::EscapeJSON                }
+        << Mode{3, QY("Don't escape"),                             Util::DontEscape                };
+
+  return modes;
+}
+
+int
+CommandLineDialog::platformDependentDefaultMode() {
+#if defined(SYS_WINDOWS)
+  return 0;
+#else
+  return 1;
+#endif
 }
 
 void
