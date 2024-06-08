@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QClipboard>
 
-#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
