@@ -13,32 +13,38 @@
 namespace mtx::gui::Merge {
 
 CommandLineDialog::CommandLineDialog(QWidget *parent,
-                                     Util::CommandLineOptions const &options,
+                                     QVector<MuxSettings> const &muxSettings,
+                                     int initialMuxSettings,
                                      QString const &title)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::CommandLineDialog}
-  , m_options{options}
+  , m_muxSettings{muxSettings}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
   setWindowTitle(title);
 
+  ui->multiplexSettings->clear();
+  for (auto const &settings : m_muxSettings)
+    ui->multiplexSettings->addItem(settings.title);
+
+  ui->multiplexSettings->setCurrentIndex(initialMuxSettings);
+
   ui->escapeMode->clear();
   for (auto const &mode : supportedModes())
     ui->escapeMode->addItem(mode.title);
 
-  // Set initial escaping mode according to platform's native mode.
-  auto index = Util::Settings::get().m_mergeDefaultCommandLineEscapeMode;
+  ui->escapeMode->setCurrentIndex(Util::Settings::get().m_mergeDefaultCommandLineEscapeMode);
 
-  ui->escapeMode->setCurrentIndex(index);
-  onEscapeModeChanged(index);
+  onControlsChanged();
 
   ui->commandLine->setFocus();
 
   Util::restoreWidgetGeometry(this);
 
-  connect(ui->escapeMode,        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CommandLineDialog::onEscapeModeChanged);
+  connect(ui->multiplexSettings, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CommandLineDialog::onControlsChanged);
+  connect(ui->escapeMode,        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CommandLineDialog::onControlsChanged);
   connect(ui->pbClose,           &QPushButton::clicked,                                                  this, &CommandLineDialog::accept);
   connect(ui->pbCopyToClipboard, &QPushButton::clicked,                                                  this, &CommandLineDialog::copyToClipboard);
 }
@@ -69,13 +75,14 @@ CommandLineDialog::platformDependentDefaultMode() {
 }
 
 void
-CommandLineDialog::onEscapeModeChanged(int index) {
-  auto mode = 0 == index ? Util::EscapeShellCmdExeArgument
-            : 1 == index ? Util::EscapeShellUnix
-            : 2 == index ? Util::EscapeJSON
-            :              Util::DontEscape;
+CommandLineDialog::onControlsChanged() {
+  auto index = ui->escapeMode->currentIndex();
+  auto mode  = 0 == index ? Util::EscapeShellCmdExeArgument
+             : 1 == index ? Util::EscapeShellUnix
+             : 2 == index ? Util::EscapeJSON
+             :              Util::DontEscape;
 
-  ui->commandLine->setPlainText(m_options.formatted(mode));
+  ui->commandLine->setPlainText(m_muxSettings[ui->multiplexSettings->currentIndex()].options.formatted(mode));
 }
 
 void

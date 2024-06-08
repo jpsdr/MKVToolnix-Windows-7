@@ -80,7 +80,6 @@ public Q_SLOTS:
   virtual void onAppendFiles();
   virtual void onRemoveFiles();
   virtual void onRemoveAllFiles();
-  virtual void onShowCommandLine();
 
   virtual void selectAllTracks();
   virtual void selectAllVideoTracks();
@@ -253,6 +252,8 @@ public Q_SLOTS:
   virtual void handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action);
   virtual void updateAttachmentsTabTitle();
 
+  virtual MuxConfig &updateConfigFromControlValues();
+
   virtual void signalRemovalOfThisTab();
 
   virtual void setupHorizontalScrollAreaInputLayout();
@@ -290,7 +291,6 @@ protected:
   virtual void setAttachmentControlValues(Attachment *attachment);
   virtual void clearInputControlValues();
   virtual void setControlValuesFromConfig();
-  virtual MuxConfig &updateConfigFromControlValues();
   virtual void withSelectedTracks(std::function<void(Track &)> code, bool notIfAppending = false, QWidget *widget = nullptr);
   virtual void withSelectedAttachedFiles(std::function<void(Track &)> code);
   virtual void withSelectedAttachments(std::function<void(Attachment &)> code);

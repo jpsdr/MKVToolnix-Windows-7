@@ -15,8 +15,21 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Multiplex &amp;settings:</string>
+       </property>
+       <property name="buddy">
+        <cstring>multiplexSettings</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="multiplexSettings"/>
+     </item>
+     <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -32,7 +45,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="1" column="1">
       <widget class="QComboBox" name="escapeMode">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -56,7 +69,7 @@
       <string notr="true"/>
      </property>
      <property name="textInteractionFlags">
-      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+      <set>Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
      </property>
     </widget>
    </item>
@@ -65,7 +78,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -94,10 +107,12 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>multiplexSettings</tabstop>
   <tabstop>escapeMode</tabstop>
   <tabstop>commandLine</tabstop>
   <tabstop>pbCopyToClipboard</tabstop>
   <tabstop>pbClose</tabstop>
  </tabstops>
  <resources/>
+ <connections/>
 </ui>

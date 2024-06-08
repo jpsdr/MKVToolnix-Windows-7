@@ -8,7 +8,6 @@
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/merge/tool.h"
@@ -151,14 +150,6 @@ Tab::title()
     title = Q("%1 (%2)").arg(title).arg(QFileInfo{p.config.m_configFileName}.fileName());
 
   return title;
-}
-
-void
-Tab::onShowCommandLine() {
-  auto exe     = Util::Settings::get().actualMkvmergeExe();
-  auto options = updateConfigFromControlValues().buildMkvmergeOptions().setExecutable(exe);
-
-  CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
 void
