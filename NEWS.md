@@ -15,6 +15,8 @@
   doesn't have an option for specifying additional file-specific options. The
   GUI now detects the use of this option in the "additional options" & adds it
   for each of the source files instead. Implements #3707.
+* MKVToolNix GUI: multiplexer: the option `--regenerate-track-uids` has been
+  added to the "additional command line options" dialog. See #3703.
 
 
 # Version 85.0 "Shame For You" 2024-06-02
