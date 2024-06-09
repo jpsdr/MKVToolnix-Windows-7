@@ -114,6 +114,7 @@ protected:
   void setupBCP47NormalizationMode();
   void setupInterfaceLanguage();
   void setupTabPositions();
+  void setupDefaultCommandLineEscapeMode();
   void setupDerivingTrackLanguagesFromFileName();
   void setupDeriveForcedDisplayFlagSubtitles();
   void setupDeriveHearingImpairedFlag();

@@ -12,7 +12,6 @@
 #include "common/character_sets.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
-#include "common/iso3166.h"
 #include "common/path.h"
 #include "common/qt.h"
 #include "common/random.h"
@@ -20,6 +19,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/font.h"
@@ -544,6 +544,7 @@ Settings::load() {
   m_mergePredefinedSubtitleTrackNames         = reg.value(s_valMergePredefinedSubtitleTrackNames).toStringList();
   m_mergePredefinedSplitSizes                 = reg.value(s_valMergePredefinedSplitSizes).toStringList();
   m_mergePredefinedSplitDurations             = reg.value(s_valMergePredefinedSplitDurations).toStringList();
+  m_mergeDefaultCommandLineEscapeMode         = reg.value(s_valMergeDefaultCommandLineEscapeMode,                                              Merge::CommandLineDialog::platformDependentDefaultMode()).toInt();
   m_mergeTrackPropertiesLayout                = static_cast<TrackPropertiesLayout>(reg.value(s_valMergeTrackPropertiesLayout,                  static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
   m_mergeAddingAppendingFilesPolicy           = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeAddingAppendingFilesPolicy,   static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
   m_mergeLastAddingAppendingDecision          = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastAddingAppendingDecision,  static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
@@ -996,6 +997,7 @@ Settings::save()
   reg.setValue(s_valMergeLastFixedOutputDirs,                  m_mergeLastFixedOutputDirs.items());
   reg.setValue(s_valMergeLastOutputDirs,                       m_mergeLastOutputDirs.items());
   reg.setValue(s_valMergeLastRelativeOutputDirs,               m_mergeLastRelativeOutputDirs.items());
+  reg.setValue(s_valMergeDefaultCommandLineEscapeMode,         m_mergeDefaultCommandLineEscapeMode);
   reg.setValue(s_valMergeTrackPropertiesLayout,                static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue(s_valMergeAddingAppendingFilesPolicy,           static_cast<int>(m_mergeAddingAppendingFilesPolicy));
   reg.setValue(s_valMergeLastAddingAppendingDecision,          static_cast<int>(m_mergeLastAddingAppendingDecision));
