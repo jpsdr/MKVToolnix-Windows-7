@@ -80,6 +80,7 @@ char const * const s_valMergeAlwaysAddDroppedFiles                              
 char const * const s_valMergeAlwaysCreateNewSettingsForVideoFiles               = "mergeAlwaysCreateNewSettingsForVideoFiles";
 char const * const s_valMergeAlwaysShowOutputFileControls                       = "mergeAlwaysShowOutputFileControls";
 char const * const s_valMergeAttachmentsAlwaysSkipForExistingName               = "mergeAttachmentsAlwaysSkipForExistingName";
+char const * const s_valMergeDefaultCommandLineEscapeMode                       = "mergeDefaultCommandLineEscapeMode";
 char const * const s_valMergeDragAndDropDirectoriesPolicy                       = "mergeDragAndDropDirectoriesPolicy";
 char const * const s_valMergeDragAndDropFilesPolicy                             = "mergeDragAndDropFilesPolicy";
 char const * const s_valMergeEnableDialogNormGainRemoval                        = "mergeEnableDialogNormGainRemoval";

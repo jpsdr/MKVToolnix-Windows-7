@@ -1,3 +1,15 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: the default mode for escaping the arguments in
+  the "Show command line" dialog can now be set in the preferences. Partially
+  implements #3709.
+* MKVToolNix GUI: multiplexer: the "Show command line" dialog now includes the
+  command lines for all currently open multiplex settings, switchable with a
+  combo box. Partially implements #3709.
+
+
 # Version 85.0 "Shame For You" 2024-06-02
 
 ## Bug fixes

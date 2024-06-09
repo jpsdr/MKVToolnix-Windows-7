@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/adding_directories_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
+#include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
@@ -74,6 +75,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupPalette();
   setupInterfaceLanguage();
   setupTabPositions();
+  setupDefaultCommandLineEscapeMode();
   setupBCP47LanguageEditMode();
   setupBCP47NormalizationMode();
   setupDerivingTrackLanguagesFromFileName();
@@ -406,6 +408,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."))
                    .arg(QY("This amount is 0.3% of the source file's size or 10 MB, whichever is higher."))
                    .arg(QY("If tracks are known to be present but not found, the percentage to probe can be changed here.")));
+
+  Util::setToolTip(ui->cbMDefaultCommandLineEscapeMode, QY("Sets how to escape arguments by default in the 'Show command line' dialog."));
 
   Util::setToolTip(ui->cbMSortFilesTracksByTypeWhenAdding,
                    Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p><p>%6</p>")
@@ -975,6 +979,15 @@ PreferencesDialog::setupTabPositions() {
 }
 
 void
+PreferencesDialog::setupDefaultCommandLineEscapeMode() {
+  ui->cbMDefaultCommandLineEscapeMode->clear();
+  for (auto const &mode : Merge::CommandLineDialog::supportedModes())
+    ui->cbMDefaultCommandLineEscapeMode->addItem(mode.title);
+
+  ui->cbMDefaultCommandLineEscapeMode->setCurrentIndex(m_cfg.m_mergeDefaultCommandLineEscapeMode);
+}
+
+void
 PreferencesDialog::setupDeriveHearingImpairedFlag() {
   ui->cbMDeriveHearingImpairedFlag->setChecked(m_cfg.m_deriveHearingImpairedFlagFromFileNames);
   ui->leMDeriveHearingImpairedFlagRE->setText(m_cfg.m_regexForDerivingHearingImpairedFlagFromFileNames);
@@ -1219,6 +1232,7 @@ PreferencesDialog::save() {
   m_cfg.m_dropLastChapterFromBlurayPlaylist                   = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
   // Merge page:
+  m_cfg.m_mergeDefaultCommandLineEscapeMode                   = ui->cbMDefaultCommandLineEscapeMode->currentIndex();
   m_cfg.m_mediaInfoExe                                        = ui->leMMediaInfoExe->text();
   m_cfg.m_mergeEnsureAtLeastOneTrackEnabled                   = ui->cbMEnsureAtLeastOneTrackEnabled->isChecked();
   m_cfg.m_autoSetFileTitle                                    = ui->cbMAutoSetFileTitle->isChecked();

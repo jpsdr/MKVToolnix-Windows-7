@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_directories_dialog.h"
 #include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
+#include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/file_identification_pack.h"
 #include "mkvtoolnix-gui/merge/select_disc_library_information_dialog.h"
@@ -483,9 +484,26 @@ Tool::addAllToJobQueue() {
 
 void
 Tool::showCommandLine() {
-  auto tab = currentTab();
-  if (tab)
-    tab->onShowCommandLine();
+  auto &p                 = *p_func();
+  auto const exe          = Util::Settings::get().actualMkvmergeExe();
+  auto const sendingTab   = currentTab();
+  auto initialMuxSettings = 0;
+  auto tabs               = p.ui->merges;
+
+  QVector<CommandLineDialog::MuxSettings> muxSettings;
+
+  for (int tabIndex = 0; tabIndex < tabs->count(); ++tabIndex) {
+    auto tab = static_cast<Tab *>(tabs->widget(tabIndex));
+
+    if (sendingTab == tab)
+      initialMuxSettings = tabIndex;
+
+    auto options = tab->updateConfigFromControlValues().buildMkvmergeOptions().setExecutable(exe);
+
+    muxSettings << CommandLineDialog::MuxSettings{ tab->title(), options };
+  }
+
+  CommandLineDialog{this, muxSettings, initialMuxSettings, QY("mkvmerge command line")}.exec();
 }
 
 void

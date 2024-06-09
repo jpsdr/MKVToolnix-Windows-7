@@ -16,18 +16,34 @@ class CommandLineDialog;
 class CommandLineDialog : public QDialog {
   Q_OBJECT
 
+public:
+  struct MuxSettings {
+    QString title;
+    Util::CommandLineOptions options;
+  };
+
+  struct Mode {
+    int index;
+    QString title;
+    Util::EscapeMode escapeMode;
+  };
+
 protected:
   // UI stuff:
   std::unique_ptr<Ui::CommandLineDialog> ui;
-  Util::CommandLineOptions const m_options;
+  QVector<MuxSettings> m_muxSettings;
 
 public:
-  explicit CommandLineDialog(QWidget *parent, Util::CommandLineOptions const &options, QString const &title);
+  explicit CommandLineDialog(QWidget *parent, QVector<MuxSettings> const &muxSettings, int initialMuxSettings, QString const &title);
   ~CommandLineDialog();
 
 public Q_SLOTS:
-  void onEscapeModeChanged(int index);
+  void onControlsChanged();
   void copyToClipboard();
+
+public:
+  static QVector<Mode> supportedModes();
+  static int platformDependentDefaultMode();
 };
 
 }
