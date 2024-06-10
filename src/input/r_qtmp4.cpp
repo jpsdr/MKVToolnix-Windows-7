@@ -3137,6 +3137,8 @@ qtmp4_demuxer_c::parse_dops_audio_header_priv_atom(mm_io_c &io,
   put_uint16_le(&opus_priv_ptr[16], get_uint16_be(&opus_priv_ptr[16])); // output gain
 
   priv.push_back(opus_priv);
+
+  a_bitdepth = 0;
 }
 
 void
