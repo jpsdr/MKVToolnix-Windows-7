@@ -8,6 +8,15 @@
 * MKVToolNix GUI: multiplexer: the "Show command line" dialog now includes the
   command lines for all currently open multiplex settings, switchable with a
   combo box. Partially implements #3709.
+* MKVToolNix GUI: multiplexer: some users add the option
+  `--regenerate-track-uids` to the "additional options", even though
+  `--regenerate-track-uids` is a file-specific option, and you can only use
+  global options in the "additional options". However, the GUI currently
+  doesn't have an option for specifying additional file-specific options. The
+  GUI now detects the use of this option in the "additional options" & adds it
+  for each of the source files instead. Implements #3707.
+* MKVToolNix GUI: multiplexer: the option `--regenerate-track-uids` has been
+  added to the "additional command line options" dialog. See #3703.
 
 
 # Version 85.0 "Shame For You" 2024-06-02

@@ -664,10 +664,16 @@ MuxConfig::buildAppendToMapping(QHash<SourceFile *, unsigned int> const &fileNum
 Util::CommandLineOptions
 MuxConfig::buildMkvmergeOptions()
   const {
-  auto options   = Util::CommandLineOptions{};
+  auto options                = Util::CommandLineOptions{};
 
-  auto &settings = Util::Settings::get();
-  auto locale    = settings.localeToUse();
+  auto &settings              = Util::Settings::get();
+  auto locale                 = settings.localeToUse();
+  auto additionalOptions      = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
+  auto regenerateTrackUIDsStr = Q("--regenerate-track-uids");
+  auto regenerateTrackUIDs    = additionalOptions.contains(regenerateTrackUIDsStr);
+
+  if (regenerateTrackUIDs)
+    additionalOptions.remove(regenerateTrackUIDsStr);
 
   if (!locale.isEmpty())
     options << Q("--ui-language") << locale;
@@ -703,6 +709,9 @@ MuxConfig::buildMkvmergeOptions()
   auto probeRangePercentage = 0.0;
 
   for (auto const &file : m_files) {
+    if (regenerateTrackUIDs)
+      options << regenerateTrackUIDsStr;
+
     file->buildMkvmergeOptions(options);
     probeRangePercentage = std::max(probeRangePercentage, file->m_probeRangePercentage);
   }
@@ -771,7 +780,6 @@ MuxConfig::buildMkvmergeOptions()
 
   add(Q("--global-tags"), Util::CommandLineOption::fileName(m_globalTags));
 
-  auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
     options << Util::unescapeSplit(additionalOptions, Util::EscapeShellUnix);
 
