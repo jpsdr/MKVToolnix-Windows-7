@@ -69,6 +69,10 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("This causes bigger overhead but allows precise seeking and extraction."),
         QY("If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present.") });
 
+  add(Q("--regenerate-track-uids"), false, global,
+      { QY("Generate new random track UIDs instead of keeping existing ones."),
+        QY("When given, this option applies to all source files.") });
+
   auto hacks       = m_ui->gridDevelopmentHacks;
   auto listOfHacks = mtx::hacks::get_list();
 
