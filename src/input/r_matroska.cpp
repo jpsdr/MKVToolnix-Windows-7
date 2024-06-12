@@ -1055,11 +1055,13 @@ kax_reader_c::handle_tags(mm_io_c *io,
 
 void
 kax_reader_c::handle_track_statistics_tags() {
+  auto remove_track_statistics_tags = !mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS) && !g_identifying;
+
   for (auto const &track : m_tracks) {
     if (!m_ti.m_track_tags.none())
       track->get_source_id_from_track_statistics_tags();
 
-    if (!mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS))
+    if (remove_track_statistics_tags)
       track->discard_track_statistics_tags();
   }
 }
@@ -2863,6 +2865,8 @@ kax_reader_c::determine_global_timestamp_offset_to_apply() {
 
 void
 kax_reader_c::identify() {
+  auto remove_track_statistics_tags = !mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS);
+
   auto info = mtx::id::info_c{};
 
   info.set(mtx::id::muxing_application,  m_muxing_app);
@@ -3012,6 +3016,9 @@ kax_reader_c::identify() {
                     : track->type == 's' ? ID_RESULT_TRACK_SUBTITLES
                     :                      Y("unknown"),
                     codec_info, info.get());
+
+    if (remove_track_statistics_tags)
+      track->discard_track_statistics_tags();
   }
 
   for (auto &attachment : g_attachments)

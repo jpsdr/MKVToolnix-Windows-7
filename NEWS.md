@@ -17,6 +17,9 @@
   for each of the source files instead. Implements #3707.
 * MKVToolNix GUI: multiplexer: the option `--regenerate-track-uids` has been
   added to the "additional command line options" dialog. See #3703.
+* mkvmerge: Matroska reader: track statistics tags are included in the JSON
+  identification output just like other tags had already been included: as
+  part of the track properties, prefixed with `tag_`. Implements #3714.
 
 
 # Version 85.0 "Shame For You" 2024-06-02
