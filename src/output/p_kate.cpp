@@ -58,9 +58,8 @@ kate_packetizer_c::process_impl(packet_cptr const &packet) {
   if (packet->data->get_size() < (1 + 3 * sizeof(int64_t))) {
     /* end packet is 1 byte long and has type 0x7f */
     if ((packet->data->get_size() == 1) && (packet->data->get_buffer()[0] == 0x7f)) {
-      packet->timestamp          = m_previous_timestamp;
-      packet->duration           = 0;
-      packet->duration_mandatory = true;
+      packet->timestamp = m_previous_timestamp;
+      packet->duration  = 0;
       add_packet(packet);
 
     } else
@@ -69,15 +68,14 @@ kate_packetizer_c::process_impl(packet_cptr const &packet) {
     return;
   }
 
-  int64_t start_time         = get_uint64_le(packet->data->get_buffer() + 1);
-  int64_t duration           = get_uint64_le(packet->data->get_buffer() + 1 + sizeof(int64_t));
+  int64_t start_time    = get_uint64_le(packet->data->get_buffer() + 1);
+  int64_t duration      = get_uint64_le(packet->data->get_buffer() + 1 + sizeof(int64_t));
 
-  packet->timestamp          = mtx::to_int(start_time * m_frame_duration);
-  packet->duration           = mtx::to_int(duration   * m_frame_duration);
-  packet->duration_mandatory = true;
-  packet->gap_following      = true;
+  packet->timestamp     = mtx::to_int(start_time * m_frame_duration);
+  packet->duration      = mtx::to_int(duration   * m_frame_duration);
+  packet->gap_following = true;
 
-  int64_t end                = packet->timestamp + packet->duration;
+  int64_t end           = packet->timestamp + packet->duration;
 
   if (end > m_previous_timestamp)
     m_previous_timestamp = end;

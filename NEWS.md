@@ -29,6 +29,8 @@
   longer queue frames longer than necessary, which resulted in the frames
   sometimes being written much later than they should have been according to
   their timestamps. Partially fixes #3711.
+* mkvmerge: when using timestamp files for subtitle tracks, mkvmerge will now
+  write the packets' duration properly. Partially fixes #3711.
 
 
 # Version 85.0 "Shame For You" 2024-06-02

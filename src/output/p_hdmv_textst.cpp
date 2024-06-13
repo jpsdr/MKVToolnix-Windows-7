@@ -59,8 +59,6 @@ hdmv_textst_packetizer_c::process_impl(packet_cptr const &packet) {
   if (!packet->has_duration())
     packet->duration = (end_pts - start_pts).abs().to_ns();
 
-  packet->duration_mandatory = true;
-
   packet->force_key_frame();
 
   add_packet(packet);

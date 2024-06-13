@@ -1430,6 +1430,9 @@ void
 generic_packetizer_c::add_packet(packet_cptr const &pack) {
   mxdebug_if(s_debug, fmt::format("add_packet() track {0} timestamp {1} m_connected_to {2}\n", get_source_track_num(), mtx::string::format_timestamp(pack->timestamp), m_connected_to));
 
+  if (m_htrack_type == track_subtitle)
+    pack->duration_mandatory = pack->duration >= 0;
+
   if ((0 == m_num_packets) && m_ti.m_reset_timestamps)
     m_ti.m_tcsync.displacement = -pack->timestamp;
 
@@ -1565,8 +1568,12 @@ generic_packetizer_c::apply_factory_once(packet_cptr const &packet) {
   if (!m_timestamp_factory) {
     packet->assigned_timestamp = packet->timestamp;
     packet->gap_following      = false;
-  } else
+
+  } else {
     packet->gap_following      = m_timestamp_factory->get_next(*packet);
+    if (m_htrack_type == track_subtitle)
+      packet->duration_mandatory = packet->duration >= 0;
+  }
 
   packet->factory_applied      = true;
 
