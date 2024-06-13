@@ -402,8 +402,10 @@ generic_packetizer_c::set_track_type(track_type type) {
   else if (track_video == type)
     m_reader->m_num_video_tracks++;
 
-  else
+  else {
     m_reader->m_num_subtitle_tracks++;
+    m_timestamp_factory_application_mode = TFA_IMMEDIATE;
+  }
 
   g_cluster_helper->register_new_packetizer(*this);
 }
