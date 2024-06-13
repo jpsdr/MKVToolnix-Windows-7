@@ -1428,6 +1428,8 @@ generic_packetizer_c::account_enqueued_bytes(packet_t &packet,
 
 void
 generic_packetizer_c::add_packet(packet_cptr const &pack) {
+  mxdebug_if(s_debug, fmt::format("add_packet() track {0} timestamp {1} m_connected_to {2}\n", get_source_track_num(), mtx::string::format_timestamp(pack->timestamp), m_connected_to));
+
   if ((0 == m_num_packets) && m_ti.m_reset_timestamps)
     m_ti.m_tcsync.displacement = -pack->timestamp;
 
@@ -1468,6 +1470,7 @@ generic_packetizer_c::add_packet(packet_cptr const &pack) {
 
 void
 generic_packetizer_c::add_packet2(packet_cptr const &pack) {
+  mxdebug_if(s_debug, fmt::format("add_packet() track {0} ap2 m_timestamp_factory_application_mode {1}\n", get_source_track_num(), static_cast<int>(m_timestamp_factory_application_mode)));
   auto adjust_timestamp = [this](int64_t x) {
     return mtx::to_int(m_ti.m_tcsync.factor * (x + m_correction_timestamp_offset + m_append_timestamp_offset)) + m_ti.m_tcsync.displacement;
   };
@@ -1567,7 +1570,9 @@ generic_packetizer_c::apply_factory_once(packet_cptr const &packet) {
 
   packet->factory_applied      = true;
 
-  mxdebug_if(s_debug, fmt::format("apply_factory_once(): source {0} t {1} tbf {2} at {3}\n", packet->source->get_source_track_num(), packet->timestamp, packet->timestamp_before_factory, packet->assigned_timestamp));
+  mxdebug_if(s_debug, fmt::format("apply_factory_once(): source {0} timestamp {1} before factory {2} duration {3} at {4}\n",
+                                  packet->source->get_source_track_num(), mtx::string::format_timestamp(packet->timestamp), mtx::string::format_timestamp(packet->timestamp_before_factory),
+                                  mtx::string::format_timestamp(packet->duration), mtx::string::format_timestamp(packet->assigned_timestamp)));
 
   m_max_timestamp_seen           = std::max(m_max_timestamp_seen, packet->assigned_timestamp + packet->duration);
   m_reader->m_max_timestamp_seen = std::max(m_max_timestamp_seen, m_reader->m_max_timestamp_seen);
@@ -1640,6 +1645,7 @@ std::deque<packet_cptr> *packet_sorter_t::m_packet_queue = nullptr;
 
 void
 generic_packetizer_c::apply_factory_full_queueing(packet_cptr_di &p_start) {
+  mxdebug_if(s_debug, fmt::format("add_packet() track {0} fac full q\n", get_source_track_num()));
   packet_sorter_t::m_packet_queue = &m_packet_queue;
 
   while (m_packet_queue.end() != p_start) {
