@@ -21,6 +21,11 @@
   identification output just like other tags had already been included: as
   part of the track properties, prefixed with `tag_`. Implements #3714.
 
+## Bug fixes
+
+* mkvmerge: when using timestamp files for subtitle tracks, mkvmerge will no
+  longer set a default duration for the track. Partially fixes #3711.
+
 
 # Version 85.0 "Shame For You" 2024-06-02
 

@@ -1081,7 +1081,7 @@ generic_packetizer_c::set_headers() {
 
   update_max_block_addition_id();
 
-  if (m_timestamp_factory)
+  if (m_timestamp_factory && (m_htrack_type != track_subtitle))
     m_htrack_default_duration = (int64_t)m_timestamp_factory->get_default_duration(m_htrack_default_duration);
   if (-1.0 != m_htrack_default_duration)
     get_child<libmatroska::KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
