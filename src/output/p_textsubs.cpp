@@ -151,8 +151,6 @@ textsubs_packetizer_c::process_one_packet(packet_cptr const &packet) {
     return;
   }
 
-  packet->duration_mandatory = true;
-
   add_packet(packet);
 
   if (m_force_rerender_track_headers_on_packetno && (*m_force_rerender_track_headers_on_packetno == m_packetno)) {

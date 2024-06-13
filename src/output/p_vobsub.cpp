@@ -44,7 +44,6 @@ vobsub_packetizer_c::set_headers() {
 
 void
 vobsub_packetizer_c::process_impl(packet_cptr const &packet) {
-  packet->duration_mandatory = true;
   add_packet(packet);
 }
 

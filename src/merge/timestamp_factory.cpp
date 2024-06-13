@@ -289,6 +289,10 @@ timestamp_factory_v2_c::get_next(packet_t &packet) {
     return false;
   }
 
+  mxdebug_if(m_debug, fmt::format("timestamp_factory_v2_c::get_next() m_frameno {0} timestamp to assign {1} duration {2} packet.m_preserve_duration {3} packet.duration {4}\n",
+                                  m_frameno, mtx::string::format_timestamp(m_timestamps[m_frameno]), mtx::string::format_timestamp(m_durations[m_frameno]),
+                                  m_preserve_duration, packet.duration <= 0  ? "<=0"s : mtx::string::format_timestamp(packet.duration)));
+
   packet.assigned_timestamp = m_timestamps[m_frameno];
   if (!m_preserve_duration || (0 >= packet.duration))
     packet.duration = m_durations[m_frameno];
