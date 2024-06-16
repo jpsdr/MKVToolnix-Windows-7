@@ -136,11 +136,12 @@ bool font_tag_opened = false;
 
 void
 teletext_to_srt_packet_converter_c::ttx_page_data_t::reset() {
-  page         = -1;
-  subpage      = -1;
-  flags        =  0;
-  national_set =  0;
-  erase_flag   = false;
+  page          = -1;
+  subpage       = -1;
+  flags         =  0;
+  national_set  =  0;
+  erase_flag    = false;
+  subtitle_flag = false;
 
   page_buffer.clear();
   page_buffer.reserve(TTX_PAGE_TEXT_ROW_SIZE + 1);
@@ -211,10 +212,13 @@ teletext_to_srt_packet_converter_c::override_encoding(int page,
 }
 
 void
-teletext_to_srt_packet_converter_c::demux_page(int page,
+teletext_to_srt_packet_converter_c::demux_page(std::optional<int> page,
                                                generic_packetizer_c *packetizer) {
-  m_track_data.emplace(page, std::make_shared<track_data_t>(packetizer));
-  m_track_data[page]->m_page_data.page = page;
+  if (!page)
+    return;
+
+  m_track_data.emplace(*page, std::make_shared<track_data_t>(packetizer));
+  m_track_data[*page]->m_page_data.page = *page;
 }
 
 void
@@ -390,8 +394,22 @@ teletext_to_srt_packet_converter_c::decode_page_data(uint8_t ttx_header_magazine
   auto page     = ttx_packet_0_header[0] == 0xff ? -1 : ttx_to_page(ttx_packet_0_header[0]) + 100 * ttx_header_magazine;
   auto data_itr = m_track_data.find(page);
 
-  if (   (page      > (0x99 + 100 * ttx_header_magazine))
-      || (data_itr == m_track_data.end())) {
+  mxdebug_if(m_debug, fmt::format("  decode_page_data: ttx_header_magazine {0} ttx_packet_0_header[0] {1} page {2} have_page {3}\n", ttx_header_magazine, static_cast<unsigned>(ttx_packet_0_header[0]), page, data_itr != m_track_data.end()));
+
+  if (   (page > (0x99 + 100 * ttx_header_magazine))
+      || (page < 100)) {
+    m_current_track = nullptr;
+    return;
+  }
+
+  if ((data_itr == m_track_data.end()) && m_parse_for_probing) {
+    mxdebug_if(m_debug, fmt::format("  decode_page_data: parse for probing; adding new page {0}\n", page));
+    demux_page(page, nullptr);
+
+    data_itr = m_track_data.find(page);
+  }
+
+  if (data_itr == m_track_data.end()) {
     m_current_track = nullptr;
     return;
   }
@@ -412,13 +430,13 @@ teletext_to_srt_packet_converter_c::decode_page_data(uint8_t ttx_header_magazine
 
   page_data.erase_flag              = page_data.flags & 0x01;
   page_data.national_set            = page_data.flags >> 8;
-  auto subtitle                     = (page_data.flags >> 2) & 0x01;
+  page_data.subtitle_flag           = (page_data.flags >> 2) & 0x01;
 
   auto const page_content           = page_to_string();
 
   mxdebug_if(m_debug,
-             fmt::format("  ttx page {0} at {5} subpage {1} erase? {2} national set {3} subtitle? {4} flags {6:02x} queued timestamp {7} queued content size {8}\n",
-                         page_data.page, page_data.subpage, page_data.erase_flag, page_data.national_set, subtitle, mtx::string::format_timestamp(m_current_packet_timestamp), static_cast<unsigned int>(page_data.flags),
+             fmt::format("  ttx page {0} at {5} subpage {1} erase {2} national set {3} subtitle {4} flags {6:02x} queued timestamp {7} queued content size {8}\n",
+                         page_data.page, page_data.subpage, page_data.erase_flag, page_data.national_set, page_data.subtitle_flag, mtx::string::format_timestamp(m_current_packet_timestamp), static_cast<unsigned int>(page_data.flags),
                          m_current_track->m_queued_timestamp, page_content.size()));
 
   queue_page_content(page_content);
@@ -448,6 +466,9 @@ teletext_to_srt_packet_converter_c::queue_page_content(std::string const &conten
   queue_packet(new_packet);
 
   m_current_track->m_queued_timestamp.reset();
+
+  if (m_current_track->m_page_data.subtitle_flag)
+    m_current_track->m_subtitle_page_found = true;
 }
 
 void
@@ -461,7 +482,8 @@ teletext_to_srt_packet_converter_c::deliver_queued_packet() {
              fmt::format("  queue: delivering packet {0} duration {1} content {2}\n",
                          mtx::string::format_timestamp(packet->timestamp), mtx::string::format_timestamp(packet->duration), displayable_packet_content(*packet->data)));
 
-  m_current_track->m_ptzr->process(packet);
+  if (m_current_track->m_ptzr)
+    m_current_track->m_ptzr->process(packet);
   packet.reset();
 }
 
@@ -515,7 +537,8 @@ teletext_to_srt_packet_converter_c::flush() {
                fmt::format("  queue: flushing packet {0} duration {1} content {2}\n",
                            mtx::string::format_timestamp(data->m_queued_packet->timestamp), mtx::string::format_timestamp(data->m_queued_packet->duration), displayable_packet_content(*data->m_queued_packet->data)));
 
-    data->m_ptzr->process(data->m_queued_packet);
+    if (data->m_ptzr)
+      data->m_ptzr->process(data->m_queued_packet);
     data->m_queued_packet.reset();
   }
 }
@@ -527,7 +550,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
 
   if (!mtx::included_in(data_unit_id, 0x02, 0x03) || (0xe4 != start_byte)) {
     if (0xff != data_unit_id)
-      mxdebug_if(m_debug_packet, fmt::format("unsupported data_unit_id/start_byte; m_pos {0} data_unit_id 0x{1:02x} start_byte 0x{2:02x}\n", m_pos, static_cast<unsigned int>(data_unit_id), static_cast<unsigned int>(start_byte)));
+      mxdebug_if(m_debug_packet, fmt::format(" m_pos {0} unsupported data_unit_id/start_byte 0x{1:02x} data_unit_id 0x{2:02x}\n", m_pos, static_cast<unsigned int>(start_byte), static_cast<unsigned int>(data_unit_id)));
 
     return;
   }
@@ -543,7 +566,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
   if (!ttx_header_magazine)
     ttx_header_magazine = 8;
 
-  mxdebug_if(m_debug_packet, fmt::format(" m_pos {0} packet_id/row_number {1} magazine {2}\n", m_pos, static_cast<unsigned int>(row_number), ttx_header_magazine));
+  mxdebug_if(m_debug_packet, fmt::format(" m_pos {0} packet type (magazine+ID/row) {1}/{2}\n", m_pos, ttx_header_magazine, static_cast<unsigned int>(row_number)));
 
   if (row_number == 0) {
     decode_page_data(ttx_header_magazine);
@@ -607,4 +630,21 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   }
 
   return true;
+}
+
+void
+teletext_to_srt_packet_converter_c::parse_for_probing() {
+  m_parse_for_probing = true;
+}
+
+std::vector<int>
+teletext_to_srt_packet_converter_c::get_probed_subtitle_page_numbers()
+  const {
+  std::vector<int> page_numbers;
+
+  for (auto const &data : m_track_data)
+    if (data.second->m_subtitle_page_found)
+      page_numbers.push_back(data.first);
+
+  return page_numbers;
 }

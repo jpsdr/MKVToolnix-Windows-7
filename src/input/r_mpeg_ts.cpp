@@ -15,6 +15,9 @@
 #include "common/common_pch.h"
 
 #include <iostream>
+#include <iterator>
+#include <optional>
+#include <type_traits>
 
 #include "common/at_scope_exit.h"
 #include "common/avc/es_parser.h"
@@ -52,6 +55,7 @@
 #include "input/truehd_ac3_splitting_packet_converter.h"
 #include "merge/cluster_helper.h"
 #include "merge/output_control.h"
+#include "merge/packet.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_avc_es.h"
@@ -527,6 +531,17 @@ track_c::new_stream_s_dvbsub() {
   return 0;
 }
 
+int
+track_c::new_stream_s_teletext() {
+  if (!m_ttx_parser)
+    return FILE_STATUS_DONE;
+
+  m_ttx_parser->convert(std::make_shared<packet_t>(memory_c::clone(pes_payload_read->get_buffer(), pes_payload_read->get_size())));
+  clear_pes_payload();
+
+  return FILE_STATUS_MOREDATA;
+}
+
 bool
 track_c::has_packetizer()
   const {
@@ -744,7 +759,14 @@ track_c::parse_teletext_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
 
   auto buffer      = reinterpret_cast<uint8_t const *>(&pmt_descriptor + 1);
   auto num_entries = static_cast<unsigned int>(pmt_descriptor.length) / 5;
+  type             = pid_type_e::subtitles;
+  codec            = codec_c::look_up(codec_c::type_e::S_SRT);
+
+  m_ttx_parser.reset(new teletext_to_srt_packet_converter_c);
+  m_ttx_parser->parse_for_probing();
+
   mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_teletext_pmt_descriptor: Teletext PMT descriptor, {0} entries\n", num_entries));
+
   for (auto idx = 0u; idx < num_entries; ++idx) {
     // EN 300 468, 6.2.43 "Teletext descriptor":
 
@@ -775,38 +797,53 @@ track_c::parse_teletext_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
     //   0x04: program schedule page
     //   0x05: Teletext subtitle page for hearing impaired people
     if (!mtx::included_in(ttx_type, 2u, 5u)) {
+      m_ttx_known_non_subtitle_pages[ttx_page] = true;
       buffer += 5;
       continue;
     }
 
-    track_c *to_set_up{};
+    m_ttx_known_subtitle_pages[ttx_page] = true;
 
-    if (!m_ttx_wanted_page) {
-      converter.reset(new teletext_to_srt_packet_converter_c{});
-      to_set_up = this;
+    auto new_track = set_up_teletext_track(ttx_page, ttx_type);
+    auto set_up    = new_track ? new_track.get() : this;
 
-    } else {
-      auto new_track      = std::make_shared<track_c>(reader);
-      new_track->m_master = this;
-      m_coupled_tracks.emplace_back(new_track);
-
-      to_set_up            = new_track.get();
-      to_set_up->converter = converter;
-      to_set_up->set_pid(pid);
-    }
-
-    to_set_up->parse_iso639_language_from(buffer);
-
-    to_set_up->m_ttx_wanted_page       = ttx_page;
-    to_set_up->type                    = pid_type_e::subtitles;
-    to_set_up->codec                   = codec_c::look_up(codec_c::type_e::S_SRT);
-    to_set_up->m_hearing_impaired_flag = ttx_type == 5;
-    to_set_up->probed_ok               = true;
+    set_up->parse_iso639_language_from(buffer);
 
     buffer += 5;
   }
 
   return true;
+}
+
+track_ptr
+track_c::set_up_teletext_track(int ttx_page,
+                               int ttx_type) {
+  track_c *to_set_up{};
+  track_ptr to_return;
+
+  if (!m_ttx_wanted_page) {
+    converter.reset(new teletext_to_srt_packet_converter_c{});
+    to_set_up = this;
+
+  } else {
+    to_return           = std::make_shared<track_c>(reader);
+    to_return->m_master = this;
+    m_coupled_tracks.emplace_back(to_return);
+
+    to_set_up            = to_return.get();
+    to_set_up->converter = converter;
+    to_set_up->set_pid(pid);
+  }
+
+  to_set_up->m_ttx_wanted_page       = ttx_page;
+  to_set_up->type                    = pid_type_e::subtitles;
+  to_set_up->codec                   = codec_c::look_up(codec_c::type_e::S_SRT);
+  to_set_up->m_hearing_impaired_flag = ttx_type == 5;
+  to_set_up->probed_ok               = true;
+
+  mxdebug_if(m_debug_headers, fmt::format("set_up_teletext_track: page {0} type {1} for {2}\n", ttx_page, ttx_type, to_set_up == this ? "this track" : "new track"));
+
+  return to_return;
 }
 
 codec_c
@@ -1126,6 +1163,46 @@ track_c::contains_dovi_base_layer_for_enhancement_layer(track_c const &el_track)
   return false;
 }
 
+void
+track_c::handle_probed_teletext_pages(std::vector<track_ptr> &newly_created_tracks) {
+  if (!m_ttx_parser)
+    return;
+
+  std::vector<int> pages;
+
+  if (m_debug_headers) {
+    for (auto const &itr : m_ttx_known_subtitle_pages)
+      pages.push_back(itr.first);
+    std::sort(pages.begin(), pages.end());
+
+    mxdebug(fmt::format("handle_probed_teletext_pages: known subtitle pages: <{0}>\n", mtx::string::join(pages, ",")));
+
+    pages.clear();
+
+    for (auto const &itr : m_ttx_known_non_subtitle_pages)
+      pages.push_back(itr.first);
+    std::sort(pages.begin(), pages.end());
+
+    mxdebug(fmt::format("handle_probed_teletext_pages: known non-subtitle pages: <{0}>\n", mtx::string::join(pages, ",")));
+  }
+
+  pages = m_ttx_parser->get_probed_subtitle_page_numbers();
+  std::sort(pages.begin(), pages.end());
+
+  mxdebug_if(m_debug_headers, fmt::format("handle_probed_teletext_pages: probed pages: <{0}>\n", mtx::string::join(pages, ",")));
+
+  for (auto const &page : pages) {
+    if (m_ttx_known_subtitle_pages[page] || m_ttx_known_non_subtitle_pages[page])
+      continue;
+
+    mxdebug_if(m_debug_headers, fmt::format("handle_probed_teletext_pages:   adding track for page {0}\n", page));
+
+    auto new_track = set_up_teletext_track(page);
+    if (new_track)
+      newly_created_tracks.push_back(new_track);
+  }
+}
+
 // ------------------------------------------------------------
 
 file_t::file_t(mm_io_cptr const &in)
@@ -1343,6 +1420,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   }
 
   pair_dovi_base_and_enhancement_layer_tracks();
+  handle_probed_teletext_pages();
 
   std::copy(m_tracks.begin(), m_tracks.end(), std::back_inserter(m_all_probed_tracks));
 }
@@ -1387,6 +1465,16 @@ reader_c::pair_dovi_base_and_enhancement_layer_tracks() {
     track.m_hidden            = true;
     bl_track->m_dovi_el_track = &track;
   }
+}
+
+void
+reader_c::handle_probed_teletext_pages() {
+  std::vector<track_ptr> newly_created_tracks;
+
+  for (auto const &track : m_tracks)
+    track->handle_probed_teletext_pages(newly_created_tracks);
+
+  std::copy(newly_created_tracks.begin(), newly_created_tracks.end(), std::back_inserter(m_tracks));
 }
 
 void
@@ -2393,6 +2481,9 @@ reader_c::determine_track_parameters(track_c &track,
 
     else if (track.codec.is(codec_c::type_e::S_DVBSUB))
       return track.new_stream_s_dvbsub();
+
+    else if (track.codec.is(codec_c::type_e::S_SRT))
+      return track.new_stream_s_teletext();
 
   } else if (track.type != pid_type_e::audio)
     return -1;

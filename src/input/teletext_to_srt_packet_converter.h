@@ -18,6 +18,7 @@
 #include "common/debugging.h"
 #include "common/timestamp.h"
 #include "input/packet_converter.h"
+#include "merge/generic_packetizer.h"
 
 constexpr auto TTX_PAGE_TEXT_ROW_SIZE    = 24;
 constexpr auto TTX_PAGE_TEXT_COLUMN_SIZE = 40;
@@ -27,7 +28,7 @@ protected:
   struct ttx_page_data_t {
     int page, subpage;
     unsigned int flags, national_set;
-    bool erase_flag;
+    bool erase_flag, subtitle_flag;
     std::vector<std::string> page_buffer;
 
     ttx_page_data_t() {
@@ -43,7 +44,7 @@ protected:
     timestamp_c m_queued_timestamp, m_page_timestamp;
     packet_cptr m_queued_packet;
     std::optional<int> m_forced_char_map_idx;
-    bool m_page_changed{};
+    bool m_page_changed{}, m_subtitle_page_found{};
     generic_packetizer_c *m_ptzr{};
     int m_magazine;
 
@@ -65,6 +66,8 @@ protected:
   std::unordered_map<int, track_data_cptr> m_track_data;
   track_data_t *m_current_track{};
 
+  bool m_parse_for_probing{};
+
   QRegularExpression m_page_re1, m_page_re2, m_page_re3;
 
   debugging_option_c m_debug, m_debug_packet, m_debug_conversion;
@@ -77,7 +80,9 @@ public:
   virtual void flush() override;
 
   virtual void override_encoding(int page, std::string const &iso639_alpha_3_code);
-  virtual void demux_page(int page, generic_packetizer_c *packetizer);
+  virtual void demux_page(std::optional<int> page, generic_packetizer_c *packetizer);
+  virtual void parse_for_probing();
+  virtual std::vector<int> get_probed_subtitle_page_numbers() const;
 
 protected:
   void process_ttx_packet();
