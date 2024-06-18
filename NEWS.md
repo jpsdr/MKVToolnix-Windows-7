@@ -20,6 +20,10 @@
 * mkvmerge: Matroska reader: track statistics tags are included in the JSON
   identification output just like other tags had already been included: as
   part of the track properties, prefixed with `tag_`. Implements #3714.
+* mkvmerge: MPEG TS reader: mkvmerge will now detect teletext subtitle tracks
+  even if they're not listed in the PMT as long as it can find teletext pages
+  flagged as subtitles in the header within the probed ranged of the
+  file. Implements #3650.
 
 ## Bug fixes
 

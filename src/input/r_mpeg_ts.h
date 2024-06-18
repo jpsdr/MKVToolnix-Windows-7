@@ -26,6 +26,7 @@
 #include "common/truehd.h"
 #include "common/vc1_fwd.h"
 #include "input/packet_converter.h"
+#include "input/teletext_to_srt_packet_converter.h"
 #include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
@@ -300,6 +301,7 @@ public:
   uint16_t pid;
   std::optional<uint16_t> program_number, m_dovi_base_layer_pid;
   std::optional<int> m_ttx_wanted_page;
+  std::unordered_map<unsigned int, bool> m_ttx_known_subtitle_pages, m_ttx_known_non_subtitle_pages;
   std::optional<uint8_t> m_expected_next_continuity_counter;
   std::optional<bool> m_hearing_impaired_flag;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
@@ -339,6 +341,7 @@ public:
   mtx::truehd::parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
   mtx::vc1::es_parser_cptr m_vc1_parser;
+  std::shared_ptr<teletext_to_srt_packet_converter_c> m_ttx_parser;
 
   unsigned int skip_packet_data_bytes;
 
@@ -369,6 +372,7 @@ public:
   int new_stream_a_truehd();
   int new_stream_s_hdmv_textst();
   int new_stream_s_dvbsub();
+  int new_stream_s_teletext();
 
   bool parse_ac3_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_dovi_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
@@ -402,6 +406,9 @@ public:
   void reset_processing_state();
 
   void set_packetizer_source_id() const;
+
+  track_ptr set_up_teletext_track(int ttx_page, int ttx_type = 0x02);
+  void handle_probed_teletext_pages(std::vector<track_ptr> &newly_created_tracks);
 };
 
 struct file_t {
@@ -516,6 +523,7 @@ private:
   int determine_track_parameters(track_c &track, bool end_of_detection);
   void determine_track_type_by_pes_content(track_c &track);
   void pair_dovi_base_and_enhancement_layer_tracks();
+  void handle_probed_teletext_pages();
 
   file_status_e finish();
   bool all_files_done() const;
