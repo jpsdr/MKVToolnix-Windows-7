@@ -24,6 +24,8 @@
   even if they're not listed in the PMT as long as it can find teletext pages
   flagged as subtitles in the header within the probed ranged of the
   file. Implements #3650.
+* translations: added a Norwegian Bokmål translation of the man pages by Roger
+  Knutsen (see `AUTHORS`).
 
 ## Bug fixes
 
