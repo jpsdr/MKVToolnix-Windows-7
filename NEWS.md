@@ -37,6 +37,9 @@
   their timestamps. Partially fixes #3711.
 * mkvmerge: when using timestamp files for subtitle tracks, mkvmerge will now
   write the packets' duration properly. Partially fixes #3711.
+* MKVToolNix GUI: job queue: the shortcut from the "Job queue" menu are now
+  enabled correctly whenever the number of jobs in the queue changes (e.g. by
+  adding new jobs). Fixes #3720.
 
 
 # Version 85.0 "Shame For You" 2024-06-02
