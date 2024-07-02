@@ -148,6 +148,9 @@ Tool::setupActions() {
   connect(ui->moveJobsDown,                                 &QPushButton::clicked,                            this,    [this]() { moveJobsUpOrDown(false); });
   connect(ui->moveJobsUp,                                   &QPushButton::clicked,                            this,    [this]() { moveJobsUpOrDown(true); });
   connect(m_model,                                          &Model::orderChanged,                             this,    &Tool::hideSortIndicator);
+  connect(m_model,                                          &Model::modelReset,                               this,    &Tool::onJobQueueMenu);
+  connect(m_model,                                          &Model::rowsInserted,                             this,    &Tool::onJobQueueMenu);
+  connect(m_model,                                          &Model::rowsRemoved,                              this,    &Tool::onJobQueueMenu);
 
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::retranslateUi);
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::setupMoveJobsButtons);
