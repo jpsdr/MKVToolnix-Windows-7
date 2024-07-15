@@ -35,7 +35,9 @@
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
-#include <fmt/ranges.h>
+#if FMT_VERSION >= 110000
+# include <fmt/ranges.h>
+#endif // FMT_VERSION >= 110000
 
 #include <boost/algorithm/string.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
