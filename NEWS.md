@@ -1,10 +1,3 @@
-# Version ?
-
-## Build system changes
-
-* The bundled `fmt` library was updated to v11.0.1.
-
-
 # Version 86.0 "Winter" 2024-07-13
 
 ## New features and enhancements
