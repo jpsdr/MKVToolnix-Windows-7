@@ -35,6 +35,7 @@
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
+#include <fmt/ranges.h>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
