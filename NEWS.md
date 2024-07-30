@@ -1,5 +1,12 @@
 # Version ?
 
+## Bug fixes
+
+* mkvmerge: AAC parser: LOAS/LATM streams: if the first `AudioSpecificConfig`
+  element is not found within the first LOAS/LATM frame, `mkvmerge` will no
+  longer discard the frames before it but defer parsing them until after it
+  has found the `AudioSpecificConfig` element. Fixes #3727.
+
 ## Build system changes
 
 * The bundled `fmt` library was updated to v10.2.1.
