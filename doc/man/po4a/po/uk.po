@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: 4.4.0\n"
 "POT-Creation-Date: 2024-07-13 18:08+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: Vlad Anisimov <uniss@ua.fm>, 2020,2022\n"
-"Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/uk/)\n"
+"Last-Translator: Altron 320, 2024\n"
+"Language-Team: Ukrainian (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -265,7 +265,7 @@ msgstr "Усі інші аргументи або перемикаються в 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:77
 msgid "Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timestamps_v2\">timestamps</link> and <link linkend=\"mkvextract.description.cues\">cues</link>."
-msgstr "В даний час підтримується витягування <link linkend=\"mkvextract.description.tracks\">доріжок</link>, <link linkend=\"mkvextract.description.tags\">тегів</link>, <link linkend=\"mkvextract.description.attachments\">вкладеннь</link>, <link linkend=\"mkvextract.description.chapters\">глав</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE листів</link>, <link linkend=\"mkvextract.description.timestamps_v2\">міток часу</link> і <link linkend=\"mkvextract.description.cues\">cue</link>."
+msgstr "В даний час підтримується витягування <link linkend=\"mkvextract.description.tracks\">доріжок</link>, <link linkend=\"mkvextract.description.tags\">тегів</link>, <link linkend=\"mkvextract.description.attachments\">вкладеннь</link>, <link linkend=\"mkvextract.description.chapters\">розділів</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE листів</link>, <link linkend=\"mkvextract.description.timestamps_v2\">міток часу</link> і <link linkend=\"mkvextract.description.cues\">cue</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:84
@@ -528,7 +528,7 @@ msgstr "<option>--cuesheet</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:274
 msgid "Causes &mkvextract; to extract a <abbrev>CUE</abbrev> sheet from the chapter information and tag data for the following track into a file whose name is the track's output name with '<literal>.cue</literal>' appended to it."
-msgstr "Відбувається витягування списків <abbrev>CUE</abbrev> з інформацією про глави і дані тегів даної доріжки у файл, ім’я якого є вихідною назвою доріжки з додаванням розширення '<literal>.cue</literal>'."
+msgstr "Відбувається витягування списків <abbrev>CUE</abbrev> з інформацією про розділи і дані тегів даної доріжки у файл, ім’я якого є вихідною назвою доріжки з додаванням розширення '<literal>.cue</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:281
@@ -595,7 +595,7 @@ msgstr "Відбувається витягування вкладення з ID
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:348
 msgid "Chapters extraction mode"
-msgstr "Режим витягування глав"
+msgstr "Режим витягування розділів"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:351
@@ -610,7 +610,7 @@ msgstr "<option>-s</option>, <option>--simple</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:359
 msgid "Exports the chapter information in the simple format used in the <abbrev>OGM</abbrev> tools (CHAPTER01=..., CHAPTER01NAME=...). In this mode some information has to be discarded. Default is to output the chapters in &xml; format."
-msgstr "Витягується інформація про глави у простому форматі, що використовується в інструментарії для роботи з <abbrev>OGM</abbrev> (CHAPTER01=..., CHAPTER01NAME=...). В цьому режимі деяка інформація пропускається. За замовчуванням глави витягуються у форматі &xml;."
+msgstr "Витягується інформація про розділи у простому форматі, що використовується в інструментарії для роботи з <abbrev>OGM</abbrev> (CHAPTER01=..., CHAPTER01NAME=...). В цьому режимі деяка інформація пропускається. За замовчуванням розділи витягуються у форматі &xml;."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:367
@@ -620,17 +620,17 @@ msgstr "<option>--simple-language</option> <parameter>language</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:370
 msgid "If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.  By default &mkvextract; will use the first chapter name found for each atom regardless of its language."
-msgstr "Якщо ввімкнено простий формат, &mkvextract; виведе лише один запис для кожного зустріченого атома глави, навіть якщо атом глави містить більше однієї назви глави. За замовчуванням &mkvextract; використовуватиме назву першої глава, знайдену для кожного атома, незалежно від його мови."
+msgstr "Якщо ввімкнено простий формат, &mkvextract; виведе лише один запис для кожного зустріченого атома розділу, навіть якщо атом розділу містить більше однієї назви розділу. За замовчуванням &mkvextract; використовуватиме назву першого розділу, знайдену для кожного атома, незалежно від його мови."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:375
 msgid "Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name.  The <parameter>language</parameter> parameter must be an ISO 639-1 or ISO 639-2 code."
-msgstr "Використання цього параметра дозволяє користувачеві визначити, які назви глав виводяться, якщо атоми містять більше однієї назви глави. Параметр <parameter>language</parameter> має бути кодом ISO 639-1 або ISO 639-2."
+msgstr "Використання цього параметра дозволяє користувачеві визначити, які назви розділів виводяться, якщо атоми містять більше однієї назви глави. Параметр <parameter>language</parameter> має бути кодом ISO 639-1 або ISO 639-2."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:383
 msgid "The chapters are written to specified output file. By default the &xml; format understood by &mkvmerge; is used. If no chapters are found in the file, the output file is not created."
-msgstr "Глави записуються у вказаний вихідний файл. За замовчуванням використовується зрозумілий &mkvmerge; формат &xml;. Якщо у файлі не знайдено жодних глав, вихідний файл не створюється."
+msgstr "Розділи записуються у вказаний вихідний файл. За замовчуванням використовується зрозумілий &mkvmerge; формат &xml;. Якщо у файлі не знайдено жодних розділів, вихідний файл не створюється."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:388
@@ -660,7 +660,7 @@ msgstr "Синтаксис: <command>mkvextract <parameter>source-filename</para
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:407
 msgid "The cue sheet is written to specified output file. If no chapters or tags are found in the file, the output file is not created."
-msgstr "Список cue записується у вказаний вихідний файл. Якщо у файлі не знайдено жодних глав або тегів, вихідний файл не створюється."
+msgstr "Список cue записується у вказаний вихідний файл. Якщо у файлі не знайдено жодних розділів або теґів, вихідний файл не створюється."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:412
@@ -792,7 +792,7 @@ msgstr "Приклади"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:528
 msgid "Extracting both chapters and tags in their respective &xml; formats at the same time:"
-msgstr "Витягування глав і тегів у відповідні &xml; формати одночасно:"
+msgstr "Витягування розділів і теґів у відповідні &xml; формати одночасно:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:531
@@ -814,7 +814,7 @@ msgstr "$ mkvextract \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aa
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:540
 msgid "Extracting chapters in the Ogg/OGM format and re-encoding a text subtitle track to another character set:"
-msgstr "Витягування глав у форматі Ogg/OGM і перекодування доріжки текстових субтитрів в інший набір символів:"
+msgstr "Витягування розділів у форматі Ogg/OGM і перекодування доріжки текстових субтитрів в інший набір символів:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:543
@@ -1163,12 +1163,12 @@ msgstr "Вкладення записуються як є до файлу на �
 #: doc/man/mkvextract.xml:851
 #: doc/man/mkvmerge.xml:3013
 msgid "Chapters"
-msgstr "Глави"
+msgstr "Розділи"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:854
 msgid "Chapters are converted to a &xml; format. This format is the same that &mkvmerge; supports for reading chapters. Alternatively a stripped-down version can be output in the simple <abbrev>OGM</abbrev> style format."
-msgstr "Глави конвертуються до формату &xml;. Цей формат є тим самим, який &mkvmerge; підтримує для читання глав. Як альтернатива, можна витягувати глави до спрощеного стильового формату <abbrev>OGM</abbrev>."
+msgstr "Розділи конвертуються до формату &xml;. Цей формат є тим самим, який &mkvmerge; підтримує для читання розділів. Як альтернатива, можна витягувати розділи до спрощеного стильового формату <abbrev>OGM</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:861
@@ -1567,7 +1567,7 @@ msgstr "Створює файл, сумісний із WebM. Це також у�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:113
 msgid "For chapters and tags only a subset of elements are allowed. &mkvmerge; will automatically remove all elements not allowed by the specification."
-msgstr "Для глав і тегів дозволяється лише підмножина елементів. &mkvmerge; автоматично видалить усі елементи, не дозволені специфікацією."
+msgstr "Для розділів і теґів дозволяється лише підмножина елементів. &mkvmerge; автоматично видалить усі елементи, не дозволені специфікацією."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:120
@@ -1639,7 +1639,7 @@ msgstr "Кожен створений файл містить один сегм�
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:181
 msgid "Chapter and tag handling (global options)"
-msgstr "Обробка глав і тегів (загальні параметри)"
+msgstr "Обробка розділів і теґів (загальні параметри)"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:185
@@ -1649,17 +1649,17 @@ msgstr "<option>--chapter-language</option> <parameter>language-code</parameter>
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:188
 msgid "Sets the ISO 639-2 language code that is written for each chapter entry.  Defaults to '<literal>eng</literal>'.  See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr "Встановлює код мови ISO 639-2, який записується для кожного запису глави. За замовчуванням '<literal>eng</literal>'. Перегляньте розділ про &quot;<link linkend=\"mkvmerge.chapters\">глави</link>&quot; нижче, щоб дізнатися більше."
+msgstr "Встановлює код мови ISO 639-2, який записується для кожного запису розділу. За замовчуванням '<literal>eng</literal>'. Перегляньте розділ про &quot;<link linkend=\"mkvmerge.chapters\">розділи</link>&quot; нижче, щоб дізнатися більше."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
 msgid "This option can be used both for simple chapter files and for source files that contain chapters but no information about the chapters' language, e.g. MP4 and OGM files."
-msgstr "Цей параметр можна використовувати як для простих файлів глав, так і для вихідних файлів, які містять глави, але не містять інформації про мову глав, наприклад файли MP4 і OGM."
+msgstr "Цей параметр можна використовувати як для простих файлів розділів, так і для вихідних файлів, які містять розділи, але не містять інформації про мову розділів, наприклад файли MP4 і OGM."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:198
 msgid "The language set with this option is also used when chapters are generated with the <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option> option</link>."
-msgstr "Мова, встановлена цим параметром, також використовується, коли глави створюються за допомогою параметра <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option></link>."
+msgstr "Мова, встановлена цим параметром, також використовується, коли розділи створюються за допомогою параметра <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:205
@@ -1669,12 +1669,12 @@ msgstr "<option>--chapter-charset</option> <parameter>character-set</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:208
 msgid "Sets the character set that is used for the conversion to UTF-8 for simple chapter files. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\">text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "Встановлює набір символів, який використовується для перетворення в UTF-8 для простих файлів глав. Перегляньте розділ про <link linkend=\"mkvmerge.text_files_and_charsets\">текстові файли та набори символів</link>, щоб дізнатися, як &mkvmerge; перетворює між наборами символів."
+msgstr "Встановлює набір символів, який використовується для перетворення в UTF-8 для простих файлів розділів. Перегляньте розділ про <link linkend=\"mkvmerge.text_files_and_charsets\">текстові файли та набори символів</link>, щоб дізнатися, як &mkvmerge; перетворює між наборами символів."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:214
 msgid "This switch does also apply to chapters that are copied from certain container types, e.g. Ogg/OGM and MP4 files.  See the section about chapters below for details."
-msgstr "Цей перемикач також застосовується до глав, які скопійовані з певних типів контейнерів, наприклад файли Ogg/OGM і MP4. Додаткову інформацію див. у розділі про глави нижче."
+msgstr "Цей перемикач також застосовується до розділів, які скопійовані з певних типів контейнерів, наприклад файли Ogg/OGM і MP4. Додаткову інформацію див. у розділі про розділи нижче."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:221
@@ -1684,7 +1684,7 @@ msgstr "<option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</op
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:224
 msgid "Adjust the timestamps of the chapters in the following source file by <parameter>d</parameter> ms. Alternatively you can use the <option>--sync</option> option with the special track ID <constant>-2</constant> (see section <link linkend=\"mkvmerge.track_ids.special_ids\">special track IDs</link>)."
-msgstr "Налаштуйте мітки часу глав у наступному вихідному файлі на <parameter>d</parameter> мс. Крім того, ви можете використовувати параметр <option>--sync</option> зі спеціальним ідентифікатором доріжки <constant>-2</constant> (див. розділ <link linkend=\"mkvmerge.track_ids.special_ids\">спеціальні ID доріжок</link>)."
+msgstr "Налаштуйте мітки часу розділів у наступному вихідному файлі на <parameter>d</parameter> мс. Крім того, ви можете використовувати параметр <option>--sync</option> зі спеціальним ідентифікатором доріжки <constant>-2</constant> (див. розділ <link linkend=\"mkvmerge.track_ids.special_ids\">спеціальні ID доріжок</link>)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:230
@@ -1723,17 +1723,17 @@ msgstr "<option>--generate-chapters</option> <parameter>mode</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:250
 msgid "&mkvmerge; can create chapters automatically.  The following two modes are currently supported:"
-msgstr "&mkvmerge; може створювати глави автоматично. На даний момент підтримуються наступні два режими:"
+msgstr "&mkvmerge; може створювати розділи автоматично. На даний момент підтримуються наступні два режими:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:256
 msgid "'<literal>when-appending</literal>' – This mode creates one chapter at the start and one chapter whenever a file is appended."
-msgstr "'<literal>when-appending</literal>' – цей режим створює одну главу на початку і одну главу щоразу, коли додається файл."
+msgstr "'<literal>when-appending</literal>' – цей режим створює один розділ на початку і один розділ щоразу, коли додається файл."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:260
 msgid "This mode also works with split modes '<literal>parts:</literal>' and '<literal>parts-frames:</literal>'. For these modes one chapter will be generated for each appended timestamp range (those whose start timestamps are prefixed with '<literal>+</literal>')."
-msgstr "Цей режим також працює з режимами розділення '<literal>parts:</literal>' і '<literal>parts-frames:</literal>'. Для цих режимів буде створено одну главу для кожного доданого діапазону міток часу (тих, чиї початкові мітки часу мають префікс '<literal>+</literal>')."
+msgstr "Цей режим також працює з режимами розділення '<literal>parts:</literal>' і '<literal>parts-frames:</literal>'. Для цих режимів буде створено один розділ для кожного доданого діапазону міток часу (тих, чиї початкові мітки часу мають префікс '<literal>+</literal>')."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:267
@@ -1743,7 +1743,7 @@ msgstr "&mkvmerge; вимагає наявності відео або ауді�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:275
 msgid "'<literal>interval:</literal><parameter>time-spec</parameter>' – This mode creates one chapter at fixed intervals given by <parameter>time-spec</parameter>.  The format is either the form <parameter>HH:MM:SS.nnnnnnnnn</parameter> or a number followed by one of the units '<literal>s</literal>', '<literal>ms</literal>' or '<literal>us</literal>'."
-msgstr "'<literal>interval:</literal><parameter>time-spec</parameter>' – цей режим створює одну главу з фіксованими інтервалами, заданими <parameter>time-spec</parameter>. Формат у формі <parameter>HH:MM:SS.nnnnnnnnn</parameter> або число, за яким слідує одна з одиниць '<literal>s</literal>', '<literal>ms</literal>' або '<literal>us</literal>'."
+msgstr "'<literal>interval:</literal><parameter>time-spec</parameter>' – цей режим створює один розділ з фіксованими інтервалами, заданими <parameter>time-spec</parameter>. Формат у формі <parameter>HH:MM:SS.nnnnnnnnn</parameter> або число, за яким слідує одна з одиниць '<literal>s</literal>', '<literal>ms</literal>' або '<literal>us</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:281
@@ -1753,7 +1753,7 @@ msgstr "Приклад: <literal>--generate-chapters interval:45s</literal>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:287
 msgid "The names for the new chapters are controlled by the option <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>.  The language is set with <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link> which must occur before <option>--generate-chapters</option>."
-msgstr "Назви нових глав керуються параметром <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>. Мова встановлюється за допомогою <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link>, яка має бути наведена перед <option>--generate-chapters</option>."
+msgstr "Назви нових розділів керуються параметром <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>. Мова встановлюється за допомогою <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link>, яка має бути наведена перед <option>--generate-chapters</option>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:296
@@ -1763,12 +1763,12 @@ msgstr "<option>--generate-chapters-name-template</option> <parameter>template</
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:299
 msgid "This sets the name template for chapter names generated by the option <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. If the option is not used then default '<literal>Chapter &lt;NUM:2&gt;</literal>' will be used."
-msgstr "Це встановлює шаблон назви для імен глав, створених за допомогою параметра <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. Якщо цей параметр не використовується, буде використано стандартне значення «<literal>Глава &lt;NUM:2&gt;</literal>»."
+msgstr "Це встановлює шаблон назви для імен розділів, створених за допомогою параметра <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. Якщо цей параметр не використовується, буде використано стандартне значення «<literal>Розділ &lt;NUM:2&gt;</literal>»."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:305
 msgid "There are several variables that can be used in the template that are replaced by their actual values when a chapter is generated.  The string '<literal>&lt;NUM&gt;</literal>' will be replaced by the chapter number. The string '<literal>&lt;START&gt;</literal>' will be replaced by the chapter's start timestamp."
-msgstr "Існує кілька змінних, які можна використовувати в шаблоні, що замінюються їхніми фактичними значеннями під час створення глави. Рядок '<literal>&lt;NUM&gt;</literal>' буде замінено номером глави. Рядок '<literal>&lt;START&gt;</literal>' буде замінено міткою часу початку глави."
+msgstr "Існує кілька змінних, які можна використовувати в шаблоні, що замінюються їхніми фактичними значеннями під час створення глави. Рядок '<literal>&lt;NUM&gt;</literal>' буде замінено номером глави. Рядок '<literal>&lt;START&gt;</literal>' буде замінено міткою часу початку розділу."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:311
@@ -1780,7 +1780,7 @@ msgstr "Рядки <literal>'&lt;FILE_NAME&gt;'</literal> і <literal>'&lt;FILE_
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:317
 msgid "You can specify a minimum number of places for the chapter number with '<literal>&lt;NUM:places&gt;</literal>', e.g. '<literal>&lt;NUM:3&gt;</literal>'.  The resulting number will be padded with leading zeroes if the number of places is less than specified."
-msgstr "Ви можете вказати мінімальну кількість місць для номера глави за допомогою '<literal>&lt;NUM:places&gt;</literal>', наприклад '<literal>&lt;NUM:3&gt;</literal>'. Отримане число буде доповнено провідними нулями, якщо кількість місць менше зазначеної."
+msgstr "Ви можете вказати мінімальну кількість місць для номера розділу за допомогою '<literal>&lt;NUM:places&gt;</literal>', наприклад '<literal>&lt;NUM:3&gt;</literal>'. Отримане число буде доповнено провідними нулями, якщо кількість місць менше зазначеної."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:322
@@ -1835,7 +1835,7 @@ msgstr "<option>--cue-chapter-name-format</option> <parameter>format</parameter>
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:359
 msgid "&mkvmerge; supports reading <abbrev>CUE</abbrev> sheets for audio files as the input for chapters. <abbrev>CUE</abbrev> sheets usually contain the entries <varname>PERFORMER</varname> and <varname>TITLE</varname> for each index entry. &mkvmerge; uses these two strings in order to construct the chapter name. With this option the format used for this name can be set."
-msgstr "&mkvmerge; підтримує читання списків <abbrev>CUE</abbrev> для аудіофайлів як вхідних даних для глав. Списки <abbrev>CUE</abbrev> зазвичай містять записи <varname>PERFORMER</varname> і <varname>TITLE</varname> для кожного запису індексу. &mkvmerge; використовує ці два рядки для створення назви глави. За допомогою цього параметра можна встановити формат, який використовується для цього імені."
+msgstr "&mkvmerge; підтримує читання списків <abbrev>CUE</abbrev> для аудіофайлів як вхідних даних для розділів. Списки <abbrev>CUE</abbrev> зазвичай містять записи <varname>PERFORMER</varname> і <varname>TITLE</varname> для кожного запису індексу. &mkvmerge; використовує ці два рядки для створення назви розділу. За допомогою цього параметра можна встановити формат, який використовується для цього імені."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:365
@@ -1875,7 +1875,7 @@ msgstr "<option>--chapters</option> <parameter>file-name</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:396
 msgid "Read chapter information from the file <parameter>file-name</parameter>. See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr "Прочитайте інформацію про главу із файлу <parameter>file-name</parameter>. Перегляньте розділ про <link linkend=\"mkvmerge.chapters\">глави</link> нижче, щоб дізнатися більше."
+msgstr "Прочитайте інформацію про розділ із файлу <parameter>file-name</parameter>. Перегляньте розділ про <link linkend=\"mkvmerge.chapters\">розділи</link> нижче, щоб дізнатися більше."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:403
@@ -2031,7 +2031,7 @@ msgstr "<option>--disable-language-ietf</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:557
 msgid "Normally &mkvmerge; will write the new IETF BCP 47 language elements in addition to the legacy language elements in track headers, chapters and tags. If this option is used, only the legacy elements are written."
-msgstr "Зазвичай &mkvmerge; записує нові мовні елементи IETF BCP 47 на додаток до спадкових мовних елементів у заголовках, главах та тегах доріжок. Якщо використовується цей параметр, записуються лише спадкові елементи."
+msgstr "Зазвичай &mkvmerge; записує нові мовні елементи IETF BCP 47 на додаток до спадкових мовних елементів у заголовках, розділах та теґах доріжок. Якщо використовується цей параметр, записуються лише спадкові елементи."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:564
@@ -2340,7 +2340,7 @@ msgstr "Не можна опускати префікс '<literal>frames:</liter
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:877
 msgid "Splitting before specific chapters."
-msgstr "Розділення перед конкретними главами."
+msgstr "Розділення перед конкретними розділами."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:881
@@ -2355,12 +2355,12 @@ msgstr "Приклад: <code>--split chapters:5,8</code>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:890
 msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of chapter numbers is separated by commas.  Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed.  A chapter starting at 0s is never considered for splitting and discarded silently."
-msgstr "Усі параметри <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> тощо мають бути цілими додатними числами. Нумерація починається з 1. Список номерів глав розділяється комами. Розділення відбудеться безпосередньо перед першим ключовим кадром, мітка часу якого дорівнює або більша за початкову мітку часу для глав, номери яких вказані. Глава, що починається з 0s, ніколи не розглядається для розділення та відкидається без змін."
+msgstr "Усі параметри <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> тощо мають бути цілими додатними числами. Нумерація починається з 1. Список номерів розділів розділяється комами. Розділення відбудеться безпосередньо перед першим ключовим кадром, мітка часу якого дорівнює або більша за початкову мітку часу для розділів, номери яких вказані. Розділ, що починається з 0s, ніколи не розглядається для розділення та відкидається без змін."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:897
 msgid "The keyword <literal>all</literal> can be used instead of listing all chapter numbers manually."
-msgstr "Ключове слово <literal>all</literal> можна використовувати замість того, щоб перераховувати всі номери глав вручну."
+msgstr "Ключове слово <literal>all</literal> можна використовувати замість того, щоб перераховувати всі номери розділів вручну."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:901
@@ -2370,7 +2370,7 @@ msgstr "Не можна опускати префікс '<literal>chapters:</lit
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:906
 msgid "The &matroska; file format supports arbitrary deeply nested chapter structures called 'edition entries' and 'chapter atoms'.  However, this mode only considers the top-most level of chapters across all edition entries."
-msgstr "Формат файлу &matroska; підтримує довільні глибоко вкладені структури глав, які називаються «записами видання» та «атомами глав». Однак цей режим враховує лише найвищий рівень глав у всіх записах видання."
+msgstr "Формат файлу &matroska; підтримує довільні глибоко вкладені структури розділів, які називаються «записами видання» та «атомами розділів». Однак цей режим враховує лише найвищий рівень розділів у всіх записах видання."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:914
@@ -2380,7 +2380,7 @@ msgstr "Для цього режиму розділення ім’я вихід
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:923
 msgid "Another possible pattern is '<code>%c</code>' which will be replaced by the name of the first chapter in the file. Note that when '<code>%c</code>' is present, the pattern '<code>-%03d</code>' will not be added automatically."
-msgstr "Іншим можливим шаблоном є '<code>%c</code>', який буде замінено назвою першої глави у файлі. Зауважте, що коли присутній '<code>%c</code>', шаблон '<code>-%03d</code>' не буде додано автоматично."
+msgstr "Іншим можливим шаблоном є '<code>%c</code>', який буде замінено назвою першого розділу у файлі. Зауважте, що коли присутній '<code>%c</code>', шаблон '<code>-%03d</code>' не буде додано автоматично."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:930
@@ -2807,7 +2807,7 @@ msgstr "<option>--no-chapters</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1378
 msgid "Don't copy chapters from this file."
-msgstr "Не копіювати глави з цього файла."
+msgstr "Не копіювати розділи з цього файла."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1384
@@ -2839,7 +2839,7 @@ msgstr "<option>--enable-durations</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1405
 msgid "When this option is used for a Matroska source file, &mkvmerge; will create new random unique track IDs instead of keeping the existing ones in the file. Existing track UIDs in chapters &amp; tags read from the same file will be remapped to the newly generated values."
-msgstr ""
+msgstr "Коли цей параметр використовується до початкового файлу Matroska, &mkvmerge; створить нову випадкову унікальну доріжку ID, замість того, щоб зберігати ту, що вже існує у файлі. Уже наявна доріжка в розділах &amp; теґах, що читається з того ж файлу, буде переналаштована згідно зі свіжозгенерованими значеннями."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1411
@@ -4036,7 +4036,7 @@ msgstr "Спеціальний ідентифікатор доріжки '<const
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2714
 msgid "The special track ID '<constant>-2</constant>' refers to the chapters in a source file. Currently only the <option>--sync</option> option uses this special ID. As an alternative to <option>--sync -2:…</option> the option <option>--chapter-sync …</option> can be used."
-msgstr "Спеціальний ідентифікатор доріжки '<constant>-2</constant>' посилається на глави у вихідному файлі. Зараз тільки параметр <option>--sync</option> використовує цей спеціальний ідентифікатор. Як альтернатива до <option>--sync -2:…</option> може бути використано параметр <option>--chapter-sync …</option>."
+msgstr "Спеціальний ідентифікатор доріжки '<constant>-2</constant>' посилається на розділи у вихідному файлі. Зараз тільки параметр <option>--sync</option> використовує цей спеціальний ідентифікатор. Як альтернатива до <option>--sync -2:…</option> може бути використано параметр <option>--chapter-sync …</option>."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:2721
@@ -4170,7 +4170,7 @@ msgstr "<link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2865
 msgid "<link linkend=\"mkvmerge.description.chapter_charset\"><option>--chapter-charset</option></link> for chapter text files and for chapters and file titles stored in container formats for which the character set cannot be determined unambiguously (e.g. Ogg files for chapter information, track and file titles etc; MP4 files for chapter information),"
-msgstr "<link linkend=\"mkvmerge.description.chapter_charset\"><option>--chapter-charset</option></link> для текстових файлів глав і для глав та заголовків файлу, що зберігаються в контейнерних форматах, для яких набір символів не може бути визначений однозначно (наприклад, файли Ogg для інформації глав, доріжок і заголовків файлу тощо; файли MP4 для інформації глав),"
+msgstr "<link linkend=\"mkvmerge.description.chapter_charset\"><option>--chapter-charset</option></link> для текстових файлів розділів і для розділів та заголовків файлу, що зберігаються в контейнерних форматах, для яких набір символів не може бути визначений однозначно (наприклад, файли Ogg для інформації розділів, доріжок і заголовків файлу тощо; файли MP4 для інформації розділів),"
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2873
@@ -4319,22 +4319,22 @@ msgstr "Якщо файл &matroska;, що містить вкладення, в
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3015
 msgid "The &matroska; chapter system is more powerful than the old known system used by <abbrev>OGM</abbrev> files. The full specifications can be found at <ulink url=\"https://www.matroska.org/\">the &matroska; website</ulink>."
-msgstr "Система глав &matroska; є більш потужною ніж стара система що використовується файлами <abbrev>OGM</abbrev>. Повна специфікація може бути знайдена на <ulink url=\"https://www.matroska.org/\">сайті &matroska;</ulink>."
+msgstr "Система розділів &matroska; є більш потужною ніж стара система, що використовується файлами <abbrev>OGM</abbrev>. Повна специфікація може бути знайдена на <ulink url=\"https://www.matroska.org/\">сайті &matroska;</ulink>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3020
 msgid "&mkvmerge; supports two kinds of chapter files as its input. The first format, called 'simple chapter format', is the same format that the <abbrev>OGM</abbrev> tools expect. The second format is a &xml; based chapter format which supports all of &matroska;'s chapter functionality."
-msgstr "&mkvmerge; підтримує два види файлів глав в якості вхідних даних. Перший формат, званий «простий формат глав», є тим самим форматом, який очікують інструменти <abbrev>OGM</abbrev>. Другим форматом є формат глав на основі &xml;, який підтримує всі функції глав &matroska;."
+msgstr "&mkvmerge; підтримує два види файлів розділів для вхідних даних. Перший формат, так званий «простий формат розділів», є тим самим форматом, який очікують інструменти <abbrev>OGM</abbrev>. Другим форматом є формат розділів на основі &xml;, який підтримує всі функції розділів &matroska;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3026
 msgid "Apart from dedicated chapter files &mkvmerge; can also read chapters from other file formats (e.g. MP4, Ogg, Blu-rays or DVDs)."
-msgstr "Окрім виділених файлів глав &mkvmerge; може також читати глав з інших форматів файлів (наприклад, MP4, Ogg, Blu-ray або DVD)."
+msgstr "Окрім виділених файлів розділів &mkvmerge; може також читати розділи з інших форматів файлів (наприклад, MP4, Ogg, Blu-ray або DVD)."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3030
 msgid "The simple chapter format"
-msgstr "Простий формат глав"
+msgstr "Простий формат розділів"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3033
@@ -4374,12 +4374,12 @@ msgstr "Оскільки це текстовий файл, може знадоб
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3057
 msgid "The &xml; based chapter format"
-msgstr "Формат глав, що базується на &xml;"
+msgstr "Формат розділів, що базується на &xml;"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3059
 msgid "The &xml; based chapter format looks like this example:"
-msgstr "Формат глав, що базується на &xml;, виглядає як у наступному прикладі:"
+msgstr "Формат розділів, що базується на &xml;, виглядає як у наступному прикладі:"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3062
@@ -4434,17 +4434,17 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3086
 msgid "With this format three things are possible that are not possible with the simple chapter format:"
-msgstr "У цьому форматі можливі три речі, які неможливі в простому форматі глави:"
+msgstr "У цьому форматі можливі три речі, які неможливі в простому форматі розділу:"
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3090
 msgid "The timestamp for the end of the chapter can be set,"
-msgstr "Мітка часу для кінця глави може бути встановлена,"
+msgstr "Мітка часу для кінця розділу може бути встановлена,"
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3091
 msgid "chapters can be nested,"
-msgstr "глави можуть вкладатися"
+msgstr "розділи можуть вкладатися"
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3092
@@ -4528,12 +4528,12 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3134
 msgid "Reading chapters from Blu-rays"
-msgstr "Читання глав з дисків Blu-ray"
+msgstr "Читання розділів з дисків Blu-ray"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3137
 msgid "&mkvmerge; can read chapters from unencrypted Blu-rays. For that you can use the path to one of the MPLS play lists with the <parameter>--chapters</parameter> parameter."
-msgstr "&mkvmerge; може читати глави з незашифрованих дисків Blu-ray. Для цього ви можете використовувати шлях до одного зі списків відтворення MPLS з параметром <parameter>--chapters</parameter>."
+msgstr "&mkvmerge; може читати розділи з незашифрованих дисків Blu-ray. Для цього ви можете використовувати шлях до одного зі списків відтворення MPLS з параметром <parameter>--chapters</parameter>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3142
@@ -4543,12 +4543,12 @@ msgstr "Приклад: <literal>--chapters /srv/blurays/BigBuckBunny/BDMV/PLAYL
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3147
 msgid "Reading chapters from DVDs"
-msgstr "Читання глав з дисків DVD"
+msgstr "Читання розділів з дисків DVD"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3150
 msgid "When MKVToolNix is compiled with the <productname>libdvdread</productname> library, &mkvmerge; can read chapters from DVDs. For that you can use the path to one of the folders or files on the DVD with the <parameter>--chapters</parameter> parameter. As DVDs can contain more than one title and each title has its own set of chapters, you can append a colon and the desired title number to the end of the file name argument. The title number defaults to 1."
-msgstr "Коли MKVToolNix компілюється з бібліотекою <productname>libdvdread</productname>, &mkvmerge; може читати глави з DVD-дисків. Для цього ви можете використовувати шлях до однієї з папок або файлів на DVD з параметром <parameter>--chapters</parameter>. Оскільки DVD-диски можуть містити більше одного заголовка, а кожен заголовок має власний набір глав, ви можете додати двокрапку та потрібний номер назви в кінець аргументу імені файлу. Номер назви за замовчуванням дорівнює 1."
+msgstr "Коли MKVToolNix компілюється з бібліотекою <productname>libdvdread</productname>, &mkvmerge; може читати розділи з DVD-дисків. Для цього ви можете використовувати шлях до однієї з папок або файлів на DVD з параметром <parameter>--chapters</parameter>. Оскільки DVD-диски можуть містити більше одного заголовка, а кожен заголовок має власний набір розділів, ви можете додати двокрапку та потрібний номер назви в кінець аргументу імені файлу. Номер назви за замовчуванням дорівнює 1."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3157
@@ -4563,12 +4563,12 @@ msgstr "Загальні примітки"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3164
 msgid "When splitting files &mkvmerge; will correctly adjust the chapters as well. This means that each file only includes the chapter entries that apply to it, and that the timestamps will be offset to match the new timestamps of each output file."
-msgstr "Під час розділення файлів &mkvmerge; також правильно коригує глави. Це означає, що кожен файл містить лише записи глав, які до нього стосуються, і що мітки часу будуть зміщені відповідно до нових міток часу кожного вихідного файлу."
+msgstr "Під час розділення файлів &mkvmerge; також правильно коригує розділи. Це означає, що кожен файл містить лише записи розділів, які до нього стосуються, і що мітки часу будуть зміщені відповідно до нових міток часу кожного вихідного файлу."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3169
 msgid "&mkvmerge; is able to copy chapters from &matroska; source files unless this is explicitly disabled with the <link linkend=\"mkvmerge.description.no_chapters\"><option>--no-chapters</option></link> option. The chapters from all sources (&matroska; files, Ogg files, <abbrev>MP4</abbrev> files, chapter text files) are usually not merged but end up in separate <classname>ChapterEditions</classname>. Only if chapters are read from several &matroska; or &xml; files that share the same edition UIDs will chapters be merged into a single <classname>ChapterEdition</classname>. If such a merge is desired in other situations as well then the user has to extract the chapters from all sources with &mkvextract; first, merge the &xml; files manually and mux them afterwards."
-msgstr "&mkvmerge; може копіювати глави з вхідних файлів &matroska;, якщо це явно не вимкнено за допомогою параметра <link linkend=\"mkvmerge.description.no_chapters\"><option>--no-chapters</option></link>. Глави з усіх джерел (файли &matroska;, файли Ogg, файли <abbrev>MP4</abbrev>, текстові файли глав) зазвичай не об’єднуються, а виходять в окремі <classname>ChapterEditions</classname>. Тільки якщо глави читаються з кількох &matroska; або &xml; файлів, які мають однакові ідентифікатори UID видання, будуть об’єднані в єдиний <classname>ChapterEdition</classname>. Якщо таке об'єднання є бажаним і в інших ситуаціях, користувач спочатку повинен витягти глави з усіх джерел за допомогою &mkvextract; потім вручну об’єднати файли &xml;, а потім мультиплексувати їх."
+msgstr "&mkvmerge; може копіювати розділи з вхідних файлів &matroska;, якщо це явно не вимкнено за допомогою параметра <link linkend=\"mkvmerge.description.no_chapters\"><option>--no-chapters</option></link>. Розділи з усіх джерел (файли &matroska;, файли Ogg, файли <abbrev>MP4</abbrev>, текстові файли розділів) зазвичай не об’єднуються, а виходять в окремі <classname>ChapterEditions</classname>. Тільки якщо розділи читаються з кількох &matroska; або &xml; файлів, які мають однакові ідентифікатори UID видання, будуть об’єднані в єдиний <classname>ChapterEdition</classname>. Якщо таке об'єднання є бажаним і в інших ситуаціях, користувач спочатку повинен витягти розділи з усіх джерел за допомогою &mkvextract; потім вручну об’єднати файли &xml;, а потім мультиплексувати їх."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3187
@@ -4583,12 +4583,12 @@ msgstr "Область застосування тегів"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3197
 msgid "&matroska; tags do not automatically apply to the complete file. They can, but they also may apply to different parts of the file: to one or more tracks, to one or more chapters, or even to a combination of both. The <ulink url=\"https://www.matroska.org/technical/specs/index.html\">&matroska; specification</ulink> gives more details about this fact."
-msgstr "Теги &matroska; не застосовуються автоматично до всього файлу. Вони це можуть, але вони також можуть застосовуватися до різних частин файлу: до однієї чи кількох доріжок, до одного чи кількох глав або навіть до комбінації обох. <ulink url=\"https://www.matroska.org/technical/specs/index.html\">Специфікація  &matroska;</ulink> містить більш детальну інформацію про цей факт."
+msgstr "Теґи &matroska; не застосовуються автоматично до всього файлу. Вони це можуть, але вони також можуть застосовуватися до різних частин файлу: до однієї чи кількох доріжок, до одного чи кількох розділів або навіть до комбінації обох. <ulink url=\"https://www.matroska.org/technical/specs/index.html\">Специфікація  &matroska;</ulink> містить більш детальну інформацію про цей факт."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3203
 msgid "One important fact is that tags are linked to tracks or chapters with the <classname>Targets</classname> &matroska; tag element, and that the UIDs used for this linking are <emphasis>not</emphasis> the track IDs &mkvmerge; uses everywhere. Instead the numbers used are the UIDs which &mkvmerge; calculates automatically (if the track is taken from a file format other than &matroska;) or which are copied from the source file if the track's source file is a &matroska; file. Therefore it is difficult to know which UIDs to use in the tag file before the file is handed over to &mkvmerge;."
-msgstr "Одним із важливих фактів є те, що теги зв’язуються з доріжками або главами за допомогою елемент тега <classname>Targets</classname> &matroska; і що, UID-и, які використовуються для цього зв’язування, не є ідентифікаторами доріжок, які &mkvmerge; використовує всюди. Замість номерів використовуються UID, які &mkvmerge; обчислює автоматично (якщо доріжка взята з формату файлу, відмінного від &matroska;) або які копіюються з вхідного файлу, якщо вхідний файл доріжки є файлом &matroska;. Тому важко знати, які UID використовувати у файлі тегів, перш ніж файл буде передано до &mkvmerge;."
+msgstr "Одним із важливих фактів є те, що теґи зв’язуються з доріжками або розділами за допомогою елемент теґу <classname>Targets</classname> &matroska; і що, UID-и, які використовуються для цього зв’язування, не є ідентифікаторами доріжок, які &mkvmerge; використовує всюди. Замість номерів використовуються UID, які &mkvmerge; обчислює автоматично (якщо доріжка взята з формату файлу, відмінного від &matroska;) або які копіюються з вхідного файлу, якщо вхідний файл доріжки є файлом &matroska;. Тому важко знати, які UID використовувати у файлі теґів, перш ніж файл буде передано до &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3211
@@ -4783,12 +4783,12 @@ msgstr "Елементи в фігурних дужках є необов’яз
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3361
 msgid "meta seek #1 includes only a small number of level 1 elements, and only if they actually exist: attachments, chapters, cues, tags, meta seek #2. Older versions of &mkvmerge; used to put the clusters into this meta seek element as well. Therefore some imprecise guessing was necessary to reserve enough space. It often failed. Now only the clusters are stored in meta seek #2, and meta seek #1 refers to the meta seek element #2."
-msgstr "мета пошук №1 включає лише невелику кількість елементів рівня 1, і тільки якщо вони дійсно існують: вкладення, глави, списки cue, теги, мета пошук №2. Старіші версії &mkvmerge; також використовується для розміщення кластерів у цьому мета-елементі пошуку. Тому довелося дещо неточні здогади, щоб зарезервувати достатньо місця. Це часто зазнавало невдач. Тепер тільки кластери зберігаються в мета пошуку №2, а мета пошуку №1 відноситься до мета пошуку №2."
+msgstr "мета пошук №1 включає лише невелику кількість елементів рівня 1, і тільки якщо вони дійсно існують: вкладення, розділи, списки cue, теґи, мета пошук №2. Старіші версії &mkvmerge; також використовується для розміщення кластерів у цьому мета-елементі пошуку. Тому довелося дещо неточні здогади, щоб зарезервувати достатньо місця. Це часто зазнавало невдач. Тепер тільки кластери зберігаються в мета пошуку №2, а мета пошуку №1 відноситься до мета пошуку №2."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3369
 msgid "Attachment, chapter and tag elements are only present if they were added."
-msgstr "Елементи вкладень, глав і тегів присутні лише в тому випадку, якщо вони були додані."
+msgstr "Елементи вкладень, розділів і теґів присутні лише в тому випадку, якщо вони були додані."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3374
@@ -5071,7 +5071,7 @@ msgstr "Видаляє всі входження властивості <paramet
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:151
 msgid "Actions that deal with tags and chapters:"
-msgstr "Дії, які впливають на теги та глави:"
+msgstr "Дії, які впливають на теґи та розділи:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:156
@@ -5121,7 +5121,7 @@ msgstr "<option>-c</option>, <option>--chapters</option> <parameter>filename</pa
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:200
 msgid "Add or replace chapters in the file with the ones from <filename>filename</filename> or remove them if <filename>filename</filename> is empty. &mkvpropedit; reads the same XML and simple chapter formats that &mkvmerge; reads as well."
-msgstr "Додає або замінює глави у файлі такими з <filename>filename</filename> або видаляє їх, якщо <filename>filename</filename> порожній. &mkvpropedit; читає ті самі XML і простий формати глав, які читає &mkvmerge;."
+msgstr "Додає або замінює розділи у файлі такими з <filename>filename</filename> або видаляє їх, якщо <filename>filename</filename> порожній. &mkvpropedit; читає ті самі XML і простий формати розділів, які читає &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:208
@@ -5277,7 +5277,7 @@ msgstr "Під час редагування заголовків доріжок
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:437
 msgid "When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced."
-msgstr "Під час редагування глав піддаються впливу всі мовні елементи всіх елементів глави, оскільки існуючі глави завжди замінюються повністю."
+msgstr "Під час редагування розділів піддаються впливу всі мовні елементи всіх елементів розділу, оскільки розділи, що вже існують, завжди замінюються повністю."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
@@ -5423,7 +5423,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:734
 msgid "When reading XML chapter or tag files &mkvpropedit; works like &mkvmerge; does."
-msgstr ""
+msgstr "Під час читання файлів розділів XML або файлів теґів &mkvpropedit; працює так само, як &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:736
@@ -5482,7 +5482,7 @@ msgstr "$ mkvpropedit movie.mkv --tags all:"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:775
 msgid "Replacing the chapters in a file looks like this:"
-msgstr "Заміна глав у файлі виглядає так:"
+msgstr "Заміна розділів у файлі має такий вигляд:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:778
@@ -5493,7 +5493,7 @@ msgstr "$ mkvpropedit movie.mkv --chapters new-chapters.xml"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:781
 msgid "Removing all chapters requires leaving out the file name:"
-msgstr "Щоб видалити всі глави, потрібно залишити ім’я файлу:"
+msgstr "Щоб видалити всі розділи, потрібно залишити ім’я файлу:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:784
@@ -5614,7 +5614,7 @@ msgstr "mkvtoolnix-gui"
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvtoolnix-gui.xml:45
 msgid "a GUI for &mkvmerge; including a chapter and a header editor"
-msgstr "графічний інтерфейс для &mkvmerge; включаючи редактор глав і заголовків"
+msgstr "графічний інтерфейс для &mkvmerge; включаючи редактор розділів і заголовків"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvtoolnix-gui.xml:51
@@ -5629,7 +5629,7 @@ msgstr "&mkvtoolnix-gui; є <abbrev>GUI</abbrev> на основі <productname>
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:71
 msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
-msgstr "Перерахування імен файлів конфігурації з розширенням <literal>.mtxcfg</literal> змушує графічний інтерфейс завантажувати ці файли конфігурації у відповідний інструмент. Будь-яке інше ім’я файлу додається як вхідний файл для мультиплексування, відкривається в інструменті інформації, редакторі глав або в редакторі заголовків залежно від поточного режиму. Поточний режим можна змінити за допомогою <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> або <option>--edit-headers</option>. Стандартним режимом є додавання файлів для мультиплексування."
+msgstr "Перерахування імен файлів конфігурації з розширенням <literal>.mtxcfg</literal> змушує графічний інтерфейс завантажувати ці файли конфігурації у відповідний інструмент. Будь-яке інше ім’я файлу додається як вхідний файл для мультиплексування, відкривається в інструменті інформації, редакторі розділів або в редакторі заголовків залежно від поточного режиму. Поточний режим можна змінити за допомогою <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> або <option>--edit-headers</option>. Стандартним режимом є додавання файлів для мультиплексування."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:78
@@ -5669,12 +5669,12 @@ msgstr "<option>--edit-chapters</option>"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:101
 msgid "All following file names will be opened in the chapter editor."
-msgstr "Всі наступні імена файлів будуть відкриті в Редакторі глав."
+msgstr "Всі наступні імена файлів будуть відкриті в Редакторі розділів."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:102
 msgid "Additionally the chapter editor will be selected on startup instead of the multiplexer tool."
-msgstr "Додатково, під час запуску буде вибрано редактор глав замість інструмента мультиплексування."
+msgstr "Додатково, під час запуску буде вибрано редактор розділів замість інструмента мультиплексування."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:107

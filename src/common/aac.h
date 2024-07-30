@@ -169,7 +169,7 @@ protected:
 protected:
   std::deque<frame_c> m_frames;
   std::deque<timestamp_c> m_provided_timestamps;
-  mtx::bytes::buffer_c m_buffer;
+  mtx::bytes::buffer_c m_buffer, m_multiplex_type_detection_buffer;
   uint8_t const *m_fixed_buffer;
   size_t m_fixed_buffer_size;
   uint64_t m_parsed_stream_position, m_total_stream_position;
@@ -216,6 +216,7 @@ protected:
   std::pair<parse_result_e, size_t> decode_header(uint8_t const *buffer, size_t buffer_size);
   std::pair<parse_result_e, size_t> decode_adts_header(uint8_t const *buffer, size_t buffer_size);
   std::pair<parse_result_e, size_t> decode_loas_latm_header(uint8_t const *buffer, size_t buffer_size);
+  bool determine_multiplex_type(uint8_t const *buffer, std::size_t buffer_size);
   void push_frame(frame_c &frame);
 };
 using parser_cptr = std::shared_ptr<parser_c>;
