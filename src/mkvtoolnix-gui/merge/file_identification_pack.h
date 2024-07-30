@@ -21,7 +21,7 @@ struct IdentificationPack {
   };
 
   AddMode m_addMode{AddMode::UserChoice};
-  uint64_t m_tabId{};
+  uint64_t m_tabId{}, m_initialNumberOfFiles{};
   QModelIndex m_sourceFileIdx{};
   Qt::MouseButtons m_mouseButtons{};
   QStringList m_fileNames;

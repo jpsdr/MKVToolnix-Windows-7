@@ -25,8 +25,9 @@ class FileIdentificationWorkerPrivate {
 
   QVector<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
-  QAtomicInteger<bool> m_abortPlaylistScan;
+  QAtomicInteger<bool> m_abortPlaylistScan, m_abortIdentification;
   QRegularExpression m_simpleChaptersRE, m_ffmpegMetaChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
+  QAtomicInteger<unsigned int> m_numberOfIdentifiedFiles;
 
   explicit FileIdentificationWorkerPrivate()
   {
@@ -51,14 +52,18 @@ FileIdentificationWorker::~FileIdentificationWorker() {
 }
 
 void
-FileIdentificationWorker::addPackToIdentify(IdentificationPack const &pack) {
+FileIdentificationWorker::addPackToIdentify(IdentificationPack &pack) {
   auto p = p_func();
 
   qDebug() << "FileIdentificationWorker::addFilesToIdentify: adding" << pack.m_fileNames;
 
   QMutexLocker lock{&p->m_mutex};
 
+  pack.m_initialNumberOfFiles = pack.m_fileNames.count();
+
   p->m_toIdentify.push_back(pack);
+
+  Q_EMIT queueProgressChanged(p->m_numberOfIdentifiedFiles, countNumberOfQueuedFiles());
 
   QTimer::singleShot(0, this, [this]() { identifyFiles(); });
 }
@@ -108,15 +113,25 @@ FileIdentificationWorker::identifyFiles() {
 
   qDebug() << "FileIdentificationWorker::identifyFiles: starting loop";
 
-  Q_EMIT queueStarted();
+  p->m_abortIdentification = false;
+
+  {
+    QMutexLocker lock{&p->m_mutex};
+    p->m_numberOfIdentifiedFiles = 0;
+    Q_EMIT queueStarted(countNumberOfQueuedFiles());
+  }
 
   while (true) {
     QString fileName;
 
     {
       QMutexLocker lock{&p->m_mutex};
-      if (p->m_toIdentify.isEmpty()) {
-        qDebug() << "FileIdentificationWorker::identifyFiles: exiting loop (nothing left to do)";
+
+      if (p->m_toIdentify.isEmpty() || p->m_abortIdentification) {
+        auto reason = p->m_abortIdentification ? "aborted" : "nothing left to do";
+        qDebug() << "FileIdentificationWorker::identifyFiles: exiting loop (" << reason << ")";
+
+        p->m_toIdentify.clear();
 
         Q_EMIT queueFinished();
 
@@ -140,6 +155,14 @@ FileIdentificationWorker::identifyFiles() {
 
     auto result = identifyThisFile(fileName);
 
+    // QThread::sleep(1);
+
+    {
+      QMutexLocker lock{&p->m_mutex};
+      p->m_numberOfIdentifiedFiles++;
+      Q_EMIT queueProgressChanged(p->m_numberOfIdentifiedFiles, countNumberOfQueuedFiles());
+    }
+
     if (result == Result::Wait) {
       qDebug() << "FileIdentificationWorker::identifyFiles: exiting loop (result was 'Wait')";
       return;
@@ -149,17 +172,9 @@ FileIdentificationWorker::identifyFiles() {
 
 void
 FileIdentificationWorker::abortIdentification() {
-  auto p = p_func();
-
-  QMutexLocker lock{&p->m_mutex};
-  if (p->m_toIdentify.isEmpty())
-    return;
-
   qDebug() << "FileIdentificationWorker::abortIdentification: skipping remaining files";
 
-  p->m_toIdentify.clear();
-
-  Q_EMIT queueFinished();
+  p_func()->m_abortIdentification = true;
 }
 
 IdentificationPack::FileType
@@ -345,6 +360,18 @@ FileIdentificationWorker::identifyThisFile(QString const &fileName) {
   return Result::Continue;
 }
 
+unsigned int
+FileIdentificationWorker::countNumberOfQueuedFiles() {
+  auto &p = *p_func();
+
+  auto numberOfQueuedFiles = 0u;
+
+  for (auto const &pack : p.m_toIdentify)
+    numberOfQueuedFiles += pack.m_initialNumberOfFiles;
+
+  return numberOfQueuedFiles;
+}
+
 // ----------------------------------------------------------------------
 
 FileIdentificationThread::FileIdentificationThread(QObject *parent)
@@ -374,7 +401,7 @@ FileIdentificationThread::continueIdentification() {
 
 void
 FileIdentificationThread::abortIdentification() {
-  QTimer::singleShot(0, &worker(), [this]() { worker().abortIdentification(); });
+  worker().abortIdentification();
 }
 
 void
