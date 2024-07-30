@@ -751,6 +751,9 @@ parser_c::determine_multiplex_type(uint8_t const *new_buffer,
     return true;
   }
 
+  if (m_require_frame_at_first_byte)
+    return false;
+
   std::vector<std::pair<multiplex_type_e, unsigned int>> multiplexes_to_try{ { loas_latm_multiplex, 0u }, { adif_multiplex, 0u } };
 
   for (auto &multiplex : multiplexes_to_try) {
@@ -766,8 +769,12 @@ parser_c::determine_multiplex_type(uint8_t const *new_buffer,
       auto num_bytes = std::max<std::size_t>(std::min(result.second, remaining_bytes), 1);
       position      += num_bytes;
 
-      if (result.first == success)
+      if (result.first == success) {
         ++multiplex.second;
+
+        if (m_abort_after_num_frames && (multiplex.second >= m_abort_after_num_frames))
+          break;
+      }
     }
   }
 
