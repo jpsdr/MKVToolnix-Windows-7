@@ -710,32 +710,96 @@ parser_c::decode_loas_latm_header(uint8_t const *buffer,
 std::pair<parser_c::parse_result_e, size_t>
 parser_c::decode_header(uint8_t const *buffer,
                         size_t buffer_size) {
-  if (adif_multiplex == m_multiplex_type)
-    return { failure, 0 };
-
   if (adts_multiplex == m_multiplex_type)
     return decode_adts_header(buffer, buffer_size);
 
   if (loas_latm_multiplex == m_multiplex_type)
     return decode_loas_latm_header(buffer, buffer_size);
 
-  auto result = decode_adts_header(buffer, buffer_size);
+  return { failure, 0 };
+}
+
+bool
+parser_c::determine_multiplex_type(uint8_t const *new_buffer,
+                                   std::size_t new_buffer_size) {
+  at_scope_exit_c cleanup{[this]() {
+    m_copy_data = true;
+
+    if (m_multiplex_type != unknown_multiplex)
+      m_multiplex_type_detection_buffer.clear();
+  }};
+
+  m_multiplex_type_detection_buffer.add(new_buffer, new_buffer_size);
+
+  m_copy_data      = false;
+
+  auto buffer      = m_multiplex_type_detection_buffer.get_buffer();
+  auto buffer_size = m_multiplex_type_detection_buffer.get_size();
+  auto result      = decode_adts_header(buffer, buffer_size);
+
   if (result.first == success) {
+    mxdebug_if(m_debug, fmt::format("determine_multiplex_type: successfully detected ADTS at the start\n"));
     m_multiplex_type = adts_multiplex;
-    return result;
+    return true;
   }
 
   result = decode_loas_latm_header(buffer, buffer_size);
+
   if (result.first == success) {
+    mxdebug_if(m_debug, fmt::format("determine_multiplex_type: successfully detected LOAS LATM at the start\n"));
     m_multiplex_type = loas_latm_multiplex;
-    return result;
+    return true;
   }
 
-  return result;
+  std::vector<std::pair<multiplex_type_e, unsigned int>> multiplexes_to_try{ { loas_latm_multiplex, 0u }, { adif_multiplex, 0u } };
+
+  for (auto &multiplex : multiplexes_to_try) {
+    auto position = 0u;
+
+    while (position < buffer_size) {
+      auto remaining_bytes = buffer_size - position;
+      result               = multiplex.first == loas_latm_multiplex ? decode_loas_latm_header(&buffer[position], remaining_bytes) : decode_adts_header(&buffer[position], remaining_bytes);
+
+      if (result.first == need_more_data)
+        break;
+
+      auto num_bytes = std::max<std::size_t>(std::min(result.second, remaining_bytes), 1);
+      position      += num_bytes;
+
+      if (result.first == success)
+        ++multiplex.second;
+    }
+  }
+
+  auto latm_config_parsed = m_latm_parser.config_parsed();
+
+  std::optional<unsigned int> winner;
+
+  for (unsigned int idx = 0; idx < multiplexes_to_try.size(); ++idx) {
+    mxdebug_if(m_debug, fmt::format("determine_multiplex_type: idx {0} type {1} size {2}\n", idx, static_cast<unsigned int>(multiplexes_to_try[idx].first), multiplexes_to_try[idx].second));
+
+    auto num_frames = multiplexes_to_try[idx].second;
+
+    if ((num_frames > 0) && (!winner || (num_frames > multiplexes_to_try[*winner].second)))
+      winner = idx;
+  }
+
+  if (winner.has_value()) {
+    m_multiplex_type = multiplexes_to_try[*winner].first;
+    mxdebug_if(m_debug, fmt::format("determine_multiplex_type: we have a winner: {0} LATM configuration parsed: {1}\n", static_cast<unsigned int>(m_multiplex_type), latm_config_parsed));
+    return true;
+  }
+
+  mxdebug_if(m_debug, fmt::format("determine_multiplex_type: no winner\n"));
+
+  return false;
 }
 
 void
 parser_c::push_frame(frame_c &frame) {
+  if (m_multiplex_type == unknown_multiplex)
+    return;
+
   if (!m_provided_timestamps.empty()) {
     frame.m_timestamp = m_provided_timestamps.front();
     m_provided_timestamps.pop_front();
@@ -762,6 +826,9 @@ parser_c::parse() {
   auto buffer      = m_fixed_buffer ? m_fixed_buffer      : m_buffer.get_buffer();
   auto buffer_size = m_fixed_buffer ? m_fixed_buffer_size : m_buffer.get_size();
   auto position    = 0u;
+
+  if ((m_multiplex_type == unknown_multiplex) && !determine_multiplex_type(buffer, buffer_size))
+    return;
 
   while (position < buffer_size) {
     auto remaining_bytes = buffer_size - position;
