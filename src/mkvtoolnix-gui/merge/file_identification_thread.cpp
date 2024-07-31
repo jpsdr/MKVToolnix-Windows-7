@@ -27,7 +27,6 @@ class FileIdentificationWorkerPrivate {
   QMutex m_mutex;
   QAtomicInteger<bool> m_abortPlaylistScan, m_abortIdentification;
   QRegularExpression m_simpleChaptersRE, m_ffmpegMetaChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
-  QAtomicInteger<unsigned int> m_numberOfIdentifiedFiles;
 
   explicit FileIdentificationWorkerPrivate()
   {
@@ -63,7 +62,8 @@ FileIdentificationWorker::addPackToIdentify(IdentificationPack &pack) {
 
   p->m_toIdentify.push_back(pack);
 
-  Q_EMIT queueProgressChanged(p->m_numberOfIdentifiedFiles, countNumberOfQueuedFiles());
+  auto numFiles = countNumberOfIdentifiedAndQueuedFiles();
+  Q_EMIT queueProgressChanged(numFiles.first, numFiles.second);
 
   QTimer::singleShot(0, this, [this]() { identifyFiles(); });
 }
@@ -117,8 +117,7 @@ FileIdentificationWorker::identifyFiles() {
 
   {
     QMutexLocker lock{&p->m_mutex};
-    p->m_numberOfIdentifiedFiles = 0;
-    Q_EMIT queueStarted(countNumberOfQueuedFiles());
+    Q_EMIT queueStarted(countNumberOfIdentifiedAndQueuedFiles().second);
   }
 
   while (true) {
@@ -159,8 +158,8 @@ FileIdentificationWorker::identifyFiles() {
 
     {
       QMutexLocker lock{&p->m_mutex};
-      p->m_numberOfIdentifiedFiles++;
-      Q_EMIT queueProgressChanged(p->m_numberOfIdentifiedFiles, countNumberOfQueuedFiles());
+      auto numFiles = countNumberOfIdentifiedAndQueuedFiles();
+      Q_EMIT queueProgressChanged(numFiles.first, numFiles.second);
     }
 
     if (result == Result::Wait) {
@@ -360,16 +359,19 @@ FileIdentificationWorker::identifyThisFile(QString const &fileName) {
   return Result::Continue;
 }
 
-unsigned int
-FileIdentificationWorker::countNumberOfQueuedFiles() {
+std::pair<unsigned int, unsigned int>
+FileIdentificationWorker::countNumberOfIdentifiedAndQueuedFiles() {
   auto &p = *p_func();
 
-  auto numberOfQueuedFiles = 0u;
+  auto numberOfIdentifiedFiles = 0u;
+  auto numberOfQueuedFiles     = 0u;
 
-  for (auto const &pack : p.m_toIdentify)
-    numberOfQueuedFiles += pack.m_initialNumberOfFiles;
+  for (auto const &pack : p.m_toIdentify) {
+    numberOfQueuedFiles     += pack.m_initialNumberOfFiles;
+    numberOfIdentifiedFiles += pack.m_initialNumberOfFiles - pack.m_fileNames.count();
+  }
 
-  return numberOfQueuedFiles;
+  return { numberOfIdentifiedFiles, numberOfQueuedFiles };
 }
 
 // ----------------------------------------------------------------------

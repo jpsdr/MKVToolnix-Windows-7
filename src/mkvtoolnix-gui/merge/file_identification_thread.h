@@ -68,7 +68,7 @@ protected:
 
   Result scanPlaylists(QFileInfoList const &fileNames);
 
-  unsigned int countNumberOfQueuedFiles();
+  std::pair<unsigned int, unsigned int> countNumberOfIdentifiedAndQueuedFiles();
 };
 
 class FileIdentificationThread : public QThread {
