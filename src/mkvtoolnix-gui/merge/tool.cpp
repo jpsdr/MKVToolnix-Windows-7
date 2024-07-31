@@ -108,7 +108,7 @@ class ToolPrivate {
   mtx::gui::Util::FilesDragDropHandler filesDDHandler{Util::FilesDragDropHandler::Mode::Remember};
 
   FileIdentificationThread *identifier{};
-  QProgressDialog *scanningDirectoryDialog{};
+  QProgressDialog *scanningDirectoryDialog{}, *identifyingFilesDialog{};
 
   QHash<Tab *, int> lastAddAppendFileNum;
 
@@ -231,6 +231,7 @@ Tool::setupFileIdentificationThread() {
 
   connect(&worker, &FileIdentificationWorker::queueStarted,               this, &Tool::fileIdentificationStarted);
   connect(&worker, &FileIdentificationWorker::queueFinished,              this, &Tool::fileIdentificationFinished);
+  connect(&worker, &FileIdentificationWorker::queueProgressChanged,       this, &Tool::updateFileIdentificationProgress);
   connect(&worker, &FileIdentificationWorker::packIdentified,             this, &Tool::handleIdentifiedFiles);
   connect(&worker, &FileIdentificationWorker::identificationFailed,       this, &Tool::showFileIdentificationError);
   connect(&worker, &FileIdentificationWorker::playlistScanStarted,        this, &Tool::showScanningPlaylistDialog);
@@ -252,27 +253,31 @@ Tool::applyPreferences() {
 
 void
 Tool::enableMenuActions() {
-  auto mwUi   = MainWindow::getUi();
-  auto tab    = currentTab();
-  auto hasTab = !!tab;
+  auto &p          = *p_func();
+  auto mwUi        = MainWindow::getUi();
+  auto tab         = currentTab();
+  auto hasTab      = !!tab;
+  auto identifying = !p.ui->overlordWidget->isEnabled();
 
-  mwUi->actionMergeSave->setEnabled(hasTab);
-  mwUi->actionMergeSaveAs->setEnabled(hasTab);
-  mwUi->actionMergeSaveOptionFile->setEnabled(hasTab);
-  mwUi->actionMergeClose->setEnabled(hasTab);
-  mwUi->actionMergeStartMuxing->setEnabled(hasTab);
-  mwUi->actionMergeAddToJobQueue->setEnabled(hasTab);
-  mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(hasTab);
-  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(hasTab && tab->hasSourceFiles());
-  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(hasTab && tab->hasDestinationFileName());
-  mwUi->actionMergeCopyTitleToOutputFileName->setEnabled(hasTab && tab->hasTitle());
-  mwUi->menuMergeAll->setEnabled(hasTab);
-  mwUi->actionMergeSaveAll->setEnabled(hasTab);
-  mwUi->actionMergeCloseAll->setEnabled(hasTab);
-  mwUi->actionMergeStartMuxingAll->setEnabled(hasTab);
-  mwUi->actionMergeAddAllToJobQueue->setEnabled(hasTab);
-  mwUi->actionMergeAddFilesFromClipboard->setEnabled(!fileNamesFromClipboard().isEmpty());
-  mwUi->menuMergeModifySelectedTracks->setEnabled(hasTab && tab->hasSelectedNotAppendedRegularTracks());
+  mwUi->actionMergeNew->setEnabled(!identifying);
+  mwUi->actionMergeOpen->setEnabled(!identifying);
+  mwUi->actionMergeSave->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAs->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveOptionFile->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeClose->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeStartMuxing->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeAddToJobQueue->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(!identifying && hasTab && tab->hasSourceFiles());
+  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(!identifying && hasTab && tab->hasDestinationFileName());
+  mwUi->actionMergeCopyTitleToOutputFileName->setEnabled(!identifying && hasTab && tab->hasTitle());
+  mwUi->menuMergeAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeCloseAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeStartMuxingAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeAddAllToJobQueue->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeAddFilesFromClipboard->setEnabled(!identifying && !fileNamesFromClipboard().isEmpty());
+  mwUi->menuMergeModifySelectedTracks->setEnabled(!identifying && hasTab && tab->hasSelectedNotAppendedRegularTracks());
 }
 
 void
@@ -947,13 +952,48 @@ Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
 }
 
 void
-Tool::fileIdentificationStarted() {
-  p_func()->ui->overlordWidget->setEnabled(false);
+Tool::fileIdentificationStarted(unsigned int numberOfQueuedFiles) {
+  auto &p = *p_func();
+
+  qDebug() << "Tool::fileIdentificationStarted with" << numberOfQueuedFiles;
+
+  p.ui->overlordWidget->setEnabled(false);
+
+  enableMenuActions();
+
+  if (!p.identifyingFilesDialog)
+    p.identifyingFilesDialog = new QProgressDialog{ QY("Identifying files"), QY("Cancel"), 0, static_cast<int>(numberOfQueuedFiles), this };
+  p.identifyingFilesDialog->setWindowTitle(QY("Identifying files"  ));
+  p.identifyingFilesDialog->show();
+
+  connect(p.identifyingFilesDialog, &QProgressDialog::canceled, p.identifier, &FileIdentificationThread::abortIdentification);
 }
 
 void
 Tool::fileIdentificationFinished() {
-  p_func()->ui->overlordWidget->setEnabled(true);
+  auto &p = *p_func();
+
+  qDebug() << "Tool::fileIdentificationFinished";
+
+  delete p.identifyingFilesDialog;
+  p.identifyingFilesDialog = nullptr;
+
+  p.ui->overlordWidget->setEnabled(true);
+
+  enableMenuActions();
+}
+
+void
+Tool::updateFileIdentificationProgress(unsigned int numberOfIdentifiedFiles,
+                                       unsigned int numberOfQueuedFiles) {
+  auto &p = *p_func();
+
+  qDebug() << "Tool::updateFileIdentificationProgress with " << numberOfIdentifiedFiles << "/" << numberOfQueuedFiles;
+
+  if (p.identifyingFilesDialog) {
+    p.identifyingFilesDialog->setValue(static_cast<int>(numberOfIdentifiedFiles));
+    p.identifyingFilesDialog->setMaximum(static_cast<int>(numberOfQueuedFiles));
+  }
 }
 
 void
@@ -1040,17 +1080,20 @@ void
 Tool::hideScanningDirectoryDialog() {
   auto &p = *p_func();
 
-  if (!p.scanningDirectoryDialog)
-    return;
-
   delete p.scanningDirectoryDialog;
   p.scanningDirectoryDialog = nullptr;
+
+  if (p.identifyingFilesDialog)
+    p.identifyingFilesDialog->show();
 }
 
 void
 Tool::showScanningPlaylistDialog(int numFilesToScan) {
   auto &p      = *p_func();
   auto &worker = p.identifier->worker();
+
+  if (p.identifyingFilesDialog)
+    p.identifyingFilesDialog->hide();
 
   if (!p.scanningDirectoryDialog)
     p.scanningDirectoryDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
@@ -1086,6 +1129,9 @@ Tool::selectPlaylistToAdd(QVector<SourceFilePtr> const &identifiedPlaylists) {
 
   for (auto const &playlist : playlists)
     p.identifier->worker().addIdentifiedFile(playlist);
+
+  if (p.identifyingFilesDialog)
+    p.identifyingFilesDialog->show();
 
   p.identifier->continueIdentification();
 }

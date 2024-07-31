@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: added a progress dialog that is shown during
+  file identification.
+
 ## Bug fixes
 
 * mkvmerge: AAC parser: LOAS/LATM streams: if the first `AudioSpecificConfig`

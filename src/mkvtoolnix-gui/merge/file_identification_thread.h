@@ -31,7 +31,7 @@ public:
   FileIdentificationWorker(QObject *parent = nullptr);
   virtual ~FileIdentificationWorker();
 
-  void addPackToIdentify(IdentificationPack const &pack);
+  void addPackToIdentify(IdentificationPack &pack);
 
   void addIdentifiedFile(SourceFilePtr const &identifiedFile);
   void addIdentifiedFile(IdentificationPack::FileType type, QString const &fileName);
@@ -45,8 +45,9 @@ public Q_SLOTS:
   void abortIdentification();
 
 Q_SIGNALS:
-  void queueStarted();
+  void queueStarted(unsigned int numberOfQueuedFiles);
   void queueFinished();
+  void queueProgressChanged(unsigned int numFilesIdentified, unsigned int numberOfQueuedFiles);
 
   void playlistScanStarted(int numFilesToScan);
   void playlistScanFinished();
@@ -66,6 +67,8 @@ protected:
   Result identifyThisFile(QString const &fileName);
 
   Result scanPlaylists(QFileInfoList const &fileNames);
+
+  std::pair<unsigned int, unsigned int> countNumberOfIdentifiedAndQueuedFiles();
 };
 
 class FileIdentificationThread : public QThread {
