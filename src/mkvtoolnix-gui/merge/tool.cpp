@@ -253,27 +253,31 @@ Tool::applyPreferences() {
 
 void
 Tool::enableMenuActions() {
-  auto mwUi   = MainWindow::getUi();
-  auto tab    = currentTab();
-  auto hasTab = !!tab;
+  auto &p          = *p_func();
+  auto mwUi        = MainWindow::getUi();
+  auto tab         = currentTab();
+  auto hasTab      = !!tab;
+  auto identifying = !p.ui->overlordWidget->isEnabled();
 
-  mwUi->actionMergeSave->setEnabled(hasTab);
-  mwUi->actionMergeSaveAs->setEnabled(hasTab);
-  mwUi->actionMergeSaveOptionFile->setEnabled(hasTab);
-  mwUi->actionMergeClose->setEnabled(hasTab);
-  mwUi->actionMergeStartMuxing->setEnabled(hasTab);
-  mwUi->actionMergeAddToJobQueue->setEnabled(hasTab);
-  mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(hasTab);
-  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(hasTab && tab->hasSourceFiles());
-  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(hasTab && tab->hasDestinationFileName());
-  mwUi->actionMergeCopyTitleToOutputFileName->setEnabled(hasTab && tab->hasTitle());
-  mwUi->menuMergeAll->setEnabled(hasTab);
-  mwUi->actionMergeSaveAll->setEnabled(hasTab);
-  mwUi->actionMergeCloseAll->setEnabled(hasTab);
-  mwUi->actionMergeStartMuxingAll->setEnabled(hasTab);
-  mwUi->actionMergeAddAllToJobQueue->setEnabled(hasTab);
-  mwUi->actionMergeAddFilesFromClipboard->setEnabled(!fileNamesFromClipboard().isEmpty());
-  mwUi->menuMergeModifySelectedTracks->setEnabled(hasTab && tab->hasSelectedNotAppendedRegularTracks());
+  mwUi->actionMergeNew->setEnabled(!identifying);
+  mwUi->actionMergeOpen->setEnabled(!identifying);
+  mwUi->actionMergeSave->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAs->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveOptionFile->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeClose->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeStartMuxing->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeAddToJobQueue->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(!identifying && hasTab && tab->hasSourceFiles());
+  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(!identifying && hasTab && tab->hasDestinationFileName());
+  mwUi->actionMergeCopyTitleToOutputFileName->setEnabled(!identifying && hasTab && tab->hasTitle());
+  mwUi->menuMergeAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeCloseAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeStartMuxingAll->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeAddAllToJobQueue->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeAddFilesFromClipboard->setEnabled(!identifying && !fileNamesFromClipboard().isEmpty());
+  mwUi->menuMergeModifySelectedTracks->setEnabled(!identifying && hasTab && tab->hasSelectedNotAppendedRegularTracks());
 }
 
 void
@@ -955,6 +959,8 @@ Tool::fileIdentificationStarted(unsigned int numberOfQueuedFiles) {
 
   p.ui->overlordWidget->setEnabled(false);
 
+  enableMenuActions();
+
   if (!p.identifyingFilesDialog)
     p.identifyingFilesDialog = new QProgressDialog{ QY("Identifying files"), QY("Cancel"), 0, static_cast<int>(numberOfQueuedFiles), this };
   p.identifyingFilesDialog->setWindowTitle(QY("Identifying files"  ));
@@ -973,6 +979,8 @@ Tool::fileIdentificationFinished() {
   p.identifyingFilesDialog = nullptr;
 
   p.ui->overlordWidget->setEnabled(true);
+
+  enableMenuActions();
 }
 
 void
