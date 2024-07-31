@@ -79,8 +79,9 @@ public Q_SLOTS:
 
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
 
-  virtual void fileIdentificationStarted();
+  virtual void fileIdentificationStarted(unsigned int numberOfQueuedFiles);
   virtual void fileIdentificationFinished();
+  virtual void updateFileIdentificationProgress(unsigned int numberOfIdentifiedFiles, unsigned int numberOfQueuedFiles);
   virtual void handleIdentifiedXmlOrSimpleChapters(QString const &fileName);
   virtual void handleIdentifiedXmlSegmentInfo(QString const &fileName);
   virtual void handleIdentifiedXmlTags(QString const &fileName);

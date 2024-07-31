@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2024-06-08 16:43+0200\n"
+"POT-Creation-Date: 2024-07-30 20:45+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2020,2022-2023\n"
 "Language-Team: Chinese (Singapore) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_SG/)\n"
@@ -1619,13 +1619,13 @@ msgstr "%s – 秒"
 msgid "&Abort job"
 msgstr "中止任务(&A)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:522
+#: src/mkvtoolnix-gui/jobs/tool.cpp:525
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:477
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "中止任务(&A)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:416
+#: src/mkvtoolnix-gui/jobs/tool.cpp:419
 #, no-c-format
 msgid "&Acknowledge warnings and errors"
 msgstr "确认警告和错误(&A)"
@@ -1743,7 +1743,7 @@ msgstr "关闭(&C)"
 msgid "&Close file"
 msgstr "关闭文件(&C)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:392
+#: src/mkvtoolnix-gui/merge/tool.cpp:393
 #, no-c-format
 msgid "&Close settings"
 msgstr "关闭设置(&C)"
@@ -1779,7 +1779,7 @@ msgstr "配置可用语言(&C)"
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "将子章节的起止时间戳收缩到上级章节范围之内(&C)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1012
+#: src/mkvtoolnix-gui/merge/tool.cpp:1044
 #, no-c-format
 msgid "&Continue identification"
 msgstr "继续鉴别(&C)"
@@ -2067,7 +2067,7 @@ msgstr "下一个讯息标签页(&N)"
 msgid "&Next job output tab"
 msgstr "下一个任务输出标签页(&N)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:700
+#: src/mkvtoolnix-gui/merge/tool.cpp:701
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "下一个混流设置页面(&N)"
@@ -2107,7 +2107,7 @@ msgstr "打开 Matr&oska 或 WebM 文件"
 msgid "&Open as new tabs in the header editor"
 msgstr "在头部编辑器的新标签页打开(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:411
+#: src/mkvtoolnix-gui/jobs/tool.cpp:414
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:147
 #, no-c-format
 msgid "&Open folder"
@@ -2135,7 +2135,7 @@ msgstr "有序(&O)"
 msgid "&Output"
 msgstr "输出(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:625
+#: src/mkvtoolnix-gui/jobs/tool.cpp:628
 #, no-c-format
 msgid "&Overwrite file"
 msgstr "覆盖文件(&O)"
@@ -2165,7 +2165,7 @@ msgstr "上一个讯息标签页(&P)"
 msgid "&Previous job output tab"
 msgstr "上一个任务输出标签页(&P)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:701
+#: src/mkvtoolnix-gui/merge/tool.cpp:702
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "上一个混流设置页面(&P)"
@@ -2209,7 +2209,7 @@ msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "移除文件(&R)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:220
+#: src/mkvtoolnix-gui/jobs/tool.cpp:223
 #, no-c-format
 msgid "&Remove job"
 msgid_plural "&Remove jobs"
@@ -2313,7 +2313,7 @@ msgstr "按章节的起止时间戳排序(&S)"
 msgid "&Start && end:"
 msgstr "起止时间(&S):"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:217
+#: src/mkvtoolnix-gui/jobs/tool.cpp:220
 #, no-c-format
 msgid "&Start job automatically"
 msgid_plural "&Start jobs automatically"
@@ -2390,7 +2390,7 @@ msgstr "视频(&V)"
 msgid "&Video tracks:"
 msgstr "视频轨道(&V):"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:410
+#: src/mkvtoolnix-gui/jobs/tool.cpp:413
 #, no-c-format
 msgid "&View output"
 msgstr "查看输出消息(&V)"
@@ -2834,7 +2834,7 @@ msgstr "「{0}」轨道 {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "「{0}」: 还将处理以下文件: {1}\n"
 
-#: src/input/r_matroska.cpp:2085
+#: src/input/r_matroska.cpp:2087
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "‘{0}’: 您正在复制一条在实验模式下写入的 Opus 轨道。输出的轨道将以最终模式写入，但实验模式下写入的轨道有一处细节损失无法恢复: 尾部裁剪讯息。这意味着解码器可能会比原本预期多输出几个采样。您应该尽可能使用原始的 Opus 文件重新混流。\n"
@@ -3004,8 +3004,8 @@ msgstr "<未保存文件>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> 不是 <{1}> 的有效子元素，位于 {2}。"
 
-#: src/input/r_matroska.cpp:2528
-#: src/input/r_matroska.cpp:2648
+#: src/input/r_matroska.cpp:2530
+#: src/input/r_matroska.cpp:2650
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "在时间戳 {0} 处找到了属于轨道编号 {1} 的区块，但没有找到该轨道编号的头部讯息。此区块将被跳过。\n"
@@ -3052,7 +3052,7 @@ msgstr "一个人类可读的字串，描述编码格式。"
 msgid "A human-readable track name."
 msgstr "一个人类可读的字串，描述轨道名称。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:622
+#: src/mkvtoolnix-gui/jobs/tool.cpp:625
 #, no-c-format
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "任务队列中已经存在一个输出文件为 ｢%1｣ 的任务。"
@@ -3228,7 +3228,7 @@ msgstr "中止所有正在运行的任务并立即停止队列(&I)"
 msgid "Abort running job"
 msgstr "中止正在运行的任务"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:520
+#: src/mkvtoolnix-gui/jobs/tool.cpp:523
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:475
 #, no-c-format
 msgid "Abort running jobs"
@@ -3249,12 +3249,12 @@ msgstr "出现警告时即中止程序。"
 msgid "Acknowledge &all warnings and errors"
 msgstr "确认所有警告和错误(&A)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:415
+#: src/mkvtoolnix-gui/jobs/tool.cpp:418
 #, no-c-format
 msgid "Acknowledge &errors"
 msgstr "确认错误(&E)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:414
+#: src/mkvtoolnix-gui/jobs/tool.cpp:417
 #, no-c-format
 msgid "Acknowledge &warnings"
 msgstr "确认警告(&W)"
@@ -3418,7 +3418,7 @@ msgstr "将文件 'filename' 添加为一个新的附件"
 msgid "Add to job &queue"
 msgstr "添加到任务队列(&Q)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:962
+#: src/mkvtoolnix-gui/merge/tool.cpp:994
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "添加章节文件"
@@ -3446,12 +3446,12 @@ msgstr "通过拖放或复制/粘贴添加文件"
 msgid "Adding multiple files via 'Add source files'"
 msgstr "通过 ｢添加输入文件｣ 添加多个文件"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:977
+#: src/mkvtoolnix-gui/merge/tool.cpp:1009
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "添加剪辑讯息文件"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:992
+#: src/mkvtoolnix-gui/merge/tool.cpp:1024
 #, no-c-format
 msgid "Adding tag files"
 msgstr "添加标签文件"
@@ -3609,7 +3609,7 @@ msgstr "所有条目"
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
 #: src/mkvtoolnix-gui/merge/tab.cpp:279
 #: src/mkvtoolnix-gui/merge/tab.cpp:342
-#: src/mkvtoolnix-gui/merge/tool.cpp:346
+#: src/mkvtoolnix-gui/merge/tool.cpp:347
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:105
 #: src/mkvtoolnix-gui/util/widget.cpp:187
@@ -4285,7 +4285,7 @@ msgstr "配置已启用(&O)"
 msgid "C&onstrict or expand timestamps"
 msgstr "收缩或扩展时间戳(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:587
+#: src/mkvtoolnix-gui/jobs/tool.cpp:590
 #, no-c-format
 msgid "C&ontinue"
 msgstr "继续(&O)"
@@ -4369,13 +4369,14 @@ msgstr "若轨道适合视觉障碍人士，可以考虑设置该项。"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:256
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:279
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:963
-#: src/mkvtoolnix-gui/jobs/tool.cpp:523
-#: src/mkvtoolnix-gui/jobs/tool.cpp:588
-#: src/mkvtoolnix-gui/jobs/tool.cpp:626
+#: src/mkvtoolnix-gui/jobs/tool.cpp:526
+#: src/mkvtoolnix-gui/jobs/tool.cpp:591
+#: src/mkvtoolnix-gui/jobs/tool.cpp:629
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:478
 #: src/mkvtoolnix-gui/merge/tab.cpp:504
-#: src/mkvtoolnix-gui/merge/tool.cpp:393
-#: src/mkvtoolnix-gui/merge/tool.cpp:1056
+#: src/mkvtoolnix-gui/merge/tool.cpp:394
+#: src/mkvtoolnix-gui/merge/tool.cpp:959
+#: src/mkvtoolnix-gui/merge/tool.cpp:1091
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
@@ -4792,7 +4793,7 @@ msgstr "关闭当前设置"
 msgid "Close modified file"
 msgstr "关闭已被修改的文件"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:390
+#: src/mkvtoolnix-gui/merge/tool.cpp:391
 #, no-c-format
 msgid "Close modified settings"
 msgstr "关闭已修改的设置"
@@ -4966,7 +4967,7 @@ msgstr "完成，成功"
 msgid "Completed with warnings"
 msgstr "完成，有警告"
 
-#: src/merge/generic_packetizer.cpp:1417
+#: src/merge/generic_packetizer.cpp:1419
 #, no-c-format, c++-format
 msgid "Compression failed: {0}\n"
 msgstr "压缩失败: {0}\n"
@@ -5109,7 +5110,7 @@ msgstr "无法初始化用以转换 UTF-8 到 {0} 的 iconv 库。部分字符�
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "无法初始化用以转换 {0} 到 UTF-8 的 iconv 库。部分字符串将不会被转换为 UTF-8，生成的 Matroska 文件可能不符合 Matroska 规范 (错误: {1}，{2})。\n"
 
-#: src/input/r_matroska.cpp:1865
+#: src/input/r_matroska.cpp:1867
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "无法保留轨道的 UID {0}，因为它已经分配给其他轨道。将自动分配新的随机 UID。\n"
@@ -5942,7 +5943,7 @@ msgstr "不切割"
 msgid "Do not write meta seek elements at all."
 msgstr "不写入任何元定位元素。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:521
+#: src/mkvtoolnix-gui/jobs/tool.cpp:524
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:476
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
@@ -5958,7 +5959,7 @@ msgstr "确定要中止该任务吗？"
 msgid "Do you really want to add '%1' as another attachment?"
 msgstr "是否确定将“%1”添加为附件?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#: src/mkvtoolnix-gui/jobs/tool.cpp:589
 #, no-c-format
 msgid "Do you want to continue and risk overwriting the file?"
 msgstr "是否希望冒着覆盖文件的风险继续操作?"
@@ -5968,7 +5969,7 @@ msgstr "是否希望冒着覆盖文件的风险继续操作?"
 msgid "Do you want to continue?"
 msgstr "是否继续?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:624
+#: src/mkvtoolnix-gui/jobs/tool.cpp:627
 #, no-c-format
 msgid "Do you want to overwrite the file?"
 msgstr "是否覆盖该文件？"
@@ -6072,7 +6073,7 @@ msgstr "时长"
 msgid "Duration:"
 msgstr "时长:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:412
+#: src/mkvtoolnix-gui/jobs/tool.cpp:415
 #, no-c-format
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "在相应工具中编辑并从队列中移除(&D)"
@@ -6414,7 +6415,7 @@ msgstr "第 {0} 行出错: 应为 SRT 时间戳，但该行内容不符合。中
 msgid "Error in line {0}: expected subtitle number and found some text.\n"
 msgstr "第 {0} 行出错: 应为字幕编号，但该行含有文本。\n"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:552
+#: src/mkvtoolnix-gui/jobs/tool.cpp:555
 #: src/mkvtoolnix-gui/merge/tab.cpp:175
 #, no-c-format
 msgid "Error loading settings file"
@@ -7111,6 +7112,11 @@ msgstr "通用选项"
 msgid "General variables"
 msgstr "通用变量"
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
+#, no-c-format
+msgid "Generate new random track UIDs instead of keeping existing ones."
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
 #, no-c-format
 msgid "Generate sub-chapters"
@@ -7334,6 +7340,12 @@ msgstr "ISO 639-3 编码"
 #, no-c-format
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "IVF (AV1, VP8, VP9)"
+
+#: src/mkvtoolnix-gui/merge/tool.cpp:959
+#: src/mkvtoolnix-gui/merge/tool.cpp:960
+#, fuzzy, no-c-format
+msgid "Identifying files"
+msgstr "添加文件时"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:365
 #, no-c-format
@@ -7717,7 +7729,7 @@ msgstr "如果已知轨道存在，但未能找到，可以在此更改探测百
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "若使用了两个或以上的时间戳，请在中间用逗号分隔。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:623
+#: src/mkvtoolnix-gui/jobs/tool.cpp:626
 #, no-c-format
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "如果再添加一个输出文件完全一致的任务，则先前任务所创建的文件将会被覆盖。"
@@ -7845,17 +7857,17 @@ msgstr "讯息 & 警告:"
 msgid "Input too long: {0} > {1}"
 msgstr "输入过长: {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:966
+#: src/mkvtoolnix-gui/merge/tool.cpp:998
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "必须通过“输出”选项卡中的“章节文件”选项来设置。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:996
+#: src/mkvtoolnix-gui/merge/tool.cpp:1028
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "必须通过“输出”选项卡中的“全局标签”选项来设置。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:981
+#: src/mkvtoolnix-gui/merge/tool.cpp:1013
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "这类文件必须通过“输出”选项卡中的“剪辑讯息”选项来设置。"
@@ -8362,7 +8374,7 @@ msgstr "待执行的任务:"
 msgid "Kate"
 msgstr "Kate"
 
-#: src/output/p_kate.cpp:67
+#: src/output/p_kate.cpp:66
 #, no-c-format
 msgid "Kate packet is too small and is being skipped.\n"
 msgstr "Kate 包过小，跳过。\n"
@@ -8478,7 +8490,7 @@ msgstr[0] "长度: %1 字节"
 msgid "Light"
 msgstr "浅色"
 
-#: src/merge/timestamp_factory.cpp:359
+#: src/merge/timestamp_factory.cpp:363
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
 msgstr "时间戳文件「{1}」的第 {0} 行包含不相容的数据 (如时长或 FPS 小于零)。\n"
@@ -8489,7 +8501,7 @@ msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the
 msgstr "时间戳文件「{1}」的第 {0} 行包含不相容的数据 (如起始帧编号大于终止帧编号，或者某些值小于零)。\n"
 
 #: src/merge/timestamp_factory.cpp:119
-#: src/merge/timestamp_factory.cpp:352
+#: src/merge/timestamp_factory.cpp:356
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "无法解析时间戳文件「{1}」的第 {0} 行。\n"
@@ -8603,7 +8615,7 @@ msgid "MKVToolNix GUI acts as a portable application but cannot write to its bas
 msgstr "MKVToolNix GUI 作为便携式应用启动，但没有自身目录 ｢%1｣ 的写入权限。若您打算以本机常驻应用模式启动，请删除目录中的 ｢%2｣ 文件。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tool.cpp:346
+#: src/mkvtoolnix-gui/merge/tool.cpp:347
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix GUI 设置文件"
@@ -8700,13 +8712,13 @@ msgstr "同时执行的最大任务数量(&X):"
 msgid "Make this track eligible to be played by default."
 msgstr "授予该轨道被默认播放的资格。"
 
-#: src/input/r_matroska.cpp:1957
-#: src/input/r_matroska.cpp:1974
+#: src/input/r_matroska.cpp:1959
+#: src/input/r_matroska.cpp:1976
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "发现畸形的 AAC 编码格式初始化数据。\n"
 
-#: src/input/r_matroska.cpp:1967
+#: src/input/r_matroska.cpp:1969
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "畸形的编码格式 ID「{0}」。\n"
@@ -9174,7 +9186,7 @@ msgstr "未找到「EBML 头」元素。"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "初始帧中未发现 AC-3 头；此轨道将被跳过。\n"
 
-#: src/input/r_qtmp4.cpp:3621
+#: src/input/r_qtmp4.cpp:3623
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "初始帧中未发现 DTS 头; 该轨道将被跳过。\n"
@@ -9516,7 +9528,7 @@ msgstr "注意，大多 <MTX_…> 变量为空，执行将变量作为参数的�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路径名称中的反斜杠 (\\) 也可以用正斜杠 (/) 代替。"
 
-#: src/merge/generic_packetizer.cpp:1787
+#: src/merge/generic_packetizer.cpp:1802
 #, no-c-format, c++-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意，与「{0}」存储相关的 Matroska 规范尚未定稿。因此 mkvmerge 对它的支持可能发生变动，在此采用 CodecID 「{1}/EXPERIMENTAL」代替「{1}」。本警告消息将在规范定稿且 mkvmerge 随之更新后取消。\n"
@@ -9776,7 +9788,7 @@ msgstr[0] "在 &MediaInfo 中打开文件"
 msgid "Open files in chapter editor"
 msgstr "在 ｢章节编辑器｣ 中打开文件"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:346
+#: src/mkvtoolnix-gui/merge/tool.cpp:347
 #, no-c-format
 msgid "Open settings file"
 msgstr "打开设置文件"
@@ -9899,8 +9911,8 @@ msgstr "用指定的字符集输出消息"
 msgid "Output sampling frequency"
 msgstr "输出采样频率"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:583
-#: src/mkvtoolnix-gui/jobs/tool.cpp:620
+#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#: src/mkvtoolnix-gui/jobs/tool.cpp:623
 #, no-c-format
 msgid "Overwrite existing file"
 msgstr "覆盖已有文件"
@@ -10381,17 +10393,17 @@ msgstr "Quicktime/MP4 读取器: 未发现 'mdat' 单元。找不到影片数据
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime/MP4 读取器: 位置 {1} 存在无效的块大小 {0}。\n"
 
-#: src/input/r_qtmp4.cpp:3701
+#: src/input/r_qtmp4.cpp:3703
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 part 10/AVC 轨道 {0} 缺少解码器配置讯息。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3726
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 轨道 {0} 缺少 esds 单元 (解码器配置讯息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3708
+#: src/input/r_qtmp4.cpp:3710
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEGH part 2/HEVC 轨道 {0} 缺少解码器配置讯息。正在跳过该轨道。\n"
@@ -10411,17 +10423,17 @@ msgstr "Quicktime/MP4 读取器: 轨道 {0} 的流描述单元的 'size' 字段�
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 读取器: 'time scale' 参数为 0。这不被支持。\n"
 
-#: src/input/r_qtmp4.cpp:3639
+#: src/input/r_qtmp4.cpp:3641
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: AAC 轨道 {0} 缺少 esds 单元 (解码器配置讯息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3634
+#: src/input/r_qtmp4.cpp:3636
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 音频轨道 {0} 的 'esds' 单元使用了不支持的 'object type id' {1}。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3718
+#: src/input/r_qtmp4.cpp:3720
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 视频轨道 {0} 缺少 ESDS 单元。正在跳过此轨道。\n"
@@ -10452,10 +10464,10 @@ msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法解压。zl
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 读取器: 轨道 ID {0} 有多于一个 FourCC。仅使用第一个 ({1}) 而非 ({2})。\n"
 
-#: src/input/r_qtmp4.cpp:3585
-#: src/input/r_qtmp4.cpp:3604
-#: src/input/r_qtmp4.cpp:3652
-#: src/input/r_qtmp4.cpp:3745
+#: src/input/r_qtmp4.cpp:3587
+#: src/input/r_qtmp4.cpp:3606
+#: src/input/r_qtmp4.cpp:3654
+#: src/input/r_qtmp4.cpp:3747
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 读取器: 轨道 {0} 缺少一些数据。头部单元损坏？\n"
@@ -10806,7 +10818,7 @@ msgstr "右击查看针对版本与章节的操作"
 msgid "Right-click for actions for header elements and attachments"
 msgstr "右击查看针对头部元素与附件的操作"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:423
+#: src/mkvtoolnix-gui/jobs/tool.cpp:426
 #, no-c-format
 msgid "Right-click for actions for jobs"
 msgstr "右击查看针对任务的操作"
@@ -10831,13 +10843,13 @@ msgstr "roll 轴旋转:"
 msgid "Running"
 msgstr "正在运行"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:494
+#: src/mkvtoolnix-gui/jobs/tool.cpp:497
 #, no-c-format
 msgid "Running jobs cannot be edited."
 msgstr "无法编辑正在运行的任务。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:286
-#: src/mkvtoolnix-gui/jobs/tool.cpp:317
+#: src/mkvtoolnix-gui/jobs/tool.cpp:289
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
 #, no-c-format
 msgid "Running jobs cannot be removed."
 msgstr "无法移除正在运行的任务。"
@@ -11022,8 +11034,8 @@ msgstr "扫描目录中的其他播放列表"
 msgid "Scanned Files"
 msgstr "扫描到的文件"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1056
-#: src/mkvtoolnix-gui/merge/tool.cpp:1061
+#: src/mkvtoolnix-gui/merge/tool.cpp:1091
+#: src/mkvtoolnix-gui/merge/tool.cpp:1096
 #, no-c-format
 msgid "Scanning directory"
 msgstr "正在扫描目录"
@@ -11262,7 +11274,7 @@ msgstr "选择字幕文件或章节讯息中使用的字符集。"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:393
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
-#: src/mkvtoolnix-gui/merge/tool.cpp:317
+#: src/mkvtoolnix-gui/merge/tool.cpp:318
 #, no-c-format
 msgid "Set &language"
 msgstr "设置语言(&L)"
@@ -11751,13 +11763,13 @@ msgstr "通过 cmd.exe 启动非可执行文件。"
 msgid "Start file types other than executable files via xdg-open."
 msgstr "通过 xdg-open 启动非可执行文件。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:219
+#: src/mkvtoolnix-gui/jobs/tool.cpp:222
 #, no-c-format
 msgid "Start job &immediately"
 msgid_plural "Start jobs &immediately"
 msgstr[0] "立即启动任务(&I)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:218
+#: src/mkvtoolnix-gui/jobs/tool.cpp:221
 #, no-c-format
 msgid "Start job &manually"
 msgid_plural "Start jobs &manually"
@@ -12121,9 +12133,9 @@ msgstr "GUI 可将文件名与此处的正则表达式匹配的轨道设置 ｢�
 msgid "The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."
 msgstr "GUI 可将文件名与此处的正则表达式匹配的轨道设置 ｢强制显示｣ 标记。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:967
-#: src/mkvtoolnix-gui/merge/tool.cpp:982
-#: src/mkvtoolnix-gui/merge/tool.cpp:997
+#: src/mkvtoolnix-gui/merge/tool.cpp:999
+#: src/mkvtoolnix-gui/merge/tool.cpp:1014
+#: src/mkvtoolnix-gui/merge/tool.cpp:1029
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "程序会将拖入文件的名称填入相应控件中，在此之前指定的文件名将会被替换。"
@@ -12459,7 +12471,7 @@ msgstr "可以使用 --multiplex、 --edit-chapters 或 --edit-headers 更改当
 msgid "The current multiplex settings will be closed."
 msgstr "当前混流设置页面将被关闭。"
 
-#: src/merge/generic_packetizer.cpp:1501
+#: src/merge/generic_packetizer.cpp:1509
 #, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "当前封包的时间戳比前一封包的小。这通常表明输入文件不是 100% 正确创建的 Matroska 文件。所有封包的时间戳将调整 {0} 毫秒以避免丢失任何数据。这可能导致音频/视频不同步，但可以通过 mkvmerge 的“--sync”选项修正。如果您已经使用了“--sync”却仍然收到本警告，请 *不必担心* -- 这是正常的。如果反复发生或某条特定轨道多次出现本警告，则可能输入文件制作存在严重问题，也可能 mkvmerge 存在 bug。如果是这样，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
@@ -12637,17 +12649,17 @@ msgstr "文件 '%1' 已被修改。确定要关闭吗？所有改动将会丢失
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "文件 '%1' 已被修改。确定要重新加载吗？所有改动将会丢失。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:964
+#: src/mkvtoolnix-gui/merge/tool.cpp:996
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "文件 '%1' 包含章节。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:979
+#: src/mkvtoolnix-gui/merge/tool.cpp:1011
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "文件“%1”包含剪辑讯息。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:994
+#: src/mkvtoolnix-gui/merge/tool.cpp:1026
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "文件 '%1' 包含标签。"
@@ -12657,7 +12669,7 @@ msgstr "文件 '%1' 包含标签。"
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "安装目录中找不到文件“%1”。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:585
+#: src/mkvtoolnix-gui/jobs/tool.cpp:588
 #, no-c-format
 msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
 msgstr "文件「%1」已存在，根据配置及输入文件内容的变化，有可能被覆盖。"
@@ -12667,7 +12679,7 @@ msgstr "文件「%1」已存在，根据配置及输入文件内容的变化，�
 msgid "The file '%1' is an unsupported container format (%2)."
 msgstr "文件「%1」属于尚未支持的容器格式 (%2)。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:552
+#: src/mkvtoolnix-gui/jobs/tool.cpp:555
 #, no-c-format
 msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "文件「%1」既非任务队列文件，亦非设置文件。"
@@ -12906,8 +12918,8 @@ msgstr "文件或目录未找到"
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1764
-#: src/input/r_matroska.cpp:2497
+#: src/input/r_matroska.cpp:1766
+#: src/input/r_matroska.cpp:2499
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "将不会进一步处理该文件。"
@@ -13042,7 +13054,7 @@ msgstr "两条轨道的高度不同: {0} 与 {1}"
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "水平的固定两列布局，其窗口较宽；纵向的选项卡布局，其窗口较长。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:360
+#: src/mkvtoolnix-gui/merge/tool.cpp:361
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "任务已添加到任务队列。"
@@ -13170,7 +13182,7 @@ msgstr "已找到 mkvmerge 可执行程序，但无法执行它。"
 msgid "The mkvmerge executable was not found."
 msgstr "未找到 mkvmerge 可执行程序。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:391
+#: src/mkvtoolnix-gui/merge/tool.cpp:392
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "「%1」的混流设置已被修改。是否确定要关闭? 所有改动将会丢失。"
@@ -13574,18 +13586,18 @@ msgstr "时间戳文件「{0}」无法以读取模式打开。\n"
 #: src/merge/timestamp_factory.cpp:92
 #: src/merge/timestamp_factory.cpp:100
 #: src/merge/timestamp_factory.cpp:106
-#: src/merge/timestamp_factory.cpp:306
+#: src/merge/timestamp_factory.cpp:310
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"
 msgstr "时间戳文件「{0}」不含有效的用于指定默认帧率的 'Assume' 行。\n"
 
-#: src/merge/timestamp_factory.cpp:341
+#: src/merge/timestamp_factory.cpp:345
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"
 msgstr "时间戳文件「{0}」不含有效的用于指定间隙时长的 'Gap' 行。\n"
 
 #: src/merge/timestamp_factory.cpp:245
-#: src/merge/timestamp_factory.cpp:370
+#: src/merge/timestamp_factory.cpp:374
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain any valid entry.\n"
 msgstr "时间戳文件「{0}」不含任何有效条目。\n"
@@ -13869,9 +13881,9 @@ msgstr "这些是不常用的选项，用以控制 mkvmerge 生成的输出文�
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "这些是用于开发的选项。不受官方支持，且可能随版本不同而变动。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:980
-#: src/mkvtoolnix-gui/merge/tool.cpp:995
+#: src/mkvtoolnix-gui/merge/tool.cpp:997
+#: src/mkvtoolnix-gui/merge/tool.cpp:1012
+#: src/mkvtoolnix-gui/merge/tool.cpp:1027
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "此类文件在 MKVToolNix 中的处理方式与其他输入文件不同。"
@@ -14178,7 +14190,7 @@ msgstr "这 *真的* 不该发生。为首个元定位元素预留的空间过�
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"
 msgstr "这 *真的* 不该发生。为首个元定位元素预留的空间过小。{0}\n"
 
-#: src/common/common.h:85
+#: src/common/common.h:88
 #, no-c-format
 msgid "This should not have happened. Please file an issue at https://mkvtoolnix.download/issues with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "此问题不该发生。请在 https://mkvtoolnix.download/issues 提交错误报告，务必标明此次输出的错误/警告消息，以及您所尝试执行的操作、所使用的命令行选项以及您所用的操作系统。感谢您的帮助。"
@@ -14202,8 +14214,8 @@ msgstr "该轨道包含 SBR AAC/HE-AAC/AAC+ 数据。"
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1764
-#: src/input/r_matroska.cpp:2497
+#: src/input/r_matroska.cpp:1766
+#: src/input/r_matroska.cpp:2499
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "这通常表示文件结构损坏。"
@@ -14430,7 +14442,7 @@ msgstr "轨道 {0} CodecPrivate 过小。\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "轨道 {0} 使用的压缩算法 ({1}) 未知或不受支持。\n"
 
-#: src/input/r_matroska.cpp:1395
+#: src/input/r_matroska.cpp:1397
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "轨道 {0} 中轨道 UID 元素缺失，而 Matroska 规范要求该元素必须存在。若文件包含标签，则标签可能损坏。\n"
@@ -14716,7 +14728,7 @@ msgstr "时间戳 {2} 处的封包 {1} 发现不支持的 MPEG mpeg_version: 0x{
 msgid "Unsupported file format"
 msgstr "不支持的格式"
 
-#: src/input/r_matroska.cpp:2319
+#: src/input/r_matroska.cpp:2321
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "不支持此轨道的轨道类型。\n"
@@ -14819,7 +14831,7 @@ msgstr "使用指定语言的章节名称，而非发现的第一个章节名称
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "使用 ｢{0}｣ 格式分离器。\n"
 
-#: src/input/r_matroska.cpp:1791
+#: src/input/r_matroska.cpp:1793
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "使用「{0}」类型轨道通用输出模块。\n"
@@ -15379,6 +15391,11 @@ msgstr "在追加文件时: 文件开头为第一章，随后每追加一个文�
 #, no-c-format
 msgid "When deriving the track language from the file name, the file name is split into parts on the characters in this list."
 msgstr "从文件名推断轨道语言时，文件名将根据此列表中的字符切割成小段。"
+
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
+#, fuzzy, no-c-format
+msgid "When given, this option applies to all source files."
+msgstr "当通过 ｢添加输入文件｣ 添加多个文件时(&U):"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
 #, no-c-format
@@ -16042,18 +16059,18 @@ msgstr "matroska_reader: (微软兼容模式，轨道 {0}) Matroska 报告视频
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (微软兼容模式，轨道 {0}) Matroska 报告视频宽度为 {1}，但 BITMAPINFOHEADER 报告为 {2}。\n"
 
-#: src/input/r_matroska.cpp:1693
-#: src/input/r_matroska.cpp:1706
+#: src/input/r_matroska.cpp:1695
+#: src/input/r_matroska.cpp:1708
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未发现剪辑。\n"
 
-#: src/input/r_matroska.cpp:1343
+#: src/input/r_matroska.cpp:1345
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: 缺少像素高度。\n"
 
-#: src/input/r_matroska.cpp:1341
+#: src/input/r_matroska.cpp:1343
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: 缺少像素宽度。\n"
@@ -16113,7 +16130,7 @@ msgstr "matroska_reader: 轨道 {0} 应该是正常的。\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge 编译时没有启用 FLAC 支持。忽略轨道 {0}。\n"
 
-#: src/input/r_matroska.cpp:1673
+#: src/input/r_matroska.cpp:1675
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未发现 EBML 头。\n"
@@ -16238,7 +16255,7 @@ msgstr "mkvmerge 可以自动生成章节。"
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
 msgstr "mkvmerge 可以读取音频 CD 的 CUE 表单并自动将其转换为章节。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:506
+#: src/mkvtoolnix-gui/merge/tool.cpp:507
 #, no-c-format
 msgid "mkvmerge command line"
 msgstr "mkvmerge 命令行"
@@ -16650,7 +16667,7 @@ msgstr "未定"
 #: src/common/kax_info.cpp:879
 #: src/common/stereo_mode.cpp:70
 #: src/input/r_matroska.cpp:130
-#: src/input/r_matroska.cpp:3013
+#: src/input/r_matroska.cpp:3017
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -16661,7 +16678,7 @@ msgstr "未定"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2996
+#: src/input/r_matroska.cpp:3000
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "未知，格式标识 0x{0:04x}"
@@ -16758,8 +16775,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: 发生异常 (消息: {1}；类型: {2})。"
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1763
-#: src/input/r_matroska.cpp:2496
+#: src/input/r_matroska.cpp:1765
+#: src/input/r_matroska.cpp:2498
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 发生未知异常。"
