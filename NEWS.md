@@ -11,6 +11,9 @@
   element is not found within the first LOAS/LATM frame, `mkvmerge` will no
   longer discard the frames before it but defer parsing them until after it
   has found the `AudioSpecificConfig` element. Fixes #3727.
+* MKVToolNix GUI: job queue: fixed the GUI crashing when re-ordering the jobs
+  in the job queue. This regression was introduced while fixing #3720. Fixes
+  #3729.
 
 ## Build system changes
 

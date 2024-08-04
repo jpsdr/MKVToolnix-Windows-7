@@ -145,7 +145,8 @@ Model::selectedJobs(QAbstractItemView *view) {
 uint64_t
 Model::idFromRow(int row)
   const {
-  return item(row)->data(Util::JobIdRole).value<uint64_t>();
+  auto itm = item(row);
+  return itm ? itm->data(Util::JobIdRole).value<uint64_t>() : 0;
 }
 
 int
