@@ -155,7 +155,7 @@ msgid ""
 "                           following attachment.\n"
 msgstr ""
 "  --attachment-name <name> De naam zou opgeslagen moeten worden voor \n"
-"                                                 de volgende bijlage.\n"
+"                           de volgende bijlage.\n"
 
 #: src/merge/mkvmerge.cpp:289
 #, fuzzy, no-c-format
@@ -193,12 +193,12 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:97
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
-msgstr "  --chapter-charset <cset>         Karakters voor een simpel hoofdstuk bestand.\n"
+msgstr "  --chapter-charset <cset> Karakters voor een simpel hoofdstuk bestand.\n"
 
 #: src/merge/mkvmerge.cpp:96
 #, no-c-format
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
-msgstr "  --chapter-language <lng>        Zet het 'taal' element in de hoofdstuk ingangen.\n"
+msgstr "  --chapter-language <lng> Zet het 'taal' element in de hoofdstuk ingangen.\n"
 
 #: src/merge/mkvmerge.cpp:98
 #, no-c-format
@@ -242,8 +242,8 @@ msgid ""
 "                           and vertically.\n"
 msgstr ""
 "  --chroma-subsample <TID:hori,vert>\n"
-"                           De hoeveelheid pixels te verwijderen in Cr en Cb\n"
-"                           kanalen voor elk pixel niet verwijderen horizontaal\n"
+"                           De hoeveelheid pixels te verwijderen in de Cr en Cb\n"
+"                           kanalen voor elk pixel niet verwijderd horizontaal\n"
 "                           en verticaal.\n"
 
 #: src/merge/mkvmerge.cpp:348
@@ -266,8 +266,8 @@ msgid ""
 "                           cluster.\n"
 msgstr ""
 "  --cluster-length <n[ms]> Plaatst hoogstens n data blokken in elke cluster.\n"
-"                                           Is het nummer vastgezet in 'ms' plaats dan\n"
-"                                           minimaal n milliseconden aan data in elke cluster.\n"
+"                           Is het nummer vastgezet in 'ms' plaats dan\n"
+"                           minimaal n milliseconden aan data in elke cluster.\n"
 
 #: src/merge/mkvmerge.cpp:133
 #, no-c-format
@@ -284,8 +284,8 @@ msgid ""
 msgstr ""
 "  --color-bits-per-channel <TID:n>\n"
 "                           Stelt het aantal gecodeerde bits in voor een kleur \n"
-"                           kanaal. Een waarde van 0 geeft aan dat het nummer niet is opgegeven\n"
-"                           uniet is opgegeven.\n"
+"                           kanaal. Een waarde van 0 geeft aan dat het nummer \n"
+"                           niet is opgegeven.\n"
 
 #: src/merge/mkvmerge.cpp:318
 #, no-c-format
@@ -297,8 +297,8 @@ msgid ""
 msgstr ""
 "  --color-matrix-coefficients <TID:n>\n"
 "                           Stelt de matrixcoëfficiënten van de gebruikte video in om\n"
-"                           helderheid en kleurintensiteit waarden van rood, groen te\n"
-"                           verkrijgen en en blauwe kleuren kleurruimtes.\n"
+"                           helderheid en kleurintensiteit waarden van rood, groen en\n"
+"                           blauw te verkrijgen.\n"
 
 #: src/merge/mkvmerge.cpp:340
 #, no-c-format
@@ -307,12 +307,12 @@ msgid ""
 "                           The color primaries of the video.\n"
 msgstr ""
 "  --color-primaries <TID:n>\n"
-"                           De kleuren ruimten van de video.\n"
+"                           De primaire kleuren van de video.\n"
 
 #: src/merge/mkvmerge.cpp:337
 #, no-c-format
 msgid "  --color-range <TID:n>   Clipping of the color ranges.\n"
-msgstr "  --color-range <TID:n>   Knippen van de kleurbereiken.\n"
+msgstr "  --color-range <TID:n>  Knippen van de kleurbereiken.\n"
 
 #: src/merge/mkvmerge.cpp:338
 #, no-c-format
@@ -371,8 +371,8 @@ msgid ""
 "                           entries to chapter names.\n"
 msgstr ""
 "  --cue-chapter-name-format <format>\n"
-"                                                                          Patroon voor conversie vanuit een 'volg document(en)(cue)'\n"
-"                                                                          ingangen naar hoofdstuk namen.\n"
+"                           Patroon voor conversie vanuit een 'volg document(en)(cue)'\n"
+"                           ingangen naar hoofdstuk namen.\n"
 
 #: src/merge/mkvmerge.cpp:270
 #, no-c-format
@@ -398,8 +398,8 @@ msgid ""
 "                           X can be a floating point number or a fraction.\n"
 msgstr ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
-"                           Forceert de standaard duur voor spoor X. X mag een \n"
-"                          veranderbaar nummer te zijn mag ook een fractie zijn.\n"
+"                           Forceert de standaard duur voor een spoor tot X.\n"
+"                           X mag een zwevendekommagetal zijn, of een fractie.\n"
 
 #: src/merge/mkvmerge.cpp:108
 #, no-c-format
@@ -408,7 +408,7 @@ msgid ""
 "                           overridden with the --language option.\n"
 msgstr ""
 "  --default-language <lng> Gebruik deze taal voor alle sporen totdat deze\n"
-"                                           overschreven wordt met de --language (taal) optie.\n"
+"                           overschreven wordt met de --language (taal) optie.\n"
 
 #: src/merge/mkvmerge.cpp:245
 #, fuzzy, no-c-format
@@ -419,7 +419,7 @@ msgid ""
 msgstr ""
 "  --default-track-flag <TID[:bool]>\n"
 "                           Stelt de 'standaard' markering in voor dit spoor of\n"
-"                           forceert het als niet aanwezig is als bool 0.\n"
+"                           forceert het als niet aanwezig als bool 0 is.\n"
 
 #: src/merge/mkvmerge.cpp:412
 #, fuzzy, no-c-format
@@ -443,6 +443,8 @@ msgid ""
 "  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
 "                           track headers, chapters and tags.\n"
 msgstr ""
+"  --disable-language-ietf  Schrijf IETF BCP 47 taalelementen niet in\n"
+"                           track headers, hoofdstukken and tags.\n"
 
 #: src/merge/mkvmerge.cpp:140
 #, no-c-format
@@ -465,7 +467,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:135
 #, no-c-format
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
-msgstr "  --enable-durations                          Zet blok duur aan voor alle blokken.\n"
+msgstr "  --enable-durations      Zet blok duur aan voor alle blokken.\n"
 
 #: src/merge/mkvmerge.cpp:204
 #, fuzzy, no-c-format
@@ -481,7 +483,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:417
 #, no-c-format
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
-msgstr "  --engage <feature>       Zet  experimentele mogelijkheid aan 'feature'.\n"
+msgstr "  --engage <feature>       Zet experimentele mogelijkheid aan 'feature'.\n"
 
 #: src/merge/mkvmerge.cpp:312
 #, no-c-format
@@ -500,8 +502,8 @@ msgid ""
 "                           bitstream to match the track's default duration.\n"
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
-"                           Zet de 'forceer' markering voor dit spoor of\n"
-"                           forceer het als niet aanwezig als 'bool' 0 is.\n"
+"                           Pas de frame-/veldsnelheid aan die in de video is opgeslagen\n"
+"                           bitstream om overeen te komen met de standaardduur van het nummer..\n"
 
 #: src/merge/mkvmerge.cpp:408
 #, no-c-format
@@ -548,7 +550,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:92
 #, no-c-format
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
-msgstr "  --global-tags <file>          Leest de globale markering uit een XML bestand.\n"
+msgstr "  --global-tags <file>    Leest de globale markering uit een XML bestand.\n"
 
 #: src/merge/mkvmerge.cpp:254
 #, fuzzy, no-c-format
@@ -568,22 +570,22 @@ msgid ""
 "                           RFC 5646 language tag).\n"
 msgstr ""
 "  --language <TID:lang>    Stelt de taal voor het spoor in (IETF BCP 47/\n"
-"RFC 5646 code).\n"
+"                           RFC 5646 code).\n"
 
 #: src/merge/mkvmerge.cpp:172
 #, no-c-format
 msgid "  --link                   Link splitted files.\n"
-msgstr "  --link                                         Link gesplitste bestanden.\n"
+msgstr "  --link                  Link gesplitste bestanden.\n"
 
 #: src/merge/mkvmerge.cpp:174
 #, no-c-format
 msgid "  --link-to-next <SID>     Link the last file to the given SID.\n"
-msgstr "  --link-to-next <SID>               Verbind het laatste bestand met een bepaald SID.\n"
+msgstr "  --link-to-next <SID>    Verbind het laatste bestand met een bepaald SID.\n"
 
 #: src/merge/mkvmerge.cpp:173
 #, no-c-format
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
-msgstr "  --link-to-previous <SID>         Verbind het eerste bestand met een bepaald SID.\n"
+msgstr "  --link-to-previous <SID> Verbind het eerste bestand met een bepaald SID.\n"
 
 #: src/merge/mkvmerge.cpp:394
 #, no-c-format
@@ -598,8 +600,8 @@ msgid ""
 "  --list-languages         Lists all ISO 639 languages and their\n"
 "                           ISO 639-2 codes.\n"
 msgstr ""
-"  --list-languages         Lijst alle ISO 639 talen en hun\n"
-"                                   ISO 639-2 codes.\n"
+"  --list-languages         Laat alle ISO 639 talen en hun\n"
+"                           ISO 639-2 codes zien.\n"
 
 #: src/merge/mkvmerge.cpp:398
 #, no-c-format
@@ -607,6 +609,8 @@ msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
 "                           option and their meaning.\n"
 msgstr ""
+" --list-stereo-modes       Geeft alle ondersteunde waarden weer voor de '--stereo-mode'\n" 
+"                           optie en hun betekenis.\n"
 
 #: src/merge/mkvmerge.cpp:342
 #, no-c-format
@@ -654,13 +658,13 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:235
 #, no-c-format
-msgid "  --no-chapters            Don't keep chapters from the source file.\n"
-msgstr "  --no-chapters            Neem hoofdstukken uit bronbestand niet over.\n"
+msgid "  --no-chapters      Don't keep chapters from the source file.\n"
+msgstr "  --no-chapters     Neem hoofdstukken uit bronbestand niet over.\n"
 
 #: src/merge/mkvmerge.cpp:136
 #, no-c-format
-msgid "  --no-cues                Do not write the cue data (the index).\n"
-msgstr "  --no-cues                         Schrijf geen volg document(en) (cue) data  (de index).\n"
+msgid "  --no-cues          Do not write the cue data (the index).\n"
+msgstr "  --no-cues         Schrijf geen volg document(en) (cue) data (de index).\n"
 
 #: src/merge/mkvmerge.cpp:137
 #, no-c-format
@@ -739,7 +743,7 @@ msgid ""
 "                           A roll rotation to the projection.\n"
 msgstr ""
 "  --projection-pose-roll <TID:float>\n"
-"                           Een rolrotatie naar de projectie..\n"
+"                           Een rolrotatie naar de projectie.\n"
 
 #: src/merge/mkvmerge.cpp:365
 #, no-c-format
@@ -787,6 +791,8 @@ msgid ""
 "  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
 "                           existing ones.\n"
 msgstr ""
+"  --regenerate-track-uids  Genereer nieuwe willekeurige track UID's in plaats van\n" 
+"                           bestaande te bewaren.\n"
 
 #: src/merge/mkvmerge.cpp:286
 #, no-c-format
@@ -806,12 +812,12 @@ msgid ""
 "                           Set the segment UIDs to SID1, SID2 etc.\n"
 msgstr ""
 "  --segment-uid <SID1,[SID2...]>\n"
-"                                                         Stelt het segment UID's in naar SID1, SID2 etc.\n"
+"                           Stelt het segment UID's in naar SID1, SID2 etc.\n"
 
 #: src/merge/mkvmerge.cpp:118
 #, no-c-format
 msgid "  --segmentinfo <file>     Read segment information from the file.\n"
-msgstr "  --segmentinfo <file>             Leest segment informatie in van bestand.\n"
+msgstr "  --segmentinfo <file>    Leest segment informatie in van bestand.\n"
 
 #: src/merge/mkvmerge.cpp:152
 #, no-c-format
@@ -822,7 +828,7 @@ msgid ""
 msgstr ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
 "                           Creëert een nieuw bestand na d bytes\n"
-"                           (KB, MB, GB)of na een specifieke tijd.\n"
+"                           (KB, MB, GB) of na een specifieke tijd.\n"
 
 #: src/merge/mkvmerge.cpp:168
 #, no-c-format
@@ -832,7 +838,7 @@ msgid ""
 "                           or before chapter numbers A, B etc.\n"
 msgstr ""
 "  --split chapters:all|A[,B...]\n"
-"                           Creëert een nieuw voor elk hoofdstuk (met 'all')\n"
+"                           Creëert een nieuw bestand voor elk hoofdstuk (met 'all')\n"
 "                           of voor elk hoofdstuknummer A, B etc.\n"
 
 #: src/merge/mkvmerge.cpp:165
@@ -884,7 +890,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:171
 #, no-c-format
 msgid "  --split-max-files <n>    Create at most n files.\n"
-msgstr "  --split-max-files <n>               Creëert op zijn meest  n bestanden.\n"
+msgstr "  --split-max-files <n>   Creëert op zijn meest n bestanden.\n"
 
 #: src/merge/mkvmerge.cpp:314
 #, fuzzy, no-c-format
@@ -905,6 +911,8 @@ msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
 "                           discarding any remaining packets of other tracks.\n"
 msgstr ""
+"  --stop-after-video-ends  Stopt de verwerking nadat de primaire videotrack is afgelopen,\n"
+"                           gooit eventuele resterende pakketten van andere nummers weg.\n"
 
 #: src/merge/mkvmerge.cpp:373
 #, no-c-format
@@ -941,7 +949,7 @@ msgstr "  --timestamps <TID:file>  Leest de te gebruiken tijd codes in van een b
 #: src/merge/mkvmerge.cpp:91
 #, no-c-format
 msgid "  --title <title>          Title for this destination file.\n"
-msgstr "  --title <title>            Titel voor dit doel nd.\n"
+msgstr "  --title <title>         Titel voor dit doel bestand.\n"
 
 #: src/merge/mkvmerge.cpp:251
 #, fuzzy, no-c-format
@@ -981,12 +989,12 @@ msgid ""
 "                           tags for all tracks.\n"
 msgstr ""
 "  --track-tags <n,m,...>   Kopieer de markeringen van sporen n,m etc. Standaard: kopieer\n"
-"                                          markeringen voor alle sporen.\n"
+"                           markeringen voor alle sporen.\n"
 
 #: src/merge/mkvmerge.cpp:402
 #, no-c-format
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
-msgstr "  --ui-language <code>                  Forceert de te gebruiken vertaal 'code'.\n"
+msgstr "  --ui-language <code>    Forceert de te gebruiken vertaal 'code'.\n"
 
 #: src/merge/mkvmerge.cpp:257
 #, fuzzy, no-c-format
@@ -1013,17 +1021,17 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:212
 #, no-c-format
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
-msgstr "  -A, --no-audio                     Kopieer geen enkele audio spoor van dit bestand.\n"
+msgstr "  -A, --no-audio          Kopieer geen enkele audio spoor van dit bestand.\n"
 
 #: src/merge/mkvmerge.cpp:224
 #, no-c-format
 msgid "  -B, --no-buttons         Don't copy any buttons track from this file.\n"
-msgstr "  -B, --no-buttons                  Kopieer geen enkele knop spoor van dit bestand.\n"
+msgstr "  -B, --no-buttons        Kopieer geen enkele knop spoor van dit bestand.\n"
 
 #: src/merge/mkvmerge.cpp:216
 #, no-c-format
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
-msgstr "  -D, --no-video                      Kopieer geen enkele video spoor van dit bestand.\n"
+msgstr "  -D, --no-video          Kopieer geen enkele video spoor van dit bestand.\n"
 
 #: src/merge/mkvmerge.cpp:386
 #, no-c-format
@@ -1048,7 +1056,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:229
 #, no-c-format
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
-msgstr "  -M, --no-attachments                   Kopieer geen enkele bijlage uit bron bestand.\n"
+msgstr "  -M, --no-attachments    Kopieer geen enkele bijlage uit een bron bestand.\n"
 
 #: src/merge/mkvmerge.cpp:220
 #, no-c-format
@@ -1058,12 +1066,12 @@ msgstr "  -S, --no-subtitles       Kopieer geen enkele ondertiteling spoor van d
 #: src/merge/mkvmerge.cpp:233
 #, no-c-format
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
-msgstr "  -T, --no-track-tags Kopieer geen enkele markering voor sporen van het bron bestand.\n"
+msgstr "  -T, --no-track-tags     Kopieer geen enkele markering voor sporen van het bron bestand.\n"
 
 #: src/merge/mkvmerge.cpp:421
 #, no-c-format
 msgid "  -V, --version            Show version information.\n"
-msgstr "  -V, --version                           Toon versie informatie.\n"
+msgstr "  -V, --version           Toon versie informatie.\n"
 
 #: src/merge/mkvmerge.cpp:209
 #, no-c-format
@@ -1073,8 +1081,8 @@ msgid ""
 "                           audio tracks.\n"
 msgstr ""
 "  -a, --audio-tracks <n,m,...>\n"
-"                                              Kopieer audio sporen n,m etc. Standaard: kopieer alles\n"
-"                                              audio sporen.\n"
+"                           Kopieer audio sporen n,m etc. Standaard: kopieer alle\n"
+"                           audio sporen.\n"
 
 #: src/merge/mkvmerge.cpp:221
 #, no-c-format
@@ -1084,8 +1092,8 @@ msgid ""
 "                           all buttons tracks.\n"
 msgstr ""
 "  -b, --button-tracks <n,m,...>\n"
-"                                              Kopieer knop sporen n,m etc. Standaard: kopieer\n"
-"                                              alle knop sporen.\n"
+"                           Kopieer knop sporen n,m etc. Standaard: kopieer\n"
+"                           alle knop sporen.\n"
 
 #: src/merge/mkvmerge.cpp:213
 #, no-c-format
@@ -1095,8 +1103,8 @@ msgid ""
 "                           video tracks.\n"
 msgstr ""
 "  -d, --video-tracks <n,m,...>\n"
-"                                              Kopieer video sporen n,m etc. Standaard: kopieer alle\n"
-"                                              video sporen.\n"
+"                           Kopieer video sporen n,m etc. Standaard: kopieer alle\n"
+"                           video sporen.\n"
 
 #: src/merge/mkvmerge.cpp:298
 #, no-c-format
@@ -1104,8 +1112,8 @@ msgid ""
 "  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
 "                           Works only for video tracks.\n"
 msgstr ""
-"  -f, --fourcc <FOURCC>    Forceert de VIERCC naar opgegeven waarde.\n"
-"                                            Werkt alleen met video sporen.\n"
+"  -f, --fourcc <FOURCC>    Forceert de FourCC naar opgegeven waarde.\n"
+"                           Werkt alleen met video sporen.\n"
 
 #: src/merge/mkvmerge.cpp:420
 #, no-c-format
@@ -1138,7 +1146,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:89
 #, no-c-format
 msgid "  -o, --output out         Write to the file 'out'.\n"
-msgstr "  -o, --output out        Schrijf naar bestand 'uit'.\n"
+msgstr "  -o, --output out        Schrijf naar bestand 'out'.\n"
 
 #: src/merge/mkvmerge.cpp:406
 #, no-c-format
@@ -1184,7 +1192,7 @@ msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
 "                           Synchroniseer en stel bij, de sporen, tijd codes met\n"
 "                           het id TID met 'd' ms.\n"
-"                           'o/p': Stel tijd codes bij  door te vermenigvuldigen met\n"
+"                           'o/p': Stel tijd codes bij door te vermenigvuldigen met\n"
 "                           'o/p' om lineaire afwijkingen te voorkomen. 'p' standaard\n"
 "                           naar 1 indien weggelaten. Beide 'o' en 'p' kan een\n"
 "                           veranderend nummer zijn.\n"
@@ -1192,7 +1200,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:183
 #, no-c-format
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
-msgstr "  <file1> + <file2>        Bijvoegen bestand2 aan bestand1.\n"
+msgstr "  <file1> + <file2>        Voeg bestand2 aan bestand1 toe.\n"
 
 #: src/merge/mkvmerge.cpp:184
 #, no-c-format
@@ -1210,8 +1218,8 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:188
 #, no-c-format
-msgid "  =<file>                  Same as \"= <file>\".\n"
-msgstr "  =<file>                  Hetzelfde als \"= <file>\".\n"
+msgid "  =<file>            Same as \"= <file>\".\n"
+msgstr "  =<file>           Hetzelfde als \"= <file>\".\n"
 
 #: src/merge/mkvmerge.cpp:418
 #, no-c-format
@@ -1235,7 +1243,7 @@ msgstr "  DT: datum & tijd\n"
 #: src/propedit/propedit_cli_parser.cpp:178
 #, no-c-format
 msgid "  FP: floating point number\n"
-msgstr "  FP: veranderbaar nummer\n"
+msgstr "  FP: zwevendekommagetal\n"
 
 #: src/propedit/propedit_cli_parser.cpp:175
 #, no-c-format
@@ -1245,12 +1253,12 @@ msgstr "  S:  reeks\n"
 #: src/propedit/propedit_cli_parser.cpp:172
 #, no-c-format
 msgid "  SI: signed integer\n"
-msgstr "  SI: getekend geheel\n"
+msgstr "  SI: getekend integer\n"
 
 #: src/propedit/propedit_cli_parser.cpp:173
 #, no-c-format
 msgid "  UI: unsigned integer\n"
-msgstr "  UI: ongetekend geheel\n"
+msgstr "  UI: ongetekend integer\n"
 
 #: src/propedit/propedit_cli_parser.cpp:176
 #, no-c-format
@@ -1343,7 +1351,7 @@ msgstr " Hoofdstuk beheren:\n"
 #: src/merge/mkvmerge.cpp:151
 #, no-c-format
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
-msgstr " Bestand splitsen en linken en aaneenschakelen (meer globale opties):\n"
+msgstr " Bestand splitsen, linken en aaneenschakelen (meer globale opties):\n"
 
 #: src/merge/mkvmerge.cpp:122
 #, no-c-format
@@ -1368,7 +1376,7 @@ msgstr " Opties alleen geldig voor VobSub ondertitel sporen:\n"
 #: src/merge/mkvmerge.cpp:280
 #, fuzzy, no-c-format
 msgid " Options that only apply to audio tracks:\n"
-msgstr " Opties alleen geldig voor Video ondertitel sporen:\n"
+msgstr " Opties alleen geldig voor audio sporen:\n"
 
 #: src/merge/mkvmerge.cpp:372
 #, no-c-format
@@ -1378,7 +1386,7 @@ msgstr " Opties alleen geldig voor tekst ondertitel sporen\n"
 #: src/merge/mkvmerge.cpp:294
 #, no-c-format
 msgid " Options that only apply to video tracks:\n"
-msgstr " Opties alleen geldig voor Video ondertitel sporen:\n"
+msgstr " Opties alleen geldig voor video ondertitel sporen:\n"
 
 #: src/merge/mkvmerge.cpp:382
 #, no-c-format
@@ -1618,22 +1626,22 @@ msgstr[1] "%1 waarschuwing(en)"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
 #, no-c-format
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
-msgstr "%<1-9>n – nanoseconden met nullen opgevuld op twee plaatsen (b.v. drie plaatsen met %3n)"
+msgstr "%<1-9>n – nanoseconden met nullen opgevuld tot negen plaatsen (b.v. drie plaatsen met %3n)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
 #, no-c-format
 msgid "%H – hours zero-padded to two places"
-msgstr "%H – uren met nullen opgevuld op twee plaatsen"
+msgstr "%H – uren met nullen opgevuld tot twee plaatsen"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
 #, no-c-format
 msgid "%M – minutes zero-padded to two places"
-msgstr "%M – minuten met nullen opgevuld op twee plaatsen"
+msgstr "%M – minuten met nullen opgevuld tot twee plaatsen"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
 #, no-c-format
 msgid "%S – seconds zero-padded to two places"
-msgstr "%S – seconden met nullen opgevuld op twee plaatsen"
+msgstr "%S – seconden met nullen opgevuld tot twee plaatsen"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #, no-c-format
@@ -1804,7 +1812,7 @@ msgstr "&Sluit scherm"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
 #, no-c-format
 msgid "&Code of Conduct"
-msgstr "Gedrags&code"
+msgstr "&Gedragscode"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:227
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
