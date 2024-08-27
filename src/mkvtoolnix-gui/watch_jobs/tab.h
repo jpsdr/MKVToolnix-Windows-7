@@ -60,7 +60,7 @@ public Q_SLOTS:
   void openFolder();
 
   void acknowledgeWarningsAndErrors();
-  void disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numWarnings, int numErrors);
+  void disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numOldWarnings, int numCurrentWarnings, int numOldErrors, int numCurrentErrors);
 
   void updateRemainingTime();
 

@@ -4,6 +4,9 @@
 
 * MKVToolNix GUI: multiplexer: added a progress dialog that is shown during
   file identification.
+* MKVToolNix GUI: jobs: the status bar now differentiates between numbers of
+  warnings/errors that occurred in the current session and those that occurred
+  before the current session. Implements #3732.
 
 ## Bug fixes
 
