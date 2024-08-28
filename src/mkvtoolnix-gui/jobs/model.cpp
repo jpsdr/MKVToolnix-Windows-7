@@ -436,15 +436,24 @@ Model::onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id,
 
 void
 Model::updateNumUnacknowledgedWarningsOrErrors() {
-  auto numWarnings = 0;
-  auto numErrors   = 0;
+  auto const appStart     = App::instance()->appStartTimestamp();
+  auto numCurrentWarnings = 0;
+  auto numCurrentErrors   = 0;
+  auto numOldWarnings     = 0;
+  auto numOldErrors       = 0;
 
   for (auto const &job : m_jobsById) {
-    numWarnings += job->numUnacknowledgedWarnings();
-    numErrors   += job->numUnacknowledgedErrors();
+    if (job->dateStarted().isValid() && (job->dateStarted() >= appStart)) {
+      numCurrentWarnings += job->numUnacknowledgedWarnings();
+      numCurrentErrors   += job->numUnacknowledgedErrors();
+
+    } else {
+      numOldWarnings += job->numUnacknowledgedWarnings();
+      numOldErrors   += job->numUnacknowledgedErrors();
+    }
   }
 
-  Q_EMIT numUnacknowledgedWarningsOrErrorsChanged(numWarnings, numErrors);
+  Q_EMIT numUnacknowledgedWarningsOrErrorsChanged(numOldWarnings, numCurrentWarnings, numOldErrors, numCurrentErrors);
 }
 
 void

@@ -34,13 +34,13 @@ public:
 public Q_SLOTS:
   void setProgress(int progress, int totalProgress);
   void setJobStats(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
-  void setNumUnacknowledgedWarningsOrErrors(int numWarnings, int numErrors);
+  void setNumUnacknowledgedWarningsOrErrors(int numOldWarnings, int numCurrentWarnings, int numOldErrors, int numCurrentErrors);
   void updateWarningsAndErrorsIcons();
 
   void reset();
 
 protected:
-  void setLabelTexts();
+  void setLabelTextsAndToolTip();
 
   virtual void mouseReleaseEvent(QMouseEvent *event) override;
 };

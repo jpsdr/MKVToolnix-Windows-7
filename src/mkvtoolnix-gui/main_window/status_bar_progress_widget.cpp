@@ -18,7 +18,7 @@ class StatusBarProgressWidgetPrivate {
   friend class StatusBarProgressWidget;
 
   std::unique_ptr<Ui::StatusBarProgressWidget> ui;
-  int m_numPendingAuto{}, m_numPendingManual{}, m_numRunning{}, m_numWarnings{}, m_numErrors{}, m_timerStep{};
+  int m_numPendingAuto{}, m_numPendingManual{}, m_numRunning{}, m_numOldWarnings{}, m_numCurrentWarnings{}, m_numOldErrors{}, m_numCurrentErrors{}, m_timerStep{};
   QTimer m_timer;
   QList<QPixmap> m_pixmaps;
 
@@ -73,51 +73,73 @@ StatusBarProgressWidget::setJobStats(int numPendingAuto,
   p->m_numPendingManual = numPendingManual;
   p->m_numRunning       = numRunning;
 
-  setLabelTexts();
+  setLabelTextsAndToolTip();
 }
 
 void
-StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors(int numWarnings,
-                                                              int numErrors) {
-  auto p           = p_func();
-  p->m_numWarnings = numWarnings;
-  p->m_numErrors   = numErrors;
+StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors(int numOldWarnings,
+                                                              int numCurrentWarnings,
+                                                              int numOldErrors,
+                                                              int numCurrentErrors) {
+  auto p                  = p_func();
+  p->m_numOldWarnings     = numOldWarnings;
+  p->m_numCurrentWarnings = numCurrentWarnings;
+  p->m_numOldErrors       = numOldErrors;
+  p->m_numCurrentErrors   = numCurrentErrors;
 
-  auto isActive = p->m_timer.isActive();
+  auto isActive           = p->m_timer.isActive();
 
-  if (!isActive && (p->m_numWarnings || p->m_numErrors)) {
+  if (!isActive && (p->m_numOldWarnings || p->m_numCurrentWarnings || p->m_numOldErrors || p->m_numCurrentErrors)) {
     p->m_timerStep = 0;
     p->m_timer.start();
 
-  } else if (isActive && !p->m_numWarnings && !p->m_numErrors) {
+  } else if (isActive && !p->m_numOldWarnings && !p->m_numCurrentWarnings && !p->m_numOldErrors && !p->m_numCurrentErrors) {
     p->m_timer.stop();
     updateWarningsAndErrorsIcons();
   }
 
-  setLabelTexts();
+  setLabelTextsAndToolTip();
 }
 
 void
 StatusBarProgressWidget::retranslateUi() {
   p_func()->ui->retranslateUi(this);
 
-  setLabelTexts();
+  setLabelTextsAndToolTip();
 }
 
 void
-StatusBarProgressWidget::setLabelTexts() {
+StatusBarProgressWidget::setLabelTextsAndToolTip() {
   auto p = p_func();
 
   p->ui->numJobsLabel->setText(QY("%1 automatic, %2 manual, %3 running").arg(p->m_numPendingAuto).arg(p->m_numPendingManual).arg(p->m_numRunning));
-  p->ui->warningsLabel->setText(QNY("%1 warning", "%1 warnings", p->m_numWarnings).arg(p->m_numWarnings));
-  p->ui->errorsLabel  ->setText(QNY("%1 error",   "%1 errors",   p->m_numErrors)  .arg(p->m_numErrors));
+  p->ui->warningsLabel->setText(QNY("%1+%2 warning", "%1+%2 warnings", p->m_numCurrentWarnings + p->m_numOldWarnings).arg(p->m_numCurrentWarnings).arg(p->m_numOldWarnings));
+  p->ui->errorsLabel->setText(QNY("%1+%2 error", "%1+%2 errors", p->m_numCurrentErrors + p->m_numOldErrors).arg(p->m_numCurrentErrors).arg(p->m_numOldErrors));
+
+  auto format = Q("<p>%1</p>"
+                  "<ul>"
+                  "<li>%2</li>"
+                  "<li>%3</li>"
+                  "</ul>");
+
+  auto toolTipWarnings = format
+    .arg(QY("Number of warnings:"))
+    .arg(QY("%1 since starting the program").arg(p->m_numCurrentWarnings))
+    .arg(QY("%1 from earlier runs").arg(p->m_numOldWarnings));
+
+  auto toolTipErrors = format
+    .arg(QY("Number of errors:"))
+    .arg(QY("%1 since starting the program").arg(p->m_numCurrentErrors))
+    .arg(QY("%1 from earlier runs").arg(p->m_numOldErrors));
+
+  setToolTip(toolTipWarnings + toolTipErrors);
 }
 
 void
 StatusBarProgressWidget::updateWarningsAndErrorsIcons() {
   auto p             = p_func();
-  auto warningOffset = !p->m_numWarnings || !(p->m_timerStep % 2) ? 1 : 0;
-  auto errorOffset   = !p->m_numErrors   || !(p->m_timerStep % 2) ? 1 : 0;
+  auto warningOffset = !(p->m_numOldWarnings + p->m_numCurrentWarnings) || !(p->m_timerStep % 2) ? 1 : 0;
+  auto errorOffset   = !(p->m_numOldErrors   + p->m_numCurrentErrors)   || !(p->m_timerStep % 2) ? 1 : 0;
 
   p->ui->warningsIconLabel->setPixmap(p->m_pixmaps[0 + warningOffset]);
   p->ui->errorsIconLabel  ->setPixmap(p->m_pixmaps[2 + errorOffset]);
@@ -143,8 +165,8 @@ StatusBarProgressWidget::mouseReleaseEvent(QMouseEvent *event) {
   showJobQueue->setText(QY("Show job queue && access job logs"));
   showJobOutput->setText(QY("Show job output"));
 
-  acknowledgeWarnings->setEnabled(!!p->m_numWarnings);
-  acknowledgeErrors->setEnabled(!!p->m_numErrors);
+  acknowledgeWarnings->setEnabled(!!(p->m_numOldWarnings + p->m_numCurrentWarnings));
+  acknowledgeErrors->setEnabled(!!(p->m_numOldErrors + p->m_numCurrentErrors));
 
   connect(acknowledgeWarnings, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllWarnings);
   connect(acknowledgeErrors,   &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllErrors);

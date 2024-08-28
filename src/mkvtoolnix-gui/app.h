@@ -3,6 +3,7 @@
 #include "common/common_pch.h"
 
 #include <QApplication>
+#include <QDateTime>
 #include <QStringList>
 
 #include "mkvtoolnix-gui/gui_cli_parser.h"
@@ -70,6 +71,8 @@ public:
   void run();
 
   Util::NetworkAccessManager &networkAccessManager();
+
+  QDateTime appStartTimestamp();
 
 #if defined(SYS_APPLE)
   virtual bool event(QEvent *event) override;

@@ -379,11 +379,13 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
 }
 
 void
-Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numWarnings,
-                                                           int numErrors) {
+Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numOldWarnings,
+                                                           int numCurrentWarnings,
+                                                           int numOldErrors,
+                                                           int numCurrentErrors) {
   auto p = p_func();
 
-  if (!numWarnings && !numErrors)
+  if (!numOldWarnings && !numCurrentWarnings && !numOldErrors && !numCurrentErrors)
     p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 }
 
