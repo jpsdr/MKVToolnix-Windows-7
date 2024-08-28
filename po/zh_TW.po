@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2024-07-30 20:45+0200\n"
+"POT-Creation-Date: 2024-08-27 21:24+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: HULEN, 2021-2022\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -1532,7 +1532,7 @@ msgstr "\"視覺障礙\" 標記:"
 msgid "%1 Hz"
 msgstr "%1 Hz"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:115
 #, no-c-format
 msgid "%1 automatic, %2 manual, %3 running"
 msgstr "%1 個自動，%2 個手動，%3 個正在執行"
@@ -1569,11 +1569,11 @@ msgid "%1 entry"
 msgid_plural "%1 entries"
 msgstr[0] "%1 個項目"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:113
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:128
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:133
 #, no-c-format
-msgid "%1 error"
-msgid_plural "%1 errors"
-msgstr[0] "%1 個錯誤"
+msgid "%1 from earlier runs"
+msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:142
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:118
@@ -1582,10 +1582,22 @@ msgstr[0] "%1 個錯誤"
 msgid "%1 pixels"
 msgstr "%1 像素"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:112
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:127
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:132
 #, no-c-format
-msgid "%1 warning"
-msgid_plural "%1 warnings"
+msgid "%1 since starting the program"
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:117
+#, fuzzy, no-c-format
+msgid "%1+%2 error"
+msgid_plural "%1+%2 errors"
+msgstr[0] "%1 個錯誤"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:116
+#, fuzzy, no-c-format
+msgid "%1+%2 warning"
+msgid_plural "%1+%2 warnings"
 msgstr[0] "%1 個警告"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
@@ -1764,7 +1776,7 @@ msgstr "關閉(&C)"
 msgid "&Close file"
 msgstr "關閉檔案(&C)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:393
+#: src/mkvtoolnix-gui/merge/tool.cpp:397
 #, no-c-format
 msgid "&Close settings"
 msgstr "關閉設定(&C)"
@@ -1800,7 +1812,7 @@ msgstr "配置可用的語言(&C)"
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "將子章節的開始和結束時間戳記限制在其主開始和結束時間戳記中(&C)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1044
+#: src/mkvtoolnix-gui/merge/tool.cpp:1052
 #, no-c-format
 msgid "&Continue identification"
 msgstr "繼續識別(&C)"
@@ -1867,7 +1879,7 @@ msgstr "下載(&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "每個項目持續以秒計算的時間(&D):"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:484
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:486
 #, no-c-format
 msgid "&Edit available actions to execute"
 msgstr "編輯可執行的操作(&E)"
@@ -2088,7 +2100,7 @@ msgstr "下一個資訊標籤(&N)"
 msgid "&Next job output tab"
 msgstr "下一個作業輸出標籤(&N)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:701
+#: src/mkvtoolnix-gui/merge/tool.cpp:705
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "下一個合併設定(&N)"
@@ -2186,7 +2198,7 @@ msgstr "上一個資訊標籤(&P)"
 msgid "&Previous job output tab"
 msgstr "上一個作業輸出標籤(&P)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:702
+#: src/mkvtoolnix-gui/merge/tool.cpp:706
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "上一個合併設定(&P)"
@@ -3281,13 +3293,13 @@ msgid "Acknowledge &warnings"
 msgstr "確認警告(&W)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:142
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:164
 #, no-c-format
 msgid "Acknowledge all &errors"
 msgstr "確認所有錯誤(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:701
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:141
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:163
 #, no-c-format
 msgid "Acknowledge all &warnings"
 msgstr "確認所有警告(&W)"
@@ -3439,7 +3451,7 @@ msgstr "加入此檔案 '檔名' 作為新附件"
 msgid "Add to job &queue"
 msgstr "加入至作業佇列(&Q)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:994
+#: src/mkvtoolnix-gui/merge/tool.cpp:1002
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "加入章節檔案"
@@ -3467,12 +3479,12 @@ msgstr "透過拖放或複製貼上加入檔案"
 msgid "Adding multiple files via 'Add source files'"
 msgstr "透過 '加入原始檔案' 加入多個檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1009
+#: src/mkvtoolnix-gui/merge/tool.cpp:1017
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "加入剪輯資訊檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1024
+#: src/mkvtoolnix-gui/merge/tool.cpp:1032
 #, no-c-format
 msgid "Adding tag files"
 msgstr "加入標籤檔案"
@@ -3630,11 +3642,11 @@ msgstr "所有項目"
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
 #: src/mkvtoolnix-gui/merge/tab.cpp:279
 #: src/mkvtoolnix-gui/merge/tab.cpp:342
-#: src/mkvtoolnix-gui/merge/tool.cpp:347
+#: src/mkvtoolnix-gui/merge/tool.cpp:351
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:105
 #: src/mkvtoolnix-gui/util/widget.cpp:187
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:397
 #, no-c-format
 msgid "All files"
 msgstr "所有檔案"
@@ -4395,9 +4407,9 @@ msgstr "如果軌道適合有視覺障礙的使用者，則可以啟用此設定
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:478
 #: src/mkvtoolnix-gui/merge/tab.cpp:504
-#: src/mkvtoolnix-gui/merge/tool.cpp:394
-#: src/mkvtoolnix-gui/merge/tool.cpp:959
-#: src/mkvtoolnix-gui/merge/tool.cpp:1091
+#: src/mkvtoolnix-gui/merge/tool.cpp:398
+#: src/mkvtoolnix-gui/merge/tool.cpp:965
+#: src/mkvtoolnix-gui/merge/tool.cpp:1099
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
@@ -4814,7 +4826,7 @@ msgstr "關閉目前的設定"
 msgid "Close modified file"
 msgstr "關閉已被修改的檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:391
+#: src/mkvtoolnix-gui/merge/tool.cpp:395
 #, no-c-format
 msgid "Close modified settings"
 msgstr "關閉已修改的設定"
@@ -6597,12 +6609,12 @@ msgstr "找不到可執行檔案"
 msgid "Execute a program"
 msgstr "執行程式"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:478
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:480
 #, no-c-format
 msgid "Execute action after next &job completion"
 msgstr "在下次作業完成後執行動作(&J)"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:479
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:481
 #, no-c-format
 msgid "Execute action when the &queue completes"
 msgstr "佇列完成時執行動作(&Q)"
@@ -7362,8 +7374,8 @@ msgstr "ISO 639-3 語言碼"
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "IVF (VP8/VP9)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:959
-#: src/mkvtoolnix-gui/merge/tool.cpp:960
+#: src/mkvtoolnix-gui/merge/tool.cpp:965
+#: src/mkvtoolnix-gui/merge/tool.cpp:966
 #, fuzzy, no-c-format
 msgid "Identifying files"
 msgstr "加入檔案"
@@ -7878,17 +7890,17 @@ msgstr "訊息 & 警告:"
 msgid "Input too long: {0} > {1}"
 msgstr "輸入過長: {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:998
+#: src/mkvtoolnix-gui/merge/tool.cpp:1006
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "必須透過 '輸出' 標籤頁中的 '章節檔案' 選項來設定。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1028
+#: src/mkvtoolnix-gui/merge/tool.cpp:1036
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "必須透過 '輸出' 標籤頁中的 '全域標籤' 選項來設定。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1013
+#: src/mkvtoolnix-gui/merge/tool.cpp:1021
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "這類檔案必須透過 '輸出' 標籤頁中的 '剪輯資訊' 選項來設定。"
@@ -8636,7 +8648,7 @@ msgid "MKVToolNix GUI acts as a portable application but cannot write to its bas
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tool.cpp:347
+#: src/mkvtoolnix-gui/merge/tool.cpp:351
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix 圖形使用者介面設定檔"
@@ -9317,13 +9329,13 @@ msgid "No information is transmitted to the server."
 msgstr "不會向伺服器傳送任何資訊。"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:144
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:446
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:448
 #, no-c-format
 msgid "No job has been started yet."
 msgstr "尚未有作業開始。"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:445
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:447
 #, no-c-format
 msgid "No job started yet"
 msgstr "尚未開始作業"
@@ -9505,7 +9517,7 @@ msgstr "不可廢棄"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:296
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:371
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:448
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:450
 #, no-c-format
 msgid "Not finished yet"
 msgstr "尚未完成"
@@ -9517,7 +9529,7 @@ msgstr "不需要從其他容器格式讀取 AAC 軌道，例如 MP4 或 Matrosk
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:370
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:447
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:449
 #, no-c-format
 msgid "Not started yet"
 msgstr "尚未開始"
@@ -9596,6 +9608,11 @@ msgstr "要保留的最近使用項目數目(&R):"
 msgid "Number of chapters:"
 msgstr "章節數:"
 
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:131
+#, fuzzy, no-c-format
+msgid "Number of errors:"
+msgstr "章節數:"
+
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
 #, no-c-format
 msgid "Number of frames: %1"
@@ -9605,6 +9622,11 @@ msgstr "影格數: %1"
 #, no-c-format
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "每影格的毫微秒數 (未縮放前的)。"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:126
+#, fuzzy, no-c-format
+msgid "Number of warnings:"
+msgstr "章節數:"
 
 #: src/common/property_element.cpp:213
 #, no-c-format
@@ -9809,7 +9831,7 @@ msgstr[0] "在 MediaInfo 中開啟檔案(&M)"
 msgid "Open files in chapter editor"
 msgstr "用章節編輯開啟檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:347
+#: src/mkvtoolnix-gui/merge/tool.cpp:351
 #, no-c-format
 msgid "Open settings file"
 msgstr "開啟設定檔"
@@ -10991,7 +11013,7 @@ msgstr "章節另存為 XML"
 msgid "Save chapters to Matroska or WebM file"
 msgstr "儲存章節至 Matroska 或 WebM 檔"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:397
 #, no-c-format
 msgid "Save job output"
 msgstr "儲存作業輸出訊息"
@@ -11055,8 +11077,8 @@ msgstr "掃描其他播放清單的目錄"
 msgid "Scanned Files"
 msgstr "掃描的檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1091
-#: src/mkvtoolnix-gui/merge/tool.cpp:1096
+#: src/mkvtoolnix-gui/merge/tool.cpp:1099
+#: src/mkvtoolnix-gui/merge/tool.cpp:1104
 #, no-c-format
 msgid "Scanning directory"
 msgstr "掃描目錄中"
@@ -11295,7 +11317,7 @@ msgstr "選擇要用來寫入字幕檔或章節資訊的字元集。"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:393
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
-#: src/mkvtoolnix-gui/merge/tool.cpp:318
+#: src/mkvtoolnix-gui/merge/tool.cpp:322
 #, no-c-format
 msgid "Set &language"
 msgstr "設置語言(&L)"
@@ -11492,12 +11514,12 @@ msgstr "顯示偵錯功能表(&G)"
 msgid "Show first 16 bytes of frames and CodecPrivate elements as hex dumps"
 msgstr "以十六進位轉儲形式顯示每影格與 CodecPrivate 的前 16 位元組"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:144
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:166
 #, no-c-format
 msgid "Show job output"
 msgstr "顯示作業輸出訊息"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:143
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:165
 #, no-c-format
 msgid "Show job queue && access job logs"
 msgstr "顯示作業佇列 && 存取作業記錄"
@@ -12079,7 +12101,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:94
 #: src/mkvtoolnix-gui/merge/input.cpp:1411
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:397
 #, no-c-format
 msgid "Text files"
 msgstr "純文字檔"
@@ -12154,9 +12176,9 @@ msgstr ""
 msgid "The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:999
-#: src/mkvtoolnix-gui/merge/tool.cpp:1014
-#: src/mkvtoolnix-gui/merge/tool.cpp:1029
+#: src/mkvtoolnix-gui/merge/tool.cpp:1007
+#: src/mkvtoolnix-gui/merge/tool.cpp:1022
+#: src/mkvtoolnix-gui/merge/tool.cpp:1037
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "程式會將此檔案的檔名填入相應控制項中，該處此前指定的檔名將會被取代。"
@@ -12670,17 +12692,17 @@ msgstr "檔案 \"%1\" 已修改。確定要關閉嗎？所有變更將會遺失�
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "檔案 \"%1\" 已經修改。確定要重新載入嗎？所有變更將會遺失。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:996
+#: src/mkvtoolnix-gui/merge/tool.cpp:1004
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "檔案 '%1' 包含章節。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1011
+#: src/mkvtoolnix-gui/merge/tool.cpp:1019
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "檔案 '%1' 包含剪輯資訊。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1026
+#: src/mkvtoolnix-gui/merge/tool.cpp:1034
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "檔案 '%1' 包含標籤。"
@@ -13075,7 +13097,7 @@ msgstr "兩軌高度不同: {0} 與 {1}"
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "水平的固定兩列布局，其視窗較寬；縱向的標籤頁布局，其視窗較長。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:361
+#: src/mkvtoolnix-gui/merge/tool.cpp:365
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "作業已加入到作業佇列。"
@@ -13203,7 +13225,7 @@ msgstr "已找到 mkvmerge 可執行檔，但無法執行。"
 msgid "The mkvmerge executable was not found."
 msgstr "未找到 mkvmerge 可執行程式。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:392
+#: src/mkvtoolnix-gui/merge/tool.cpp:396
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "已修改 multiplex 設定建立的 \"%1\" 。是否要關閉？所有變更將會遺失。"
@@ -13902,9 +13924,9 @@ msgstr "這些是控制 mkvmerge 建立輸出結構比較少使用的選項。"
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "這些選項專給程式開發使用。這些選項並沒有正式支援且每個發佈版本都會改變很多。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:997
-#: src/mkvtoolnix-gui/merge/tool.cpp:1012
-#: src/mkvtoolnix-gui/merge/tool.cpp:1027
+#: src/mkvtoolnix-gui/merge/tool.cpp:1005
+#: src/mkvtoolnix-gui/merge/tool.cpp:1020
+#: src/mkvtoolnix-gui/merge/tool.cpp:1035
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "此類檔案在 MKVToolNix 中的處理方式與其他原始檔案不同。"
@@ -16276,7 +16298,7 @@ msgstr "mkvmerge 可以自動產生章節。"
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
 msgstr "mkvmerge 能夠讀取音訊光碟的 CUE 工作表並自動將其轉換成章節。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:507
+#: src/mkvtoolnix-gui/merge/tool.cpp:511
 #, no-c-format
 msgid "mkvmerge command line"
 msgstr "mkvmerge 命令列"

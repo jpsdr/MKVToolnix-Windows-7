@@ -63,6 +63,7 @@ static RegionList s_regions, s_commonRegions;
 static CharacterSetList s_characterSets, s_commonCharacterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_regionToDescription;
 static QStringList s_originalCLIArgs;
+static std::optional<QDateTime> s_appStartTimestamp;
 
 static std::optional<bool> s_is_installed;
 
@@ -88,6 +89,8 @@ App::App(int &argc,
   : QApplication{argc, argv}
   , p_ptr{new AppPrivate{}}
 {
+  s_appStartTimestamp = QDateTime::currentDateTime();
+
   // The routines for handling unique numbers cannot cope with
   // multiple chapters being worked on at the same time as they safe
   // already-used numbers in one static container. So just disable them.
@@ -650,5 +653,10 @@ App::event(QEvent *event) {
   return QApplication::event(event);
 }
 #endif
+
+QDateTime
+App::appStartTimestamp() {
+  return *s_appStartTimestamp;
+}
 
 }

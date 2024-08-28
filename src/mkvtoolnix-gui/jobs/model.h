@@ -88,7 +88,7 @@ public:
 Q_SIGNALS:
   void progressChanged(int progress, int totalProgress);
   void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
-  void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
+  void numUnacknowledgedWarningsOrErrorsChanged(int numOldWarnings, int numCurrentWarnings, int numOldErrors, int numCurrentErrors);
 
   void queueStatusChanged(QueueStatus status);
 
