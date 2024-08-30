@@ -540,6 +540,10 @@ parse(const std::string &file_name,
     auto parsed_dvd_chapters = maybe_parse_dvd(file_name, language);
     if (parsed_dvd_chapters) {
       unify_legacy_and_bcp47_languages_and_countries(*parsed_dvd_chapters);
+
+      if (format)
+        *format = format_e::dvd;
+
       return parsed_dvd_chapters;
     }
 #endif
