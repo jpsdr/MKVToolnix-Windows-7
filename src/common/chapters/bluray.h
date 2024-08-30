@@ -21,5 +21,6 @@ class KaxChapters;
 namespace mtx::chapters {
 
 std::shared_ptr<libmatroska::KaxChapters> convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &chapters, mtx::bcp47::language_c const &main_language, std::string const &name_template = {});
+std::shared_ptr<libmatroska::KaxChapters> maybe_parse_bluray(std::string const &file_name, mtx::bcp47::language_c const &language);
 
 }
