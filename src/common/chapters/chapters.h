@@ -55,6 +55,8 @@ enum class format_e {
   ogg,
   cue,
   ffmpeg_meta,
+  dvd,
+  bluray,
 };
 
 mtx::chapters::kax_cptr

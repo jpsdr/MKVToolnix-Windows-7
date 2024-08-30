@@ -16,6 +16,7 @@
 #include "common/chapters/dvd.h"
 #include "common/ebml.h"
 #include "common/kax_file.h"
+#include "common/list_utils.h"
 #include "common/math.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
@@ -486,7 +487,7 @@ Tab::loadFromChapterFile(QString const &fileName,
     if (!append)
       Q_EMIT removeThisTab();
 
-  } else if (format != mtx::chapters::format_e::xml) {
+  } else if (mtx::included_in(format, mtx::chapters::format_e::cue, mtx::chapters::format_e::ogg, mtx::chapters::format_e::ffmpeg_meta)) {
     auto result = checkSimpleFormatForBomAndNonAscii(chapters, fileName, append);
 
     if (!append) {
