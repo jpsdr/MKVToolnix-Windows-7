@@ -22,6 +22,7 @@
 
 #include "common/bcp47.h"
 #include "common/chapters/chapters.h"
+#include "common/chapters/bluray.h"
 #include "common/chapters/dvd.h"
 #include "common/construct.h"
 #include "common/container.h"
@@ -547,6 +548,16 @@ parse(const std::string &file_name,
       return parsed_dvd_chapters;
     }
 #endif
+
+    auto parsed_bluray_chapters = maybe_parse_bluray(file_name, language);
+    if (parsed_bluray_chapters) {
+      unify_legacy_and_bcp47_languages_and_countries(*parsed_bluray_chapters);
+
+      if (format)
+        *format = format_e::bluray;
+
+      return parsed_bluray_chapters;
+    }
 
     mm_text_io_c in(std::make_shared<mm_file_io_c>(file_name));
     auto parsed_chapters = parse(&in, min_ts, max_ts, offset, language, charset, exception_on_error, format, tags);

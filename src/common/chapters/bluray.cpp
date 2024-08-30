@@ -16,6 +16,8 @@
 #include "common/chapters/chapters.h"
 #include "common/construct.h"
 #include "common/ebml.h"
+#include "common/hacks.h"
+#include "common/mm_file_io.h"
 #include "common/unique_numbers.h"
 
 namespace mtx::chapters {
@@ -64,6 +66,21 @@ convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &mpls_cha
   mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(*kax_chapters);
 
   return kax_chapters;
+}
+
+std::shared_ptr<libmatroska::KaxChapters>
+maybe_parse_bluray(std::string const &file_name,
+                   mtx::bcp47::language_c const &language) {
+
+  mm_file_io_c in{file_name};
+  auto parser = mtx::bluray::mpls::parser_c{};
+
+  parser.enable_dropping_last_entry_if_at_end(!mtx::hacks::is_engaged(mtx::hacks::KEEP_LAST_CHAPTER_IN_MPLS));
+
+  if (parser.parse(in))
+    return mtx::chapters::convert_mpls_chapters_kax_chapters(parser.get_chapters(), language, g_chapter_generation_name_template.get_translated());
+
+  return {};
 }
 
 }
