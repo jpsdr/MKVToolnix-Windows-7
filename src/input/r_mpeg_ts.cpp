@@ -32,6 +32,7 @@
 #include "common/checksums/base_fwd.h"
 #include "common/dovi_meta.h"
 #include "common/endian.h"
+#include "common/hacks.h"
 #include "common/hdmv_textst.h"
 #include "common/mm_io_x.h"
 #include "common/mp3.h"
@@ -1427,6 +1428,9 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
 void
 reader_c::pair_dovi_base_and_enhancement_layer_tracks() {
+  if (mtx::hacks::is_engaged(mtx::hacks::KEEP_DOLBY_VISION_LAYERS_SEPARATE))
+    return;
+
   for (std::size_t idx = 0, num_tracks = m_tracks.size(); idx < num_tracks; ++idx) {
     auto &track = *m_tracks[idx];
 
