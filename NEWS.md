@@ -1,4 +1,4 @@
-# Version ?
+# Version 87.0 "Black as the Sky" 2024-09-07
 
 ## New features and enhancements
 
