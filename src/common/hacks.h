@@ -47,7 +47,8 @@ constexpr unsigned int APPEND_AND_SPLIT_FLAC              = 22;
 constexpr unsigned int DONT_NORMALIZE_PARAMETER_SETS      = 23;
 constexpr unsigned int KEEP_WHITESPACES_IN_TEXT_SUBTITLES = 24;
 constexpr unsigned int ALWAYS_WRITE_BLOCK_ADD_IDS         = 25;
-constexpr unsigned int MAX_IDX                            = 25;
+constexpr unsigned int KEEP_DOLBY_VISION_LAYERS_SEPARATE  = 26;
+constexpr unsigned int MAX_IDX                            = 26;
 }
 
 struct hack_t {
