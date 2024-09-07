@@ -68,6 +68,7 @@ get_list() {
   hacks.emplace_back("keep_whitespaces_in_text_subtitles", svec{ Y("Normally spaces & tabs are removed from the beginning & the end of each line in text subtitles."),
                                                                  Y("If this hack is enabled, they won't be removed.") });
   hacks.emplace_back("always_write_block_add_ids",         svec{ Y("If enabled, the BlockAddID element will be written even if it's set to its default value of 1.") });
+  hacks.emplace_back("keep_dolby_vision_layers_separate",  svec{ Y("Prevents mkvmerge from looking for Dolby Vision Enhancement Layers stored in a separate track & combining them with the track containing the Dolby Vision Base Layer.") });
   hacks.emplace_back("cow",                                svec{ Y("No help available.") });
 
   return hacks;
