@@ -2,15 +2,15 @@
 
 ## New features and enhancements
 
+* mkvmerge: chapters: added support for specifying MPLS files with
+  `--chapters`, too, not just as regular source files. The documentation
+  stated this was possible already, but that wasn't actually the
+  case. Implements/fixes #3735.
 * MKVToolNix GUI: multiplexer: added a progress dialog that is shown during
   file identification.
 * MKVToolNix GUI: jobs: the status bar now differentiates between numbers of
   warnings/errors that occurred in the current session and those that occurred
   before the current session. Implements #3732.
-* mkvmerge: chapters: added support for specifying MPLS files with
-  `--chapters`, too, not just as regular source files. The documentation
-  stated this was possible already, but that wasn't actually the
-  case. Implements/fixes #3735.
 
 ## Bug fixes
 
