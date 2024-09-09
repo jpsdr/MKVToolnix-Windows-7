@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2024-09-07 12:50+0200\n"
+"POT-Creation-Date: 2024-08-27 21:24+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: CamielK, 2022\n"
+"Last-Translator: Rob Cuiper, 2024\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -388,7 +388,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:416
 #, no-c-format
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
-msgstr "  --debug <topic>          Zet debuggen uitvoer aan voor 'topic'.\n"
+msgstr "  --debug <topic>          Zet debug uitvoer aan voor 'topic'.\n"
 
 #: src/merge/mkvmerge.cpp:276
 #, no-c-format
@@ -444,7 +444,7 @@ msgid ""
 "                           track headers, chapters and tags.\n"
 msgstr ""
 "  --disable-language-ietf  Schrijf IETF BCP 47 taalelementen niet in\n"
-"                           track headers, hoofdstukken and tags.\n"
+"                           track headers, hoofdstukken en tags.\n"
 
 #: src/merge/mkvmerge.cpp:140
 #, no-c-format
@@ -503,7 +503,7 @@ msgid ""
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
 "                           Pas de frame-/veldsnelheid aan die in de video is opgeslagen\n"
-"                           bitstream om overeen te komen met de standaardduur van het nummer..\n"
+"                           bitstream om overeen te komen met de standaardduur van het nummer.\n"
 
 #: src/merge/mkvmerge.cpp:408
 #, no-c-format
@@ -534,7 +534,7 @@ msgid ""
 msgstr ""
 "  --generate-chapters <mode>\n"
 "                           Genereer automatisch hoofdstukken volgens\n"
-"                           de mode ('wanneer bijvoegen'' of 'interval:<duration>').\n"
+"                           de mode ('wanneer bijvoegen' of 'interval:<duration>').\n"
 
 #: src/merge/mkvmerge.cpp:113
 #, no-c-format
@@ -658,13 +658,13 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:235
 #, no-c-format
-msgid "  --no-chapters            Don't keep chapters from the source file.\n"
-msgstr "  --no-chapters            Neem hoofdstukken uit bronbestand niet over.\n"
+msgid "  --no-chapters      Don't keep chapters from the source file.\n"
+msgstr "  --no-chapters     Neem hoofdstukken uit bronbestand niet over.\n"
 
 #: src/merge/mkvmerge.cpp:136
 #, no-c-format
-msgid "  --no-cues                Do not write the cue data (the index).\n"
-msgstr "  --no-cues                         Schrijf geen volg document(en) (cue) data  (de index).\n"
+msgid "  --no-cues          Do not write the cue data (the index).\n"
+msgstr "  --no-cues         Schrijf geen volg document(en) (cue) data (de index).\n"
 
 #: src/merge/mkvmerge.cpp:137
 #, no-c-format
@@ -922,8 +922,8 @@ msgid ""
 "                           read as for the conversion to UTF-8.\n"
 msgstr ""
 "  --sub-charset <TID:charset>\n"
-"                           Onderzoekt de karakterset van de tekst ondertiteling\n"
-"                           gelezen kunnen worden, om deze om te zetten naar UTF-8.\n"
+"                           Onderzoekt de karakterset hoe de tekst ondertiteling\n"
+"                           gelezen wordt, om deze om te zetten naar UTF-8.\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, fuzzy, no-c-format
@@ -965,7 +965,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:269
 #, no-c-format
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
-msgstr "  --track-name <TID:name>  Stelt de naam voor een spoor in.\n"
+msgstr "  --track-name <TID:name>  Stelt de naam van een spoor in.\n"
 
 #: src/merge/mkvmerge.cpp:123
 #, fuzzy, no-c-format
@@ -979,7 +979,7 @@ msgid ""
 msgstr ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           Een komma gescheiden lijst van beide bestand ID's\n"
-"                           en spoor ID's welke de volgorde controleert \n"
+"                           en spoor ID's welke de volgorde controleert\n"
 "                           van de sporen in het doelbestand.\n"
 
 #: src/merge/mkvmerge.cpp:231
@@ -1050,7 +1050,7 @@ msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
 msgstr ""
-"  -J <file>                Dit is een handig alternatief voorr\n"
+"  -J <file>                Dit is een handig alternatief voor\n"
 "                           \"--identification-format json --identify file\".\n"
 
 #: src/merge/mkvmerge.cpp:229
@@ -1155,7 +1155,7 @@ msgid ""
 "                           Redirects all messages into this file.\n"
 msgstr ""
 "  -r, --redirect-output <file>\n"
-"                          Omleiden alle berichten naar dit bestand.\n"
+"                          Leid alle berichten om naar dit bestand.\n"
 
 #: src/merge/mkvmerge.cpp:217
 #, no-c-format
@@ -1190,8 +1190,8 @@ msgid ""
 "                           floating point numbers.\n"
 msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
-"                           Synchroniseer en stel bij, de sporen, tijd codes met\n"
-"                           het id TID met 'd' ms.\n"
+"                           Synchroniseer en stel bij, de tijd codes van de sporen,\n"
+"                           met het id TID met 'd' ms.\n"
 "                           'o/p': Stel tijd codes bij door te vermenigvuldigen met\n"
 "                           'o/p' om lineaire afwijkingen te voorkomen. 'p' standaard\n"
 "                           naar 1 indien weggelaten. Beide 'o' en 'p' kan een\n"
@@ -1205,7 +1205,7 @@ msgstr "  <file1> + <file2>        Voeg bestand2 aan bestand1 toe.\n"
 #: src/merge/mkvmerge.cpp:184
 #, no-c-format
 msgid "  <file1> +<file2>         Same as \"<file1> + <file2>\".\n"
-msgstr "  <file1> +<file2>         Hetzelfde als \"<file1> + <file2>\".\n"
+msgstr "  <file1> +<file2>        Hetzelfde als \"<file1> + <file2>\".\n"
 
 #: src/merge/mkvmerge.cpp:186
 #, no-c-format
@@ -1219,7 +1219,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:188
 #, no-c-format
 msgid "  =<file>                  Same as \"= <file>\".\n"
-msgstr "  =<file>                  Hetzelfde als \"= <file>\".\n"
+msgstr "  =<file>                 Hetzelfde als \"= <file>\".\n"
 
 #: src/merge/mkvmerge.cpp:418
 #, no-c-format
@@ -1619,7 +1619,7 @@ msgstr "%1 pixels"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:132
 #, no-c-format
 msgid "%1 since starting the program"
-msgstr ""
+msgstr "%1 sinds het starten van het programma"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:117
 #, fuzzy, no-c-format
@@ -1826,7 +1826,7 @@ msgstr "&Sluit scherm"
 msgid "&Code of Conduct"
 msgstr "&Gedragscode"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:228
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:227
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
 msgid "&Collapse all"
@@ -1845,7 +1845,7 @@ msgstr "Controleer op beschikbare opwaarderingen"
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, no-c-format
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "Vernauwen begin en einde tijd &codes van sub hoofdstukken van de bijbehorende start en einde tijdcodes"
+msgstr "Vernauw begin en einde tijd &codes van sub hoofdstukken van de bijbehorende start en einde tijdcodes"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:1052
 #, fuzzy, no-c-format
@@ -1886,14 +1886,14 @@ msgstr "&Ontkoppel scherm"
 #: src/mkvtoolnix-gui/merge/input.cpp:1799
 #, no-c-format
 msgid "&Disable all items"
-msgstr "Uitzetten alle items"
+msgstr "Zet alle items &Uit"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:395
 #, no-c-format
 msgid "&Disable selected attachment"
 msgid_plural "&Disable selected attachments"
 msgstr[0] "Uitzetten geselecteer&de bijlage"
-msgstr[1] "Ve&rwijder geselecteerde bijlage"
+msgstr[1] "Uitzetten geselecteer&de bijlagen"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:34
 #, no-c-format
@@ -1908,7 +1908,7 @@ msgstr "S&ysteem informatie"
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:167
 #, no-c-format
 msgid "&Download"
-msgstr "&Ophalen"
+msgstr "&Download"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:186
 #, no-c-format
@@ -1922,20 +1922,20 @@ msgstr "B&ewerk beschikbare acties om uit te voeren"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2245
 #, no-c-format
-msgid "&Elide text in tab headers of tab widgets"
-msgstr ""
+msgid "&Slide text in tab headers of tab widgets"
+msgstr "&Schuif tekst in tabbladkoppen van tabbladwidgets"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1798
 #, no-c-format
 msgid "&Enable all items"
-msgstr "Aanz&etten alle items"
+msgstr "Alle items aanz&etten"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:394
 #, no-c-format
 msgid "&Enable selected attachment"
 msgid_plural "&Enable selected attachments"
 msgstr[0] "Aanz&etten geselecteerde bijlage"
-msgstr[1] "Ve&rwijder geselecteerde bijlage"
+msgstr[1] "Aanz&etten geselecteerde bijlages"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 #, no-c-format
@@ -1945,18 +1945,18 @@ msgstr "Aang&ezet"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2279
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "Zorg &ervoor dat bij minstens één spoor van elk type de vlag \"spoor ingeschakeld"\ is ingesteld"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:131
 #, no-c-format
 msgid "&Escape arguments for:"
 msgstr "&Escape argumenten voor:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:227
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:226
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
 #, no-c-format
 msgid "&Expand all"
-msgstr "&All&es uitklappen"
+msgstr "All&es uitklappen"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:392
 #, fuzzy, no-c-format
@@ -1966,7 +1966,7 @@ msgstr "Het bereikpercentage van sonde '{0}' is ongeldig.\n"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
 #, no-c-format
 msgid "&Extraction tool"
-msgstr "&Uitpak hulmiddel"
+msgstr "&Uitpak hulpmiddel"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:691
 #, no-c-format
@@ -1991,9 +1991,9 @@ msgstr "&Lettertype && grootte:"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
 #, no-c-format
 msgid "&Free-form input"
-msgstr ""
+msgstr "&Vrije invoer"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:237
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:236
 #, no-c-format
 msgid "&Generate sub-chapters"
 msgstr "&Genereer sub-hoofdstukken"
@@ -2001,7 +2001,7 @@ msgstr "&Genereer sub-hoofdstukken"
 #: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
 #, no-c-format
 msgid "&Handle all files from all directories as a single list of files"
-msgstr ""
+msgstr "Alle bestanden uit alle mappen als één enkele lijst met bestanden be&handelen"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:672
 #, no-c-format
@@ -2016,7 +2016,7 @@ msgstr "&Help"
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:166
 #, no-c-format
 msgid "&Hex dumps:"
-msgstr "&Hex dump:"
+msgstr "&Hex dumps:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:519
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:523
@@ -2193,7 +2193,7 @@ msgstr "&Open instellingen"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:653
 #, fuzzy, no-c-format
 msgid "&Open supported chapter file format"
-msgstr "Niet ondersteunt bestand format"
+msgstr "&Open ondersteund hoofdstukbestandsformaat"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:520
 #, no-c-format
@@ -2267,7 +2267,7 @@ msgstr "&Bestand opnieuw inladen"
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
 msgstr[0] "Ve&rwijder bijlage"
-msgstr[1] "Ve&rwijder bijlage"
+msgstr[1] "Ve&rwijder bijlages"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, no-c-format
@@ -2279,14 +2279,14 @@ msgstr "Eindtijdstempels ve&rwijderen"
 msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "Ve&rwijder bestand"
-msgstr[1] "Ve&rwijder bestand"
+msgstr[1] "Ve&rwijder bestanden"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:223
 #, no-c-format
 msgid "&Remove job"
 msgid_plural "&Remove jobs"
 msgstr[0] "&Verwijder taak(en)"
-msgstr[1] "&Verwijder taak(en)"
+msgstr[1] "&Verwijder taken"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
 #, no-c-format
@@ -2298,15 +2298,15 @@ msgstr "Ve&rwijder taak uit wachtrij na voltooiing:"
 msgid "&Remove selected attachment"
 msgstr "Ve&rwijder geselecteerde bijlage"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:234
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:233
 #, no-c-format
 msgid "&Remove selected edition or chapter"
-msgstr "&Verwijderen geselecteerde edition of hoofdstuk"
+msgstr "&Verwijder geselecteerde editie of hoofdstuk"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:400
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "Ve&rvangen door genormaliseerde vorm"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2328,7 +2328,7 @@ msgstr "&Opslaan"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:382
 #, no-c-format
 msgid "&Save attachment content to a file"
-msgstr "Sla bijlage inhoud op naar een bestand"
+msgstr "&Sla bijlage inhoud op naar een bestand"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:145
 #, no-c-format
@@ -2390,7 +2390,7 @@ msgstr "&Start && einde:"
 #, no-c-format
 msgid "&Start job automatically"
 msgid_plural "&Start jobs automatically"
-msgstr[0] "&Start taken automatisch"
+msgstr[0] "&Start taak automatisch"
 msgstr[1] "&Start taken automatisch"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
@@ -2462,7 +2462,7 @@ msgstr "&Video"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
 #, no-c-format
 msgid "&Video tracks:"
-msgstr "&Video sporen"
+msgstr "&Video sporen:"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:413
 #, no-c-format
@@ -2477,7 +2477,7 @@ msgstr "&Volume:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
 #, no-c-format
 msgid "&When to set the language:"
-msgstr "&Wanneer taal in te stellen"
+msgstr "&Wanneer taal in te stellen:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
 #, no-c-format
@@ -2652,7 +2652,7 @@ msgstr "'-A' en '-a' zijn gebruikt in hetzelfde bronbestand\n"
 #: src/merge/mkvmerge.cpp:2005
 #, no-c-format
 msgid "'-B' and '-b' used on the same source file.\n"
-msgstr "'-B' en'-b' zijn gebruikt in hetzelfde bronbestand\n"
+msgstr "'-B' en '-b' zijn gebruikt in hetzelfde bronbestand\n"
 
 #: src/merge/mkvmerge.cpp:1999
 #, no-c-format
@@ -2689,13 +2689,13 @@ msgstr "'{0}' mist de bestandsnaam.\n"
 msgid "'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"
 msgstr "'{0}' is geen van beiden een geldige iso639-2 noch een geldige iso639-1 code. Zie 'mkvmerge --list-languages' voor een lijst van alle talen en de bijbehorende ISO 639-2 codes.\n"
 
-#: src/common/chapters/chapters.cpp:294
-#: src/common/chapters/chapters.cpp:314
+#: src/common/chapters/chapters.cpp:293
+#: src/common/chapters/chapters.cpp:313
 #, no-c-format, c++-format
 msgid "'{0}' is not a CHAPTERxx=... line."
 msgstr "'{0}' is geen HOOFDSTUKxx=... regel."
 
-#: src/common/chapters/chapters.cpp:318
+#: src/common/chapters/chapters.cpp:317
 #, no-c-format, c++-format
 msgid "'{0}' is not a CHAPTERxxNAME=... line."
 msgstr "'{0}' is geen HOOFDSTUKxxNAAM=... regel."
@@ -2743,7 +2743,7 @@ msgstr "'{0}' is geen geldige veldvolgorde."
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "'{0}' is geen geldige bestands ID in '--track-order {1}'.\n"
 
-#: src/common/hacks.cpp:118
+#: src/common/hacks.cpp:117
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' is geen geldige kraak.\n"
@@ -2938,17 +2938,17 @@ msgstr "(Extra delen)"
 #: src/input/r_flac.cpp:95
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
-msgstr "+-> Het FLAC bestand ontleden. Dit kan héél lang duren.\n"
+msgstr "+-> Het FLAC bestand parseren. Dit kan héél lang duren.\n"
 
 #: src/input/r_flac.cpp:151
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
-msgstr "+-> Voor-ontleden FLAC bestand: 100%\n"
+msgstr "+-> Voor-parseren FLAC bestand: 100%\n"
 
 #: src/input/r_flac.cpp:128
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
-msgstr "+-> Voor-ontleden FLAC bestand: {0}%{1}"
+msgstr "+-> Voor-parseren FLAC bestand: {0}%{1}"
 
 #: src/merge/generic_reader.cpp:290
 #, no-c-format, c++-format
@@ -3067,8 +3067,8 @@ msgstr "<Tag> mist de <Simple> bijbehorende deel."
 msgid "<Unnamed>"
 msgstr "<Niet benoemd>"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:213
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:263
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:212
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:262
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<Niet opgeslagen bestand>"
@@ -3082,7 +3082,7 @@ msgstr "<{0}> is geen geldig bijbehorend element van <{1}> op positie {2}."
 #: src/input/r_matroska.cpp:2650
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
-msgstr "Een blok is gevonden op tijd moment {0} voor spoor nummer {1}. Maar geen beginblokken informatie is gevonden voor dat spoor nummer. Het blok wordt overgeslagen.\n"
+msgstr "Er is een blok gevonden op tijdstempel {0} voor tracknummer {1}. Er zijn echter geen headers gevonden voor dat tracknummer. Het blok wordt overgeslagen.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:342
 #, no-c-format
@@ -3140,8 +3140,8 @@ msgstr "Een naam voor dit spoor die spelers kunnen weergeven en de gebruiker hel
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
-msgstr[0] "Er is een probleem gedetecteerd met deze installatie ven MKVToolnix:"
-msgstr[1] "Er zzijn verschillende problemen gedetecteerd met deze MKVToolnix installatie"
+msgstr[0] "Er is een probleem gedetecteerd met deze installatie van MKVToolnix:"
+msgstr[1] "Er zijn verschillende problemen gedetecteerd met deze MKVToolnix installatie"
 
 #: src/common/property_element.cpp:125
 #, no-c-format
@@ -3157,7 +3157,7 @@ msgstr "Een enkele Matroska blok bevat ofwel een volledig beeld (voor progressie
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:606
 #, no-c-format
 msgid "A subtitle track is considered to be 'forced' track if any of the following conditions are met:"
-msgstr ""
+msgstr "Een ondertiteltrack wordt als een 'geforceerde' track beschouwd als aan een van de volgende voorwaarden is voldaan:"
 
 #: src/merge/generic_reader.cpp:177
 #, no-c-format, c++-format
@@ -3182,17 +3182,17 @@ msgstr "Een uniek ID om het vorige gekoppelde segment te identificeren (128 bits
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:51
 #, no-c-format
 msgid "A unique, positive number unambiguously identifying the attachment within the Matroska file."
-msgstr "Een uniek, positief getal eenduidig identificeren van de bijlage in het Matroska bestand."
+msgstr "Een uniek, positief nummer dat de bijlage in het Matroska-bestand eenduidig ​​identificeert."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:301
 #, no-c-format
 msgid "A&cknowledge warnings/errors"
-msgstr "A&anvaard waarschuwingen / fouten"
+msgstr "A&anvaard waarschuwingen/fouten"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:657
 #, fuzzy, no-c-format
 msgid "A&ppend chapters from supported file format"
-msgstr "T&oevoegen hoofdstuk van een Matroska, WebM of hoofdstuk bestand"
+msgstr "T&oevoegen hoofdstukken van ondersteund bestandsformaat"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1787
 #: src/mkvtoolnix-gui/merge/input.cpp:1788
@@ -3219,7 +3219,7 @@ msgstr "AAC (Advanced Audio Coding)"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2258
 #, no-c-format
 msgid "AAC is SBR/HE-AAC/AAC+:"
-msgstr "AAC is ssbr/hee-aac/aac+:"
+msgstr "AAC is SBR/HE-AAC/AAC+:"
 
 #: src/input/unsupported_types_signature_prober.cpp:66
 #, no-c-format
@@ -3249,7 +3249,7 @@ msgstr "ALAC privé data grootte komt niet overeen\n"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:165
 #, no-c-format
-msgid "ASCII string (no special chars like Umlaute etc.)"
+msgid "ASCII string (no special chars like Umlaut etc.)"
 msgstr "ASCII reeks (geen speciale karakters zoals Umlaut etc.)"
 
 #: src/output/p_av1.h:33
@@ -3260,7 +3260,7 @@ msgstr "AV1"
 #: src/common/file_types.cpp:52
 #, no-c-format
 msgid "AV1 Open Bitstream Units stream"
-msgstr "AV1 Bitstream Units-stream openen"
+msgstr "AV1 Open Bitstream Units stream"
 
 #: src/common/file_types.cpp:76
 #: src/output/p_avc.h:33
@@ -3317,7 +3317,7 @@ msgstr "Afgebroken door gebruiker"
 #: src/common/cli_parser.cpp:195
 #, no-c-format
 msgid "Aborts the program after the first warning is emitted."
-msgstr "Breekt het programma af, nadat de eerste waarschuwing is afgegeven."
+msgstr "Breekt het programma af nadat de eerste waarschuwing is afgegeven."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #, no-c-format
@@ -3372,7 +3372,7 @@ msgstr "Acties voor afhandelen van markeringen en hoofdstukken"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
-msgstr ""
+msgstr "Voeg &Blu-ray-coverafbeeldingen toe als bijlagen"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:335
 #, no-c-format
@@ -3441,27 +3441,27 @@ msgstr "Voeg media bestanden toe"
 msgid "Add media files as additional parts"
 msgstr "Voeg media bestanden en additionele delen toe"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:233
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:232
 #, no-c-format
 msgid "Add new &sub-chapter inside"
 msgstr "Voeg een nieuw &sub hoofdstuk in"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:231
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:230
 #, no-c-format
 msgid "Add new c&hapter before"
 msgstr "Voeg een nieuw &hoofdstuk voor"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:232
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:231
 #, no-c-format
 msgid "Add new ch&apter after"
 msgstr "Voeg een nieuw hoofdstuk n&a"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:229
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:228
 #, no-c-format
 msgid "Add new e&dition before"
 msgstr "Voeg een nieuwe e&ditie in vóór"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:230
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:229
 #, no-c-format
 msgid "Add new ed&ition after"
 msgstr "Voeg een nieuwe ed&itie toe na"
@@ -3479,7 +3479,7 @@ msgstr "Vervang of voeg toe hoofdstukken in het bestand met degene uit het besta
 #: src/propedit/propedit_cli_parser.cpp:254
 #, no-c-format
 msgid "Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"
-msgstr "Vervang of voeg toe markeringen in het bestand met degene uit het bestand 'filename' of verwijdert hen wanneer 'filename' leeg is (zie hier en op hoofdpagina voor ingaven)"
+msgstr "Vervang of voeg toe markeringen in het bestand met degene uit het bestand 'filename' of verwijdert hen wanneer 'filename' leeg is (zie hier en op hoofdpagina voor syntaxis)"
 
 #: src/propedit/propedit_cli_parser.cpp:261
 #, no-c-format
@@ -3502,24 +3502,24 @@ msgstr "Toevoegen hoofdstuk(ken) bestand(en)"
 #: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
 #, no-c-format
 msgid "Adding directories via drag & drop or copy & paste"
-msgstr ""
+msgstr "Mappen toevoegen via slepen en neerzetten of kopiëren en plakken"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2280
 #, fuzzy, no-c-format
 msgid "Adding files"
-msgstr "Toevoegen markering bestanden"
+msgstr "Bestanden toevoegen"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:165
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
 #, no-c-format
 msgid "Adding files via drag & drop or copy & paste"
-msgstr ""
+msgstr "Bestanden toevoegen via slepen en neerzetten of kopiëren en plakken"
 
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:28
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:29
 #, fuzzy, no-c-format
 msgid "Adding multiple files via 'Add source files'"
-msgstr "Toevoegen markering bestanden"
+msgstr "Meerdere bestanden toevoegen via 'Bronbestanden toevoegen'"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:1017
 #, no-c-format
@@ -3534,9 +3534,9 @@ msgstr "Toevoegen markering bestanden"
 #: src/mkvtoolnix-gui/merge/tab.cpp:595
 #, no-c-format
 msgid "Adding the job to the queue failed"
-msgstr ""
+msgstr "Het toevoegen van de taak aan de wachtrij is mislukt"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:236
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:235
 #, no-c-format
 msgid "Additional &modifications"
 msgstr "Overige &modificaties"
@@ -3575,17 +3575,17 @@ msgstr "Adler-32: 0x{0:08x}"
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
 #, fuzzy, no-c-format
 msgid "After a job completes &successfully"
-msgstr "Nadat een taak &succesvol of met waarschuwing(en) voltooid is"
+msgstr "Nadat een taak &succesvol voltooid is"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:326
 #, fuzzy, no-c-format
 msgid "After a job exits with &warnings"
-msgstr "Nadat een taak &succesvol of met waarschuwing(en) voltooid is"
+msgstr "Nadat een taak met &waarschuwing(en) voltooid is"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
 msgid "After a job exits with an &error or the user aborts the job"
-msgstr "Nadat een taak &een spoor heeft verlaten met een fout of de gebruiker de taak heeft afgebroken"
+msgstr "Nadat &een taak met een fout is beëindigd of de gebruiker de taak heeft afgebroken"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 #, no-c-format
@@ -3644,7 +3644,7 @@ msgstr "Algoritme"
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:52
 #, fuzzy, no-c-format
 msgid "All chapter names regardless of their language"
-msgstr "– Alle hoofdstuk namen ongeacht hun taal –"
+msgstr "Alle hoofdstuk namen ongeacht hun taal"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:385
 #, no-c-format
@@ -3666,8 +3666,8 @@ msgstr "Alle elementen in a boomachtige structuur"
 msgid "All entries"
 msgstr "Alle ingangen"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:809
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:808
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:205
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:191
@@ -3751,7 +3751,7 @@ msgstr "Alle waarden zijn gebaseerd op 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 #: src/common/hacks.cpp:43
 #, no-c-format
 msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
-msgstr "Staat AVC/H.264 video opslag toe in Video-for-Windows compatibiliteitsmode, b.v. wanneer gelezen wordt van een AVI bestand"
+msgstr "Staat AVC/H.264 video opslag toe in Video-for-Windows compatibiliteitsmode, b.v. wanneer gelezen wordt van een AVI bestand."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1028
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1048
@@ -3773,7 +3773,7 @@ msgstr "Gebruik ook het correctie bestand '{0}c'.\n"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
 #, fuzzy, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
-msgstr "Maak nieuwe samenvoeg instelling voor &elk bestand"
+msgstr "Maak altijd nieuwe samenvoeg instelling voor &elk video bestand"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:175
@@ -3800,7 +3800,7 @@ msgstr "Altijd gebruiker vragen"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "Altijd automatisch vervangen door canonieke vorm"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
 #, fuzzy, no-c-format
@@ -3815,17 +3815,17 @@ msgstr "Zet altijd kopiëren aan voor alle sporen van de volgende typen ongeacht
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
-msgstr ""
+msgstr "Altijd kopiëren van ge&forceerde ondertitelsporen inschakelen"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:263
 #, fuzzy, no-c-format
 msgid "Always s&kip files"
-msgstr "Altijd gebruiker vragen"
+msgstr "&Sla altijd bestanden over"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, no-c-format
 msgid "Always s&kip while attaching new files when attachment with same name exists"
-msgstr ""
+msgstr "Altijd overs&laan bij het toevoegen van nieuwe bestanden als er een bijlage met dezelfde naam bestaat"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
@@ -3846,7 +3846,7 @@ msgstr "Gebruik altijd stan&daard beschrijving bij toevoegen taak aan de wachtri
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:107
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
-msgstr "Gebruik altijd volledige pad namen, zelfs indien de aanvraag ligt in dezelfde map als de GUI."
+msgstr "Gebruik altijd volledige padnamen, zelfs als de applicatie zich in dezelfde directory bevindt als de GUI."
 
 #: src/propedit/propedit_cli_parser.cpp:295
 #, no-c-format
@@ -3891,7 +3891,7 @@ msgstr "Een verlaten bestandsnaam behorende bij het vorige segment."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:428
 #, no-c-format
 msgid "An example: 'movie.001.mp4', 'movie.002.mp4' and 'movie.003.mp4'"
-msgstr ""
+msgstr "Een voorbeeld: 'movie.001.mp4', 'movie.002.mp4' en 'movie.003.mp4'"
 
 #: src/merge/mkvmerge.cpp:3216
 #, no-c-format
@@ -3917,7 +3917,7 @@ msgstr "Analyseert MPEG4 bit stromen, zet elk beeld in één Matroska blok, gebr
 #: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
 msgid "Any later packets of other tracks will be discarded."
-msgstr ""
+msgstr "Alle latere pakketten met andere tracks worden verwijderd."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:251
 #: src/mkvtoolnix-gui/merge/output.cpp:252
@@ -3933,7 +3933,7 @@ msgstr "Een andere bestandsnaam is toegevoegd als bronbestand voor samenvoegen, 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:635
 #, no-c-format
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
-msgstr "Afgezien van het aan de GUI vragen, kan altijd de neergezette bestanden openen als nieuwe tabbladen of kan ze het altijd toevoegen als nieuwe bijlagen aan het huidige tabblad."
+msgstr "Naast de vraag kan de GUI de gedropte bestanden altijd openen als nieuwe tabbladen of ze toevoegen als nieuwe bijlagen aan het huidige tabblad."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:195
 #, no-c-format
@@ -3958,7 +3958,7 @@ msgstr "Bijvoegen {0} van bestand nr. {1} ('{2}') naar spoor {3} van bestand nr.
 #: src/merge/output_control.cpp:1086
 #, fuzzy, no-c-format
 msgid "Appending tracks of this type is not supported."
-msgstr "Lezen van versleutelde VOB's niet ondersteunt.\n"
+msgstr "Lezen van versleutelde VOB's niet ondersteund.\n"
 
 #: src/merge/mkvmerge.cpp:707
 #, no-c-format
@@ -4060,7 +4060,7 @@ msgstr "Audio"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:526
 #, no-c-format
 msgid "Audio and subtitle files often contain the words 'cc' or 'sdh' in their file name to signal that they're intended for hearing impaired people."
-msgstr ""
+msgstr "Audio- en ondertitelingsbestanden bevatten vaak de woorden 'cc' of 'sdh' in hun bestandsnaam om aan te geven dat ze bedoeld zijn voor slechthorenden."
 
 #: src/common/property_element.cpp:214
 #, no-c-format
@@ -4075,7 +4075,7 @@ msgstr "Audio kanalen"
 #: src/common/property_element.cpp:215
 #, fuzzy, no-c-format
 msgid "Audio emphasis"
-msgstr "Audio kanalen"
+msgstr "Audio nadruk"
 
 #: src/merge/mkvmerge.cpp:1065
 #, fuzzy, no-c-format, c++-format
@@ -4095,7 +4095,7 @@ msgstr "Audio eigenschappen"
 #: src/common/property_element.cpp:211
 #, no-c-format
 msgid "Audio sampling frequency"
-msgstr "Audio voorbeeld frequentie"
+msgstr "Audio-bemonsteringsfrequentie"
 
 #: src/common/kax_element_names.cpp:107
 #, no-c-format
@@ -4135,12 +4135,12 @@ msgstr "Automatisch aanzetten van WebM herkenbare mode via bestandsnaam extensie
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
 #, no-c-format
 msgid "Automatically set the file &title from source files"
-msgstr "Zet automatisch het bestand &titel vanuit bronbestand"
+msgstr "Automatisch de bestands&titel instellen op basis van bronbestanden"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
-msgstr "Zet automatisch spoo&r vertraging vanuit bron bestandsnaam"
+msgstr "Automatisch trackvertragingen instellen op basis van &de bronbestandsnaam"
 
 #: src/common/command_line.cpp:258
 #, no-c-format
@@ -4205,27 +4205,27 @@ msgstr "Blok"
 #: src/common/kax_element_names.cpp:186
 #, fuzzy, no-c-format
 msgid "Block addition ID extra data"
-msgstr "Extra blok ID"
+msgstr "Extra blok ID data"
 
 #: src/common/kax_element_names.cpp:187
 #, fuzzy, no-c-format
 msgid "Block addition ID name"
-msgstr "Extra blok ID"
+msgstr "Extra blok ID naam"
 
 #: src/common/kax_element_names.cpp:188
 #, fuzzy, no-c-format
 msgid "Block addition ID type"
-msgstr "Extra blok ID"
+msgstr "Extra blok ID type"
 
 #: src/common/kax_element_names.cpp:189
 #, fuzzy, no-c-format
 msgid "Block addition ID value"
-msgstr "Extra blok"
+msgstr "Extra blok ID waarde"
 
 #: src/common/kax_element_names.cpp:185
 #, fuzzy, no-c-format
 msgid "Block addition mapping"
-msgstr "Extra blok"
+msgstr "Extra blok mapping"
 
 #: src/common/kax_element_names.cpp:266
 #, no-c-format
@@ -4241,7 +4241,7 @@ msgstr "Extra blok ID"
 #: src/common/kax_element_names.cpp:259
 #, no-c-format
 msgid "Block duration"
-msgstr "Block duur"
+msgstr "Blok duur"
 
 #: src/common/kax_element_names.cpp:257
 #, no-c-format
@@ -4262,12 +4262,12 @@ msgstr "Blu-ray schijven bevatten vaak een hoofdstuk ingang dicht bij het einde 
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:44
 #, no-c-format
 msgid "Blu-ray index files"
-msgstr " Blu-ray index bestanden"
+msgstr "Blu-ray index bestanden"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:199
 #, no-c-format
 msgid "Blu-ray playlist files"
-msgstr " Blu-ray afspeellijst bestanden"
+msgstr "Blu-ray afspeellijst bestanden"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
 #, no-c-format
@@ -4307,7 +4307,7 @@ msgstr "Variabel (ja/nee, aan/uit etc.)"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:430
 #, no-c-format
 msgid "Both of the schemes used by older models (e.g. GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) & by current ones (e.g. GH019876.mp4, GH029876.mp4, GH039876.mp4…) are supported."
-msgstr ""
+msgstr "Beide schema's die door oudere modellen worden gebruikt (bijv. GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) en door huidige modellen (bijv. GH019876.mp4, GH029876.mp4, GH039876.mp4…) worden ondersteund."
 
 #: src/merge/generic_packetizer.cpp:204
 #, no-c-format
@@ -4363,7 +4363,7 @@ msgstr "Vernauwen of verbreden tijd &codes"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:590
 #, no-c-format
 msgid "C&ontinue"
-msgstr ""
+msgstr "D&oorgaan"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:132
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:90
@@ -4384,7 +4384,7 @@ msgstr "Aa&nmaken optie bestand"
 #: src/common/audio_emphasis.cpp:52
 #, no-c-format
 msgid "CCIT-J.17"
-msgstr ""
+msgstr "CCIT-J.17"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:173
 #, no-c-format
@@ -4394,7 +4394,7 @@ msgstr "Calculeert Adler-32 &controle sommen voor elk beeld en binair element"
 #: src/info/info_cli_parser.cpp:37
 #, no-c-format
 msgid "Calculate and display checksums and use verbosity level 4."
-msgstr "Bereken en controleer de controlesom gebruik meldt niveau 4."
+msgstr "Bereken en toon controlesommen en gebruik verbosity level 4."
 
 #: src/info/info_cli_parser.cpp:36
 #, no-c-format
@@ -4404,42 +4404,42 @@ msgstr "Calculeert controle som van spoor inhoud."
 #: src/propedit/propedit_cli_parser.cpp:257
 #, no-c-format
 msgid "Calculate statistics for all tracks and add new/update existing tags for them"
-msgstr "Bereken statistieken voor alle spore en voegt nieuwe / actualiseert bestaande tags voor hen"
+msgstr "Bereken statistieken voor alle sporen en voegt nieuwe / actualiseert bestaande tags voor hen"
 
 #: src/common/property_element.cpp:138
 #, no-c-format
 msgid "Can be set for tracks containing onscreen text or foreign-language dialog."
-msgstr ""
+msgstr "Kan worden ingesteld voor tracks met tekst op het scherm of dialogen in een vreemde taal."
 
 #: src/common/property_element.cpp:135
 #: src/mkvtoolnix-gui/merge/input.cpp:571
 #, fuzzy, no-c-format
 msgid "Can be set if the track contains commentary."
-msgstr "Stel in als spoor gebruikt wordt."
+msgstr "Stel in als het spoor commentaar bevat."
 
 #: src/common/property_element.cpp:141
 #: src/mkvtoolnix-gui/merge/input.cpp:569
 #, no-c-format
 msgid "Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr ""
+msgstr "Kan worden ingesteld als het spoor tekstuele beschrijvingen van video-inhoud bevat die geschikt zijn voor weergave via een tekst-naar-spraaksysteem voor een visueel beperkte gebruiker."
 
 #: src/common/property_element.cpp:140
 #: src/mkvtoolnix-gui/merge/input.cpp:570
 #, no-c-format
 msgid "Can be set if the track is in the content's original language (not a translation)."
-msgstr ""
+msgstr "Kan worden ingesteld als het nummer in de originele taal van de inhoud is (geen vertaling)."
 
 #: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/merge/input.cpp:567
 #, no-c-format
 msgid "Can be set if the track is suitable for users with hearing impairments."
-msgstr ""
+msgstr "Kan worden ingesteld als het nummer geschikt is voor gebruikers met een gehoorbeperking."
 
 #: src/common/property_element.cpp:142
 #: src/mkvtoolnix-gui/merge/input.cpp:568
 #, no-c-format
 msgid "Can be set if the track is suitable for users with visual impairments."
-msgstr ""
+msgstr "Kan worden ingesteld als de route geschikt is voor gebruikers met een visuele beperking."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:256
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:279
@@ -4490,7 +4490,7 @@ msgstr "Kan spoor niet schrijven {0} met het CodecID '{1}' naar bestand '{2}' om
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "Canonieke vorm"
 
 #: src/common/kax_info.cpp:1349
 #: src/common/kax_info.cpp:1353
@@ -4513,7 +4513,7 @@ msgstr "Veroorzaakt dat mkvmerge géén 'CueRelativePosition' elementen schrijft
 #: src/common/hacks.cpp:52
 #, no-c-format
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
-msgstr "Veroorzaak dat mkvmerge toevoegt 'stop scherm' commando's naar VobSub ondertiteling pakketten bevatten geen duur veld."
+msgstr "Zorgt ervoor dat mkvmerge 'stop display'-opdrachten toevoegt aan VobSub-ondertitelpakketten die geen duurveld bevatten."
 
 #: src/common/hacks.cpp:42
 #, fuzzy, no-c-format
@@ -4523,12 +4523,12 @@ msgstr "Vertelt mkvmerge een meta zoek data elementen te creëren aan het eind v
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2239
 #, fuzzy, no-c-format
 msgid "Cb subsampling:"
-msgstr "Verticale Cb subvoorbeeld"
+msgstr "Cb subsampling:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, no-c-format
 msgid "Certain file formats have 'title' property."
-msgstr "Bepaalde bestandsindelingen hebben 'titel' eigenschap."
+msgstr "Bepaalde bestandsindelingen hebben een 'titel' eigenschap."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:483
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
@@ -4538,7 +4538,7 @@ msgstr "Bepaalde bestandsindelingen hebben 'titel' eigenschap."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:520
 #, no-c-format
 msgid "Certain file formats have a 'language' property for their tracks."
-msgstr "Bepaalde bestandsindelingen hebben 'taal' eigenschap voor hun sporen."
+msgstr "Bepaalde bestandsindelingen hebben een 'taal' eigenschap voor hun sporen."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:806
 #, no-c-format
@@ -4586,7 +4586,7 @@ msgstr "Kanalen"
 msgid "Chapter &number of first created entry:"
 msgstr "Hoofdstukken aa&ntallen van eerst gecreëerde ingang:"
 
-#: src/common/chapters/chapters.cpp:58
+#: src/common/chapters/chapters.cpp:57
 #: src/mkvtoolnix-gui/util/settings.cpp:597
 #, no-c-format
 msgid "Chapter <NUM:2>"
@@ -4659,7 +4659,7 @@ msgstr "Hoofdstuk taal (IETF)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
 #, no-c-format
 msgid "Chapter mass modification"
-msgstr "Hoofdstuk massale modificatie"
+msgstr "Massale hoofdstuk modificatie"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:336
 #, no-c-format
@@ -4841,12 +4841,12 @@ msgstr "Verticale kleurintensiteit plaatsing"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2248
 #, no-c-format
 msgid "Chromaticity coordinates:"
-msgstr ""
+msgstr "Chromaticity coordinaten:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
 #, no-c-format
 msgid "Clearing settings auto&matically:"
-msgstr "Automatisch instellingen schoonmaken:"
+msgstr "Automatisch instellingen schoon&maken:"
 
 #: src/common/property_element.cpp:179
 #, no-c-format
@@ -4991,7 +4991,7 @@ msgstr "Kleurmatrixcoëfficiënten"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2243
 #, fuzzy, no-c-format
 msgid "Color matrix coefficients:"
-msgstr "Kleurmatrixcoëfficiënten"
+msgstr "Kleurmatrixcoëfficiënten:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
 #, fuzzy, no-c-format
@@ -5016,7 +5016,7 @@ msgstr "Kleur bereik"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2244
 #, fuzzy, no-c-format
 msgid "Color range:"
-msgstr "Kleur bereik"
+msgstr "Kleur bereik:"
 
 #: src/common/kax_element_names.cpp:164
 #, no-c-format
@@ -5031,7 +5031,7 @@ msgstr "Kleur overdracht"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
 #, no-c-format
 msgid "Community && &help forum"
-msgstr ""
+msgstr "Community- en &helpforum"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:271
 #, no-c-format
@@ -5095,7 +5095,7 @@ msgstr "Houder grootte"
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Converteer tekst ondertiteling naar deze karakterset (standaard: UTF-8)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:782
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:781
 #, no-c-format
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Hoofdstukken converteren naar XML mislukt: %1"
@@ -5105,7 +5105,7 @@ msgstr "Hoofdstukken converteren naar XML mislukt: %1"
 msgid "Cop&y this item:"
 msgstr "Kopieer dit item:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:239
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:238
 #, no-c-format
 msgid "Cop&y to other tab"
 msgstr "Kop&iëren naar ander tabblad"
@@ -5113,12 +5113,12 @@ msgstr "Kop&iëren naar ander tabblad"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:718
 #, no-c-format
 msgid "Copy &destination file's name to file title"
-msgstr "Kopieer uitvoer bestan&d naam naar bestandstitel"
+msgstr "Kopieer de naam van het &doelbestand naar de bestandstitel"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
 #, no-c-format
 msgid "Copy &first source file's name to file title"
-msgstr "Kopieer eerst de bron bestandsnaam naar de bestand &titel"
+msgstr "Kopieer de naam van het &eerste bronbestand naar de bestandstitel"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #, no-c-format
@@ -5189,38 +5189,38 @@ msgstr "Kon de iconv bibliotheek niet starten voor conversie van {0} naar UTF-8.
 #: src/input/r_matroska.cpp:1867
 #, fuzzy, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
-msgstr "matroska_reader: Kan spoor UID {0} niet houden, omdat het als is toegewezen aan het nieuwe bestand.\n"
+msgstr "Kon de UID {0} van een track niet behouden omdat deze al is toegewezen aan een andere track. Er wordt automatisch een nieuwe willekeurige UID toegewezen.\n"
 
-#: src/common/chapters/chapters.cpp:577
-#: src/common/chapters/chapters.cpp:579
+#: src/common/chapters/chapters.cpp:562
+#: src/common/chapters/chapters.cpp:564
 #: src/common/chapters/dvd.cpp:58
 #: src/input/r_vobsub.cpp:109
 #: src/input/r_vobsub.cpp:115
 #, no-c-format, c++-format
 msgid "Could not open '{0}' for reading.\n"
-msgstr "Kon niet openen '{0}' voor lezen.\n"
+msgstr "Kon '{0}' niet openen voor lezen.\n"
 
 #: src/input/r_wavpack.cpp:66
 #, no-c-format, c++-format
 msgid "Could not open the corresponding correction file '{0}c'.\n"
-msgstr "Kon het corresponderende correctie bestand niet openen '{0}c'.\n"
+msgstr "Kon het corresponderende correctie bestand '{0}c' niet openen.\n"
 
 #: src/common/command_line.cpp:244
 #, no-c-format, c++-format
 msgid "Could not open the file '{0}' for directing the output.\n"
-msgstr "Kon het bestand niet openen '{0}' voor het dirigeren van de uitvoer.\n"
+msgstr "Kon het bestand '{0}' niet openen voor het dirigeren van de uitvoer.\n"
 
 #: src/extract/tracks.cpp:186
 #, no-c-format, c++-format
 msgid "Could not open the timestamp file '{0}' for writing ({1}).\n"
-msgstr "Kon het tijd code bestand niet openen'{0}' voor schrijven ({1}).\n"
+msgstr "Kon het tijd code bestand '{0}' niet openen om ({1}) te schrijven .\n"
 
 #: src/common/xml/ebml_converter.cpp:257
 #, no-c-format, c++-format
 msgid "Could not open/read the file '{0}'."
 msgstr "Kon het bestand niet openen/lezen '{0}'."
 
-#: src/common/chapters/chapters.cpp:573
+#: src/common/chapters/chapters.cpp:558
 #, no-c-format, c++-format
 msgid "Could not parse the chapters in '{0}': {1}\n"
 msgstr "Kon hoofdstukken niet ontleden in '{0}': {1}\n"
@@ -5228,7 +5228,7 @@ msgstr "Kon hoofdstukken niet ontleden in '{0}': {1}\n"
 #: src/input/r_ogm_flac.cpp:255
 #, no-c-format
 msgid "Could not read the FLAC header packets.\n"
-msgstr "Kon de FLAC pakket beginblok niet lezen.\n"
+msgstr "De FLAC-headerpakketten konden niet worden gelezen.\n"
 
 #: src/common/mm_file_io/windows.cpp:158
 #, no-c-format, c++-format
@@ -5240,7 +5240,7 @@ msgstr "Kon niet schrijven naar het doelbestand: {0} ({1})\n"
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
-msgstr ""
+msgstr "Omslagafbeelding"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2284
 #, no-c-format
@@ -5297,7 +5297,7 @@ msgstr "Maak één nieuwe samenvoeg instellingen tab voor elk bestand"
 msgid "Creating directory '{0}' failed: {1}"
 msgstr "Aanmaken map '{0}' mislukt: {1}"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:778
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:777
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:213
 #, no-c-format
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
@@ -5404,7 +5404,7 @@ msgstr "volg document(en) (cue) blok nummer"
 #: src/common/kax_element_names.cpp:235
 #, no-c-format
 msgid "Cue cluster position"
-msgstr "Volg cluster positie"
+msgstr "Cue cluster positie"
 
 #: src/common/kax_element_names.cpp:239
 #, no-c-format
@@ -5414,7 +5414,7 @@ msgstr "Volg document(en) (cue) codec staat"
 #: src/common/kax_element_names.cpp:237
 #, no-c-format
 msgid "Cue duration"
-msgstr "Volg duur"
+msgstr "Cue duur"
 
 #: src/extract/extract_cli_parser.cpp:132
 #, no-c-format
@@ -5547,7 +5547,7 @@ msgstr "Er is online geen nieuwere versie beschikbaar."
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
 msgstr "Momenteel zijn alleen bepaalde ondertitel indelingen gecomprimeerd met de zlib-algoritme."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:235
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:234
 #, no-c-format
 msgid "D&uplicate selected edition or chapter"
 msgstr "D&upliceer geselecteerde editie of hoofdstuk"
@@ -5587,12 +5587,12 @@ msgstr "Aantal hoofdstukken:"
 #: src/mkvtoolnix-gui/merge/output.cpp:551
 #, no-c-format
 msgid "DVDs"
-msgstr ""
+msgstr "DVDs"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
 #, no-c-format
 msgid "Dark"
-msgstr ""
+msgstr "Donker"
 
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #, no-c-format
@@ -5608,7 +5608,7 @@ msgstr "Datum"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
 #, fuzzy, no-c-format
 msgid "Date & time"
-msgstr "  DT: datum & tijd\n"
+msgstr "Datum & tijd"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:113
 #, no-c-format
@@ -5638,7 +5638,7 @@ msgstr "Standaard"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2259
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
-msgstr ""
+msgstr "Standaard IETF BCP 47 taalbewerkings&modus:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
 #, no-c-format
@@ -5669,7 +5669,7 @@ msgstr "Standaard taal"
 #: src/common/kax_element_names.cpp:334
 #, no-c-format
 msgid "Default language (bogus element with invalid ID)"
-msgstr ""
+msgstr "Standaardtaal (onjuist element met ongeldige ID)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, no-c-format
@@ -5792,7 +5792,7 @@ msgstr "Leid &eindtijdstempels af van starttijdstempels"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:609
 #, no-c-format
 msgid "Deriving the 'forced display' flag from file names is active & the file name matches the corresponding pattern."
-msgstr ""
+msgstr "Het afleiden van de 'geforceerde weergave'-vlag van bestandsnamen is actief en de bestandsnaam komt overeen met het bijbehorende patroon."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:268
 #, no-c-format
@@ -5829,7 +5829,7 @@ msgstr "Beschrijving:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
 #, no-c-format
 msgid "Destination directory"
-msgstr "Bestemmingsbestand map"
+msgstr "Bestemmingsmap"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2326
 #, no-c-format
@@ -5850,7 +5850,7 @@ msgstr "Bestemmingsbestandsnaam: %1"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
 #, fuzzy, no-c-format
 msgid "Destination file's absolute path"
-msgstr "Bestemmingsbestanden naam"
+msgstr "Absoluut pad van het doelbestand"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2274
 #, no-c-format
@@ -5860,7 +5860,7 @@ msgstr "Bestemmingsbestand:"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
 #, fuzzy, no-c-format
 msgid "Destination folders's absolute path"
-msgstr "Bestemmingsbestanden naam"
+msgstr "Absoluut pad van de doelmap"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #, no-c-format
@@ -5870,7 +5870,7 @@ msgstr "Details"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
 #, no-c-format
 msgid "Detect file name se&quences when adding multiple files"
-msgstr ""
+msgstr "Detecteer de &volgorde van bestandsnamen bij het toevoegen van meerdere bestanden"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1828
 #: src/mkvtoolnix-gui/merge/input.cpp:1829
@@ -5882,7 +5882,7 @@ msgstr "Bepaal automatisch"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 #, no-c-format
 msgid "Development hacks"
-msgstr "### Ontwikkel hacks ###"
+msgstr "Ontwikkel hacks"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:449
 #, no-c-format
@@ -5956,7 +5956,7 @@ msgstr "Zet aaneensluiten uit voor alle sporen."
 #: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
 #, no-c-format
 msgid "Disc library information selection"
-msgstr ""
+msgstr "Selectie van schijfbibliotheekinformatie"
 
 #: src/common/kax_element_names.cpp:272
 #, no-c-format
@@ -5966,23 +5966,23 @@ msgstr "Opvulling weggooien"
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
 #, no-c-format
 msgid "Discardable"
-msgstr "Afwijsbaar "
+msgstr "Afwijsbaar"
 
 #: src/merge/mkvmerge.cpp:759
 #: src/merge/mkvmerge.cpp:765
 #, no-c-format, c++-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"
-msgstr "toon verhoudingen: niet ingegeven in formulier <TID>:<breedte>x<hoogte>, b.v. 1:640x480 (het argument was '{0}').\n"
+msgstr "Scherm verhoudingen: niet ingegeven in formulier <TID>:<breedte>x<hoogte>, b.v. 1:640x480 (het argument was '{0}').\n"
 
 #: src/common/kax_element_names.cpp:153
 #, no-c-format
 msgid "Display height"
-msgstr "Toon hoogte"
+msgstr "Scherm hoogte"
 
 #: src/common/kax_element_names.cpp:158
 #, no-c-format
 msgid "Display unit"
-msgstr "Toon unit"
+msgstr "Scherm unit"
 
 #: src/common/kax_element_names.cpp:152
 #, no-c-format
@@ -6002,7 +6002,7 @@ msgstr "Voeg niets toe aan het meta zoek element."
 #: src/propedit/propedit_cli_parser.cpp:271
 #, no-c-format
 msgid "Do not change LanguageIETF track header elements when the 'language' property is changed."
-msgstr ""
+msgstr "Wijzig de LanguageIETF track header-elementen niet wanneer de eigenschap 'Language' wordt gewijzigd."
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:167
 #, no-c-format
@@ -6500,10 +6500,10 @@ msgstr "Fout in regel {0}: verwachtte een ondertitel nummer maar vond een tekst.
 msgid "Error loading settings file"
 msgstr "Instellingen bestand laadt fout"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:483
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:540
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:587
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:623
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:482
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:539
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:586
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:622
 #, no-c-format
 msgid "Error message from the parser: %1"
 msgstr "Fout bericht van ontleder: %1"
@@ -6915,15 +6915,15 @@ msgstr "Bestandsnaam:"
 msgid "File not found"
 msgstr "Bestand niet gevonden"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:314
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:320
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:393
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:417
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:485
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:540
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:589
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:625
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:822
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:319
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:484
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:539
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:588
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:624
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:153
@@ -8165,7 +8165,7 @@ msgstr "Ongeldig identificatie formaat in '{0} {1}'.\n"
 msgid "Invalid length of hexadecimal content: must be divisable by 2."
 msgstr "Ongeldige hexadecimale inhoud: moet deelbaar zijn door 2."
 
-#: src/common/chapters/chapters.cpp:303
+#: src/common/chapters/chapters.cpp:302
 #, no-c-format, c++-format
 msgid "Invalid minute: {0}"
 msgstr "Ongeldige minuten: {0}"
@@ -8180,7 +8180,7 @@ msgstr "Ongeldig aantal minuten: {0} > 59"
 msgid "Invalid number of seconds: {0} > 59"
 msgstr "Ongeldig aantal seconden: {0} > 59"
 
-#: src/common/chapters/chapters.cpp:305
+#: src/common/chapters/chapters.cpp:304
 #, no-c-format, c++-format
 msgid "Invalid second: {0}"
 msgstr "Ongeldige seconde: {0}"
@@ -8837,7 +8837,7 @@ msgstr "Matroska en WebM bestanden"
 msgid "Matroska audio/video files"
 msgstr "Matroska audio/video bestanden"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:807
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:806
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:197
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:358
 #: src/mkvtoolnix-gui/merge/output.cpp:444
@@ -9366,7 +9366,7 @@ msgstr "Er zijn geen bestandsnamen tussen ('{0}' en '{1}') weergegeven.\n"
 msgid "No filename found after the '@'."
 msgstr "Geen bestandsnaam gevonden na '@'."
 
-#: src/common/hacks.cpp:72
+#: src/common/hacks.cpp:71
 #, no-c-format
 msgid "No help available."
 msgstr "Geen help beschikbaar."
@@ -10225,8 +10225,8 @@ msgstr "Positie:"
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "Mogelijke oorzaken zijn dat het programma niet bestaat of dat je geen toestemming hebt om het of haar map te openen."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:391
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:368
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
@@ -10277,11 +10277,6 @@ msgstr "Voorgedefinieerde waardes"
 #, no-c-format
 msgid "Predefined video track names"
 msgstr "Voorgedefinieerde video spoor namen"
-
-#: src/common/hacks.cpp:71
-#, no-c-format
-msgid "Prevents mkvmerge from looking for Dolby Vision Enhancement Layers stored in a separate track & combining them with the track containing the Dolby Vision Base Layer."
-msgstr ""
 
 #: src/common/kax_element_names.cpp:96
 #: src/common/property_element.cpp:123
@@ -10598,7 +10593,7 @@ msgstr "RSA"
 msgid "Raw OBUs without a size field are not supported."
 msgstr "Onbewerkte OBU's zonder een veld voor grootte worden niet ondersteund."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:238
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:237
 #, no-c-format
 msgid "Re&number sub-chapters"
 msgstr "Ver&nummeren sub-hoofdstukken"
@@ -10913,7 +10908,7 @@ msgstr "Rechts"
 msgid "Right-click for actions for all items"
 msgstr "Rechts klikken voor acties voor alle items."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:253
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:252
 #, no-c-format
 msgid "Right-click for actions for editions and chapters"
 msgstr "Rechts klikken voor acties voor alle seditties en hoofdstukken."
@@ -11065,12 +11060,12 @@ msgstr "Opslaan als &standaard voor het opslaan van uitvoer naar tekstbestanden"
 msgid "Save attachment"
 msgstr "Bijlagen opslaan"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, no-c-format
 msgid "Save chapters as XML"
 msgstr "Sla hoofdstukken op als een XML bestand"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:805
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:804
 #, no-c-format
 msgid "Save chapters to Matroska or WebM file"
 msgstr "Bewaar hoofdstukken naar Matroska of WebM bestand"
@@ -11095,14 +11090,14 @@ msgstr "Bewaar instellingenbestand als"
 msgid "Save to &Matroska or WebM file"
 msgstr "Bewaar als &Matroska of WebM bestand"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:778
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:782
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:777
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:781
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:213
 #, no-c-format
 msgid "Saving failed"
 msgstr "Bewaren mislukt"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:847
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:846
 #, no-c-format
 msgid "Saving the chapters failed."
 msgstr "Opslaan hoofdstukken mislukt."
@@ -11280,7 +11275,7 @@ msgstr[1] "Selecteer alle &items van geselecteerd bestand"
 msgid "Select all tracks of specific &type"
 msgstr "Selecteer alle sporen van en specifiek &type"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:254
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:253
 #: src/mkvtoolnix-gui/merge/output.cpp:205
 #: src/mkvtoolnix-gui/merge/output.cpp:206
 #: src/mkvtoolnix-gui/merge/output.cpp:207
@@ -11695,7 +11690,7 @@ msgstr "Simpel OGM-stijl files hoofdstuk bestand"
 msgid "Simple block"
 msgstr "Eenvoudig blok"
 
-#: src/common/chapters/chapters.cpp:171
+#: src/common/chapters/chapters.cpp:170
 #, no-c-format, c++-format
 msgid "Simple chapter parser: {0}\n"
 msgstr "Simpele hoofdstuk ontleder: {0}\n"
@@ -12010,7 +12005,7 @@ msgstr "Ondertitel spoor {0} mist sommige duur elementen. Controleer a.u.b. het 
 msgid "Subtitles"
 msgstr "Ondertitels"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:806
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:805
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:196
 #: src/mkvtoolnix-gui/merge/output.cpp:555
 #, no-c-format
@@ -12327,19 +12322,19 @@ msgstr "Het VobSub ondertitelspoor {0} bevat niet zijn index in het CodecPrivate
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
 msgstr "De Vorbis codeboeken zijn verschillend. Dergelijke sporen kunnen niet worden samengevoegd zonder her coderen."
 
-#: src/common/chapters/chapters.cpp:662
+#: src/common/chapters/chapters.cpp:647
 #: src/common/xml/ebml_chapters_converter.cpp:255
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "Het XML tijd code bestand '{0}' bevat een fout op positie {2}: {1}\n"
 
-#: src/common/chapters/chapters.cpp:664
+#: src/common/chapters/chapters.cpp:649
 #: src/common/xml/ebml_chapters_converter.cpp:258
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "Het XML hoofdstukbestand '{0}' bevat een fout: {1}\n"
 
-#: src/common/chapters/chapters.cpp:660
+#: src/common/chapters/chapters.cpp:645
 #: src/common/xml/ebml_chapters_converter.cpp:252
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' could not be read.\n"
@@ -12478,7 +12473,7 @@ msgstr ""
 msgid "The changes are written to the file.\n"
 msgstr "De veranderingen worden geschreven naar het bestand.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:932
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:931
 #, no-c-format
 msgid "The chapter UID must be a number if given."
 msgstr "Het hoofdstuk UID moet ingegeven worden met een cijfer."
@@ -12694,7 +12689,7 @@ msgstr "De duur waarna een nieuwe doelbestand wordt gestart."
 msgid "The edit specifications '{0}' and '{1}' resolve to the same track with the UID {2}.\n"
 msgstr "De bewerk specificaties '{0}' en '{1}' herleiden naar hetzelfde spoor met het UID {2}.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:1009
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:1008
 #, no-c-format
 msgid "The edition UID must be a number if given."
 msgstr "De editie UID moet gezet worden met een cijfer indien gegeven."
@@ -12705,12 +12700,12 @@ msgstr "De editie UID moet gezet worden met een cijfer indien gegeven."
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Het element is geschreven aan het einde van het bestand, maar de segment waarde kon niet opgewaardeerd worden. Daarom is dit element niet zichtbaar. Het proces wordt afgebroken. Het bestand is veranderd!"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:958
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:957
 #, no-c-format
 msgid "The end time could not be parsed: %1"
 msgstr "De eindtijd kon niet ontleed worden %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:961
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:960
 #, no-c-format
 msgid "The end time must be greater than the start time."
 msgstr "De eindtijd moet groter zijn dan de begintijd."
@@ -12934,7 +12929,7 @@ msgstr "Het bestand kon voor schrijven niet geopend worden."
 msgid "The file does not contain track ID {0}.\n"
 msgstr "Het i bestand bevat geen spoor ID {0}.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:751
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:750
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:288
 #, no-c-format
 msgid "The file has been saved successfully."
@@ -13038,11 +13033,11 @@ msgstr "Bestand of map is niet gevonden"
 msgid "The file will not be processed further."
 msgstr "Het bestand wordt verder niet uitgevoerd."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:314
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:320
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:391
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:417
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:313
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:319
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:390
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:819
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:367
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:151
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:848
@@ -13061,9 +13056,9 @@ msgstr "Het bestand dat je probeerde te openen (%1) bevat geen hoofdstukken."
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "Het bestand wat je probeerde te openen (%1) is geen geldig Matroska/WebM bestand."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:481
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:585
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:621
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:480
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:584
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:620
 #, no-c-format
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "Het bestand wat je probeerde te openen (%1) wordt niet herkend als geldig Matroska noch een geldig hoofdstuk bestand."
@@ -13556,12 +13551,12 @@ msgstr "De tweede modus extraheert de markeringen, converteert ze naar XML en sc
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "De zoek tabel in dit TTA lijkt te zijn gebroken.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:974
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:973
 #, no-c-format
 msgid "The segment UID could not be parsed: %1"
 msgstr "Het segment UID kon niet ontleed worden %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:984
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:983
 #, no-c-format
 msgid "The segment edition UID must be a positive number if given."
 msgstr "Indien gegeven, moet het segment UID een positief cijfer zijn."
@@ -13602,7 +13597,7 @@ msgstr "De grootte van de bijlage '{0}' is 0.\n"
 msgid "The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "Het bron bestand '{0}' kon niet succesvol worden geopend, of kon de grootte niet worden verkregen, zoeken tot aan het eind werkte niet.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:952
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:951
 #, no-c-format
 msgid "The start time could not be parsed: %1"
 msgstr "Het starttijd kon niet ontleed worden %1"
@@ -14752,7 +14747,7 @@ msgstr "Onbekend"
 msgid "Unknown audio stream type 0x{0:04x}. Stream ID {1} will be ignored.\n"
 msgstr "Onbekend audio stroom type 0x{0:04x}. Stroom ID {1} zal worden genegeerd.\n"
 
-#: src/common/chapters/chapters.cpp:656
+#: src/common/chapters/chapters.cpp:641
 #, no-c-format, c++-format
 msgid "Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"
 msgstr "Onbekend hoofdstuk formaat in '{0}'. Het bevat geen ondersteund hoofdstuk format.\n"
@@ -14982,12 +14977,12 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Geldige format codes zijn:"
 
-#: src/common/hacks.cpp:94
+#: src/common/hacks.cpp:93
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Geldige 'kraken' zijn:\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:888
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:887
 #, no-c-format
 msgid "Validation failed"
 msgstr "Valideren mislukt"
@@ -15417,7 +15412,7 @@ msgstr "Waarschuwingen:"
 msgid "WebM audio/video files"
 msgstr "WebM audio/video bestanden"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:808
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:807
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:198
 #: src/mkvtoolnix-gui/merge/output.cpp:444
 #, no-c-format
@@ -15684,7 +15679,7 @@ msgstr "Verkeerde identificatie reeks: '{0:6s}' != 'theora'"
 msgid "Wrong identification string: '{0:7s}' != 'kate\\0\\0\\0'"
 msgstr "Verkeerde identificatie reeks: '{0:7s}' != 'kate\\0\\0\\0'"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:201
 #: src/mkvtoolnix-gui/merge/output.cpp:556
 #, no-c-format
@@ -18282,4 +18277,3 @@ msgstr "– Zet naar niets –"
 
 #~ msgid "{0}: Could not open the sub file"
 #~ msgstr "{0}: Kon sub bestand niet openen"
-
