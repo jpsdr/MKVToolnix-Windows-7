@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* configure: fixed setting `HAVE_QTDBUS` properly if the QtDbus module is
+  found. Fixes #3744.
+
+
 # Version 87.0 "Black as the Sky" 2024-09-07
 
 ## New features and enhancements
