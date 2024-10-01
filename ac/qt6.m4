@@ -77,6 +77,7 @@ EOT
     fi
   fi
 
+  dbus=0
   modules_to_test=dbus
 
   if test x"$enable_gui" = xno; then
@@ -103,7 +104,7 @@ EOT
       continue
     elif test $qt_module = dbus; then
       qmake_qt_ui="$qmake_qt_ui dbus"
-      AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
+      dbus=1
     fi
   done
 
@@ -265,6 +266,9 @@ return 0;
   fi
 
   AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
+  if test "x$dbus" = x1; then
+    AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
+  fi
   AC_MSG_CHECKING(for Qt 6)
   AC_MSG_RESULT(yes)
   have_qt6=yes
