@@ -2,6 +2,7 @@
 
 #include <Qt>
 #include <QAudioOutput>
+#include <QDebug>
 #include <QMediaPlayer>
 
 #include "mkvtoolnix-gui/util/media_player.h"
