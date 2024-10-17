@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge, MKVToolNix GUI's chapter editor: added support for reading
+  chapters from PotPlayer bookmark files.
+
 ## Bug fixes
 
 * configure: fixed setting `HAVE_QTDBUS` properly if the QtDbus module is

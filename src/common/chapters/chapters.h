@@ -57,6 +57,7 @@ enum class format_e {
   ffmpeg_meta,
   dvd,
   bluray,
+  potplayer_bookmarks,
 };
 
 mtx::chapters::kax_cptr
