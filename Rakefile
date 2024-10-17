@@ -210,6 +210,8 @@ def setup_globals
   setup_compiler_specifics
 
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
+
+  $magick_convert = !c(:MAGICK).empty? ? c(:MAGICK) + " convert" : !c(:CONVERT).empty? ? c(:CONVERT) : nil
 end
 
 def setup_overrides
@@ -274,7 +276,7 @@ def define_default_task
   targets += $tools.map { |name| "src/tools/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   targets += $qt_resources
 
-  targets << "msix-assets" if $building_for[:windows] && !c(:CONVERT).empty?
+  targets << "msix-assets" if $building_for[:windows] && $magick_convert
   targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
 
   # Build the unit tests only if requested

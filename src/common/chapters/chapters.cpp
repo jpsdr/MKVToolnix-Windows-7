@@ -493,6 +493,94 @@ parse_ffmpeg_meta(mm_text_io_c *in,
   return chapters;
 }
 
+bool
+probe_potplayer_bookmarks(mm_text_io_c *in) {
+  std::string line;
+
+  in->setFilePointer(0);
+
+  if (!in->getline2(line))
+    return false;
+
+  mtx::string::strip(line);
+
+  return line == "[Bookmark]";
+}
+
+kax_cptr
+parse_potplayer_bookmarks(mm_text_io_c *in,
+                          int64_t min_ts,
+                          int64_t max_ts,
+                          int64_t offset,
+                          mtx::bcp47::language_c const &language,
+                          std::string const &charset) {
+  in->setFilePointer(0);
+
+  std::string line;
+  kax_cptr chapters;
+  libmatroska::KaxEditionEntry *edition{};
+  charset_converter_cptr cc_utf8;
+  bool do_convert = in->get_byte_order_mark() == byte_order_mark_e::none;
+
+  if (do_convert)
+    cc_utf8 = charset_converter_c::init(charset);
+
+  auto use_language = language.is_valid()           ? language
+                    : g_default_language.is_valid() ? g_default_language
+                    :                                 mtx::bcp47::language_c::parse("eng"s);
+
+  QRegularExpression content_re{Q(R"(^[0-9]+=([0-9]+)\*(.*?)(\*[0-9a-fA-F]+)?$)")};
+  QRegularExpressionMatch matches;
+
+  while (in->getline2(line)) {
+    if (do_convert)
+      line = cc_utf8->utf8(line);
+
+    mtx::string::strip(line);
+
+    if (!(matches = content_re.match(Q(line))).hasMatch())
+      continue;
+
+    uint64_t timestamp_ms;
+    if (!mtx::string::parse_number(to_utf8(matches.captured(1)), timestamp_ms))
+      continue;
+
+    auto timestamp_ns = timestamp_c::ms(timestamp_ms).to_ns();
+
+    if ((timestamp_ns < min_ts) || ((max_ts != -1) && (timestamp_ns > max_ts)))
+      continue;
+
+    auto title = to_utf8(matches.captured(2));
+    if (title.empty())
+      continue;
+
+    if (!chapters) {
+      chapters   = std::make_shared<libmatroska::KaxChapters>();
+      edition = &get_child<libmatroska::KaxEditionEntry>(*chapters);
+    }
+
+    auto &atom = add_empty_child<libmatroska::KaxChapterAtom>(*edition);
+    get_child<libmatroska::KaxChapterUID>(atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+    get_child<libmatroska::KaxChapterTimeStart>(atom).SetValue(timestamp_ns - offset);
+
+    auto &display = get_child<libmatroska::KaxChapterDisplay>(atom);
+    get_child<libmatroska::KaxChapterString>(display).SetValueUTF8(title);
+
+    if (use_language.is_valid()) {
+      get_child<libmatroska::KaxChapterLanguage>(display).SetValue(use_language.get_closest_iso639_2_alpha_3_code());
+      if (!mtx::bcp47::language_c::is_disabled())
+        get_child<libmatroska::KaxChapLanguageIETF>(display).SetValue(use_language.format());
+      else
+        delete_children<libmatroska::KaxChapLanguageIETF>(display);
+    }
+
+    if (!g_default_country.empty())
+      get_child<libmatroska::KaxChapterCountry>(display).SetValue(g_default_country);
+  }
+
+  return chapters;
+}
+
 /** \brief Probe a file for different chapter formats and parse the file.
 
    The file \a file_name is opened and checked for supported chapter formats.
@@ -644,6 +732,11 @@ parse(mm_text_io_c *in,
       if (format)
         *format = format_e::ffmpeg_meta;
       return parse_ffmpeg_meta(in, min_ts, max_ts, offset, language, charset);
+
+    } else if (probe_potplayer_bookmarks(in)) {
+      if (format)
+        *format = format_e::potplayer_bookmarks;
+      return parse_potplayer_bookmarks(in, min_ts, max_ts, offset, language, charset);
 
     } else if (format)
       *format = format_e::xml;
