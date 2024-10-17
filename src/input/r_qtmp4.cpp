@@ -2907,11 +2907,13 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
   memcpy(&sv1_stsd, stsd_raw, sizeof(sound_v0_stsd_atom_t));
   memcpy(&sv2_stsd, stsd_raw, sizeof(sound_v0_stsd_atom_t));
 
-  if (fourcc)
+  auto this_fourcc = fourcc_c{sv1_stsd.v0.base.fourcc};
+
+  if (fourcc && (this_fourcc != fourcc))
     mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
-                       id, fourcc.description(), fourcc_c{sv1_stsd.v0.base.fourcc}.description()));
+                       id, fourcc.description(), this_fourcc.description()));
   else
-    fourcc = fourcc_c{sv1_stsd.v0.base.fourcc};
+    fourcc = this_fourcc;
 
   auto version = get_uint16_be(&sv1_stsd.v0.version);
   a_channels   = get_uint16_be(&sv1_stsd.v0.channels);
@@ -2988,12 +2990,13 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
   auto stsd_raw = stsd->get_buffer();
   memcpy(&v_stsd, stsd_raw, sizeof(video_stsd_atom_t));
 
-  if (fourcc)
-    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
-                       id, fourcc.description(), fourcc_c{v_stsd.base.fourcc}.description()));
+  auto this_fourcc = fourcc_c{v_stsd.base.fourcc};
 
+  if (fourcc && (this_fourcc != fourcc))
+    mxwarn(fmt::format(FY("Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"),
+                       id, fourcc.description(), this_fourcc.description()));
   else
-    fourcc = fourcc_c{v_stsd.base.fourcc};
+    fourcc = this_fourcc;
 
   codec = codec_c::look_up(fourcc);
 
