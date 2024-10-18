@@ -119,7 +119,7 @@ TEST(FourCC, Equality) {
   fourcc_c little_f{little, fourcc_c::byte_order_e::little_endian};
 
   fourcc_c big_bad_f{big + 1};
-  fourcc_c little_bad_f{little + 1, fourcc_c::byte_order_e::little_endian};
+  fourcc_c little_bad_f{little + (1u << 24), fourcc_c::byte_order_e::little_endian};
 
   // EXPECT_TRUE(big_f         == big);
   // EXPECT_TRUE(little_f      == big);
@@ -144,6 +144,12 @@ TEST(FourCC, Equality) {
 
   EXPECT_TRUE(big_bad_f     != "1234");
   EXPECT_TRUE(little_bad_f  != "1234");
+
+  EXPECT_TRUE(big_f         == little_f);
+  EXPECT_TRUE(big_bad_f     == little_bad_f);
+
+  EXPECT_TRUE(big_f         != big_bad_f);
+  EXPECT_TRUE(little_f      != little_bad_f);
 }
 
 TEST(FourCC, Stringification) {

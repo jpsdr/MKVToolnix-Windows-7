@@ -9,6 +9,8 @@
 
 * configure: fixed setting `HAVE_QTDBUS` properly if the QtDbus module is
   found. Fixes #3744.
+* mkvmerge: MP4 reader: mkvmerge will no longer warn when multiple identical
+  FourCCs are present within the same track headers. Fixes #3748.
 
 
 # Version 87.0 "Black as the Sky" 2024-09-07
