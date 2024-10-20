@@ -57,7 +57,7 @@ MXE_PLUGIN_DIRS += plugins/gcc13
 JOBS = ${PARALLEL}
 
 MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost flac ogg pthreads vorbis cmark libdvdread gmp
-MKVTOOLNIX_DEPENDENCIES+=qt5 qtmultimedia
+MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
 
 LOCAL_PKG_LIST=\$(MKVTOOLNIX_DEPENDENCIES)
 local-pkg-list: \$(LOCAL_PKG_LIST)
