@@ -1,3 +1,12 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: AC-3 writer: mkvmerge will now use the codec ID `A_AC3` even for
+  streams with bitstream IDs 9 or 10 instead of the deprecated codec IDs
+  `A_AC3/BSID9` & `A_AC3/BSID10`. Fixes #2387.
+
+
 # Version 88.0 "All I Know" 2024-10-19
 
 ## New features and enhancements

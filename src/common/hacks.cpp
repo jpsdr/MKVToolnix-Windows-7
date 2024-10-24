@@ -69,6 +69,7 @@ get_list() {
                                                                  Y("If this hack is enabled, they won't be removed.") });
   hacks.emplace_back("always_write_block_add_ids",         svec{ Y("If enabled, the BlockAddID element will be written even if it's set to its default value of 1.") });
   hacks.emplace_back("keep_dolby_vision_layers_separate",  svec{ Y("Prevents mkvmerge from looking for Dolby Vision Enhancement Layers stored in a separate track & combining them with the track containing the Dolby Vision Base Layer.") });
+  hacks.emplace_back("keep_bsid_9_10_in_ac3_codec_id",     svec{ Y("Causes mkvmerge to use the codec IDs A_AC3/BSID9 & A_AC3/BSID10 instead of A_AC3 for AC-3 tracks with BSIDs of 9 or 10 like older versions of mkvmerge did.") });
   hacks.emplace_back("cow",                                svec{ Y("No help available.") });
 
   return hacks;
