@@ -18,6 +18,7 @@
 
 #include <QDateTime>
 #include <QRegularExpression>
+#include <QTimeZone>
 
 #include <ebml/EbmlCrc32.h>
 #include <ebml/EbmlContexts.h>
@@ -2884,7 +2885,7 @@ kax_reader_c::identify() {
   add_uid_info(m_previous_segment_uid, mtx::id::previous_segment_uid);
 
   if (m_muxing_date_epoch) {
-    auto timestamp = QDateTime::fromSecsSinceEpoch(m_muxing_date_epoch.value(), Qt::UTC);
+    auto timestamp = QDateTime::fromSecsSinceEpoch(m_muxing_date_epoch.value(), QTimeZone::utc());
     info.add(mtx::id::date_utc,   mtx::date_time::format_iso_8601(timestamp));
     info.add(mtx::id::date_local, mtx::date_time::format_iso_8601(timestamp.toLocalTime()));
   }

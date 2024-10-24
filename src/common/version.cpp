@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include <QRegularExpression>
+#include <QTimeZone>
 
 #include <ebml/EbmlVersion.h>
 #include <matroska/KaxVersion.h>
@@ -207,7 +208,7 @@ get_default_segment_info_data(std::string const &application) {
   } else {
     data.muxing_app   = "no_variable_data";
     data.writing_app  = "no_variable_data";
-    data.writing_date = QDateTime::fromSecsSinceEpoch(0, Qt::UTC);
+    data.writing_date = QDateTime::fromSecsSinceEpoch(0, QTimeZone::utc());
   }
 
   return data;

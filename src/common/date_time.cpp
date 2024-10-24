@@ -75,7 +75,7 @@ format(QDateTime const &timestamp,
 
 std::string
 format_iso_8601(QDateTime const &timestamp) {
-  auto zone_specifier = timestamp.timeSpec() == Qt::UTC ? "Z"s : "%z";
+  auto zone_specifier = timestamp.timeZone() == QTimeZone::utc() ? "Z"s : "%z";
   return format(timestamp, "%Y-%m-%dT%H:%M:%S"s + zone_specifier);
 }
 
