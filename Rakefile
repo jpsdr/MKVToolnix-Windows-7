@@ -65,6 +65,8 @@ require_relative "rake.d/source_tests"
 require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
+FileList["rake.d/local.d/*.rb"].each { |rb| require_relative rb }
+
 def setup_globals
   $po4a_cfg                 = c(:PO4A).empty? ? nil : "doc/man/po4a/po4a.cfg"
   $po4a_stamp               = "doc/man/po4a/latest_po4a_run.stamp"
