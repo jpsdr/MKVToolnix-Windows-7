@@ -919,7 +919,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
     auto matt         = std::make_shared<attachment_t>();
     matt->name        = to_utf8(find_child_value<libmatroska::KaxFileName>(att));
     matt->description = to_utf8(find_child_value<libmatroska::KaxFileDescription>(att));
-    matt->mime_type   = ::mtx::mime::maybe_map_to_legacy_font_mime_type(find_child_value<libmatroska::KaxMimeType>(att), g_use_legacy_font_mime_types);
+    matt->mime_type   = ::mtx::mime::get_font_mime_type_to_use(find_child_value<libmatroska::KaxMimeType>(att), g_use_legacy_font_mime_types ? mtx::mime::font_mime_type_type_e::legacy : mtx::mime::font_mime_type_type_e::current);
     matt->id          = find_child_value<libmatroska::KaxFileUID>(att);
     matt->data        = memory_c::clone(static_cast<uint8_t *>(fdata->GetBuffer()), fdata->GetSize());
 

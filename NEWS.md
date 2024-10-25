@@ -6,6 +6,18 @@
   streams with bitstream IDs 9 or 10 instead of the deprecated codec IDs
   `A_AC3/BSID9` & `A_AC3/BSID10`. Fixes #2387.
 
+## Bug fixes
+
+* mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: the
+  MIME type for TrueType & OpenType fonts will be set properly to either the
+  current MIME types `font/ttf` & `font/otf` or to the legacy MIME types
+  `application/x-truetype-font` & `application/vnd.ms-opentype` depending on
+  whether the "use legacy font MIME types" option is disabled or enabled, even
+  if the MIME database used by Qt returns the wrong one or even other MIME
+  types such as `application/x-font-ttf` & `application/x-font-otf`. This was
+  the case on Windows due to Qt 6.7.3 switching to a different embedded MIME
+  database. Partially fixes #3751.
+
 
 # Version 88.0 "All I Know" 2024-10-19
 
