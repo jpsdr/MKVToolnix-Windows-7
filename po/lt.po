@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2024-10-17 12:38+0200\n"
+"POT-Creation-Date: 2024-10-25 16:40+0200\n"
 "PO-Revision-Date: 2018-05-02 15:51+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/lt/)\n"
@@ -2594,7 +2594,7 @@ msgstr ""
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr ""
 
-#: src/common/hacks.cpp:118
+#: src/common/hacks.cpp:119
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr ""
@@ -2759,7 +2759,7 @@ msgstr "„{0}“ {1} takelis: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:2087
+#: src/input/r_matroska.cpp:2088
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr ""
@@ -2929,8 +2929,8 @@ msgstr ""
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr ""
 
-#: src/input/r_matroska.cpp:2530
-#: src/input/r_matroska.cpp:2650
+#: src/input/r_matroska.cpp:2531
+#: src/input/r_matroska.cpp:2651
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr ""
@@ -2955,7 +2955,7 @@ msgstr ""
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr ""
 
-#: src/input/r_matroska.cpp:796
+#: src/input/r_matroska.cpp:797
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
@@ -4367,6 +4367,11 @@ msgstr ""
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
 msgstr ""
 
+#: src/common/hacks.cpp:72
+#, no-c-format
+msgid "Causes mkvmerge to use the codec IDs A_AC3/BSID9 & A_AC3/BSID10 instead of A_AC3 for AC-3 tracks with BSIDs of 9 or 10 like older versions of mkvmerge did."
+msgstr ""
+
 #: src/common/hacks.cpp:42
 #, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
@@ -5039,7 +5044,7 @@ msgstr ""
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1867
+#: src/input/r_matroska.cpp:1868
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr ""
@@ -8643,13 +8648,13 @@ msgstr "didžiausias rinkmenų skaičius:"
 msgid "Make this track eligible to be played by default."
 msgstr ""
 
-#: src/input/r_matroska.cpp:1959
-#: src/input/r_matroska.cpp:1976
+#: src/input/r_matroska.cpp:1960
+#: src/input/r_matroska.cpp:1977
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1969
+#: src/input/r_matroska.cpp:1970
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr ""
@@ -9123,7 +9128,7 @@ msgstr ""
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3623
+#: src/input/r_qtmp4.cpp:3626
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr ""
@@ -9148,8 +9153,8 @@ msgstr ", pradėta %s"
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr ""
 
-#: src/propedit/attachment_target.cpp:206
-#: src/propedit/attachment_target.cpp:217
+#: src/propedit/attachment_target.cpp:207
+#: src/propedit/attachment_target.cpp:218
 #, no-c-format, c++-format
 msgid "No attachment matched the spec '{0}'.\n"
 msgstr ""
@@ -9222,7 +9227,7 @@ msgstr ""
 msgid "No filename found after the '@'."
 msgstr "Už „@“ nerasta rinkmenos vardo."
 
-#: src/common/hacks.cpp:72
+#: src/common/hacks.cpp:73
 #, no-c-format
 msgid "No help available."
 msgstr "Nėra prieinamos pagalbos."
@@ -10332,8 +10337,8 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2937
-#: src/input/r_qtmp4.cpp:2951
+#: src/input/r_qtmp4.cpp:2939
+#: src/input/r_qtmp4.cpp:2953
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr ""
@@ -10348,7 +10353,7 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2985
+#: src/input/r_qtmp4.cpp:2987
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr ""
@@ -10368,17 +10373,17 @@ msgstr ""
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3703
+#: src/input/r_qtmp4.cpp:3706
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3726
+#: src/input/r_qtmp4.cpp:3729
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3710
+#: src/input/r_qtmp4.cpp:3713
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr ""
@@ -10398,17 +10403,17 @@ msgstr ""
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3641
+#: src/input/r_qtmp4.cpp:3644
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3636
+#: src/input/r_qtmp4.cpp:3639
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3720
+#: src/input/r_qtmp4.cpp:3723
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr ""
@@ -10433,16 +10438,16 @@ msgstr ""
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:2911
-#: src/input/r_qtmp4.cpp:2992
+#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2996
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3587
-#: src/input/r_qtmp4.cpp:3606
-#: src/input/r_qtmp4.cpp:3654
-#: src/input/r_qtmp4.cpp:3747
+#: src/input/r_qtmp4.cpp:3590
+#: src/input/r_qtmp4.cpp:3609
+#: src/input/r_qtmp4.cpp:3657
+#: src/input/r_qtmp4.cpp:3750
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr ""
@@ -12192,7 +12197,7 @@ msgstr ""
 msgid "The UID must not be left empty."
 msgstr ""
 
-#: src/input/r_matroska.cpp:795
+#: src/input/r_matroska.cpp:796
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr ""
@@ -12347,7 +12352,7 @@ msgstr "Rinkmeną „{0}“ atverėme įrašymui.\n"
 msgid "The audio file to play hasn't been set yet."
 msgstr "Nuostatų rinkmena sukurta."
 
-#: src/output/p_ac3.cpp:81
+#: src/output/p_ac3.cpp:82
 #: src/output/p_mp3.cpp:71
 #, no-c-format
 msgid "The audio/video synchronization may have been lost."
@@ -12920,8 +12925,8 @@ msgstr ""
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, fuzzy, no-c-format
 msgid "The file will not be processed further."
 msgstr "Rinkmena nepakeista."
@@ -13895,7 +13900,7 @@ msgstr ""
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr ""
 
-#: src/output/p_ac3.cpp:63
+#: src/output/p_ac3.cpp:64
 #, no-c-format, c++-format
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr ""
@@ -13935,7 +13940,7 @@ msgstr ""
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
 msgstr ""
 
-#: src/output/p_ac3.cpp:78
+#: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:68
 #, no-c-format, c++-format
 msgid "This audio track contains {0} byte of invalid data which was skipped before timestamp {1}."
@@ -14217,8 +14222,8 @@ msgstr ""
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr ""
@@ -14445,7 +14450,7 @@ msgstr ""
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1397
+#: src/input/r_matroska.cpp:1398
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr ""
@@ -14508,7 +14513,7 @@ msgstr ""
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:3074
+#: src/input/r_qtmp4.cpp:3077
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr ""
@@ -14731,7 +14736,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Nepalaikomas rinkmenos formatas"
 
-#: src/input/r_matroska.cpp:2321
+#: src/input/r_matroska.cpp:2322
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr ""
@@ -14834,7 +14839,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1793
+#: src/input/r_matroska.cpp:1794
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr ""
@@ -14870,7 +14875,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Tinkami formato kodai yra:"
 
-#: src/common/hacks.cpp:94
+#: src/common/hacks.cpp:95
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr ""
@@ -15738,7 +15743,7 @@ msgstr ""
 msgid "Zlib decompression failed. Result: {0}\n"
 msgstr ""
 
-#: src/output/p_ac3.cpp:234
+#: src/output/p_ac3.cpp:239
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr ""
@@ -15765,7 +15770,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:638
 #: src/common/kax_info.cpp:841
-#: src/input/r_matroska.cpp:131
+#: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "audio"
 msgstr "garsas"
@@ -15792,7 +15797,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:641
 #: src/common/kax_info.cpp:844
-#: src/input/r_matroska.cpp:132
+#: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "buttons"
 msgstr "mygtukai"
@@ -16037,108 +16042,108 @@ msgstr "trukmė {0}, duomenys: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "linija {0}: 'Delsos' laikžymės neįmanoma išnagrinėti.\n"
 
-#: src/input/r_matroska.cpp:462
+#: src/input/r_matroska.cpp:463
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:453
+#: src/input/r_matroska.cpp:454
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:444
+#: src/input/r_matroska.cpp:445
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:671
+#: src/input/r_matroska.cpp:672
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:662
+#: src/input/r_matroska.cpp:663
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1695
-#: src/input/r_matroska.cpp:1708
+#: src/input/r_matroska.cpp:1696
+#: src/input/r_matroska.cpp:1709
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1345
+#: src/input/r_matroska.cpp:1346
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1343
+#: src/input/r_matroska.cpp:1344
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:829
+#: src/input/r_matroska.cpp:830
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:477
-#: src/input/r_matroska.cpp:523
-#: src/input/r_matroska.cpp:546
-#: src/input/r_matroska.cpp:733
-#: src/input/r_matroska.cpp:743
-#: src/input/r_matroska.cpp:764
+#: src/input/r_matroska.cpp:478
+#: src/input/r_matroska.cpp:524
+#: src/input/r_matroska.cpp:547
+#: src/input/r_matroska.cpp:734
+#: src/input/r_matroska.cpp:744
+#: src/input/r_matroska.cpp:765
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:650
+#: src/input/r_matroska.cpp:651
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:422
+#: src/input/r_matroska.cpp:423
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:690
+#: src/input/r_matroska.cpp:691
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:782
+#: src/input/r_matroska.cpp:783
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:722
+#: src/input/r_matroska.cpp:723
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:716
+#: src/input/r_matroska.cpp:717
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:867
+#: src/input/r_matroska.cpp:868
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:514
+#: src/input/r_matroska.cpp:515
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1675
+#: src/input/r_matroska.cpp:1676
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:862
+#: src/input/r_matroska.cpp:863
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr ""
@@ -16575,7 +16580,7 @@ msgstr " dydis {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr ""
 
-#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:135
 #, no-c-format
 msgid "subtitle"
 msgstr "subtitrai _1 vnt."
@@ -16669,8 +16674,8 @@ msgstr ""
 #: src/common/kax_info.cpp:866
 #: src/common/kax_info.cpp:879
 #: src/common/stereo_mode.cpp:70
-#: src/input/r_matroska.cpp:130
-#: src/input/r_matroska.cpp:3017
+#: src/input/r_matroska.cpp:131
+#: src/input/r_matroska.cpp:3018
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -16681,7 +16686,7 @@ msgstr ""
 msgid "unknown"
 msgstr "nežinoma"
 
-#: src/input/r_matroska.cpp:3000
+#: src/input/r_matroska.cpp:3001
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "nežinoma, formato žymė 0x{0:04x}"
@@ -16693,7 +16698,7 @@ msgstr "(nepavadintas)"
 
 #: src/common/kax_info.cpp:639
 #: src/common/kax_info.cpp:842
-#: src/input/r_matroska.cpp:133
+#: src/input/r_matroska.cpp:134
 #, no-c-format
 msgid "video"
 msgstr "vaizdas"
@@ -16786,8 +16791,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr ""
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1765
-#: src/input/r_matroska.cpp:2498
+#: src/input/r_matroska.cpp:1766
+#: src/input/r_matroska.cpp:2499
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr ""

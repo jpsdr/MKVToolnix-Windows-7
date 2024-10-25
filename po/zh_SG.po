@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2024-10-17 12:38+0200\n"
+"POT-Creation-Date: 2024-10-25 16:40+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2020,2022-2023\n"
 "Language-Team: Chinese (Singapore) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_SG/)\n"
@@ -2681,7 +2681,7 @@ msgstr "「{0}」不是有效的场序。"
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "'--track-order {1}' 中的「{0}」不是有效的文件 ID。\n"
 
-#: src/common/hacks.cpp:118
+#: src/common/hacks.cpp:119
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "「{0}」不是有效的 hack。\n"
@@ -2846,7 +2846,7 @@ msgstr "「{0}」轨道 {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "「{0}」: 还将处理以下文件: {1}\n"
 
-#: src/input/r_matroska.cpp:2087
+#: src/input/r_matroska.cpp:2088
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "‘{0}’: 您正在复制一条在实验模式下写入的 Opus 轨道。输出的轨道将以最终模式写入，但实验模式下写入的轨道有一处细节损失无法恢复: 尾部裁剪讯息。这意味着解码器可能会比原本预期多输出几个采样。您应该尽可能使用原始的 Opus 文件重新混流。\n"
@@ -3016,8 +3016,8 @@ msgstr "<未保存文件>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> 不是 <{1}> 的有效子元素，位于 {2}。"
 
-#: src/input/r_matroska.cpp:2530
-#: src/input/r_matroska.cpp:2650
+#: src/input/r_matroska.cpp:2531
+#: src/input/r_matroska.cpp:2651
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "在时间戳 {0} 处找到了属于轨道编号 {1} 的区块，但没有找到该轨道编号的头部讯息。此区块将被跳过。\n"
@@ -3042,7 +3042,7 @@ msgstr "逗号分隔的列表，指定要在哪些帧/场之后切割。"
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "逗号分隔的列表，指定要截取内容的时间戳范围。"
 
-#: src/input/r_matroska.cpp:796
+#: src/input/r_matroska.cpp:797
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "将使用默认的索引，以及与之匹配的默认宽度、高度与配色板设置。"
@@ -4452,6 +4452,11 @@ msgstr "使 mkvmerge 不在索引部分写入 'CueRelativePosition' 元素。"
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
 msgstr "使 mkvmerge 向不包含时长字段的 VobSub 字幕包添加“停止显示”指令。"
 
+#: src/common/hacks.cpp:72
+#, no-c-format
+msgid "Causes mkvmerge to use the codec IDs A_AC3/BSID9 & A_AC3/BSID10 instead of A_AC3 for AC-3 tracks with BSIDs of 9 or 10 like older versions of mkvmerge did."
+msgstr ""
+
 #: src/common/hacks.cpp:42
 #, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
@@ -5122,7 +5127,7 @@ msgstr "无法初始化用以转换 UTF-8 到 {0} 的 iconv 库。部分字符�
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "无法初始化用以转换 {0} 到 UTF-8 的 iconv 库。部分字符串将不会被转换为 UTF-8，生成的 Matroska 文件可能不符合 Matroska 规范 (错误: {1}，{2})。\n"
 
-#: src/input/r_matroska.cpp:1867
+#: src/input/r_matroska.cpp:1868
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "无法保留轨道的 UID {0}，因为它已经分配给其他轨道。将自动分配新的随机 UID。\n"
@@ -8724,13 +8729,13 @@ msgstr "同时执行的最大任务数量(&X):"
 msgid "Make this track eligible to be played by default."
 msgstr "授予该轨道被默认播放的资格。"
 
-#: src/input/r_matroska.cpp:1959
-#: src/input/r_matroska.cpp:1976
+#: src/input/r_matroska.cpp:1960
+#: src/input/r_matroska.cpp:1977
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "发现畸形的 AAC 编码格式初始化数据。\n"
 
-#: src/input/r_matroska.cpp:1969
+#: src/input/r_matroska.cpp:1970
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "畸形的编码格式 ID「{0}」。\n"
@@ -9198,7 +9203,7 @@ msgstr "未找到「EBML 头」元素。"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "初始帧中未发现 AC-3 头；此轨道将被跳过。\n"
 
-#: src/input/r_qtmp4.cpp:3623
+#: src/input/r_qtmp4.cpp:3626
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "初始帧中未发现 DTS 头; 该轨道将被跳过。\n"
@@ -9223,8 +9228,8 @@ msgstr "尚未添加操作。"
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "没有为文件 {0} (｢{1}｣) 指定追加映射。将使用默认映射 {2}。请留意 mkvmerge 是否因此中止并输出关于无效的 ｢--append-to｣ 选项的错误消息。\n"
 
-#: src/propedit/attachment_target.cpp:206
-#: src/propedit/attachment_target.cpp:217
+#: src/propedit/attachment_target.cpp:207
+#: src/propedit/attachment_target.cpp:218
 #, no-c-format, c++-format
 msgid "No attachment matched the spec '{0}'.\n"
 msgstr "没有与「{0}」匹配的附件。\n"
@@ -9297,7 +9302,7 @@ msgstr "｢{0}｣ 与 ｢{1}｣ 之间未列出文件名。\n"
 msgid "No filename found after the '@'."
 msgstr "在 '@' 后没有找到文件名。"
 
-#: src/common/hacks.cpp:72
+#: src/common/hacks.cpp:73
 #, no-c-format
 msgid "No help available."
 msgstr "没有可用帮助。"
@@ -10389,8 +10394,8 @@ msgstr "Quicktime/MP4 读取器: 尚不支持恒定采样尺寸与可变时长�
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 读取器: 无法从位置 {3} 读取大小为 {2} 的块 {0}/{1}。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2937
-#: src/input/r_qtmp4.cpp:2951
+#: src/input/r_qtmp4.cpp:2939
+#: src/input/r_qtmp4.cpp:2953
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的扩展音频描述单元。\n"
@@ -10405,7 +10410,7 @@ msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的音频描述单元
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的流描述单元。\n"
 
-#: src/input/r_qtmp4.cpp:2985
+#: src/input/r_qtmp4.cpp:2987
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的视频描述单元。\n"
@@ -10425,17 +10430,17 @@ msgstr "Quicktime/MP4 读取器: 未发现 'mdat' 单元。找不到影片数据
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime/MP4 读取器: 位置 {1} 存在无效的块大小 {0}。\n"
 
-#: src/input/r_qtmp4.cpp:3703
+#: src/input/r_qtmp4.cpp:3706
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 part 10/AVC 轨道 {0} 缺少解码器配置讯息。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3726
+#: src/input/r_qtmp4.cpp:3729
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 轨道 {0} 缺少 esds 单元 (解码器配置讯息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3710
+#: src/input/r_qtmp4.cpp:3713
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEGH part 2/HEVC 轨道 {0} 缺少解码器配置讯息。正在跳过该轨道。\n"
@@ -10455,17 +10460,17 @@ msgstr "Quicktime/MP4 读取器: 轨道 {0} 的流描述单元的 'size' 字段�
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 读取器: 'time scale' 参数为 0。这不被支持。\n"
 
-#: src/input/r_qtmp4.cpp:3641
+#: src/input/r_qtmp4.cpp:3644
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: AAC 轨道 {0} 缺少 esds 单元 (解码器配置讯息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3636
+#: src/input/r_qtmp4.cpp:3639
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 音频轨道 {0} 的 'esds' 单元使用了不支持的 'object type id' {1}。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3720
+#: src/input/r_qtmp4.cpp:3723
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 视频轨道 {0} 缺少 ESDS 单元。正在跳过此轨道。\n"
@@ -10490,16 +10495,16 @@ msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法初始化 z
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法解压。zlib 错误代码: {0}。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2911
-#: src/input/r_qtmp4.cpp:2992
+#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2996
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 读取器: 轨道 ID {0} 有多于一个 FourCC。仅使用第一个 ({1}) 而非 ({2})。\n"
 
-#: src/input/r_qtmp4.cpp:3587
-#: src/input/r_qtmp4.cpp:3606
-#: src/input/r_qtmp4.cpp:3654
-#: src/input/r_qtmp4.cpp:3747
+#: src/input/r_qtmp4.cpp:3590
+#: src/input/r_qtmp4.cpp:3609
+#: src/input/r_qtmp4.cpp:3657
+#: src/input/r_qtmp4.cpp:3750
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 读取器: 轨道 {0} 缺少一些数据。头部单元损坏？\n"
@@ -12236,7 +12241,7 @@ msgstr "无法解析 Theora 鉴别头 ({0})。\n"
 msgid "The UID must not be left empty."
 msgstr "UID 不可以留空。"
 
-#: src/input/r_matroska.cpp:795
+#: src/input/r_matroska.cpp:796
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "VobSub 字幕轨道 {0} 的 CodecPrivate 元素不含索引。"
@@ -12381,7 +12386,7 @@ msgstr "无法播放音频文件 ｢%1｣。"
 msgid "The audio file to play hasn't been set yet."
 msgstr "要播放的音频文件尚未设置。"
 
-#: src/output/p_ac3.cpp:81
+#: src/output/p_ac3.cpp:82
 #: src/output/p_mp3.cpp:71
 #, no-c-format
 msgid "The audio/video synchronization may have been lost."
@@ -12950,8 +12955,8 @@ msgstr "文件或目录未找到"
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "将不会进一步处理该文件。"
@@ -13926,7 +13931,7 @@ msgstr "此类文件在 MKVToolNix 中的处理方式与其他输入文件不同
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "该 AAC 轨道不含有效的头。无法解析 AAC 讯息。\n"
 
-#: src/output/p_ac3.cpp:63
+#: src/output/p_ac3.cpp:64
 #, no-c-format, c++-format
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "该 AC-3 轨道的开头包含 {0} 字节的非 AC-3 数据。这些数据相当于 {1} 毫秒的延迟。将使用此延迟替代非 AC-3 数据。\n"
@@ -13966,7 +13971,7 @@ msgstr "影响到的功能包括混流器的 ｢最近使用的输出目录｣ �
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
 msgstr "探测数据量为输入文件大小的 0.3% 或 10 MB，取其中较高者。"
 
-#: src/output/p_ac3.cpp:78
+#: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:68
 #, no-c-format, c++-format
 msgid "This audio track contains {0} byte of invalid data which was skipped before timestamp {1}."
@@ -14246,8 +14251,8 @@ msgstr "该轨道包含 SBR AAC/HE-AAC/AAC+ 数据。"
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "这通常表示文件结构损坏。"
@@ -14474,7 +14479,7 @@ msgstr "轨道 {0} CodecPrivate 过小。\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "轨道 {0} 使用的压缩算法 ({1}) 未知或不受支持。\n"
 
-#: src/input/r_matroska.cpp:1397
+#: src/input/r_matroska.cpp:1398
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "轨道 {0} 中轨道 UID 元素缺失，而 Matroska 规范要求该元素必须存在。若文件包含标签，则标签可能损坏。\n"
@@ -14537,7 +14542,7 @@ msgstr "轨道 {0}: NAL 过大。头部字段给出的大小: {1}，封包中可
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "轨道 {0}: 字幕编号 {1} 缺少时长。视作 1 秒处理。\n"
 
-#: src/input/r_qtmp4.cpp:3074
+#: src/input/r_qtmp4.cpp:3077
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "轨道 {0}: AAC 讯息无法解析。\n"
@@ -14760,7 +14765,7 @@ msgstr "时间戳 {2} 处的封包 {1} 发现不支持的 MPEG mpeg_version: 0x{
 msgid "Unsupported file format"
 msgstr "不支持的格式"
 
-#: src/input/r_matroska.cpp:2321
+#: src/input/r_matroska.cpp:2322
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "不支持此轨道的轨道类型。\n"
@@ -14863,7 +14868,7 @@ msgstr "使用指定语言的章节名称，而非发现的第一个章节名称
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "使用 ｢{0}｣ 格式分离器。\n"
 
-#: src/input/r_matroska.cpp:1793
+#: src/input/r_matroska.cpp:1794
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "使用「{0}」类型轨道通用输出模块。\n"
@@ -14899,7 +14904,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "可用的格式代码有:"
 
-#: src/common/hacks.cpp:94
+#: src/common/hacks.cpp:95
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "有效的 hack 列表: \n"
@@ -15767,7 +15772,7 @@ msgstr "您刚刚将至少一个目录拖放或复制/粘贴到这里。本程�
 msgid "Zlib decompression failed. Result: {0}\n"
 msgstr "Zlib 解压失败。结果: {0}\n"
 
-#: src/output/p_ac3.cpp:234
+#: src/output/p_ac3.cpp:239
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): 未经测试的代码 ('size' 比较奇怪)。如果 mkvmerge 崩溃或者生成的文件不含完整且正确的音频轨道，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
@@ -15794,7 +15799,7 @@ msgstr "attachments [选项] [AID1:输出1 [AID2:输出2 ...]]"
 
 #: src/common/kax_info.cpp:638
 #: src/common/kax_info.cpp:841
-#: src/input/r_matroska.cpp:131
+#: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "audio"
 msgstr "音频"
@@ -15821,7 +15826,7 @@ msgstr "底场先显示，底场先存储"
 
 #: src/common/kax_info.cpp:641
 #: src/common/kax_info.cpp:844
-#: src/input/r_matroska.cpp:132
+#: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "buttons"
 msgstr "按钮"
@@ -16066,108 +16071,108 @@ msgstr "长度 {0}，数据: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "第 {0} 行: '延迟' 时间戳无法解析。\n"
 
-#: src/input/r_matroska.cpp:462
+#: src/input/r_matroska.cpp:463
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (轨道 {0} 的微软兼容模式) Matroska 报告采样深度为 {1} 位，但 WAVEFORMATEX 报告为 {2} 位。\n"
 
-#: src/input/r_matroska.cpp:453
+#: src/input/r_matroska.cpp:454
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (轨道 {0} 的微软兼容模式) Matroska 报告有 {1} 声道，但 WAVEFORMATEX 报告为 {2} 声道。\n"
 
-#: src/input/r_matroska.cpp:444
+#: src/input/r_matroska.cpp:445
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (轨道 {0} 的微软兼容模式) Matroska 报告采样率为 {1}，但 WAVEFORMATEX 报告为 {2}。\n"
 
-#: src/input/r_matroska.cpp:671
+#: src/input/r_matroska.cpp:672
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (微软兼容模式，轨道 {0}) Matroska 报告视频高度为 {1}，但 BITMAPINFOHEADER 报告为 {2}。\n"
 
-#: src/input/r_matroska.cpp:662
+#: src/input/r_matroska.cpp:663
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (微软兼容模式，轨道 {0}) Matroska 报告视频宽度为 {1}，但 BITMAPINFOHEADER 报告为 {2}。\n"
 
-#: src/input/r_matroska.cpp:1695
-#: src/input/r_matroska.cpp:1708
+#: src/input/r_matroska.cpp:1696
+#: src/input/r_matroska.cpp:1709
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未发现剪辑。\n"
 
-#: src/input/r_matroska.cpp:1345
+#: src/input/r_matroska.cpp:1346
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: 缺少像素高度。\n"
 
-#: src/input/r_matroska.cpp:1343
+#: src/input/r_matroska.cpp:1344
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: 缺少像素宽度。\n"
 
-#: src/input/r_matroska.cpp:829
+#: src/input/r_matroska.cpp:830
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: 轨道 {1} 的 CodecID「{0}」未知。\n"
 
-#: src/input/r_matroska.cpp:477
-#: src/input/r_matroska.cpp:523
-#: src/input/r_matroska.cpp:546
-#: src/input/r_matroska.cpp:733
-#: src/input/r_matroska.cpp:743
-#: src/input/r_matroska.cpp:764
+#: src/input/r_matroska.cpp:478
+#: src/input/r_matroska.cpp:524
+#: src/input/r_matroska.cpp:547
+#: src/input/r_matroska.cpp:734
+#: src/input/r_matroska.cpp:744
+#: src/input/r_matroska.cpp:765
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但编码格式私有数据不含有效的头部。\n"
 
-#: src/input/r_matroska.cpp:650
+#: src/input/r_matroska.cpp:651
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 BITMAPINFOHEADER 结构。因此我们没有可用于鉴别视频编码的 FourCC。\n"
 
-#: src/input/r_matroska.cpp:422
+#: src/input/r_matroska.cpp:423
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 WAVEFORMATEX 结构。因此我们没有可用于鉴别音频编码的格式 ID。\n"
 
-#: src/input/r_matroska.cpp:690
+#: src/input/r_matroska.cpp:691
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但没有编码格式私有头部。\n"
 
-#: src/input/r_matroska.cpp:782
+#: src/input/r_matroska.cpp:783
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但没发现私有数据。\n"
 
-#: src/input/r_matroska.cpp:722
+#: src/input/r_matroska.cpp:723
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: 未设置轨道 {0} 的高度。\n"
 
-#: src/input/r_matroska.cpp:716
+#: src/input/r_matroska.cpp:717
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: 未设置轨道 {0} 的宽度。\n"
 
-#: src/input/r_matroska.cpp:867
+#: src/input/r_matroska.cpp:868
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: 轨道 {0} 应该是正常的。\n"
 
-#: src/input/r_matroska.cpp:514
+#: src/input/r_matroska.cpp:515
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge 编译时没有启用 FLAC 支持。忽略轨道 {0}。\n"
 
-#: src/input/r_matroska.cpp:1675
+#: src/input/r_matroska.cpp:1676
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未发现 EBML 头。\n"
 
-#: src/input/r_matroska.cpp:862
+#: src/input/r_matroska.cpp:863
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: 轨道 {0} 的分离器类型未知: ｢{1}｣\n"
@@ -16604,7 +16609,7 @@ msgstr "大小 {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: 无效格式。“[Events]”段中未找到“Format”行。"
 
-#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:135
 #, no-c-format
 msgid "subtitle"
 msgstr "字幕"
@@ -16698,8 +16703,8 @@ msgstr "未定"
 #: src/common/kax_info.cpp:866
 #: src/common/kax_info.cpp:879
 #: src/common/stereo_mode.cpp:70
-#: src/input/r_matroska.cpp:130
-#: src/input/r_matroska.cpp:3017
+#: src/input/r_matroska.cpp:131
+#: src/input/r_matroska.cpp:3018
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -16710,7 +16715,7 @@ msgstr "未定"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:3000
+#: src/input/r_matroska.cpp:3001
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "未知，格式标识 0x{0:04x}"
@@ -16722,7 +16727,7 @@ msgstr "未命名"
 
 #: src/common/kax_info.cpp:639
 #: src/common/kax_info.cpp:842
-#: src/input/r_matroska.cpp:133
+#: src/input/r_matroska.cpp:134
 #, no-c-format
 msgid "video"
 msgstr "视频"
@@ -16807,8 +16812,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: 发生异常 (消息: {1}；类型: {2})。"
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1765
-#: src/input/r_matroska.cpp:2498
+#: src/input/r_matroska.cpp:1766
+#: src/input/r_matroska.cpp:2499
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 发生未知异常。"

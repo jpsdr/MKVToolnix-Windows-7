@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2024-10-17 12:38+0200\n"
+"POT-Creation-Date: 2024-10-25 16:40+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>, 2015\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/moritz-"
@@ -2738,7 +2738,7 @@ msgstr "'{0}' nije pravilan redosled poluslika."
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "'{0}' nije važeći fajl ID u '--track-order {1}'.\n"
 
-#: src/common/hacks.cpp:118
+#: src/common/hacks.cpp:119
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' nije važeći hak.\n"
@@ -2903,7 +2903,7 @@ msgstr "'{0}' track {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': Takodje obrađujem prateće fajlove: {1}\n"
 
-#: src/input/r_matroska.cpp:2087
+#: src/input/r_matroska.cpp:2088
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Kopirate Opus stazu koja je zapisana u eksperimentalnom režimu. Dobijena staza će biti zapisana u finalnom režimu, ali jedan detalj ne može biti oporavljen iz staze muksovane u eksperimentalnom režimu: skraćivanje na kraju. Ovo znači da dekoder može izbaciti nekoliko uzoraka više nego što je originalno nameravano. Treba da ponovo multipleksujete iz originalnog Opus fajla ako je moguće.\n"
@@ -3073,8 +3073,8 @@ msgstr "<Nesačuvan fajl>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> nije važeći dečji element od <{1}> na poziciji {2}."
 
-#: src/input/r_matroska.cpp:2530
-#: src/input/r_matroska.cpp:2650
+#: src/input/r_matroska.cpp:2531
+#: src/input/r_matroska.cpp:2651
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Blok je pronađen na vremenskoj oznaci {0} za stazu {1}. Ipak, nije nađeno zaglavlje za stazu sa tim brojem. Blok će biti preskočen.\n"
@@ -3099,7 +3099,7 @@ msgstr "Zarezom odvojena lista brojeva slika/poluslika nakon kojih se pravi pode
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Zarezom odvojena lista opsega vremenskih oznaka koji se čuvaju."
 
-#: src/input/r_matroska.cpp:796
+#: src/input/r_matroska.cpp:797
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
@@ -4511,6 +4511,11 @@ msgstr "Uzrokuje da mkvmerge ne zapisuje 'CueRelativePosition' elemente u cue li
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
 msgstr "Uzrokuje da mkvmerge doda 'stop display' komandu za VobSub titl pakete koji ne sadrže polje sa trajanjem."
 
+#: src/common/hacks.cpp:72
+#, no-c-format
+msgid "Causes mkvmerge to use the codec IDs A_AC3/BSID9 & A_AC3/BSID10 instead of A_AC3 for AC-3 tracks with BSIDs of 9 or 10 like older versions of mkvmerge did."
+msgstr ""
+
 #: src/common/hacks.cpp:42
 #, fuzzy, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
@@ -5183,7 +5188,7 @@ msgstr "Ne mogu da inicijalizujem iconv biblioteku radi konverzije iz UTF-8 u {0
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Ne mogu da inicijalizujem iconv biblioteku radi konverzije iz {0} u UTF-8. Neki nizovi neće biti konvertovani u UTF-8 i dobijeni Matroska fajl se možda neće usaglasiti sa Matroska specifikacijom (greška: {1}, {2}).\n"
 
-#: src/input/r_matroska.cpp:1867
+#: src/input/r_matroska.cpp:1868
 #, fuzzy, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "matroska_reader: Ne mogu da zadržim UID staze {0}, zato što je već dodeljen za novi fajl.\n"
@@ -8792,13 +8797,13 @@ msgstr "Maksimalan broj istovremenih zadataka:"
 msgid "Make this track eligible to be played by default."
 msgstr ""
 
-#: src/input/r_matroska.cpp:1959
-#: src/input/r_matroska.cpp:1976
+#: src/input/r_matroska.cpp:1960
+#: src/input/r_matroska.cpp:1977
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Pronađen loše formiran podatak za inicijalizaciju AAC kodeka.\n"
 
-#: src/input/r_matroska.cpp:1969
+#: src/input/r_matroska.cpp:1970
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Nepravilan codec ID '{0}'.\n"
@@ -9272,7 +9277,7 @@ msgstr "EBML glava nije nađena."
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nije pronađeno AC-3 zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
-#: src/input/r_qtmp4.cpp:3623
+#: src/input/r_qtmp4.cpp:3626
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nije pronađeno DTS zaglavlje u prvom okviru; staza će biti preskočena.\n"
@@ -9297,8 +9302,8 @@ msgstr "Još nije dodata nijedna radnja."
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Nije navedno mapiranje spajanja za fajl broj {0} ('{1}'). Umesto toga koristiće se podrazumevano mapiranje od {2}. Molim vas da imate to u vidu ako mkvmerge prekine sa greškom u vezi sa nevažećim '--append-to' opcijama.\n"
 
-#: src/propedit/attachment_target.cpp:206
-#: src/propedit/attachment_target.cpp:217
+#: src/propedit/attachment_target.cpp:207
+#: src/propedit/attachment_target.cpp:218
 #, no-c-format, c++-format
 msgid "No attachment matched the spec '{0}'.\n"
 msgstr "Nijedan od priloga ne odgovara specifikaciji '{0}'.\n"
@@ -9371,7 +9376,7 @@ msgstr "No file names were listed between '{0}' and '{1}'.\n"
 msgid "No filename found after the '@'."
 msgstr "Nije nađeno ime fajla posle '@'."
 
-#: src/common/hacks.cpp:72
+#: src/common/hacks.cpp:73
 #, no-c-format
 msgid "No help available."
 msgstr "Pomoć nedostupna."
@@ -10480,8 +10485,8 @@ msgstr "Quicktime/MP4 čitač: Konstantna veličina uzorka i varijabilno trajanj
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam broj parčeta {0}/{1} veličine {2} sa pozicije {3}. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:2937
-#: src/input/r_qtmp4.cpp:2951
+#: src/input/r_qtmp4.cpp:2939
+#: src/input/r_qtmp4.cpp:2953
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam prošireni atom za opis zvuka za stazu sa ID {0}.\n"
@@ -10496,7 +10501,7 @@ msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis zvuka za stazu 
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis potoka za stazu sa ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2985
+#: src/input/r_qtmp4.cpp:2987
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis videa za stazu sa ID {0}.\n"
@@ -10516,17 +10521,17 @@ msgstr "Quicktime/MP4 čitač: Nije pronađen 'mdat' atom. Video podaci nisu na�
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime/MP4 čitač: Nevažeća veličina parčeta {0} u {1}.\n"
 
-#: src/input/r_qtmp4.cpp:3703
+#: src/input/r_qtmp4.cpp:3706
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEG4 part 10/AVC stazi {0} nedostaje njena konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3726
+#: src/input/r_qtmp4.cpp:3729
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEG4 stazi {0} nedostaje esds atom/konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3710
+#: src/input/r_qtmp4.cpp:3713
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEGH part 2/HEVC stazi {0} nedostaje njena konfiguracija dekodera. Izostavljam ovu stazu.\n"
@@ -10546,17 +10551,17 @@ msgstr "Quicktime/MP4 čitač: Polje 'size' u atomu za opis potoka je previše m
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 čitač: Parametar 'time scale' je bila 0. Ovo nije podržano.\n"
 
-#: src/input/r_qtmp4.cpp:3641
+#: src/input/r_qtmp4.cpp:3644
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: AAC stazi {0} nedostaje esds atom/konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3636
+#: src/input/r_qtmp4.cpp:3639
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: Audio staza {0} koristi nepodržan 'object type id' od {1} u 'esds' atomu. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:3720
+#: src/input/r_qtmp4.cpp:3723
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: Video stazi {0} nedostaje ESDS atom. Izostavljam ovu stazu.\n"
@@ -10581,16 +10586,16 @@ msgstr "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali zli
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali ona ne mogu biti nekompresovana. Kod greške iz zlib-a: {0}. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:2911
-#: src/input/r_qtmp4.cpp:2992
+#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2996
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 čitač: Track ID {0} ima više od jednog FourCC. Koristim samo onaj prvi ({1}) a ne ovaj ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:3587
-#: src/input/r_qtmp4.cpp:3606
-#: src/input/r_qtmp4.cpp:3654
-#: src/input/r_qtmp4.cpp:3747
+#: src/input/r_qtmp4.cpp:3590
+#: src/input/r_qtmp4.cpp:3609
+#: src/input/r_qtmp4.cpp:3657
+#: src/input/r_qtmp4.cpp:3750
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 čitač: Stazi {0} nedostaju neki podaci. Atomi iz zaglavlja oštećeni?\n"
@@ -12340,7 +12345,7 @@ msgstr "Theora indentifikaciono zaglavlje ne može biti raščlanjeno ({0}).\n"
 msgid "The UID must not be left empty."
 msgstr "UID ne može biti ostavljen prazan."
 
-#: src/input/r_matroska.cpp:795
+#: src/input/r_matroska.cpp:796
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "VobSub titl staza {0} ne sadrži svoj index u CodecPrivate elementu."
@@ -12495,7 +12500,7 @@ msgstr "XML tag fajl '{0}' ne može biti pročitan.\n"
 msgid "The audio file to play hasn't been set yet."
 msgstr "Konfiguracioni fajl je kreiran."
 
-#: src/output/p_ac3.cpp:81
+#: src/output/p_ac3.cpp:82
 #: src/output/p_mp3.cpp:71
 #, no-c-format
 msgid "The audio/video synchronization may have been lost."
@@ -13066,8 +13071,8 @@ msgstr "Fajl ili direktorijum nije pronađen"
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Fajl neće biti dalje obrađen."
@@ -14042,7 +14047,7 @@ msgstr "Takvi fajlovi nisu tretirani kao drugi izvorni fajlovi u MKVToolNix-u."
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "Ova AAC staza ne sadrži ispravna zaglavlja. Ne mogu da raščlanim AAC informaciju.\n"
 
-#: src/output/p_ac3.cpp:63
+#: src/output/p_ac3.cpp:64
 #, no-c-format, c++-format
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "Ova AC-3 staza na početku sadrži {0} bajtova koji nisu AC-3 podaci. Ovo odgovara kašnjenju od  {1}ms. Ovo kašnjenje će biti korišćeno umesto beskorisnih podataka.\n"
@@ -14082,7 +14087,7 @@ msgstr ""
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
 msgstr "Ova količina je 0.3% veličine izvornog fajla ili 10 MB, šta god je veće."
 
-#: src/output/p_ac3.cpp:78
+#: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:68
 #, no-c-format, c++-format
 msgid "This audio track contains {0} byte of invalid data which was skipped before timestamp {1}."
@@ -14364,8 +14369,8 @@ msgstr "Ova staza sadrži SBR AAC/HE-AAC/AAC+ podatke."
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Ovo obično ukazuje na oštećenu strukturu fajla."
@@ -14592,7 +14597,7 @@ msgstr "CodecPrivate staze {0} je previše mali.\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "Staza {0} je kompresovana sa nepoznatim/nepodržanim algoritmom kompresije ({1}).\n"
 
-#: src/input/r_matroska.cpp:1397
+#: src/input/r_matroska.cpp:1398
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Stazi {0} nedostaje njen track UID element koji je potrebno da bude prisutan od strane Matroska specifikacije. Ako fajl sadrži tagove onda ti tagovi mogu biti oštećeni.\n"
@@ -14655,7 +14660,7 @@ msgstr "Staza {0}: NAL je previše veliki. Prema polju sa zaglavljem veličina j
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Staza {0}: Titlu sa brojem {1} nedostaje trajanje. Pretpostavljam trajanje od 1s.\n"
 
-#: src/input/r_qtmp4.cpp:3074
+#: src/input/r_qtmp4.cpp:3077
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Staza {0}: AAC informacija ne može biti raščlanjena.\n"
@@ -14878,7 +14883,7 @@ msgstr "Nepodržan MPEG mpeg_version: 0x{0:02x} u paketu {1} za vremensku oznaku
 msgid "Unsupported file format"
 msgstr "Nepodržan format fajla"
 
-#: src/input/r_matroska.cpp:2321
+#: src/input/r_matroska.cpp:2322
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Nepodržan tip za ovu stazu.\n"
@@ -14981,7 +14986,7 @@ msgstr "Pri izvlačenju poglavlja, koristi imena od naznačenog jezika umesto im
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Koristim demultiplekser za format '{0}'.\n"
 
-#: src/input/r_matroska.cpp:1793
+#: src/input/r_matroska.cpp:1794
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Koristim opšti izlazni modul za stazu tipa '{0}'.\n"
@@ -15017,7 +15022,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Važeći kodovi formata su:"
 
-#: src/common/hacks.cpp:94
+#: src/common/hacks.cpp:95
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Važeći hakovi su:\n"
@@ -15885,7 +15890,7 @@ msgstr ""
 msgid "Zlib decompression failed. Result: {0}\n"
 msgstr "Zlib dekompresija nije uspela. Rezultat: {0}\n"
 
-#: src/output/p_ac3.cpp:234
+#: src/output/p_ac3.cpp:239
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): Neproveren kod ('veličina' je čudna). Ako se mkvmerge sruši ili ako dobijen fajl ne sadrži kompletnu i ispravnu audio stazu, onda molim vas kontaktirajte autora Morica Bunkusa na <moritz@bunkus.org>.\n"
@@ -15912,7 +15917,7 @@ msgstr "attachments [opcije] [AID1:out1 [AID2:out2 ...]]"
 
 #: src/common/kax_info.cpp:638
 #: src/common/kax_info.cpp:841
-#: src/input/r_matroska.cpp:131
+#: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "audio"
 msgstr "audio"
@@ -15939,7 +15944,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:641
 #: src/common/kax_info.cpp:844
-#: src/input/r_matroska.cpp:132
+#: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "buttons"
 msgstr "dugmad"
@@ -16184,108 +16189,108 @@ msgstr "dužina {0}, podaci: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "linija {0}: vremenska oznaka 'kašnjenje' ne može biti raščlanjena.\n"
 
-#: src/input/r_matroska.cpp:462
+#: src/input/r_matroska.cpp:463
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti za stazu {0}) Matroska kaže da ima {1} bita po uzorku, ali WAVEFORMATEX kaže da ih ima {2}.\n"
 
-#: src/input/r_matroska.cpp:453
+#: src/input/r_matroska.cpp:454
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti za stazu {0}) Matroska kaže da ima {1} kanala, ali WAVEFORMATEX kaže da ih ima {2}.\n"
 
-#: src/input/r_matroska.cpp:444
+#: src/input/r_matroska.cpp:445
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti za stazu {0}) Matroska kaže da imaju {1} uzorka po sekundi, ali WAVEFORMATEX kaže da ima {2}.\n"
 
-#: src/input/r_matroska.cpp:671
+#: src/input/r_matroska.cpp:672
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti, staza {0}) Matroska kaže da je visina videa {1}, ali BITMAPINFOHEADER kaže {2}.\n"
 
-#: src/input/r_matroska.cpp:662
+#: src/input/r_matroska.cpp:663
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti, staza {0}) Matroska kaže da je širina videa {1}, ali BITMAPINFOHEADER kaže {2}.\n"
 
-#: src/input/r_matroska.cpp:1695
-#: src/input/r_matroska.cpp:1708
+#: src/input/r_matroska.cpp:1696
+#: src/input/r_matroska.cpp:1709
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nije nađen nikakav segment.\n"
 
-#: src/input/r_matroska.cpp:1345
+#: src/input/r_matroska.cpp:1346
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Nedostaje visina u pikselima.\n"
 
-#: src/input/r_matroska.cpp:1343
+#: src/input/r_matroska.cpp:1344
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Nedostaje širina u pikselima.\n"
 
-#: src/input/r_matroska.cpp:829
+#: src/input/r_matroska.cpp:830
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: CodecID '{0}' za stazu {1} je nepoznat.\n"
 
-#: src/input/r_matroska.cpp:477
-#: src/input/r_matroska.cpp:523
-#: src/input/r_matroska.cpp:546
-#: src/input/r_matroska.cpp:733
-#: src/input/r_matroska.cpp:743
-#: src/input/r_matroska.cpp:764
+#: src/input/r_matroska.cpp:478
+#: src/input/r_matroska.cpp:524
+#: src/input/r_matroska.cpp:547
+#: src/input/r_matroska.cpp:734
+#: src/input/r_matroska.cpp:744
+#: src/input/r_matroska.cpp:765
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: CodecID za stazu sa ID {0} je '{1}', ali lični podaci kodeka ne sadrže važeća zaglavlja.\n"
 
-#: src/input/r_matroska.cpp:650
+#: src/input/r_matroska.cpp:651
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: CodecID za stazu {0} je '{1}', ali nije prisutna BITMAPINFOHEADER struktura. Stoga nemamo FourCC da identifikujemo korišćeni video kodek.\n"
 
-#: src/input/r_matroska.cpp:422
+#: src/input/r_matroska.cpp:423
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: CodecID za stazu {0} je '{1}', ali nije prisutna WAVEFORMATEX struktura. Stoga nemamo ID formata da identifikujemo korišćeni audio kodek.\n"
 
-#: src/input/r_matroska.cpp:690
+#: src/input/r_matroska.cpp:691
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: CodecID za stazu {0} je '{1}', ali nije bilo ličnog zaglavlja kodeka.\n"
 
-#: src/input/r_matroska.cpp:782
+#: src/input/r_matroska.cpp:783
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: CodecID za stazu {0} je '{1}', ali nije pronađeno ličnih podataka.\n"
 
-#: src/input/r_matroska.cpp:722
+#: src/input/r_matroska.cpp:723
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: Nije podešena visina za stazu {0}.\n"
 
-#: src/input/r_matroska.cpp:716
+#: src/input/r_matroska.cpp:717
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: Nije podešena širina za stazu {0}.\n"
 
-#: src/input/r_matroska.cpp:867
+#: src/input/r_matroska.cpp:868
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: Staza {0}, izgleda ok.\n"
 
-#: src/input/r_matroska.cpp:514
+#: src/input/r_matroska.cpp:515
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge nije kompajlovan sa podrškom za FLAC. Ignorisana staza {0}.\n"
 
-#: src/input/r_matroska.cpp:1675
+#: src/input/r_matroska.cpp:1676
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nije nađena EBML glava.\n"
 
-#: src/input/r_matroska.cpp:862
+#: src/input/r_matroska.cpp:863
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: nepoznat tip demultipleksera za stazu {0}: '{1}'\n"
@@ -16722,7 +16727,7 @@ msgstr "veličina {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Nevažeći format. Ne mogu naći \"Format\" liniju u \"[Events]\" sekciji."
 
-#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:135
 #, no-c-format
 msgid "subtitle"
 msgstr "titl"
@@ -16816,8 +16821,8 @@ msgstr ""
 #: src/common/kax_info.cpp:866
 #: src/common/kax_info.cpp:879
 #: src/common/stereo_mode.cpp:70
-#: src/input/r_matroska.cpp:130
-#: src/input/r_matroska.cpp:3017
+#: src/input/r_matroska.cpp:131
+#: src/input/r_matroska.cpp:3018
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -16828,7 +16833,7 @@ msgstr ""
 msgid "unknown"
 msgstr "nepoznato"
 
-#: src/input/r_matroska.cpp:3000
+#: src/input/r_matroska.cpp:3001
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "nepoznato, tag formata 0x{0:04x}"
@@ -16840,7 +16845,7 @@ msgstr "neimenovano"
 
 #: src/common/kax_info.cpp:639
 #: src/common/kax_info.cpp:842
-#: src/input/r_matroska.cpp:133
+#: src/input/r_matroska.cpp:134
 #, no-c-format
 msgid "video"
 msgstr "video"
@@ -16931,8 +16936,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: desilo se nepoznato odstupanje (poruka: {1}; tip: {2})."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1765
-#: src/input/r_matroska.cpp:2498
+#: src/input/r_matroska.cpp:1766
+#: src/input/r_matroska.cpp:2499
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: desilo se nepoznato odstupanje."
