@@ -91,13 +91,28 @@ primary_file_extension_for_type(std::string const &type_name) {
 
 std::vector<std::string>
 sorted_type_names() {
-  std::vector<std::string> names;
+  std::vector<std::string> names, names_to_exclude;
+
+  for (auto const &type : { font_mime_type_type_e::legacy, font_mime_type_type_e::current }) {
+    auto const &mapping = get_font_mime_type_mapping(type);
+
+    for (auto const &pair : mapping)
+      names_to_exclude.emplace_back(pair.first);
+  }
 
   auto all_types = database().allMimeTypes();
   names.reserve(all_types.size());
 
-  for (auto const &type : all_types)
-    names.emplace_back(to_utf8(type.name()));
+  for (auto const &type : all_types) {
+    auto u8_name = to_utf8(type.name());
+
+    if (std::find(names_to_exclude.begin(), names_to_exclude.end(), u8_name) == names_to_exclude.end())
+      names.emplace_back(u8_name);
+  }
+
+  for (auto const &name : { "font/otf"s, "application/vnd.ms-opentype"s, "font/ttf"s, "application/x-truetype-font"s })
+    if (std::find(names.begin(), names.end(), name) == names.end())
+      names.emplace_back(name);
 
   std::sort(names.begin(), names.end());
 

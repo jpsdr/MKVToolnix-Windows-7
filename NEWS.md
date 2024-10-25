@@ -17,6 +17,10 @@
   types such as `application/x-font-ttf` & `application/x-font-otf`. This was
   the case on Windows due to Qt 6.7.3 switching to a different embedded MIME
   database. Partially fixes #3751.
+* MKVToolNix GUI's multiplexer & header editor: ensured that both the legacy &
+  the current font MIME types are always present in the MIME type combo boxes
+  of attachments, no matter what Qt's MIME type database contains. Partially
+  fixes #3751.
 
 
 # Version 88.0 "All I Know" 2024-10-19
