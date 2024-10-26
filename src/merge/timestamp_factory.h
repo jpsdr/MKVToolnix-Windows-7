@@ -66,11 +66,9 @@ public:
     , m_debug{"timestamp_factory"}
   {
   }
-  virtual ~timestamp_factory_c() {
-  }
+  virtual ~timestamp_factory_c() = default;
 
-  virtual void parse(mm_io_c &) {
-  }
+  virtual void parse(mm_io_c &) = 0;
   virtual bool get_next(packet_t &packet) {
     // No gap is following!
     packet.assigned_timestamp = packet.timestamp;
@@ -109,12 +107,11 @@ public:
     , m_default_fps(0.0)
   {
   }
-  virtual ~timestamp_factory_v1_c() {
-  }
+  virtual ~timestamp_factory_v1_c() = default;
 
-  virtual void parse(mm_io_c &in);
+  virtual void parse(mm_io_c &in) override;
   virtual bool get_next(packet_t &packet) override;
-  virtual double get_default_duration(double proposal) {
+  virtual double get_default_duration(double proposal) override {
     return 0.0 != m_default_fps ? 1000000000.0 / m_default_fps : proposal;
   }
 
@@ -139,12 +136,11 @@ public:
     , m_warning_printed(false)
   {
   }
-  virtual ~timestamp_factory_v2_c() {
-  }
+  virtual ~timestamp_factory_v2_c() = default;
 
-  virtual void parse(mm_io_c &in);
-  virtual bool get_next(packet_t &packet);
-  virtual double get_default_duration(double proposal) {
+  virtual void parse(mm_io_c &in) override;
+  virtual bool get_next(packet_t &packet) override;
+  virtual double get_default_duration(double proposal) override {
     return m_default_duration != 0 ? m_default_duration : proposal;
   }
 };
@@ -168,9 +164,9 @@ public:
     , m_default_fps(0.0)
   {
   }
-  virtual void parse(mm_io_c &in);
+  virtual void parse(mm_io_c &in) override;
   virtual bool get_next(packet_t &packet) override;
-  virtual bool contains_gap() {
+  virtual bool contains_gap() override {
     return true;
   }
 };
@@ -191,11 +187,13 @@ public:
   {
   }
 
-  virtual ~forced_default_duration_timestamp_factory_c() {
+  virtual ~forced_default_duration_timestamp_factory_c() = default;
+
+  virtual void parse(mm_io_c &) override {
   }
 
   virtual bool get_next(packet_t &packet) override;
-  virtual double get_default_duration(double) {
+  virtual double get_default_duration(double) override {
     return m_default_duration;
   }
 };
