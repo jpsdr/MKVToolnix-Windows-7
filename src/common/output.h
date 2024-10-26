@@ -50,6 +50,7 @@ void mxinfo(const std::string &info);
 void mxinfo(const std::wstring &info);
 
 void mxwarn(const std::string &warning);
+[[noreturn]]
 void mxerror(const std::string &error);
 
 void mxinfo_fn(const std::string &file_name, const std::string &info);
@@ -58,5 +59,7 @@ void mxinfo_tid(const std::string &file_name, int64_t track_id, const std::strin
 void mxwarn_fn(const std::string &file_name, const std::string &info);
 void mxwarn_tid(const std::string &file_name, int64_t track_id, const std::string &warning);
 
+[[noreturn]]
 void mxerror_fn(const std::string &file_name, const std::string &error);
+[[noreturn]]
 void mxerror_tid(const std::string &file_name, int64_t track_id, const std::string &error);
