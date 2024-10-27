@@ -592,7 +592,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
   decode_chars(in, out, data_uu.length() % 4);
 
   attachment.mime_type = ::mtx::mime::guess_type_for_data(*attachment.data);
-  attachment.mime_type = ::mtx::mime::maybe_map_to_legacy_font_mime_type(attachment.mime_type, g_use_legacy_font_mime_types);
+  attachment.mime_type = ::mtx::mime::get_font_mime_type_to_use(attachment.mime_type, g_use_legacy_font_mime_types ? mtx::mime::font_mime_type_type_e::legacy : mtx::mime::font_mime_type_type_e::current);
 
   add_attachment(attachment_p);
 

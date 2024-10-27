@@ -182,7 +182,8 @@ attachment_target_c::execute() {
 
 void
 attachment_target_c::execute_add() {
-  auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : ::mtx::mime::maybe_map_to_legacy_font_mime_type(::mtx::mime::guess_type_for_file(m_file_name), g_use_legacy_font_mime_types);
+  auto fmt_type    = g_use_legacy_font_mime_types                   ? mtx::mime::font_mime_type_type_e::legacy : mtx::mime::font_mime_type_type_e::current;
+  auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : ::mtx::mime::get_font_mime_type_to_use(::mtx::mime::guess_type_for_file(m_file_name), fmt_type);
   auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : mtx::fs::to_path(m_file_name).filename().string();
   auto description = m_options.m_description                        ? *m_options.m_description : ""s;
   auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
@@ -321,8 +322,9 @@ attachment_target_c::replace_attachment_values(libmatroska::KaxAttached &att) {
   }
 
   auto current_mime_type = find_child_value<libmatroska::KaxMimeType>(att);
-  auto new_mime_type     = !m_options.m_mime_type         ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(current_mime_type, g_use_legacy_font_mime_types)
-                         : m_options.m_mime_type->empty() ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(::mtx::mime::guess_type_for_file(m_file_name), g_use_legacy_font_mime_types)
+  auto fmt_type          = g_use_legacy_font_mime_types   ? ::mtx::mime::font_mime_type_type_e::legacy : ::mtx::mime::font_mime_type_type_e::current;
+  auto new_mime_type     = !m_options.m_mime_type         ? ::mtx::mime::get_font_mime_type_to_use(current_mime_type,                             fmt_type)
+                         : m_options.m_mime_type->empty() ? ::mtx::mime::get_font_mime_type_to_use(::mtx::mime::guess_type_for_file(m_file_name), fmt_type)
                          :                                  *m_options.m_mime_type;
 
   if (!new_mime_type.empty() && (new_mime_type != current_mime_type))
