@@ -440,7 +440,7 @@ print_capabilities() {
 static std::string
 guess_mime_type_and_report(std::string file_name) {
   auto mime_type = ::mtx::mime::guess_type_for_file(file_name);
-  mime_type      = ::mtx::mime::maybe_map_to_legacy_font_mime_type(mime_type, g_use_legacy_font_mime_types);
+  mime_type      = ::mtx::mime::get_font_mime_type_to_use(mime_type, g_use_legacy_font_mime_types ? mtx::mime::font_mime_type_type_e::legacy : mtx::mime::font_mime_type_type_e::current);
   if (mime_type != "") {
     mxinfo(fmt::format(FY("Automatic MIME type recognition for '{0}': {1}\n"), file_name, mime_type));
     return mime_type;

@@ -131,7 +131,7 @@ replaceDirectoriesByContainedFiles(QStringList const &namesToCheck) {
 QString
 detectMIMEType(QString const &fileName) {
   auto mimeType = ::mtx::mime::guess_type_for_file(to_utf8(fileName));
-  return Q(::mtx::mime::maybe_map_to_legacy_font_mime_type(mimeType, Util::Settings::get().m_useLegacyFontMIMETypes));
+  return Q(::mtx::mime::get_font_mime_type_to_use(mimeType, Util::Settings::get().m_useLegacyFontMIMETypes  ? mtx::mime::font_mime_type_type_e::legacy : mtx::mime::font_mime_type_type_e::current));
 }
 
 void
