@@ -38,6 +38,12 @@ timestamp_factory_c::create(std::string const &file_name,
     mxerror(fmt::format(FY("The timestamp file '{0}' could not be opened for reading.\n"), file_name));
   }
 
+  auto factory = create_from_json(file_name, source_name, tid, *in);
+  if (factory)
+    return factory;
+
+  in->setFilePointer(0);
+
   std::string line;
   int version = -1;
   bool ok     = in->getline2(line);
@@ -55,22 +61,63 @@ timestamp_factory_c::create(std::string const &file_name,
     mxerror(fmt::format(FY("The timestamp file '{0}' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"),
                         file_name));
 
-  timestamp_factory_c *factory = nullptr; // avoid gcc warning
-  if (1 == version)
-    factory = new timestamp_factory_v1_c(file_name, source_name, tid);
-
-  else if ((2 == version) || (4 == version))
-    factory = new timestamp_factory_v2_c(file_name, source_name, tid, version);
-
-  else if (3 == version)
-    factory = new timestamp_factory_v3_c(file_name, source_name, tid);
-
-  else
-    mxerror(fmt::format(FY("The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"), file_name, version));
+  factory = create_for_version(file_name, source_name, tid, version);
 
   factory->parse(*in);
 
-  return timestamp_factory_cptr(factory);
+  return factory;
+}
+
+timestamp_factory_cptr
+timestamp_factory_c::create_from_json(std::string const &file_name,
+                                      std::string const &source_name,
+                                      int64_t tid,
+                                      mm_io_c &in) {
+  std::string buffer;
+  in.read(buffer, in.get_size());
+
+  nlohmann::json doc;
+
+  try {
+    doc = mtx::json::parse(buffer);
+  } catch (nlohmann::json::parse_error const &) {
+    return {};
+  }
+
+  std::optional<int> version;
+
+  if (doc.is_object()) {
+    auto val = doc["version"];
+
+    if (val.is_number_integer())
+      version = val.get<int>();
+  }
+
+  if (!version)
+    mxerror(Y("JSON timestamp files must contain a JSON hash with a 'version' key.\n"));
+
+  auto factory = create_for_version(file_name, source_name, tid, *version);
+
+  factory->parse_json(doc);
+
+  return factory;
+}
+
+timestamp_factory_cptr
+timestamp_factory_c::create_for_version(std::string const &file_name,
+                                        std::string const &source_name,
+                                        int64_t tid,
+                                        int version) {
+  if (1 == version)
+    return timestamp_factory_cptr{ new timestamp_factory_v1_c(file_name, source_name, tid) };
+
+  if ((2 == version) || (4 == version))
+    return timestamp_factory_cptr{ new timestamp_factory_v2_c(file_name, source_name, tid, version) };
+
+  if (3 == version)
+    return timestamp_factory_cptr{ new timestamp_factory_v3_c(file_name, source_name, tid) };
+
+  mxerror(fmt::format(FY("The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"), file_name, version));
 }
 
 timestamp_factory_cptr
@@ -83,8 +130,8 @@ void
 timestamp_factory_v1_c::parse(mm_io_c &in) {
   std::string line;
   timestamp_range_c t;
-  std::vector<timestamp_range_c>::iterator iit;
-  std::vector<timestamp_range_c>::const_iterator pit;
+
+  t.base_timestamp = 0;
 
   int line_no = 1;
   do {
@@ -129,7 +176,17 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
     m_ranges.push_back(t);
   }
 
-  mxdebug_if(m_debug, fmt::format("ext_timestamps: Version 1, default fps {0}, {1} entries.\n", m_default_fps, m_ranges.size()));
+  postprocess_parsed_ranges();
+}
+
+void
+timestamp_factory_v1_c::postprocess_parsed_ranges() {
+  mxdebug_if(m_debug, fmt::format("ext_timestamps: version 1, default fps {0}, {1} entries; before post-processing:\n", m_default_fps, m_ranges.size()));
+
+  for (auto iit = m_ranges.begin(); iit < m_ranges.end(); iit++)
+    mxdebug_if(m_debug, fmt::format("  entry {0} -> {1} at {2} with {3}\n", iit->start_frame, iit->end_frame, iit->fps, iit->base_timestamp));
+
+  timestamp_range_c t;
 
   if (m_ranges.size() == 0)
     t.start_frame = 0;
@@ -138,7 +195,7 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
     bool done;
     do {
       done = true;
-      iit  = m_ranges.begin();
+      auto iit  = m_ranges.begin();
       size_t i;
       for (i = 0; i < (m_ranges.size() - 1); i++) {
         iit++;
@@ -166,12 +223,45 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
   m_ranges.push_back(t);
 
   m_ranges[0].base_timestamp = 0.0;
-  pit = m_ranges.begin();
-  for (iit = m_ranges.begin() + 1; iit < m_ranges.end(); iit++, pit++)
+  auto pit = m_ranges.begin();
+  for (auto iit = m_ranges.begin() + 1; iit < m_ranges.end(); iit++, pit++)
     iit->base_timestamp = pit->base_timestamp + ((double)pit->end_frame - (double)pit->start_frame + 1) * 1000000000.0 / pit->fps;
 
-  for (iit = m_ranges.begin(); iit < m_ranges.end(); iit++)
-    mxdebug_if(m_debug, fmt::format("ranges: entry {0} -> {1} at {2} with {3}\n", iit->start_frame, iit->end_frame, iit->fps, iit->base_timestamp));
+  mxdebug_if(m_debug, fmt::format("after post-processing: \n"));
+  for (auto iit = m_ranges.begin(); iit < m_ranges.end(); iit++)
+    mxdebug_if(m_debug, fmt::format("  entry {0} -> {1} at {2} with {3}\n", iit->start_frame, iit->end_frame, iit->fps, iit->base_timestamp));
+}
+
+void
+timestamp_factory_v1_c::parse_json(nlohmann::json &doc) {
+  auto assume_j = doc["assume"];
+  auto ranges_j = doc["ranges"];
+
+  if (!assume_j.is_number())
+    mxerror(fmt::format(FY("The timestamp file '{0}' is invalid: {1}\n"), m_file_name, Y("The 'assume' key must be set to the default number of frames per second.")));
+
+   if (!ranges_j.is_array())
+    mxerror(fmt::format(FY("The timestamp file '{0}' is invalid: {1}\n"), m_file_name, Y("The 'ranges' key must exist & be an array.")));
+
+   m_default_fps = assume_j.get<double>();
+
+  auto range_num = 0;
+
+  for (auto const &range_j : ranges_j) {
+    ++range_num;
+
+    if (!range_j.is_object() || !range_j["start"].is_number_integer() || !range_j["end"].is_number_integer() || !range_j["fps"].is_number())
+      mxerror(fmt::format(FY("The timestamp file '{0}' is invalid: {1}\n"), m_file_name, fmt::format(FY("The range number {0} must be an object with keys 'start', 'end' & 'fps'."), range_num)));
+
+    m_ranges.push_back({
+        range_j["start"].get<uint64_t>(),
+        range_j["end"].get<uint64_t>(),
+        range_j["fps"].get<double>(),
+        0.0,
+      });
+  }
+
+  postprocess_parsed_ranges();
 }
 
 bool
@@ -201,10 +291,8 @@ timestamp_factory_v1_c::get_at(uint64_t frame) {
 void
 timestamp_factory_v2_c::parse(mm_io_c &in) {
   std::string line;
-  std::map<int64_t, int64_t> dur_map;
 
-  int64_t dur_sum          = 0;
-  int line_no              = 0;
+  int line_no               = 0;
   double previous_timestamp = 0;
 
   while (in.getline2(line)) {
@@ -230,19 +318,23 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
 
     previous_timestamp = timestamp;
     m_timestamps.push_back((int64_t)(timestamp * 1000000));
-    if (m_timestamps.size() > 1) {
-      int64_t duration = m_timestamps[m_timestamps.size() - 1] - m_timestamps[m_timestamps.size() - 2];
-      if (dur_map.find(duration) == dur_map.end())
-        dur_map[duration] = 1;
-      else
-        dur_map[duration] = dur_map[duration] + 1;
-      dur_sum += duration;
-      m_durations.push_back(duration);
-    }
   }
 
+  postprocess_parsed_timestamps();
+}
+
+void
+timestamp_factory_v2_c::postprocess_parsed_timestamps() {
   if (m_timestamps.empty())
     mxerror(fmt::format(FY("The timestamp file '{0}' does not contain any valid entry.\n"), m_file_name));
+
+  std::map<int64_t, int64_t> duration_map;
+
+  for (unsigned int idx = 1; idx < m_timestamps.size(); ++idx) {
+    int64_t duration = m_timestamps[idx] - m_timestamps[idx - 1];
+    duration_map[duration]++;
+    m_durations.push_back(duration);
+  }
 
   if (m_debug) {
     mxdebug("Absolute probablities with maximum in separate line:\n");
@@ -250,20 +342,41 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
     mxdebug("----------+---------------------\n");
   }
 
-  dur_sum = -1;
-  for (auto entry : dur_map) {
-    if ((0 > dur_sum) || (dur_map[dur_sum] < entry.second))
-      dur_sum = entry.first;
+  int64_t duration_sum = -1;
+  for (auto entry : duration_map) {
+    if ((0 > duration_sum) || (duration_map[duration_sum] < entry.second))
+      duration_sum = entry.first;
     mxdebug_if(m_debug, fmt::format("{0: 9} | {1: 9}\n", entry.first, entry.second));
   }
 
   mxdebug_if(m_debug, "Max-------+---------------------\n");
-  mxdebug_if(m_debug, fmt::format("{0: 9} | {1: 9}\n", dur_sum, dur_map[dur_sum]));
+  mxdebug_if(m_debug, fmt::format("{0: 9} | {1: 9}\n", duration_sum, duration_map[duration_sum]));
 
-  if (0 < dur_sum)
-    m_default_duration = dur_sum;
+  if (0 < duration_sum)
+    m_default_duration = duration_sum;
 
-  m_durations.push_back(dur_sum);
+  m_durations.push_back(duration_sum);
+}
+
+void
+timestamp_factory_v2_c::parse_json(nlohmann::json &doc) {
+  auto timestamps_j = doc["timestamps"];
+
+   if (!timestamps_j.is_array())
+    mxerror(fmt::format(FY("The timestamp file '{0}' is invalid: {1}\n"), m_file_name, Y("The 'timestamps' key must exist & be an array.")));
+
+  auto timestamp_num = 0;
+
+  for (auto const &timestamp_j : timestamps_j) {
+    ++timestamp_num;
+
+    if (!timestamp_j.is_number())
+      mxerror(fmt::format(FY("The timestamp file '{0}' is invalid: {1}\n"), m_file_name, fmt::format(FY("The timestamp number {0} must be an integer or floating point number."), timestamp_num)));
+
+    m_timestamps.push_back(static_cast<int64_t>(timestamp_j.get<double>() * 1'000'000));
+  }
+
+  postprocess_parsed_timestamps();
 }
 
 bool
@@ -380,6 +493,10 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
 
   for (iit = m_durations.begin(); iit < m_durations.end(); iit++)
     mxdebug_if(m_debug, fmt::format("durations:{0} entry for {1} with {2} FPS\n", iit->is_gap ? " gap" : "", iit->duration, iit->fps));
+}
+
+void
+timestamp_factory_v3_c::parse_json([[maybe_unused]] nlohmann::json &doc) {
 }
 
 bool

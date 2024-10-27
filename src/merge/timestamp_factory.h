@@ -69,6 +69,7 @@ public:
   virtual ~timestamp_factory_c() = default;
 
   virtual void parse(mm_io_c &) = 0;
+  virtual void parse_json(nlohmann::json &) = 0;
   virtual bool get_next(packet_t &packet) {
     // No gap is following!
     packet.assigned_timestamp = packet.timestamp;
@@ -87,7 +88,9 @@ public:
   }
 
   static timestamp_factory_cptr create(const std::string &file_name, const std::string &source_name, int64_t tid);
+  static timestamp_factory_cptr create_for_version(std::string const &file_name, std::string const &source_name, int64_t tid, int version);
   static timestamp_factory_cptr create_fps_factory(int64_t default_duration, timestamp_sync_t const &tcsync);
+  static timestamp_factory_cptr create_from_json(std::string const &file_name, std::string const &source_name, int64_t tid, mm_io_c &in);
 };
 
 class timestamp_factory_v1_c: public timestamp_factory_c {
@@ -110,6 +113,7 @@ public:
   virtual ~timestamp_factory_v1_c() = default;
 
   virtual void parse(mm_io_c &in) override;
+  virtual void parse_json(nlohmann::json &) override;
   virtual bool get_next(packet_t &packet) override;
   virtual double get_default_duration(double proposal) override {
     return 0.0 != m_default_fps ? 1000000000.0 / m_default_fps : proposal;
@@ -117,6 +121,7 @@ public:
 
 protected:
   virtual int64_t get_at(uint64_t frame);
+  virtual void postprocess_parsed_ranges();
 };
 
 class timestamp_factory_v2_c: public timestamp_factory_c {
@@ -139,10 +144,14 @@ public:
   virtual ~timestamp_factory_v2_c() = default;
 
   virtual void parse(mm_io_c &in) override;
+  virtual void parse_json(nlohmann::json &) override;
   virtual bool get_next(packet_t &packet) override;
   virtual double get_default_duration(double proposal) override {
     return m_default_duration != 0 ? m_default_duration : proposal;
   }
+
+protected:
+  virtual void postprocess_parsed_timestamps();
 };
 
 class timestamp_factory_v3_c: public timestamp_factory_c {
@@ -165,6 +174,7 @@ public:
   {
   }
   virtual void parse(mm_io_c &in) override;
+  virtual void parse_json(nlohmann::json &) override;
   virtual bool get_next(packet_t &packet) override;
   virtual bool contains_gap() override {
     return true;
@@ -190,6 +200,8 @@ public:
   virtual ~forced_default_duration_timestamp_factory_c() = default;
 
   virtual void parse(mm_io_c &) override {
+  }
+  virtual void parse_json(nlohmann::json &) override {
   }
 
   virtual bool get_next(packet_t &packet) override;

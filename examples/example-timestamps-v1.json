@@ -1,0 +1,34 @@
+{
+  // Even though the JSON standard doesn't support comments, the
+  // library used by MKVToolNix does. Therefore you can use them here.
+
+  // The key 'version' must be set to 1. Later formats will increase
+  // the version number.
+  "version": 1,
+
+  // The key 'assume', a floating-point number, is used to set the
+  // default FPS for ranges that are not explicitely covered below."
+  "assume": 23.976,
+
+  /* A list of objects describing the ranges. Each entry in a range must contain three keys:
+      'start' — the starting frame number (integer)
+      'end' — the end frame number inclusively (integer)
+      'fps' — the number of frames per second to use in this range (floating point)
+  */
+  "ranges": [
+    {
+      "start": 800,
+      "end": 1000,
+      "fps": 25
+    },
+    {
+      "start": 1500,
+      "end": 1700,
+      "fps": 29.930
+    }
+  ]
+}
+
+// Local Variables:
+// mode: jsonc
+// End:
