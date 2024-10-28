@@ -23,7 +23,10 @@ std::string primary_file_extension_for_type(std::string const &type_name);
 
 std::vector<std::string> sorted_type_names();
 
-const std::unordered_map<std::string, std::string> &legacy_font_mime_type_mapping();
-std::string maybe_map_to_legacy_font_mime_type(std::string const &mime_type, bool do_map);
+enum class font_mime_type_type_e {
+  current,
+  legacy,
+};
+std::string get_font_mime_type_to_use(std::string const &mime_type, font_mime_type_type_e type);
 
 }

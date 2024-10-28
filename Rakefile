@@ -65,6 +65,8 @@ require_relative "rake.d/source_tests"
 require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
+FileList["rake.d/local.d/*.rb"].each { |rb| require_relative rb }
+
 def setup_globals
   $po4a_cfg                 = c(:PO4A).empty? ? nil : "doc/man/po4a/po4a.cfg"
   $po4a_stamp               = "doc/man/po4a/latest_po4a_run.stamp"
@@ -262,15 +264,6 @@ def generate_helper_files
 end
 
 def define_default_task
-  if !c(:DEFAULT_TARGET).empty?
-    desc "Build target '#{c(:DEFAULT_TARGET)}' by default"
-    task :default => c(:DEFAULT_TARGET)
-
-    return
-  end
-
-  desc "Build everything"
-
   # The applications themselves
   targets  = $applications.clone
   targets += $tools.map { |name| "src/tools/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
@@ -307,11 +300,20 @@ def define_default_task
 
   targets += $benchmark_programs
 
-  task :default => targets do
-    build_duration = Time.now - $build_start
-    build_duration = sprintf("%02d:%02d.%03d", (build_duration / 60).to_i, build_duration.to_i % 60, (build_duration * 1000).to_i % 1000)
+  task :default_targets => targets
 
-    puts "Done after #{build_duration}. Enjoy :)"
+  if !c(:DEFAULT_TARGET).empty?
+    desc "Build target '#{c(:DEFAULT_TARGET)}' by default"
+    task :default => c(:DEFAULT_TARGET)
+
+  else
+    desc "Build everything"
+    task :default => :default_targets do
+      build_duration = Time.now - $build_start
+      build_duration = sprintf("%02d:%02d.%03d", (build_duration / 60).to_i, build_duration.to_i % 60, (build_duration * 1000).to_i % 1000)
+
+      puts "Done after #{build_duration}. Enjoy :)"
+    end
   end
 
   return if %r{drake(?:\.exe)?$}i.match($PROGRAM_NAME)

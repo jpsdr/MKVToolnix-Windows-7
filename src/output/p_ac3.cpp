@@ -15,6 +15,7 @@
 
 #include "common/ac3.h"
 #include "common/codec.h"
+#include "common/hacks.h"
 #include "common/strings/formatting.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
@@ -88,13 +89,17 @@ ac3_packetizer_c::get_frame() {
 void
 ac3_packetizer_c::set_headers() {
   std::string id = MKV_A_AC3;
+  auto use_bsid  = mtx::hacks::is_engaged(mtx::hacks::KEEP_BSID910_IN_AC3_CODECID);
 
   if (m_first_ac3_header.is_eac3())
     id = MKV_A_EAC3;
-  else if (9 == m_first_ac3_header.m_bs_id)
-    id += "/BSID9";
-  else if (10 == m_first_ac3_header.m_bs_id)
-    id += "/BSID10";
+
+  else if (use_bsid) {
+    if (9 == m_first_ac3_header.m_bs_id)
+      id += "/BSID9";
+    else if (10 == m_first_ac3_header.m_bs_id)
+      id += "/BSID10";
+  }
 
   set_codec_id(id.c_str());
   set_audio_sampling_freq(m_first_ac3_header.m_sample_rate);
