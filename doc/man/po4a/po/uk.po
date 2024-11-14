@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: 4.4.0\n"
 "POT-Creation-Date: 2024-10-19 15:11+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: Altron 320, 2024\n"
+"Last-Translator: Oleh Hishak, 2024\n"
 "Language-Team: Ukrainian (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -1772,10 +1772,8 @@ msgstr "Існує кілька змінних, які можна викорис
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:311
-#, fuzzy
-#| msgid "The strings <literal>'&lt;FILE_NAME&gt;'</literal> and <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> are only filled when generating chapters for appended files.  They will be replaced by the appended file's name wihtout respectively with its extension.  Note that only the file's base name and extension are inserted, not its directory or drive components."
 msgid "The strings <literal>'&lt;FILE_NAME&gt;'</literal> and <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> are only filled when generating chapters for appended files.  They will be replaced by the appended file's name without respectively with its extension.  Note that only the file's base name and extension are inserted, not its directory or drive components."
-msgstr "Рядки <literal>'&lt;FILE_NAME&gt;'</literal> і <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> заповнюються лише під час створення глав для доданих файлів. Вони будуть замінені іменем доданого файлу без його розширення. Зауважте, що вставляються лише базове ім’я та розширення файлу, а не каталог чи диск."
+msgstr "Рядки <literal>«<FILE_NAME>»</literal> та <literal>«<FILE_NAME_WITH_EXT>»</literal> заповнюються тільки при створенні розділів для доданих файлів. Вони будуть замінені ім'ям файлу, що додається без вказівки відповідно до його розширення. Зверніть увагу, що вставляється лише базове ім'я та розширення файлу, а не його каталог або компоненти диска."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:317
@@ -1905,7 +1903,7 @@ msgstr "Цей параметр змінює порядок, у якому ст�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:429
 msgid "If this option isn't given, tracks will be sorted by their type first &amp; the order of their source file second. Video tracks come first followed by audio &amp; subtitle tracks. Other rarely used track types come last."
-msgstr ""
+msgstr "Якщо цей параметр не вказано, доріжки будуть відсортовані за їх типом в першу чергу та по порядку вихідного файлу в другу чергу. Першими йдуть відеодоріжки, потім аудіодоріжки та доріжки субтитрів. Інші типи доріжок, що рідко використовуються, йдуть останніми."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:436
@@ -2059,15 +2057,13 @@ msgstr "Для форми розширених мовних підтегів с�
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:587
-#, fuzzy
-#| msgid "<option>--gui-mode</option>"
 msgid "<option>--stop-after-video-ends</option>"
-msgstr "<option>--gui-mode</option>"
+msgstr "<option>--stop-after-video-ends</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:590
 msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
-msgstr ""
+msgstr "Припиняє обробку після закінчення основної відеодоріжки, відкидаючи всі інші пакети інших доріжок."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:598
@@ -2621,10 +2617,8 @@ msgstr "<option>--attach-file</option> <parameter>file-name</parameter>, <option
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1164
-#, fuzzy
-#| msgid "Creates a file attachment inside the &matroska; file. The <abbrev>MIME</abbrev> type must have been set before this option can used. The difference between the two forms is that during splitting the files attached with <option>--attach-file</option> are attached to all output files while the ones attached with <option>--attach-file-once</option> are only attached to the first file created.  If splitting is not used then both do the same."
 msgid "Creates a file attachment inside the &matroska; file. The difference between the two forms is that during splitting the files attached with <option>--attach-file</option> are attached to all output files while the ones attached with <option>--attach-file-once</option> are only attached to the first file created. If splitting is not used then both do the same."
-msgstr "Створює вкладений файл всередині файла &matroska;. Перш ніж використовувати цей параметр, потрібно встановити тип <abbrev>MIME</abbrev>. Різниця між цими двома формами полягає в тому, що під час розділення файли, вкладені за допомогою <option>--attach-file</option>, приєднуються до всіх вихідних файлів, а файли, прикріплені за допомогою <option>--attach-file-once</option>, долучаються лише до першого створеного файлу. Якщо розділення не використовується, то обидва роблять те саме."
+msgstr "Створює вкладення файлу всередині файлу &matroska;. Різниця між двома формами полягає в тому, що при розбитті файли, прикріплені за допомогою <option>--attach-file</option>, прикріплюються до всіх вихідних файлів, а файли, прикріплені за допомогою <option>--attach-file- once</option>, прикріплюються лише до першого створеного файлу. Якщо поділ не використовується, то обидва варіанти працюють однаково."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1170
@@ -2833,10 +2827,8 @@ msgstr "Не копіювати глобальних тегів з цього ф
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1401
-#, fuzzy
-#| msgid "<option>--enable-durations</option>"
 msgid "<option>--regenerate-track-uids</option>"
-msgstr "<option>--enable-durations</option>"
+msgstr "<option>--regenerate-track-uids</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1404
@@ -2846,7 +2838,7 @@ msgstr "Коли цей параметр використовується до �
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1410
 msgid "This behavior is enabled automatically for Matroska files created by the MakeMKV software. The reason is that MakeMKV uses consecutive numbers (1, 2, 3…) as UIDs instead of generating random ones."
-msgstr ""
+msgstr "Ця поведінка автоматично включається для файлів Matroska, створених програмою MakeMKV. Причина у тому, що MakeMKV використовує послідовні числа (1, 2, 3...) як UID, а чи не створює випадкові."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1417
@@ -3015,17 +3007,13 @@ msgstr "Якщо mkvmerge помилково виявляє, що файл <abbr
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1656
-#, fuzzy
-#| msgid "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
 msgid "<option>--audio-emphasis</option> <parameter>TID:n|symbolic-name</parameter>"
-msgstr "<option>--timestamps</option> <parameter>TID:file-name</parameter>"
+msgstr "<option>--audio-emphasis</option> <parameter>TID:n|symbolic-name</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1659
-#, fuzzy
-#| msgid "Sets the stereo mode for the video track with the track ID <parameter>TID</parameter>.  The mode can either be a number <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or one of these keywords:"
 msgid "Sets the emphasis for the audio track with the track ID <parameter>TID</parameter>.  The mode can either be a number <parameter>n</parameter> (certain values between <constant>0</constant> and <constant>16</constant>) or a symbolic name. All valid numbers &amp; symbolic names can be listed with the <link linkend=\"mkvmerge.description.list_audio_emphasis\"><option>--list-audio-emphasis</option> option</link>."
-msgstr "Встановлює режим стерео для відео доріжок з ідентифікатором доріжки <parameter>TID</parameter>.  Режим може бути або числом <parameter>n</parameter> між <constant>0</constant> та <constant>14</constant> або одним з таких ключових слів:"
+msgstr "Задає акцент звукової доріжки за допомогою ідентифікатора доріжки <parameter>TID</parameter>. Режим може бути числом <parameter>n</parameter> (визначені значення від <constant>0</constant> до <constant>16</constant>) або символьним ім'ям. Всі допустимі номери та символьні імена можна вивести списком за допомогою <link linkend=\"mkvmerge.description.list_audio_emphasis\">параметра <option>--list-audio-accession</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1668
@@ -3431,17 +3419,13 @@ msgstr "<constant>0</constant>: прогресивний; <constant>1</constant>
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2086
-#, fuzzy
-#| msgid "<option>--stereo-mode</option> <parameter>TID:n|keyword</parameter>"
 msgid "<option>--stereo-mode</option> <parameter>TID:n|symbolic-name</parameter>"
-msgstr "<option>--stereo-mode</option> <parameter>TID:n|keyword</parameter>"
+msgstr "<option>--stereo-mode</option> <parameter>TID:n|symbolic-name</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2089
-#, fuzzy
-#| msgid "Sets the stereo mode for the video track with the track ID <parameter>TID</parameter>.  The mode can either be a number <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or one of these keywords:"
 msgid "Sets the stereo mode for the video track with the track ID <parameter>TID</parameter>.  The mode can either be a number <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or a symbolic name. All valid numbers &amp; names can be listed with the <link linkend=\"mkvmerge.description.list_stereo_modes\"><option>--list-stereo-modes</option> option</link>."
-msgstr "Встановлює режим стерео для відео доріжок з ідентифікатором доріжки <parameter>TID</parameter>.  Режим може бути або числом <parameter>n</parameter> між <constant>0</constant> та <constant>14</constant> або одним з таких ключових слів:"
+msgstr "Встановлює стереорежим для відеозйомки за допомогою ідентифікатора доріжки <parameter>TID</parameter>. Режим може бути числом <parameter>n</parameter> від <constant>0</constant> до <constant>14</constant> або символьним ім'ям. Всі допустимі номери та імена можна вивести списком за допомогою <link linkend=\"mkvmerge.description.list_stereo_modes\">параметра <option>--list-stereo-modes</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2099
@@ -3515,10 +3499,8 @@ msgstr "Формат виводу <literal>json</literal> є машиночит�
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2169
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v20.json\"><literal>mkvmerge-identification-output-schema-v20.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v20.json\"><literal>mkvmerge-identification-output-schema-v20.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2173
@@ -3542,17 +3524,13 @@ msgstr "Якщо відомо, що доріжки присутні, але не
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2197
-#, fuzzy
-#| msgid "<option>--list-languages</option>"
 msgid "<option>--list-audio-emphasis</option>"
-msgstr "<option>--list-languages</option>"
+msgstr "<option>--list-audio-emphasis</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2200
-#, fuzzy
-#| msgid "Lists all languages and their ISO 639-2 code which can be used with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option."
 msgid "Lists all valid numbers &amp; their corresponding symbolic names for the <link linkend=\"mkvmerge.description.audio_emphasis\"><option>--audio-emphasis</option></link> option."
-msgstr "Перелічує всі мови та їх коди ISO 639-2, які можна використовувати з параметром <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> ."
+msgstr "Виводить список допустимих чисел та їх відповідних символічних імен для параметра <link linkend=\"mkvmerge.description.audio_emphasis\"><option>--audio-emphasis</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2207
@@ -3566,17 +3544,13 @@ msgstr "Перелічує всі мови та їх коди ISO 639-2, які 
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2217
-#, fuzzy
-#| msgid "<option>--gui-mode</option>"
 msgid "<option>--list-stereo-modes</option>"
-msgstr "<option>--gui-mode</option>"
+msgstr "<option>--list-stereo-modes</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2220
-#, fuzzy
-#| msgid "Lists all languages and their ISO 639-2 code which can be used with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option."
 msgid "Lists all valid numbers &amp; their corresponding symbolic names for the <link linkend=\"mkvmerge.description.stereo_mode\"><option>--stereo-mode</option></link> option."
-msgstr "Перелічує всі мови та їх коди ISO 639-2, які можна використовувати з параметром <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> ."
+msgstr "Виводить список допустимих чисел та їх відповідних символічних імен для параметра <link linkend=\"mkvmerge.description.audio_emphasis\"><option>--stereo-mode</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2227
@@ -4044,39 +4018,37 @@ msgstr "Спеціальний ідентифікатор доріжки '<const
 #: doc/man/mkvmerge.xml:2720
 #: doc/man/mkvpropedit.xml:715
 msgid "Language handling"
-msgstr ""
+msgstr "Робота з мовами"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2723
 msgid "&matroska; has support for two different types of language elements: the old, deprecated \"Language\" element containing ISO 639-2 alpha 3 codes and the new \"LanguageIETF\" tags containing IETF BCP 47 language tags. All of &mkvmerge;'s options that accept a language accept a BCP 47 language tag. &mkvmerge; will derive the value for the deprecated \"Language\" element from the BCP 47 language tags wherever possible."
-msgstr ""
+msgstr "&matroska; підтримує два різних типи мовних елементів: старий, застарілий елемент «Language», що містить коди ISO 639-2 alpha 3, та нові теги «LanguageIETF», що містять мовні теги IETF BCP 47. Всі параметри &mkvmerge;, які приймають мову, приймають мовний тег BCP 47. &mkvmerge; буде виводити значення для застарілого елемента Language з мовних тегів BCP 47, де це можливо."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2729
 msgid "When identifying a file in JSON mode, existing \"LanguageIETF\" track header elements will be output as the <literal>language_ietf</literal> track property."
-msgstr ""
+msgstr "При ідентифікації файлу в режимі JSON існуючі елементи заголовка доріжки «LanguageIETF» будуть виведені як властивість доріжки <literal>language_ietf</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2734
 msgid "When writing a file &mkvmerge; will always write the \"LanguageIETF\", \"ChapLanguageIETF\" and \"TagLanguageIETF\" elements (the latter two only if chapters or tags are written respectively). In addition to those elements the corresponding old elements will be written; they'll be set to the ISO 639-2 code portion of the BCP 47 language tag. For example, when the track language is set to <literal>sr-Cyrl-RS</literal> \"LanguageIETF\" will be set to <literal>sr-Cyrl-RS</literal> and the old \"Language\" element will be set to <literal>srp</literal>."
-msgstr ""
+msgstr "Під час запису файлу &mkvmerge; завжди записуватиме елементи «LanguageIETF», «ChapLanguageIETF» та «TagLanguageIETF» (останні два лише у разі запису розділів або тегів відповідно). Крім цих елементів будуть записані відповідні старі елементи; вони будуть встановлені на частину коду ISO 639-2 мовного тега BCP 47. Наприклад, коли мова доріжки встановлена ​​на <literal>sr-Cyrl-RS</literal>, «LanguageIETF» буде встановлена ​​на <literal>sr-Cyrl-RS</literal>, а старий елемент \"Language\" буде встановлений на <literal>srp</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2742
 msgid "When reading existing files (Matroska files, XML chapter or tag files etc.) that already contain \"…LanguageIETF\" elements the existing elements will be kept. Otherwise \"…LanguageIETF\" elements will be added based on command-line options and other existing deprecated \"…Language\" elements."
-msgstr ""
+msgstr "При читанні існуючих файлів (файли Matroska, файли глав або тегів XML тощо), які вже містять елементи «...LanguageIETF\"», існуючі елементи будуть збережені. В іншому випадку елементи ««..LanguageIETF» будуть додані. на основі параметрів командного рядка та інших застарілих елементів «...Language»."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2748
 msgid "The creation of the new elements can be disabled completely with the command-line option <option>--disable-language-ietf</option> which operates on all three new elements."
-msgstr ""
+msgstr "Створення нових елементів можна повністю відключити за допомогою командного рядка <option>--disable-language-ietf</option>, який діє на всі три нові елементи."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2753
-#, fuzzy
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link>."
-msgstr "Вміст розглядається так, ніби його було передано за допомогою параметра <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>."
+msgstr "За допомогою параметра <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link> можна вибрати метод нормалізації, що застосовується до розширених мовних підтегів."
 
 #. type: Content of: <refentry><refsect1><note><para>
 #: doc/man/mkvmerge.xml:2762
@@ -4363,10 +4335,8 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3044
-#, fuzzy
-#| msgid "&mkvmerge; will transform every pair or lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that the chapters all apply to all tracks in the file."
 msgid "&mkvmerge; will transform every pair or lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that all chapters apply to all tracks in the file."
-msgstr "&mkvmerge; перетворить кожну пару або рядки в один <classname>ChapterAtom</classname> &matroska;. Це не встановлює жодного <classname>ChapterTrackNumber</classname>, що означає, що всі глави застосовуються до всіх доріжок у файлі."
+msgstr "&mkvmerge; перетворює кожну пару або рядки на один <classname>ChapterAtom</classname> &matroska;. Він не встановлює будь-який <classname>ChapterTrackNumbe</classname>, що означає, що всі розділи застосовуються до всіх записів у файлі."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3049
@@ -5415,12 +5385,12 @@ msgstr "Вибір за типом MIME. У цій формі селекторо
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:718
 msgid "&mkvpropedit; mostly tries to do the right thing by default. Therefore changes to the <option>language</option> property will cause &mkvpropedit; to apply the same change to both the new \"LanguageIETF\" element as well as the old \"Language\" element similar to how &mkvmerge; applies the language to both elements. For example, when using <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> the \"LanguageIETF\" element will be set to <literal>zh-TW</literal> and the old \"Language\" element to <literal>chi</literal>."
-msgstr ""
+msgstr "&mkvpropedit; переважно намагається робити правильні речі за умовчанням. Тому зміни властивості <option>language</option> змусять &mkvpropedit; застосувати таку ж зміну як до нового елемента «LanguageIETF», так і до старого елемента «Language», подібно до того, як &mkvmerge; застосовує мову до обох елементів. Наприклад, під час використання <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> елемент «LanguageIETF» буде встановлений на <literal>zh-TW</literal>, а старий елемент \"Language\" на <literal>chi</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:726
 msgid "Additionally there's a new track header property named <option>language-ietf</option> that can be set or removed. Changes to this property only apply to the new \"LanguageIETF\" track header element. A caveat is that the old \"Language\" track header element is a mandatory element in Matroska — meaning even if it isn't present in the file it still has an implied value. When the user only sets the <option>language-ietf</option> property but not the <option>language</option> property, &mkvpropedit; will therefore add the old \"Language\" element in certain cases &amp; set it to <literal>und</literal> (meaning \"undetermined\") as the user didn't specify a value for it."
-msgstr ""
+msgstr "Крім того, є нова властивість заголовка доріжки під назвою <option>language-ietf</option>, яку можна встановити або видалити. Зміни цієї властивості застосовуються лише до нового елемента заголовка доріжки \"LanguageIETF\". Застереження полягає в тому, що старий елемент заголовка доріжки «Language» є обов'язковим елементом у Matroska — це означає, що навіть якщо він відсутній у файлі, він має однакове значення. Коли користувач встановлює лише властивість <option>language-ietf</option>, але не властивість <option>language</option>, &mkvpropedit; буде додавати старий елемент \"Language\" у певних випадках і встановить його в <literal>und</literal> (що означає \"невизначений\"), оскільки користувач не вказав для нього значення."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:734
@@ -5430,12 +5400,12 @@ msgstr "Під час читання файлів розділів XML або ф
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:736
 msgid "The creation of the new elements can be disabled completely with the command-line option `--disable-language-ietf` which operates on all three new elements."
-msgstr ""
+msgstr "Створення нових елементів може бути повністю відключено за допомогою командного рядка «--disable-language-ietf», який діє на всі три нові елементи."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:739
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <option>--normalize-language-ietf</option>."
-msgstr ""
+msgstr "За допомогою параметра <option>--normalize-language-ietf</option> можна вибрати метод нормалізації, який застосовується до розширених мовних підтегів."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:746
@@ -5760,7 +5730,7 @@ msgstr " -- "
 #: doc/stylesheets/docbook-to-html.xsl:83
 #: doc/stylesheets/docbook-to-html.xsl:100
 msgid "Link to this heading"
-msgstr ""
+msgstr "Посилання на цей заголовок"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><tr><td><xsl:choose><xsl:when><a>
 #: doc/stylesheets/docbook-to-html.xsl:83
@@ -5768,7 +5738,7 @@ msgstr ""
 #: doc/stylesheets/docbook-to-html.xsl:145
 #, no-wrap
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><table><thead><tr><th>
 #: doc/stylesheets/docbook-to-html.xsl:130
@@ -5779,7 +5749,7 @@ msgstr "Налаштування"
 #. type: Attribute 'title' of: <xsl:stylesheet><xsl:template><tr><td><xsl:choose><xsl:when><a>
 #: doc/stylesheets/docbook-to-html.xsl:145
 msgid "Link to this option"
-msgstr ""
+msgstr "Посилання на цю функцію"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:choose><xsl:otherwise><a><xsl:text>
 #: doc/stylesheets/docbook-to-html.xsl:185
