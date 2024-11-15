@@ -7,3 +7,4 @@ test_merge "data/h264/vfr.h264", :exit_code => :warning
 test_merge "data/h264/vfr.h264", :args => "--timecodes 0:data/h264/vfr-timecodes.txt"
 test_merge "data/h264/vfr.h264", :args => "--timestamps 0:data/h264/vfr-timecodes.txt"
 test_merge "data/h264/vfr.h264", :args => "--timestamps 0:data/h264/vfr-timestamps.txt"
+test_merge "data/h264/vfr.h264", :args => "--timestamps 0:data/h264/vfr-timestamps.json"

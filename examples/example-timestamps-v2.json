@@ -1,0 +1,42 @@
+{
+  // Even though the JSON standard doesn't support comments, the
+  // library used by MKVToolNix does. Therefore you can use them here.
+
+  // The key 'version' must be set to 2. Later formats will increase
+  // the version number.
+  "version": 2,
+
+  // An array of integer or floating point numbers depicting the frame
+  // timestamps in milliseconds.
+
+  // You must give at least as many timestamp lines here as the track
+  // contains frames. Otherwise mkvmerge will complain, and the
+  // results might not be what you expect.
+  "timestamps": [
+    // Example for 10 consecutive frames at 25fps:
+    0,
+    40.0,
+    80.0,
+    120,
+    160,
+    200,
+    240,
+    280,
+    320,
+    360,
+
+    // No need to use floats, but you can if you want. Now some more
+    // frames which, are spaced a bit more.
+    460,
+    560,
+    660,
+    760,
+    860,
+    960,
+    1060
+  ]
+}
+
+// Local Variables:
+// mode: jsonc
+// End:
