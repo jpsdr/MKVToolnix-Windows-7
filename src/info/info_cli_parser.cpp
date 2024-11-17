@@ -33,7 +33,7 @@ info_cli_parser_c::init_parser() {
   add_section_header(YT("Options"));
 
   add_option("a|all",           std::bind(&info_cli_parser_c::set_show_all_elements,   this), YT("Show all sub-elements (including cues & seek heads entries) and don't stop at the first cluster."));
-  add_option("c|checksum",      std::bind(&info_cli_parser_c::set_checksum,            this), YT("Calculate and display checksums of frame contents."));
+  add_option("c|checksum|checksums", std::bind(&info_cli_parser_c::set_checksum,            this), YT("Calculate and display checksums of frame contents."));
   add_option("C|check-mode",    std::bind(&info_cli_parser_c::set_check_mode,          this), YT("Calculate and display checksums and use verbosity level 4."));
   add_option("o|continue",      std::bind(&info_cli_parser_c::set_continue_at_cluster, this), YT("Don't stop processing at the first cluster."));
   add_option("P|positions",     std::bind(&info_cli_parser_c::set_dec_positions,       this), YT("Show the position of each element in decimal."));
