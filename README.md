@@ -284,13 +284,13 @@ to my FTP server. Details on how to connect can be found in the
 The issue tracker above is not meant for general support which you can
 find in the following places:
 
-* The [MKVToolNix sub-Reddit](https://www.reddit.com/r/mkvtoolnix) is
+* The [MKVToolNix help forum](https://help.mkvtoolnix.download/) is
   suitable for all kinds of questions.
 * The MKVToolNix thread on [Doom9's
   forum](http://forum.doom9.org/showthread.php?t=155732) is more
   suited for in-depth technical questions.
-* There's also the IRC channel `#matroska` on the [Freenode IRC
-  network](https://freenode.net/) where we hang out. The main
+* There's also the IRC channel `#matroska` on the [Libera IRC
+  network](https://libera.chat/) where we hang out. The main
   MKVToolNix author Moritz Bunkus is known as "mosu" there.
 
 
