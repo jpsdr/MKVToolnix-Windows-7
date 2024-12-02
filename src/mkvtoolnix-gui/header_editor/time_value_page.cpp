@@ -27,6 +27,17 @@ TimeValuePage::TimeValuePage(Tab &parent,
 TimeValuePage::~TimeValuePage() {
 }
 
+void
+TimeValuePage::setTimeZoneOrSpec() {
+  auto &cfg = Util::Settings::get();
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  m_dteValue->setTimeZone(cfg.m_headerEditorDateTimeInUTC ? QTimeZone::utc()   : QTimeZone::systemTimeZone());
+#else
+  m_dteValue->setTimeSpec(cfg.m_headerEditorDateTimeInUTC ? Qt::UTC            : Qt::LocalTime);
+#endif
+}
+
 QWidget *
 TimeValuePage::createInputControl() {
   auto &cfg = Util::Settings::get();
@@ -36,7 +47,7 @@ TimeValuePage::createInputControl() {
 
   m_dteValue = new QDateTimeEdit{this};
   m_dteValue->setCalendarPopup(true);
-  m_dteValue->setTimeZone(cfg.m_headerEditorDateTimeInUTC ? QTimeZone::utc()   : QTimeZone::systemTimeZone());
+  setTimeZoneOrSpec();
   m_dteValue->setDateTime(cfg.m_headerEditorDateTimeInUTC ? m_originalValueUTC : m_originalValueUTC.toLocalTime());
   m_dteValue->setDisplayFormat(Q("yyyy-MM-dd hh:mm:ss"));
 
@@ -82,7 +93,7 @@ TimeValuePage::showInRequestedTimeSpec() {
   auto &cfg    = Util::Settings::get();
   auto current = m_dteValue->dateTime();
 
-  m_dteValue->setTimeZone(cfg.m_headerEditorDateTimeInUTC ? QTimeZone::utc() : QTimeZone::systemTimeZone());
+  setTimeZoneOrSpec();
   m_dteValue->setDateTime(cfg.m_headerEditorDateTimeInUTC ? current.toUTC()  : current.toLocalTime());
 }
 
