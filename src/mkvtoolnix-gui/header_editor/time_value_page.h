@@ -29,6 +29,9 @@ public:
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
   virtual void showInRequestedTimeSpec();
+
+private:
+  void setTimeZoneOrSpec();
 };
 
 }
