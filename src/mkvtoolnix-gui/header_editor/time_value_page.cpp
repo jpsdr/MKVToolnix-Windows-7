@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDateTimeEdit>
+#include <QTimeZone>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/time_value_page.h"
@@ -26,16 +27,27 @@ TimeValuePage::TimeValuePage(Tab &parent,
 TimeValuePage::~TimeValuePage() {
 }
 
+void
+TimeValuePage::setTimeZoneOrSpec() {
+  auto &cfg = Util::Settings::get();
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  m_dteValue->setTimeZone(cfg.m_headerEditorDateTimeInUTC ? QTimeZone::utc()   : QTimeZone::systemTimeZone());
+#else
+  m_dteValue->setTimeSpec(cfg.m_headerEditorDateTimeInUTC ? Qt::UTC            : Qt::LocalTime);
+#endif
+}
+
 QWidget *
 TimeValuePage::createInputControl() {
   auto &cfg = Util::Settings::get();
 
   if (m_element)
-    m_originalValueUTC = QDateTime::fromSecsSinceEpoch(static_cast<libebml::EbmlDate *>(m_element)->GetEpochDate(), Qt::UTC);
+    m_originalValueUTC = QDateTime::fromSecsSinceEpoch(static_cast<libebml::EbmlDate *>(m_element)->GetEpochDate(), QTimeZone::utc());
 
   m_dteValue = new QDateTimeEdit{this};
   m_dteValue->setCalendarPopup(true);
-  m_dteValue->setTimeSpec(cfg.m_headerEditorDateTimeInUTC ? Qt::UTC            : Qt::LocalTime);
+  setTimeZoneOrSpec();
   m_dteValue->setDateTime(cfg.m_headerEditorDateTimeInUTC ? m_originalValueUTC : m_originalValueUTC.toLocalTime());
   m_dteValue->setDisplayFormat(Q("yyyy-MM-dd hh:mm:ss"));
 
@@ -81,8 +93,8 @@ TimeValuePage::showInRequestedTimeSpec() {
   auto &cfg    = Util::Settings::get();
   auto current = m_dteValue->dateTime();
 
-  m_dteValue->setTimeSpec(cfg.m_headerEditorDateTimeInUTC ? Qt::UTC : Qt::LocalTime);
-  m_dteValue->setDateTime(cfg.m_headerEditorDateTimeInUTC ? current.toUTC() : current.toLocalTime());
+  setTimeZoneOrSpec();
+  m_dteValue->setDateTime(cfg.m_headerEditorDateTimeInUTC ? current.toUTC()  : current.toLocalTime());
 }
 
 QString

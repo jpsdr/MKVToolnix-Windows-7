@@ -20,6 +20,7 @@
 
 #include <QDateTime>
 #include <QRegularExpression>
+#include <QTimeZone>
 
 #include "common/bcp47.h"
 #include "common/date_time.h"
@@ -214,7 +215,7 @@ change_c::parse_date_time() {
   QDate date(year, month, day);
   QTime time(hours, minutes, seconds);
 
-  m_ui_value              = QDateTime{date, time, Qt::UTC}.toSecsSinceEpoch();
+  m_ui_value              = QDateTime{date, time, QTimeZone::utc()}.toSecsSinceEpoch();
 
   auto tz_offset_minutes  = (offset_hours * 60 + offset_minutes) * offset_mult;
   m_ui_value             -= tz_offset_minutes * 60;
