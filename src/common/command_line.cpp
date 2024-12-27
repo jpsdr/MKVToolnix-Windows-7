@@ -106,18 +106,24 @@ args_in_utf8(int argc,
 
   charset_converter_cptr cc_command_line = g_cc_stdio;
 
-  for (i = 1; i < argc; i++)
-    if (argv[i][0] == '@')
-      read_args_from_json_file(args, &argv[i][1]);
-    else {
-      if (!strcmp(argv[i], "--command-line-charset")) {
-        if ((i + 1) == argc)
-          mxerror(Y("'--command-line-charset' is missing its argument.\n"));
-        cc_command_line = charset_converter_c::init(!argv[i + 1] ? "" : argv[i + 1]);
-        i++;
-      } else
-        args.push_back(cc_command_line->utf8(argv[i]));
-    }
+  for (i = 1; i < argc; i++) {
+    auto s_arg = std::string{argv[i]};
+
+    if (s_arg.substr(0, 2) == "@@"s)
+      args.push_back(cc_command_line->utf8(s_arg.substr(1)));
+
+    else if (s_arg.substr(0, 1) == "@"s)
+      read_args_from_json_file(args, s_arg.substr(1));
+
+    else if (s_arg == "--command-line-charset"s) {
+      if ((i + 1) == argc)
+        mxerror(Y("'--command-line-charset' is missing its argument.\n"));
+      cc_command_line = charset_converter_c::init(!argv[i + 1] ? "" : argv[i + 1]);
+      i++;
+
+    } else
+      args.push_back(cc_command_line->utf8(s_arg));
+  }
 
 #if defined(SYS_APPLE)
   // Always use NFD on macOS, no matter which normalization form the
@@ -147,7 +153,10 @@ args_in_utf8(int,
   for (i = 1; i < num_args; i++) {
     auto arg = to_utf8(std::wstring{arg_list[i]});
 
-    if (arg[0] == '@')
+    if (arg.substr(0, 2) == "@@"s)
+      args.push_back(arg.substr(1));
+
+    else if (arg[0] == '@')
       read_args_from_json_file(args, arg.substr(1));
 
     else

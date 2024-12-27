@@ -2386,6 +2386,13 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
        Reads additional command line arguments from the file <parameter>options-file</parameter>. See the section about <link
        linkend="mkvmerge.option_files">option files</link> for further information.
       </para>
+
+      <para>
+       If you want to use the <literal>@</literal> sign as the first character in the argument to an option such as
+       '<literal>--title</literal>', you have to escape it with a second <literal>@</literal> sign. Example:
+      </para>
+
+      <screen>$ mkvmerge -o midnight-s01e01.mkv --title @@midnight midnight-s01e01.mp4</screen>
      </listitem>
     </varlistentry>
 

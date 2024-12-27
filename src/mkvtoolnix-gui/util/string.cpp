@@ -44,10 +44,14 @@ escapeShellUnix(QString const &source) {
   if (source.isEmpty())
     return Q("\"\"");
 
-  if (!source.contains(QRegularExpression{"[^\\w%+,\\-./:=@]"}))
+  if (!source.contains(QRegularExpression{"[^\\w%+,\\-./:=]"}))
     return source;
 
   auto copy = source;
+
+  if (copy.startsWith(QChar{'@'}))
+    copy.insert(0, QChar{'@'});
+
   // ' -> '\''
   copy.replace(QRegularExpression{"'"}, Q("'\\''"));
 
@@ -116,10 +120,13 @@ escapeShellWindows(QString const &source) {
   if (source.isEmpty())
     return Q("^\"^\"");
 
-  if (!source.contains(QRegularExpression{"[^\\w+,\\-./:=@]"}))
+  if (!source.contains(QRegularExpression{"[^\\w+,\\-./:=]"}))
     return source;
 
   auto copy = QString{'"'};
+
+  if (source.startsWith(QChar{'@'}))
+    copy.append(QChar{'@'});
 
   for (auto it = source.begin(), end = source.end() ; ; ++it) {
     QString::size_type numBackslashes = 0;

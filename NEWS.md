@@ -9,6 +9,10 @@
   specific values upon adding a file has gotten a new option to always set the
   language, no matter whether or not the source container provided a track
   language or what it was set to.
+* all command-line tools: implemented an escape mechanism for when you want to
+  use the `@` sign as the first character in an argument to an option such as
+  `--title`. To escape it the `@` sign has to be doubled as in `--title
+  @@midnight`. Implements #3768.
 
 ## Bug fixes
 
