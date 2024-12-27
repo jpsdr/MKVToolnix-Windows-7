@@ -220,7 +220,7 @@ msgstr ""
 "                           Параметры o/p служаць для рэгулявання метак часу памнажэннем іх\n"
 "                           на значэнні o/p для выпраўлення ліннейных змяшчэнняў.\n"
 "                           Значэнне p па змаўчанні роўна 1, калі не зададзена.\n"
-"                           Параметры o і p могуць быць лікамі з плаваючай коскай.\n"
+"                           Параметры o і p могуць быць лікамі з плаваючай кропкай.\n"
 
 #: src/merge/mkvmerge.cpp:95
 #, no-c-format
@@ -1182,7 +1182,7 @@ msgid ""
 "                           'o/p' to fix linear drifts. 'p' defaults to\n"
 "                           1 if omitted. Both 'o' and 'p' can be\n"
 "                           floating point numbers.\n"
-msgstr "  -y, --sync <TID:d[,o[/p]]> - Сінхранізацыя, прыстасаванне метак часу трэка з TID по «d» мілісекунд. Параметры «o/p» служаць для рэгулявання метак часу памнажэннем іх на значэнні «o/p» для выпрашлення лінейных змяшчэнняў. Значэнне «p» па змаўчанні роўна 1, калі не зададзена. Параметры «o» і «p» могуць быць лікамі з плаваючай коскай.\n"
+msgstr "  -y, --sync <TID:d[,o[/p]]> - Сінхранізацыя, прыстасаванне метак часу трэка з TID по «d» мілісекунд. Параметры «o/p» служаць для рэгулявання метак часу памнажэннем іх на значэнні «o/p» для выпрашлення лінейных змяшчэнняў. Значэнне «p» па змаўчанні роўна 1, калі не зададзена. Параметры «o» і «p» могуць быць лікамі з плаваючай кропкай.\n"
 
 #: src/merge/mkvmerge.cpp:183
 #, no-c-format
@@ -1226,7 +1226,7 @@ msgstr "  DT: дата і час\n"
 #: src/propedit/propedit_cli_parser.cpp:178
 #, no-c-format
 msgid "  FP: floating point number\n"
-msgstr "  FP:  лік з плаваючай коскай\n"
+msgstr "  FP:  лік з плаваючай кропкай\n"
 
 #: src/propedit/propedit_cli_parser.cpp:175
 #, no-c-format
@@ -1603,7 +1603,7 @@ msgstr[3] "%1 запісаў"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:133
 #, no-c-format
 msgid "%1 from earlier runs"
-msgstr ""
+msgstr "%1 з мінулых запускаў"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:142
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:118
@@ -1616,25 +1616,25 @@ msgstr "%1 пікселяў"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:132
 #, no-c-format
 msgid "%1 since starting the program"
-msgstr ""
+msgstr "%1 ад запуску праграмы"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:117
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%1+%2 error"
 msgid_plural "%1+%2 errors"
-msgstr[0] "%1 памылка"
-msgstr[1] "%1 памылкі"
-msgstr[2] "%1 памылак"
-msgstr[3] "%1 памылак"
+msgstr[0] "%1+%2 памылка"
+msgstr[1] "%1+%2 памылкі"
+msgstr[2] "%1+%2 памылак"
+msgstr[3] "%1+%2 памылак"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:116
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%1+%2 warning"
 msgid_plural "%1+%2 warnings"
-msgstr[0] "%1 папярэджанне"
-msgstr[1] "%1 папярэджанні"
-msgstr[2] "%1 папярэджанняў"
-msgstr[3] "%1 папярэджанняў"
+msgstr[0] "%1+%2 папярэджанне"
+msgstr[1] "%1+%2 папярэджанні"
+msgstr[2] "%1+%2 папярэджанняў"
+msgstr[3] "%1+%2 папярэджанняў"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
 #, no-c-format
@@ -4541,7 +4541,7 @@ msgstr "Задае mkvmerge дадаць каманды «спыніць пак�
 #: src/common/hacks.cpp:72
 #, no-c-format
 msgid "Causes mkvmerge to use the codec IDs A_AC3/BSID9 & A_AC3/BSID10 instead of A_AC3 for AC-3 tracks with BSIDs of 9 or 10 like older versions of mkvmerge did."
-msgstr ""
+msgstr "Задае mkvmerge выкарыстоўваць ідэнтыфікатары кадзіроўшчыка A_AC3/BSID9 і A_AC3/BSID10 замест A_AC3 для трэкаў AC-3 с BSID 9 або 10, як гэта было ў старых версіях mkvmerge."
 
 #: src/common/hacks.cpp:42
 #, no-c-format
@@ -7223,11 +7223,9 @@ msgid "General variables"
 msgstr "Агульныя пераменныя"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Generate new random track UIDs instead of keeping existing ones."
-msgstr ""
-"  --regenerate-track-uids  Ствараць новыя выпадковыя UID трэкаў замест\n"
-"                           захоўвання існуючых.\n"
+msgstr "Згенераваць новыя выпадковыя UID трэкаў замест захавання існуючых."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
 #, no-c-format
@@ -7458,9 +7456,9 @@ msgstr "IVF (AV1, VP8, VP9)"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:965
 #: src/mkvtoolnix-gui/merge/tool.cpp:966
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Identifying files"
-msgstr "Даданне файлаў"
+msgstr "Ідэнтыфікацыя файлаў"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:365
 #, no-c-format
@@ -9294,7 +9292,7 @@ msgstr "UID наступнага сегмента"
 #: src/mkvtoolnix-gui/merge/track_model.cpp:340
 #, no-c-format
 msgid "No"
-msgstr "Няма"
+msgstr "Не"
 
 #: src/merge/output_control.cpp:228
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:269
@@ -9700,9 +9698,9 @@ msgid "Number of chapters:"
 msgstr "Колькасць раздзелаў:"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:131
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Number of errors:"
-msgstr "Колькасць раздзелаў:"
+msgstr "Колькасць памылак:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
 #, no-c-format
@@ -9715,9 +9713,9 @@ msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "Колькасць нанасекунд (не маштабаванае) на кадр."
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Number of warnings:"
-msgstr "Колькасць раздзелаў:"
+msgstr "Колькасць папярэджанняў:"
 
 #: src/common/property_element.cpp:213
 #, no-c-format
@@ -10297,7 +10295,7 @@ msgstr "Магчымыя прычыны: файл не з'яўляецца фа�
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:205
 #, no-c-format
 msgid "PotPlayer bookmark files"
-msgstr ""
+msgstr "Файл закладак PotPlayer"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
 #, no-c-format
@@ -10342,7 +10340,7 @@ msgstr "Перадвызначаныя імёны відэатрэкаў"
 #: src/common/hacks.cpp:71
 #, no-c-format
 msgid "Prevents mkvmerge from looking for Dolby Vision Enhancement Layers stored in a separate track & combining them with the track containing the Dolby Vision Base Layer."
-msgstr ""
+msgstr "Прадухіляе mkvmerge ад пошуку слаёў паляпшэння Dolby Vision, захаваных у асобным трэку, і ад іх аб'яднання з трэкам, які ўтрымлівае базавы слой Dolby Vision."
 
 #: src/common/kax_element_names.cpp:96
 #: src/common/property_element.cpp:123
@@ -13329,7 +13327,7 @@ msgstr "Сімвалы G, M і K могуць выкарыстоўвацца д�
 #: src/merge/timestamp_factory.cpp:218
 #, no-c-format, c++-format
 msgid "The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"
-msgstr "Радок {0} файла меткі часу «{1}» не ўтрымлівае правільны лік з плаваючай коскай.\n"
+msgstr "Радок {0} файла меткі часу «{1}» не ўтрымлівае правільны лік з плаваючай кропкай.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1509
 #, no-c-format
@@ -13562,7 +13560,7 @@ msgstr "Значэнне ў радку «{0}» не з'яўляецца дапу
 #: src/propedit/change.cpp:150
 #, no-c-format, c++-format
 msgid "The property value is not a valid floating point number in '{0}'. {1}\n"
-msgstr "Значэнне ўласцівасці не з'яўляецца правільным лікам з плаваючай коскай у «{0}». {1}\n"
+msgstr "Значэнне ўласцівасці не з'яўляецца правільным лікам з плаваючай кропкай у «{0}». {1}\n"
 
 #: src/propedit/change.cpp:135
 #, no-c-format, c++-format
@@ -15612,9 +15610,9 @@ msgid "When deriving the track language from the file name, the file name is spl
 msgstr "Пры выняцця мовы трэка з імя файла, яно разбіваецца на часткі па сімвалах у дадзеным спісе."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "When given, this option applies to all source files."
-msgstr "Пры даданні некалькіх файлаў праз «Дадаць зыходныя файлы»:"
+msgstr "Калі зададзена, то ўжываецца да ўсіх зыходных файлаў."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
 #, no-c-format
