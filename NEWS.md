@@ -25,6 +25,8 @@
   the current font MIME types are always present in the MIME type combo boxes
   of attachments, no matter what Qt's MIME type database contains. Partially
   fixes #3751.
+* MKVToolNix GUI: the "disable tooltips" option in the preference will now
+  disable the tooltip for the status bar, too.
 
 
 # Version 88.0 "All I Know" 2024-10-19
