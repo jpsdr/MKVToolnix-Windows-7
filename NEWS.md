@@ -5,6 +5,10 @@
 * mkvmerge: AC-3 writer: mkvmerge will now use the codec ID `A_AC3` even for
   streams with bitstream IDs 9 or 10 instead of the deprecated codec IDs
   `A_AC3/BSID9` & `A_AC3/BSID10`. Fixes #2387.
+* MKVToolNix GUI: multiplexer: the mechanism for setting track languages to
+  specific values upon adding a file has gotten a new option to always set the
+  language, no matter whether or not the source container provided a track
+  language or what it was set to.
 
 ## Bug fixes
 

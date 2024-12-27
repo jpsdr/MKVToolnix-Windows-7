@@ -173,8 +173,8 @@ Track::setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFile
   }
 
   if (   !language.is_valid()
-      || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined == settings.m_whenToSetDefaultLanguage)
-          && (language.get_language() == "und"s)))
+      ||  (Util::Settings::SetDefaultLanguagePolicy::Always                 == settings.m_whenToSetDefaultLanguage)
+      || ((Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined == settings.m_whenToSetDefaultLanguage) && (language.get_language() == "und"s)))
     language = isAudio()     ? settings.m_defaultAudioTrackLanguage
              : isVideo()     ? settings.m_defaultVideoTrackLanguage
              : isSubtitles() ? settings.m_defaultSubtitleTrackLanguage
