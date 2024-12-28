@@ -233,6 +233,7 @@ function build_flac {
 }
 
 function build_zlib {
+  DIR=${${spec_zlib[1]%%.tar*}/zlib-v/zlib-} \
   build_package zlib \
     --prefix=${TARGET} \
     --static
