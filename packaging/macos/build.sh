@@ -84,11 +84,11 @@ function build_package {
   local DIR=${DIR:-$PACKAGE}
 
   case ${FILE##*.} in
-    xz|lzma) COMPRESSION=J ;;
-    bz2)     COMPRESSION=j ;;
-    gz)      COMPRESSION=z ;;
-    tar)     COMPRESSION=  ;;
-    *)       echo Unknown compression for ${FILE} ; exit 1 ;;
+    xz|lz|lzma) COMPRESSION=J ;;
+    bz2)        COMPRESSION=j ;;
+    gz)         COMPRESSION=z ;;
+    tar)        COMPRESSION=  ;;
+    *)          echo Unknown compression for ${FILE} ; exit 1 ;;
   esac
 
   cd $CMPL
