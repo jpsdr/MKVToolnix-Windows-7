@@ -106,41 +106,47 @@ function build_package {
     done
   fi
 
-  if [[ -z $NO_CONFIGURE ]]; then
-    saved_CFLAGS=${CFLAGS}
-    saved_CXXFLAGS=${CXXFLAGS}
-    saved_LDFLAGS=${LDFLAGS}
+  if [[ -n $NO_CONFIGURE ]]; then
+    return
+  fi
 
-    export CFLAGS="${CFLAGS} -I${TARGET}/include"
-    export LDFLAGS="${LDFLAGS} -L${TARGET}/lib"
+  saved_CFLAGS=${CFLAGS}
+  saved_CXXFLAGS=${CXXFLAGS}
+  saved_LDFLAGS=${LDFLAGS}
 
-    if [[ ( -n ${CONFIGURE} ) || ( -x ./configure ) ]]; then
-      $DEBUG ${CONFIGURE:-./configure} $@
+  export CFLAGS="${CFLAGS} -I${TARGET}/include"
+  export LDFLAGS="${LDFLAGS} -L${TARGET}/lib"
 
-      if [[ -z $NO_MAKE ]]; then
-        $DEBUG make
-        build_tarball
-      fi
-
-    else
-      mkdir mtx-build
-      cd mtx-build
-
-      $DEBUG cmake .. $@
-
-      if [[ -z $NO_MAKE ]]; then
-        $DEBUG make
-        build_tarball command "make DESTDIR=TMPDIR install"
-      fi
-
-      cd ..
-
+  if [[ ( -n ${CONFIGURE} ) || ( -x ./configure ) ]]; then
+    if [[ -n ${build_package_hook_pre_configure} ]]; then
+      ${build_package_hook_pre_configure}
     fi
 
-    CFLAGS=${saved_CFLAGS}
-    CXXFLAGS=${saved_CXXFLAGS}
-    LDFLAGS=${saved_LDFLAGS}
+    $DEBUG ${CONFIGURE:-./configure} $@
+
+    if [[ -z $NO_MAKE ]]; then
+      $DEBUG make
+      build_tarball
+    fi
+
+  else
+    mkdir mtx-build
+    cd mtx-build
+
+    $DEBUG cmake .. $@
+
+    if [[ -z $NO_MAKE ]]; then
+      $DEBUG make
+      build_tarball command "make DESTDIR=TMPDIR install"
+    fi
+
+    cd ..
+
   fi
+
+  CFLAGS=${saved_CFLAGS}
+  CXXFLAGS=${saved_CXXFLAGS}
+  LDFLAGS=${saved_LDFLAGS}
 }
 
 mkdir -p $CMPL
@@ -188,7 +194,14 @@ function build_ogg {
     --enable-static
 }
 
+function build_vorbis_pre_configure {
+  echo fixing libVorbis build
+
+  perl -pi -e 's{-+force_cpusubtype_ALL}{}g' configure.ac configure
+}
+
 function build_vorbis {
+  build_package_hook_pre_configure=build_vorbis_pre_configure \
   build_package vorbis \
     --prefix=${TARGET} \
     --with-ogg-libraries=${TARGET}/lib \
