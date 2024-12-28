@@ -94,7 +94,7 @@ timestamp_factory_c::create_from_json(std::string const &file_name,
   }
 
   if (!version)
-    mxerror(Y("JSON timestamp files must contain a JSON hash with a 'version' key.\n"));
+    mxerror(Y("JSON timestamp files must contain a JSON object with a 'version' key.\n"));
 
   auto factory = create_for_version(file_name, source_name, tid, *version);
 

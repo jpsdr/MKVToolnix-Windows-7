@@ -1,10 +1,18 @@
-# Version ?
+# Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27
 
 ## New features and enhancements
 
 * mkvmerge: AC-3 writer: mkvmerge will now use the codec ID `A_AC3` even for
   streams with bitstream IDs 9 or 10 instead of the deprecated codec IDs
   `A_AC3/BSID9` & `A_AC3/BSID10`. Fixes #2387.
+* MKVToolNix GUI: multiplexer: the mechanism for setting track languages to
+  specific values upon adding a file has gotten a new option to always set the
+  language, no matter whether or not the source container provided a track
+  language or what it was set to.
+* all command-line tools: implemented an escape mechanism for when you want to
+  use the `@` sign as the first character in an argument to an option such as
+  `--title`. To escape it the `@` sign has to be doubled as in `--title
+  @@midnight`. Implements #3768.
 
 ## Bug fixes
 
@@ -21,6 +29,8 @@
   the current font MIME types are always present in the MIME type combo boxes
   of attachments, no matter what Qt's MIME type database contains. Partially
   fixes #3751.
+* MKVToolNix GUI: the "disable tooltips" option in the preference will now
+  disable the tooltip for the status bar, too.
 
 
 # Version 88.0 "All I Know" 2024-10-19

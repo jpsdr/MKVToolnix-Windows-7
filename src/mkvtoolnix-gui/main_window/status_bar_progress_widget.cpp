@@ -116,6 +116,11 @@ StatusBarProgressWidget::setLabelTextsAndToolTip() {
   p->ui->warningsLabel->setText(QNY("%1+%2 warning", "%1+%2 warnings", p->m_numCurrentWarnings + p->m_numOldWarnings).arg(p->m_numCurrentWarnings).arg(p->m_numOldWarnings));
   p->ui->errorsLabel->setText(QNY("%1+%2 error", "%1+%2 errors", p->m_numCurrentErrors + p->m_numOldErrors).arg(p->m_numCurrentErrors).arg(p->m_numOldErrors));
 
+  if (Util::Settings::get().m_uiDisableToolTips) {
+    setToolTip({});
+    return;
+  }
+
   auto format = Q("<p>%1</p>"
                   "<ul>"
                   "<li>%2</li>"

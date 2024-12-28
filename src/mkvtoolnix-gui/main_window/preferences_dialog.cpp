@@ -1046,6 +1046,7 @@ PreferencesDialog::setupWhenToSetDefaultLanguage() {
   ui->cbMWhenToSetDefaultLanguage->clear();
   ui->cbMWhenToSetDefaultLanguage->addItem(QY("Only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::OnlyIfAbsent));
   ui->cbMWhenToSetDefaultLanguage->addItem(QY("Also if the language is 'undetermined' ('und')"), static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined));
+  ui->cbMWhenToSetDefaultLanguage->addItem(QY("Always"),                                         static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::Always));
 
   Util::setComboBoxIndexIf(ui->cbMWhenToSetDefaultLanguage, [this](QString const &, QVariant const &data) {
     return data.toInt() == static_cast<int>(m_cfg.m_whenToSetDefaultLanguage);
