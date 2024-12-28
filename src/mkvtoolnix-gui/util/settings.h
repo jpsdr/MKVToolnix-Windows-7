@@ -78,6 +78,7 @@ public:
   enum class SetDefaultLanguagePolicy {
     OnlyIfAbsent = 0,
     IfAbsentOrUndetermined,
+    Always,
   };
   Q_ENUM(SetDefaultLanguagePolicy);
 
