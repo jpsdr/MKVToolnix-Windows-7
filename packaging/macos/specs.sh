@@ -9,7 +9,6 @@ spec_gettext=(gettext-0.21.tar.gz https://ftp.gnu.org/gnu/gettext/gettext-0.21.t
 spec_gmp=(gmp-6.1.2.tar.xz https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz 87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912)
 spec_libiconv=(libiconv-1.16.tar.gz https://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04)
 spec_ogg=(libogg-1.3.4.tar.xz http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.xz c163bc12bc300c401b6aa35907ac682671ea376f13ae0969a220f7ddf71893fe)
-spec_pcre2=(pcre2-10.37.tar.bz2 https://ftp.pcre.org/pub/pcre/pcre2-10.37.tar.bz2 4d95a96e8b80529893b4562be12648d798b957b1ba1aae39606bbc2ab956d270)
 spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz 6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
 spec_zlib=(zlib-1.2.11.tar.xz https://www.zlib.net/zlib-1.2.11.tar.gz c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1)
