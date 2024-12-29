@@ -13,4 +13,4 @@ spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/rele
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
 spec_zlib=(zlib-1.2.11.tar.xz https://www.zlib.net/zlib-1.2.11.tar.gz c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1)
 
-spec_qt=(qt-everywhere-src-6.4.2.tar.xz https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.tar.xz 689f53e6652da82fccf7c2ab58066787487339f28d1ec66a8765ad357f4976be)
+spec_qt=(qt-everywhere-src-6.5.3.tar.xz https://download.qt.io/official_releases/qt/6.5/6.5.3/single/qt-everywhere-src-6.5.3.tar.xz 7cda4d119aad27a3887329cfc285f2aba5da85601212bcb0aea27bd6b7b544cb)
