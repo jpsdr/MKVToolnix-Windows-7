@@ -1,6 +1,6 @@
 spec_autoconf=(autoconf-2.69.tar.xz https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz 64ebcec9f8ac5b2487125a86a7760d2591ac9e1d3dbd59489633f9de62a57684)
 spec_automake=(automake-1.16.1.tar.gz https://ftp.gnu.org/gnu/automake/automake-1.16.1.tar.xz 5d05bb38a23fd3312b10aea93840feec685bdf4a41146e78882848165d3ae921)
-spec_boost=(boost_1_74_0.tar.bz2 https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.bz2 83bfc1507731a0906e387fc28b7ef5417d591429e51e788417fe9ff025e116b1)
+spec_boost=(boost_1_85_0.tar.bz2 https://boostorg.jfrog.io/artifactory/main/release/1.85.0/source/boost_1_85_0.tar.bz2 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617)
 spec_cmake=(cmake-3.25.2.tar.gz https://cmake.org/files/v3.20/cmake-3.25.2.tar.gz c026f22cb931dd532f648f087d587f07a1843c6e66a3dfca4fb0ea21944ed33c)
 spec_cmark=(cmark-0.29.0.tar.gz https://github.com/commonmark/cmark/archive/0.29.0.tar.gz 2558ace3cbeff85610de3bda32858f722b359acdadf0c4691851865bb84924a6)
 spec_curl=(curl-7.60.0.tar.xz https://curl.haxx.se/download/curl-7.60.0.tar.xz 8736ff8ded89ddf7e926eec7b16f82597d029fc1469f3a551f1fafaac164e6a0)
