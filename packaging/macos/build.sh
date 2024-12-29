@@ -561,7 +561,7 @@ if [[ -z $@ ]]; then
   build_gmp
   build_boost
   build_qt
-  build_configured_mkvtoolnix
+  build_mkvtoolnix
 
 else
   while [[ -n $1 ]]; do
