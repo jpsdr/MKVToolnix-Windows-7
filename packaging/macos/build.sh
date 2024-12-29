@@ -126,6 +126,11 @@ function build_package {
 
     if [[ -z $NO_MAKE ]]; then
       $DEBUG make
+
+      if [[ -n ${build_package_hook_pre_installation} ]]; then
+        ${build_package_hook_pre_installation}
+      fi
+
       build_tarball
     fi
 
@@ -137,6 +142,11 @@ function build_package {
 
     if [[ -z $NO_MAKE ]]; then
       $DEBUG make
+
+      if [[ -n ${build_package_hook_pre_installation} ]]; then
+        ${build_package_hook_pre_installation}
+      fi
+
       build_tarball command "make DESTDIR=TMPDIR install"
     fi
 
@@ -228,7 +238,12 @@ function build_zlib {
     --static
 }
 
+function build_gettext_fix_compilation {
+  perl -pi -e 's/#define setlocale.*//g' $( find . -name libintl.h )
+}
+
 function build_gettext {
+  build_package_hook_pre_installation=build_gettext_fix_compilation \
   build_package gettext \
     --prefix=${TARGET} \
     --disable-csharp \
