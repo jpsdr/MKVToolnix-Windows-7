@@ -48,7 +48,6 @@ BuildRequires: boost-devel
 BuildRequires: gcc-c++
 BuildRequires: json-devel >= 2
 BuildRequires: libappstream-glib
-BuildRequires: pugixml-devel
 BuildRequires: qt6-qtbase-devel
 BuildRequires: qt6-qtmultimedia-devel
 BuildRequires: qt6-qtsvg
