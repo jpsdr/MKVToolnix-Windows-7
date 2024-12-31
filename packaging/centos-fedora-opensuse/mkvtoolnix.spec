@@ -44,14 +44,17 @@ BuildRequires: qt6-qtsvg
 %endif
 
 %if 0%{?fedora}
+BuildRequires: boost-devel
 BuildRequires: gcc-c++
 BuildRequires: json-devel >= 2
 BuildRequires: libappstream-glib
 BuildRequires: pugixml-devel
-BuildRequires: rubypick
 BuildRequires: qt6-qtbase-devel
 BuildRequires: qt6-qtmultimedia-devel
 BuildRequires: qt6-qtsvg
+BuildRequires: qt6-qtsvg-devel
+BuildRequires: rubypick
+BuildRequires: utf8cpp-devel
 %endif
 
 %description
