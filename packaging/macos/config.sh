@@ -11,8 +11,9 @@ export CXXCPP="clang++ -E"
 export CFLAGS=""
 export CXXFLAGS="-std=c++17 -Wno-unused-parameter -Wno-deprecated-declarations"
 export QT_CXXFLAGS="-stdlib=libc++"
-export MACOSX_DEPLOYMENT_TARGET="10.15"
+export MACOSX_DEPLOYMENT_TARGET="13"
 export DRAKETHREADS=${DRAKETHREADS:-4}
 export MAKEFLAGS="-j ${DRAKETHREADS}"
-export QTVER=${QTVER:-6.4.2}
+export QTVER=${QTVER:-6.8.1}
 export SIGNATURE_IDENTITY="Developer ID Application: Moritz Bunkus (YZ9DVS8D8C)"
+export DYLD_LIBRARY_PATH=${TARGET}/lib:${DYLD_LIBRARY_PATH}
