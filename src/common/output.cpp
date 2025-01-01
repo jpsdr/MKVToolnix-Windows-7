@@ -200,7 +200,6 @@ void
 mxerror(std::string const &error) {
   if (s_mxmsg_error_handler)
     s_mxmsg_error_handler(MXMSG_ERROR, error);
-  mxexit(2);
 }
 
 void

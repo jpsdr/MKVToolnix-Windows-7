@@ -84,11 +84,11 @@ function build_package {
   local DIR=${DIR:-$PACKAGE}
 
   case ${FILE##*.} in
-    xz|lzma) COMPRESSION=J ;;
-    bz2)     COMPRESSION=j ;;
-    gz)      COMPRESSION=z ;;
-    tar)     COMPRESSION=  ;;
-    *)       echo Unknown compression for ${FILE} ; exit 1 ;;
+    xz|lz|lzma) COMPRESSION=J ;;
+    bz2)        COMPRESSION=j ;;
+    gz)         COMPRESSION=z ;;
+    tar)        COMPRESSION=  ;;
+    *)          echo Unknown compression for ${FILE} ; exit 1 ;;
   esac
 
   cd $CMPL
@@ -106,41 +106,57 @@ function build_package {
     done
   fi
 
-  if [[ -z $NO_CONFIGURE ]]; then
-    saved_CFLAGS=${CFLAGS}
-    saved_CXXFLAGS=${CXXFLAGS}
-    saved_LDFLAGS=${LDFLAGS}
+  if [[ -n $NO_CONFIGURE ]]; then
+    return
+  fi
 
-    export CFLAGS="${CFLAGS} -I${TARGET}/include"
-    export LDFLAGS="${LDFLAGS} -L${TARGET}/lib"
+  saved_CFLAGS=${CFLAGS}
+  saved_CXXFLAGS=${CXXFLAGS}
+  saved_LDFLAGS=${LDFLAGS}
 
-    if [[ ( -n ${CONFIGURE} ) || ( -x ./configure ) ]]; then
-      $DEBUG ${CONFIGURE:-./configure} $@
+  export CFLAGS="${CFLAGS} -I${TARGET}/include"
+  export LDFLAGS="${LDFLAGS} -L${TARGET}/lib"
 
-      if [[ -z $NO_MAKE ]]; then
-        $DEBUG make
-        build_tarball
-      fi
-
-    else
-      mkdir mtx-build
-      cd mtx-build
-
-      $DEBUG cmake .. $@
-
-      if [[ -z $NO_MAKE ]]; then
-        $DEBUG make
-        build_tarball command "make DESTDIR=TMPDIR install"
-      fi
-
-      cd ..
-
+  if [[ ( -n ${CONFIGURE} ) || ( -x ./configure ) ]]; then
+    if [[ -n ${build_package_hook_pre_configure} ]]; then
+      ${build_package_hook_pre_configure}
     fi
 
-    CFLAGS=${saved_CFLAGS}
-    CXXFLAGS=${saved_CXXFLAGS}
-    LDFLAGS=${saved_LDFLAGS}
+    $DEBUG ${CONFIGURE:-./configure} $@
+
+    if [[ -z $NO_MAKE ]]; then
+      $DEBUG make
+
+      if [[ -n ${build_package_hook_pre_installation} ]]; then
+        ${build_package_hook_pre_installation}
+      fi
+
+      build_tarball
+    fi
+
+  else
+    mkdir mtx-build
+    cd mtx-build
+
+    $DEBUG cmake .. $@
+
+    if [[ -z $NO_MAKE ]]; then
+      $DEBUG make
+
+      if [[ -n ${build_package_hook_pre_installation} ]]; then
+        ${build_package_hook_pre_installation}
+      fi
+
+      build_tarball command "make DESTDIR=TMPDIR install"
+    fi
+
+    cd ..
+
   fi
+
+  CFLAGS=${saved_CFLAGS}
+  CXXFLAGS=${saved_CXXFLAGS}
+  LDFLAGS=${saved_LDFLAGS}
 }
 
 mkdir -p $CMPL
@@ -188,7 +204,14 @@ function build_ogg {
     --enable-static
 }
 
+function build_vorbis_pre_configure {
+  echo fixing libVorbis build
+
+  perl -pi -e 's{-+force_cpusubtype_ALL}{}g' configure.ac configure
+}
+
 function build_vorbis {
+  build_package_hook_pre_configure=build_vorbis_pre_configure \
   build_package vorbis \
     --prefix=${TARGET} \
     --with-ogg-libraries=${TARGET}/lib \
@@ -210,12 +233,18 @@ function build_flac {
 }
 
 function build_zlib {
+  DIR=${${spec_zlib[1]%%.tar*}/zlib-v/zlib-} \
   build_package zlib \
     --prefix=${TARGET} \
     --static
 }
 
+function build_gettext_fix_compilation {
+  perl -pi -e 's/#define setlocale.*//g' $( find . -name libintl.h )
+}
+
 function build_gettext {
+  build_package_hook_pre_installation=build_gettext_fix_compilation \
   build_package gettext \
     --prefix=${TARGET} \
     --disable-csharp \
@@ -240,19 +269,6 @@ function build_gmp {
     --enable-static \
     --enable-cxx \
     --without-readline
-}
-
-function build_pcre2 {
-  build_package pcre2 \
-    --prefix=${TARGET} \
-    --enable-pcre2-16 \
-    --enable-utf \
-    --enable-unicode-properties \
-    --enable-cpp \
-    --enable-shared=no \
-    --disable-pcre2grep-libz \
-    --disable-pcre2grep-libbz2 \
-    --disable-pcre2test-libreadline
 }
 
 function build_boost {
@@ -314,10 +330,13 @@ function build_qt {
     -nomake benchmarks
     -nomake examples
     -nomake tests
+    -nomake manual-tests
+    -nomake minimal-static-tests
 
-    -skip qt3d,qt5compat,qtactiveqt,qtcharts,qtcoap,qtconnectivity,qtdatavis3d,qtdeclarative,qtdoc,qthttpserver,qtlanguageserver,qtlottie,qtmqtt,qtnetworkauth,qtopcua,qtpositioning,qtquick3d,qtquick3dphysics,qtquicktimeline,qtremoteobjects,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtvirtualkeyboard,qtwayland,qtwebchannel,qtwebengine,qtwebsockets,qtwebview
+    -skip qt3d,qt5compat,qtactiveqt,qtcharts,qtcoap,qtconnectivity,qtdatavis3d,qtdeclarative,qtdoc,qthttpserver,qtlanguageserver,qtlottie,qtmqtt,qtnetworkauth,qtopcua,qtpositioning,qtquick3d,qtquick3dphysics,qtquicktimeline,qtremoteobjects,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtvirtualkeyboard,qtwayland,qtwebchannel,qtwebengine,qtwebsockets,qtwebview,qtgraphs,qtlocation,qtquickeffectmaker
 
     -no-framework
+    -no-rpath
     -no-avx512
 
     -no-feature-cups
@@ -331,6 +350,8 @@ function build_qt {
     -no-feature-sql-oci
     -no-feature-sql-odbc
     -no-feature-sql-sqlite
+
+    -no-sbom
 
     --
     -DCMAKE_OSX_DEPLOYMENT_TARGET=$MACOSX_DEPLOYMENT_TARGET
@@ -537,11 +558,10 @@ if [[ -z $@ ]]; then
   build_zlib
   build_gettext
   build_cmark
-  build_pcre2
   build_gmp
   build_boost
   build_qt
-  build_configured_mkvtoolnix
+  build_mkvtoolnix
 
 else
   while [[ -n $1 ]]; do

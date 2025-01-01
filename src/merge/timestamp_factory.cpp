@@ -118,6 +118,8 @@ timestamp_factory_c::create_for_version(std::string const &file_name,
     return timestamp_factory_cptr{ new timestamp_factory_v3_c(file_name, source_name, tid) };
 
   mxerror(fmt::format(FY("The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"), file_name, version));
+
+  return {};
 }
 
 timestamp_factory_cptr
