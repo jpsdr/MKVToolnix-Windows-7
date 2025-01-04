@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Matroska reader: enabled limits for how much data a single
+  Matroksa reader instance might buffer when the muxing core looks for packets
+  for specific tracks, avoiding huge memory consumption in cases where tracks
+  have huge gaps between packets. This might happen when appending files
+  containing forced-only subtitle tracks, for example. Fixes #3771.
+
+
 # Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27
 
 ## New features and enhancements
