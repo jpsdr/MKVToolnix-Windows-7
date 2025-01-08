@@ -2461,7 +2461,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
 
 file_status_e
 kax_reader_c::read(generic_packetizer_c *requested_ptzr,
-                   bool force) {
+                   [[maybe_unused]] bool force) {
   if (m_tracks.empty() || (FILE_STATUS_DONE == m_file_status))
     return FILE_STATUS_DONE;
 
@@ -2470,8 +2470,8 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
   if (20 * 1024 * 1024 < num_queued_bytes) {
     auto requested_ptzr_track = m_ptzr_to_track_map[requested_ptzr];
     if (   !requested_ptzr_track
-        || (!force && ('a' != requested_ptzr_track->type) && ('v' != requested_ptzr_track->type))
-        || (!force && (128 * 1024 * 1024 < num_queued_bytes)))
+        || (('a' != requested_ptzr_track->type) && ('v' != requested_ptzr_track->type))
+        || (128 * 1024 * 1024 < num_queued_bytes))
       return FILE_STATUS_HOLDING;
   }
 
