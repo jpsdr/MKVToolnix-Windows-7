@@ -8,6 +8,10 @@
   have huge gaps between packets. This might happen when appending files
   containing forced-only subtitle tracks, for example. Fixes #3771.
 
+## Build system changes
+
+* The bundled `fmt` library was updated to v11.1.1.
+
 
 # Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27
 
