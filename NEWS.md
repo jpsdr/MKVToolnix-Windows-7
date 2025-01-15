@@ -16,7 +16,7 @@
 
 ## Build system changes
 
-* The bundled `fmt` library was updated to v11.1.1.
+* The bundled `fmt` library was updated to v11.1.2.
 
 
 # Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27
