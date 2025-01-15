@@ -159,17 +159,17 @@ msgid ""
 msgstr "  --attachment-name <isim> Adı aşağıdaki ek için saklanmalıdır.\n"
 
 #: src/merge/mkvmerge.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --audio-emphasis <TID:n|keyword>\n"
 "                           Sets the audio emphasis track header value. It can\n"
 "                           be either a number or a keyword (see\n"
 "                           '--list-audio-emphasis' for the full list).\n"
 msgstr ""
-"  --stereo-mode <TID:n|anahtarkelime>\n"
-"                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
-"                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
-"                           (tam liste için belgelere bakın).\n"
+"  --audio-emphasis <TID:n|keyword>\n"
+"                           Ses vurgulama izi başlık değerini ayarlar. Ya bir sayı \n"
+"                           ya da bir anahtar kelime olabilir (tam liste\n"
+"                           için bkz. '--list-audio-emphasis').\n"
 
 #: src/merge/mkvmerge.cpp:400
 #, no-c-format
@@ -3784,7 +3784,7 @@ msgstr "Her &zaman yukarıda seçilen eylemi kullan ve bir daha sorma"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1049
 #, no-c-format
 msgid "Always"
-msgstr ""
+msgstr "Her zaman"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2373
 #, no-c-format
@@ -8385,7 +8385,7 @@ msgstr "JSON seçenek dosyaları yalnızca JSON dizgilerinden oluşan bir JSON d
 #: src/merge/timestamp_factory.cpp:97
 #, no-c-format
 msgid "JSON timestamp files must contain a JSON object with a 'version' key.\n"
-msgstr ""
+msgstr "JSON zaman damgası dosyaları, 'version' anahtarına sahip bir JSON nesnesi içermek zorundadır.\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
 #, no-c-format
@@ -12189,19 +12189,19 @@ msgid "Text files"
 msgstr "Metin dosyaları"
 
 #: src/merge/timestamp_factory.cpp:241
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The 'assume' key must be set to the default number of frames per second."
-msgstr "Zaman damgası dosyası '{0}', saniye başına varsayılan kare sayısıyla geçerli bir 'Assume' satırı içermiyor.\n"
+msgstr "'assume' anahtarı, saniye başına varsayılan kare sayısına ayarlanmak zorundadır."
 
 #: src/merge/timestamp_factory.cpp:244
 #, no-c-format
 msgid "The 'ranges' key must exist & be an array."
-msgstr ""
+msgstr "'ranges' anahtarı mevcut ve bir dizilim olmak zorundadır."
 
 #: src/merge/timestamp_factory.cpp:366
 #, no-c-format
 msgid "The 'timestamps' key must exist & be an array."
-msgstr ""
+msgstr "'timestamps' anahtarı mevcut ve bir dizilim olmak zorundadır."
 
 #: src/input/r_vobsub.cpp:257
 #, no-c-format
@@ -13526,7 +13526,7 @@ msgstr "Özellik değeri, '{0}' içinde geçerli bir imzasız sayı değil. {1}\
 #: src/merge/timestamp_factory.cpp:254
 #, no-c-format, c++-format
 msgid "The range number {0} must be an object with keys 'start', 'end' & 'fps'."
-msgstr ""
+msgstr "{0} aralık numarası 'start', 'end' ve 'fps' anahtarlarına sahip bir nesne olmak zorundadır."
 
 #: src/merge/output_control.cpp:1087
 #, no-c-format
@@ -13753,14 +13753,14 @@ msgstr "Zaman damgası dosyası '{0}', herhangi bir geçerli giriş içermiyor.\
 #: src/merge/timestamp_factory.cpp:254
 #: src/merge/timestamp_factory.cpp:366
 #: src/merge/timestamp_factory.cpp:374
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The timestamp file '{0}' is invalid: {1}\n"
-msgstr "Zaman damgası dosyası '{0}', herhangi bir geçerli giriş içermiyor.\n"
+msgstr "'{0}' zaman damgası dosyası geçersiz: {1}\n"
 
 #: src/merge/timestamp_factory.cpp:374
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The timestamp number {0} must be an integer or floating point number."
-msgstr "{1}' zaman damgası dosyasının '{0}' satırı geçerli bir kayan noktalı sayı içermiyor.\n"
+msgstr "Zaman damgası numarası {0} bir tamsayı veya kayan noktalı sayı olmak zorundadır."
 
 #: src/merge/timestamp_factory.cpp:309
 #, no-c-format, c++-format
