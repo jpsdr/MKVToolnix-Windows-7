@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: header editor: double-clicking on one of the three flag
+  indicators ("Default track", "Forced display", "Enabled") for a track in the
+  tree view will now toggle the corresponding flag. Implements #3773.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader: enabled limits for how much data a single
