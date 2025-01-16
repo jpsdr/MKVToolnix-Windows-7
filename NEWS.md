@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: header editor: double-clicking on one of the three flag
+  indicators ("Default track", "Forced display", "Enabled") for a track in the
+  tree view will now toggle the corresponding flag. Implements #3773.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader: enabled limits for how much data a single
@@ -7,6 +13,10 @@
   for specific tracks, avoiding huge memory consumption in cases where tracks
   have huge gaps between packets. This might happen when appending files
   containing forced-only subtitle tracks, for example. Fixes #3771.
+
+## Build system changes
+
+* The bundled `fmt` library was updated to v11.1.2.
 
 
 # Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27

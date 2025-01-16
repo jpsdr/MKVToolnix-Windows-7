@@ -312,6 +312,7 @@ Tab::setupUi() {
   connect(ui->elements,                              &Util::BasicTreeView::insertPressed,                 this, &Tab::selectAttachmentsAndAdd);
   connect(ui->elements,                              &Util::BasicTreeView::ctrlDownPressed,               this, [this]() { moveElementUpOrDown(false); });
   connect(ui->elements,                              &Util::BasicTreeView::ctrlUpPressed,                 this, [this]() { moveElementUpOrDown(true); });
+  connect(ui->elements,                              &Util::BasicTreeView::doubleClicked,                 this, &Tab::treeItemDoubleClicked);
   connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,                this, &Tab::selectionChanged);
   connect(m_expandAllAction,                         &QAction::triggered,                                 this, &Tab::expandAll);
   connect(m_collapseAllAction,                       &QAction::triggered,                                 this, &Tab::collapseAll);
@@ -1124,6 +1125,20 @@ Tab::updateSelectedTopLevelPageModelItems() {
   auto page = m_model->selectedPage(topLevelIdx);
   if (dynamic_cast<TrackTypePage *>(page))
     static_cast<TrackTypePage *>(page)->updateModelItems();
+}
+
+void
+Tab::treeItemDoubleClicked(QModelIndex const &idx) {
+  auto const column = idx.column();
+
+  if (column == PageModel::EnabledColumn)
+    toggleSpecificTrackFlag(EBML_ID(libmatroska::KaxTrackFlagEnabled).GetValue());
+
+  else if (column == PageModel::DefaultTrackColumn)
+    toggleSpecificTrackFlag(EBML_ID(libmatroska::KaxTrackFlagDefault).GetValue());
+
+  else if (column == PageModel::ForcedDisplayColumn)
+    toggleSpecificTrackFlag(EBML_ID(libmatroska::KaxTrackFlagForced).GetValue());
 }
 
 }

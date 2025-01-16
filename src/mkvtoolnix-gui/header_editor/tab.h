@@ -95,6 +95,7 @@ public Q_SLOTS:
   virtual void handleReorderedTracks();
   virtual void changeTrackLanguage(QString const &formattedLanguage, QString const &trackName);
   virtual void moveElementUpOrDown(bool up);
+  virtual void treeItemDoubleClicked(QModelIndex const &idx);
 
 protected:
   void setupUi();
