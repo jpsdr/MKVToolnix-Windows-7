@@ -21,6 +21,9 @@
 ## Build system changes
 
 * The bundled `fmt` library was updated to v11.1.2.
+* added a new option to `configure` called `--disable-dbus` to disable looking
+  for & using QtDBus even if it's present on the system. Default remains to
+  probe for its existence. Patch by Anthony Ryan.
 
 
 # Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27
