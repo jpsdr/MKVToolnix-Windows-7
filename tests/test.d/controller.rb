@@ -12,6 +12,7 @@ class Controller
     @num_threads      = self.get_num_processors
     @record_duration  = false
     @show_duration    = false
+    @for_mkvgoodbad   = %r{^(1|true)$}i.match(ENV['MKVGOODBAD_OUTPUT'] || '')
 
     @tests            = Array.new
     @exclusions       = Array.new
@@ -135,16 +136,46 @@ class Controller
       if (!@results.exist? class_name)
         self.add_result class_name, :passed, :message => "  NEW test. Storing result '#{result}'.", :checksum => result, :duration => duration
 
-      elsif (@results.hash?(class_name) != result)
-        msg            =  "  #{class_name} FAILED: checksum is different. Commands:\n"
+      elsif (@results.hash?(class_name) == result)
+        self.add_result class_name, :passed, :duration => duration
+
+      else
+        for_mkvgoodbad = @for_mkvgoodbad ? " for mkvgoodbad" : ""
+        msg            =  "  #{class_name} FAILED: checksum is different. Commands#{ for_mkvgoodbad}:\n"
         actual_results = result.split(/-/)
         idx            = 0
 
-        current_test.commands.each do |command|
-          command = { :command => command } unless command.is_a?(Hash)
-          prefix  = !command[:no_result] && (expected_results[idx] != actual_results[idx]) ? "(*)" : "   "
-          msg    += "  #{prefix} #{command[:command]}\n"
-          idx    += 1 unless command[:no_result]
+        if (@for_mkvgoodbad)
+          current_test.commands.each do |command|
+            command = { :command => command } unless command.is_a?(Hash)
+
+            if !command[:no_result] && (expected_results[idx] != actual_results[idx])
+              mkvgoodbad_cmd = command[:command].gsub(%r{^\.\./src/| -o [a-z0-9._/-]+| *>.*}i, '').gsub(%r{  +}, ' ')
+
+              if %r{^mkvmerge}.match(mkvgoodbad_cmd)
+                mkvgoodbad_cmd.
+                  gsub!(%r{^mkvmerge}, 'mkvgoodbad').
+                  gsub!(%r{ *--engage no_variable_data *}, ' ').
+                  gsub!(%r{  +}, ' ')
+              end
+
+              if %r{ -i | -J |--identify}.match(mkvgoodbad_cmd)
+                mkvgoodbad_cmd.gsub!(%r{^mkvgoodbad}, 'mkvgoodbadidentify')
+              end
+
+              msg += "#{mkvgoodbad_cmd}\n"
+            end
+
+            idx += 1 unless command[:no_result]
+          end
+
+        else
+          current_test.commands.each do |command|
+            command = { :command => command } unless command.is_a?(Hash)
+            prefix  = !command[:no_result] && (expected_results[idx] != actual_results[idx]) ? "(*)" : "   "
+            msg    += "  #{prefix} #{command[:command]}\n"
+            idx    += 1 unless command[:no_result]
+          end
         end
 
         if (update_failed && actual_results.include?("failed"))
@@ -154,8 +185,6 @@ class Controller
         else
           self.add_result class_name, :failed, :message => msg
         end
-      else
-        self.add_result class_name, :passed, :duration => duration
       end
 
     else
