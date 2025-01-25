@@ -13,6 +13,10 @@
   for specific tracks, avoiding huge memory consumption in cases where tracks
   have huge gaps between packets. This might happen when appending files
   containing forced-only subtitle tracks, for example. Fixes #3771.
+* mkvmerge: AAC parser: LOAS/LATM streams: fixed use of uninitialized data
+  when the `StreamMuxConfig` element doesn't contain the `audioMuxVersion`
+  element; version 0 must be assumed in such a case. The result was that
+  sometimes certain valid AAC packets were dropped. Fix by Stefan Pöschel.
 
 ## Build system changes
 
