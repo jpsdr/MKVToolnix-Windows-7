@@ -80,7 +80,7 @@ EOT
   have_qtdbus=no
   modules_to_test=dbus
 
-  if test x"$enable_gui" = xno; then
+  if test x"$enable_gui" = xno || test x"$enable_dbus" = xno; then
     modules_to_test=
   fi
 
