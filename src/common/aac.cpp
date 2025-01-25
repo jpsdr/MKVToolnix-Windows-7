@@ -267,6 +267,8 @@ latm_parser_c::parse_stream_mux_config() {
   m_audio_mux_version = m_bc->get_bit();
   if (m_audio_mux_version)
     m_audio_mux_version_a = m_bc->get_bit();
+  else
+    m_audio_mux_version_a = 0;
 
   if (m_audio_mux_version_a != 0) {
     mxdebug_if(m_debug, fmt::format("audio_mux_version_a is not 0; not supported\n"));
