@@ -23,7 +23,7 @@
 
 class truehd_reader_c: public generic_reader_c {
 private:
-  memory_cptr m_chunk{memory_c::alloc(128 * 1024)};
+  memory_cptr m_chunk;
   mtx::truehd::frame_cptr m_header;
   int m_truehd_ptzr{-1}, m_ac3_ptzr{-1};
   mtx::ac3::frame_c m_ac3_header;

@@ -26,12 +26,15 @@
 bool
 truehd_reader_c::probe_file() {
   mtx::id3::skip_v2_tag(*m_in);
+  m_chunk = memory_c::alloc(m_probe_range_info.probe_size);
   return find_valid_headers(*m_in, m_chunk->get_size(), 2);
 }
 
 void
 truehd_reader_c::read_headers() {
   try {
+    m_chunk            = memory_c::alloc(m_probe_range_info.probe_size);
+
     int tag_size_start = mtx::id3::skip_v2_tag(*m_in);
     int tag_size_end   = mtx::id3::tag_present_at_end(*m_in);
 
