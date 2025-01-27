@@ -77,10 +77,10 @@ EOT
     fi
   fi
 
-  dbus=0
+  have_qtdbus=no
   modules_to_test=dbus
 
-  if test x"$enable_gui" = xno; then
+  if test x"$enable_gui" = xno || test x"$enable_dbus" = xno; then
     modules_to_test=
   fi
 
@@ -104,7 +104,7 @@ EOT
       continue
     elif test $qt_module = dbus; then
       qmake_qt_ui="$qmake_qt_ui dbus"
-      dbus=1
+      have_qtdbus=yes
     fi
   done
 
@@ -265,9 +265,6 @@ return 0;
   fi
 
   AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
-  if test "x$dbus" = x1; then
-    AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
-  fi
   AC_MSG_CHECKING(for Qt 6)
   AC_MSG_RESULT(yes)
   have_qt6=yes
@@ -276,6 +273,10 @@ return 0;
 AC_ARG_ENABLE([gui],
   AS_HELP_STRING([--enable-gui],[compile the Qt-based GUI (yes)]),
   [],[enable_gui=yes])
+
+AC_ARG_ENABLE([dbus],
+  AS_HELP_STRING([--enable-dbus],[compile DBus support (auto)]),
+  [],[enable_dbus=auto])
 
 have_qt6=no
 
@@ -295,6 +296,21 @@ else
   BUILD_GUI=no
   opt_features_no="$opt_features_no\n   * MKVToolNix GUI"
 fi
+
+if test x"$enable_dbus" = xno; then
+  opt_features_no="$opt_features_no\n   * DBus support"
+elif test "x$have_qtdbus" = xyes; then
+  # have_dbus == yes && enable_dbus != no
+  opt_features_yes="$opt_features_yes\n   * DBus support"
+  AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
+elif test x"$enable_dbus" = xyes; then
+  # have_dbus == no && enable_dbus == yes
+  AC_MSG_ERROR([QtDBus not found.])
+else
+  # have_dbus == no && enable_dbus == auto
+  opt_features_no="$opt_features_no\n   * DBus support"
+fi
+
 
 AC_SUBST(QT_CFLAGS)
 AC_SUBST(QT_LIBS)

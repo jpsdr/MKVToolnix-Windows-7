@@ -267,6 +267,8 @@ latm_parser_c::parse_stream_mux_config() {
   m_audio_mux_version = m_bc->get_bit();
   if (m_audio_mux_version)
     m_audio_mux_version_a = m_bc->get_bit();
+  else
+    m_audio_mux_version_a = 0;
 
   if (m_audio_mux_version_a != 0) {
     mxdebug_if(m_debug, fmt::format("audio_mux_version_a is not 0; not supported\n"));
@@ -627,6 +629,10 @@ parser_c::decode_adts_header(uint8_t const *buffer,
 
     push_frame(frame);
 
+    mxdebug_if(m_debug,
+               fmt::format("decode_adts_header: buffer_size {0} header_byte_size {1} data_byte_size {2} bytes {3} first_four_bytes {4:08x} header_bit_size {5}\n",
+                           buffer_size, frame.m_header.header_byte_size, frame.m_header.data_byte_size, frame.m_header.bytes,
+                           frame.m_data && (frame.m_header.data_byte_size >= 4) ? get_uint32_be(frame.m_data->get_buffer()) : 0, frame.m_header.header_bit_size));
     return { success, frame.m_header.bytes };
 
   } catch (mtx::mm_io::end_of_file_x &) {
