@@ -13,10 +13,17 @@
   for specific tracks, avoiding huge memory consumption in cases where tracks
   have huge gaps between packets. This might happen when appending files
   containing forced-only subtitle tracks, for example. Fixes #3771.
+* mkvmerge: AAC parser: LOAS/LATM streams: fixed use of uninitialized data
+  when the `StreamMuxConfig` element doesn't contain the `audioMuxVersion`
+  element; version 0 must be assumed in such a case. The result was that
+  sometimes certain valid AAC packets were dropped. Fix by Stefan Pöschel.
 
 ## Build system changes
 
 * The bundled `fmt` library was updated to v11.1.2.
+* added a new option to `configure` called `--disable-dbus` to disable looking
+  for & using QtDBus even if it's present on the system. Default remains to
+  probe for its existence. Patch by Anthony Ryan.
 
 
 # Version 89.0 "And the Melody Still Lingers On (Night in Tunisia)" 2024-12-27
