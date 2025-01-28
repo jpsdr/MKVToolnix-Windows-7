@@ -17,6 +17,9 @@
   when the `StreamMuxConfig` element doesn't contain the `audioMuxVersion`
   element; version 0 must be assumed in such a case. The result was that
   sometimes certain valid AAC packets were dropped. Fix by Stefan Pöschel.
+* mkvmerge: TrueHD reader: increased the probe range for TrueHD sync frames
+  from 128 KB to 512 KB to avoid mis-detection with certain files with a lot
+  of data between sync frames. Fixes #3783.
 
 ## Build system changes
 

@@ -1,5 +1,6 @@
 class SimpleTest
   @@json_schema = nil
+  @@test_nums_to_skip = Hash[ (ENV['SKIP_TESTS'] || '').split(%r{ +}).map { |num| [ num.to_i, true ] } ]
 
   EXIT_CODE_ALIASES = {
     :success => 0,
@@ -10,12 +11,13 @@ class SimpleTest
   def self.instantiate class_name
     file_name = class_name_to_file_name class_name
     content   = IO.readlines(file_name).join("")
+    test_num  = class_name.gsub(%r{^T_0*|[a-zA-Z].*}, '').to_i
 
     if ! %r{class\s+.*?\s+<\s+Test}.match(content)
       content = %Q!
         class ::#{class_name} < SimpleTest
           def initialize
-            super
+            super(#{test_num})
 
             #{content}
           end
@@ -30,11 +32,12 @@ class SimpleTest
     constantize(class_name).new
   end
 
-  def initialize
+  def initialize(test_num)
     @commands      = []
+    @test_num      = test_num
     @tmp_num       = 0
     @tmp_num_mutex = Mutex.new
-    @skip          = false
+    @skip          = @@test_nums_to_skip[test_num]
     @blocks        = {
       :setup       => [],
       :tests       => [],
