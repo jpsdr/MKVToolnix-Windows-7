@@ -353,7 +353,7 @@ probe_file_format(filelist_t &file) {
   }
 
   // More file types with detection issues.
-  if ((reader = do_probe<truehd_reader_c>(io)))
+  if ((reader = do_probe<truehd_reader_c>(io, { 512 * 1024, 0 })))
     return reader;
   if ((reader = do_probe<dts_reader_c>(io)))
     return reader;
