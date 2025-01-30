@@ -25,7 +25,7 @@ namespace mtx::hevc {
 
 class es_parser_c: public mtx::xyzvc::es_parser_c {
 protected:
-  int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
+  unsigned int m_prev_pic_order_cnt{};
   bool m_first_access_unit_parsed{}, m_first_access_unit_parsing_slices{};
 
   std::deque<mtx::xyzvc::frame_t> m_frames_awaiting_dovi_el;
@@ -101,6 +101,7 @@ protected:
   void determine_if_first_access_unit_parsed();
   void maybe_set_configuration_record_ready();
   virtual void calculate_frame_order() override;
+  unsigned int calculate_picture_order_cnt(mtx::xyzvc::frame_t const &frame, sps_info_t const &sps) const;
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 
   bool add_dovi_combiner_frame_data(mtx::xyzvc::frame_t &frame);
