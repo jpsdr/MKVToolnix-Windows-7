@@ -76,6 +76,11 @@ xyzvc_es_video_packetizer_c::set_container_default_field_duration(int64_t defaul
   m_parser_base->set_container_default_duration(default_duration);
 }
 
+void
+xyzvc_es_video_packetizer_c::set_is_framed(unsigned int nalu_size) {
+  m_framed_nalu_size = nalu_size;
+}
+
 unsigned int
 xyzvc_es_video_packetizer_c::get_nalu_size_length()
   const {
@@ -92,7 +97,11 @@ xyzvc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     if (packet->has_timestamp())
       m_parser_base->add_timestamp(packet->timestamp);
-    m_parser_base->add_bytes(packet->data->get_buffer(), packet->data->get_size());
+
+    if (m_framed_nalu_size)
+      m_parser_base->add_bytes_framed(packet->data->get_buffer(), packet->data->get_size(), *m_framed_nalu_size);
+    else
+      m_parser_base->add_bytes(packet->data->get_buffer(), packet->data->get_size());
     flush_frames();
 
   } catch (mtx::exception &error) {
