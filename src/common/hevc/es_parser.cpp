@@ -698,7 +698,8 @@ es_parser_c::calculate_frame_order() {
 
       mxdebug_if(m_debug_frame_order,
                  fmt::format("frame order: {0} lsb {1} msb {2} max_poc_lsb {3} prev_lsb {4} prev_msb {5} cond1 {6} cond2 {7} NALsize {8} type {9} ({10})\n",
-                             frame_itr->m_presentation_order, poc_lsb, poc_msb, max_poc_lsb, m_prev_pic_order_cnt_lsb, m_prev_pic_order_cnt_msb, condition1, condition2, frame_itr->m_data->get_size(), static_cast<unsigned int>(si.nalu_type), get_nalu_type_name(si.nalu_type)));
+                             frame_itr->m_presentation_order, poc_lsb, poc_msb, max_poc_lsb, m_prev_pic_order_cnt_lsb, m_prev_pic_order_cnt_msb, condition1, condition2,
+                             frame_itr->m_data ? frame_itr->m_data->get_size() : 0, static_cast<unsigned int>(si.nalu_type), get_nalu_type_name(si.nalu_type)));
 
       if (   (frame_itr->m_si.temporal_id == 0)
           && !mtx::included_in(si.nalu_type, NALU_TYPE_TRAIL_N, NALU_TYPE_TSA_N, NALU_TYPE_STSA_N, NALU_TYPE_RADL_N, NALU_TYPE_RASL_N, NALU_TYPE_RADL_R, NALU_TYPE_RASL_R)) {
