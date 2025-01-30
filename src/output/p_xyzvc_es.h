@@ -22,7 +22,7 @@ protected:
   std::unique_ptr<mtx::xyzvc::es_parser_c> m_parser_base;
 
   int64_t m_default_duration_for_interlaced_content{-1};
-  std::optional<int64_t> m_parser_default_duration_to_force, m_framed_nalu_size;
+  std::optional<int64_t> m_parser_default_duration_to_force, m_framed_nalu_size, m_source_timestamp_resolution;
   bool m_first_frame{true}, m_set_display_dimensions{false};
   uint32_t m_width{}, m_height{};
   debugging_option_c m_debug_timestamps, m_debug_aspect_ratio;
@@ -35,6 +35,7 @@ public:
   virtual void add_extra_data(memory_cptr const &data);
   virtual void set_container_default_field_duration(int64_t default_duration);
   virtual void set_is_framed(unsigned int nalu_size);
+  virtual void set_source_timestamp_resolution(int64_t resolution);
   virtual unsigned int get_nalu_size_length() const;
 
   virtual void connect(generic_packetizer_c *src, int64_t p_append_timestamp_offset) override;
@@ -50,4 +51,6 @@ protected:
   virtual void handle_delayed_headers();
   virtual void handle_aspect_ratio();
   virtual void handle_actual_default_duration();
+
+  int64_t calculate_frame_duration(mtx::xyzvc::frame_t const &frame) const;
 };
