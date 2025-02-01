@@ -20,6 +20,8 @@
 * mkvmerge: TrueHD reader: increased the probe range for TrueHD sync frames
   from 128 KB to 512 KB to avoid mis-detection with certain files with a lot
   of data between sync frames. Fixes #3783.
+* mkvmerge: HEVC/H.265 parser: fixed calculation of picture order count
+  calculation that was triggered under rare circumstances. Fixes #3775.
 
 ## Build system changes
 

@@ -651,6 +651,33 @@ es_parser_c::duration_for(mtx::xyzvc::slice_info_t const &si)
   return duration;
 }
 
+unsigned int
+es_parser_c::calculate_picture_order_cnt(mtx::xyzvc::frame_t const &frame,
+                                         sps_info_t const &sps)
+  const {
+  auto const &si                  = frame.m_si;
+  unsigned int const max_poc_lsb  = 1 << (sps.log2_max_pic_order_cnt_lsb);
+  unsigned int const prev_poc_lsb = m_prev_pic_order_cnt % max_poc_lsb;
+  unsigned int const prev_poc_msb = m_prev_pic_order_cnt - prev_poc_lsb;
+  unsigned int const poc_lsb      = si.pic_order_cnt_lsb;
+
+  auto const condition1           = (poc_lsb < prev_poc_lsb) && ((prev_poc_lsb - poc_lsb) >= (max_poc_lsb / 2));
+  auto const condition2           = (poc_lsb > prev_poc_lsb) && ((poc_lsb - prev_poc_lsb) >  (max_poc_lsb / 2));
+  auto const not_idr              = mtx::included_in(si.nalu_type, NALU_TYPE_BLA_W_LP, NALU_TYPE_BLA_W_RADL, NALU_TYPE_BLA_N_LP);
+  unsigned int const poc_msb      = not_idr    ? 0
+                                  : condition1 ? prev_poc_msb + max_poc_lsb
+                                  : condition2 ? prev_poc_msb - max_poc_lsb
+                                  :              prev_poc_msb;
+  unsigned int const new_poc      = poc_msb + poc_lsb;
+
+  mxdebug_if(m_debug_frame_order,
+             fmt::format("frame order: {0} prev {1} lsb {2} msb {3} max_poc_lsb {4} prev_lsb {5} prev_msb {6} cond1 {7} cond2 {8} NALsize {9} type {10} ({11})\n",
+                         new_poc, m_prev_pic_order_cnt, poc_lsb, poc_msb, max_poc_lsb, prev_poc_lsb, prev_poc_msb, condition1, condition2,
+                         frame.m_data ? frame.m_data->get_size() : 0, static_cast<unsigned int>(si.nalu_type), get_nalu_type_name(si.nalu_type)));
+
+  return new_poc;
+}
+
 void
 es_parser_c::calculate_frame_order() {
   auto frames_begin      = m_frames.begin();
@@ -676,36 +703,12 @@ es_parser_c::calculate_frame_order() {
       frame_itr->m_presentation_order = 0;
       mxdebug_if(m_debug_frame_order, fmt::format("frame order: KEY!\n"));
 
-    } else {
-      int poc_msb;
-      int max_poc_lsb = 1 << (sps.log2_max_pic_order_cnt_lsb);
-      int poc_lsb     = si.pic_order_cnt_lsb;
+    } else
+      frame_itr->m_presentation_order = calculate_picture_order_cnt(*frame_itr, sps);
 
-      auto condition1 = poc_lsb < m_prev_pic_order_cnt_lsb && (m_prev_pic_order_cnt_lsb - poc_lsb) >= (max_poc_lsb / 2);
-      auto condition2 = poc_lsb > m_prev_pic_order_cnt_lsb && (poc_lsb - m_prev_pic_order_cnt_lsb) >  (max_poc_lsb / 2);
-
-      if (condition1)
-        poc_msb = m_prev_pic_order_cnt_msb + max_poc_lsb;
-      else if (condition2)
-        poc_msb = m_prev_pic_order_cnt_msb - max_poc_lsb;
-      else
-        poc_msb = m_prev_pic_order_cnt_msb;
-
-      if (mtx::included_in(si.nalu_type, NALU_TYPE_BLA_W_LP, NALU_TYPE_BLA_W_RADL, NALU_TYPE_BLA_N_LP))
-        poc_msb = 0;
-
-      frame_itr->m_presentation_order = poc_lsb + poc_msb;
-
-      mxdebug_if(m_debug_frame_order,
-                 fmt::format("frame order: {0} lsb {1} msb {2} max_poc_lsb {3} prev_lsb {4} prev_msb {5} cond1 {6} cond2 {7} NALsize {8} type {9} ({10})\n",
-                             frame_itr->m_presentation_order, poc_lsb, poc_msb, max_poc_lsb, m_prev_pic_order_cnt_lsb, m_prev_pic_order_cnt_msb, condition1, condition2, frame_itr->m_data->get_size(), static_cast<unsigned int>(si.nalu_type), get_nalu_type_name(si.nalu_type)));
-
-      if (   (frame_itr->m_si.temporal_id == 0)
-          && !mtx::included_in(si.nalu_type, NALU_TYPE_TRAIL_N, NALU_TYPE_TSA_N, NALU_TYPE_STSA_N, NALU_TYPE_RADL_N, NALU_TYPE_RASL_N, NALU_TYPE_RADL_R, NALU_TYPE_RASL_R)) {
-        m_prev_pic_order_cnt_lsb = poc_lsb;
-        m_prev_pic_order_cnt_msb = poc_msb;
-      }
-    }
+    if (   (frame_itr->m_si.temporal_id == 0)
+        && !mtx::included_in(si.nalu_type, NALU_TYPE_TRAIL_N, NALU_TYPE_TSA_N, NALU_TYPE_STSA_N, NALU_TYPE_RADL_N, NALU_TYPE_RASL_N, NALU_TYPE_RADL_R, NALU_TYPE_RASL_R))
+      m_prev_pic_order_cnt = frame_itr->m_presentation_order;
 
     frame_itr->m_decode_order = idx;
 

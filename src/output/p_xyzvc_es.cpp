@@ -15,6 +15,7 @@
 
 #include <matroska/KaxTracks.h>
 
+#include "common/xyzvc/types.h"
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
 #include "output/p_xyzvc_es.h"
@@ -76,6 +77,16 @@ xyzvc_es_video_packetizer_c::set_container_default_field_duration(int64_t defaul
   m_parser_base->set_container_default_duration(default_duration);
 }
 
+void
+xyzvc_es_video_packetizer_c::set_source_timestamp_resolution(int64_t resolution) {
+  m_source_timestamp_resolution = resolution;
+}
+
+void
+xyzvc_es_video_packetizer_c::set_is_framed(unsigned int nalu_size) {
+  m_framed_nalu_size = nalu_size;
+}
+
 unsigned int
 xyzvc_es_video_packetizer_c::get_nalu_size_length()
   const {
@@ -92,7 +103,11 @@ xyzvc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     if (packet->has_timestamp())
       m_parser_base->add_timestamp(packet->timestamp);
-    m_parser_base->add_bytes(packet->data->get_buffer(), packet->data->get_size());
+
+    if (m_framed_nalu_size)
+      m_parser_base->add_bytes_framed(packet->data->get_buffer(), packet->data->get_size(), *m_framed_nalu_size);
+    else
+      m_parser_base->add_bytes(packet->data->get_buffer(), packet->data->get_size());
     flush_frames();
 
   } catch (mtx::exception &error) {
@@ -110,6 +125,19 @@ xyzvc_es_video_packetizer_c::flush_impl() {
   flush_frames();
 }
 
+int64_t
+xyzvc_es_video_packetizer_c::calculate_frame_duration(mtx::xyzvc::frame_t const &frame)
+  const {
+  auto duration = frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration;
+
+  if (   (m_htrack_default_duration > 0)
+      && m_source_timestamp_resolution
+      && (std::abs(duration - m_htrack_default_duration) <= *m_source_timestamp_resolution))
+    duration = m_htrack_default_duration;
+
+  return duration;
+}
+
 void
 xyzvc_es_video_packetizer_c::flush_frames() {
   while (m_parser_base->frame_available()) {
@@ -119,7 +147,7 @@ xyzvc_es_video_packetizer_c::flush_frames() {
     }
 
     auto frame    = m_parser_base->get_frame();
-    auto duration = frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration;
+    auto duration = calculate_frame_duration(frame);
     auto packet   = std::make_shared<packet_t>(frame.m_data, frame.m_start, duration,
                                                 frame.is_key_frame() ? -1 : frame.m_start + frame.m_ref1,
                                                !frame.is_b_frame()   ? -1 : frame.m_start + frame.m_ref2);
