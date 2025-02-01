@@ -137,6 +137,11 @@ hevc_es_video_packetizer_c::process_enhancement_layer(packet_cptr const &packet)
   }
 }
 
+void
+hevc_es_video_packetizer_c::set_configuration_record(memory_cptr const &bytes) {
+  m_parser.set_configuration_record(bytes);
+}
+
 connection_result_e
 hevc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
                                            std::string &error_message) {

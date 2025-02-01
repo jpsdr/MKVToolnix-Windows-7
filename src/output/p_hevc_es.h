@@ -35,6 +35,8 @@ public:
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
 
+  virtual void set_configuration_record(memory_cptr const &bytes);
+
 protected:
   virtual void handle_dovi_block_addition_mappings();
   virtual bool handle_dovi_configuration_record();
