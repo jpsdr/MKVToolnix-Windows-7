@@ -2929,7 +2929,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
                          a_bitdepth,
                          get_uint16_be(&sv1_stsd.v0.compression_id),
                          a_samplerate,
-                         get_uint16_be(&sv1_stsd.v0.version)));
+                         version));
 
   if (0 == version)
     stsd_non_priv_struct_size = sizeof(sound_v0_stsd_atom_t);
@@ -2958,6 +2958,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
     a_channels   = get_uint32_be(&sv2_stsd.v2.channels);
     a_bitdepth   = get_uint32_be(&sv2_stsd.v2.bits_per_channel);
     a_samplerate = mtx::math::int_to_double(get_uint64_be(&sv2_stsd.v2.sample_rate));
+    a_flags      = get_uint32_be(&sv2_stsd.v2.flags);
 
 
     if (m_debug_headers)
@@ -2967,7 +2968,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
                          a_channels,
                          get_uint32_be(&sv2_stsd.v2.const1),
                          a_bitdepth,
-                         get_uint32_be(&sv2_stsd.v2.flags),
+                         a_flags,
                          get_uint32_be(&sv2_stsd.v2.bytes_per_frame),
                          get_uint32_be(&sv2_stsd.v2.samples_per_frame)));
   }
@@ -3758,12 +3759,17 @@ void
 qtmp4_demuxer_c::determine_codec() {
   codec = codec_c::look_up_object_type_id(esds.object_type_id);
 
-  if (!codec) {
-    codec = codec_c::look_up(fourcc);
+  if (codec)
+    return;
 
-    if (codec.is(codec_c::type_e::A_PCM))
-      m_pcm_format = fourcc == "twos" ? pcm_packetizer_c::big_endian_integer : pcm_packetizer_c::little_endian_integer;
-  }
+  codec = codec_c::look_up(fourcc);
+
+  if (codec.is(codec_c::type_e::A_PCM))
+    m_pcm_format = fourcc == "twos" ? pcm_packetizer_c::big_endian_integer
+                 : fourcc != "lpcm" ? pcm_packetizer_c::little_endian_integer
+                 : a_flags & 0x01   ? pcm_packetizer_c::ieee_float
+                 : a_flags & 0x02   ? pcm_packetizer_c::big_endian_integer
+                 :                    pcm_packetizer_c::little_endian_integer;
 }
 
 void

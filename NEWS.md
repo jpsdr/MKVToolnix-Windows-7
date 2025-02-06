@@ -22,6 +22,8 @@
   of data between sync frames. Fixes #3783.
 * mkvmerge: HEVC/H.265 parser: fixed calculation of picture order count
   calculation that was triggered under rare circumstances. Fixes #3775.
+* mkvmerge: QuickTime/MP4 reader: fixed detection of Big Endian LPCM
+  audio. Fixes #3788.
 
 ## Build system changes
 
