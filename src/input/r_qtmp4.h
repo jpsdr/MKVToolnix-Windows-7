@@ -268,7 +268,7 @@ struct qtmp4_demuxer_c {
   uint16_t v_color_primaries, v_color_transfer_characteristics, v_color_matrix_coefficients;
   bool m_hevc_is_annex_b{};
   std::deque<int64_t> references;
-  uint32_t a_channels, a_bitdepth;
+  uint32_t a_channels, a_bitdepth, a_flags{};
   double a_samplerate;
   std::optional<mtx::aac::audio_config_t> a_aac_audio_config;
   mtx::ac3::frame_c m_ac3_header;
