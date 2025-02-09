@@ -1,4 +1,4 @@
-# Version ?
+# Version 90.0 "Hanging On" 2025-02-08
 
 ## New features and enhancements
 
@@ -8,21 +8,21 @@
 
 ## Bug fixes
 
+* mkvmerge: AAC parser: LOAS/LATM streams: fixed use of uninitialized data
+  when the `StreamMuxConfig` element doesn't contain the `audioMuxVersion`
+  element; version 0 must be assumed in such a case. The result was that
+  sometimes certain valid AAC packets were dropped. Fix by Stefan Pöschel.
+* mkvmerge: HEVC/H.265 parser: fixed calculation of picture order count
+  calculation that was triggered under rare circumstances. Fixes #3775.
 * mkvmerge: Matroska reader: enabled limits for how much data a single
   Matroksa reader instance might buffer when the muxing core looks for packets
   for specific tracks, avoiding huge memory consumption in cases where tracks
   have huge gaps between packets. This might happen when appending files
   containing forced-only subtitle tracks, for example. Fixes #3771.
-* mkvmerge: AAC parser: LOAS/LATM streams: fixed use of uninitialized data
-  when the `StreamMuxConfig` element doesn't contain the `audioMuxVersion`
-  element; version 0 must be assumed in such a case. The result was that
-  sometimes certain valid AAC packets were dropped. Fix by Stefan Pöschel.
 * mkvmerge: TrueHD reader: increased the probe range for TrueHD sync frames
   from 128 KB to 512 KB to avoid mis-detection with certain files with a lot
   of data between sync frames. Fixes #3783.
-* mkvmerge: HEVC/H.265 parser: fixed calculation of picture order count
-  calculation that was triggered under rare circumstances. Fixes #3775.
-* mkvmerge: QuickTime/MP4 reader: fixed detection of Big Endian LPCM
+* mkvmerge: MP4/QuickTime reader: fixed detection of Big Endian LPCM
   audio. Fixes #3788.
 
 ## Build system changes

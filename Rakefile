@@ -629,7 +629,7 @@ namespace :translations do
           po       = "po/#{language}.po"
           tmp_file = "#{po}.new"
           no_wrap  = $unwrapped_po.include?(language) ? "" : "--no-wrap"
-          runq "msgmerge", po, "msgmerge -q -s #{no_wrap} #{po} po/mkvtoolnix.pot > #{tmp_file}", :allow_failure => true
+          runq "msgmerge", po, "msgmerge -q #{no_wrap} #{po} po/mkvtoolnix.pot > #{tmp_file}", :allow_failure => true
 
           exit_code = last_exit_code
           if 0 != exit_code
