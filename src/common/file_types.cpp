@@ -97,7 +97,7 @@ file_type_t::get_name(file_type_e type) {
        : file_type_e::obu         == type ? YT("Open Bitstream Units stream")
        : file_type_e::ogm         == type ? YT("Ogg/OGM")
        : file_type_e::pgssup      == type ? YT("PGSSUP")
-       : file_type_e::qtmp4       == type ? YT("QuickTime/MP4")
+       : file_type_e::qtmp4       == type ? YT("MP4/QuickTime")
        : file_type_e::real        == type ? YT("RealMedia")
        : file_type_e::srt         == type ? YT("SRT subtitles")
        : file_type_e::ssa         == type ? YT("SSA/ASS subtitles")
