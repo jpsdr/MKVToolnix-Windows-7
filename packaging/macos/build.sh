@@ -449,7 +449,7 @@ MKVToolNix – macOS specific notes
 Configuration files are stored in ~/.config/bunkus.org and temporary
 files are stored in the folder automatically set via TMPDIR.
 
-This build works only with macOS 10.15 "Catalina" or newer. Older
+This build works only with macOS ${MACOSX_DEPLOYMENT_TARGET} or newer. Older
 releases that work on older macOS versions can be found at
 https://mkvtoolnix.download/downloads.html#macosx-old
 
