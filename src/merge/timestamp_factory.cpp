@@ -16,6 +16,7 @@
 
 #include <QRegularExpression>
 
+#include "common/list_utils.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
@@ -416,6 +417,31 @@ timestamp_factory_v2_c::get_next(packet_t &packet) {
   return false;
 }
 
+std::optional<timestamp_duration_c>
+timestamp_factory_v3_c::parse_normal_line(std::string const &line) {
+  auto parts = mtx::string::split(line, ",");
+
+  if (!mtx::included_in(parts.size(), 1, 2))
+    return {};
+
+  timestamp_duration_c t;
+  double duration;
+
+  if (!mtx::string::parse_number(parts[0], duration))
+    return {};
+
+  if (1 == parts.size())
+    t.fps = m_default_fps;
+
+  else if (!mtx::string::parse_number(parts[1], t.fps))
+    return {};
+
+  t.duration = static_cast<int64_t>(1'000'000'000.0 * duration);
+  t.is_gap   = false;
+
+  return t;
+}
+
 void
 timestamp_factory_v3_c::parse(mm_io_c &in) {
   std::string line;
@@ -461,17 +487,14 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
       t.duration = (int64_t)(1000000000.0 * dur);
 
     } else {
-      t.is_gap = false;
-      auto parts = mtx::string::split(line, ",");
+      auto new_t = parse_normal_line(line);
 
-      if ((1 == parts.size()) && mtx::string::parse_number(parts[0], dur))
-        t.fps = m_default_fps;
-
-      else if ((2 != parts.size()) || !mtx::string::parse_number(parts[1], t.fps)) {
+      if (!new_t) {
         mxwarn(fmt::format(FY("Line {0} of the timestamp file '{1}' could not be parsed.\n"), line_no, m_file_name));
         continue;
       }
-      t.duration = (int64_t)(1000000000.0 * dur);
+
+      t = *new_t;
     }
 
     if ((t.fps < 0) || (t.duration <= 0)) {

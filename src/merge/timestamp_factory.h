@@ -179,6 +179,9 @@ public:
   virtual bool contains_gap() override {
     return true;
   }
+
+private:
+  std::optional<timestamp_duration_c> parse_normal_line(std::string const &line);
 };
 
 class forced_default_duration_timestamp_factory_c: public timestamp_factory_c {
