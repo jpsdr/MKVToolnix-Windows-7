@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: timestamps format v3: fixed the parser; it was completely broken
+  for the lines containing the duration & an optional number of frames per
+  second. Fixes #2285.
+
+
 # Version 90.0 "Hanging On" 2025-02-08
 
 ## New features and enhancements
