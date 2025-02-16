@@ -5,6 +5,8 @@
 * mkvmerge: timestamps format v3: fixed the parser; it was completely broken
   for the lines containing the duration & an optional number of frames per
   second. Fixes #2285.
+* mkvmerge: DTS parser: if the X96 extension is present in a DTS-HD High
+  Resolution stream, the sampling frequency will be set to 96kHz. Fixes #3288.
 
 
 # Version 90.0 "Hanging On" 2025-02-08

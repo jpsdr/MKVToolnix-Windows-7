@@ -839,7 +839,11 @@ header_t::decode_asset(mtx::bits::reader_c &bc,
   if (asset.extension_mask & exss_xll)
     dts_type = dts_type_e::master_audio;
 
-  else if (asset.extension_mask & (exss_xbr | exss_x96 | exss_xxch))
+  else if (asset.extension_mask & exss_x96) {
+    dts_type = dts_type_e::high_resolution;
+    extension_sampling_frequency = 96'000;
+
+  } else if (asset.extension_mask & (exss_xbr | exss_xxch))
     dts_type = dts_type_e::high_resolution;
 
   else if (asset.extension_mask & exss_lbr)
