@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-02-08 14:22+0100\n"
+"POT-Creation-Date: 2025-02-23 14:10+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: BouRock, 2016-2025\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -8167,75 +8167,75 @@ msgstr "Dosya içeriği biçim türüyle eşleşmiyor ve tanınmadı."
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Dosya üstbilgisi ayrıştırılamadı, örn. çünkü tamamlanmamış, geçersiz ya da hasarlı."
 
-#: src/merge/timestamp_factory.cpp:38
+#: src/merge/timestamp_factory.cpp:39
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' could not be opened for reading.\n"
 msgstr "Zaman damgası dosyası '{0}' okumak için açılamadı.\n"
 
-#: src/merge/timestamp_factory.cpp:61
+#: src/merge/timestamp_factory.cpp:62
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
 msgstr "Zaman damgası dosyası '{0}' desteklenmeyen/tanınmayan biçim satırı içeriyor. En ilk satır '# timestamp format v1' gibi görünmelidir.\n"
 
-#: src/merge/timestamp_factory.cpp:97
+#: src/merge/timestamp_factory.cpp:98
 #, no-c-format
 msgid "JSON timestamp files must contain a JSON object with a 'version' key.\n"
 msgstr "JSON zaman damgası dosyaları, 'version' anahtarına sahip bir JSON nesnesi içermek zorundadır.\n"
 
-#: src/merge/timestamp_factory.cpp:120
+#: src/merge/timestamp_factory.cpp:121
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"
 msgstr "Zaman damgası dosyası '{0}' desteklenmeyen/tanınmayan biçim (sürüm {1}) içeriyor.\n"
 
-#: src/merge/timestamp_factory.cpp:141
-#: src/merge/timestamp_factory.cpp:149
-#: src/merge/timestamp_factory.cpp:155
-#: src/merge/timestamp_factory.cpp:425
+#: src/merge/timestamp_factory.cpp:142
+#: src/merge/timestamp_factory.cpp:150
+#: src/merge/timestamp_factory.cpp:156
+#: src/merge/timestamp_factory.cpp:451
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"
 msgstr "Zaman damgası dosyası '{0}', saniye başına varsayılan kare sayısıyla geçerli bir 'Assume' satırı içermiyor.\n"
 
-#: src/merge/timestamp_factory.cpp:168
-#: src/merge/timestamp_factory.cpp:471
+#: src/merge/timestamp_factory.cpp:169
+#: src/merge/timestamp_factory.cpp:493
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "'{1}' zaman damgası dosyasının {0}. satırı ayrıştırılamadı.\n"
 
-#: src/merge/timestamp_factory.cpp:173
+#: src/merge/timestamp_factory.cpp:174
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
 msgstr "'{1}' zaman damgası dosyasının {0}. satırı tutarsız veri içeriyor (örn. başlangıç karesi numarası bitiş karesi numarasından büyük ya da bazı değerler sıfırdan küçük).\n"
 
-#: src/merge/timestamp_factory.cpp:243
-#: src/merge/timestamp_factory.cpp:246
-#: src/merge/timestamp_factory.cpp:256
-#: src/merge/timestamp_factory.cpp:368
-#: src/merge/timestamp_factory.cpp:376
+#: src/merge/timestamp_factory.cpp:244
+#: src/merge/timestamp_factory.cpp:247
+#: src/merge/timestamp_factory.cpp:257
+#: src/merge/timestamp_factory.cpp:369
+#: src/merge/timestamp_factory.cpp:377
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' is invalid: {1}\n"
 msgstr "'{0}' zaman damgası dosyası geçersiz: {1}\n"
 
-#: src/merge/timestamp_factory.cpp:243
+#: src/merge/timestamp_factory.cpp:244
 #, no-c-format
 msgid "The 'assume' key must be set to the default number of frames per second."
 msgstr "'assume' anahtarı, saniye başına varsayılan kare sayısına ayarlanmak zorundadır."
 
-#: src/merge/timestamp_factory.cpp:246
+#: src/merge/timestamp_factory.cpp:247
 #, no-c-format
 msgid "The 'ranges' key must exist & be an array."
 msgstr "'ranges' anahtarı mevcut ve bir dizilim olmak zorundadır."
 
-#: src/merge/timestamp_factory.cpp:256
+#: src/merge/timestamp_factory.cpp:257
 #, no-c-format, c++-format
 msgid "The range number {0} must be an object with keys 'start', 'end' & 'fps'."
 msgstr "{0} aralık numarası 'start', 'end' ve 'fps' anahtarlarına sahip bir nesne olmak zorundadır."
 
-#: src/merge/timestamp_factory.cpp:308
+#: src/merge/timestamp_factory.cpp:309
 #, no-c-format, c++-format
 msgid "The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"
 msgstr "{1}' zaman damgası dosyasının '{0}' satırı geçerli bir kayan noktalı sayı içermiyor.\n"
 
-#: src/merge/timestamp_factory.cpp:311
+#: src/merge/timestamp_factory.cpp:312
 #, no-c-format, c++-format
 msgid ""
 "The timestamp v2 file '{0}' contains timestamps that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timestamp file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timestamps in the timestamp file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timestamp file with the first timestamps being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
@@ -8243,33 +8243,33 @@ msgid ""
 "If you really have to specify non-sorted timestamps then use the timestamp format v4. It is identical to format v2 but allows non-sorted timestamps.\n"
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:331
-#: src/merge/timestamp_factory.cpp:489
+#: src/merge/timestamp_factory.cpp:332
+#: src/merge/timestamp_factory.cpp:512
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain any valid entry.\n"
 msgstr "Zaman damgası dosyası '{0}', herhangi bir geçerli giriş içermiyor.\n"
 
-#: src/merge/timestamp_factory.cpp:368
+#: src/merge/timestamp_factory.cpp:369
 #, no-c-format
 msgid "The 'timestamps' key must exist & be an array."
 msgstr "'timestamps' anahtarı mevcut ve bir dizilim olmak zorundadır."
 
-#: src/merge/timestamp_factory.cpp:376
+#: src/merge/timestamp_factory.cpp:377
 #, no-c-format, c++-format
 msgid "The timestamp number {0} must be an integer or floating point number."
 msgstr "Zaman damgası numarası {0} bir tamsayı veya kayan noktalı sayı olmak zorundadır."
 
-#: src/merge/timestamp_factory.cpp:388
+#: src/merge/timestamp_factory.cpp:389
 #, no-c-format, c++-format
 msgid "The number of external timestamps {0} is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "Harici zaman damgalarının sayısı {0} bu izdeki karelerin sayısından küçük. Bu izin kalan kareleri, olmasını istediğiniz şekilde zaman damgalı olmayabilir. Hatta mkvmerge çökebilir.\n"
 
-#: src/merge/timestamp_factory.cpp:460
+#: src/merge/timestamp_factory.cpp:486
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"
 msgstr "Zaman damgası dosyası '{0}', boşluğun süresiyle geçerli bir 'Gap' satırı içermiyor.\n"
 
-#: src/merge/timestamp_factory.cpp:478
+#: src/merge/timestamp_factory.cpp:501
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
 msgstr "'{1}' zaman damgası dosyasının {0}. satırı tutarsız veri içeriyor (örn. süre ya da FPS sıfırdan küçük).\n"
@@ -8572,9 +8572,10 @@ msgstr "XML bölüm dosyaları"
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/tab.cpp:342
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tab.cpp:291
+#: src/mkvtoolnix-gui/merge/tab.cpp:354
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:105
 #: src/mkvtoolnix-gui/util/widget.cpp:187
@@ -8747,10 +8748,10 @@ msgstr "Dosyayı &yeniden yükle"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:591
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:478
-#: src/mkvtoolnix-gui/merge/tab.cpp:504
-#: src/mkvtoolnix-gui/merge/tool.cpp:398
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:1099
+#: src/mkvtoolnix-gui/merge/tab.cpp:516
+#: src/mkvtoolnix-gui/merge/tool.cpp:463
+#: src/mkvtoolnix-gui/merge/tool.cpp:1085
+#: src/mkvtoolnix-gui/merge/tool.cpp:1219
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
@@ -9138,15 +9139,15 @@ msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & 
 msgstr "Dosyayı \"bölüm düzenleyici\" menüsü, aşağıdaki düğmeler aracılığıyla ya da bir taneyi buraya sürükle ve bırakarak açın."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:193
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:604
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:649
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
 #: src/mkvtoolnix-gui/forms/merge/tool.h:226
 #, no-c-format
 msgid "&New"
 msgstr "&Yeni"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:194
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:653
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
 msgid "&Open supported chapter file format"
 msgstr "Desteklenen bölüm dosyası biçimini &aç"
@@ -9230,8 +9231,8 @@ msgstr "Matroska veya WebM dosyasını \"üstbilgi düzenleyici\" menüsü, aşa
 
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
 #: src/mkvtoolnix-gui/forms/info/tool.h:180
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:635
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:743
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:756
 #, no-c-format
 msgid "&Open Matroska or WebM file"
 msgstr "Matroska veya WebM dosyası &aç"
@@ -9501,119 +9502,119 @@ msgstr "İ&ndir"
 msgid "&Cancel"
 msgstr "İ&ptal"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:606
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:651
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:619
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 #, no-c-format
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:608
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:732
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:745
 #, no-c-format
 msgid "&Save settings"
 msgstr "Ayarları &kaydet"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:610
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:645
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:683
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:677
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:696
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:767
 #, no-c-format
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:612
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
 #: src/mkvtoolnix-gui/forms/merge/tool.h:227
 #, no-c-format
 msgid "&Open settings"
 msgstr "Ayarları &aç"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:614
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:637
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:655
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:745
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:650
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:668
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:758
 #, no-c-format
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:616
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:629
 #, no-c-format
 msgid "Sa&ve settings as"
 msgstr "Ayarları &farklı kaydet"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:630
 #, no-c-format
 msgid "E&xit"
 msgstr "Çı&kış"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:619
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:632
 #, no-c-format
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:733
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:746
 #, no-c-format
 msgid "Start &multiplexing"
 msgstr "Çokla&mayı başlat"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:710
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:636
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:723
 #, no-c-format
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:638
 #, no-c-format
 msgid "C&reate option file"
 msgstr "&Seçenek dosyası oluştur"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:626
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
 #, no-c-format
 msgid "S&how command line"
 msgstr "Komut satırını &göster"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:640
 #, no-c-format
 msgid "&Copy command line to clipboard"
 msgstr "Komut satırını panoya &kopyala"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:628
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:734
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:747
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2329
 #, no-c-format
 msgid "Add to job &queue"
 msgstr "İş k&uyruğuna ekle"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:629
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:642
 #, no-c-format
 msgid "&Preferences"
 msgstr "&Tercihler"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:631
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:644
 #, no-c-format
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:633
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:646
 #, no-c-format
 msgid "Check for &updates"
 msgstr "&Güncellemeleri denetle"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:647
 #, no-c-format
 msgid "&Code of Conduct"
 msgstr "&Kullanım Şartları"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:677
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:685
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:727
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:729
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:735
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:747
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:652
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:740
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:742
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:744
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:748
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:133
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:91
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:102
@@ -9621,270 +9622,285 @@ msgstr "&Kullanım Şartları"
 msgid "&Close"
 msgstr "&Kapat"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:679
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:749
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:654
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:673
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:692
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
 #, no-c-format
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:643
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:681
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:728
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:730
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:736
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:752
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:656
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:694
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:741
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:743
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:749
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:765
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:89
 #, no-c-format
 msgid "&Save"
 msgstr "&Kaydet"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:647
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:668
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:681
 #, no-c-format
 msgid "&Reload"
 msgstr "&Yeniden yükle"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:661
 #, no-c-format
 msgid "&Validate values"
 msgstr "Değerleri &doğrula"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:657
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
 #, no-c-format
 msgid "A&ppend chapters from supported file format"
 msgstr "Desteklenen dosya biçiminden bölümleri i&lave et"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:679
 #, no-c-format
 msgid "Save as &XML file"
 msgstr "&XML dosyası olarak kaydet"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:667
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:680
 #, no-c-format
 msgid "Save to &Matroska or WebM file"
 msgstr "&Matroska veya WebM dosyasına kaydet"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:669
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:682
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:442
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "Ç&oklayıcı"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:683
 #, no-c-format
 msgid "&Extraction tool"
 msgstr "Çıkarma ara&cı"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:765
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:684
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:783
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:443
 #, no-c-format
 msgid "&Info tool"
 msgstr "&Bilgi aracı"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:672
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:685
 #, no-c-format
 msgid "&Header editor"
 msgstr "Üst&bilgi düzenleyici"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:673
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:686
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:445
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "&Bölüm düzenleyici"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:674
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "&Job queue"
 msgstr "İş k&uyruğu"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:688
 #, no-c-format
 msgid "Job &output"
 msgstr "İş çı&ktısı"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:676
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:689
 #, no-c-format
 msgid "&Tag editor"
 msgstr "&Etiket düzenleyici"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:689
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
 #, no-c-format
 msgid "MKVToolNix &web site"
 msgstr "MKVToolNix &web sitesi"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #, no-c-format
 msgid "Community && &help forum"
 msgstr "Topluluk ve &yardım forumu"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:691
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
 #, no-c-format
 msgid "&FAQ"
 msgstr "&SSS"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:692
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:705
 #, no-c-format
 msgid "Known &problems in recent releases"
 msgstr "Son yayınlarda bilinen &sorunlar"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:693
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
 #, no-c-format
 msgid "Report a &bug"
 msgstr "Bir &hata bildir"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:694
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:707
 #, no-c-format
 msgid "S&ystem information"
 msgstr "S&istem bilgileri"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:695
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:708
 #, no-c-format
 msgid "mkv&merge documentation"
 msgstr "mkv&merge belgeleri"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:696
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:709
 #, no-c-format
 msgid "Remove &successfully completed jobs"
 msgstr "&Başarılı olarak tamamlanan işleri kaldır"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:711
 #, no-c-format
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:713
 #, no-c-format
 msgid "Remove a&ll jobs"
 msgstr "Tüm işleri ka&ldır"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:701
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:168
 #, no-c-format
 msgid "Acknowledge all &warnings"
 msgstr "Tüm &uyarıları bildir"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:715
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:169
 #, no-c-format
 msgid "Acknowledge all &errors"
 msgstr "Tüm &hataları bildir"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:716
 #, no-c-format
 msgid "Acknowledge &all warnings and errors"
 msgstr "&Tüm uyarıları ve hataları bildir"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:717
 #, no-c-format
 msgid "Remove &completed jobs"
 msgstr "&Tamamlanan işleri kaldır"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:719
 #, no-c-format
 msgid "Ctrl+Shift+L"
 msgstr "Ctrl+Shift+L"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:708
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
 msgid "Sta&rt all pending jobs"
 msgstr "Tüm bekleyen işle&ri başlat"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:712
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:725
 #, no-c-format
 msgid "Stop &after all running jobs have finished"
 msgstr "Tüm çalışan işler tamamlandıktan &sonra durdur"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:713
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:726
 #, no-c-format
 msgid "Abort all running jobs and stop &immediately"
 msgstr "Tüm çalışan işleri iptal et ve &hemen durdur"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:727
 #, no-c-format
 msgid "Copy &first source file's name to file title"
 msgstr "İl&k kaynak dosyanın adını dosya başlığına kopyala"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:716
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:729
 #, no-c-format
 msgid "Ctrl+F"
 msgstr "Ctrl+F"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:718
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
 #, no-c-format
 msgid "Copy &destination file's name to file title"
 msgstr "He&def dosyanın adını dosya başlığına kopyala"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:720
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:733
 #, no-c-format
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:722
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:735
 #, no-c-format
 msgid "Copy file &title to destination file name"
 msgstr "Dosya &başlığını hedef dosya adına kopyala"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:724
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:737
 #, no-c-format
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:726
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:739
 #, no-c-format
 msgid "Remo&ve chapters from existing Matroska file"
 msgstr "Bölümleri varolan Matroska dosyasından &kaldır"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:738
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:751
 #, no-c-format
 msgid "Ctrl+F6"
 msgstr "Ctrl+F6"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:741
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
 #, no-c-format
 msgid "Ctrl+Shift+F6"
 msgstr "Ctrl+Shift+F6"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:751
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
 #, no-c-format
 msgid "Close &all tabs"
 msgstr "&Tüm sekmeleri kapat"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:756
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:769
 #, no-c-format
 msgid "Add files from clip&board"
 msgstr "&Panodan dosyaları ekle"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:757
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:759
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:761
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:770
+#, fuzzy, no-c-format
+msgid "Save all settings to single file"
+msgstr "Ayarlar dosyasını farklı kaydet"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:772
+#, fuzzy, no-c-format
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+L"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:774
+#, fuzzy, no-c-format
+msgid "Save all settings to single file as"
+msgstr "Ayarlar dosyasını farklı kaydet"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:775
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:777
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:779
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:780
 #, no-c-format
 msgid "Actions for &all tabs"
 msgstr "&Tüm sekmeler için eylemler"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:758
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:776
 #, no-c-format
 msgid "Modif&y selected tracks"
 msgstr "Seçilen izleri d&eğiştir"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:778
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 #, no-c-format
 msgid "Modif&y selected track"
 msgstr "Seçilen izi d&eğiştir"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:763
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:781
 #, no-c-format
 msgid "S&top job queue"
 msgstr "İş kuyruğunu &durdur"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:782
 #, no-c-format
 msgid "&Window"
 msgstr "&Pencere"
@@ -10298,7 +10314,7 @@ msgstr "Dosya adlarından altyazılar için \"zorunlu görüntüle\" iş&aretini
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
 #, no-c-format
-msgid "Derive \"&hearing impair\" flag for audio/subtitles from file names:"
+msgid "Derive \"&hearing impaired\" flag for audio/subtitles from file names:"
 msgstr "Dosya adlarından ses/altyazılar için \"&işitme engelliler\" işaretini türet:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
@@ -11895,7 +11911,7 @@ msgstr "Eki yeni bir dosya ile ve ondan gelen &türeyen ad ve MIME türü ile de
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:394
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
-#: src/mkvtoolnix-gui/merge/tool.cpp:322
+#: src/mkvtoolnix-gui/merge/tool.cpp:330
 #, no-c-format
 msgid "Set &language"
 msgstr "Dili &ayarla"
@@ -15518,6 +15534,7 @@ msgstr "Ayarlar dosyası '%1' geçersiz ayarlar içeriyor ve yüklenemedi."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:208
 #: src/mkvtoolnix-gui/merge/tab.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:569
 #, no-c-format
 msgid "The configuration has been saved."
 msgstr "Yapılandırma kaydedildi."
@@ -15533,179 +15550,181 @@ msgid "The option file has been created."
 msgstr "Seçenek dosyası oluşturuldu."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #, no-c-format
 msgid "Save settings file as"
 msgstr "Ayarlar dosyasını farklı kaydet"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix GKA yapılandırma dosyaları"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:413
 #: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:437
 #, no-c-format
 msgid "Cannot start multiplexing"
 msgstr "Çoklama başlatılamıyor"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:413
+#: src/mkvtoolnix-gui/merge/tab.cpp:425
 #, no-c-format
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
 msgstr "Çoklamaya başlamadan ya da iş kuyruğuna bir iş eklemeden önce hedef dosyayı ayarlamak zorundasınız."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:437
 #, no-c-format
 msgid "The destination file name is invalid and must be fixed before you can start multiplexing or add a job to the job queue."
 msgstr "Hedef dosya adı geçersiz ve çoklamaya başlamadan ya da iş kuyruğuna bir iş eklemeden önce düzeltilmek zorundadır."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:499
+#: src/mkvtoolnix-gui/merge/tab.cpp:511
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "Ses izi olmadan dosya oluştur"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:501
+#: src/mkvtoolnix-gui/merge/tab.cpp:513
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr "Şu anki çoklama ayarları ile hedef dosya bir ses izi içermeyecek."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:502
+#: src/mkvtoolnix-gui/merge/tab.cpp:514
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:503
+#: src/mkvtoolnix-gui/merge/tab.cpp:515
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "Ses izi olmadan dosya &oluştur"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:579
+#: src/mkvtoolnix-gui/merge/tab.cpp:591
 #, no-c-format
 msgid "Enter job description"
 msgstr "İş tanımını gir"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:579
+#: src/mkvtoolnix-gui/merge/tab.cpp:591
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "Lütfen yeni işin tanımını girin:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:595
+#: src/mkvtoolnix-gui/merge/tab.cpp:607
 #, no-c-format
 msgid "Adding the job to the queue failed"
 msgstr "İş kuyruğa ekleme başarısız oldu"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
 #, no-c-format
 msgid "Open settings file"
 msgstr "Ayarlar dosyasını aç"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:365
+#: src/mkvtoolnix-gui/merge/tool.cpp:379
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "İş, iş kuyruğuna eklendi."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:395
+#: src/mkvtoolnix-gui/merge/tool.cpp:460
 #, no-c-format
 msgid "Close modified settings"
 msgstr "Değiştirilmiş ayarları kapat"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:396
+#: src/mkvtoolnix-gui/merge/tool.cpp:461
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "Çoklama ayarlarını oluşturan \"%1\" değiştirildi. Gerçekten kapatmak istiyor musunuz? Tüm değişiklikler kaybolacaktır."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:397
+#: src/mkvtoolnix-gui/merge/tool.cpp:462
 #, no-c-format
 msgid "&Close settings"
 msgstr "Ayarları &kapat"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:511
+#: src/mkvtoolnix-gui/merge/tool.cpp:631
 #, no-c-format
 msgid "mkvmerge command line"
 msgstr "mkvmerge komut satırı"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:705
+#: src/mkvtoolnix-gui/merge/tool.cpp:825
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "&Sonraki çoklama ayarları"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:706
+#: src/mkvtoolnix-gui/merge/tool.cpp:826
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "Ö&nceki çoklama ayarları"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:966
+#: src/mkvtoolnix-gui/merge/tool.cpp:1085
+#: src/mkvtoolnix-gui/merge/tool.cpp:1086
 #, no-c-format
 msgid "Identifying files"
 msgstr "Dosyalar tanımlanıyor"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1002
+#: src/mkvtoolnix-gui/merge/tool.cpp:1122
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Bölüm dosyaları ekleniyor"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1004
+#: src/mkvtoolnix-gui/merge/tool.cpp:1124
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "'%1' dosyası bölümler içeriyor."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1005
-#: src/mkvtoolnix-gui/merge/tool.cpp:1020
-#: src/mkvtoolnix-gui/merge/tool.cpp:1035
+#: src/mkvtoolnix-gui/merge/tool.cpp:1125
+#: src/mkvtoolnix-gui/merge/tool.cpp:1140
+#: src/mkvtoolnix-gui/merge/tool.cpp:1155
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "Bunlar MKVToolNix içindeki diğer kaynak dosyalar gibi işlem görmezler."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1006
+#: src/mkvtoolnix-gui/merge/tool.cpp:1126
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "Bunun yerine böyle bir dosya 'çıktı' sekmesindeki 'bölüm dosyası' seçeneği aracılığıyla ayarlanmak zorundadır."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1007
-#: src/mkvtoolnix-gui/merge/tool.cpp:1022
-#: src/mkvtoolnix-gui/merge/tool.cpp:1037
+#: src/mkvtoolnix-gui/merge/tool.cpp:1127
+#: src/mkvtoolnix-gui/merge/tool.cpp:1142
+#: src/mkvtoolnix-gui/merge/tool.cpp:1157
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "GKA, önceden ayarlanabilmiş herhangi bir dosya adını değiştiren bu denetimin içine bırakılan dosyanın dosya adını girecek."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1017
+#: src/mkvtoolnix-gui/merge/tool.cpp:1137
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Parça bilgisi dosyaları ekleniyor"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1019
+#: src/mkvtoolnix-gui/merge/tool.cpp:1139
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "'%1' dosyası parça bilgileri içeriyor."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1021
+#: src/mkvtoolnix-gui/merge/tool.cpp:1141
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "Bunun yerine böyle bir dosya 'çıktı' sekmesindeki 'parça bilgisi' seçeneği aracılığıyla ayarlanmak zorundadır."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1032
+#: src/mkvtoolnix-gui/merge/tool.cpp:1152
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Etiket dosyaları ekleniyor"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1034
+#: src/mkvtoolnix-gui/merge/tool.cpp:1154
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "'%1' dosyası etiketler içeriyor."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1036
+#: src/mkvtoolnix-gui/merge/tool.cpp:1156
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "Bunun yerine böyle bir dosya 'çıktı' sekmesindeki 'genel etiketler' seçeneği aracılığıyla ayarlanmak zorundadır."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1052
+#: src/mkvtoolnix-gui/merge/tool.cpp:1172
 #, no-c-format
 msgid "&Continue identification"
 msgstr "Tanımlamaya &devam et"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1099
-#: src/mkvtoolnix-gui/merge/tool.cpp:1104
+#: src/mkvtoolnix-gui/merge/tool.cpp:1219
+#: src/mkvtoolnix-gui/merge/tool.cpp:1224
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Dizin tarama"

@@ -51,8 +51,10 @@ public Q_SLOTS:
   virtual bool closeAllTabs();
 
   virtual void saveConfig();
-  virtual void saveAllConfigs();
   virtual void saveConfigAs();
+  virtual void saveAllConfigs();
+  virtual void saveAllConfigsToSingle();
+  virtual void saveAllConfigsToSingleAs();
   virtual void saveOptionFile();
   virtual void startMuxing();
   virtual void startMuxingAll();
@@ -78,6 +80,7 @@ public Q_SLOTS:
   virtual void handleFilesFromCommandLine(QStringList const &fileNames);
 
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
+  virtual bool openMultipleConfigFilesFromConfigFile(QString const &fileNames);
 
   virtual void fileIdentificationStarted(unsigned int numberOfQueuedFiles);
   virtual void fileIdentificationFinished();

@@ -242,6 +242,18 @@ Tab::onSaveConfigAs() {
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
 
+void
+Tab::saveConfigTo(Util::ConfigFile &configFile) {
+  auto &p = *p_func();
+
+  updateConfigFromControlValues();
+  p.config.save(configFile);
+
+  p.savedState = currentState();
+
+  Q_EMIT titleChanged();
+}
+
 QString
 Tab::defaultFileNameForSaving(QString const &ext) {
   auto &p = *p_func();
