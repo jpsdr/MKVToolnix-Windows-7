@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-02-08 14:22+0100\n"
+"POT-Creation-Date: 2025-02-23 14:10+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>, 2019-2021\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/moritz-bunkus/"
@@ -8193,75 +8193,75 @@ msgstr "Није препознат садржај датотеке јер се 
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Ова заглавља датотеке не могу да рашчланим (можда нису кломплетна или ваљана, а можда су и оштећена)."
 
-#: src/merge/timestamp_factory.cpp:38
+#: src/merge/timestamp_factory.cpp:39
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' could not be opened for reading.\n"
 msgstr "Не могу да читам из датотеке временских ознака „{0}“.\n"
 
-#: src/merge/timestamp_factory.cpp:61
+#: src/merge/timestamp_factory.cpp:62
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
 msgstr "Датотека временских ознака „{0}“ садржи облик линије који није познат или подржан. Прва линија датотеке мора да изгледа као „# timestamp format v1“.\n"
 
-#: src/merge/timestamp_factory.cpp:97
+#: src/merge/timestamp_factory.cpp:98
 #, no-c-format
 msgid "JSON timestamp files must contain a JSON object with a 'version' key.\n"
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:120
+#: src/merge/timestamp_factory.cpp:121
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"
 msgstr "Датотека временских ознака „{0}“ не садржи подржан/познат облик (издање {1}).\n"
 
-#: src/merge/timestamp_factory.cpp:141
-#: src/merge/timestamp_factory.cpp:149
-#: src/merge/timestamp_factory.cpp:155
-#: src/merge/timestamp_factory.cpp:425
+#: src/merge/timestamp_factory.cpp:142
+#: src/merge/timestamp_factory.cpp:150
+#: src/merge/timestamp_factory.cpp:156
+#: src/merge/timestamp_factory.cpp:451
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"
 msgstr "Датотека временских ознака „{0}“ не садржи ваљану линију „Assume“ са подразумеваним бројем кадрова по секунди (кпс).\n"
 
-#: src/merge/timestamp_factory.cpp:168
-#: src/merge/timestamp_factory.cpp:471
+#: src/merge/timestamp_factory.cpp:169
+#: src/merge/timestamp_factory.cpp:493
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "Не може да се рашчлани линија „{0}“ у датотеци врем.ознака „{1}“.\n"
 
-#: src/merge/timestamp_factory.cpp:173
+#: src/merge/timestamp_factory.cpp:174
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
 msgstr "Линија {0} у датотеци временских ознака „{1}“ не садржи доследне податке (нпр. број почетног је већи од броја завршног кадра, или су неке вредности мање од нуле).\n"
 
-#: src/merge/timestamp_factory.cpp:243
-#: src/merge/timestamp_factory.cpp:246
-#: src/merge/timestamp_factory.cpp:256
-#: src/merge/timestamp_factory.cpp:368
-#: src/merge/timestamp_factory.cpp:376
+#: src/merge/timestamp_factory.cpp:244
+#: src/merge/timestamp_factory.cpp:247
+#: src/merge/timestamp_factory.cpp:257
+#: src/merge/timestamp_factory.cpp:369
+#: src/merge/timestamp_factory.cpp:377
 #, fuzzy, no-c-format, c++-format
 msgid "The timestamp file '{0}' is invalid: {1}\n"
 msgstr "Датотека временских ознака „{0}“ не садржи ваљане уносе.\n"
 
-#: src/merge/timestamp_factory.cpp:243
+#: src/merge/timestamp_factory.cpp:244
 #, fuzzy, no-c-format
 msgid "The 'assume' key must be set to the default number of frames per second."
 msgstr "Датотека временских ознака „{0}“ не садржи ваљану линију „Assume“ са подразумеваним бројем кадрова по секунди (кпс).\n"
 
-#: src/merge/timestamp_factory.cpp:246
+#: src/merge/timestamp_factory.cpp:247
 #, no-c-format
 msgid "The 'ranges' key must exist & be an array."
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:256
+#: src/merge/timestamp_factory.cpp:257
 #, no-c-format, c++-format
 msgid "The range number {0} must be an object with keys 'start', 'end' & 'fps'."
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:308
+#: src/merge/timestamp_factory.cpp:309
 #, no-c-format, c++-format
 msgid "The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"
 msgstr "Ред {0} у датотеци временских ознака „{1}“ не садржи ваљан број са покретним зарезом.\n"
 
-#: src/merge/timestamp_factory.cpp:311
+#: src/merge/timestamp_factory.cpp:312
 #, no-c-format, c++-format
 msgid ""
 "The timestamp v2 file '{0}' contains timestamps that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timestamp file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timestamps in the timestamp file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timestamp file with the first timestamps being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
@@ -8272,33 +8272,33 @@ msgstr ""
 "\n"
 "За употребу непоређаних врем. ознака искористите издање 4 датотеке врем. ознака (исто као и издање 2 али су дозвољене непоређане ознаке).\n"
 
-#: src/merge/timestamp_factory.cpp:331
-#: src/merge/timestamp_factory.cpp:489
+#: src/merge/timestamp_factory.cpp:332
+#: src/merge/timestamp_factory.cpp:512
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain any valid entry.\n"
 msgstr "Датотека временских ознака „{0}“ не садржи ваљане уносе.\n"
 
-#: src/merge/timestamp_factory.cpp:368
+#: src/merge/timestamp_factory.cpp:369
 #, no-c-format
 msgid "The 'timestamps' key must exist & be an array."
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:376
+#: src/merge/timestamp_factory.cpp:377
 #, fuzzy, no-c-format, c++-format
 msgid "The timestamp number {0} must be an integer or floating point number."
 msgstr "Ред {0} у датотеци временских ознака „{1}“ не садржи ваљан број са покретним зарезом.\n"
 
-#: src/merge/timestamp_factory.cpp:388
+#: src/merge/timestamp_factory.cpp:389
 #, no-c-format, c++-format
 msgid "The number of external timestamps {0} is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "Број спољашњих временских ознака {0} је мањи од броја кадрова у овом запису. Преостали кадрови овог записа можда неће бити временски означени онако како сте и наумили. Мкв-спојница ће се можда чак и срушитиi.\n"
 
-#: src/merge/timestamp_factory.cpp:460
+#: src/merge/timestamp_factory.cpp:486
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"
 msgstr "Датотека временских ознака „{0}“ не садржи ваљану линију празнине („Gap“) са одређеним трајањем празнине.\n"
 
-#: src/merge/timestamp_factory.cpp:478
+#: src/merge/timestamp_factory.cpp:501
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
 msgstr "Линија {0} у датотеци врем.ознака „{1}“ не садржи доследне податке (нпр. трајање или број кадрова по секунди су мањи од нуле).\n"
@@ -8601,9 +8601,10 @@ msgstr "ИксМЛ датотеке поглавља"
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/tab.cpp:342
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tab.cpp:291
+#: src/mkvtoolnix-gui/merge/tab.cpp:354
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:105
 #: src/mkvtoolnix-gui/util/widget.cpp:187
@@ -8777,10 +8778,10 @@ msgstr "&Учитај датотеку наново"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:591
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:478
-#: src/mkvtoolnix-gui/merge/tab.cpp:504
-#: src/mkvtoolnix-gui/merge/tool.cpp:398
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:1099
+#: src/mkvtoolnix-gui/merge/tab.cpp:516
+#: src/mkvtoolnix-gui/merge/tool.cpp:463
+#: src/mkvtoolnix-gui/merge/tool.cpp:1085
+#: src/mkvtoolnix-gui/merge/tool.cpp:1219
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
@@ -9168,15 +9169,15 @@ msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & 
 msgstr "Отворите датотеку преко изборника »Уредник поглавља«, дугмади испод или превлачењем овде."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:193
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:604
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:649
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
 #: src/mkvtoolnix-gui/forms/merge/tool.h:226
 #, no-c-format
 msgid "&New"
 msgstr "&Ново"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:194
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:653
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
 msgid "&Open supported chapter file format"
 msgstr "&Otvori podržan format fajla poglavlja"
@@ -9260,8 +9261,8 @@ msgstr "Otvori Matroska ili WebM fajl preko menija »urednik zaglavlja«, dugmet
 
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
 #: src/mkvtoolnix-gui/forms/info/tool.h:180
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:635
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:743
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:756
 #, no-c-format
 msgid "&Open Matroska or WebM file"
 msgstr "&Отвори Matroska или WebM фајл"
@@ -9531,119 +9532,119 @@ msgstr "&Преузимања"
 msgid "&Cancel"
 msgstr "&Поништи"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:606
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:651
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:619
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 #, no-c-format
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:608
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:732
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:745
 #, no-c-format
 msgid "&Save settings"
 msgstr "&Сачувај поставке"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:610
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:645
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:683
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:677
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:696
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:767
 #, no-c-format
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:612
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
 #: src/mkvtoolnix-gui/forms/merge/tool.h:227
 #, no-c-format
 msgid "&Open settings"
 msgstr "&Отвори поставке"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:614
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:637
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:655
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:745
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:650
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:668
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:758
 #, no-c-format
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:616
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:629
 #, no-c-format
 msgid "Sa&ve settings as"
 msgstr "Са&чувај поставке као"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:630
 #, no-c-format
 msgid "E&xit"
 msgstr "&Изађи"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:619
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:632
 #, no-c-format
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:733
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:746
 #, no-c-format
 msgid "Start &multiplexing"
 msgstr "Почни &мултиплексирање"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:710
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:636
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:723
 #, no-c-format
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:638
 #, no-c-format
 msgid "C&reate option file"
 msgstr "С&твори датотеку поставки"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:626
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
 #, no-c-format
 msgid "S&how command line"
 msgstr "При&кажи линију наредбе"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:640
 #, no-c-format
 msgid "&Copy command line to clipboard"
 msgstr "&Умножи линију наредбе у оставу"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:628
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:734
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:747
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2329
 #, no-c-format
 msgid "Add to job &queue"
 msgstr "Додај у &заказане радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:629
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:642
 #, no-c-format
 msgid "&Preferences"
 msgstr "&Поставке"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:631
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:644
 #, no-c-format
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:633
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:646
 #, no-c-format
 msgid "Check for &updates"
 msgstr "Провери доступност &надоградњи"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:647
 #, no-c-format
 msgid "&Code of Conduct"
 msgstr "Pr&avila ponašanja"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:677
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:685
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:727
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:729
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:735
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:747
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:652
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:740
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:742
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:744
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:748
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:133
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:91
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:102
@@ -9651,270 +9652,285 @@ msgstr "Pr&avila ponašanja"
 msgid "&Close"
 msgstr "&Затвори"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:679
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:749
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:654
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:673
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:692
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
 #, no-c-format
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:643
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:681
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:728
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:730
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:736
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:752
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:656
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:694
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:741
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:743
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:749
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:765
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:89
 #, no-c-format
 msgid "&Save"
 msgstr "&Сачувај"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:647
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:668
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:681
 #, no-c-format
 msgid "&Reload"
 msgstr "&Учитај наново"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:661
 #, no-c-format
 msgid "&Validate values"
 msgstr "&Потврди вредности"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:657
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
 #, no-c-format
 msgid "A&ppend chapters from supported file format"
 msgstr "Pripoji poglavlja iz podržanog fajl formata"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:679
 #, no-c-format
 msgid "Save as &XML file"
 msgstr "Сачувај у И&ксМЛ датотеци"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:667
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:680
 #, no-c-format
 msgid "Save to &Matroska or WebM file"
 msgstr "Sačuvaj u &Matroska ili WebM fajl"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:669
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:682
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:442
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "&Мултиплексер"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:683
 #, no-c-format
 msgid "&Extraction tool"
 msgstr "Мкв-&издвојница"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:765
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:684
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:783
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:443
 #, no-c-format
 msgid "&Info tool"
 msgstr "Алатка &обавештења"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:672
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:685
 #, no-c-format
 msgid "&Header editor"
 msgstr "Уредник &заглавља"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:673
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:686
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:445
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "Уредник &поглавља"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:674
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "&Job queue"
 msgstr "Заказане &радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:688
 #, no-c-format
 msgid "Job &output"
 msgstr "Исх&од радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:676
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:689
 #, no-c-format
 msgid "&Tag editor"
 msgstr "Уредник &ознака"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:689
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
 #, no-c-format
 msgid "MKVToolNix &web site"
 msgstr "Интернет-&адреса Мкв-алатнице"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #, no-c-format
 msgid "Community && &help forum"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:691
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
 #, no-c-format
 msgid "&FAQ"
 msgstr "&ЧПП"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:692
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:705
 #, no-c-format
 msgid "Known &problems in recent releases"
 msgstr "Познати &проблеми у скорашњим издањима"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:693
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
 #, no-c-format
 msgid "Report a &bug"
 msgstr "Известите о &грешки"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:694
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:707
 #, no-c-format
 msgid "S&ystem information"
 msgstr "&Informacija o sistemu"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:695
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:708
 #, no-c-format
 msgid "mkv&merge documentation"
 msgstr "Упутства за рад са Мкв-спојницом"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:696
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:709
 #, no-c-format
 msgid "Remove &successfully completed jobs"
 msgstr "Уклони успешно &свршене радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:711
 #, no-c-format
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:713
 #, no-c-format
 msgid "Remove a&ll jobs"
 msgstr "Уклони с&ве радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:701
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:168
 #, no-c-format
 msgid "Acknowledge all &warnings"
 msgstr "Примљена сва упозоре&ња"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:715
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:169
 #, no-c-format
 msgid "Acknowledge all &errors"
 msgstr "Примљ&ене све погрешке"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:716
 #, no-c-format
 msgid "Acknowledge &all warnings and errors"
 msgstr "Примљена св&а упозорења и грешке"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:717
 #, no-c-format
 msgid "Remove &completed jobs"
 msgstr "Уклони свр&шене радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:719
 #, no-c-format
 msgid "Ctrl+Shift+L"
 msgstr "Ctrl+Shift+L"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:708
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
 msgid "Sta&rt all pending jobs"
 msgstr "Z&apočni sve zadatke na čekanju"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:712
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:725
 #, no-c-format
 msgid "Stop &after all running jobs have finished"
 msgstr "Zaustavi &kad se završe svi pokrenuti zadaci"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:713
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:726
 #, no-c-format
 msgid "Abort all running jobs and stop &immediately"
 msgstr "Prekini sve pokrenute zadatke i zaustavi &odmah"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:727
 #, no-c-format
 msgid "Copy &first source file's name to file title"
 msgstr "Kopiraj ime prvog izvornog fajla u &naslov fajla"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:716
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:729
 #, no-c-format
 msgid "Ctrl+F"
 msgstr "Ctrl+F"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:718
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
 #, no-c-format
 msgid "Copy &destination file's name to file title"
 msgstr "Kopiraj ime &odredišnog fajla u naslov fajla"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:720
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:733
 #, no-c-format
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:722
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:735
 #, no-c-format
 msgid "Copy file &title to destination file name"
 msgstr "Kopiraj naslov fajla u ime odredišnog fajla"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:724
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:737
 #, no-c-format
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:726
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:739
 #, no-c-format
 msgid "Remo&ve chapters from existing Matroska file"
 msgstr "&Ukloni poglavlja iz postojećeg Matroska fajla"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:738
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:751
 #, no-c-format
 msgid "Ctrl+F6"
 msgstr "Ctrl+F6"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:741
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
 #, no-c-format
 msgid "Ctrl+Shift+F6"
 msgstr "Ctrl+Shift+F6"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:751
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
 #, no-c-format
 msgid "Close &all tabs"
 msgstr "Zatvori &sve kartice"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:756
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:769
 #, no-c-format
 msgid "Add files from clip&board"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:757
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:759
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:761
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:770
+#, fuzzy, no-c-format
+msgid "Save all settings to single file"
+msgstr "Сачувај датотеку подешавања као"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:772
+#, fuzzy, no-c-format
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+L"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:774
+#, fuzzy, no-c-format
+msgid "Save all settings to single file as"
+msgstr "Сачувај датотеку подешавања као"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:775
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:777
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:779
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:780
 #, no-c-format
 msgid "Actions for &all tabs"
 msgstr "&Radnje za sve kartice"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:758
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:776
 #, fuzzy, no-c-format
 msgid "Modif&y selected tracks"
 msgstr "Записи одељака"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:778
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 #, no-c-format
 msgid "Modif&y selected track"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:763
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:781
 #, no-c-format
 msgid "S&top job queue"
 msgstr "Заус&тави заказане радње"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:782
 #, no-c-format
 msgid "&Window"
 msgstr "&Прозор"
@@ -11928,7 +11944,7 @@ msgstr "Zameni prilog sa novim fajlom i &izvedi ime && MIME tip iz njega"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:394
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
-#: src/mkvtoolnix-gui/merge/tool.cpp:322
+#: src/mkvtoolnix-gui/merge/tool.cpp:330
 #, fuzzy, no-c-format
 msgid "Set &language"
 msgstr "Језик"
@@ -15581,6 +15597,7 @@ msgstr "Датотека поставки „%1“ није учитана је�
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:208
 #: src/mkvtoolnix-gui/merge/tab.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:569
 #, no-c-format
 msgid "The configuration has been saved."
 msgstr "Поставке су сачуване."
@@ -15596,179 +15613,181 @@ msgid "The option file has been created."
 msgstr "Створена је датотека опција."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #, no-c-format
 msgid "Save settings file as"
 msgstr "Сачувај датотеку подешавања као"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "Датотеке графичких поставки Мкв-алатнице"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:413
 #: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:437
 #, no-c-format
 msgid "Cannot start multiplexing"
 msgstr "Ne mogu da počnem multipleksiranje"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:413
+#: src/mkvtoolnix-gui/merge/tab.cpp:425
 #, no-c-format
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
 msgstr "Morate da postavite odredišni fajl pre nego što možete da počnete multipleksiranje ili dodavanje novog zadatka na listu."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:437
 #, no-c-format
 msgid "The destination file name is invalid and must be fixed before you can start multiplexing or add a job to the job queue."
 msgstr "Ime odredišnog fajla je nevažeće i mora se popraviti pre nego što počnete multipleksiranje."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:499
+#: src/mkvtoolnix-gui/merge/tab.cpp:511
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "Napravi fajl bez audio staze"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:501
+#: src/mkvtoolnix-gui/merge/tab.cpp:513
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr "Sa trenutnim multipleks postavkama, odredišni fajl neće sadržati audio stazu."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:502
+#: src/mkvtoolnix-gui/merge/tab.cpp:514
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "Da li želite da nastavite?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:503
+#: src/mkvtoolnix-gui/merge/tab.cpp:515
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "&Направи файл без аудио стазе"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:579
+#: src/mkvtoolnix-gui/merge/tab.cpp:591
 #, no-c-format
 msgid "Enter job description"
 msgstr "Унесите опис радње"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:579
+#: src/mkvtoolnix-gui/merge/tab.cpp:591
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "Унесите опис нове радње."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:595
+#: src/mkvtoolnix-gui/merge/tab.cpp:607
 #, no-c-format
 msgid "Adding the job to the queue failed"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
 #, no-c-format
 msgid "Open settings file"
 msgstr "Отвори датотеку поставки"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:365
+#: src/mkvtoolnix-gui/merge/tool.cpp:379
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "Zadatak je dodat na listu zadataka."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:395
+#: src/mkvtoolnix-gui/merge/tool.cpp:460
 #, no-c-format
 msgid "Close modified settings"
 msgstr "Zatvori izmenjene postavke"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:396
+#: src/mkvtoolnix-gui/merge/tool.cpp:461
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "Multipleks postavke koje kreiraju \"%1\" su izmenjene. Da li zaista želite da zatvorite? Sve izmene će biti izgubljene."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:397
+#: src/mkvtoolnix-gui/merge/tool.cpp:462
 #, no-c-format
 msgid "&Close settings"
 msgstr "&Zatvori postavke"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:511
+#: src/mkvtoolnix-gui/merge/tool.cpp:631
 #, no-c-format
 msgid "mkvmerge command line"
 msgstr "Линија наредбе Мкв-спојнице"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:705
+#: src/mkvtoolnix-gui/merge/tool.cpp:825
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "&Sledeća kartica"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:706
+#: src/mkvtoolnix-gui/merge/tool.cpp:826
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "&Prethodna kartica"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:966
+#: src/mkvtoolnix-gui/merge/tool.cpp:1085
+#: src/mkvtoolnix-gui/merge/tool.cpp:1086
 #, fuzzy, no-c-format
 msgid "Identifying files"
 msgstr "Додавање датотека"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1002
+#: src/mkvtoolnix-gui/merge/tool.cpp:1122
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Dodavanje poglavlja"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1004
+#: src/mkvtoolnix-gui/merge/tool.cpp:1124
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "Fajl '%1' sadrži poglavlja."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1005
-#: src/mkvtoolnix-gui/merge/tool.cpp:1020
-#: src/mkvtoolnix-gui/merge/tool.cpp:1035
+#: src/mkvtoolnix-gui/merge/tool.cpp:1125
+#: src/mkvtoolnix-gui/merge/tool.cpp:1140
+#: src/mkvtoolnix-gui/merge/tool.cpp:1155
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "Takvi fajlovi nisu tretirani kao drugi izvorni fajlovi u MKVToolNix-u."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1006
+#: src/mkvtoolnix-gui/merge/tool.cpp:1126
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'fajl sa poglavljima' u kartici 'izlaz'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1007
-#: src/mkvtoolnix-gui/merge/tool.cpp:1022
-#: src/mkvtoolnix-gui/merge/tool.cpp:1037
+#: src/mkvtoolnix-gui/merge/tool.cpp:1127
+#: src/mkvtoolnix-gui/merge/tool.cpp:1142
+#: src/mkvtoolnix-gui/merge/tool.cpp:1157
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "Program će naziv prevučenog fajla uneti u odgovarajuće polje menjajući bilo koji naziv koji je možda postavljen ranije."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1017
+#: src/mkvtoolnix-gui/merge/tool.cpp:1137
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Dodavanje segment info fajlova"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1019
+#: src/mkvtoolnix-gui/merge/tool.cpp:1139
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "Fajl '%1' sadrži segment informaciju."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1021
+#: src/mkvtoolnix-gui/merge/tool.cpp:1141
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'segment info' u kartici 'izlaz'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1032
+#: src/mkvtoolnix-gui/merge/tool.cpp:1152
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Dodavanje tagova"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1034
+#: src/mkvtoolnix-gui/merge/tool.cpp:1154
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "Fajl '%1' sadrži tagove."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1036
+#: src/mkvtoolnix-gui/merge/tool.cpp:1156
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'globalni tagovi' u kartici 'izlaz'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1052
+#: src/mkvtoolnix-gui/merge/tool.cpp:1172
 #, fuzzy, no-c-format
 msgid "&Continue identification"
 msgstr "Шифровање садржаја"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1099
-#: src/mkvtoolnix-gui/merge/tool.cpp:1104
+#: src/mkvtoolnix-gui/merge/tool.cpp:1219
+#: src/mkvtoolnix-gui/merge/tool.cpp:1224
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Истражујем директоријум"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-02-08 14:22+0100\n"
+"POT-Creation-Date: 2025-02-23 14:10+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: HULEN, 2021-2022\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -8129,75 +8129,75 @@ msgstr "檔案內容不符合本身的格式類型而無法辨認。"
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "無法解析此檔案表頭，可能是因為檔案不完整、無效或已損壞。"
 
-#: src/merge/timestamp_factory.cpp:38
+#: src/merge/timestamp_factory.cpp:39
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' could not be opened for reading.\n"
 msgstr "時間戳記檔案 '{0}' 無法開啟以讀取。\n"
 
-#: src/merge/timestamp_factory.cpp:61
+#: src/merge/timestamp_factory.cpp:62
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
 msgstr "時間戳記檔案 '{0}' 包含格式不支援/無法識別的一行。最靠前的一行必須類似於 '# timestamp format v1' 。\n"
 
-#: src/merge/timestamp_factory.cpp:97
+#: src/merge/timestamp_factory.cpp:98
 #, no-c-format
 msgid "JSON timestamp files must contain a JSON object with a 'version' key.\n"
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:120
+#: src/merge/timestamp_factory.cpp:121
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"
 msgstr "時間戳記檔案 '{0}' 包含不支援的/無法識別的格式 (版本 {1})。\n"
 
-#: src/merge/timestamp_factory.cpp:141
-#: src/merge/timestamp_factory.cpp:149
-#: src/merge/timestamp_factory.cpp:155
-#: src/merge/timestamp_factory.cpp:425
+#: src/merge/timestamp_factory.cpp:142
+#: src/merge/timestamp_factory.cpp:150
+#: src/merge/timestamp_factory.cpp:156
+#: src/merge/timestamp_factory.cpp:451
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"
 msgstr "時間戳記檔案 '{0}' 不含有效的 'Assume' 行（包含影格率的預設值）。\n"
 
-#: src/merge/timestamp_factory.cpp:168
-#: src/merge/timestamp_factory.cpp:471
+#: src/merge/timestamp_factory.cpp:169
+#: src/merge/timestamp_factory.cpp:493
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
 msgstr "無法解析時間戳記檔案 '{1}' 中的第 {0} 行。\n"
 
-#: src/merge/timestamp_factory.cpp:173
+#: src/merge/timestamp_factory.cpp:174
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
 msgstr "時間戳記檔案 '{1}' 中的第 {0} 行包含不相容的資料 (如起始影格數大於終止影格數，或者某些值小於零)。\n"
 
-#: src/merge/timestamp_factory.cpp:243
-#: src/merge/timestamp_factory.cpp:246
-#: src/merge/timestamp_factory.cpp:256
-#: src/merge/timestamp_factory.cpp:368
-#: src/merge/timestamp_factory.cpp:376
+#: src/merge/timestamp_factory.cpp:244
+#: src/merge/timestamp_factory.cpp:247
+#: src/merge/timestamp_factory.cpp:257
+#: src/merge/timestamp_factory.cpp:369
+#: src/merge/timestamp_factory.cpp:377
 #, fuzzy, no-c-format, c++-format
 msgid "The timestamp file '{0}' is invalid: {1}\n"
 msgstr "時間戳記檔案 '{0}' 不含任何有效專案。\n"
 
-#: src/merge/timestamp_factory.cpp:243
+#: src/merge/timestamp_factory.cpp:244
 #, fuzzy, no-c-format
 msgid "The 'assume' key must be set to the default number of frames per second."
 msgstr "時間戳記檔案 '{0}' 不含有效的 'Assume' 行（包含影格率的預設值）。\n"
 
-#: src/merge/timestamp_factory.cpp:246
+#: src/merge/timestamp_factory.cpp:247
 #, no-c-format
 msgid "The 'ranges' key must exist & be an array."
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:256
+#: src/merge/timestamp_factory.cpp:257
 #, no-c-format, c++-format
 msgid "The range number {0} must be an object with keys 'start', 'end' & 'fps'."
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:308
+#: src/merge/timestamp_factory.cpp:309
 #, no-c-format, c++-format
 msgid "The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"
 msgstr "時間戳記檔案 '{1}' 的第 {0} 行不包含有效的浮點數。\n"
 
-#: src/merge/timestamp_factory.cpp:311
+#: src/merge/timestamp_factory.cpp:312
 #, no-c-format, c++-format
 msgid ""
 "The timestamp v2 file '{0}' contains timestamps that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timestamp file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timestamps in the timestamp file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timestamp file with the first timestamps being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
@@ -8208,33 +8208,33 @@ msgstr ""
 "\n"
 "如果確實要指定未排序的時間戳記，請使用時間戳記格式 v4。它與格式 v2 完全一致，但允許未排序的時間戳記。\n"
 
-#: src/merge/timestamp_factory.cpp:331
-#: src/merge/timestamp_factory.cpp:489
+#: src/merge/timestamp_factory.cpp:332
+#: src/merge/timestamp_factory.cpp:512
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain any valid entry.\n"
 msgstr "時間戳記檔案 '{0}' 不含任何有效專案。\n"
 
-#: src/merge/timestamp_factory.cpp:368
+#: src/merge/timestamp_factory.cpp:369
 #, no-c-format
 msgid "The 'timestamps' key must exist & be an array."
 msgstr ""
 
-#: src/merge/timestamp_factory.cpp:376
+#: src/merge/timestamp_factory.cpp:377
 #, fuzzy, no-c-format, c++-format
 msgid "The timestamp number {0} must be an integer or floating point number."
 msgstr "時間戳記檔案 '{1}' 的第 {0} 行不包含有效的浮點數。\n"
 
-#: src/merge/timestamp_factory.cpp:388
+#: src/merge/timestamp_factory.cpp:389
 #, no-c-format, c++-format
 msgid "The number of external timestamps {0} is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "外部時間戳記數 {0} 小於此軌的影格數。此軌的其餘影格將可能不按想要的方式標記時間戳記。mkvmerge 甚至可能不正常關閉。\n"
 
-#: src/merge/timestamp_factory.cpp:460
+#: src/merge/timestamp_factory.cpp:486
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"
 msgstr "時間戳記檔案 '{0}' 不含有效的 'Gap' 行（包含間隙時間長度）。\n"
 
-#: src/merge/timestamp_factory.cpp:478
+#: src/merge/timestamp_factory.cpp:501
 #, no-c-format, c++-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
 msgstr "時間戳記檔案 '{1}' 中的第 {0} 行包含不相容的資料 (如時間長度 或 FPS 小於零)。\n"
@@ -8537,9 +8537,10 @@ msgstr "XML 章節檔"
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/tab.cpp:342
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tab.cpp:291
+#: src/mkvtoolnix-gui/merge/tab.cpp:354
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:105
 #: src/mkvtoolnix-gui/util/widget.cpp:187
@@ -8711,10 +8712,10 @@ msgstr "重新載入檔案(&R)"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:591
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:478
-#: src/mkvtoolnix-gui/merge/tab.cpp:504
-#: src/mkvtoolnix-gui/merge/tool.cpp:398
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:1099
+#: src/mkvtoolnix-gui/merge/tab.cpp:516
+#: src/mkvtoolnix-gui/merge/tool.cpp:463
+#: src/mkvtoolnix-gui/merge/tool.cpp:1085
+#: src/mkvtoolnix-gui/merge/tool.cpp:1219
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
@@ -9102,15 +9103,15 @@ msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & 
 msgstr "透過 \"章節編輯\" 功能表中的下方按鍵或將檔案拖曳到這裡以開啟新的檔案。"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:193
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:604
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:649
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
 #: src/mkvtoolnix-gui/forms/merge/tool.h:226
 #, no-c-format
 msgid "&New"
 msgstr "新增(&N)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:194
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:653
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
 msgid "&Open supported chapter file format"
 msgstr "開啟支援的章節檔案格式(&O)"
@@ -9194,8 +9195,8 @@ msgstr "透過 \"表頭編輯\" 功能表中的下方按鍵或將檔案拖曳到
 
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
 #: src/mkvtoolnix-gui/forms/info/tool.h:180
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:635
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:743
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:756
 #, no-c-format
 msgid "&Open Matroska or WebM file"
 msgstr "開啟 Matroska 或 WebM 檔案(&O)"
@@ -9465,119 +9466,119 @@ msgstr "下載(&D)"
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:606
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:651
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:619
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
 #, no-c-format
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:608
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:732
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:745
 #, no-c-format
 msgid "&Save settings"
 msgstr "儲存設定值(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:610
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:645
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:664
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:683
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:677
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:696
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:767
 #, no-c-format
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:612
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
 #: src/mkvtoolnix-gui/forms/merge/tool.h:227
 #, no-c-format
 msgid "&Open settings"
 msgstr "開啟設定值(&O)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:614
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:637
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:655
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:745
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:650
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:668
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:758
 #, no-c-format
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:616
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:629
 #, no-c-format
 msgid "Sa&ve settings as"
 msgstr "設定值另存新檔(&V)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:617
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:630
 #, no-c-format
 msgid "E&xit"
 msgstr "離開(&X)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:619
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:632
 #, no-c-format
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:621
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:733
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:746
 #, no-c-format
 msgid "Start &multiplexing"
 msgstr "開始合併(&M)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:623
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:710
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:636
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:723
 #, no-c-format
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:638
 #, no-c-format
 msgid "C&reate option file"
 msgstr "建立選項檔(&R)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:626
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
 #, no-c-format
 msgid "S&how command line"
 msgstr "顯示命令列(&H)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:627
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:640
 #, no-c-format
 msgid "&Copy command line to clipboard"
 msgstr "複製命令列至剪貼簿(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:628
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:734
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:747
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2329
 #, no-c-format
 msgid "Add to job &queue"
 msgstr "加入至作業佇列(&Q)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:629
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:642
 #, no-c-format
 msgid "&Preferences"
 msgstr "喜好設定(&P)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:631
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:644
 #, no-c-format
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:633
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:646
 #, no-c-format
 msgid "Check for &updates"
 msgstr "檢查更新(&U)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:634
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:647
 #, no-c-format
 msgid "&Code of Conduct"
 msgstr "管理辦法(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:677
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:685
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:727
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:729
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:735
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:747
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:652
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:740
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:742
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:744
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:748
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:133
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:91
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:102
@@ -9585,270 +9586,285 @@ msgstr "管理辦法(&C)"
 msgid "&Close"
 msgstr "關閉(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:679
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:749
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:654
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:673
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:692
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
 #, no-c-format
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:643
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:662
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:681
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:728
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:730
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:736
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:752
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:656
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:694
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:741
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:743
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:749
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:765
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:89
 #, no-c-format
 msgid "&Save"
 msgstr "儲存(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:647
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:668
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:681
 #, no-c-format
 msgid "&Reload"
 msgstr "重新載入(&R)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:648
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:661
 #, no-c-format
 msgid "&Validate values"
 msgstr "驗證值(&V)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:657
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
 #, no-c-format
 msgid "A&ppend chapters from supported file format"
 msgstr "從支援的檔案格式附加章節(&P)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:679
 #, no-c-format
 msgid "Save as &XML file"
 msgstr "另存為 &XML 檔"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:667
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:680
 #, no-c-format
 msgid "Save to &Matroska or WebM file"
 msgstr "儲存至 &Matroska 或 WebM 檔"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:669
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:682
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:442
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "合併工具(&M)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:670
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:683
 #, no-c-format
 msgid "&Extraction tool"
 msgstr "擷取工具(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:765
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:684
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:783
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:443
 #, no-c-format
 msgid "&Info tool"
 msgstr "資訊工具(&I)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:672
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:685
 #, no-c-format
 msgid "&Header editor"
 msgstr "表頭編輯(&H)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:673
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:686
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:445
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "章節編輯(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:674
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "&Job queue"
 msgstr "作業佇列(&J)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:675
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:688
 #, no-c-format
 msgid "Job &output"
 msgstr "作業輸出(&O)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:676
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:689
 #, no-c-format
 msgid "&Tag editor"
 msgstr "標籤編輯器(&T)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:689
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
 #, no-c-format
 msgid "MKVToolNix &web site"
 msgstr "MKVToolNix 網站(&W)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #, no-c-format
 msgid "Community && &help forum"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:691
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
 #, no-c-format
 msgid "&FAQ"
 msgstr "常見問題(&F)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:692
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:705
 #, no-c-format
 msgid "Known &problems in recent releases"
 msgstr "近期版本中的已知問題(&P)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:693
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
 #, no-c-format
 msgid "Report a &bug"
 msgstr "回報錯誤(&B)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:694
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:707
 #, no-c-format
 msgid "S&ystem information"
 msgstr "系統訊息(&Y)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:695
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:708
 #, no-c-format
 msgid "mkv&merge documentation"
 msgstr "mkvmerge 文件(&M)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:696
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:709
 #, no-c-format
 msgid "Remove &successfully completed jobs"
 msgstr "移除已成功完成的作業(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:711
 #, no-c-format
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:713
 #, no-c-format
 msgid "Remove a&ll jobs"
 msgstr "移除所有作業(&L)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:701
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:168
 #, no-c-format
 msgid "Acknowledge all &warnings"
 msgstr "確認所有警告(&W)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:715
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:169
 #, no-c-format
 msgid "Acknowledge all &errors"
 msgstr "確認所有錯誤(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:716
 #, no-c-format
 msgid "Acknowledge &all warnings and errors"
 msgstr "確認所有警告和錯誤(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:717
 #, no-c-format
 msgid "Remove &completed jobs"
 msgstr "移除完成的作業(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:719
 #, no-c-format
 msgid "Ctrl+Shift+L"
 msgstr "Ctrl+Shift+L"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:708
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
 msgid "Sta&rt all pending jobs"
 msgstr "開始所有待處理作業(&R)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:712
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:725
 #, no-c-format
 msgid "Stop &after all running jobs have finished"
 msgstr "所有正在執行的作業結束後停止(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:713
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:726
 #, no-c-format
 msgid "Abort all running jobs and stop &immediately"
 msgstr "中止所有正在執行的作業並立即停止佇列(&I)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:727
 #, no-c-format
 msgid "Copy &first source file's name to file title"
 msgstr "以第一個原始檔案的名稱用作檔案標題(&F)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:716
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:729
 #, no-c-format
 msgid "Ctrl+F"
 msgstr "Ctrl+F"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:718
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
 #, no-c-format
 msgid "Copy &destination file's name to file title"
 msgstr "以輸出檔案的名稱作為檔案標題(&D)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:720
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:733
 #, no-c-format
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:722
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:735
 #, no-c-format
 msgid "Copy file &title to destination file name"
 msgstr "以檔案標題為輸出的檔名(&T)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:724
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:737
 #, no-c-format
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:726
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:739
 #, no-c-format
 msgid "Remo&ve chapters from existing Matroska file"
 msgstr "從現有 Matroska 檔案移除章節(&V)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:738
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:751
 #, no-c-format
 msgid "Ctrl+F6"
 msgstr "Ctrl+F6"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:741
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
 #, no-c-format
 msgid "Ctrl+Shift+F6"
 msgstr "Ctrl+Shift+F6"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:751
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
 #, no-c-format
 msgid "Close &all tabs"
 msgstr "關閉全部標籤(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:756
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:769
 #, no-c-format
 msgid "Add files from clip&board"
 msgstr "從剪貼簿加入檔案(&B)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:757
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:759
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:761
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:770
+#, fuzzy, no-c-format
+msgid "Save all settings to single file"
+msgstr "設定值檔案另存新檔"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:772
+#, fuzzy, no-c-format
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+L"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:774
+#, fuzzy, no-c-format
+msgid "Save all settings to single file as"
+msgstr "設定值檔案另存新檔"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:775
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:777
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:779
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:780
 #, no-c-format
 msgid "Actions for &all tabs"
 msgstr "對所有標籤執行(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:758
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:776
 #, no-c-format
 msgid "Modif&y selected tracks"
 msgstr "修改選中的軌道(&Y)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:778
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 #, no-c-format
 msgid "Modif&y selected track"
 msgstr "修改選中的軌道(&Y)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:763
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:781
 #, no-c-format
 msgid "S&top job queue"
 msgstr "停止作業佇列(&T)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:764
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:782
 #, no-c-format
 msgid "&Window"
 msgstr "視窗(&W)"
@@ -11858,7 +11874,7 @@ msgstr "用新檔案取代附件，並沿用其名稱及 MIME 類型(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:394
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
-#: src/mkvtoolnix-gui/merge/tool.cpp:322
+#: src/mkvtoolnix-gui/merge/tool.cpp:330
 #, no-c-format
 msgid "Set &language"
 msgstr "設置語言(&L)"
@@ -15457,6 +15473,7 @@ msgstr "設定值檔案 '%1' 含有無效的設定值因此沒有載入。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:208
 #: src/mkvtoolnix-gui/merge/tab.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:569
 #, no-c-format
 msgid "The configuration has been saved."
 msgstr "此設定檔已儲存。"
@@ -15472,179 +15489,181 @@ msgid "The option file has been created."
 msgstr "選項檔已建立。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #, no-c-format
 msgid "Save settings file as"
 msgstr "設定值檔案另存新檔"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
+#: src/mkvtoolnix-gui/merge/tool.cpp:521
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix 圖形使用者介面設定檔"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:413
 #: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:437
 #, no-c-format
 msgid "Cannot start multiplexing"
 msgstr "無法開始合併"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:413
+#: src/mkvtoolnix-gui/merge/tab.cpp:425
 #, no-c-format
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
 msgstr "開始合併或加入作業到作業佇列中之前，必須設定輸出檔案名稱。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:437
 #, no-c-format
 msgid "The destination file name is invalid and must be fixed before you can start multiplexing or add a job to the job queue."
 msgstr "輸出的檔案名稱無效，必須要先修改，然後才能開始合併或將作業加入到作業佇列。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:499
+#: src/mkvtoolnix-gui/merge/tab.cpp:511
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "建立沒有聲音訊軌的檔案"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:501
+#: src/mkvtoolnix-gui/merge/tab.cpp:513
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr "使用目前的合併設定，輸出檔案並不會包含聲音軌。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:502
+#: src/mkvtoolnix-gui/merge/tab.cpp:514
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "是否要繼續?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:503
+#: src/mkvtoolnix-gui/merge/tab.cpp:515
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "建立沒有聲音訊軌的檔案(&C)"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:579
+#: src/mkvtoolnix-gui/merge/tab.cpp:591
 #, no-c-format
 msgid "Enter job description"
 msgstr "輸入作業描述"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:579
+#: src/mkvtoolnix-gui/merge/tab.cpp:591
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "請輸入新增作業的描述。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:595
+#: src/mkvtoolnix-gui/merge/tab.cpp:607
 #, no-c-format
 msgid "Adding the job to the queue failed"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:351
+#: src/mkvtoolnix-gui/merge/tool.cpp:359
 #, no-c-format
 msgid "Open settings file"
 msgstr "開啟設定檔"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:365
+#: src/mkvtoolnix-gui/merge/tool.cpp:379
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "作業已加入到作業佇列。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:395
+#: src/mkvtoolnix-gui/merge/tool.cpp:460
 #, no-c-format
 msgid "Close modified settings"
 msgstr "關閉已修改的設定"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:396
+#: src/mkvtoolnix-gui/merge/tool.cpp:461
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "已修改 multiplex 設定建立的 \"%1\" 。是否要關閉？所有變更將會遺失。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:397
+#: src/mkvtoolnix-gui/merge/tool.cpp:462
 #, no-c-format
 msgid "&Close settings"
 msgstr "關閉設定(&C)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:511
+#: src/mkvtoolnix-gui/merge/tool.cpp:631
 #, no-c-format
 msgid "mkvmerge command line"
 msgstr "mkvmerge 命令列"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:705
+#: src/mkvtoolnix-gui/merge/tool.cpp:825
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "下一個合併設定(&N)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:706
+#: src/mkvtoolnix-gui/merge/tool.cpp:826
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "上一個合併設定(&P)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:965
-#: src/mkvtoolnix-gui/merge/tool.cpp:966
+#: src/mkvtoolnix-gui/merge/tool.cpp:1085
+#: src/mkvtoolnix-gui/merge/tool.cpp:1086
 #, fuzzy, no-c-format
 msgid "Identifying files"
 msgstr "加入檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1002
+#: src/mkvtoolnix-gui/merge/tool.cpp:1122
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "加入章節檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1004
+#: src/mkvtoolnix-gui/merge/tool.cpp:1124
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "檔案 '%1' 包含章節。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1005
-#: src/mkvtoolnix-gui/merge/tool.cpp:1020
-#: src/mkvtoolnix-gui/merge/tool.cpp:1035
+#: src/mkvtoolnix-gui/merge/tool.cpp:1125
+#: src/mkvtoolnix-gui/merge/tool.cpp:1140
+#: src/mkvtoolnix-gui/merge/tool.cpp:1155
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "此類檔案在 MKVToolNix 中的處理方式與其他原始檔案不同。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1006
+#: src/mkvtoolnix-gui/merge/tool.cpp:1126
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "必須透過 '輸出' 標籤頁中的 '章節檔案' 選項來設定。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1007
-#: src/mkvtoolnix-gui/merge/tool.cpp:1022
-#: src/mkvtoolnix-gui/merge/tool.cpp:1037
+#: src/mkvtoolnix-gui/merge/tool.cpp:1127
+#: src/mkvtoolnix-gui/merge/tool.cpp:1142
+#: src/mkvtoolnix-gui/merge/tool.cpp:1157
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "程式會將此檔案的檔名填入相應控制項中，該處此前指定的檔名將會被取代。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1017
+#: src/mkvtoolnix-gui/merge/tool.cpp:1137
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "加入剪輯資訊檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1019
+#: src/mkvtoolnix-gui/merge/tool.cpp:1139
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "檔案 '%1' 包含剪輯資訊。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1021
+#: src/mkvtoolnix-gui/merge/tool.cpp:1141
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "這類檔案必須透過 '輸出' 標籤頁中的 '剪輯資訊' 選項來設定。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1032
+#: src/mkvtoolnix-gui/merge/tool.cpp:1152
 #, no-c-format
 msgid "Adding tag files"
 msgstr "加入標籤檔案"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1034
+#: src/mkvtoolnix-gui/merge/tool.cpp:1154
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "檔案 '%1' 包含標籤。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1036
+#: src/mkvtoolnix-gui/merge/tool.cpp:1156
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "必須透過 '輸出' 標籤頁中的 '全域標籤' 選項來設定。"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1052
+#: src/mkvtoolnix-gui/merge/tool.cpp:1172
 #, no-c-format
 msgid "&Continue identification"
 msgstr "繼續識別(&C)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:1099
-#: src/mkvtoolnix-gui/merge/tool.cpp:1104
+#: src/mkvtoolnix-gui/merge/tool.cpp:1219
+#: src/mkvtoolnix-gui/merge/tool.cpp:1224
 #, no-c-format
 msgid "Scanning directory"
 msgstr "掃描目錄中"
