@@ -653,52 +653,52 @@ PreferencesDialog::setupToolTips() {
 
 void
 PreferencesDialog::setupConnections() {
-  connect(ui->cbUseISO639_3Languages,                     &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::setupCommonLanguages);
+  connect(ui->cbUseISO639_3Languages,                      &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::setupCommonLanguages);
 
-  connect(ui->twGuiLanguageShortcuts,                     &QTreeWidget::itemSelectionChanged,                            this,                                 &PreferencesDialog::enableLanguageShortcutControls);
-  connect(ui->twGuiLanguageShortcuts,                     &QTreeWidget::itemDoubleClicked,                               this,                                 &PreferencesDialog::editLanguageShortcut);
-  connect(ui->pbGuiAddLanguageShortcut,                   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::addLanguageShortcut);
-  connect(ui->pbGuiEditLanguageShortcut,                  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editLanguageShortcut);
-  connect(ui->pbGuiRemoveLanguageShortcuts,               &QPushButton::clicked,                                         this,                                 &PreferencesDialog::removeLanguageShortcuts);
+  connect(ui->twGuiLanguageShortcuts,                      &QTreeWidget::itemSelectionChanged,                            this,                                 &PreferencesDialog::enableLanguageShortcutControls);
+  connect(ui->twGuiLanguageShortcuts,                      &QTreeWidget::itemDoubleClicked,                               this,                                 &PreferencesDialog::editLanguageShortcut);
+  connect(ui->pbGuiAddLanguageShortcut,                    &QPushButton::clicked,                                         this,                                 &PreferencesDialog::addLanguageShortcut);
+  connect(ui->pbGuiEditLanguageShortcut,                   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editLanguageShortcut);
+  connect(ui->pbGuiRemoveLanguageShortcuts,                &QPushButton::clicked,                                         this,                                 &PreferencesDialog::removeLanguageShortcuts);
 
-  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
+  connect(ui->pbMEditDefaultAdditionalCommandLineOptions,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
-  connect(ui->pbMBrowseMediaInfoExe,                      &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseMediaInfoExe);
-  connect(ui->cbMAutoSetDestinationFileName,              &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetDestinationSameDirectory,         &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetDestinationRelativeDirectory,     &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetDestinationPreviousDirectory,     &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetDestinationFixedDirectory,        &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->pbMAutoSetDestinationBrowseFixedDirectory,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
+  connect(ui->pbMBrowseMediaInfoExe,                       &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseMediaInfoExe);
+  connect(ui->cbMAutoSetDestinationFileName,               &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationSameDirectory,          &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationRelativeDirectory,      &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationPreviousDirectory,      &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationFixedDirectory,         &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->pbMAutoSetDestinationBrowseFixedDirectory,   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
-  connect(ui->pbMDeriveTrackLanguageRevertBoundaryChars,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars);
-  connect(ui->pbMDeriveCommentaryFlagRERevert,            &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveCommentaryFlagRE);
-  connect(ui->cbMDeriveCommentaryFlag,                    &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveCommentaryFlagControls);
-  connect(ui->pbMDeriveHearingImpairedFlagRERevert,       &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveHearingImpairedFlagRE);
-  connect(ui->cbMDeriveHearingImpairedFlag,               &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveHearingImpairedFlagControls);
-  connect(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, &QPushButton::clicked,                                        this,                                 &PreferencesDialog::revertDeriveForcedDisplayFlagSubtitlesRE);
-  connect(ui->cbMDeriveForcedDisplayFlagSubtitles,         &QCheckBox::toggled,                                          this,                                 &PreferencesDialog::enableDeriveForcedDisplayFlagSubtitlesControls);
-  connect(ui->cbMSetOriginalLanguageFlagLanguage,          &QCheckBox::toggled,                                          this,                                 &PreferencesDialog::enableSetOriginalLanguageFlagControls);
+  connect(ui->pbMDeriveTrackLanguageRevertBoundaryChars,   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars);
+  connect(ui->pbMDeriveCommentaryFlagRERevert,             &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveCommentaryFlagRE);
+  connect(ui->cbMDeriveCommentaryFlag,                     &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveCommentaryFlagControls);
+  connect(ui->pbMDeriveHearingImpairedFlagRERevert,        &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveHearingImpairedFlagRE);
+  connect(ui->cbMDeriveHearingImpairedFlag,                &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveHearingImpairedFlagControls);
+  connect(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveForcedDisplayFlagSubtitlesRE);
+  connect(ui->cbMDeriveForcedDisplayFlagSubtitles,         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveForcedDisplayFlagSubtitlesControls);
+  connect(ui->cbMSetOriginalLanguageFlagLanguage,          &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableSetOriginalLanguageFlagControls);
 
-  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
-  connect(ui->cbGuiRemoveJobsOnExit,                      &QCheckBox::toggled,                                           ui->cbGuiJobRemovalOnExitPolicy,      &QComboBox::setEnabled);
-  connect(ui->cbGuiRemoveOldJobs,                         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
-  connect(ui->sbGuiRemoveOldJobsDays,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
+  connect(ui->cbGuiRemoveJobs,                             &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
+  connect(ui->cbGuiRemoveJobsOnExit,                       &QCheckBox::toggled,                                           ui->cbGuiJobRemovalOnExitPolicy,      &QComboBox::setEnabled);
+  connect(ui->cbGuiRemoveOldJobs,                          &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
+  connect(ui->sbGuiRemoveOldJobsDays,                      static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
 
-  connect(ui->sbMMinPlaylistDuration,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustPlaylistControls);
+  connect(ui->sbMMinPlaylistDuration,                      static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustPlaylistControls);
 
-  connect(ui->buttons,                                    &QDialogButtonBox::accepted,                                   this,                                 &PreferencesDialog::accept);
-  connect(ui->buttons,                                    &QDialogButtonBox::rejected,                                   this,                                 &PreferencesDialog::reject);
+  connect(ui->buttons,                                     &QDialogButtonBox::accepted,                                   this,                                 &PreferencesDialog::accept);
+  connect(ui->buttons,                                     &QDialogButtonBox::rejected,                                   this,                                 &PreferencesDialog::reject);
 
-  connect(ui->tbOftenUsedLanguages,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedLanguagesOnly);
-  connect(ui->tbOftenUsedRegions,                         &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedRegionsOnly);
-  connect(ui->tbOftenUsedCharacterSets,                   &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCharacterSetsOnly);
+  connect(ui->tbOftenUsedLanguages,                        &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedLanguagesOnly);
+  connect(ui->tbOftenUsedRegions,                          &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedRegionsOnly);
+  connect(ui->tbOftenUsedCharacterSets,                    &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCharacterSetsOnly);
 }
 
 void
