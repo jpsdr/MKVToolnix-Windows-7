@@ -127,6 +127,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
 
   setupDeriveForcedDisplayFlagSubtitles();
   setupDeriveHearingImpairedFlag();
+  setupDeriveCommentaryFlag();
   setupFileColorsControls();
   setupProcessPriority();
   setupPlaylistScanningPolicy();
@@ -531,6 +532,14 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->pbMDeriveHearingImpairedFlagRERevert, QY("Revert the entry to its default value."));
 
   text = Q("<p>%1 %2</p>")
+    .arg(QYH("Audio and subtitle files often contain the words 'comments' or 'commentary' in their file name to signal that they contain content such as a movie director's comments."))
+    .arg(QYH("The GUI can set the 'commentary' flag for such tracks if the file name matches this regular expression."));
+
+  Util::setToolTip(ui->cbMDeriveCommentaryFlag,   text);
+  Util::setToolTip(ui->leMDeriveCommentaryFlagRE, text);
+  Util::setToolTip(ui->pbMDeriveCommentaryFlagRERevert, QY("Revert the entry to its default value."));
+
+  text = Q("<p>%1 %2</p>")
     .arg(QYH("Subtitle files often contain the word 'forced' in their file name to signal that they're intended for 'forced display' only (e.g. when they speak Elfish in 'Lord of the Rings')."))
     .arg(QYH("The GUI can set the 'forced display' flag for such tracks if the file name matches this regular expression."));
 
@@ -662,6 +671,8 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
   connect(ui->pbMDeriveTrackLanguageRevertBoundaryChars,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars);
+  connect(ui->pbMDeriveCommentaryFlagRERevert,            &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveCommentaryFlagRE);
+  connect(ui->cbMDeriveCommentaryFlag,                    &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveCommentaryFlagControls);
   connect(ui->pbMDeriveHearingImpairedFlagRERevert,       &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveHearingImpairedFlagRE);
   connect(ui->cbMDeriveHearingImpairedFlag,               &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveHearingImpairedFlagControls);
   connect(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, &QPushButton::clicked,                                        this,                                 &PreferencesDialog::revertDeriveForcedDisplayFlagSubtitlesRE);
@@ -988,6 +999,14 @@ PreferencesDialog::setupDefaultCommandLineEscapeMode() {
 }
 
 void
+PreferencesDialog::setupDeriveCommentaryFlag() {
+  ui->cbMDeriveCommentaryFlag->setChecked(m_cfg.m_deriveCommentaryFlagFromFileNames);
+  ui->leMDeriveCommentaryFlagRE->setText(m_cfg.m_regexForDerivingCommentaryFlagFromFileNames);
+
+  enableDeriveCommentaryFlagControls();
+}
+
+void
 PreferencesDialog::setupDeriveHearingImpairedFlag() {
   ui->cbMDeriveHearingImpairedFlag->setChecked(m_cfg.m_deriveHearingImpairedFlagFromFileNames);
   ui->leMDeriveHearingImpairedFlagRE->setText(m_cfg.m_regexForDerivingHearingImpairedFlagFromFileNames);
@@ -1001,6 +1020,14 @@ PreferencesDialog::setupDeriveForcedDisplayFlagSubtitles() {
   ui->leMDeriveForcedDisplayFlagSubtitlesRE->setText(m_cfg.m_regexForDerivingSubtitlesForcedFlagFromFileNames);
 
   enableDeriveForcedDisplayFlagSubtitlesControls();
+}
+
+void
+PreferencesDialog::enableDeriveCommentaryFlagControls() {
+  auto enable = ui->cbMDeriveCommentaryFlag->isChecked();
+
+  ui->leMDeriveCommentaryFlagRE->setEnabled(enable);
+  ui->pbMDeriveCommentaryFlagRERevert->setEnabled(enable);
 }
 
 void
@@ -1256,6 +1283,8 @@ PreferencesDialog::save() {
   m_cfg.m_defaultVideoTrackLanguage                           = ui->ldwMDefaultVideoTrackLanguage->language();
   m_cfg.m_defaultSubtitleTrackLanguage                        = ui->ldwMDefaultSubtitleTrackLanguage->language();
   m_cfg.m_whenToSetDefaultLanguage                            = static_cast<Util::Settings::SetDefaultLanguagePolicy>(ui->cbMWhenToSetDefaultLanguage->currentData().toInt());
+  m_cfg.m_deriveCommentaryFlagFromFileNames                   = ui->cbMDeriveCommentaryFlag->isChecked();
+  m_cfg.m_regexForDerivingCommentaryFlagFromFileNames         = ui->leMDeriveCommentaryFlagRE->text();
   m_cfg.m_deriveHearingImpairedFlagFromFileNames              = ui->cbMDeriveHearingImpairedFlag->isChecked();
   m_cfg.m_regexForDerivingHearingImpairedFlagFromFileNames    = ui->leMDeriveHearingImpairedFlagRE->text();
   m_cfg.m_deriveSubtitlesForcedFlagFromFileNames              = ui->cbMDeriveForcedDisplayFlagSubtitles->isChecked();
@@ -1488,6 +1517,11 @@ PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars() {
 }
 
 void
+PreferencesDialog::revertDeriveCommentaryFlagRE() {
+  ui->leMDeriveCommentaryFlagRE->setText(Util::Settings::defaultRegexForDerivingCommentaryFlagFromFileName());
+}
+
+void
 PreferencesDialog::revertDeriveHearingImpairedFlagRE() {
   ui->leMDeriveHearingImpairedFlagRE->setText(Util::Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName());
 }
@@ -1526,6 +1560,22 @@ PreferencesDialog::verifyDeriveTrackLanguageSettings() {
   }
 
   return true;
+}
+
+bool
+PreferencesDialog::verifyDeriveCommentaryFlagSettings() {
+  auto reText = ui->leMDeriveCommentaryFlagRE->text();
+  QRegularExpression re{reText, QRegularExpression::CaseInsensitiveOption};
+
+  if (!reText.isEmpty() && re.isValid())
+    return true;
+
+  Util::MessageBox::critical(this)
+    ->title(QY("Invalid settings"))
+    .text(QY("The value for deriving the 'commentary' flag from file names must be a valid regular expression."))
+    .exec();
+
+  return false;
 }
 
 bool
@@ -1590,6 +1640,7 @@ PreferencesDialog::verifyRunProgramConfigurations() {
 void
 PreferencesDialog::accept() {
   if (   verifyDeriveTrackLanguageSettings()
+      && verifyDeriveCommentaryFlagSettings()
       && verifyDeriveHearingImpairedFlagSettings()
       && verifyDeriveForcedDisplayFlagSettings()
       && verifyRunProgramConfigurations()) {

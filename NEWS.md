@@ -5,6 +5,11 @@
 * MKVToolNix GUI: multiplexer: added actions in the "Multiplexer" menu for
   saving all currently open multiplexer tabs to a single `.mtxcfg`
   file. Loading this file later will restore all tabs. Implements #3797.
+* MKVToolNix GUI: multiplexer: when adding files the GUI can automatically
+  enable the "commentary" flag for audio and subtitle tracks if the file name
+  contains the word "comments" or "commentary" delimited by certain characters
+  (configurable). This feature is turned on by default. Part of the
+  implementation of #3798.
 
 ## Bug fixes
 

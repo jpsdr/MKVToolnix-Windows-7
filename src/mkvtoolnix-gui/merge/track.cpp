@@ -223,6 +223,19 @@ Track::setDefaultsMuxThis() {
 }
 
 void
+Track::setDefaultsCommentaryFlag() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_deriveCommentaryFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  QRegularExpression re{settings.m_regexForDerivingCommentaryFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
+
+  if (re.isValid() && m_file->m_fileName.contains(re))
+    m_commentaryFlag = 1;
+}
+
+void
 Track::setDefaultsHearingImpairedFlag() {
   auto &settings = Util::Settings::get();
 
@@ -322,6 +335,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsBasics();
   setDefaultsLanguage(languageDerivedFromFileName);
   setDefaultsForcedDisplayFlag();
+  setDefaultsCommentaryFlag();
   setDefaultsHearingImpairedFlag();
   setDefaultsMuxThis();
   setDefaultsDisplayDimensions();

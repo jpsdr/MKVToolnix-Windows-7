@@ -1325,6 +1325,16 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_12">
+             <item row="3" column="1">
+              <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
@@ -1342,37 +1352,20 @@
                </item>
               </layout>
              </item>
-             <item row="2" column="0">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
+               <property name="text">
+                <string>Derive &quot;&amp;hearing impaired&quot; flag for audio/subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Default subtitle &amp;charset to set:</string>
                </property>
                <property name="buddy">
                 <cstring>cbMDefaultSubtitleCharset</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="cbMDeriveForcedDisplayFlagSubtitles">
-               <property name="text">
-                <string>Derive &quot;forced display&quot; fla&amp;g for subtitles from file names:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
-               <property name="text">
-                <string>Derive &quot;&amp;hearing impaired&quot; flag for audio/subtitles from file names:</string>
                </property>
               </widget>
              </item>
@@ -1383,6 +1376,37 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pbMDeriveHearingImpairedFlagRERevert">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="edit-undo"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cbMDeriveForcedDisplayFlagSubtitles">
+               <property name="text">
+                <string>Derive &quot;forced display&quot; fla&amp;g for subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="cbMDeriveCommentaryFlag">
+               <property name="text">
+                <string>Derive &quot;commentar&amp;y&quot; flag for audio/subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <item>
+                <widget class="QLineEdit" name="leMDeriveCommentaryFlagRE"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMDeriveCommentaryFlagRERevert">
                  <property name="text">
                   <string notr="true"/>
                  </property>
@@ -2825,6 +2849,9 @@
   <tabstop>cbMDeriveHearingImpairedFlag</tabstop>
   <tabstop>leMDeriveHearingImpairedFlagRE</tabstop>
   <tabstop>pbMDeriveHearingImpairedFlagRERevert</tabstop>
+  <tabstop>cbMDeriveCommentaryFlag</tabstop>
+  <tabstop>leMDeriveCommentaryFlagRE</tabstop>
+  <tabstop>pbMDeriveCommentaryFlagRERevert</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>
