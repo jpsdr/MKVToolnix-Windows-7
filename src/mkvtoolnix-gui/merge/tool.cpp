@@ -24,6 +24,7 @@
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/file_identification_pack.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/select_disc_library_information_dialog.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -368,6 +369,12 @@ Tool::openConfigFile(QString const &fileName) {
     cfg.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   });
 
+  if (openMultipleConfigFilesFromConfigFile(fileName)) {
+    auto &p = *p_func();
+    p.m_singleConfigFileName = fileName;
+    return;
+  }
+
   if (MainWindow::jobTool()->addJobFile(fileName)) {
     MainWindow::get()->setStatusBarMessage(QY("The job has been added to the job queue."));
     return;
@@ -378,6 +385,57 @@ Tool::openConfigFile(QString const &fileName) {
     tab->deleteLater();
 
   appendNewTab()->load(fileName);
+}
+
+bool
+Tool::openMultipleConfigFilesFromConfigFile(QString const &fileName) {
+  if (Util::ConfigFile::determineType(fileName) == Util::ConfigFile::UnknownType)
+    return false;
+
+  auto configFile = Util::ConfigFile::open(fileName);
+  if (!configFile)
+    return false;
+
+  configFile->beginGroup(App::settingsBaseGroupName());
+  auto version = configFile->value("version", std::numeric_limits<unsigned int>::max()).toUInt();
+  auto type    = configFile->value("type").toString();
+  configFile->endGroup();
+
+  if ((type != MuxConfig::settingsTypeMulti()) || (version > Util::ConfigFile::MtxCfgVersion))
+    return false;
+
+  configFile->beginGroup("configurations");
+
+  auto groups = configFile->childGroups();
+
+  if (groups.isEmpty())
+    return true;
+
+  auto tab = currentTab();
+  if (tab && tab->isEmpty())
+    tab->deleteLater();
+
+  groups.sort();
+
+  for (auto const &group : groups) {
+    configFile->beginGroup(group);
+
+    MuxConfig muxConfig;
+
+    try {
+      muxConfig.load(*configFile);
+
+      openFromConfig(muxConfig);
+
+    } catch (InvalidSettingsX const &) {
+    }
+
+    configFile->endGroup();
+  }
+
+  configFile->endGroup();
+
+  return true;
 }
 
 void
