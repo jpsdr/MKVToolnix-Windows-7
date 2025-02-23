@@ -262,6 +262,17 @@ Track::setDefaultsForcedDisplayFlag() {
 }
 
 void
+Track::setDefaultsOriginalLanguageFlag() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_defaultSetOriginalLanguageFlagLanguage.is_valid() || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  if (m_language.matches(settings.m_defaultSetOriginalLanguageFlagLanguage))
+    m_originalFlag = 1;
+}
+
+void
 Track::setDefaultsBasics() {
   auto &settings = Util::Settings::get();
 
@@ -337,6 +348,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsForcedDisplayFlag();
   setDefaultsCommentaryFlag();
   setDefaultsHearingImpairedFlag();
+  setDefaultsOriginalLanguageFlag();
   setDefaultsMuxThis();
   setDefaultsDisplayDimensions();
   setDefaultsColor();

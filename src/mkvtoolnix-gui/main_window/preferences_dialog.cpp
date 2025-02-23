@@ -10,6 +10,7 @@
 #include <QTabWidget>
 #include <QVector>
 
+#include "common/bcp47.h"
 #include "common/chapters/chapters.h"
 #include "common/qt.h"
 #include "common/translation.h"
@@ -128,6 +129,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupDeriveForcedDisplayFlagSubtitles();
   setupDeriveHearingImpairedFlag();
   setupDeriveCommentaryFlag();
+  setupSetOriginalLanguageFlag();
   setupFileColorsControls();
   setupProcessPriority();
   setupPlaylistScanningPolicy();
@@ -539,6 +541,11 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->leMDeriveCommentaryFlagRE, text);
   Util::setToolTip(ui->pbMDeriveCommentaryFlagRERevert, QY("Revert the entry to its default value."));
 
+  text = QYH("The GUI can set the 'original language' flag audio and subtitle tracks if the track's language matches this language.");
+
+  Util::setToolTip(ui->cbMSetOriginalLanguageFlagLanguage, text);
+  Util::setToolTip(ui->ldwMSetOriginalLanguageFlagLanguage, text);
+
   text = Q("<p>%1 %2</p>")
     .arg(QYH("Subtitle files often contain the word 'forced' in their file name to signal that they're intended for 'forced display' only (e.g. when they speak Elfish in 'Lord of the Rings')."))
     .arg(QYH("The GUI can set the 'forced display' flag for such tracks if the file name matches this regular expression."));
@@ -677,6 +684,7 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbMDeriveHearingImpairedFlag,               &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveHearingImpairedFlagControls);
   connect(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, &QPushButton::clicked,                                        this,                                 &PreferencesDialog::revertDeriveForcedDisplayFlagSubtitlesRE);
   connect(ui->cbMDeriveForcedDisplayFlagSubtitles,         &QCheckBox::toggled,                                          this,                                 &PreferencesDialog::enableDeriveForcedDisplayFlagSubtitlesControls);
+  connect(ui->cbMSetOriginalLanguageFlagLanguage,          &QCheckBox::toggled,                                          this,                                 &PreferencesDialog::enableSetOriginalLanguageFlagControls);
 
   connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbGuiRemoveJobsOnExit,                      &QCheckBox::toggled,                                           ui->cbGuiJobRemovalOnExitPolicy,      &QComboBox::setEnabled);
@@ -1023,6 +1031,14 @@ PreferencesDialog::setupDeriveForcedDisplayFlagSubtitles() {
 }
 
 void
+PreferencesDialog::setupSetOriginalLanguageFlag() {
+  ui->cbMSetOriginalLanguageFlagLanguage->setChecked(m_cfg.m_defaultSetOriginalLanguageFlagLanguage.is_valid());
+  ui->ldwMSetOriginalLanguageFlagLanguage->setLanguage(m_cfg.m_defaultSetOriginalLanguageFlagLanguage);
+
+  enableSetOriginalLanguageFlagControls();
+}
+
+void
 PreferencesDialog::enableDeriveCommentaryFlagControls() {
   auto enable = ui->cbMDeriveCommentaryFlag->isChecked();
 
@@ -1044,6 +1060,13 @@ PreferencesDialog::enableDeriveForcedDisplayFlagSubtitlesControls() {
 
   ui->leMDeriveForcedDisplayFlagSubtitlesRE->setEnabled(enable);
   ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert->setEnabled(enable);
+}
+
+void
+PreferencesDialog::enableSetOriginalLanguageFlagControls() {
+  auto enable = ui->cbMSetOriginalLanguageFlagLanguage->isChecked();
+
+  ui->ldwMSetOriginalLanguageFlagLanguage->setEnabled(enable);
 }
 
 void
@@ -1289,6 +1312,7 @@ PreferencesDialog::save() {
   m_cfg.m_regexForDerivingHearingImpairedFlagFromFileNames    = ui->leMDeriveHearingImpairedFlagRE->text();
   m_cfg.m_deriveSubtitlesForcedFlagFromFileNames              = ui->cbMDeriveForcedDisplayFlagSubtitles->isChecked();
   m_cfg.m_regexForDerivingSubtitlesForcedFlagFromFileNames    = ui->leMDeriveForcedDisplayFlagSubtitlesRE->text();
+  m_cfg.m_defaultSetOriginalLanguageFlagLanguage              = ui->cbMSetOriginalLanguageFlagLanguage->isChecked() ? ui->ldwMSetOriginalLanguageFlagLanguage->language() : mtx::bcp47::language_c{};
   m_cfg.m_defaultSubtitleCharset                              = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                                            = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
   m_cfg.m_defaultAdditionalMergeOptions                       = ui->leMDefaultAdditionalCommandLineOptions->text();

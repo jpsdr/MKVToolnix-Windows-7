@@ -10,6 +10,10 @@
   contains the word "comments" or "commentary" delimited by certain characters
   (configurable). This feature is turned on by default. Part of the
   implementation of #3798.
+* MKVToolNix GUI: multiplexer: when adding files the GUI can automatically
+  enable the "original language" flag for audio and subtitle tracks if the
+  track's language matches one configured by the user (configurable). This
+  feature is turned off by default. Part of the implementation of #3798.
 
 ## Bug fixes
 

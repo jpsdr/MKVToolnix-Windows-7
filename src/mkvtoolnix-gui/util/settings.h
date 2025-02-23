@@ -187,7 +187,7 @@ public:
   unsigned int m_numRecentlyUsedStringsToRemember;
   LanguageShortcutList m_languageShortcuts;
   bool m_useLegacyFontMIMETypes;
-  mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage;
+  mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage, m_defaultSetOriginalLanguageFlagLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
   QString m_boundaryCharsForDerivingTrackLanguagesFromFileNames;

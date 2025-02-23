@@ -1313,7 +1313,24 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_12">
-             <item row="3" column="1">
+             <item row="2" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <item>
+                <widget class="QLineEdit" name="leMDeriveCommentaryFlagRE"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMDeriveCommentaryFlagRERevert">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="edit-undo"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="1">
               <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1340,14 +1357,7 @@
                </item>
               </layout>
              </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
-               <property name="text">
-                <string>Derive &quot;&amp;hearing impaired&quot; flag for audio/subtitles from file names:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Default subtitle &amp;charset to set:</string>
@@ -1388,22 +1398,35 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_19">
-               <item>
-                <widget class="QLineEdit" name="leMDeriveCommentaryFlagRE"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pbMDeriveCommentaryFlagRERevert">
-                 <property name="text">
-                  <string notr="true"/>
-                 </property>
-                 <property name="icon">
-                  <iconset theme="edit-undo"/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
+               <property name="text">
+                <string>Derive &quot;&amp;hearing impaired&quot; flag for audio/subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMSetOriginalLanguageFlagLanguage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="cbMSetOriginalLanguageFlagLanguage">
+               <property name="text">
+                <string>Set &quot;original language&quot; flag for audio/subtitles for language:</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -1500,7 +1523,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>15</height>
+            <height>46</height>
            </size>
           </property>
          </spacer>
@@ -2840,6 +2863,8 @@
   <tabstop>cbMDeriveCommentaryFlag</tabstop>
   <tabstop>leMDeriveCommentaryFlagRE</tabstop>
   <tabstop>pbMDeriveCommentaryFlagRERevert</tabstop>
+  <tabstop>cbMSetOriginalLanguageFlagLanguage</tabstop>
+  <tabstop>ldwMSetOriginalLanguageFlagLanguage</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>

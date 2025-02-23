@@ -85,6 +85,7 @@ public Q_SLOTS:
   void enableDeriveCommentaryFlagControls();
   void enableDeriveHearingImpairedFlagControls();
   void enableDeriveForcedDisplayFlagSubtitlesControls();
+  void enableSetOriginalLanguageFlagControls();
   void setupCommonLanguages(bool withISO639_3);
 
   void setupLanguageShortcuts();
@@ -121,6 +122,7 @@ protected:
   void setupDeriveForcedDisplayFlagSubtitles();
   void setupDeriveCommentaryFlag();
   void setupDeriveHearingImpairedFlag();
+  void setupSetOriginalLanguageFlag();
   void setupWhenToSetDefaultLanguage();
   void setupJobRemovalPolicy();
   void setupCommonRegions();

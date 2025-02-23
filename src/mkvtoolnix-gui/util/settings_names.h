@@ -42,6 +42,7 @@ char const * const s_valDefaultDeriveSubtitlesForcedFlagFromFileNames           
 char const * const s_valDefaultRegexForDerivingCommentaryFlagFromFileNames      = "defaultRegexForDerivingCommentaryFlagFromFileNames";
 char const * const s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames = "defaultRegexForDerivingHearingImpairedFlagFromFileNames";
 char const * const s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames = "defaultRegexForDerivingSubtitlesForcedFlagFromFileNames";
+char const * const s_valDefaultSetOriginalLanguageFlagLanguage                  = "defaultSetOriginalLanguageFlagLanguage";
 char const * const s_valDefaultSubtitleCharset                                  = "defaultSubtitleCharset";
 char const * const s_valDefaultSubtitleTrackLanguage                            = "defaultSubtitleTrackLanguage";
 char const * const s_valDefaultTrackLanguage                                    = "defaultTrackLanguage";
