@@ -128,6 +128,7 @@ public:
   static void loadProperties(Util::ConfigFile &settings, QVariantMap &properties);
   static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
   static QString settingsType();
+  static QString settingsTypeMulti();
   static QString determineFirstInputFileName(QVector<SourceFilePtr> const &files);
   static QString formatDelayAndStretchBy(QString const &delay, QString const &stretchBy);
 };

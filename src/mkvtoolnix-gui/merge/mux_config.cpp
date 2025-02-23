@@ -846,6 +846,11 @@ MuxConfig::settingsType() {
   return Q("MuxConfig");
 }
 
+QString
+MuxConfig::settingsTypeMulti() {
+  return Q("MuxConfigMulti");
+}
+
 bool
 MuxConfig::needChapterNameTemplateAndLanguage()
   const {

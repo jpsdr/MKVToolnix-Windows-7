@@ -51,8 +51,10 @@ public Q_SLOTS:
   virtual bool closeAllTabs();
 
   virtual void saveConfig();
-  virtual void saveAllConfigs();
   virtual void saveConfigAs();
+  virtual void saveAllConfigs();
+  virtual void saveAllConfigsToSingle();
+  virtual void saveAllConfigsToSingleAs();
   virtual void saveOptionFile();
   virtual void startMuxing();
   virtual void startMuxingAll();
