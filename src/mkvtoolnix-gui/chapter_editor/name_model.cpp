@@ -142,7 +142,7 @@ NameModel::reset() {
 
   removeRows(0, rowCount());
 
-  m_displayRegistry.empty();
+  m_displayRegistry.clear();
   m_nextDisplayRegistryIdx = 0;
   m_chapter                = nullptr;
 
@@ -154,7 +154,7 @@ NameModel::populate(libmatroska::KaxChapterAtom &chapter) {
   beginResetModel();
 
   removeRows(0, rowCount());
-  m_displayRegistry.empty();
+  m_displayRegistry.clear();
   m_nextDisplayRegistryIdx = 0;
   m_chapter                = &chapter;
 
