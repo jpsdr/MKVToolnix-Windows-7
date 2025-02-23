@@ -17,7 +17,7 @@
    <item>
     <widget class="QSplitter" name="pagesSplitter">
      <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
      <property name="childrenCollapsible">
       <bool>false</bool>
@@ -36,7 +36,7 @@
        </size>
       </property>
       <property name="editTriggers">
-       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+       <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="iconSize">
        <size>
@@ -45,7 +45,7 @@
        </size>
       </property>
       <property name="textElideMode">
-       <enum>Qt::TextElideMode::ElideNone</enum>
+       <enum>Qt::ElideNone</enum>
       </property>
       <property name="headerHidden">
        <bool>true</bool>
@@ -314,7 +314,7 @@
         <item>
          <spacer name="verticalSpacer_2">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -353,7 +353,7 @@
             <item>
              <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedLanguages" native="true">
               <property name="focusPolicy">
-               <enum>Qt::FocusPolicy::StrongFocus</enum>
+               <enum>Qt::StrongFocus</enum>
               </property>
              </widget>
             </item>
@@ -374,7 +374,7 @@
             <item>
              <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedRegions" native="true">
               <property name="focusPolicy">
-               <enum>Qt::FocusPolicy::StrongFocus</enum>
+               <enum>Qt::StrongFocus</enum>
               </property>
              </widget>
             </item>
@@ -395,7 +395,7 @@
             <item>
              <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbOftenUsedCharacterSets" native="true">
               <property name="focusPolicy">
-               <enum>Qt::FocusPolicy::StrongFocus</enum>
+               <enum>Qt::StrongFocus</enum>
               </property>
              </widget>
             </item>
@@ -491,16 +491,16 @@
               <bool>true</bool>
              </property>
              <property name="dragDropMode">
-              <enum>QAbstractItemView::DragDropMode::InternalMove</enum>
+              <enum>QAbstractItemView::InternalMove</enum>
              </property>
              <property name="defaultDropAction">
-              <enum>Qt::DropAction::MoveAction</enum>
+              <enum>Qt::MoveAction</enum>
              </property>
              <property name="selectionMode">
-              <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+              <enum>QAbstractItemView::ExtendedSelection</enum>
              </property>
              <property name="selectionBehavior">
-              <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+              <enum>QAbstractItemView::SelectRows</enum>
              </property>
              <property name="rootIsDecorated">
               <bool>false</bool>
@@ -570,7 +570,7 @@
              <item>
               <spacer name="verticalSpacer_3">
                <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
+                <enum>Qt::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -870,7 +870,7 @@
         <item>
          <spacer name="verticalSpacer_12">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -930,10 +930,10 @@
              <item>
               <spacer name="horizontalSpacer_8">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Policy::Fixed</enum>
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1009,19 +1009,19 @@
                 </size>
                </property>
                <property name="editTriggers">
-                <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                <set>QAbstractItemView::NoEditTriggers</set>
                </property>
                <property name="dragEnabled">
                 <bool>true</bool>
                </property>
                <property name="dragDropMode">
-                <enum>QAbstractItemView::DragDropMode::InternalMove</enum>
+                <enum>QAbstractItemView::InternalMove</enum>
                </property>
                <property name="defaultDropAction">
-                <enum>Qt::DropAction::MoveAction</enum>
+                <enum>Qt::MoveAction</enum>
                </property>
                <property name="selectionMode">
-                <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+                <enum>QAbstractItemView::ExtendedSelection</enum>
                </property>
               </widget>
              </item>
@@ -1060,10 +1060,10 @@
                <item>
                 <spacer name="verticalSpacer">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
+                  <enum>Qt::Vertical</enum>
                  </property>
                  <property name="sizeType">
-                  <enum>QSizePolicy::Policy::Fixed</enum>
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1089,10 +1089,10 @@
                <item>
                 <spacer name="verticalSpacer_7">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
+                  <enum>Qt::Vertical</enum>
                  </property>
                  <property name="sizeType">
-                  <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+                  <enum>QSizePolicy::MinimumExpanding</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1107,7 +1107,7 @@
              <item>
               <spacer name="horizontalSpacer_11">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1125,7 +1125,7 @@
         <item>
          <spacer name="verticalSpacer_13">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -1223,18 +1223,6 @@
       </widget>
       <widget class="QWidget" name="pMergeDefaultsForTracks">
        <layout class="QVBoxLayout" name="verticalLayout_23">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
         <item>
          <widget class="QGroupBox" name="groupBox_11">
           <property name="title">
@@ -1507,7 +1495,7 @@
         <item>
          <spacer name="verticalSpacer_8">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -1642,7 +1630,7 @@
            <item>
             <widget class="mtx::gui::Util::SideBySideMultiSelect" name="tbMDeriveTrackLanguageRecognizedLanguages" native="true">
              <property name="focusPolicy">
-              <enum>Qt::FocusPolicy::StrongFocus</enum>
+              <enum>Qt::StrongFocus</enum>
              </property>
             </widget>
            </item>
@@ -1731,10 +1719,10 @@
                 <item>
                  <spacer name="horizontalSpacer_4">
                   <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
+                   <enum>Qt::Horizontal</enum>
                   </property>
                   <property name="sizeType">
-                   <enum>QSizePolicy::Policy::Fixed</enum>
+                   <enum>QSizePolicy::Fixed</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1765,10 +1753,10 @@
                 <item>
                  <spacer name="horizontalSpacer_3">
                   <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
+                   <enum>Qt::Horizontal</enum>
                   </property>
                   <property name="sizeType">
-                   <enum>QSizePolicy::Policy::Fixed</enum>
+                   <enum>QSizePolicy::Fixed</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1878,7 +1866,7 @@
               </size>
              </property>
              <property name="focusPolicy">
-              <enum>Qt::FocusPolicy::StrongFocus</enum>
+              <enum>Qt::StrongFocus</enum>
              </property>
             </widget>
            </item>
@@ -1913,7 +1901,7 @@
               </size>
              </property>
              <property name="focusPolicy">
-              <enum>Qt::FocusPolicy::StrongFocus</enum>
+              <enum>Qt::StrongFocus</enum>
              </property>
             </widget>
            </item>
@@ -1938,10 +1926,10 @@
              <item>
               <spacer name="horizontalSpacer">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Policy::Fixed</enum>
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1961,10 +1949,10 @@
              <item>
               <spacer name="horizontalSpacer_9">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Policy::Fixed</enum>
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1984,10 +1972,10 @@
              <item>
               <spacer name="horizontalSpacer_10">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Policy::Fixed</enum>
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -2007,7 +1995,7 @@
              <item>
               <spacer name="horizontalSpacer_2">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -2154,7 +2142,7 @@
         <item>
          <spacer name="verticalSpacer_6">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -2189,7 +2177,7 @@
            <item>
             <widget class="mtx::gui::Info::JobSettingsWidget" name="wIDefaultJobSettings" native="true">
              <property name="focusPolicy">
-              <enum>Qt::FocusPolicy::StrongFocus</enum>
+              <enum>Qt::StrongFocus</enum>
              </property>
             </widget>
            </item>
@@ -2199,7 +2187,7 @@
         <item>
          <spacer name="verticalSpacer_11">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -2268,7 +2256,7 @@
         <item>
          <spacer name="verticalSpacer_10">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -2386,7 +2374,7 @@
         <item>
          <spacer name="verticalSpacer_4">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -2552,7 +2540,7 @@
         <item>
          <spacer name="verticalSpacer_5">
           <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -2589,7 +2577,7 @@
              <item>
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -2612,7 +2600,7 @@
              <item>
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -2655,7 +2643,7 @@
                  <item>
                   <spacer name="horizontalSpacer_7">
                    <property name="orientation">
-                    <enum>Qt::Orientation::Horizontal</enum>
+                    <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -2670,7 +2658,7 @@
                <item>
                 <spacer name="verticalSpacer_9">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
+                  <enum>Qt::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -2724,10 +2712,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttons">
      <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
