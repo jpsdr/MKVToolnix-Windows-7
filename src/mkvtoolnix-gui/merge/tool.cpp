@@ -24,12 +24,14 @@
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/file_identification_pack.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/select_disc_library_information_dialog.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
@@ -112,6 +114,8 @@ class ToolPrivate {
 
   QHash<Tab *, int> lastAddAppendFileNum;
 
+  QString m_singleConfigFileName;
+
   mtx::gui::Util::ModifyTracksSubmenu modifyTracksSubmenu;
 
   ToolPrivate(QWidget *p_parent, QMenu *p_mergeMenu);
@@ -193,6 +197,8 @@ Tool::setupActions() {
   connect(mwUi->actionMergeSave,                      &QAction::triggered,                                 this, &Tool::saveConfig);
   connect(mwUi->actionMergeSaveAll,                   &QAction::triggered,                                 this, &Tool::saveAllConfigs);
   connect(mwUi->actionMergeSaveAs,                    &QAction::triggered,                                 this, &Tool::saveConfigAs);
+  connect(mwUi->actionMergeSaveAllSingle,             &QAction::triggered,                                 this, &Tool::saveAllConfigsToSingle);
+  connect(mwUi->actionMergeSaveAllSingleAs,           &QAction::triggered,                                 this, &Tool::saveAllConfigsToSingleAs);
   connect(mwUi->actionMergeSaveOptionFile,            &QAction::triggered,                                 this, &Tool::saveOptionFile);
   connect(mwUi->actionMergeStartMuxing,               &QAction::triggered,                                 this, &Tool::startMuxing);
   connect(mwUi->actionMergeStartMuxingAll,            &QAction::triggered,                                 this, &Tool::startMuxingAll);
@@ -263,6 +269,8 @@ Tool::enableMenuActions() {
   mwUi->actionMergeOpen->setEnabled(!identifying);
   mwUi->actionMergeSave->setEnabled(!identifying && hasTab);
   mwUi->actionMergeSaveAs->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAllSingle->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAllSingleAs->setEnabled(!identifying && hasTab);
   mwUi->actionMergeSaveOptionFile->setEnabled(!identifying && hasTab);
   mwUi->actionMergeClose->setEnabled(!identifying && hasTab);
   mwUi->actionMergeStartMuxing->setEnabled(!identifying && hasTab);
@@ -361,6 +369,12 @@ Tool::openConfigFile(QString const &fileName) {
     cfg.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   });
 
+  if (openMultipleConfigFilesFromConfigFile(fileName)) {
+    auto &p = *p_func();
+    p.m_singleConfigFileName = fileName;
+    return;
+  }
+
   if (MainWindow::jobTool()->addJobFile(fileName)) {
     MainWindow::get()->setStatusBarMessage(QY("The job has been added to the job queue."));
     return;
@@ -371,6 +385,57 @@ Tool::openConfigFile(QString const &fileName) {
     tab->deleteLater();
 
   appendNewTab()->load(fileName);
+}
+
+bool
+Tool::openMultipleConfigFilesFromConfigFile(QString const &fileName) {
+  if (Util::ConfigFile::determineType(fileName) == Util::ConfigFile::UnknownType)
+    return false;
+
+  auto configFile = Util::ConfigFile::open(fileName);
+  if (!configFile)
+    return false;
+
+  configFile->beginGroup(App::settingsBaseGroupName());
+  auto version = configFile->value("version", std::numeric_limits<unsigned int>::max()).toUInt();
+  auto type    = configFile->value("type").toString();
+  configFile->endGroup();
+
+  if ((type != MuxConfig::settingsTypeMulti()) || (version > Util::ConfigFile::MtxCfgVersion))
+    return false;
+
+  configFile->beginGroup("configurations");
+
+  auto groups = configFile->childGroups();
+
+  if (groups.isEmpty())
+    return true;
+
+  auto tab = currentTab();
+  if (tab && tab->isEmpty())
+    tab->deleteLater();
+
+  groups.sort();
+
+  for (auto const &group : groups) {
+    configFile->beginGroup(group);
+
+    MuxConfig muxConfig;
+
+    try {
+      muxConfig.load(*configFile);
+
+      openFromConfig(muxConfig);
+
+    } catch (InvalidSettingsX const &) {
+    }
+
+    configFile->endGroup();
+  }
+
+  configFile->endGroup();
+
+  return true;
 }
 
 void
@@ -447,6 +512,61 @@ Tool::saveConfig() {
 void
 Tool::saveAllConfigs() {
   forEachTab([](Tab &tab) { tab.onSaveConfig(); });
+}
+
+void
+Tool::saveAllConfigsToSingleAs() {
+  auto &p        = *p_func();
+  auto &settings = Util::Settings::get();
+  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), Q(".mtxcfg"), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
+  if (fileName.isEmpty())
+    return;
+
+  settings.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
+  qDebug() << "LCD" << settings.m_lastConfigDir;
+  settings.save();
+
+  p.m_singleConfigFileName = fileName;
+
+  saveAllConfigsToSingle();
+}
+
+void
+Tool::saveAllConfigsToSingle() {
+  auto &p = *p_func();
+
+  if (p.m_singleConfigFileName.isEmpty()) {
+    saveAllConfigsToSingleAs();
+    return;
+  }
+
+  QFile::remove(p.m_singleConfigFileName);
+  auto configFile = Util::ConfigFile::create(p.m_singleConfigFileName);
+
+  configFile->beginGroup(App::settingsBaseGroupName());
+  configFile->setValue("version", Util::ConfigFile::MtxCfgVersion);
+  configFile->setValue("type",    MuxConfig::settingsTypeMulti());
+  configFile->endGroup();
+
+  configFile->beginGroup("configurations");
+
+  auto configurationCounter = 0;
+
+  forEachTab([&configFile, &configurationCounter](Tab &tab) {
+    ++configurationCounter;
+
+    configFile->beginGroup(Q(fmt::format("{0:04d}", configurationCounter)));
+
+    tab.saveConfigTo(*configFile);
+
+    configFile->endGroup();
+  });
+
+  configFile->endGroup();
+
+  configFile->save();
+
+  MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
 
 void

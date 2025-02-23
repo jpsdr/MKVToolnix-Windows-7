@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: added actions in the "Multiplexer" menu for
+  saving all currently open multiplexer tabs to a single `.mtxcfg`
+  file. Loading this file later will restore all tabs. Implements #3797.
+
 ## Bug fixes
 
 * mkvmerge: timestamps format v3: fixed the parser; it was completely broken

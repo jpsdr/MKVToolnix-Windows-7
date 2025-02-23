@@ -121,6 +121,9 @@
     <addaction name="actionMergeSaveAs"/>
     <addaction name="actionMergeSaveOptionFile"/>
     <addaction name="separator"/>
+    <addaction name="actionMergeSaveAllSingle"/>
+    <addaction name="actionMergeSaveAllSingleAs"/>
+    <addaction name="separator"/>
     <addaction name="actionMergeClose"/>
     <addaction name="separator"/>
     <addaction name="actionMergeStartMuxing"/>
@@ -933,6 +936,25 @@
   <action name="actionDbgMergeInputSetupVerticalTabWidgetInputLayout">
    <property name="text">
     <string notr="true">Input: setup&amp;VerticalTabWidgetInputLayout</string>
+   </property>
+  </action>
+  <action name="actionMergeSaveAllSingle">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+   </property>
+   <property name="text">
+    <string>Save all settings to single file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionMergeSaveAllSingleAs">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+   </property>
+   <property name="text">
+    <string>Save all settings to single file as</string>
    </property>
   </action>
  </widget>

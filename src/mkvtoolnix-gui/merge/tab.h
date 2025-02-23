@@ -50,6 +50,7 @@ public:
 
   virtual QString const &fileName() const;
   virtual QString title() const;
+  virtual void saveConfigTo(Util::ConfigFile &configFile);
   virtual void load(QString const &fileName);
   virtual void cloneConfig(MuxConfig const &config);
 

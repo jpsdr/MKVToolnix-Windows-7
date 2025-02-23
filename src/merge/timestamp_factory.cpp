@@ -421,7 +421,7 @@ std::optional<timestamp_duration_c>
 timestamp_factory_v3_c::parse_normal_line(std::string const &line) {
   auto parts = mtx::string::split(line, ",");
 
-  if (!mtx::included_in(parts.size(), 1, 2))
+  if (!mtx::included_in(parts.size(), 1u, 2u))
     return {};
 
   timestamp_duration_c t;
