@@ -541,7 +541,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->leMDeriveCommentaryFlagRE, text);
   Util::setToolTip(ui->pbMDeriveCommentaryFlagRERevert, QY("Revert the entry to its default value."));
 
-  text = QYH("The GUI can set the 'original language' flag audio and subtitle tracks if the track's language matches this language.");
+  text = QYH("The GUI can set the 'original language' flag for audio and subtitle tracks if the track's language matches this language.");
 
   Util::setToolTip(ui->cbMSetOriginalLanguageFlagLanguage, text);
   Util::setToolTip(ui->ldwMSetOriginalLanguageFlagLanguage, text);
