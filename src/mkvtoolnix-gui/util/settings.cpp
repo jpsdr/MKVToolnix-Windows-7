@@ -718,8 +718,11 @@ Settings::loadDefaults(QSettings &reg) {
   m_defaultSubtitleTrackLanguage                     = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString()));
   m_whenToSetDefaultLanguage                         = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
   m_defaultChapterLanguage                           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
+  m_defaultSetOriginalLanguageFlagLanguage           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSetOriginalLanguageFlagLanguage).toString()));
   m_defaultSubtitleCharset                           = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions                    = reg.value(s_valDefaultAdditionalMergeOptions).toString();
+  m_deriveCommentaryFlagFromFileNames                = reg.value(s_valDefaultDeriveCommentaryFlagFromFileNames,                           true).toBool();
+  m_regexForDerivingCommentaryFlagFromFileNames      = reg.value(s_valDefaultRegexForDerivingCommentaryFlagFromFileNames,                 defaultRegexForDerivingCommentaryFlagFromFileName()).toString();
   m_deriveHearingImpairedFlagFromFileNames           = reg.value(s_valDefaultDeriveHearingImpairedFlagFromFileNames,                      true).toBool();
   m_regexForDerivingHearingImpairedFlagFromFileNames = reg.value(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames,            defaultRegexForDerivingHearingImpairedFlagFromFileName()).toString();
   m_deriveSubtitlesForcedFlagFromFileNames           = reg.value(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames,                      true).toBool();
@@ -1085,8 +1088,11 @@ Settings::saveDefaults(QSettings &reg)
   reg.setValue(s_valDefaultSubtitleTrackLanguage,                            Q(m_defaultSubtitleTrackLanguage.format()));
   reg.setValue(s_valWhenToSetDefaultLanguage,                                static_cast<int>(m_whenToSetDefaultLanguage));
   reg.setValue(s_valDefaultChapterLanguage,                                  Q(m_defaultChapterLanguage.format()));
+  reg.setValue(s_valDefaultSetOriginalLanguageFlagLanguage,                  Q(m_defaultSetOriginalLanguageFlagLanguage.format()));
   reg.setValue(s_valDefaultSubtitleCharset,                                  m_defaultSubtitleCharset);
   reg.setValue(s_valDefaultAdditionalMergeOptions,                           m_defaultAdditionalMergeOptions);
+  reg.setValue(s_valDefaultDeriveCommentaryFlagFromFileNames,                m_deriveCommentaryFlagFromFileNames);
+  reg.setValue(s_valDefaultRegexForDerivingCommentaryFlagFromFileNames,      m_regexForDerivingCommentaryFlagFromFileNames);
   reg.setValue(s_valDefaultDeriveHearingImpairedFlagFromFileNames,           m_deriveHearingImpairedFlagFromFileNames);
   reg.setValue(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames, m_regexForDerivingHearingImpairedFlagFromFileNames);
   reg.setValue(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames,           m_deriveSubtitlesForcedFlagFromFileNames);
@@ -1398,6 +1404,11 @@ Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName() {
 QString
 Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName() {
   return Q("[[\\](){}.+=#-]forced[[\\](){}.+=#-]");
+}
+
+QString
+Settings::defaultRegexForDerivingCommentaryFlagFromFileName() {
+  return Q("[[\\](){} .+=#-](comments|commentary)[[\\](){} .+=#-]");
 }
 
 QVector<QColor>
