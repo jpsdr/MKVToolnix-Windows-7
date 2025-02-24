@@ -224,6 +224,19 @@ Track::setDefaultsMuxThis() {
 }
 
 void
+Track::setDefaultsCommentaryFlag() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_deriveCommentaryFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  QRegularExpression re{settings.m_regexForDerivingCommentaryFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
+
+  if (re.isValid() && m_file->m_fileName.contains(re))
+    m_commentaryFlag = 1;
+}
+
+void
 Track::setDefaultsHearingImpairedFlag() {
   auto &settings = Util::Settings::get();
 
@@ -247,6 +260,17 @@ Track::setDefaultsForcedDisplayFlag() {
 
   if (re.isValid() && m_file->m_fileName.contains(re))
     m_forcedTrackFlag = 1;
+}
+
+void
+Track::setDefaultsOriginalLanguageFlag() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_defaultSetOriginalLanguageFlagLanguage.is_valid() || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  if (m_language.matches(settings.m_defaultSetOriginalLanguageFlagLanguage))
+    m_originalFlag = 1;
 }
 
 void
@@ -323,7 +347,9 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsBasics();
   setDefaultsLanguage(languageDerivedFromFileName);
   setDefaultsForcedDisplayFlag();
+  setDefaultsCommentaryFlag();
   setDefaultsHearingImpairedFlag();
+  setDefaultsOriginalLanguageFlag();
   setDefaultsMuxThis();
   setDefaultsDisplayDimensions();
   setDefaultsColor();

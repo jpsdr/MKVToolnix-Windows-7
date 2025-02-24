@@ -36,10 +36,13 @@ char const * const s_valCommandLine                                             
 char const * const s_valDefaultAdditionalMergeOptions                           = "defaultAdditionalMergeOptions";
 char const * const s_valDefaultAudioTrackLanguage                               = "defaultAudioTrackLanguage";
 char const * const s_valDefaultChapterLanguage                                  = "defaultChapterLanguage";
+char const * const s_valDefaultDeriveCommentaryFlagFromFileNames                = "defaultDeriveCommentaryFlagFromFileNames";
 char const * const s_valDefaultDeriveHearingImpairedFlagFromFileNames           = "defaultDeriveHearingImpairedFlagFromFileNames";
 char const * const s_valDefaultDeriveSubtitlesForcedFlagFromFileNames           = "defaultDeriveSubtitlesForcedFlagFromFileNames";
+char const * const s_valDefaultRegexForDerivingCommentaryFlagFromFileNames      = "defaultRegexForDerivingCommentaryFlagFromFileNames";
 char const * const s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames = "defaultRegexForDerivingHearingImpairedFlagFromFileNames";
 char const * const s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames = "defaultRegexForDerivingSubtitlesForcedFlagFromFileNames";
+char const * const s_valDefaultSetOriginalLanguageFlagLanguage                  = "defaultSetOriginalLanguageFlagLanguage";
 char const * const s_valDefaultSubtitleCharset                                  = "defaultSubtitleCharset";
 char const * const s_valDefaultSubtitleTrackLanguage                            = "defaultSubtitleTrackLanguage";
 char const * const s_valDefaultTrackLanguage                                    = "defaultTrackLanguage";

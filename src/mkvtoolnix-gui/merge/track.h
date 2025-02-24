@@ -93,7 +93,9 @@ protected:
   void setDefaultsBasics();
   void setDefaultsMuxThis();
   void setDefaultsForcedDisplayFlag();
+  void setDefaultsCommentaryFlag();
   void setDefaultsHearingImpairedFlag();
+  void setDefaultsOriginalLanguageFlag();
   void setDefaultsDisplayDimensions();
   void setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName);
   void setDefaultsColor();
