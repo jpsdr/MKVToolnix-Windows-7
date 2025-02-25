@@ -37,6 +37,7 @@ char const * const s_valDefaultAdditionalMergeOptions                           
 char const * const s_valDefaultAudioTrackLanguage                               = "defaultAudioTrackLanguage";
 char const * const s_valDefaultChapterLanguage                                  = "defaultChapterLanguage";
 char const * const s_valDefaultDeriveCommentaryFlagFromFileNames                = "defaultDeriveCommentaryFlagFromFileNames";
+char const * const s_valDefaultDeriveFlagsFromTrackNames                        = "defaultDeriveFlagsFromTrackNames";
 char const * const s_valDefaultDeriveHearingImpairedFlagFromFileNames           = "defaultDeriveHearingImpairedFlagFromFileNames";
 char const * const s_valDefaultDeriveSubtitlesForcedFlagFromFileNames           = "defaultDeriveSubtitlesForcedFlagFromFileNames";
 char const * const s_valDefaultRegexForDerivingCommentaryFlagFromFileNames      = "defaultRegexForDerivingCommentaryFlagFromFileNames";

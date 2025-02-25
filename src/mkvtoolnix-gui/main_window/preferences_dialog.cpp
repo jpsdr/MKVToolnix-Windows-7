@@ -125,6 +125,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
   ui->cbMAddBlurayCovers->setChecked(m_cfg.m_mergeAddBlurayCovers);
   ui->cbMAttachmentAlwaysSkipForExistingName->setChecked(m_cfg.m_mergeAttachmentsAlwaysSkipForExistingName);
+  ui->cbMDeriveFlagsFromTrackNames->setChecked(m_cfg.m_deriveFlagsFromTrackNames);
 
   setupDeriveForcedDisplayFlagSubtitles();
   setupDeriveHearingImpairedFlag();
@@ -553,6 +554,8 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMDeriveForcedDisplayFlagSubtitles,   text);
   Util::setToolTip(ui->leMDeriveForcedDisplayFlagSubtitlesRE, text);
   Util::setToolTip(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, QY("Revert the entry to its default value."));
+
+  Util::setToolTip(ui->cbMDeriveFlagsFromTrackNames, QYH("If enabled, the flags mentioned above will be derived from track names as well, not just from file names."));
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
@@ -1312,6 +1315,7 @@ PreferencesDialog::save() {
   m_cfg.m_regexForDerivingHearingImpairedFlagFromFileNames    = ui->leMDeriveHearingImpairedFlagRE->text();
   m_cfg.m_deriveSubtitlesForcedFlagFromFileNames              = ui->cbMDeriveForcedDisplayFlagSubtitles->isChecked();
   m_cfg.m_regexForDerivingSubtitlesForcedFlagFromFileNames    = ui->leMDeriveForcedDisplayFlagSubtitlesRE->text();
+  m_cfg.m_deriveFlagsFromTrackNames                           = ui->cbMDeriveFlagsFromTrackNames->isChecked();
   m_cfg.m_defaultSetOriginalLanguageFlagLanguage              = ui->cbMSetOriginalLanguageFlagLanguage->isChecked() ? ui->ldwMSetOriginalLanguageFlagLanguage->language() : mtx::bcp47::language_c{};
   m_cfg.m_defaultSubtitleCharset                              = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                                            = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
