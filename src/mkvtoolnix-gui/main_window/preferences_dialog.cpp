@@ -104,6 +104,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   if (!m_cfg.m_mediaInfoExe.isEmpty())
     ui->leMMediaInfoExe->setText(QDir::toNativeSeparators(m_cfg.m_mediaInfoExe));
   ui->cbMEnsureAtLeastOneTrackEnabled->setChecked(m_cfg.m_mergeEnsureAtLeastOneTrackEnabled);
+  ui->cbMShowDNDZones->setChecked(m_cfg.m_mergeShowDNDZones);
   ui->cbMSortFilesTracksByTypeWhenAdding->setChecked(m_cfg.m_mergeSortFilesTracksByTypeWhenAdding);
   ui->cbMReconstructSequencesWhenAdding->setChecked(m_cfg.m_mergeReconstructSequencesWhenAdding);
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
@@ -439,6 +440,13 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("If enabled, the destination file name controls will always be visible no matter which tab is currently shown."))
                    .arg(QY("Otherwise they're shown on the 'output' tab.")));
+
+  Util::setToolTip(ui->cbMShowDNDZones,
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
+                   .arg(QYH("When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."))
+                   .arg(QYH("Normally the program will chose what to do with the dropped files based on the preferences, e.g. always add them to the current multiplex settings or ask the user interactively what to do."))
+                   .arg(QYH("If enabled, zones will be shown that files can be dropped on to circumvent the preferences."))
+                   .arg(QYH("Each zone corresponds to and selects one of the possible actions.")));
 
   auto controls = QWidgetList{} << ui->rbMTrackPropertiesLayoutHorizontalScrollArea << ui->rbMTrackPropertiesLayoutHorizontalTwoColumns << ui->rbMTrackPropertiesLayoutVerticalTabWidget;
   for (auto const &control : controls)
@@ -1297,6 +1305,7 @@ PreferencesDialog::save() {
   m_cfg.m_mergeDragAndDropFilesPolicy                         = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMDragAndDropFilesPolicy->currentData().toInt());
   m_cfg.m_mergeDragAndDropDirectoriesPolicy                   = static_cast<Util::Settings::MergeAddingDirectoriesPolicy>(ui->cbMDragAndDropDirectoriesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles           = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
+  m_cfg.m_mergeShowDNDZones                                   = ui->cbMShowDNDZones->isChecked();
   m_cfg.m_mergeSortFilesTracksByTypeWhenAdding                = ui->cbMSortFilesTracksByTypeWhenAdding->isChecked();
   m_cfg.m_mergeReconstructSequencesWhenAdding                 = ui->cbMReconstructSequencesWhenAdding->isChecked();
   m_cfg.m_mergeAlwaysShowOutputFileControls                   = ui->cbMAlwaysShowOutputFileControls->isChecked();

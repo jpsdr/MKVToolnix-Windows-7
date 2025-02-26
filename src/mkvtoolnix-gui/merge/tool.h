@@ -10,6 +10,7 @@
 class QDragEnterEvent;
 class QDragMoveEvent;
 class QDropEvent;
+class QEvent;
 class QMenu;
 
 namespace mtx::gui::Merge {
@@ -37,6 +38,8 @@ public:
   virtual void openFromConfig(MuxConfig const &config);
 
   virtual void addMergeTabIfNoneOpen();
+
+  virtual bool eventFilter(QObject *watched, QEvent *event) override;
 
 public Q_SLOTS:
   virtual void applyPreferences();
@@ -71,12 +74,12 @@ public Q_SLOTS:
   virtual void toolShown() override;
   virtual void tabTitleChanged();
 
-  virtual void identifyMultipleFiles(QStringList const &fileNamesToIdentify, Qt::MouseButtons mouseButtons);
+  virtual void identifyMultipleFiles(QStringList const &fileNamesToIdentify, Qt::MouseButtons mouseButtons, std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> forcedDecision = std::nullopt);
   virtual void handleIdentifiedFiles(IdentificationPack pack);
   virtual void handleIdentifiedNonSourceFiles(IdentificationPack &pack);
   virtual void handleIdentifiedSourceFiles(IdentificationPack &sourceFiles);
 
-  virtual void handleExternallyAddedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
+  virtual void handleExternallyAddedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons, std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> forcedDecision = std::nullopt);
   virtual void handleFilesFromCommandLine(QStringList const &fileNames);
 
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
@@ -112,7 +115,7 @@ protected:
   virtual void showMergeWidget();
 
   virtual std::optional<Util::Settings::MergeAddingDirectoriesPolicy> determineAddingDirectoriesPolicy();
-  virtual void addFileIdentificationPack(QStringList const &fileNames, IdentificationPack::AddMode addMode, Qt::MouseButtons mouseButtons);
+  virtual void addFileIdentificationPack(QStringList const &fileNames, IdentificationPack::AddMode addMode, Qt::MouseButtons mouseButtons, std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> forcedDecision = std::nullopt);
   virtual QStringList fileNamesFromClipboard() const;
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
@@ -120,6 +123,8 @@ protected:
   virtual void dropEvent(QDropEvent *event) override;
 
   virtual void retrieveDiscInformationForPlaylists(QVector<SourceFilePtr> &sourceFiles);
+
+  virtual std::optional<bool> filterEventsForSourceFilesDNDZones(QObject *watched, QEvent *event);
 
 public:
   static FileIdentificationWorker &identifier();

@@ -12,6 +12,7 @@
 
 #include "common/bluray/util.h"
 #include "common/fs_sys_helpers.h"
+#include "common/list_utils.h"
 #include "common/path.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
@@ -114,7 +115,7 @@ class ToolPrivate {
 
   QHash<Tab *, int> lastAddAppendFileNum;
 
-  QString m_singleConfigFileName;
+  QString m_singleConfigFileName, m_dndHoverStyleSheet;
 
   mtx::gui::Util::ModifyTracksSubmenu modifyTracksSubmenu;
 
@@ -157,6 +158,14 @@ Tool::~Tool() {
 void
 Tool::setupUi() {
   auto &p = *p_func();
+
+  auto color             = MainWindow::get()->palette().window().color();
+  color                  = (color.red() + color.green() + color.blue()) > (128 * 3) ? color.darker(105) : color.lighter(105);
+  p.m_dndHoverStyleSheet = Q("QWidget { background-color: rgb(%1, %2, %3) }").arg(color.red()).arg(color.green()).arg(color.blue());
+
+  p.ui->wDNDFilesAllCurrent->installEventFilter(this);
+  p.ui->wDNDFilesAllOneNew->installEventFilter(this);
+  p.ui->wDNDFilesOneNewPerFile->installEventFilter(this);
 
   setupModifySelectedTracksMenu();
 
@@ -302,6 +311,7 @@ Tool::showMergeWidget() {
   auto &p = *p_func();
 
   p.ui->stack->setCurrentWidget(p.ui->merges->count() ? p.ui->mergesPage : p.ui->noMergesPage);
+  p.ui->wDNDFilesAllCurrent->setEnabled(p.ui->merges->count() > 0);
   enableMenuActions();
   enableCopyMenuActions();
 }
@@ -328,6 +338,12 @@ Tool::retranslateUi() {
   }
 
   p.languageShortcutsMenu->setTitle(QY("Set &language"));
+
+  p.ui->gbDragAndDrop->setHidden(!Util::Settings::get().m_mergeShowDNDZones);
+
+  Util::setToolTip(p.ui->wDNDFilesAllCurrent,    QY("Drag & drop files here to add all of them to the current multiplex settings."));
+  Util::setToolTip(p.ui->wDNDFilesAllOneNew,     QY("Drag & drop files here to create a new multiplex settings tab & add all files there."));
+  Util::setToolTip(p.ui->wDNDFilesOneNewPerFile, QY("Drag & drop files here to create a new multiplex settings tab per dropped file & add one file to each new tab."));
 }
 
 Tab *
@@ -691,7 +707,8 @@ Tool::dropEvent(QDropEvent *event) {
 
 void
 Tool::handleExternallyAddedFiles(QStringList const &fileNames,
-                                 Qt::MouseButtons mouseButtons) {
+                                 Qt::MouseButtons mouseButtons,
+                                 std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> forcedDecision) {
   if (fileNames.isEmpty())
     return;
 
@@ -709,7 +726,7 @@ Tool::handleExternallyAddedFiles(QStringList const &fileNames,
       mediaFiles << fileName;
 
   if (!mediaFiles.isEmpty())
-    identifyMultipleFiles(mediaFiles, mouseButtons);
+    identifyMultipleFiles(mediaFiles, mouseButtons, forcedDecision);
 }
 
 void
@@ -888,6 +905,12 @@ void
 Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
   auto &p = *p_func();
 
+  qDebug() << "handling identified source files with forced decision"
+           << (  !pack.m_forcedDecision                                                              ? "---"
+               : *pack.m_forcedDecision == Util::Settings::MergeAddingAppendingFilesPolicy::Add      ? "add"
+               : *pack.m_forcedDecision == Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew ? "add-to-new"
+               :                                                                                       "add-each-to-new");
+
   auto identifiedSourceFiles = pack.sourceFiles();
 
   if (identifiedSourceFiles.isEmpty())
@@ -911,7 +934,7 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
 
   auto isDragAndDrop                        = pack.m_addMode == IdentificationPack::AddMode::UserChoice;
   auto &policySetting                       = isDragAndDrop ? settings.m_mergeDragAndDropFilesPolicy : settings.m_mergeAddingAppendingFilesPolicy;
-  auto decision                             = policySetting;
+  auto decision                             = pack.m_forcedDecision.value_or(policySetting);
   auto fileModelIdx                         = QModelIndex{};
   auto alwaysCreateNewSettingsForVideoFiles = settings.m_mergeAlwaysCreateNewSettingsForVideoFiles;
 
@@ -1012,17 +1035,19 @@ Tool::determineAddingDirectoriesPolicy() {
 void
 Tool::addFileIdentificationPack(QStringList const &fileNames,
                                 IdentificationPack::AddMode addMode,
-                                Qt::MouseButtons mouseButtons) {
+                                Qt::MouseButtons mouseButtons,
+                                std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> forcedDecision) {
   auto &p = *p_func();
 
   if (fileNames.isEmpty())
     return;
 
   IdentificationPack pack;
-  pack.m_tabId        = reinterpret_cast<uint64_t>(currentTab());
-  pack.m_fileNames    = fileNames;
-  pack.m_addMode      = addMode;
-  pack.m_mouseButtons = mouseButtons;
+  pack.m_tabId          = reinterpret_cast<uint64_t>(currentTab());
+  pack.m_fileNames      = fileNames;
+  pack.m_addMode        = addMode;
+  pack.m_mouseButtons   = mouseButtons;
+  pack.m_forcedDecision = forcedDecision;
 
   qDebug() << "tabId" << pack.m_tabId << pack.m_fileNames;
 
@@ -1031,14 +1056,15 @@ Tool::addFileIdentificationPack(QStringList const &fileNames,
 
 void
 Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
-                            Qt::MouseButtons mouseButtons) {
+                            Qt::MouseButtons mouseButtons,
+                            std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> forcedDecision) {
   auto resolvedDirs = resolveDirectoriesToContainedFilesAndDirectories(fileNamesToIdentify);
 
   if (resolvedDirs.m_files.isEmpty() && resolvedDirs.m_directories.isEmpty())
     return;
 
   if (resolvedDirs.m_directories.isEmpty()) {
-    addFileIdentificationPack(resolvedDirs.m_files, IdentificationPack::AddMode::UserChoice, mouseButtons);
+    addFileIdentificationPack(resolvedDirs.m_files, IdentificationPack::AddMode::UserChoice, mouseButtons, forcedDecision);
     return;
   }
 
@@ -1062,12 +1088,12 @@ Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
   if (!currentTab())
     appendNewTab();
 
-  addFileIdentificationPack(resolvedDirs.m_files, IdentificationPack::AddMode::UserChoice, mouseButtons);
+  addFileIdentificationPack(resolvedDirs.m_files, IdentificationPack::AddMode::UserChoice, mouseButtons, forcedDecision);
 
   // Util::Settings::MergeAddingDirectoriesPolicy::AddEachDirectoryToNew
   for (auto const &dir : resolvedDirs.m_directories) {
     appendNewTab();
-    addFileIdentificationPack(dir.second, IdentificationPack::AddMode::AddDontAsk, mouseButtons);
+    addFileIdentificationPack(dir.second, IdentificationPack::AddMode::AddDontAsk, mouseButtons, forcedDecision);
   }
 }
 
@@ -1292,6 +1318,62 @@ Tool::changeTrackLanguage(QString const &formattedLanguage,
 
   if (tab)
     tab->changeTrackLanguage(formattedLanguage, trackName);
+}
+
+std::optional<bool>
+Tool::filterEventsForSourceFilesDNDZones(QObject *watched,
+                                         QEvent *event) {
+  auto &p = *p_func();
+
+  if (!mtx::included_in(watched, p.ui->wDNDFilesAllCurrent, p.ui->wDNDFilesAllOneNew, p.ui->wDNDFilesOneNewPerFile))
+    return {};
+
+  auto &widget = *static_cast<QWidget *>(watched);
+
+  if (event->type() == QEvent::DragEnter)
+    widget.setStyleSheet(p.m_dndHoverStyleSheet);
+
+  else if (mtx::included_in(event->type(), QEvent::DragLeave, QEvent::Drop))
+    widget.setStyleSheet({});
+
+  auto dropEvent = dynamic_cast<QDropEvent *>(event);
+
+  if (!dropEvent)
+    return {};
+
+  if (mtx::included_in(dropEvent->type(), QEvent::DragEnter, QEvent::DragMove)) {
+    p.filesDDHandler.handle(dropEvent, false);
+    return true;
+  }
+
+  if (dropEvent->type() != QEvent::Drop)
+    return {};
+
+  if (!p.filesDDHandler.handle(dropEvent, true))
+    return true;
+
+  auto fileNames    = p.filesDDHandler.fileNames();
+  auto mouseButtons = dropEvent->buttons();
+  auto decision     = watched == p.ui->wDNDFilesAllCurrent ? Util::Settings::MergeAddingAppendingFilesPolicy::Add
+                    : watched == p.ui->wDNDFilesAllOneNew  ? Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew
+                    :                                        Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew;
+
+  QTimer::singleShot(0, this, [this, fileNames, mouseButtons, decision]() {
+    handleExternallyAddedFiles(fileNames, mouseButtons, decision);
+  });
+
+  return true;
+}
+
+bool
+Tool::eventFilter(QObject *watched,
+                  QEvent *event) {
+  auto result = filterEventsForSourceFilesDNDZones(watched, event);
+
+  if (result)
+    return *result;
+
+  return ToolBase::eventFilter(watched, event);
 }
 
 }

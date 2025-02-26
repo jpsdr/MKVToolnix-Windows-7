@@ -5,6 +5,8 @@
 #include <QModelIndex>
 #include <QStringList>
 
+#include "mkvtoolnix-gui/util/settings.h"
+
 namespace mtx::gui::Merge {
 
 class SourceFile;
@@ -26,6 +28,7 @@ struct IdentificationPack {
   Qt::MouseButtons m_mouseButtons{};
   QStringList m_fileNames;
   QVector<IdentifiedFile> m_identifiedSourceFiles, m_identifiedNonSourceFiles;
+  std::optional<Util::Settings::MergeAddingAppendingFilesPolicy> m_forcedDecision;
 
   QVector<SourceFilePtr>
   sourceFiles() {
