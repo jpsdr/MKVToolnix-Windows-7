@@ -1313,6 +1313,53 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_12">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cbMDeriveForcedDisplayFlagSubtitles">
+               <property name="text">
+                <string>Derive &quot;forced display&quot; fla&amp;g for subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="cbMDeriveCommentaryFlag">
+               <property name="text">
+                <string>Derive &quot;commentar&amp;y&quot; flag for audio/subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMSetOriginalLanguageFlagLanguage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="cbMSetOriginalLanguageFlagLanguage">
+               <property name="text">
+                <string>Set &quot;original language&quot; flag for audio/subtitles for language:</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_19">
                <item>
@@ -1330,40 +1377,10 @@
                </item>
               </layout>
              </item>
-             <item row="4" column="1">
-              <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                <widget class="QLineEdit" name="leMDeriveForcedDisplayFlagSubtitlesRE"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pbMDeriveForcedDisplayFlagSubtitlesRERevert">
-                 <property name="text">
-                  <string notr="true"/>
-                 </property>
-                 <property name="icon">
-                  <iconset theme="edit-undo"/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_4">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
                <property name="text">
-                <string>Default subtitle &amp;charset to set:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cbMDefaultSubtitleCharset</cstring>
+                <string>Derive &quot;&amp;hearing impaired&quot; flag for audio/subtitles from file names:</string>
                </property>
               </widget>
              </item>
@@ -1384,51 +1401,41 @@
                </item>
               </layout>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="cbMDeriveForcedDisplayFlagSubtitles">
-               <property name="text">
-                <string>Derive &quot;forced display&quot; fla&amp;g for subtitles from file names:</string>
-               </property>
-              </widget>
+             <item row="0" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="leMDeriveForcedDisplayFlagSubtitlesRE"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMDeriveForcedDisplayFlagSubtitlesRERevert">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="edit-undo"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="cbMDeriveCommentaryFlag">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_4">
                <property name="text">
-                <string>Derive &quot;commentar&amp;y&quot; flag for audio/subtitles from file names:</string>
+                <string>Default subtitle &amp;charset to set:</string>
                </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
-               <property name="text">
-                <string>Derive &quot;&amp;hearing impaired&quot; flag for audio/subtitles from file names:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMSetOriginalLanguageFlagLanguage">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="cbMSetOriginalLanguageFlagLanguage">
-               <property name="text">
-                <string>Set &quot;original language&quot; flag for audio/subtitles for language:</string>
+               <property name="buddy">
+                <cstring>cbMDefaultSubtitleCharset</cstring>
                </property>
               </widget>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbMDeriveFlagsFromTrackNames">
+             <property name="text">
+              <string>Derive flags from trac&amp;k names in addition to file names</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QGroupBox" name="groupBox_9">
@@ -2866,6 +2873,7 @@
   <tabstop>cbMSetOriginalLanguageFlagLanguage</tabstop>
   <tabstop>ldwMSetOriginalLanguageFlagLanguage</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
+  <tabstop>cbMDeriveFlagsFromTrackNames</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>
   <tabstop>cbMDeriveVideoTrackLanguageFromFileName</tabstop>
