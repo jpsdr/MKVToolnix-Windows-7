@@ -227,38 +227,40 @@ void
 Track::setDefaultsCommentaryFlag() {
   auto &settings = Util::Settings::get();
 
-  if (!settings.m_deriveCommentaryFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
-    return;
-
   QRegularExpression re{settings.m_regexForDerivingCommentaryFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
 
-  if (re.isValid() && m_file->m_fileName.contains(re))
-    m_commentaryFlag = 1;
+  if (!re.isValid() || !settings.m_deriveCommentaryFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  qDebug() << "testing for commentary, name is" << m_name;
+
+  if (m_file->m_fileName.contains(re) || (settings.m_deriveFlagsFromTrackNames && m_name.contains(re)))
+    m_commentaryFlag = true;
 }
 
 void
 Track::setDefaultsHearingImpairedFlag() {
   auto &settings = Util::Settings::get();
 
-  if (!settings.m_deriveHearingImpairedFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
-    return;
-
   QRegularExpression re{settings.m_regexForDerivingHearingImpairedFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
 
-  if (re.isValid() && m_file->m_fileName.contains(re))
-    m_hearingImpairedFlag = 1;
+  if (!re.isValid() || !settings.m_deriveHearingImpairedFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  if (m_file->m_fileName.contains(re) || (settings.m_deriveFlagsFromTrackNames && m_name.contains(re)))
+    m_hearingImpairedFlag = true;
 }
 
 void
 Track::setDefaultsForcedDisplayFlag() {
   auto &settings = Util::Settings::get();
 
-  if (!settings.m_deriveSubtitlesForcedFlagFromFileNames || isAppended() || !isSubtitles())
-    return;
-
   QRegularExpression re{settings.m_regexForDerivingSubtitlesForcedFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
 
-  if (re.isValid() && m_file->m_fileName.contains(re))
+  if (!re.isValid() || !settings.m_deriveSubtitlesForcedFlagFromFileNames || isAppended() || !isSubtitles())
+    return;
+
+  if (m_file->m_fileName.contains(re) || (settings.m_deriveFlagsFromTrackNames && m_name.contains(re)))
     m_forcedTrackFlag = 1;
 }
 

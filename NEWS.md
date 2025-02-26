@@ -14,6 +14,10 @@
   enable the "original language" flag for audio and subtitle tracks if the
   track's language matches one configured by the user (configurable). This
   feature is turned off by default. Part of the implementation of #3798.
+* MKVToolNix GUI: multiplexer: when adding files the GUI can automatically set
+  several track flags based on the file name. It can now look for the same
+  patters in the track names, too (configurable). This feature is turned on by
+  default. Part of the implementation of #3798.
 
 ## Bug fixes
 
