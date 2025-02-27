@@ -18,6 +18,12 @@
   several track flags based on the file name. It can now look for the same
   patters in the track names, too (configurable). This feature is turned on by
   default. Part of the implementation of #3798.
+* MKVToolNix GUI: multiplexer: added special drag & drop zones where users can
+  drop files to circumvent the preferences wrt. what to do with multiple
+  dropped files. Each drop zone corresponds to one of the three possible
+  choices (add all to current settings; create one new settings & add all
+  there; add new settings for each file & add one file to each). This feature
+  is turned off by default. Implements #3796.
 
 ## Bug fixes
 

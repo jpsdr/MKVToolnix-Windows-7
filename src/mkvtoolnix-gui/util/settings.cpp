@@ -542,6 +542,7 @@ Settings::load() {
   m_mergeSortFilesTracksByTypeWhenAdding      = reg.value(s_valMergeSortFilesTracksByTypeWhenAdding,                                           true).toBool();
   m_mergeReconstructSequencesWhenAdding       = reg.value(s_valMergeReconstructSequencesWhenAdding,                                            true).toBool();
   m_mergeAlwaysShowOutputFileControls         = reg.value(s_valMergeAlwaysShowOutputFileControls,                                              true).toBool();
+  m_mergeShowDNDZones                         = reg.value(s_valMergeShowDNDZones,                                                              false).toBool();
   m_mergePredefinedVideoTrackNames            = reg.value(s_valMergePredefinedVideoTrackNames).toStringList();
   m_mergePredefinedAudioTrackNames            = reg.value(s_valMergePredefinedAudioTrackNames).toStringList();
   m_mergePredefinedSubtitleTrackNames         = reg.value(s_valMergePredefinedSubtitleTrackNames).toStringList();
@@ -996,6 +997,7 @@ Settings::save()
   reg.setValue(s_valMergeSortFilesTracksByTypeWhenAdding,      m_mergeSortFilesTracksByTypeWhenAdding);
   reg.setValue(s_valMergeReconstructSequencesWhenAdding,       m_mergeReconstructSequencesWhenAdding);
   reg.setValue(s_valMergeAlwaysShowOutputFileControls,         m_mergeAlwaysShowOutputFileControls);
+  reg.setValue(s_valMergeShowDNDZones,                         m_mergeShowDNDZones);
   reg.setValue(s_valMergePredefinedVideoTrackNames,            m_mergePredefinedVideoTrackNames);
   reg.setValue(s_valMergePredefinedAudioTrackNames,            m_mergePredefinedAudioTrackNames);
   reg.setValue(s_valMergePredefinedSubtitleTrackNames,         m_mergePredefinedSubtitleTrackNames);
