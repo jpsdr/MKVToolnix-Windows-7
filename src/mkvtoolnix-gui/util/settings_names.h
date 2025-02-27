@@ -104,6 +104,7 @@ char const * const s_valMergePredefinedVideoTrackNames                          
 char const * const s_valMergeReconstructSequencesWhenAdding                     = "mergeReconstructSequencesWhenAdding";
 char const * const s_valMergeSetDestinationFromDirectory                        = "mergeSetDestinationFromDirectory";
 char const * const s_valMergeSetDestinationFromTitle                            = "mergeSetDestinationFromTitle";
+char const * const s_valMergeShowDNDZones                                       = "mergeShowDNDZones";
 char const * const s_valMergeSortFilesTracksByTypeWhenAdding                    = "mergeSortFilesTracksByTypeWhenAdding";
 char const * const s_valMergeTrackPropertiesLayout                              = "mergeTrackPropertiesLayout";
 char const * const s_valMergeUseFileAndTrackColors                              = "mergeUseFileAndTrackColors";
