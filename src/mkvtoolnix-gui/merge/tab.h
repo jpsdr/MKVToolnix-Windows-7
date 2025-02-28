@@ -244,6 +244,8 @@ public Q_SLOTS:
   virtual void onRemoveAllAttachments();
   virtual void onSelectAllAttachments();
   virtual void addAttachments(QStringList const &fileNames);
+  virtual void addAttachmentsAsCovers(QStringList const &fileNames);
+  virtual void addAttachmentsFiltered(QStringList const &fileNames, std::optional<std::function<bool(Attachment &)>> filter = std::nullopt);
 
   virtual void enableDisableAllAttachedFiles(bool enable);
   virtual void enableDisableSelectedAttachedFiles(bool enable);

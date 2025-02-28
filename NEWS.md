@@ -24,6 +24,10 @@
   choices (add all to current settings; create one new settings & add all
   there; add new settings for each file & add one file to each). This feature
   is turned off by default. Implements #3796.
+* MKVToolNix GUI: multiplexer: added additional special drag & drop zones
+  where users can drop files to add them as attachments. One of the zones will
+  automatically set up the dropped file to function as a cover
+  image. Implements #3794.
 
 ## Bug fixes
 

@@ -281,15 +281,40 @@ Tab::prepareFileForAttaching(QString const &fileName,
 }
 
 void
-Tab::addAttachments(QStringList const &fileNames) {
+Tab::addAttachmentsFiltered(QStringList const &fileNames,
+                            std::optional<std::function<bool(Attachment &)>> filter) {
   QList<AttachmentPtr> attachmentsToAdd;
   for (auto &fileName : Util::replaceDirectoriesByContainedFiles(fileNames)) {
     auto attachment = prepareFileForAttaching(fileName, false);
-    if (attachment)
-      attachmentsToAdd << attachment;
+
+    if (!attachment)
+      continue;
+
+    if (filter && !(*filter)(*attachment))
+      continue;
+
+    attachmentsToAdd << attachment;
   }
 
   p_func()->attachmentsModel->addAttachments(attachmentsToAdd);
+}
+
+void
+Tab::addAttachmentsAsCovers(QStringList const &fileNames) {
+  addAttachmentsFiltered(fileNames, [](Attachment &attachment) {
+    attachment.m_name = Q("cover");
+
+    auto suffix = QFileInfo{attachment.m_fileName}.suffix();
+    if (!suffix.isEmpty())
+      attachment.m_name += Q(".%1").arg(suffix);
+
+    return true;
+  });
+}
+
+void
+Tab::addAttachments(QStringList const &fileNames) {
+  addAttachmentsFiltered(fileNames);
 }
 
 void

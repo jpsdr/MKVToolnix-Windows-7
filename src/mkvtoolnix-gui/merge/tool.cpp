@@ -166,6 +166,8 @@ Tool::setupUi() {
   p.ui->wDNDFilesAllCurrent->installEventFilter(this);
   p.ui->wDNDFilesAllOneNew->installEventFilter(this);
   p.ui->wDNDFilesOneNewPerFile->installEventFilter(this);
+  p.ui->wDNDAttachmentsCover->installEventFilter(this);
+  p.ui->wDNDAttachments->installEventFilter(this);
 
   setupModifySelectedTracksMenu();
 
@@ -308,10 +310,13 @@ Tool::enableCopyMenuActions() {
 
 void
 Tool::showMergeWidget() {
-  auto &p = *p_func();
+  auto &p     = *p_func();
+  auto hasTab = p.ui->merges->count() > 0;
 
-  p.ui->stack->setCurrentWidget(p.ui->merges->count() ? p.ui->mergesPage : p.ui->noMergesPage);
-  p.ui->wDNDFilesAllCurrent->setEnabled(p.ui->merges->count() > 0);
+  p.ui->stack->setCurrentWidget(hasTab ? p.ui->mergesPage : p.ui->noMergesPage);
+  p.ui->wDNDFilesAllCurrent->setEnabled(hasTab);
+  p.ui->wDNDAttachmentsCover->setEnabled(hasTab);
+  p.ui->wDNDAttachments->setEnabled(hasTab);
   enableMenuActions();
   enableCopyMenuActions();
 }
@@ -344,6 +349,8 @@ Tool::retranslateUi() {
   Util::setToolTip(p.ui->wDNDFilesAllCurrent,    QY("Drag & drop files here to add all of them to the current multiplex settings."));
   Util::setToolTip(p.ui->wDNDFilesAllOneNew,     QY("Drag & drop files here to create a new multiplex settings tab & add all files there."));
   Util::setToolTip(p.ui->wDNDFilesOneNewPerFile, QY("Drag & drop files here to create a new multiplex settings tab per dropped file & add one file to each new tab."));
+  Util::setToolTip(p.ui->wDNDAttachmentsCover,   QY("Drag & drop image files here to attach them as cover images to be used by players."));
+  Util::setToolTip(p.ui->wDNDAttachments,        QY("Drag & drop image files here to attach them as general attachments."));
 }
 
 Tab *
@@ -1320,12 +1327,26 @@ Tool::changeTrackLanguage(QString const &formattedLanguage,
     tab->changeTrackLanguage(formattedLanguage, trackName);
 }
 
+void
+Tool::handleSourceFilesDroppedOnSpecialZones(QWidget *zone,
+                                             QStringList const &fileNames,
+                                             Qt::MouseButtons mouseButtons) {
+  auto &p       = *p_func();
+  auto decision = zone == p.ui->wDNDFilesAllCurrent ? Util::Settings::MergeAddingAppendingFilesPolicy::Add
+                : zone == p.ui->wDNDFilesAllOneNew  ? Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew
+                :                                     Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew;
+
+  QTimer::singleShot(0, this, [this, fileNames, mouseButtons, decision]() {
+    handleExternallyAddedFiles(fileNames, mouseButtons, decision);
+  });
+}
+
 std::optional<bool>
-Tool::filterEventsForSourceFilesDNDZones(QObject *watched,
-                                         QEvent *event) {
+Tool::filterEventsForFileDNDZones(QObject *watched,
+                                  QEvent *event) {
   auto &p = *p_func();
 
-  if (!mtx::included_in(watched, p.ui->wDNDFilesAllCurrent, p.ui->wDNDFilesAllOneNew, p.ui->wDNDFilesOneNewPerFile))
+  if (!mtx::included_in(watched, p.ui->wDNDFilesAllCurrent, p.ui->wDNDFilesAllOneNew, p.ui->wDNDFilesOneNewPerFile, p.ui->wDNDAttachmentsCover, p.ui->wDNDAttachments))
     return {};
 
   auto &widget = *static_cast<QWidget *>(watched);
@@ -1352,15 +1373,22 @@ Tool::filterEventsForSourceFilesDNDZones(QObject *watched,
   if (!p.filesDDHandler.handle(dropEvent, true))
     return true;
 
-  auto fileNames    = p.filesDDHandler.fileNames();
-  auto mouseButtons = dropEvent->buttons();
-  auto decision     = watched == p.ui->wDNDFilesAllCurrent ? Util::Settings::MergeAddingAppendingFilesPolicy::Add
-                    : watched == p.ui->wDNDFilesAllOneNew  ? Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew
-                    :                                        Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew;
+  auto fileNames = p.filesDDHandler.fileNames();
 
-  QTimer::singleShot(0, this, [this, fileNames, mouseButtons, decision]() {
-    handleExternallyAddedFiles(fileNames, mouseButtons, decision);
-  });
+  if (mtx::included_in(watched, p.ui->wDNDFilesAllCurrent, p.ui->wDNDFilesAllOneNew, p.ui->wDNDFilesOneNewPerFile)) {
+    handleSourceFilesDroppedOnSpecialZones(&widget, fileNames, dropEvent->buttons());
+    return true;
+  }
+
+  auto tab = currentTab();
+  if (!tab)
+    return true;
+
+  if (watched == p.ui->wDNDAttachmentsCover)
+    tab->addAttachmentsAsCovers(fileNames);
+
+  else if (watched == p.ui->wDNDAttachments)
+    tab->addAttachments(fileNames);
 
   return true;
 }
@@ -1368,7 +1396,7 @@ Tool::filterEventsForSourceFilesDNDZones(QObject *watched,
 bool
 Tool::eventFilter(QObject *watched,
                   QEvent *event) {
-  auto result = filterEventsForSourceFilesDNDZones(watched, event);
+  auto result = filterEventsForFileDNDZones(watched, event);
 
   if (result)
     return *result;

@@ -124,7 +124,8 @@ protected:
 
   virtual void retrieveDiscInformationForPlaylists(QVector<SourceFilePtr> &sourceFiles);
 
-  virtual std::optional<bool> filterEventsForSourceFilesDNDZones(QObject *watched, QEvent *event);
+  virtual std::optional<bool> filterEventsForFileDNDZones(QObject *watched, QEvent *event);
+  virtual void handleSourceFilesDroppedOnSpecialZones(QWidget *zone, QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
 public:
   static FileIdentificationWorker &identifier();

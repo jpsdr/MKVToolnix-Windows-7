@@ -323,7 +323,7 @@
         <property name="title">
          <string>D&amp;&amp;D</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_8">
+        <layout class="QVBoxLayout" name="verticalLayout_10">
          <item>
           <widget class="QWidget" name="wDNDFilesAllCurrent" native="true">
            <property name="sizePolicy">
@@ -336,6 +336,12 @@
             <bool>true</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <spacer name="verticalSpacer_4">
               <property name="orientation">
@@ -344,7 +350,7 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>29</height>
+                <height>0</height>
                </size>
               </property>
              </spacer>
@@ -385,7 +391,7 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>28</height>
+                <height>0</height>
                </size>
               </property>
              </spacer>
@@ -406,6 +412,12 @@
             <bool>true</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <spacer name="verticalSpacer_6">
               <property name="orientation">
@@ -414,7 +426,7 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>28</height>
+                <height>0</height>
                </size>
               </property>
              </spacer>
@@ -452,7 +464,7 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>28</height>
+                <height>0</height>
                </size>
               </property>
              </spacer>
@@ -473,6 +485,12 @@
             <bool>true</bool>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <spacer name="verticalSpacer_8">
               <property name="orientation">
@@ -481,7 +499,7 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>29</height>
+                <height>0</height>
                </size>
               </property>
              </spacer>
@@ -519,7 +537,153 @@
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>28</height>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="wDNDAttachmentsCover" native="true">
+           <property name="acceptDrops">
+            <bool>true</bool>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <spacer name="verticalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="lDNDAttachmentsCover">
+              <property name="minimumSize">
+               <size>
+                <width>48</width>
+                <height>48</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>48</width>
+                <height>48</height>
+               </size>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/oxygen/view-preview.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_11">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="wDNDAttachments" native="true">
+           <property name="acceptDrops">
+            <bool>true</bool>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <spacer name="verticalSpacer_12">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="lDNDAttachments">
+              <property name="minimumSize">
+               <size>
+                <width>48</width>
+                <height>48</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>48</width>
+                <height>48</height>
+               </size>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/oxygen/mail-attachment.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_13">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>0</height>
                </size>
               </property>
              </spacer>
