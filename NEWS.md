@@ -28,6 +28,10 @@
   where users can drop files to add them as attachments. One of the zones will
   automatically set up the dropped file to function as a cover
   image. Implements #3794.
+* MKVToolNix GUI: multiplexer: when making destination file names unique by
+  suffixing them with a running number the GUI will now also consider the
+  destination file names of multiplex jobs currently in the queue that are
+  currently running or still waiting for execution. Implements #3801.
 
 ## Bug fixes
 

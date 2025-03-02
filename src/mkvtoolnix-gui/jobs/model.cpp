@@ -933,4 +933,20 @@ Model::moveJobsUpOrDown(QList<Job *> jobs,
   Q_EMIT orderChanged();
 }
 
+QStringList
+Model::getPendingMergeJobDestinationFileNames() {
+  QStringList fileNames;
+
+  withAllJobs([&fileNames](Job &job) {
+    auto muxJob = dynamic_cast<MuxJob *>(&job);
+    if (!muxJob)
+      return;
+
+    if (mtx::included_in(muxJob->status(), Job::PendingManual, Job::PendingAuto, Job::Running))
+      fileNames << muxJob->config().m_destination;
+  });
+
+  return fileNames;
+}
+
 }

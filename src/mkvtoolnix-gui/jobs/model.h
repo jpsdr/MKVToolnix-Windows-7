@@ -58,6 +58,8 @@ public:
   bool hasRunningJobs();
   bool isRunning() const;
 
+  QStringList getPendingMergeJobDestinationFileNames();
+
   void withSelectedJobs(QAbstractItemView *view, std::function<void(Job &)> const &worker);
   void withSelectedJobsAsList(QAbstractItemView *view, std::function<void(QList<Job *> const &)> const &worker);
   void withAllJobs(std::function<void(Job &)> const &worker);
