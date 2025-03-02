@@ -25,6 +25,7 @@
 #include "common/stereo_mode.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/enums.h"
@@ -1973,15 +1974,20 @@ Tab::generateUniqueOutputFileName(QString const &baseName,
 
   auto idx = 0;
 
+  QSet<QString> jobDestinationFileNames;
+  for (auto const &fileName : MainWindow::jobTool()->model()->getPendingMergeJobDestinationFileNames())
+    jobDestinationFileNames << QDir::toNativeSeparators(fileName);
+
   while (true) {
     auto uniquenessSuffix = idx ? QString{" (%1)"}.arg(idx) : QString{};
     auto currentBaseName  = QString{"%1%2.%3"}.arg(cleanedBaseName).arg(uniquenessSuffix).arg(suffix);
     currentBaseName       = Util::removeInvalidPathCharacters(currentBaseName);
     auto outputFileName   = QFileInfo{outputDir, currentBaseName};
+    auto outputFileNameNS = QDir::toNativeSeparators(outputFileName.absoluteFilePath());
 
-    if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
+    if (!settings.m_uniqueOutputFileNames || (!outputFileName.exists() && !jobDestinationFileNames.contains(outputFileNameNS))) {
       p.config.m_destinationUniquenessSuffix = uniquenessSuffix;
-      return QDir::toNativeSeparators(outputFileName.absoluteFilePath());
+      return outputFileNameNS;
     }
 
     ++idx;
