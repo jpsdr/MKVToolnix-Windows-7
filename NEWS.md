@@ -41,6 +41,10 @@
 * mkvmerge: DTS parser: if the X96 extension is present in a DTS-HD High
   Resolution stream, the sampling frequency will be set to 96kHz. Fixes #3288.
 
+## Build system changes
+
+* The bundled `nlohmann-json` library was updated to v3.11.3.
+
 
 # Version 90.0 "Hanging On" 2025-02-08
 
