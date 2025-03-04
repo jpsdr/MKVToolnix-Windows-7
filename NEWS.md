@@ -40,6 +40,13 @@
   second. Fixes #2285.
 * mkvmerge: DTS parser: if the X96 extension is present in a DTS-HD High
   Resolution stream, the sampling frequency will be set to 96kHz. Fixes #3288.
+* mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed a bug leading
+  to a segmentation fault when trying to replace an element at the end of the
+  file that's followed by only void elements (at least one). Fixes #3802.
+
+## Build system changes
+
+* The bundled `nlohmann-json` library was updated to v3.11.3.
 
 
 # Version 90.0 "Hanging On" 2025-02-08
