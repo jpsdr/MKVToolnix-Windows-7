@@ -655,22 +655,24 @@ bool
 kax_analyzer_c::handle_void_elements(size_t data_idx) {
   static debugging_option_c s_debug_void{"kax_analyzer_handle_void_elements"};
 
-  // Is the element at the end of the file? If so truncate the file
-  // and remove the element from the data structure if that was
-  // requested. Then we're done.
-  if (m_data.size() == (data_idx + 1)) {
-    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): element is at end; truncating file\n", data_idx));
-    m_file->truncate(m_data[data_idx]->m_pos + m_data[data_idx]->m_size);
-    adjust_segment_size();
-    if (0 == m_data[data_idx]->m_size)
-      m_data.erase(m_data.begin() + data_idx);
-    return false;
-  }
-
   // Are the following elements libebml::EbmlVoid elements?
   size_t end_idx = data_idx + 1;
   while ((m_data.size() > end_idx) && is_type<libebml::EbmlVoid>(m_data[end_idx]->m_id))
     ++end_idx;
+
+  // Is the element at the end of the file or are there only void
+  // elements following? If so truncate the file and remove the
+  // elements from the data structure if that was requested. Then
+  // we're done.
+  if (m_data.size() == end_idx) {
+    mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): element is at end or only void elements following; truncating file; m_data.size() {1}\n", data_idx, m_data.size()));
+    m_file->truncate(m_data[data_idx]->m_pos + m_data[data_idx]->m_size);
+    adjust_segment_size();
+    if (0 == m_data[data_idx]->m_size)
+      m_data.erase(m_data.begin() + data_idx, m_data.end());
+
+    return false;
+  }
 
   if (end_idx > data_idx + 1) {
     mxdebug_if(s_debug_void, fmt::format("handle_void_elements({0}): {1} void element(s) following; merging\n", data_idx, end_idx - data_idx - 1));
