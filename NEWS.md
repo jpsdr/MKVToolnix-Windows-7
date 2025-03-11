@@ -48,6 +48,11 @@
 
 * The bundled `nlohmann-json` library was updated to v3.11.3.
 
+## Other changes
+
+* The customized MXE repository used for building the Windows variants was
+  moved from Gitlab to [Codeberg](https://codeberg.org/mbunkus/mxe).
+
 
 # Version 90.0 "Hanging On" 2025-02-08
 
