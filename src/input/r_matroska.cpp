@@ -493,6 +493,7 @@ kax_reader_c::verify_dts_audio_track(kax_track_t *t) {
       return false;
 
     t->a_channels = t->dts_header.get_total_num_audio_channels();
+    t->a_sfreq    = t->dts_header.get_effective_sampling_frequency();
     t->codec.set_specialization(t->dts_header.get_codec_specialization());
 
   } catch (...) {
