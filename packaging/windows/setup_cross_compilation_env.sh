@@ -40,7 +40,7 @@ LOGFILE=${LOGFILE:-$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)
 function update_mingw_cross_env {
   if [[ ! -d $INSTALL_DIR ]]; then
     echo Retrieving the M cross environment build scripts >> $LOGFILE
-    git clone --branch QT6_Windows7 https://github.com/jpsdr/mxe-Windows-7.git $INSTALL_DIR >> $LOGFILE 2>&1
+git clone --branch QT6_Windows7 https://github.com/jpsdr/mxe-Windows-7.git $INSTALL_DIR >> $LOGFILE 2>&1
   else
     echo Updating the M cross environment build scripts >> $LOGFILE
     cd $INSTALL_DIR

@@ -244,9 +244,10 @@ def setup_compiler_specifics
 end
 
 def determine_optimization_cflags
-  return ""                   if !c?(:USE_OPTIMIZATION)
-  return " -O1"               if is_clang? && !check_compiler_version("clang", "3.8.0") # LLVM bug 11962
-  return " -O2 -fno-ipa-icf"  if $building_for[:windows] && check_compiler_version("gcc", "5.1.0") && !check_compiler_version("gcc", "7.2.0")
+  return ""                             if !c?(:USE_OPTIMIZATION)
+  return " -O#{c(:OPTIMIZATION_LEVEL)}" if c(:OPTIMIZATION_LEVEL).to_s != ""
+  return " -O1"                         if is_clang? && !check_compiler_version("clang", "3.8.0") # LLVM bug 11962
+  return " -O2 -fno-ipa-icf"            if $building_for[:windows] && check_compiler_version("gcc", "5.1.0") && !check_compiler_version("gcc", "7.2.0")
   return " -O3"
 end
 

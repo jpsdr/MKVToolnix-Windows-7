@@ -33,7 +33,7 @@ features required by MKVToolNix saving compilation time and deployment
 space. In order to retrieve that fork, you need `git`. Then do the
 following:
 
-    git clone https://gitlab.com/mbunkus/mxe $HOME/mxe
+    git clone https://codeberg.org/mbunkus/mxe $HOME/mxe
 
 The rest of this guide assumes that you've unpacked MXE
 into the directory `$HOME/mxe`.
