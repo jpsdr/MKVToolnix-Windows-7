@@ -39,7 +39,9 @@
   for the lines containing the duration & an optional number of frames per
   second. Fixes #2285.
 * mkvmerge: DTS parser: if the X96 extension is present in a DTS-HD High
-  Resolution stream, the sampling frequency will be set to 96kHz. Fixes #3288.
+  Resolution stream, the sampling frequency will be set to 96kHz. This was
+  broken when reading DTS from elementary streams & from Matroska files. Fixes
+  #3288.
 * mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed a bug leading
   to a segmentation fault when trying to replace an element at the end of the
   file that's followed by only void elements (at least one). Fixes #3802.
@@ -47,6 +49,11 @@
 ## Build system changes
 
 * The bundled `nlohmann-json` library was updated to v3.11.3.
+
+## Other changes
+
+* The customized MXE repository used for building the Windows variants was
+  moved from Gitlab to [Codeberg](https://codeberg.org/mbunkus/mxe).
 
 
 # Version 90.0 "Hanging On" 2025-02-08
