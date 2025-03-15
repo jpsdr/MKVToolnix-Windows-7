@@ -1,5 +1,12 @@
 # Version ?
 
+## Important notes
+
+* The MKVToolNix project's source code repository, bug tracker and wiki have
+  been moved to [Codeberg](https://codeberg.org/mbunkus/mkvtoolnix).
+* The customized MXE repository used for building the Windows variants has
+  been moved from Gitlab to [Codeberg](https://codeberg.org/mbunkus/mxe).
+
 ## New features and enhancements
 
 * MKVToolNix GUI: multiplexer: added actions in the "Multiplexer" menu for
@@ -49,11 +56,6 @@
 ## Build system changes
 
 * The bundled `nlohmann-json` library was updated to v3.11.3.
-
-## Other changes
-
-* The customized MXE repository used for building the Windows variants was
-  moved from Gitlab to [Codeberg](https://codeberg.org/mbunkus/mxe).
 
 
 # Version 90.0 "Hanging On" 2025-02-08
@@ -2158,7 +2160,7 @@
 ## New feature: IETF BCP 47 language tags
 
 * I've written up a [nice FAQ
-  entry](https://gitlab.com/mbunkus/mkvtoolnix/-/wikis/Languages-in-Matroska-and-MKVToolNix)
+  entry](https://codeberg.org/mbunkus/mkvtoolnix/wiki/Languages-in-Matroska-and-MKVToolNix)
   about the switch to using IETF BCP 47 language tags, how they interact with
   legacy language elements, how the programs actually behave and how to
   disable their use if necessary.

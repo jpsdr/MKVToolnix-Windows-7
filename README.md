@@ -196,7 +196,7 @@ for both Unix/Linux and Windows.
 
 First clone my Git repository with this command:
 
-    git clone https://gitlab.com/mbunkus/mkvtoolnix.git
+    git clone https://codeberg.org/mbunkus/mkvtoolnix.git
 
 Now change to the MKVToolNix directory with `cd mkvtoolnix` and run
 `./autogen.sh` which will generate the "configure" script. You need
@@ -268,7 +268,7 @@ If you're sure you've found a bug — e.g. if one of my programs crashes
 with an obscur error message, or if the resulting file is missing part
 of the original data, then by all means submit a bug report.
 
-I use [GitLab's issue system](https://gitlab.com/mbunkus/mkvtoolnix/issues)
+I use [Codeberg's issue system](https://codeberg.org/mbunkus/mkvtoolnix/issues)
 as my bug database. You can submit your bug reports there. Please be as
 verbose as possible — e.g. include the command line, if you use Windows
 or Linux etc.pp.
@@ -277,7 +277,7 @@ If at all possible, please include sample files as well so that I can
 reproduce the issue. If they are larger than 1 MB, please upload
 them somewhere and post a link in the issue. You can also upload them
 to my FTP server. Details on how to connect can be found in the
-[MKVToolNix FAQ](https://gitlab.com/mbunkus/mkvtoolnix/wikis/FTP-server).
+[MKVToolNix FAQ](https://codeberg.org/mbunkus/mkvtoolnix/wiki/FTP-server).
 
 # 3.2. Getting support
 
