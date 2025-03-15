@@ -1,6 +1,10 @@
 MKVToolNix 90.0
 =================
 
+# Moving to Codeberg
+
+**2025-03-15: this project is moving to [Codeberg](https://codeberg.org/mbunkus/mkvtoolnix). The project on Gitlab will be removed in May & is archived (read-only) until then.**
+
 # Table of contents
 
 1. [Introduction](#1-introduction)
