@@ -1,5 +1,5 @@
 !define PRODUCT_NAME "MKVToolNix"
-!define PRODUCT_VERSION "90.0.0"
+!define PRODUCT_VERSION "91.0.0"
 !define PRODUCT_VERSION_BUILD ""
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
@@ -249,7 +249,7 @@ FunctionEnd
 
 Function onClickMediaFoundationMoreInformation
   Pop $0
-  ExecShell "open" "https://gitlab.com/mbunkus/mkvtoolnix/wikis/DLLs-not-found"
+  ExecShell "open" "https://codeberg.org/mbunkus/mkvtoolnix/wiki/DLLs-not-found"
 FunctionEnd
 
 Function showExternalLinks

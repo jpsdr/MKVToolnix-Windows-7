@@ -165,7 +165,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto reNewlines        = QRegularExpression{"\r?\n"};
   auto bugFormatter      = [](QRegularExpressionMatch const &matches) {
     auto number_str = matches.captured(1).mid(1);
-    return Q("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/%1\">#%1</a>").arg(number_str);
+    return Q("<a href=\"https://codeberg.org/mbunkus/mkvtoolnix/issues/%1\">#%1</a>").arg(number_str);
   };
 
   releases.sort();
