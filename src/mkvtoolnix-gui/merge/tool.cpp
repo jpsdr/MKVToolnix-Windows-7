@@ -1376,7 +1376,7 @@ Tool::filterEventsForFileDNDZones(QObject *watched,
   auto fileNames = p.filesDDHandler.fileNames();
 
   if (mtx::included_in(watched, p.ui->wDNDFilesAllCurrent, p.ui->wDNDFilesAllOneNew, p.ui->wDNDFilesOneNewPerFile)) {
-    handleSourceFilesDroppedOnSpecialZones(&widget, fileNames, dropEvent->buttons());
+	handleSourceFilesDroppedOnSpecialZones(&widget, fileNames, dropEvent->mouseButtons());
     return true;
   }
 

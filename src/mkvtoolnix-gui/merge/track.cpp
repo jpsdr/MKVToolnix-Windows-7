@@ -2,6 +2,7 @@
 
 #include <QRegularExpression>
 #include <QVariant>
+#include <QDebug>
 
 #include "common/id_info.h"
 #include "common/iso639.h"
