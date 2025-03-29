@@ -21,6 +21,7 @@
 #include "common/flac.h"
 #include "common/id_info.h"
 #include "common/id3.h"
+#include "common/list_utils.h"
 #include "common/mime.h"
 #include "input/r_flac.h"
 #include "merge/input_x.h"
@@ -53,7 +54,7 @@ flac_reader_c::read_headers() {
     std::vector<flac_block_t> to_keep;
 
     for (auto const &info : m_metadata_block_info)
-      if (info.type != FLAC__METADATA_TYPE_PICTURE)
+      if (!mtx::included_in(info.type, FLAC__METADATA_TYPE_PICTURE, FLAC__METADATA_TYPE_PADDING))
         to_keep.emplace_back(info);
 
     m_metadata_block_info = to_keep;

@@ -5,6 +5,8 @@
 * mkvmerge: FLAC reader: pictures embedded into the FLAC file were already
   handled as attachments, but they were left in the codec initialization data
   as well. They're now removed from the codec initialization data. See #6079.
+* mkvmerge: FLAC reader: padding metadata blocks will now be removed from the
+  codec initialization data. See #6079.
 
 
 # Version 91.0 "Signs" 2025-03-16
