@@ -28,7 +28,7 @@
 #include "output/p_flac.h"
 
 struct flac_block_t {
-  int64_t filepos;
+  uint64_t filepos;
   unsigned int type, len;
 };
 
@@ -45,6 +45,8 @@ private:
   debugging_option_c m_debug{"flac_reader|flac"};
   int64_t tag_size_start{}, tag_size_end{};
   bool current_frame_broken{};
+
+  std::vector<flac_block_t> m_metadata_block_info;
 
 public:
   virtual mtx::file_type_e get_format_type() const {

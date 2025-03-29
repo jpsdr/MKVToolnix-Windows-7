@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include <FLAC/format.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 
@@ -46,19 +47,33 @@ flac_reader_c::read_headers() {
   show_demuxer_info();
 
   try {
-    uint32_t block_size = 0;
+    m_in->setFilePointer(tag_size_start);
+    m_header = m_in->read(4); // "fLaC";
 
-    for (current_block = blocks.begin(); (current_block != blocks.end()) && (mtx::flac::BLOCK_TYPE_HEADERS == current_block->type); current_block++)
-      block_size += current_block->len;
+    std::vector<flac_block_t> to_keep;
 
-    m_header = memory_c::alloc(block_size);
+    for (auto const &info : m_metadata_block_info)
+      // if (info.type != FLAC__METADATA_TYPE_PICTURE)
+        to_keep.emplace_back(info);
 
-    block_size         = 0;
-    for (current_block = blocks.begin(); (current_block != blocks.end()) && (mtx::flac::BLOCK_TYPE_HEADERS == current_block->type); current_block++) {
-      m_in->setFilePointer(current_block->filepos + tag_size_start);
-      if (m_in->read(m_header->get_buffer() + block_size, current_block->len) != current_block->len)
-        mxerror(Y("flac_reader: Could not read a header packet.\n"));
-      block_size += current_block->len;
+    auto info_num = 0u;
+    for (auto const &info : m_metadata_block_info) {
+      ++info_num;
+
+      m_in->setFilePointer(info.filepos + tag_size_start);
+      auto block = m_in->read(info.len);
+
+      if (block->get_size() == 0)
+        continue;
+
+      auto buffer = block->get_buffer();
+
+      if (info_num == m_metadata_block_info.size())
+        buffer[0] = buffer[0] | 0x80; // set "last metadata block" flag
+      else
+        buffer[0] = buffer[0] & 0x7f; // clear "last metadata block" flag
+
+      m_header->add(*block);
     }
 
   } catch (mtx::exception &) {
@@ -107,15 +122,9 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
   FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &u);
 
-  block.type    = mtx::flac::BLOCK_TYPE_HEADERS;
-  block.filepos = 0;
-  block.len     = u;
-  old_pos       = u;
+  mxdebug_if(m_debug, fmt::format("flac_reader: headers: block at 0 with size {0}\n", u));
 
-  blocks.push_back(block);
-
-  mxdebug_if(m_debug, fmt::format("flac_reader: headers: block at {0} with size {1}\n", block.filepos, block.len));
-
+  old_pos              = u;
   old_progress         = -5;
   current_frame_broken = false;
   ok                   = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
@@ -152,12 +161,10 @@ flac_reader_c::parse_file(bool for_identification_only) {
   else
     mxinfo("\n");
 
-  if ((blocks.size() == 0) || (blocks[0].type != mtx::flac::BLOCK_TYPE_HEADERS))
+  if (m_metadata_block_info.size() == 0)
     mxerror(Y("flac_reader: Could not read all header packets.\n"));
 
-  m_in->setFilePointer(tag_size_start);
-  blocks[0].len     -= 4;
-  blocks[0].filepos  = 4;
+  current_block = blocks.begin();
 
   return metadata_parsed;
 }
@@ -262,6 +269,25 @@ flac_reader_c::handle_picture_metadata(FLAC__StreamMetadata const *metadata) {
 
 void
 flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
+  FLAC__uint64 new_decode_position = 0;
+  FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &new_decode_position);
+
+  auto position = new_decode_position - metadata->length - FLAC__STREAM_METADATA_HEADER_LENGTH;
+
+  m_metadata_block_info.emplace_back(flac_block_t{ position, metadata->type, metadata->length + FLAC__STREAM_METADATA_HEADER_LENGTH });
+
+  mxdebug_if(m_debug,
+             fmt::format("flac_reader: metadata type {0} ({1}) size {2} at {3}\n",
+                           metadata->type == FLAC__METADATA_TYPE_STREAMINFO     ? "stream info"
+                         : metadata->type == FLAC__METADATA_TYPE_PICTURE        ? "picture"
+                         : metadata->type == FLAC__METADATA_TYPE_PADDING        ? "padding"
+                         : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "application"
+                         : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "seektable"
+                         : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "vorbis comment"
+                         : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "cuesheet"
+                         :                                                        "undefined",
+                         static_cast<unsigned int>(metadata->type), metadata->length + FLAC__STREAM_METADATA_HEADER_LENGTH, position));
+
   switch (metadata->type) {
     case FLAC__METADATA_TYPE_STREAMINFO:
       handle_stream_info_metadata(metadata);
@@ -272,15 +298,6 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
       break;
 
     default:
-      mxdebug_if(m_debug,
-                 fmt::format("{0} ({1}) block ({2} bytes)\n",
-                               metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
-                             : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
-                             : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
-                             : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
-                             : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
-                             :                                                        "UNDEFINED",
-                             static_cast<unsigned int>(metadata->type), metadata->length));
       break;
   }
 }
