@@ -7,6 +7,13 @@
   as well. They're now removed from the codec initialization data. See #6079.
 * mkvmerge: FLAC reader: padding metadata blocks will now be removed from the
   codec initialization data. See #6079.
+* mkvmerge: FLAC reader: embedded Vorbis comments will now be converted into
+  Matroska comments or track/global header fields when available (e.g. `TITLE`
+  will become the segment title & track's name, `LANGUAGE` will become the
+  track's language). Copying of Vorbis comments that are converted into actual
+  Matroska tags can be prevented with the usual options,
+  e.g. `--no-track-tags`. The comments will also be removed from the codec
+  initialization data. Implements #6079.
 
 
 # Version 91.0 "Signs" 2025-03-16

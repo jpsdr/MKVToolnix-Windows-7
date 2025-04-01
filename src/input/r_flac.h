@@ -15,8 +15,10 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "common/debugging.h"
 #include "common/mm_io.h"
+#include "matroska/KaxSemantic.h"
 #include "merge/generic_reader.h"
 
 #if defined(HAVE_FLAC_FORMAT_H)
@@ -25,6 +27,7 @@
 #include <FLAC/stream_decoder.h>
 
 #include "common/flac.h"
+#include "common/tags/vorbis.h"
 #include "output/p_flac.h"
 
 struct flac_block_t {
@@ -47,6 +50,10 @@ private:
   bool current_frame_broken{};
 
   std::vector<flac_block_t> m_metadata_block_info;
+
+  mtx::bcp47::language_c m_language;
+  std::string m_title;
+  std::shared_ptr<libmatroska::KaxTags> m_tags;
 
 public:
   virtual mtx::file_type_e get_format_type() const {
@@ -76,7 +83,9 @@ protected:
   virtual bool parse_file(bool for_identification_only);
   virtual void handle_picture_metadata(FLAC__StreamMetadata const *metadata);
   virtual void handle_stream_info_metadata(FLAC__StreamMetadata const *metadata);
+  virtual void handle_vorbis_comment_metadata(FLAC__StreamMetadata const *metadata);
   virtual std::string attachment_name_from_metadata(FLAC__StreamMetadata_Picture const &picture) const;
+  virtual void handle_language_and_title(mtx::tags::converted_vorbis_comments_t const &converted);
 };
 #else  // HAVE_FLAC_FORMAT_H
 
