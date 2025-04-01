@@ -15,6 +15,11 @@
   e.g. `--no-track-tags`. The comments will also be removed from the codec
   initialization data. Implements #6079.
 
+## Bug fixes
+
+* mkvmerge: Ogg reader: during identification the track tags are now reported
+  properly.
+
 
 # Version 91.0 "Signs" 2025-03-16
 
