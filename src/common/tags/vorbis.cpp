@@ -218,34 +218,38 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
 }
 
 vorbis_comments_t
-parse_vorbis_comments_from_packet(memory_c const &packet) {
+parse_vorbis_comments_from_packet(memory_c const &packet,
+                                  std::optional<unsigned int> offset) {
   try {
     mm_mem_io_c in{packet};
     vorbis_comments_t comments;
 
-    auto header = in.read(8)->to_string();
-    unsigned int offset{};
+    if (!offset.has_value()) {
+      auto header = in.read(8)->to_string();
 
-    if (header == "OpusTags") {
-      comments.m_type = vorbis_comments_t::type_e::Opus;
-      offset          = 8;
+      if (header == "OpusTags") {
+        comments.m_type = vorbis_comments_t::type_e::Opus;
+        offset          = 8;
 
-    } else if (Q(header).contains(QRegularExpression{"^.vorbis"})) {
-      comments.m_type = vorbis_comments_t::type_e::Vorbis;
-      offset          = 7;
+      } else if (Q(header).contains(QRegularExpression{"^.vorbis"})) {
+        comments.m_type = vorbis_comments_t::type_e::Vorbis;
+        offset          = 7;
 
-    } else if (Q(header).contains(QRegularExpression{"^OVP80"})) {
-      comments.m_type = vorbis_comments_t::type_e::VP8;
-      offset          = 7;
+      } else if (Q(header).contains(QRegularExpression{"^OVP80"})) {
+        comments.m_type = vorbis_comments_t::type_e::VP8;
+        offset          = 7;
 
-    // } else if (Q(header).contains(QRegularExpression{"^OVP90"})) {
-    //   comments.m_type = vorbis_comments_t::type_e::VP9;
-    //   offset          = 7;
+      // } else if (Q(header).contains(QRegularExpression{"^OVP90"})) {
+      //   comments.m_type = vorbis_comments_t::type_e::VP9;
+      //   offset          = 7;
+
+      } else
+        return {};
 
     } else
-      return {};
+      comments.m_type = vorbis_comments_t::type_e::Other;
 
-    in.setFilePointer(offset);
+    in.setFilePointer(*offset);
     auto vendor_length = in.read_uint32_le();
     comments.m_vendor  = in.read(vendor_length)->to_string();
 

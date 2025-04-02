@@ -31,6 +31,7 @@ struct vorbis_comments_t {
     VP8,
     VP9,
     Opus,
+    Other,
   };
 
   type_e m_type{type_e::Unknown};
@@ -51,7 +52,7 @@ struct converted_vorbis_comments_t {
 
 converted_vorbis_comments_t from_vorbis_comments(vorbis_comments_t const &vorbis_comments);
 
-vorbis_comments_t parse_vorbis_comments_from_packet(memory_c const &packet);
+vorbis_comments_t parse_vorbis_comments_from_packet(memory_c const &packet, std::optional<unsigned int> offset = std::nullopt);
 memory_cptr assemble_vorbis_comments_into_packet(vorbis_comments_t const &comments);
 
 }

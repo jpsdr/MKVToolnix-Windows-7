@@ -13,14 +13,22 @@
 
 #include "common/common_pch.h"
 
+#include <FLAC/format.h>
+#include <FLAC/ordinals.h>
+#include <FLAC/stream_decoder.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 
+#include "common/at_scope_exit.h"
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/flac.h"
 #include "common/id_info.h"
 #include "common/id3.h"
+#include "common/list_utils.h"
 #include "common/mime.h"
+#include "common/tags/tags.h"
+#include "common/tags/vorbis.h"
 #include "input/r_flac.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -46,19 +54,35 @@ flac_reader_c::read_headers() {
   show_demuxer_info();
 
   try {
-    uint32_t block_size = 0;
+    m_in->setFilePointer(tag_size_start);
+    m_header = m_in->read(4); // "fLaC";
 
-    for (current_block = blocks.begin(); (current_block != blocks.end()) && (mtx::flac::BLOCK_TYPE_HEADERS == current_block->type); current_block++)
-      block_size += current_block->len;
+    std::vector<flac_block_t> to_keep;
 
-    m_header = memory_c::alloc(block_size);
+    for (auto const &info : m_metadata_block_info)
+      if (!mtx::included_in(info.type, FLAC__METADATA_TYPE_PICTURE, FLAC__METADATA_TYPE_PADDING))
+        to_keep.emplace_back(info);
 
-    block_size         = 0;
-    for (current_block = blocks.begin(); (current_block != blocks.end()) && (mtx::flac::BLOCK_TYPE_HEADERS == current_block->type); current_block++) {
-      m_in->setFilePointer(current_block->filepos + tag_size_start);
-      if (m_in->read(m_header->get_buffer() + block_size, current_block->len) != current_block->len)
-        mxerror(Y("flac_reader: Could not read a header packet.\n"));
-      block_size += current_block->len;
+    m_metadata_block_info = to_keep;
+
+    auto info_num = 0u;
+    for (auto const &info : m_metadata_block_info) {
+      ++info_num;
+
+      m_in->setFilePointer(info.filepos + tag_size_start);
+      auto block = m_in->read(info.len);
+
+      if (block->get_size() == 0)
+        continue;
+
+      auto buffer = block->get_buffer();
+
+      if (info_num == m_metadata_block_info.size())
+        buffer[0] = buffer[0] | 0x80; // set "last metadata block" flag
+      else
+        buffer[0] = buffer[0] & 0x7f; // clear "last metadata block" flag
+
+      m_header->add(*block);
     }
 
   } catch (mtx::exception &) {
@@ -70,6 +94,11 @@ void
 flac_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
+
+  m_ti.m_language = m_language;
+
+  if (m_tags && demuxing_requested('T', 0))
+    m_ti.m_tags = clone(m_tags);
 
   add_packetizer(new flac_packetizer_c(this, m_ti, m_header->get_buffer(), m_header->get_size()));
   show_packetizer_info(0, ptzr(0));
@@ -107,15 +136,9 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
   FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &u);
 
-  block.type    = mtx::flac::BLOCK_TYPE_HEADERS;
-  block.filepos = 0;
-  block.len     = u;
-  old_pos       = u;
+  mxdebug_if(m_debug, fmt::format("flac_reader: headers: block at 0 with size {0}\n", u));
 
-  blocks.push_back(block);
-
-  mxdebug_if(m_debug, fmt::format("flac_reader: headers: block at {0} with size {1}\n", block.filepos, block.len));
-
+  old_pos              = u;
   old_progress         = -5;
   current_frame_broken = false;
   ok                   = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
@@ -152,12 +175,10 @@ flac_reader_c::parse_file(bool for_identification_only) {
   else
     mxinfo("\n");
 
-  if ((blocks.size() == 0) || (blocks[0].type != mtx::flac::BLOCK_TYPE_HEADERS))
+  if (m_metadata_block_info.size() == 0)
     mxerror(Y("flac_reader: Could not read all header packets.\n"));
 
-  m_in->setFilePointer(tag_size_start);
-  blocks[0].len     -= 4;
-  blocks[0].filepos  = 4;
+  current_block = blocks.begin();
 
   return metadata_parsed;
 }
@@ -261,7 +282,74 @@ flac_reader_c::handle_picture_metadata(FLAC__StreamMetadata const *metadata) {
 }
 
 void
+flac_reader_c::handle_vorbis_comment_metadata(FLAC__StreamMetadata const *metadata) {
+  if (metadata->length == 0)
+    return;
+
+  m_in->save_pos();
+  mtx::at_scope_exit_c restore_pos([this]() { m_in->restore_pos(); });
+
+  FLAC__uint64 decode_position = 0;
+  FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &decode_position);
+
+  auto start_pos = tag_size_start + decode_position - metadata->length;
+  m_in->setFilePointer(start_pos);
+
+  auto raw_data  = m_in->read(metadata->length);
+  auto comments  = mtx::tags::parse_vorbis_comments_from_packet(*raw_data, 0);
+  auto converted = mtx::tags::from_vorbis_comments(comments);
+
+  if (m_debug) {
+    mxdebug(fmt::format("flac_reader: comments: title {0} language {1} num pictures {2} (unsupported at the moment)\n",
+                        !converted.m_title.empty()      ? converted.m_title             : "<no title>"s,
+                        converted.m_language.is_valid() ? converted.m_language.format() : "<no language>"s,
+                        converted.m_pictures.size()));
+
+    mxdebug(fmt::format("flac_reader: comments: track tags:\n"));
+    dump_ebml_elements(converted.m_track_tags.get());
+
+    mxdebug(fmt::format("flac_reader: comments: album tags:\n"));
+    dump_ebml_elements(converted.m_album_tags.get());
+  }
+
+  handle_language_and_title(converted);
+
+  m_tags = mtx::tags::merge(converted.m_track_tags, converted.m_album_tags);
+}
+
+void
+flac_reader_c::handle_language_and_title(mtx::tags::converted_vorbis_comments_t const &converted) {
+  if (converted.m_language.is_valid())
+    m_language = converted.m_language;
+
+  if (converted.m_title.empty())
+    return;
+
+  m_title = converted.m_title;
+  maybe_set_segment_title(m_title);
+}
+
+void
 flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
+  FLAC__uint64 new_decode_position = 0;
+  FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &new_decode_position);
+
+  auto position = new_decode_position - metadata->length - FLAC__STREAM_METADATA_HEADER_LENGTH;
+
+  m_metadata_block_info.emplace_back(flac_block_t{ position, metadata->type, metadata->length + FLAC__STREAM_METADATA_HEADER_LENGTH });
+
+  mxdebug_if(m_debug,
+             fmt::format("flac_reader: metadata type {0} ({1}) size {2} at {3}\n",
+                           metadata->type == FLAC__METADATA_TYPE_STREAMINFO     ? "stream info"
+                         : metadata->type == FLAC__METADATA_TYPE_PICTURE        ? "picture"
+                         : metadata->type == FLAC__METADATA_TYPE_PADDING        ? "padding"
+                         : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "application"
+                         : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "seektable"
+                         : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "vorbis comment"
+                         : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "cuesheet"
+                         :                                                        "undefined",
+                         static_cast<unsigned int>(metadata->type), metadata->length + FLAC__STREAM_METADATA_HEADER_LENGTH, position));
+
   switch (metadata->type) {
     case FLAC__METADATA_TYPE_STREAMINFO:
       handle_stream_info_metadata(metadata);
@@ -271,16 +359,11 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
       handle_picture_metadata(metadata);
       break;
 
+    case FLAC__METADATA_TYPE_VORBIS_COMMENT:
+      handle_vorbis_comment_metadata(metadata);
+      break;
+
     default:
-      mxdebug_if(m_debug,
-                 fmt::format("{0} ({1}) block ({2} bytes)\n",
-                               metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
-                             : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
-                             : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
-                             : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
-                             : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
-                             :                                                        "UNDEFINED",
-                             static_cast<unsigned int>(metadata->type), metadata->length));
       break;
   }
 }
@@ -326,15 +409,27 @@ flac_reader_c::flac_eof_cb() {
 
 void
 flac_reader_c::identify() {
+  auto container_info = mtx::id::info_c{};
+  container_info.add(mtx::id::title, m_title);
+
   auto info = mtx::id::info_c{};
+  info.add(mtx::id::track_name,               m_title);
   info.add(mtx::id::audio_bits_per_sample,    bits_per_sample);
   info.add(mtx::id::audio_channels,           channels);
   info.add(mtx::id::audio_sampling_frequency, sample_rate);
 
-  id_result_container();
+  if (m_language.is_valid())
+    info.add(mtx::id::language, m_language.format());
+
+  if (m_tags)
+    add_track_tags_to_identification(*m_tags, info);
+
+  id_result_container(container_info.get());
   id_result_track(0, ID_RESULT_TRACK_AUDIO, "FLAC", info.get());
   for (auto &attachment : g_attachments)
     id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description, attachment->id);
+  if (m_tags)
+    id_result_tags(0, mtx::tags::count_simple(*m_tags));
 }
 
 #else  // HAVE_FLAC_FORMAT_H

@@ -710,6 +710,9 @@ ogm_reader_c::identify() {
 
     id_result_track(track_id, dmx->get_type(), dmx->get_codec(), info.get());
 
+    if (dmx->m_tags)
+      id_result_tags(track_id, mtx::tags::count_simple(*dmx->m_tags));
+
     ++track_id;
   }
 
