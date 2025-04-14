@@ -14,6 +14,10 @@
   Matroska tags can be prevented with the usual options,
   e.g. `--no-track-tags`. The comments will also be removed from the codec
   initialization data. Implements #6079.
+* mkvmerge, MKVToolNix GUI's chapter editor: when reading simple (OGM-style)
+  chapter files & no character set is given for the file, mkvmerge will try
+  UTF-8 first before falling back to the system's default encoding. Implements
+  #6084.
 
 ## Bug fixes
 

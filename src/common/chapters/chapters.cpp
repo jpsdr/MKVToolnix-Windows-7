@@ -41,6 +41,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
+#include "common/strings/utf8.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
 
@@ -263,11 +264,10 @@ parse_simple(mm_text_io_c *in,
   int mode                              = 0;
   int num                               = 0;
   int64_t start                         = 0;
-  charset_converter_cptr cc_utf8;
 
-  bool do_convert = in->get_byte_order_mark() == byte_order_mark_e::none;
-  if (do_convert)
-    cc_utf8 = charset_converter_c::init(charset);
+  auto has_bom  = in->get_byte_order_mark() != byte_order_mark_e::none;
+  auto try_utf8 = !has_bom && charset.empty();
+  auto cc_utf8  = charset_converter_c::init(charset);
 
   auto use_language = language.is_valid()           ? language
                     : g_default_language.is_valid() ? g_default_language
@@ -281,8 +281,21 @@ parse_simple(mm_text_io_c *in,
   std::string line;
 
   while (in->getline2(line)) {
-    if (do_convert)
-      line = cc_utf8->utf8(line);
+    if (!has_bom) {
+      auto ok = false;
+
+      if (try_utf8) {
+        if (mtx::utf8::is_valid(line))
+          ok = true;
+        else
+          try_utf8 = false;
+      }
+
+      if (!ok)
+        line = cc_utf8->utf8(line);
+    }
+
+    mtx::utf8::fix_invalid(line);
 
     mtx::string::strip(line);
     if (line.empty())
