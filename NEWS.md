@@ -23,6 +23,13 @@
 
 * mkvmerge: Ogg reader: during identification the track tags are now reported
   properly.
+* MKVToolNix GUI: multiplexer: within the "additional options", both
+  track-specific ones & the global ones on the "Output" tab, it wasn't
+  possible to specify empty (zero-length) arguments. With the intended syntax
+  of two consecutive single or double quotation marks the empty arguments were
+  simply skipped. This was fixed, and it is now possible to specify
+  e.g. `--title ""` in the global "Additional options" in order to force no
+  title to be written ever. Fixes #6087.
 
 
 # Version 91.0 "Signs" 2025-03-16
