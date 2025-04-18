@@ -26,7 +26,7 @@ def create_file erb_file_name, erb_binding
   dest_file_name = erb_file_name.gsub(%r{\.erb$}, '')
   content        = IO.read(erb_file_name, encoding: "utf-8")
 
-  File.open(dest_file_name, 'w') { |file| file.puts(ERB.new(content, nil, '<>').result(erb_binding)) }
+  File.open(dest_file_name, 'w') { |file| file.puts(ERB.new(content, trim_mode: '<>').result(erb_binding)) }
 
   if %r{rules$}.match(dest_file_name)
     FileUtils.chmod 0755, dest_file_name
