@@ -70,12 +70,14 @@ unescapeSplitShellUnix(QString const &source) {
   auto escapeNext       = false;
   auto singleQuoted     = false;
   auto doubleQuoted     = false;
-  auto appendChar       = [&currentArgument, &arguments](QChar const &c) {
+  auto ensureHaveArg    = [&currentArgument, &arguments]() {
     if (!currentArgument) {
       arguments << Q("");
       currentArgument = &arguments.last();
     }
-
+  };
+  auto appendChar = [&currentArgument, &ensureHaveArg](QChar const &c) {
+    ensureHaveArg();
     *currentArgument += c;
   };
 
@@ -99,13 +101,15 @@ unescapeSplitShellUnix(QString const &source) {
       else
         appendChar(c);
 
-    } else if (c == Q('\''))
+    } else if (c == Q('\'')) {
+      ensureHaveArg();
       singleQuoted = true;
 
-    else if (c == Q('"'))
+    } else if (c == Q('"')) {
+      ensureHaveArg();
       doubleQuoted = true;
 
-    else if (c == Q(' '))
+    } else if (c == Q(' '))
       currentArgument = nullptr;
 
     else
