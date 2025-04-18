@@ -14,11 +14,22 @@
   Matroska tags can be prevented with the usual options,
   e.g. `--no-track-tags`. The comments will also be removed from the codec
   initialization data. Implements #6079.
+* mkvmerge, MKVToolNix GUI's chapter editor: when reading simple (OGM-style)
+  chapter files & no character set is given for the file, mkvmerge will try
+  UTF-8 first before falling back to the system's default encoding. Implements
+  #6084.
 
 ## Bug fixes
 
 * mkvmerge: Ogg reader: during identification the track tags are now reported
   properly.
+* MKVToolNix GUI: multiplexer: within the "additional options", both
+  track-specific ones & the global ones on the "Output" tab, it wasn't
+  possible to specify empty (zero-length) arguments. With the intended syntax
+  of two consecutive single or double quotation marks the empty arguments were
+  simply skipped. This was fixed, and it is now possible to specify
+  e.g. `--title ""` in the global "Additional options" in order to force no
+  title to be written ever. Fixes #6087.
 
 
 # Version 91.0 "Signs" 2025-03-16
