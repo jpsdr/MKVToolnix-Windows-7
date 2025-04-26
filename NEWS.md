@@ -1,4 +1,4 @@
-# Version ?
+# Version 92.0 "Everglow" 2025-04-26
 
 ## New features and enhancements
 
