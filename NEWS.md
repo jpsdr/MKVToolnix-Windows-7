@@ -20,6 +20,10 @@
   #6084.
 * MKVToolNix GUI: multiplexer: the special drag & drop zones added in v91 are
   now shown by default in new installations.
+* MKVToolNix GUI: in new installations the main window will now be sized at
+  75% of the screen's resolution initially with a certain minimum initial
+  size. This improves initial readability on high DPI screens that use screen
+  scaling factors such as 150%.
 
 ## Bug fixes
 

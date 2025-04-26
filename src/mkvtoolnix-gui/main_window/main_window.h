@@ -138,6 +138,8 @@ protected:
   virtual QWidget *createNotImplementedWidget();
   Util::LanguageDialog &setupLanguageDialog();
 
+  virtual void resizeToDefaultSize();
+
   virtual void showEvent(QShowEvent *event);
   virtual void closeEvent(QCloseEvent *event);
   virtual bool beforeCloseCheckRunningJobs();
