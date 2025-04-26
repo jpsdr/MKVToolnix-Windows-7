@@ -37,6 +37,13 @@
   e.g. `--title ""` in the global "Additional options" in order to force no
   title to be written ever. Fixes #6087.
 
+## Build system changes
+
+* Windows build: the `packaging/windows/populate_installer_dir.sh` now expects
+  the user to pass the Saxon-HE's JAR file name to be passed with the `-s` or
+  `--saxon-jar` parameter instead of the base directory for Saxon-HE. This
+  allows newer versions of Saxon-HE to be used.
+
 
 # Version 91.0 "Signs" 2025-03-16
 
