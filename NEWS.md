@@ -18,6 +18,8 @@
   chapter files & no character set is given for the file, mkvmerge will try
   UTF-8 first before falling back to the system's default encoding. Implements
   #6084.
+* MKVToolNix GUI: multiplexer: the special drag & drop zones added in v91 are
+  now shown by default in new installations.
 
 ## Bug fixes
 
