@@ -1,3 +1,12 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: the default regular expression for deriving the
+  "forced display" track flag from file names for subtitles was extended to
+  also match on the term `signs`. Implements #6094.
+
+
 # Version 92.0 "Everglow" 2025-04-26
 
 ## New features and enhancements
