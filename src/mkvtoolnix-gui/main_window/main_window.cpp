@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QRegularExpression>
+#include <QScreen>
 #include <QStackedWidget>
 #include <QStaticText>
 #include <QVBoxLayout>
@@ -100,7 +101,7 @@ MainWindow::MainWindow(QWidget *parent)
   retranslateUi();
 
   if (!Util::restoreWidgetGeometry(this))
-    resize(1060, 780);
+    resizeToDefaultSize();
 
   App::programRunner().setup();
 
@@ -122,6 +123,19 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {
+}
+
+void
+MainWindow::resizeToDefaultSize() {
+  QSize newSize{1060, 780};
+
+  auto screens = App::screens();
+  if (!screens.isEmpty()) {
+    newSize.setWidth( std::max<unsigned int>(screens[0]->size().width()  * 3 / 4, newSize.width()));
+    newSize.setHeight(std::max<unsigned int>(screens[0]->size().height() * 3 / 4, newSize.height()));
+  }
+
+  resize(newSize);
 }
 
 void

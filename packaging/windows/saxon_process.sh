@@ -16,7 +16,11 @@ shift 3
 
 perl -pe 's/PUBLIC.*OASIS.*dtd"//' < ${src_file} > ${tmpi}
 
-java -classpath ${saxon_dir}/saxon9he.jar net.sf.saxon.Transform -o:${dst_file} -xsl:${stylesheet} ${tmpi} $@ |& \
+java \
+  -classpath ${saxon_jar} \
+  -Djdk.xml.entityExpansionLimit=100000 \
+  net.sf.saxon.Transform \
+  -o:${dst_file} -xsl:${stylesheet} -dtd:off ${tmpi} $@ |& \
   perl -pe '
     s{^Error\s+(at.*?)?\s*on\s+line\s+(\d+)\s+column\s+(\d+)\s+of\s+(.+?):}{\4:\2:\3: error: \1};
     s{(.+?)\s+on\s+line\s+(\d+)\s+of\s+(.+)}{\3:\2: warning: \1};'
