@@ -539,7 +539,7 @@ Settings::load() {
   m_mergeSortFilesTracksByTypeWhenAdding      = reg.value(s_valMergeSortFilesTracksByTypeWhenAdding,                                           true).toBool();
   m_mergeReconstructSequencesWhenAdding       = reg.value(s_valMergeReconstructSequencesWhenAdding,                                            true).toBool();
   m_mergeAlwaysShowOutputFileControls         = reg.value(s_valMergeAlwaysShowOutputFileControls,                                              true).toBool();
-  m_mergeShowDNDZones                         = reg.value(s_valMergeShowDNDZones,                                                              false).toBool();
+  m_mergeShowDNDZones                         = reg.value(s_valMergeShowDNDZones,                                                              true).toBool();
   m_mergePredefinedVideoTrackNames            = reg.value(s_valMergePredefinedVideoTrackNames).toStringList();
   m_mergePredefinedAudioTrackNames            = reg.value(s_valMergePredefinedAudioTrackNames).toStringList();
   m_mergePredefinedSubtitleTrackNames         = reg.value(s_valMergePredefinedSubtitleTrackNames).toStringList();

@@ -8,8 +8,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2025-02-27 20:49+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: HULEN, 2021-2022\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
+"Last-Translator: Chun-Kai Mao <chunkai.mao@gmail.com>, 2019-2021,2025\n"
+"Language-Team: Chinese (Taiwan) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: src/common/audio_emphasis.cpp:49
 #, no-c-format
 msgid "no emphasis"
-msgstr ""
+msgstr "無增強"
 
 #: src/common/audio_emphasis.cpp:50
 #, no-c-format
@@ -65,7 +65,7 @@ msgstr "未知"
 #: src/common/audio_emphasis.cpp:52
 #, no-c-format
 msgid "CCIT-J.17"
-msgstr ""
+msgstr "CCIT-J.17"
 
 #: src/common/audio_emphasis.cpp:53
 #, no-c-format
@@ -116,7 +116,7 @@ msgstr ""
 #: src/common/stereo_mode.cpp:102
 #, no-c-format
 msgid "Number"
-msgstr ""
+msgstr "數值"
 
 #: src/common/audio_emphasis.cpp:114
 #: src/common/stereo_mode.cpp:102
@@ -1399,7 +1399,7 @@ msgstr "位元深度"
 #: src/common/kax_element_names.cpp:113
 #, no-c-format
 msgid "Emphasis"
-msgstr ""
+msgstr "增強"
 
 #: src/common/kax_element_names.cpp:115
 #, no-c-format
@@ -2258,9 +2258,9 @@ msgid "Edition string"
 msgstr "輸入版本"
 
 #: src/common/kax_element_names.cpp:292
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition language (IETF BCP 47)"
-msgstr "標籤語言 (IETF BCP 47)"
+msgstr "版本語言 (IETF BCP 47)"
 
 #: src/common/kax_element_names.cpp:293
 #, no-c-format
@@ -2444,12 +2444,12 @@ msgstr "標籤語言 (IETF BCP 47)"
 #: src/common/kax_element_names.cpp:333
 #, no-c-format
 msgid "Default language"
-msgstr "預設值語言"
+msgstr "預設語言"
 
 #: src/common/kax_element_names.cpp:334
 #, no-c-format
 msgid "Default language (bogus element with invalid ID)"
-msgstr ""
+msgstr "預設語言 (ID無效的偽造元素)"
 
 #: src/common/kax_file.cpp:50
 #, no-c-format, c++-format
@@ -3245,9 +3245,9 @@ msgid "A human-readable track name."
 msgstr "一個人類可讀的字串，描述軌道名稱。"
 
 #: src/common/property_element.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Language (obsolete)"
-msgstr "下方選擇語言"
+msgstr "語言(淘汰)"
 
 #: src/common/property_element.cpp:145
 #, fuzzy, no-c-format
@@ -3725,14 +3725,14 @@ msgid "Bits per sample, mostly used for PCM."
 msgstr "每次取樣的位元數，主要用於 PCM。"
 
 #: src/common/property_element.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio emphasis"
-msgstr "音訊聲道數"
+msgstr "音訊增強"
 
 #: src/common/property_element.cpp:215
 #, no-c-format
 msgid "Emphasis applied on audio which must be reversed by player to get the actual samples."
-msgstr ""
+msgstr "曾強音訊，播放器必須將其反轉才能獲得實際樣本。"
 
 #: src/common/split_arg_parsing.cpp:33
 #, no-c-format, c++-format
@@ -5496,7 +5496,7 @@ msgstr "PTS 錯誤: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"
 #: src/input/r_vobsub.cpp:580
 #, no-c-format, c++-format
 msgid "Bogus aid {0}\n"
-msgstr "無效 aid {0}\n"
+msgstr "偽造的 aid {0}\n"
 
 #: src/input/r_vobsub.cpp:607
 #, no-c-format
@@ -5988,6 +5988,8 @@ msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
 "                           discarding any remaining packets of other tracks.\n"
 msgstr ""
+"  --stop-after-video-ends  在主要視訊軌道結束後停止處理，\n"
+"                           丟棄其他軌道的任何剩餘資料包。\n"
 
 #: src/merge/mkvmerge.cpp:151
 #, no-c-format
@@ -6504,17 +6506,17 @@ msgstr ""
 "                           移除降低標準對話增益。\n"
 
 #: src/merge/mkvmerge.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --audio-emphasis <TID:n|keyword>\n"
 "                           Sets the audio emphasis track header value. It can\n"
 "                           be either a number or a keyword (see\n"
 "                           '--list-audio-emphasis' for the full list).\n"
 msgstr ""
-"  --stereo-mode <TID:n|關鍵字>\n"
-"                           設定立體模式參數。參數可以是 0 - 14\n"
-"                           之間的一個數或關鍵字\n"
-"                           (請見文件裡的完整清單)。\n"
+"  --audio-emphasis <TID:n|關鍵字>\n"
+"                           設定音訊增強軌道的標頭。它可以是\n"
+"                           一個數值或是一個關鍵字 (請見\n"
+"                           '--list-audio-emphasis' 獲得完整列表)。\n"
 
 #: src/merge/mkvmerge.cpp:294
 #, no-c-format
@@ -6883,6 +6885,8 @@ msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
 "                           '--audio-emphasis' option and their meaning.\n"
 msgstr ""
+"  --list-audio-emphasis    列出所有支援於 '--audio-emphasis' \n"
+"                            的數值選項以及其代表的涵義。\n"
 
 #: src/merge/mkvmerge.cpp:396
 #, no-c-format
@@ -7104,12 +7108,12 @@ msgstr "{0}: 除數為 0，在 '{1} {2}' 。\n"
 #: src/merge/mkvmerge.cpp:765
 #, no-c-format, c++-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"
-msgstr "顯示尺寸: 未以 <TID>:<width>x<height> 的形式給定, 例如 1:640x480 (參數為 '{0}' )。\n"
+msgstr "顯示尺寸: 未以 <TID>:<width>x<height> 的形式給定參數, 例如 1:640x480 (參數為 '{0}' )。\n"
 
 #: src/merge/mkvmerge.cpp:784
 #, no-c-format, c++-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '{0}').\n"
-msgstr "剪裁參數: 未以 <TID>:<left>,<top>,<right>,<bottom> 的形式給定 例如 0:10,5,10,5 (參數為 '{0}' )。\n"
+msgstr "剪裁參數: 未以 <TID>:<left>,<top>,<right>,<bottom> 的形式給定參數 例如 0:10,5,10,5 (參數為 '{0}' )。\n"
 
 #: src/merge/mkvmerge.cpp:981
 #, no-c-format, c++-format
@@ -7144,9 +7148,9 @@ msgid "'{0}' is not a valid field order."
 msgstr "'{0}' 不是有效的欄位順序。"
 
 #: src/merge/mkvmerge.cpp:1065
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n"
-msgstr "立體視覺模式參數: 未以 <TID>:<n|keyword> 形式給定參數，其中可以是 0 到 {0} 中的數字或這些關鍵字其中一個: {1} (參數為 '{2}' )。\n"
+msgstr "音訊增強模式選項: 未以 <TID>:<mode> 的形式給定參數，其中的模式可以是以下列表中的一個數值或是關鍵字: {0} (參數為 '{1}').\n"
 
 #: src/merge/mkvmerge.cpp:1103
 #, no-c-format, c++-format
@@ -9422,7 +9426,7 @@ msgstr "輸出十六進位元件的位置(&X)"
 #: src/mkvtoolnix-gui/forms/info/tab.h:155
 #, no-c-format
 msgid "Modified:"
-msgstr ""
+msgstr "已修改:"
 
 #: src/mkvtoolnix-gui/forms/info/tool.h:179
 #, no-c-format
@@ -9686,7 +9690,7 @@ msgstr "MKVToolNix 網站(&W)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #, no-c-format
 msgid "Community && &help forum"
-msgstr ""
+msgstr "社群與求助討論(&H)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:704
 #, no-c-format
@@ -9826,9 +9830,9 @@ msgid "Add files from clip&board"
 msgstr "從剪貼簿加入檔案(&B)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:770
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save all settings to single file"
-msgstr "設定值檔案另存新檔"
+msgstr "儲存所有設定至單一檔案"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:772
 #, fuzzy, no-c-format
@@ -9836,9 +9840,9 @@ msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+L"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:774
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save all settings to single file as"
-msgstr "設定值檔案另存新檔"
+msgstr "另存所有設定至單一檔案"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:775
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:777
@@ -9900,24 +9904,24 @@ msgid "&Font && size:"
 msgstr "字型與大小(&F):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use system settings"
-msgstr "關閉設定(&C)"
+msgstr "使用系統設定"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Light"
-msgstr "至右"
+msgstr "淺色"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
 #, no-c-format
 msgid "Dark"
-msgstr ""
+msgstr "深色"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color palette:"
-msgstr "色彩空間(色域)"
+msgstr "調色盤"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
 #, no-c-format
@@ -10106,14 +10110,14 @@ msgid "Process &priority:"
 msgstr "優先處理順序(&P):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Default command-&line escape mode:"
-msgstr "預設額外命令行選項(&M)："
+msgstr "預設命令行逸出模式(&L):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "確認個別類型至少有一個軌道設定 \"軌道已啟用\" 的標籤(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
 #, no-c-format
@@ -10144,7 +10148,7 @@ msgstr "總是為包含視訊軌檔案建立新的合併設定(&Y)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "Show special drag && drop &zones"
-msgstr ""
+msgstr "顯示特殊拖放區域(&Z)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #, no-c-format
@@ -10164,7 +10168,7 @@ msgstr "在加入新檔案時，永遠跳過已存在相同檔名附件(&K)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
 #, no-c-format
 msgid "Always show the destination file controls &below tabs"
-msgstr "總是在標籤頁下方顯示輸出檔案的控制(&B)"
+msgstr "永遠在標籤頁下方顯示輸出檔案的控制(&B)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, no-c-format
@@ -10272,24 +10276,24 @@ msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "啟用刪除音訊軌的正常化增益對話方塊"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2375
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
-msgstr "以檔案的名稱為軌道預設語言"
+msgstr "從檔案名稱中指派字幕的 \"強制(&G):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2376
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"commentar&y\" flag for audio/subtitles from file names:"
-msgstr "以檔案的名稱為軌道預設語言"
+msgstr "從檔案名稱中指派音訊/字幕的 \"評論\" 標籤(&Y):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2377
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Set \"original language\" flag for audio/subtitles for language:"
-msgstr "以檔案的名稱為軌道預設語言"
+msgstr "為音訊/字幕設定 \"原始語言\" 標籤:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2378
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"&hearing impaired\" flag for audio/subtitles from file names:"
-msgstr "以檔案的名稱為軌道預設語言"
+msgstr "從檔案名稱中指派音訊/字幕的 \"聽力受損\" 標籤(&H):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2379
 #, no-c-format
@@ -10297,9 +10301,9 @@ msgid "Default subtitle &charset to set:"
 msgstr "字幕預設字元集(&C)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive flags from trac&k names in addition to file names"
-msgstr "以檔案的名稱為軌道預設語言"
+msgstr "除了從檔案名稱，還可以從軌道名稱指派標籤(&K)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2381
 #, no-c-format
@@ -10366,9 +10370,9 @@ msgid "Use the &title as the base file name if a title is set"
 msgstr "如果已設定標題，將使用標題作為檔名的基礎(&T)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2396
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
-msgstr "否則，輸出檔案名稱將由原始檔案名稱命名。"
+msgstr "使用輸入檔案的目錄名稱，而不是檔案名稱"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2397
 #, no-c-format
@@ -10398,7 +10402,7 @@ msgstr "使用固定的目錄(&X):"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2403
 #, no-c-format
 msgid "Ensure the file name is &unique"
-msgstr "確保檔名的唯一性(&U)"
+msgstr "確認檔名的唯一性(&U)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2404
 #, no-c-format
@@ -10451,7 +10455,7 @@ msgstr "字幕(&S)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2414
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
-msgstr ""
+msgstr "永遠啟用強制字幕軌道複製(&F)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2415
 #, no-c-format
@@ -10471,13 +10475,13 @@ msgstr "掃描目錄中的其他播放列表(&S)："
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:955
 #, no-c-format
 msgid "Always ask the user"
-msgstr "總是詢問使用者"
+msgstr "永遠詢問使用者"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2418
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 #, no-c-format
 msgid "Always scan for other playlists"
-msgstr "總是掃描其他播放清單"
+msgstr "永遠掃描其他播放清單"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2419
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
@@ -10493,7 +10497,7 @@ msgstr "播放列表最短時長(&M)："
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2422
 #, no-c-format
 msgid "&Ignore playlists meant for menus"
-msgstr ""
+msgstr "忽略用於選單的播放列表(&I)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2423
 #, no-c-format
@@ -11243,7 +11247,7 @@ msgstr "AAC 是 SBR/HE-AAC/AAC+:"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2259
 #, no-c-format
 msgid "Emphasis:"
-msgstr ""
+msgstr "增強:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2260
 #, no-c-format
@@ -11344,9 +11348,9 @@ msgid "Create WebM compliant file"
 msgstr "建立 WebM 相容檔"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2285
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Stop after video track ends"
-msgstr "若視訊為交錯式請設定。"
+msgstr "視訊軌道結束後停止"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2288
 #, no-c-format
@@ -12453,19 +12457,19 @@ msgid "Job completed with warnings"
 msgstr "完成，警告"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:92
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Job failed"
-msgstr "失敗"
+msgstr "任務失敗"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:100
 #, no-c-format
 msgid "The job queue has finished processing."
-msgstr ""
+msgstr "作業佇列已完成處裡。"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:120
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Job queue changed"
-msgstr "作業佇列"
+msgstr "作業佇列已變更"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:220
 #, no-c-format
@@ -12731,9 +12735,9 @@ msgstr "MKVToolNix 管理辦法"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:675
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:686
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Markdown files"
-msgstr "Matroska 檔案"
+msgstr "Markdown 檔案"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:684
 #, no-c-format
@@ -13023,7 +13027,7 @@ msgstr "章節編輯需要知道文字章節檔使用的字元集，才能正確
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
-msgstr "預設情況下，總是詢問使用者在開啟無法自動識別該字元集的檔案時，要使用哪種字元集。"
+msgstr "預設情況下，永遠詢問使用者在開啟無法自動識別該字元集的檔案時，要使用哪種字元集。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, no-c-format
@@ -13135,7 +13139,7 @@ msgstr "如果已知的軌道存在卻未能找到，則可以在此處更改探
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:417
 #, no-c-format
 msgid "Sets how to escape arguments by default in the 'Show command line' dialog."
-msgstr ""
+msgstr "設定在 '顯示命令行' 的對話方塊中預設如何轉義溢出參數。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
 #, no-c-format
@@ -13443,7 +13447,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:566
 #, no-c-format
 msgid "If enabled, the flags mentioned above will be derived from track names as well, not just from file names."
-msgstr ""
+msgstr "如果啟用，不僅只有檔案名稱，連上方指派的標籤也將會指派到該軌道。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:568
 #, no-c-format
@@ -13478,7 +13482,7 @@ msgstr "只有播放清單的時間長度至少有一定長度並提供使用者
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:582
 #, no-c-format
 msgid "Ignores playlists which are likely meant for menus."
-msgstr ""
+msgstr "忽略可能用於選單的播放列表。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:583
 #, no-c-format
@@ -13838,7 +13842,7 @@ msgstr "語言設為 '未指定' ('und')"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1110
 #, no-c-format
 msgid "Always"
-msgstr ""
+msgstr "永遠"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1455
 #, no-c-format
@@ -14037,9 +14041,9 @@ msgstr "刪除合併工具作業的原始檔案"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:202
 #: src/mkvtoolnix-gui/util/settings.cpp:319
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Quit MKVToolNix"
-msgstr "MKVToolNix 圖形使用者介面(&G)"
+msgstr "退出 MKVToolNix"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
@@ -14325,7 +14329,7 @@ msgstr "請參閱 MKVToolNix 錯誤追蹤上的 #2469 和 #2480 問題，以便�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:54
 #, no-c-format
 msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
-msgstr ""
+msgstr "在主要視訊軌道結束後停止處理，丟棄其他軌道的任何剩餘資料包。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
@@ -15268,7 +15272,7 @@ msgstr "DocType 標頭項目變更為 \"webm\" 。"
 #: src/mkvtoolnix-gui/merge/output.cpp:249
 #, no-c-format
 msgid "Stops processing after the primary video track ends."
-msgstr ""
+msgstr "在主要視訊軌道結束後停止處理。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
@@ -15618,7 +15622,7 @@ msgstr "請輸入新增作業的描述。"
 #: src/mkvtoolnix-gui/merge/tab.cpp:607
 #, no-c-format
 msgid "Adding the job to the queue failed"
-msgstr ""
+msgstr "新增作業至佇列失敗"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:349
 #, fuzzy, no-c-format
@@ -15824,7 +15828,7 @@ msgstr "執行 mkvmerge 發生錯誤"
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:93
 #, no-c-format
 msgid "Storing result in cache failed"
-msgstr ""
+msgstr "停止結果到快取失敗"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:165
 #, no-c-format
@@ -15973,7 +15977,7 @@ msgstr "僅這一次替換為最簡式(&J)"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr "總是自動替換為最簡式"
+msgstr "永遠自動替換為最簡式"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
 #, no-c-format
@@ -15988,7 +15992,7 @@ msgstr "僅這一次替換為擴展語言子標籤形式(&E)"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
 #, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "總是自動替換為擴展語言子標籤形式(&K)"
+msgstr "永遠自動替換為擴展語言子標籤形式(&K)"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:441
 #, no-c-format
@@ -16176,9 +16180,9 @@ msgid "Play audio file '%1'"
 msgstr "播放音訊檔案 '%1'"
 
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save"
-msgstr "儲存(&S)"
+msgstr "儲存"
 
 #: src/mkvtoolnix-gui/util/widget.cpp:188
 #, no-c-format

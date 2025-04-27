@@ -227,7 +227,7 @@ while [[ ! -z $1 ]]; do
   case $1 in
     -t|--target-dir) tgt_dir=$2;    shift; ;;
     -m|--mxe-dir)    mxe_dir=$2;    shift; ;;
-    -s|--saxon-dir)  saxon_dir=$2;  shift; ;;
+    -s|--saxon-jar)  saxon_jar=$2;  shift; ;;
     --exe-signer)    exe_signer=$2; shift; ;;
     *)               fail "Unknown option $1" ;;
   esac
@@ -239,8 +239,8 @@ if [[   -z ${tgt_dir}   ]] fail "The target directory has not been set"
 if [[ ! -d ${tgt_dir}   ]] fail "The target directory does not exist"
 if [[   -z ${mxe_dir}   ]] fail "The MXE base directory has not been set"
 if [[ ! -d ${mxe_dir}   ]] fail "The MXE base directory does not exist"
-if [[   -z ${saxon_dir} ]] fail "The Saxon-HE base directory has not been set"
-if [[ ! -d ${saxon_dir} ]] fail "The Saxon-HE base directory does not exist"
+if [[   -z ${saxon_jar} ]] fail "The Saxon-HE JAR has not been set"
+if [[ ! -f ${saxon_jar} ]] fail "The Saxon-HE JAR does not exist"
 if [[ ( -n ${exe_signer} ) && ( ! -x ${exe_signer} ) ]] fail "The EXE signer cannot be run"
 
 setup_variables
