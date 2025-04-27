@@ -1,4 +1,4 @@
-MKVToolNix 91.0
+MKVToolNix 92.0
 =================
 
 # Moving to Codeberg

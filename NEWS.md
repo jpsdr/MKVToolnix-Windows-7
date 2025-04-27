@@ -1,4 +1,4 @@
-# Version ?
+# Version 92.0 "Everglow" 2025-04-26
 
 ## New features and enhancements
 
@@ -18,6 +18,12 @@
   chapter files & no character set is given for the file, mkvmerge will try
   UTF-8 first before falling back to the system's default encoding. Implements
   #6084.
+* MKVToolNix GUI: multiplexer: the special drag & drop zones added in v91 are
+  now shown by default in new installations.
+* MKVToolNix GUI: in new installations the main window will now be sized at
+  75% of the screen's resolution initially with a certain minimum initial
+  size. This improves initial readability on high DPI screens that use screen
+  scaling factors such as 150%.
 
 ## Bug fixes
 
@@ -30,6 +36,13 @@
   simply skipped. This was fixed, and it is now possible to specify
   e.g. `--title ""` in the global "Additional options" in order to force no
   title to be written ever. Fixes #6087.
+
+## Build system changes
+
+* Windows build: the `packaging/windows/populate_installer_dir.sh` now expects
+  the user to pass the Saxon-HE's JAR file name to be passed with the `-s` or
+  `--saxon-jar` parameter instead of the base directory for Saxon-HE. This
+  allows newer versions of Saxon-HE to be used.
 
 
 # Version 91.0 "Signs" 2025-03-16
