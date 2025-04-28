@@ -1410,7 +1410,7 @@ Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName() {
 
 QString
 Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName() {
-  return Q(R"((^|[[\](){}.+=#-])forced([[\](){}.+=#-]|$))");
+  return Q(R"((^|[[\](){}.+=#-])(forced|signs)([[\](){}.+=#-]|$))");
 }
 
 QString
