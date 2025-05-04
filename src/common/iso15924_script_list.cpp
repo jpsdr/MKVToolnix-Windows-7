@@ -45,6 +45,7 @@ static script_init_t const s_scripts_init[] = {
   { "Bass", 259, "Bassa Vah",                                                                                       false },
   { "Batk", 365, "Batak",                                                                                           false },
   { "Beng", 325, "Bengali (Bangla)",                                                                                false },
+  { "Berf", 258, "Beria Erfe",                                                                                      false },
   { "Bhks", 334, "Bhaiksuki",                                                                                       false },
   { "Blis", 550, "Blissymbols",                                                                                     false },
   { "Bopo", 285, "Bopomofo",                                                                                        false },
@@ -57,6 +58,7 @@ static script_init_t const s_scripts_init[] = {
   { "Cari", 201, "Carian",                                                                                          false },
   { "Cham", 358, "Cham",                                                                                            false },
   { "Cher", 445, "Cherokee",                                                                                        false },
+  { "Chis", 298, "Chisoi",                                                                                          false },
   { "Chrs", 109, "Chorasmian",                                                                                      false },
   { "Cirt", 291, "Cirth",                                                                                           false },
   { "Copt", 204, "Coptic",                                                                                          false },
@@ -75,6 +77,7 @@ static script_init_t const s_scripts_init[] = {
   { "Elba", 226, "Elbasan",                                                                                         false },
   { "Elym", 128, "Elymaic",                                                                                         false },
   { "Ethi", 430, "Ethiopic (Geʻez)",                                                                                false },
+  { "Gara", 164, "Garay",                                                                                           false },
   { "Geok", 241, "Khutsuri (Asomtavruli and Nuskhuri)",                                                             false },
   { "Geor", 240, "Georgian (Mkhedruli and Mtavruli)",                                                               false },
   { "Glag", 225, "Glagolitic",                                                                                      false },
@@ -84,6 +87,7 @@ static script_init_t const s_scripts_init[] = {
   { "Gran", 343, "Grantha",                                                                                         false },
   { "Grek", 200, "Greek",                                                                                           false },
   { "Gujr", 320, "Gujarati",                                                                                        false },
+  { "Gukh", 397, "Gurung Khema",                                                                                    false },
   { "Guru", 310, "Gurmukhi",                                                                                        false },
   { "Hanb", 503, "Han with Bopomofo (alias for Han + Bopomofo)",                                                    false },
   { "Hang", 286, "Hangul (Hangŭl, Hangeul)",                                                                        false },
@@ -97,6 +101,7 @@ static script_init_t const s_scripts_init[] = {
   { "Hluw",  80, "Anatolian Hieroglyphs (Luwian Hieroglyphs, Hittite Hieroglyphs)",                                 false },
   { "Hmng", 450, "Pahawh Hmong",                                                                                    false },
   { "Hmnp", 451, "Nyiakeng Puachue Hmong",                                                                          false },
+  { "Hntl", 504, "Han (Traditional variant) with Latin (alias for Hant + Latn)",                                    false },
   { "Hrkt", 412, "Japanese syllabaries (alias for Hiragana + Katakana)",                                            false },
   { "Hung", 176, "Old Hungarian (Hungarian Runic)",                                                                 false },
   { "Inds", 610, "Indus (Harappan)",                                                                                false },
@@ -116,6 +121,7 @@ static script_init_t const s_scripts_init[] = {
   { "Knda", 345, "Kannada",                                                                                         false },
   { "Kore", 287, "Korean (alias for Hangul + Han)",                                                                 false },
   { "Kpel", 436, "Kpelle",                                                                                          false },
+  { "Krai", 396, "Kirat Rai",                                                                                       false },
   { "Kthi", 317, "Kaithi",                                                                                          false },
   { "Lana", 351, "Tai Tham (Lanna)",                                                                                false },
   { "Laoo", 356, "Lao",                                                                                             false },
@@ -160,6 +166,7 @@ static script_init_t const s_scripts_init[] = {
   { "Nshu", 499, "Nüshu",                                                                                           false },
   { "Ogam", 212, "Ogham",                                                                                           false },
   { "Olck", 261, "Ol Chiki (Ol Cemet’, Ol, Santali)",                                                               false },
+  { "Onao", 296, "Ol Onal",                                                                                         false },
   { "Orkh", 175, "Old Turkic, Orkhon Runic",                                                                        false },
   { "Orya", 327, "Oriya (Odia)",                                                                                    false },
   { "Osge", 219, "Osage",                                                                                           false },
@@ -238,11 +245,13 @@ static script_init_t const s_scripts_init[] = {
   { "Sara", 292, "Sarati",                                                                                          false },
   { "Sarb", 105, "Old South Arabian",                                                                               false },
   { "Saur", 344, "Saurashtra",                                                                                      false },
+  { "Seal", 590, "(Small) Seal",                                                                                    false },
   { "Sgnw",  95, "SignWriting",                                                                                     false },
   { "Shaw", 281, "Shavian (Shaw)",                                                                                  false },
   { "Shrd", 319, "Sharada, Śāradā",                                                                                 false },
   { "Shui", 530, "Shuishu",                                                                                         false },
   { "Sidd", 302, "Siddham, Siddhaṃ, Siddhamātṛkā",                                                                  false },
+  { "Sidt", 180, "Sidetic",                                                                                         false },
   { "Sind", 318, "Khudawadi, Sindhi",                                                                               false },
   { "Sinh", 348, "Sinhala",                                                                                         false },
   { "Sogd", 141, "Sogdian",                                                                                         false },
@@ -263,6 +272,7 @@ static script_init_t const s_scripts_init[] = {
   { "Taml", 346, "Tamil",                                                                                           false },
   { "Tang", 520, "Tangut",                                                                                          false },
   { "Tavt", 359, "Tai Viet",                                                                                        false },
+  { "Tayo", 380, "Tai Yo",                                                                                          false },
   { "Telu", 340, "Telugu",                                                                                          false },
   { "Teng", 290, "Tengwar",                                                                                         false },
   { "Tfng", 120, "Tifinagh (Berber)",                                                                               false },
@@ -272,7 +282,10 @@ static script_init_t const s_scripts_init[] = {
   { "Tibt", 330, "Tibetan",                                                                                         false },
   { "Tirh", 326, "Tirhuta",                                                                                         false },
   { "Tnsa", 275, "Tangsa",                                                                                          false },
+  { "Todr", 229, "Todhri",                                                                                          false },
+  { "Tols", 299, "Tolong Siki",                                                                                     false },
   { "Toto", 294, "Toto",                                                                                            false },
+  { "Tutg", 341, "Tulu-Tigalari",                                                                                   false },
   { "Ugar",  40, "Ugaritic",                                                                                        false },
   { "Vaii", 470, "Vai",                                                                                             false },
   { "Visp", 280, "Visible Speech",                                                                                  false },
@@ -296,9 +309,9 @@ static script_init_t const s_scripts_init[] = {
 
 void
 init() {
-  g_scripts.reserve(261);
+  g_scripts.reserve(274);
 
-  for (script_init_t const *script = s_scripts_init, *end = script + 261; script < end; ++script)
+  for (script_init_t const *script = s_scripts_init, *end = script + 274; script < end; ++script)
     g_scripts.emplace_back(script->code, script->number, script->english_name, script->is_deprecated);
 }
 

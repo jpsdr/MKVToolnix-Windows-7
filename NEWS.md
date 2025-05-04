@@ -5,6 +5,9 @@
 * MKVToolNix GUI: multiplexer: the default regular expression for deriving the
   "forced display" track flag from file names for subtitles was extended to
   also match on the term `signs`. Implements #6094.
+* all: updated the various lists that go into IETF/BCP 47 language tags: ISO
+  639 languages; ISO 3166 countries; ISO 15924 regions; IANA subtag
+  registries.
 
 
 # Version 92.0 "Everglow" 2025-04-26
