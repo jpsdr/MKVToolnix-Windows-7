@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2025-02-27 20:49+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Prydespar <prydespar@gmail.com>, 2024\n"
+"Last-Translator: Prydespar <prydespar@gmail.com>, 2024-2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -3414,7 +3414,7 @@ msgstr "Відэа: каэфіцэнты колернай матрыцы"
 #: src/common/property_element.cpp:171
 #, no-c-format
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr "Задае матрыцу каэфіцэнтаў відэа, якая выкарыстоўваецца для атрымання яркасці і колернасці са значэнняў чырвонага, зялёнага і сіняга базавых колераў."
+msgstr "Задае матрыцу каэфіцэнтаў відэа, якая выкарыстоўваецца для вымання яркасці і колернасці са значэнняў чырвонага, зялёнага і сіняга базавых колераў."
 
 #: src/common/property_element.cpp:172
 #, no-c-format
@@ -6675,7 +6675,7 @@ msgid ""
 msgstr ""
 "  --color-matrix-coefficients <TID:n>\n"
 "                           Задае матрыцу каэфіцэнтаў відэа, якая\n"
-"выкарыстоўваецца для атрымання яркасці і колернасці са значэнняў\n"
+"выкарыстоўваецца для вымання яркасці і колернасці са значэнняў\n"
 "чырвонага, зялёнага і сінега базавых колераў.\n"
 
 #: src/merge/mkvmerge.cpp:322
@@ -8222,7 +8222,7 @@ msgstr "Файл метак часу «{0}» утрымлівае радок н�
 #: src/merge/timestamp_factory.cpp:98
 #, no-c-format
 msgid "JSON timestamp files must contain a JSON object with a 'version' key.\n"
-msgstr ""
+msgstr "Файлы часавых метак JSON павінныя ўтрымліваць аб'ект JSON з ключом version.\n"
 
 #: src/merge/timestamp_factory.cpp:121
 #, no-c-format, c++-format
@@ -8411,7 +8411,7 @@ msgstr "Калі такога раздзела няма, замест яго б�
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr "Калі раздзелы былі загружаныя з файла Matroska, канечная метка часу для самага апошняга раздзела будзе атрыманая з даўжыні файла."
+msgstr "Калі раздзелы былі загружаныя з файла Matroska, канечная метка часу для самага апошняга раздзела будзе вынятая з даўжыні файла."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
@@ -9035,7 +9035,7 @@ msgstr "Паш&ырыць межы метак часу пачатка і кан�
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
 #, no-c-format
 msgid "Derive &end timestamps from start timestamps"
-msgstr "Атрымаць значэнне &канечнай меткі часу з часу пачатковай"
+msgstr "Вымаць значэнне &канечнай меткі часу з часу пачатковай"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, no-c-format
@@ -9913,19 +9913,19 @@ msgid "Add files from clip&board"
 msgstr "Дадаць файлы з &буфера абмену"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:770
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save all settings to single file"
-msgstr "Захаваць файл налад як"
+msgstr "Захаваць усе налады ў адзін файл"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:772
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl+Shift+L"
+msgstr "Ctrl+Shift+S"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:774
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save all settings to single file as"
-msgstr "Захаваць файл налад як"
+msgstr "Захаваць усе налады ў адзін файл як"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:775
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:777
@@ -10231,7 +10231,7 @@ msgstr "Заў&сёды ствараць новыя налады зліцця д
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "Show special drag && drop &zones"
-msgstr ""
+msgstr "Паказваць &вобласці для перацягвання"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #, no-c-format
@@ -10361,22 +10361,22 @@ msgstr "Уключыць выдаленне &нармалізацыі дыяло
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2375
 #, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
-msgstr "&Атрымліваць пазнаку субцітраў «прымусовы паказ» з імяў файлаў:"
+msgstr "Вымаць &пазнаку субцітраў «прымусовы паказ» з імяў файлаў:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2376
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"commentar&y\" flag for audio/subtitles from file names:"
-msgstr "Вымаць пазнаку &hearing impair для аўдыя/субцітраў з імяў файла:"
+msgstr "Вымаць &пазнаку «каментарый» для аўдыя/субцітраў з імяў файлаў:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2377
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Set \"original language\" flag for audio/subtitles for language:"
-msgstr "Вымаць пазнаку &hearing impair для аўдыя/субцітраў з імяў файла:"
+msgstr "Задаць пазнаку «мова арыгінала» для мовы аўдыя/субцітраў:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2378
 #, no-c-format
 msgid "Derive \"&hearing impaired\" flag for audio/subtitles from file names:"
-msgstr "Вымаць пазнаку &hearing impair для аўдыя/субцітраў з імяў файла:"
+msgstr "Вымаць пазнаку «парушэнне &слыху» для аўдыя/субцітраў з імяў файла:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2379
 #, no-c-format
@@ -10384,9 +10384,9 @@ msgid "Default subtitle &charset to set:"
 msgstr "Перадвызначаная кадзіроўка су&бцітраў:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive flags from trac&k names in addition to file names"
-msgstr "Атрымліваць мовы трэкаў з імён файлаў"
+msgstr "Вымаць пазнакі з імяў трэкаў у дадатак да імяў файлаў"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2381
 #, no-c-format
@@ -10538,7 +10538,7 @@ msgstr "&Субцітры"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2414
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
-msgstr "Заўжды капіяваць трэкі &прымусовых субцітраў"
+msgstr "Заўсёды капіяваць трэкі &прымусовых субцітраў"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2415
 #, no-c-format
@@ -11569,7 +11569,7 @@ msgstr "Вы таксама можаце перацягнуць сюды мед�
 #: src/mkvtoolnix-gui/forms/merge/tool.h:441
 #, no-c-format
 msgid "D&&D"
-msgstr ""
+msgstr "D&&D"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
@@ -11985,7 +11985,7 @@ msgstr "&Замяніць далучэнне іншым файлам"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:385
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
-msgstr "Замяніць далучэнне новым файлам і  &ўзяць з яго імя і тып MIME"
+msgstr "Замяніць далучэнне новым файлам і  &выняць з яго імя і тып MIME"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:394
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
@@ -13000,7 +13000,7 @@ msgstr "Змяненні гэтага параметра ўступяць у с�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
 #, no-c-format
 msgid "If checked, the GUI will not show helpful usage tips in popup windows while hovering over a control — such as this one."
-msgstr "Калі ўключана, інтэрфейс не будзе паказваць карысныя падказкі, якія ўсплываюць пры навядзенні на элемент — накшталт гэтай падказкі."
+msgstr "Калі ўключана, графічны інтэрфейс не будзе паказваць карысныя падказкі, якія ўсплываюць пры навядзенні на элемент — накшталт гэтай падказкі."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:308
 #, no-c-format
@@ -13060,7 +13060,7 @@ msgstr "Калі ўключана, назвы ў загалоўках уклад
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:334
 #, no-c-format
 msgid "If enabled, the GUI will use legacy MIME types when detecting the MIME type of font attachments instead of the current standard MIME types."
-msgstr "Калі ўключана, то GUI будзе выкарыстоўваць састарэлыя MIME-тыпы пры вызначэнні далучэнняў шрыфтоў замест бягучых стандартных тыпаў MIME."
+msgstr "Калі ўключана, то графічны інтэрфейс будзе выкарыстоўваць састарэлыя MIME-тыпы пры вызначэнні далучэнняў шрыфтоў замест бягучых стандартных тыпаў MIME."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:335
 #, no-c-format
@@ -13090,7 +13090,7 @@ msgstr "Калі выключана, праграма будзе запытва�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:347
 #, no-c-format
 msgid "If disabled, the GUI will let you enter a description for a job when adding it to the queue."
-msgstr "Калі адключана, GUI дазволіць вам увесці пісанне задання пры даданні яго ў чаргу."
+msgstr "Калі адключана, графічны інтэрфейс дазволіць вам увесці пісанне задання пры даданні яго ў чаргу."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
 #, no-c-format
@@ -13100,7 +13100,7 @@ msgstr "Калі ўключана, то першая ўкладка ў меню 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:349
 #, no-c-format
 msgid "If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
-msgstr "Калі ўключана, то GUI будзе аўтаматычна пераходзіць да меню «Вывад задання» заўжды, калі запускаецца выкананне задання (напрыклад, пры націсканні кнопкі «Выканаць зліццё»)."
+msgstr "Калі ўключана, то графічны інтэрфейс будзе аўтаматычна пераходзіць да меню «Вывад задання» заўжды, калі запускаецца выкананне задання (напрыклад, пры націсканні кнопкі «Выканаць зліццё»)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:350
 #, no-c-format
@@ -13110,13 +13110,13 @@ msgstr "Калі ўключана, то пры выхадзе з праграм�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:351
 #, no-c-format
 msgid "If enabled, the GUI will remove the output file created by a job if that job ends with an error or if the user aborts the job."
-msgstr "Калі ўключана, то GUI будзе выдаляць выхадныя файлы задання, якое скончылася з памылкай або перапыненага карыстальнікам."
+msgstr "Калі ўключана, то графічны інтэрфейс будзе выдаляць выхадныя файлы задання, якое скончылася з памылкай або перапыненага карыстальнікам."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:352
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:353
 #, no-c-format
 msgid "If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
-msgstr "Калі ўключана, то GUI выдаліць завершаныя заданні, старэйшыя за зададзеную колькасць дзён, незалежна ад стану іх завяршэння."
+msgstr "Калі ўключана, то графічны інтэрфейс выдаліць завершаныя заданні, старэйшыя за зададзеную колькасць дзён, незалежна ад стану іх завяршэння."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:357
 #, no-c-format
@@ -13146,7 +13146,7 @@ msgstr "Рэдактар раздзелаў павінен ведаць кадз
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
-msgstr "Па змаўчанні пры адкрыцці файла заўжды пытае ў карыстальніка, якую кадзіроўку выкарыстоўваць, калі яна не можа быць распазнаная аўтаматычна."
+msgstr "Па змаўчанні пры адкрыцці файла заўсёды пытае ў карыстальніка, якую кадзіроўку выкарыстоўваць, калі яна не можа быць распазнаная аўтаматычна."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, no-c-format
@@ -13171,7 +13171,7 @@ msgstr "Звярніце ўвагу, што нават калі функцыя �
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:378
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
-msgstr "Калі ўключана, то GUI будзе ачышчаць поле «назва файла» кожны раз, калі апошні зыходны файл выдаляецца."
+msgstr "Калі ўключана, то графічны інтэрфейс будзе ачышчаць поле «назва файла» заўсёды, калі апошні зыходны файл выдаляецца."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:383
 #, no-c-format
@@ -13233,7 +13233,7 @@ msgstr "Звычайна mkvmerge будзе ўжываць дадатковае
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 #, no-c-format
 msgid "Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files."
-msgstr "Уключэнне гэтай функцыі задае сцісканне ў становішча «‎не» па змаўчанні для ўсіх тыпаў трэкаў пры даданні файлаў."
+msgstr "Уключэнне гэтай функцыі графічнага інтэрфейсу задае сцісканне ў становішча «‎не» па змаўчанні для ўсіх тыпаў трэкаў пры даданні файлаў."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
 #, no-c-format
@@ -13293,7 +13293,7 @@ msgstr "Вызначаецца толькі пачатковы парадак, �
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:430
 #, no-c-format
 msgid "If enabled, the GUI will analyze the file names when you add multiple files at once."
-msgstr "Калі ўключана, GUI будзе аналізаваць імі файлаў пры адначасовым даданні некалькіх файлаў."
+msgstr "Калі ўключана, графічны інтэрфейс будзе аналізаваць імі файлаў пры адначасовым даданні некалькіх файлаў."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:431
 #, no-c-format
@@ -13328,7 +13328,7 @@ msgstr "Калі такая паслядоўнасць выяўленая, да�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:437
 #, no-c-format
 msgid "If disabled, all files selected for adding will always be added regardless of their names."
-msgstr "Калі адключана, усе выбраныя файлы будуць дададзеныя незалежна ад іх імяў."
+msgstr "Калі адключана, усе выбраныя файлы будуць заўсёды дададзеныя незалежна ад іх імяў."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:441
 #, no-c-format
@@ -13344,22 +13344,22 @@ msgstr "У адваротным выпадку яно будзе паказан�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:477
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."
-msgstr "Пры перацягванні файлаў са знешняй праграмы ў інструмент зліцця GUI можа выконваць розныя дзеянні."
+msgstr "Пры перацягванні файлаў са знешняй праграмы ў інструмент зліцця графічны інтэрфейс можа выконваць розныя дзеянні."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
 msgid "Normally the program will chose what to do with the dropped files based on the preferences, e.g. always add them to the current multiplex settings or ask the user interactively what to do."
-msgstr ""
+msgstr "Звычайна, праграма сама выбірае, што рабіць з файламі пасля перацягвання, грунтуючыся на наладах, напрыклад, заўсёды дадаваць іх да бягучых налад зліцця або запытваць дзеянне ў карыстальніка."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:448
 #, no-c-format
 msgid "If enabled, zones will be shown that files can be dropped on to circumvent the preferences."
-msgstr ""
+msgstr "Калі ўключана, будзе паказаная вобласць для перацягвання файлаў у абыход налад."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:449
 #, no-c-format
 msgid "Each zone corresponds to and selects one of the possible actions."
-msgstr ""
+msgstr "Кожная вобласць адпавядае аднаму магчымаму дзеянню."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:455
 #, no-c-format
@@ -13394,7 +13394,7 @@ msgstr "Калі запісаў больш, чым наладжаных коле
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:468
 #, no-c-format
 msgid "The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."
-msgstr "GUI дапаможа вам пачаць новае зліццё пасля запуску задання або дадання яго ў чаргу."
+msgstr "Графічны інтэрфейс дапаможа вам пачаць новае зліццё пасля запуску задання або дадання яго ў чаргу."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:469
 #, no-c-format
@@ -13424,22 +13424,22 @@ msgstr "Пры выкарыстанні пункта «закрыць бягуч
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:478
 #, no-c-format
 msgid "The default is to always add all the files to the current multiplex settings."
-msgstr "Па змаўчанні заўжды дадае ўсе файлы ў бягучыя налады зліцця."
+msgstr "Па змаўчанні заўсёды дадае ўсе файлы ў бягучыя налады зліцця."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:479
 #, no-c-format
 msgid "The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those."
-msgstr "GUI таксама можа кожны раз запытваць у карыстальніка, што яму рабіць далей. Напрыклад, далучаць файлы да бягучага замест дадання або ствараць новыя налады зліцця."
+msgstr "Графічны інтэрфейс таксама можа кожны раз запытваць у карыстальніка, што яму рабіць далей. Напрыклад, далучаць файлы да бягучага замест дадання або ствараць новыя налады зліцця."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:488
 #, no-c-format
 msgid "When the user drags & drops directories from an external application onto the multiplex tool the GUI can take different actions."
-msgstr "Пры перацягванні карыстальнікам папак са знешняй праграмы ў інструмент зліцця, GUI можа выконваць розныя дзеянні."
+msgstr "Пры перацягванні карыстальнікам папак са знешняй праграмы ў інструмент зліцця, графічны інтэрфейс можа выконваць розныя дзеянні."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:491
 #, no-c-format
 msgid "The GUI can ask for confirmation when you're about to create a file without audio tracks in it."
-msgstr "GUI можа запытваць пацвярджэнне , калі вы збіраецеся стварыць файл без аўдыятрэкаў."
+msgstr "Графічны інтэрфейс можа запытваць пацвярджэнне, калі вы збіраецеся стварыць файл без аўдыятрэкаў."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:495
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:501
@@ -13464,24 +13464,24 @@ msgstr "Калі карыстальнік дадае такі файл, звес
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:497
 #, no-c-format
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "Калі зыходны файл не ўтрымлівае задавання моўнай прыналежнасці для аўдыятрэка, мова можа быць атрыманая з імя файла пры ўмове, што яно адпавядае пэўным шаблонам (напрыклад «...[bel]...» для беларускай мовы)."
+msgstr "Калі зыходны файл не ўтрымлівае задавання моўнай прыналежнасці для аўдыятрэка, мова можа быць вынятая з імя файла пры ўмове, што яно адпавядае пэўным шаблонам (напрыклад «...[bel]...» для беларускай мовы)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:498
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:504
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:510
 #, no-c-format
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
-msgstr "У залежнасці ад гэтага параметра мова таксама можа быць атрыманая з імя файла, калі мова ў зыходным файле пазначаная як «нявызначаная» («und»)."
+msgstr "У залежнасці ад гэтага параметра мова таксама можа быць вынятая з імя файла, калі мова ў зыходным файле пазначаная як «нявызначаная» («und»)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:503
 #, no-c-format
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "Калі зыходны файл не ўтрымлівае задавання моўнай прыналежнасці для відэатрэка, мова можа быць атрыманая з імя файла пры ўмове, што яно адпавядае пэўным шаблонам (напрыклад «...[bel]...» для беларускай мовы)."
+msgstr "Калі зыходны файл не ўтрымлівае задавання моўнай прыналежнасці для відэатрэка, мова можа быць вынятая з імя файла пры ўмове, што яно адпавядае пэўным шаблонам (напрыклад «...[bel]...» для беларускай мовы)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:509
 #, no-c-format
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "Калі зыходны файл не ўтрымлівае задавання моўнай прыналежнасці для трэка субцітраў, мова можа быць атрыманая з імя файла пры ўмове, што яно адпавядае пэўным шаблонам (напрыклад «...[bel]...» для беларускай мовы)."
+msgstr "Калі зыходны файл не ўтрымлівае задавання моўнай прыналежнасці для трэка субцітраў, мова можа быць вынятая з імя файла пры ўмове, што яно адпавядае пэўным шаблонам (напрыклад «...[bel]...» для беларускай мовы)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:513
 #, no-c-format
@@ -13509,7 +13509,7 @@ msgstr "Толькі мовы ў спісе «выбраныя» справа б
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:522
 #, no-c-format
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "Выбраная тут мова будзе выкарыстаная для аўдыятрэкаў, у якіх зыходны файл не ўтрымлівае задавання моўнай прыналежнасці і для якіх мова не была атрыманая з імя файла."
+msgstr "Выбраная тут мова будзе выкарыстаная для аўдыятрэкаў, у якіх зыходны файл не ўтрымлівае задавання моўнай прыналежнасці і для якіх мова не была вынятая з імя файла."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:523
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:529
@@ -13521,12 +13521,12 @@ msgstr "У залежнасці ад налад ніжэй гэтая мова �
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:528
 #, no-c-format
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "Выбраная тут мова будзе выкарыстаная для відэатрэкаў, у якіх зыходны файл не ўтрымлівае задавання моўнай прыналежнасці і для якіх мова не была атрыманая з імя файла."
+msgstr "Выбраная тут мова будзе выкарыстаная для відэатрэкаў, у якіх зыходны файл не ўтрымлівае задавання моўнай прыналежнасці і для якіх мова не была вынятая з імя файла."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:534
 #, no-c-format
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "Выбраная тут мова будзе выкарыстаная для трэкаў субцітраў, у якіх зыходны файл не ўтрымлівае задавання моўнай прыналежнасці і для якіх мова не была атрыманая з імя файла."
+msgstr "Выбраная тут мова будзе выкарыстаная для трэкаў субцітраў, у якіх зыходны файл не ўтрымлівае задавання моўнай прыналежнасці і для якіх мова не была вынятая з імя файла."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:538
 #, no-c-format
@@ -13536,22 +13536,22 @@ msgstr "Аўдыяфайлы і файлы субцітраў часта змя�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:539
 #, no-c-format
 msgid "The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."
-msgstr "Графічны інтэрфейс можа задаць пазнаку hearing impaired для такіх трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
+msgstr "Графічны інтэрфейс можа задаць пазнаку «парушэнне слыху» для такіх трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:546
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio and subtitle files often contain the words 'comments' or 'commentary' in their file name to signal that they contain content such as a movie director's comments."
-msgstr "Аўдыяфайлы і файлы субцітраў часта змяшчаюць словы \"cc\" або \"sdh\" у імі, каб паказаць прызначэнне для людзей з парушэннямі слыху."
+msgstr "Файлы аўдыя і субцітраў часта ўтрымліваюць словы «каментарый» або «каментарыі» ў сваёй назве для вызначэння таго, што ўнутры іх прадстаўленыя каментарыі рэжысёра і іншых стваральнікаў фільма."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:547
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The GUI can set the 'commentary' flag for such tracks if the file name matches this regular expression."
-msgstr "Графічная абалонка можа задаць сцяг «прымусовы паказ» для падобных трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
+msgstr "Графічны інтэрфейс можа задаваць пазнаку «каментарый» для падобных трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:553
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The GUI can set the 'original language' flag for audio and subtitle tracks if the track's language matches this language."
-msgstr "Графічны інтэрфейс можа задаць пазнаку hearing impaired для такіх трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
+msgstr "Графічны інтэрфейс можа задаваць пазнаку «мова арыгінала» для аўдыятрэкаў і субцітраў, калі мова трэка адпавядае гэтай мове."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:559
 #, no-c-format
@@ -13561,12 +13561,12 @@ msgstr "Імёны файлаў субцітраў часта ўтрымліва
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:560
 #, no-c-format
 msgid "The GUI can set the 'forced display' flag for such tracks if the file name matches this regular expression."
-msgstr "Графічная абалонка можа задаць сцяг «прымусовы паказ» для падобных трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
+msgstr "Графічны інтэрфейс можа задаць сцяг «прымусовы паказ» для падобных трэкаў, калі імя файла адпавядае гэтаму рэгулярнаму выразу."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:566
 #, no-c-format
 msgid "If enabled, the flags mentioned above will be derived from track names as well, not just from file names."
-msgstr ""
+msgstr "Калі ўключана, пазнакі, згаданыя вышэй, будуць вымацца і з імяў трэкаў, а не толькі з імяў файлаў. "
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:568
 #, no-c-format
@@ -13616,17 +13616,17 @@ msgstr "Калі ўключана, самая вялікая вокладка з
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:587
 #, no-c-format
 msgid "When adding new files as attachments the GUI will check if there are other attachments with the same name."
-msgstr "Пры даданні новых файлаў у якасці далучэнняў GUI правярае наяўнасць іншых далучэнняў з такім жа імем."
+msgstr "Пры даданні новых файлаў у якасці далучэнняў, графічны інтэрфейс правярае наяўнасць іншых далучэнняў з такім жа імем."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:588
 #, no-c-format
 msgid "If one is found, the GUI will ask whether to skip the file or to add it anyway."
-msgstr "Калі такі файл знойдзены, GUI спытае, прапусціць яго ці дадаць у любым выпадку."
+msgstr "Калі такі файл знойдзены, графічны інтэрфейс спытае, прапусціць яго ці дадаць у любым выпадку."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:589
 #, no-c-format
 msgid "If enabled, such files will always be skipped without asking."
-msgstr "Калі ўключана, такія файлы заўжды будуць прапушчаныя без запыту."
+msgstr "Калі ўключана, такія файлы заўсёды будуць прапушчаныя без запыту."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:593
 #, no-c-format
@@ -13657,7 +13657,7 @@ msgstr "Калі ўключана, то назва файла будзе вык�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:609
 #, no-c-format
 msgid "Otherwise the destination file name is derived from the source file names."
-msgstr "Інакш імя файла назначэння будзе атрымана з імён зыходных файлаў."
+msgstr "Інакш імя файла назначэння будзе вынятае з імяў зыходных файлаў."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:608
 #, no-c-format
@@ -13677,7 +13677,7 @@ msgstr "Гэта робіцца толькі ў тым выпадку, калі 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:615
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
-msgstr "Калі ўключана, то GUI будзе ашчышчаць поле «Імя файла назначэння» кожны раз, калі апошні зыходны файл выдаляецца."
+msgstr "Калі ўключана, то графічны інтэрфейс будзе ашчышчаць поле «Імя файла назначэння» заўсёды, калі апошні зыходны файл выдаляецца."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:617
 #, no-c-format
@@ -13709,7 +13709,7 @@ msgstr "Звярніце ўвагу, што ў выпадку, калі мова
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:626
 #, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
-msgstr "Калі ўключана, то трэкі гэтага тыпу будуць заўжды задавацца для капіявання незалежна ад іх мовы."
+msgstr "Калі ўключана, то трэкі гэтага тыпу будуць заўсёды задавацца для капіявання незалежна ад іх мовы."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:627
 #, no-c-format
@@ -13778,7 +13778,7 @@ msgstr "Кадзіроўкі ў «выбраным» спісе справа б�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:660
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."
-msgstr "Пры перацягванні карыстальнікам файлаў са знешняй праграмы на ўкладку рэдактара загалоўка, GUI можа выконваць розныя дзеянні."
+msgstr "Пры перацягванні карыстальнікам файлаў са знешняй праграмы на ўкладку рэдактара загалоўка, графічны інтэрфейс можа выконваць розныя дзеянні."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:661
 #, no-c-format
@@ -13788,7 +13788,7 @@ msgstr "Па змаўчанні запытваць у карыстальніка
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:662
 #, no-c-format
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
-msgstr "Акрамя пытання GUI можа заўжды адкрываць перацягнутыя файлы ў новых укладках або заўсёды дадаваць іх як новыя ўкладанні ў бягучую ўкладку."
+msgstr "Акрамя пытання, графічны інтэрфейс можа заўжды адкрываць перацягнутыя файлы ў новых укладках або заўсёды дадаваць іх як новыя ўкладанні ў бягучую ўкладку."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:796
 #, no-c-format
@@ -13961,7 +13961,7 @@ msgstr "Нават калі мова пазначаная як «нявызна�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1110
 #, no-c-format
 msgid "Always"
-msgstr ""
+msgstr "Заўсёды"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1455
 #, no-c-format
@@ -14021,9 +14021,9 @@ msgid "The list of recognized track languages in file names must not be empty."
 msgstr "Спіс распазнаных моў трэкаў у імёнах файлаў павінен не быць пустым."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1612
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value for deriving the 'commentary' flag from file names must be a valid regular expression."
-msgstr "Значэнне для вымання пазнакі hearing impaired з імяў файла павінна быць рэгулярным выразам."
+msgstr "Значэнне для вымання пазнакі «каментарыі» з імяў файлаў павінна быць рэгулярным выразам."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1628
 #, no-c-format
@@ -14084,7 +14084,7 @@ msgstr "Ніжэй прыведзеныя прыклады."
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:107
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
-msgstr "Заўсёды выкарыстоўвайце поўныя шляхі, нават калі праграма знаходзіцца ў той жа папцы, што і GUI."
+msgstr "Заўсёды выкарыстоўвайце поўныя шляхі, нават калі праграма знаходзіцца ў той жа папцы, што і графічны інтэрфейс."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:112
 #, no-c-format
@@ -14183,7 +14183,7 @@ msgstr "Незалежна ад параметраў кожная актыўна
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:230
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
-msgstr "Гэта адвольнае імя, якое GUI будзе ўжываць, каб выкарыстоўваць дадзеную канкрэтную канфігурацыю."
+msgstr "Гэта адвольнае імя, якое графічны інтэрфейс будзе ўжываць, каб выкарыстоўваць дадзеную канкрэтную канфігурацыю."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:231
 #, no-c-format
@@ -14549,7 +14549,7 @@ msgstr[3] "Папка, дзе ён знаходзіцца, утрымлівае 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:53
 #, no-c-format
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
-msgstr "GUI можа прасканаваць гэтыя файлы, паказаць вынікі, уключаючы даўжыню і колькасць трэкаў для кожнага знойдзенага плэй-ліста, каб дазволіць выбраць файл для дадання."
+msgstr "Графічны інтэрфейс можа прасканаваць гэтыя файлы, паказаць вынікі, уключаючы даўжыню і колькасць трэкаў для кожнага знойдзенага плэй-ліста, каб дазволіць выбраць файл для дадання."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:58
 #, no-c-format
@@ -14977,7 +14977,7 @@ msgstr "Адвольна запаўняльнае поле для карыста
 #: src/mkvtoolnix-gui/merge/input.cpp:654
 #, no-c-format
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
-msgstr "Тое, што вы тут напішаце, дадаецца пасля ўсіх астатніх параметраў, дададзеных mmg, так што вы можаце перавызначыць любы з зададзеных mmg-параметраў для гэтага трэка."
+msgstr "Тое, што вы тут напішаце, графічны інтэрфейс дадае пасля ўсіх астатніх параметраў, дададзеных mmg, так што вы можаце перавызначыць любы з зададзеных mmg-параметраў для гэтага трэка."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:655
 #, no-c-format
@@ -15783,29 +15783,29 @@ msgid "Adding the job to the queue failed"
 msgstr "Даданне заданняў ў чаргу не выкананае"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:349
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Drag & drop files here to add all of them to the current multiplex settings."
-msgstr "Па змаўчанні заўжды дадае ўсе файлы ў бягучыя налады зліцця."
+msgstr "Перацягніце файлы сюды, каб дадаць іх усе ў бягучыя налады зліцця."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:350
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Drag & drop files here to create a new multiplex settings tab & add all files there."
-msgstr "Стварыць адну ўкладку з новымі наладамі зліцця і ўсе файлы дадаць туды"
+msgstr "Перацягніце файлы сюды, каб стварыць новую ўкладку налад зліцця і дадаць іх усіх туды."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:351
 #, no-c-format
 msgid "Drag & drop files here to create a new multiplex settings tab per dropped file & add one file to each new tab."
-msgstr ""
+msgstr "Перацягніце файлы сюды, каб стварыць новыя ўкладкі налад зліцця і дадаць кожны файл у сваю."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:352
 #, no-c-format
 msgid "Drag & drop image files here to attach them as cover images to be used by players."
-msgstr ""
+msgstr "Перацягніце файлы выяў сюды, каб далучыць іх як выявы вокладкі, якія будуць выкарыстоўвацца прайгравальнікамі."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:353
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Drag & drop image files here to attach them as general attachments."
-msgstr "Па змаўчанні заўжды дадае ўсе файлы ў бягучыя налады зліцця."
+msgstr "Перацягніце файлы выяў сюды, каб далучыць іх як звычайныя далучэнні."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:382
 #, no-c-format
@@ -15880,7 +15880,7 @@ msgstr "Замест гэтага файл павінен быць зададз�
 #: src/mkvtoolnix-gui/merge/tool.cpp:1190
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
-msgstr "GUI будзе замяняць перацягнутым сюды файлам любы папярэдні файл з такім жа імем."
+msgstr "Графічны інтэрфейс будзе замяняць перацягнутым сюды файлам любы папярэдні файл з такім жа імем."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:1170
 #, no-c-format
