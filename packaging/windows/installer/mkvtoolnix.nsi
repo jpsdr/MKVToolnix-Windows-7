@@ -92,6 +92,7 @@ Page custom showExternalLinks
 !insertmacro LANG_LOAD "Dutch"
 !insertmacro LANG_LOAD "French"
 !insertmacro LANG_LOAD "German"
+!insertmacro LANG_LOAD "Hungarian"
 !insertmacro LANG_LOAD "Italian"
 !insertmacro LANG_LOAD "Japanese"
 !insertmacro LANG_LOAD "Korean"

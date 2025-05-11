@@ -8,6 +8,8 @@
 * all: updated the various lists that go into IETF/BCP 47 language tags: ISO
   639 languages; ISO 3166 countries; ISO 15924 regions; IANA subtag
   registries.
+* translations: added a Hungarian translation of the programs & man pages by
+  Viktor György, John Fowler & Attila Zsigus (see `AUTHORS`).
 
 
 # Version 92.0 "Everglow" 2025-04-26
