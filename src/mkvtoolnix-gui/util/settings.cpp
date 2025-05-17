@@ -287,6 +287,30 @@ convert67_0_0DefaultAudioFileNames(version_number_t const &writtenByVersion) {
   reg->endGroup();            // runProgramConfigurations
 }
 
+void
+convert93_0RegexesForDerivingTrackFlags(version_number_t const &writtenByVersion) {
+  if (writtenByVersion >= version_number_t{"92.0.28"})
+    return;
+
+  auto reg = Settings::registry();
+  reg->beginGroup(s_grpDefaults);
+
+  auto currentValue = reg->value(s_valDefaultRegexForDerivingCommentaryFlagFromFileNames).toString();
+  if (currentValue == Q(R"([[\](){} .+=#-](comments|commentary)[[\](){} .+=#-])"))
+    reg->setValue(s_valDefaultRegexForDerivingCommentaryFlagFromFileNames, Settings::defaultRegexForDerivingCommentaryFlagFromFileName());
+
+  currentValue = reg->value(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames).toString();
+  if (    (currentValue == Q(R"([[\](){}.+=#-]forced[[\](){}.+=#-])"))
+       || (currentValue == Q(R"((^|[[\](){}.+=#-])forced([[\](){}.+=#-]|$))")))
+    reg->setValue(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames, Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName());
+
+  currentValue = reg->value(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames).toString();
+  if (currentValue == Q(R"([[\](){} .+=#-](cc|sdh)[[\](){} .+=#-])"))
+    reg->setValue(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames, Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName());
+
+  reg->endGroup();
+}
+
 } // anonymous namespace
 
 QString
@@ -484,6 +508,7 @@ Settings::convertOldSettings() {
   convert67_0_0AttachmentsAlwaysSkipForExistingName(writtenByVersion);
   convert67_0_0UseISO639_3Languages(writtenByVersion);
   convert67_0_0DefaultAudioFileNames(writtenByVersion);
+  convert93_0RegexesForDerivingTrackFlags(writtenByVersion);
 }
 
 void

@@ -16,6 +16,7 @@
 
 options_c::mode_options_c::mode_options_c()
   : m_simple_chapter_format{}
+  , m_no_track_tags{}
   , m_extraction_mode{options_c::em_unknown}
 {
 }

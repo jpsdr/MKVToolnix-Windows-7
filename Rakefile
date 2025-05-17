@@ -618,7 +618,7 @@ namespace :translations do
   task :qt => FileList[ "#{$source_dir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
   desc "Update all translation files"
-  task :update => [ "translations:update:programs", "translations:update:manpages", "translations:update:translations" ]
+  task :update => ([ "translations:update:programs", "translations:update:installer" ] + ($po4a_cfg ? [ "translations:update:manpages" ] : []))
 
   namespace :update do
     desc "Update the program's translation files"

@@ -663,6 +663,21 @@ PreferencesDialog::setupToolTips() {
 }
 
 void
+PreferencesDialog::setupLineEditWithDefaultText(QPushButton *revertButton,
+                                                QLineEdit *edit,
+                                                QString const &defaultText) {
+  connect(edit, &QLineEdit::textChanged, this, [revertButton, defaultText](QString const &newText) {
+    revertButton->setEnabled(newText != defaultText);
+  });
+
+  connect(revertButton, &QPushButton::clicked, this, [edit, defaultText]() {
+    edit->setText(defaultText);
+  });
+
+  revertButton->setEnabled(edit->text() != defaultText);
+}
+
+void
 PreferencesDialog::setupConnections() {
   connect(ui->cbUseISO639_3Languages,                      &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::setupCommonLanguages);
 
@@ -688,12 +703,8 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,             &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
-  connect(ui->pbMDeriveTrackLanguageRevertBoundaryChars,   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars);
-  connect(ui->pbMDeriveCommentaryFlagRERevert,             &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveCommentaryFlagRE);
   connect(ui->cbMDeriveCommentaryFlag,                     &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveCommentaryFlagControls);
-  connect(ui->pbMDeriveHearingImpairedFlagRERevert,        &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveHearingImpairedFlagRE);
   connect(ui->cbMDeriveHearingImpairedFlag,                &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveHearingImpairedFlagControls);
-  connect(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveForcedDisplayFlagSubtitlesRE);
   connect(ui->cbMDeriveForcedDisplayFlagSubtitles,         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableDeriveForcedDisplayFlagSubtitlesControls);
   connect(ui->cbMSetOriginalLanguageFlagLanguage,          &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableSetOriginalLanguageFlagControls);
 
@@ -710,6 +721,11 @@ PreferencesDialog::setupConnections() {
   connect(ui->tbOftenUsedLanguages,                        &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedLanguagesOnly);
   connect(ui->tbOftenUsedRegions,                          &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedRegionsOnly);
   connect(ui->tbOftenUsedCharacterSets,                    &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCharacterSetsOnly);
+
+  setupLineEditWithDefaultText(ui->pbMDeriveTrackLanguageRevertBoundaryChars,   ui->leMDeriveTrackLanguageBoundaryChars,   Util::Settings::defaultBoundaryCharsForDerivingLanguageFromFileName());
+  setupLineEditWithDefaultText(ui->pbMDeriveCommentaryFlagRERevert,             ui->leMDeriveCommentaryFlagRE,             Util::Settings::defaultRegexForDerivingCommentaryFlagFromFileName());
+  setupLineEditWithDefaultText(ui->pbMDeriveHearingImpairedFlagRERevert,        ui->leMDeriveHearingImpairedFlagRE,        Util::Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName());
+  setupLineEditWithDefaultText(ui->pbMDeriveForcedDisplayFlagSubtitlesRERevert, ui->leMDeriveForcedDisplayFlagSubtitlesRE, Util::Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName());
 }
 
 void
@@ -1546,26 +1562,6 @@ PreferencesDialog::showPage(Page page) {
 
   ui->pageSelector->selectionModel()->select(pageModelIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
   ui->pages->setCurrentIndex(pageIndex);
-}
-
-void
-PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars() {
-  ui->leMDeriveTrackLanguageBoundaryChars->setText(Util::Settings::defaultBoundaryCharsForDerivingLanguageFromFileName());
-}
-
-void
-PreferencesDialog::revertDeriveCommentaryFlagRE() {
-  ui->leMDeriveCommentaryFlagRE->setText(Util::Settings::defaultRegexForDerivingCommentaryFlagFromFileName());
-}
-
-void
-PreferencesDialog::revertDeriveHearingImpairedFlagRE() {
-  ui->leMDeriveHearingImpairedFlagRE->setText(Util::Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName());
-}
-
-void
-PreferencesDialog::revertDeriveForcedDisplayFlagSubtitlesRE() {
-  ui->leMDeriveForcedDisplayFlagSubtitlesRE->setText(Util::Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName());
 }
 
 bool
