@@ -58,6 +58,7 @@ protected:
   void set_blockadd();
   void set_raw();
   void set_fullraw();
+  void set_no_track_tags();
   void set_simple();
   void set_simple_language();
   void set_cli_mode();

@@ -1,4 +1,4 @@
-!define LANG "Belarusian"
+!define LANG "English"
 
 # The next entry needs translations:
 !insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "If you need a GUI for mkvextract then give these projects a try:"

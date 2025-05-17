@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 
 class QItemSelection;
+class QLineEdit;
 class QListWidget;
 class QListWidgetItem;
 class QModelIndex;
@@ -78,10 +79,6 @@ public Q_SLOTS:
   void setSendersTabTitleForRunProgramWidget();
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
-  void revertDeriveTrackLanguageFromFileNameChars();
-  void revertDeriveCommentaryFlagRE();
-  void revertDeriveHearingImpairedFlagRE();
-  void revertDeriveForcedDisplayFlagSubtitlesRE();
   void enableDeriveCommentaryFlagControls();
   void enableDeriveHearingImpairedFlagControls();
   void enableDeriveForcedDisplayFlagSubtitlesControls();
@@ -144,6 +141,8 @@ protected:
   void setupPalette();
   void setupFileColorsControls();
   void setupFileColors(QVector<QColor> const &colors);
+  void setupLineEditWithDefaultText(QPushButton *revertButton, QLineEdit *edit, QString const &defaultText);
+
 
   QListWidgetItem &setupFileColorItem(QListWidgetItem &item, QColor const &color);
 

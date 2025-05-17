@@ -12,29 +12,24 @@
 
 #include "common/common_pch.h"
 
-#include <cassert>
-#include <iostream>
-
-#include <ebml/EbmlHead.h>
-#include <ebml/EbmlStream.h>
-#include <ebml/EbmlVoid.h>
-
-#include "common/ebml.h"
-#include "common/kax_analyzer.h"
-#include "common/mm_io.h"
-#include "common/mm_io_x.h"
+#include "common/tags/tags.h"
 #include "common/xml/ebml_tags_converter.h"
 #include "extract/mkvextract.h"
 
 bool
 extract_tags(kax_analyzer_c &analyzer,
              options_c::mode_options_c &options) {
-  auto tags = analyzer.read_all(EBML_INFO(libmatroska::KaxTags));
+  auto tags_element = analyzer.read_all(EBML_INFO(libmatroska::KaxTags));
 
-  if (!dynamic_cast<libmatroska::KaxTags *>(tags.get()))
+  auto tags = dynamic_cast<libmatroska::KaxTags *>(tags_element.get());
+  if (!tags)
     return true;
 
-  mtx::xml::ebml_tags_converter_c::write_xml(static_cast<libmatroska::KaxTags &>(*tags), *open_output_file(options.m_output_file_name));
+  if (options.m_no_track_tags)
+    mtx::tags::remove_track_tags(tags);
+
+  if (tags->ListSize())
+    mtx::xml::ebml_tags_converter_c::write_xml(*tags, *open_output_file(options.m_output_file_name));
 
   return true;
 }

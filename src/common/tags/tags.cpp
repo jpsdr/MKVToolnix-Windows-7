@@ -382,6 +382,44 @@ remove_track_statistics(libmatroska::KaxTags *tags,
   return removed_something;
 }
 
+bool
+remove_track_tags(libmatroska::KaxTags *tags,
+                  std::optional<uint64_t> track_uid_to_remove) {
+  if (!tags)
+    return false;
+
+  auto idx               = 0u;
+  auto removed_something = false;
+
+  while (idx < tags->ListSize()) {
+    auto tag_elt = (*tags)[idx];
+    auto tag     = dynamic_cast<libmatroska::KaxTag *>(tag_elt);
+    if (!tag) {
+      ++idx;
+      continue;
+    }
+
+    auto targets = find_child<libmatroska::KaxTagTargets>(tag);
+    if (!targets) {
+      ++idx;
+      continue;
+    }
+
+    auto track_uid_elt = find_child<libmatroska::KaxTagTrackUID>(targets);
+    if (!track_uid_elt || (track_uid_to_remove && (*track_uid_to_remove != track_uid_elt->GetValue()))) {
+      ++idx;
+      continue;
+    }
+
+    tags->Remove(idx);
+    delete tag_elt;
+
+    removed_something = true;
+  }
+
+  return removed_something;
+}
+
 namespace {
 std::string
 convert_tagets_to_index(libmatroska::KaxTagTargets const &targets) {
