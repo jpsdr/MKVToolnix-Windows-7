@@ -72,7 +72,7 @@ ValuePage::init() {
   if (m_present) {
     auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), m_callbacks.ClassId());
     if (semantic && semantic->IsMandatory()) {
-      std::unique_ptr<libebml::EbmlElement> elt(&semantic->Create());
+      std::unique_ptr<libebml::EbmlElement> elt(&create_ebml_element(*semantic));
       m_mayBeRemoved = has_default_value(*elt);
 
     } else if (semantic && !semantic->IsMandatory())

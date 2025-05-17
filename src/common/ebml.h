@@ -364,6 +364,7 @@ get_child_value(libebml::EbmlMaster *master) {
 
 libebml::EbmlElement *empty_ebml_master(libebml::EbmlElement *e);
 libebml::EbmlElement *create_ebml_element(const libebml::EbmlCallbacks &callbacks, const libebml::EbmlId &id);
+libebml::EbmlElement &create_ebml_element(const libebml::EbmlSemantic &semantic);
 libebml::EbmlMaster *sort_ebml_master(libebml::EbmlMaster *e);
 void remove_voids_from_master(libebml::EbmlElement *element);
 void move_children(libebml::EbmlMaster &source, libebml::EbmlMaster &destination);
