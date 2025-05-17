@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-02-27 20:49+0100\n"
-"PO-Revision-Date: 2025-04-28 15:51+0200\n"
+"POT-Creation-Date: 2025-05-17 11:27+0200\n"
+"PO-Revision-Date: 2025-05-17 11:30+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -49,7 +49,7 @@ msgstr "in CD-/DVD-/MPEG-Audio vorzufindender Filter erster Ordnung"
 #: src/common/kax_info.cpp:880
 #: src/common/stereo_mode.cpp:70
 #: src/input/r_matroska.cpp:131
-#: src/input/r_matroska.cpp:3018
+#: src/input/r_matroska.cpp:3019
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -238,45 +238,45 @@ msgstr "Es fehlt eine Hexadezimalziffer."
 msgid "The number of bytes to swap isn't divisible by {0}."
 msgstr "Die Anzahl zu vertauschender Bytes ist nicht durch {0} teilbar."
 
-#: src/common/chapters/chapters.cpp:58
-#: src/mkvtoolnix-gui/util/settings.cpp:598
+#: src/common/chapters/chapters.cpp:59
+#: src/mkvtoolnix-gui/util/settings.cpp:623
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Kapitel <NUM:2>"
 
-#: src/common/chapters/chapters.cpp:171
+#: src/common/chapters/chapters.cpp:172
 #, no-c-format, c++-format
 msgid "Simple chapter parser: {0}\n"
 msgstr "Auswertungsprogramm für einfache Kapiteldateien: {0}\n"
 
-#: src/common/chapters/chapters.cpp:294
-#: src/common/chapters/chapters.cpp:314
+#: src/common/chapters/chapters.cpp:307
+#: src/common/chapters/chapters.cpp:327
 #, no-c-format, c++-format
 msgid "'{0}' is not a CHAPTERxx=... line."
 msgstr "»{0}« ist keine Zeile nach dem Muster »CHAPTERxx=…«."
 
-#: src/common/chapters/chapters.cpp:303
+#: src/common/chapters/chapters.cpp:316
 #, no-c-format, c++-format
 msgid "Invalid minute: {0}"
 msgstr "Ungültige Minute: {0}"
 
-#: src/common/chapters/chapters.cpp:305
+#: src/common/chapters/chapters.cpp:318
 #, no-c-format, c++-format
 msgid "Invalid second: {0}"
 msgstr "Ungültige Sekunde: {0}"
 
-#: src/common/chapters/chapters.cpp:318
+#: src/common/chapters/chapters.cpp:331
 #, no-c-format, c++-format
 msgid "'{0}' is not a CHAPTERxxNAME=... line."
 msgstr "»{0}« ist keine Zeile nach dem Muster »CHAPTERxxNAME=…«."
 
-#: src/common/chapters/chapters.cpp:661
+#: src/common/chapters/chapters.cpp:674
 #, no-c-format, c++-format
 msgid "Could not parse the chapters in '{0}': {1}\n"
 msgstr "Die Kapitel in »{0}« konnten nicht ausgewertet werden: {1}\n"
 
-#: src/common/chapters/chapters.cpp:665
-#: src/common/chapters/chapters.cpp:667
+#: src/common/chapters/chapters.cpp:678
+#: src/common/chapters/chapters.cpp:680
 #: src/common/chapters/dvd.cpp:58
 #: src/input/r_vobsub.cpp:109
 #: src/input/r_vobsub.cpp:115
@@ -284,24 +284,24 @@ msgstr "Die Kapitel in »{0}« konnten nicht ausgewertet werden: {1}\n"
 msgid "Could not open '{0}' for reading.\n"
 msgstr "Die Datei »{0}« konnte nicht zum Lesen geöffnet werden.\n"
 
-#: src/common/chapters/chapters.cpp:749
+#: src/common/chapters/chapters.cpp:762
 #, no-c-format, c++-format
 msgid "Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"
 msgstr "Unbekanntes Dateiformat in »{0}«. Diese Datei enthält kein unterstütztes Format für Kapitel.\n"
 
-#: src/common/chapters/chapters.cpp:753
+#: src/common/chapters/chapters.cpp:766
 #: src/common/xml/ebml_chapters_converter.cpp:252
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "Die XML-Kapiteldatei »{0}« konnte nicht gelesen werden.\n"
 
-#: src/common/chapters/chapters.cpp:755
+#: src/common/chapters/chapters.cpp:768
 #: src/common/xml/ebml_chapters_converter.cpp:255
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "Die XML-Kapiteldatei »{0}« enthält einen Fehler an Position {2}: {1}.\n"
 
-#: src/common/chapters/chapters.cpp:757
+#: src/common/chapters/chapters.cpp:770
 #: src/common/xml/ebml_chapters_converter.cpp:258
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
@@ -1181,23 +1181,23 @@ msgstr "Keine gültige Matroska-Datei (kein EBML-Kopf gefunden)"
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "Keine gültige Matroska-Datei (kein Segment/Stufe-0-Element gefunden)"
 
-#: src/common/kax_analyzer.cpp:1735
-#: src/common/kax_analyzer.cpp:1738
+#: src/common/kax_analyzer.cpp:1737
+#: src/common/kax_analyzer.cpp:1740
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened for reading: {1}."
 msgstr "Die Datei »{0}« konnte nicht zum Lesen geöffnet werden: {1}."
 
-#: src/common/kax_analyzer.cpp:1741
+#: src/common/kax_analyzer.cpp:1743
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Die Datei »{0}« konnte nicht geöffnet oder ausgewertet werden."
 
-#: src/common/kax_analyzer.cpp:1745
+#: src/common/kax_analyzer.cpp:1747
 #, no-c-format, c++-format
 msgid "No segment UID could be found in the file '{0}'."
 msgstr "In der Datei »{0}« wurde keine Segment-UID gefunden."
 
-#: src/common/kax_analyzer.cpp:1808
+#: src/common/kax_analyzer.cpp:1810
 #, no-c-format, c++-format
 msgid "Progress: [{0}{1}] {2}%"
 msgstr "Fortschritt: [{0}{1}] {2}%"
@@ -2463,8 +2463,8 @@ msgstr "{0}: Eine Ausnahme ist aufgetreten (Nachricht: {1}; Typ: {2})."
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:2500
+#: src/input/r_matroska.cpp:1768
+#: src/input/r_matroska.cpp:2501
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Dies deutet normalerweise auf eine beschädigte Dateistruktur hin."
@@ -2472,15 +2472,15 @@ msgstr "Dies deutet normalerweise auf eine beschädigte Dateistruktur hin."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:2500
+#: src/input/r_matroska.cpp:1768
+#: src/input/r_matroska.cpp:2501
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Die Datei wird nicht weiter verarbeitet."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: Eine unbekannte Ausnahme ist aufgetreten."
@@ -3183,7 +3183,7 @@ msgid "A unique ID to identify the Track. This should be kept the same when maki
 msgstr "eine eindeutige ID zur Identifikation der Spur. Diese sollte beim Kopieren der Spur in eine andere Datei erhalten bleiben."
 
 #: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/merge/input.cpp:571
+#: src/mkvtoolnix-gui/merge/input.cpp:572
 #, no-c-format
 msgid "Can be set if the track contains commentary."
 msgstr "Kann gesetzt werden, wenn die Spur Kommentare enthält."
@@ -3209,25 +3209,25 @@ msgid "Can be set for tracks containing onscreen text or foreign-language dialog
 msgstr "Kann für Spuren gesetzt werden, die auf dem Bildschirm angezeigten Text oder Dialoge in fremden Sprachen beinhalten."
 
 #: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/merge/input.cpp:567
+#: src/mkvtoolnix-gui/merge/input.cpp:568
 #, no-c-format
 msgid "Can be set if the track is suitable for users with hearing impairments."
 msgstr "Kann gesetzt werden, wenn die Spur für Hörgeschädigte geeignet ist."
 
 #: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/merge/input.cpp:570
+#: src/mkvtoolnix-gui/merge/input.cpp:571
 #, no-c-format
 msgid "Can be set if the track is in the content's original language (not a translation)."
 msgstr "Kann gesetzt werden, wenn die Spur in der Originalsprache (nicht in einer Übersetzung) gehalten ist."
 
 #: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/merge/input.cpp:569
+#: src/mkvtoolnix-gui/merge/input.cpp:570
 #, no-c-format
 msgid "Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
 msgstr "Kann gesetzt werden, wenn die Spur eine schriftliche Beschreibung des Videoinhalts enthält, die für die Wiedergabe über ein Sprachsynthese-System für Sehbehinderte geeignet ist."
 
 #: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/merge/input.cpp:568
+#: src/mkvtoolnix-gui/merge/input.cpp:569
 #, no-c-format
 msgid "Can be set if the track is suitable for users with visual impairments."
 msgstr "Kann gesetzt werden, wenn die Spur für Sehbehinderte geeignet ist."
@@ -4285,7 +4285,7 @@ msgid "All other arguments either switch to a certain extraction mode, change op
 msgstr "Alle anderen Argumente wechseln entweder den Modus, ändern Optionen für den momentan aktiven Modus oder geben an, was in welche Datei extrahiert werden soll."
 
 #: src/extract/extract_cli_parser.cpp:68
-#: src/extract/extract_cli_parser.cpp:140
+#: src/extract/extract_cli_parser.cpp:141
 #, no-c-format
 msgid "Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."
 msgstr "Mehrere Modi können im selben Aufruf von mkvextract benutzt werden, wodurch man mehrere Dinge in einem einzigen Durchlauf extrahieren kann."
@@ -4347,13 +4347,13 @@ msgid "Write track with the ID TID to the file 'out'."
 msgstr "Schreibt Spur mit der ID »TID« in die Datei »out«."
 
 #: src/extract/extract_cli_parser.cpp:85
-#: src/extract/extract_cli_parser.cpp:93
-#: src/extract/extract_cli_parser.cpp:102
-#: src/extract/extract_cli_parser.cpp:111
-#: src/extract/extract_cli_parser.cpp:120
-#: src/extract/extract_cli_parser.cpp:128
-#: src/extract/extract_cli_parser.cpp:135
-#: src/extract/extract_cli_parser.cpp:142
+#: src/extract/extract_cli_parser.cpp:94
+#: src/extract/extract_cli_parser.cpp:103
+#: src/extract/extract_cli_parser.cpp:112
+#: src/extract/extract_cli_parser.cpp:121
+#: src/extract/extract_cli_parser.cpp:129
+#: src/extract/extract_cli_parser.cpp:136
+#: src/extract/extract_cli_parser.cpp:143
 #, no-c-format
 msgid "Example"
 msgstr "Beispiel"
@@ -4373,168 +4373,173 @@ msgstr "Extraktion von Tags"
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
 msgstr "Im zweiten Modus werden Tags extrahiert, in ein XML-Format konvertiert und in eine Ausgabedatei geschrieben."
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:92
+#, no-c-format
+msgid "Do not exports track tags."
+msgstr "Spur-Tags nicht extrahieren."
+
+#: src/extract/extract_cli_parser.cpp:96
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
 msgstr "mkvextract \"Ein Film.mkv\" tags Tags.xml"
 
-#: src/extract/extract_cli_parser.cpp:97
+#: src/extract/extract_cli_parser.cpp:98
 #, no-c-format
 msgid "Attachment extraction"
 msgstr "Extraktion von Dateianhängen"
 
-#: src/extract/extract_cli_parser.cpp:99
+#: src/extract/extract_cli_parser.cpp:100
 #, no-c-format
 msgid "The third mode extracts attachments from the source file."
 msgstr "Beim dritten Modus werden Dateianhänge aus der Quelldatei extrahiert."
 
-#: src/extract/extract_cli_parser.cpp:100
+#: src/extract/extract_cli_parser.cpp:101
 #, no-c-format
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "Den Dateianhang mit der ID »AID« in die Datei »Ausname« extrahieren"
 
-#: src/extract/extract_cli_parser.cpp:104
+#: src/extract/extract_cli_parser.cpp:105
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
 msgstr "mkvextract \"Ein Film.mkv\" attachments 4:Cover.jpg"
 
-#: src/extract/extract_cli_parser.cpp:106
+#: src/extract/extract_cli_parser.cpp:107
 #, no-c-format
 msgid "Chapter extraction"
 msgstr "Kapitelextraktion"
 
-#: src/extract/extract_cli_parser.cpp:107
+#: src/extract/extract_cli_parser.cpp:108
 #, no-c-format
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
 msgstr "Im vierten Modus werden Kapitelinformationen extrahiert, in ein XML-Format umgewandelt und in eine Ausgabedatei geschrieben."
 
-#: src/extract/extract_cli_parser.cpp:108
+#: src/extract/extract_cli_parser.cpp:109
 #, no-c-format
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Extrahiert Kapitelinformationen im einfachen Format, das auch in verschiedenen OGM-Werkzeugen verwendet wird (CHAPTER01=… CHAPTER01NAME=…)."
 
-#: src/extract/extract_cli_parser.cpp:109
+#: src/extract/extract_cli_parser.cpp:110
 #, no-c-format
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
 msgstr "Benutzt die Kapitelnamen der angegebenen Sprache für die Extraktion, anstatt den jeweils ersten gefundenen Kapitelnamen zu extrahieren."
 
-#: src/extract/extract_cli_parser.cpp:113
+#: src/extract/extract_cli_parser.cpp:114
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
 msgstr "mkvextract \"Ein Film.mkv\" chapters Kapitel.xml"
 
-#: src/extract/extract_cli_parser.cpp:115
+#: src/extract/extract_cli_parser.cpp:116
 #, no-c-format
 msgid "Cue sheet extraction"
 msgstr "Cuesheet-Extraktion"
 
-#: src/extract/extract_cli_parser.cpp:117
+#: src/extract/extract_cli_parser.cpp:118
 #, no-c-format
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a cue sheet with mkvmerge's '--chapters' option."
 msgstr "Im fünften Modus wird versucht, Kapitelinformationen und Tags zusammen als Cuesheet zu extrahieren. Dies ist umgekehrt, wie bei der Benutzung eines Cuesheets mit Mkvmerges Option »--chapters«."
 
-#: src/extract/extract_cli_parser.cpp:122
+#: src/extract/extract_cli_parser.cpp:123
 #, no-c-format
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
 msgstr "mkvextract \"Audiodatei.mka\" cuesheet Audiodatei.cue"
 
-#: src/extract/extract_cli_parser.cpp:124
+#: src/extract/extract_cli_parser.cpp:125
 #, no-c-format
 msgid "Timestamp extraction"
 msgstr "Zeitstempelextraktion"
 
-#: src/extract/extract_cli_parser.cpp:126
+#: src/extract/extract_cli_parser.cpp:127
 #, no-c-format
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
 msgstr "Im sechsten Modus werden die Zeitstempel aller Bilder gelesen und in eine Zeitstempeldatei der Version 2 geschrieben."
 
-#: src/extract/extract_cli_parser.cpp:130
+#: src/extract/extract_cli_parser.cpp:131
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
 msgstr "mkvextract \"Ein Film.mkv\" timestamps_v2 1:Zeitstempel_Spur1.txt"
 
-#: src/extract/extract_cli_parser.cpp:132
+#: src/extract/extract_cli_parser.cpp:133
 #, no-c-format
 msgid "Cue extraction"
 msgstr "Indexextraktion"
 
-#: src/extract/extract_cli_parser.cpp:133
+#: src/extract/extract_cli_parser.cpp:134
 #, no-c-format
 msgid "This mode extracts cue information for some tracks to external text files."
 msgstr "In diesem Modus werden Informationen aus dem Index einiger Spuren in externe Textdateien geschrieben."
 
-#: src/extract/extract_cli_parser.cpp:137
+#: src/extract/extract_cli_parser.cpp:138
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
 msgstr "mkvextract \"Ein Film.mkv\" cues 0:Index_Spur0.txt"
 
-#: src/extract/extract_cli_parser.cpp:139
+#: src/extract/extract_cli_parser.cpp:140
 #, no-c-format
 msgid "Extracting multiple items at the same time"
 msgstr "Mehrere Daten gleichzeitig extrahieren"
 
-#: src/extract/extract_cli_parser.cpp:144
+#: src/extract/extract_cli_parser.cpp:145
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
 msgstr "mkvextract \"Ein Film.mkv\" tracks 0:Video.h264 1:Audio.aac timestamps_v2 0:Zeitstempel.Video.txt chapters Kapitel.xml tags Tags.xml"
 
-#: src/extract/extract_cli_parser.cpp:156
+#: src/extract/extract_cli_parser.cpp:157
 #, no-c-format, c++-format
 msgid "'{0}' is only allowed when extracting tracks.\n"
 msgstr "»{0}« darf nur beim Extrahieren von Spuren benutzt werden.\n"
 
-#: src/extract/extract_cli_parser.cpp:159
+#: src/extract/extract_cli_parser.cpp:160
 #, no-c-format, c++-format
 msgid "'{0}' is only allowed when extracting chapters.\n"
 msgstr "»{0}« darf nur beim Extrahieren von Kapiteln benutzt werden.\n"
 
-#: src/extract/extract_cli_parser.cpp:183
+#: src/extract/extract_cli_parser.cpp:184
 #, no-c-format, c++-format
 msgid "Invalid BlockAddition level in argument '{0}'.\n"
 msgstr "Ungültige Stufe für BlockAddition in Argument »{0}«\n"
 
-#: src/extract/extract_cli_parser.cpp:210
+#: src/extract/extract_cli_parser.cpp:217
 #, no-c-format, c++-format
 msgid "'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"
 msgstr "»{0}« ist weder ein gültiger ISO-639-2- noch ein gültiger ISO-639-1-Code. Mit »mkvmerge --list-languages« können Sie sich eine Liste aller Sprachen und ihrer ISO-639-2-Codes ausgeben lassen.\n"
 
-#: src/extract/extract_cli_parser.cpp:270
+#: src/extract/extract_cli_parser.cpp:277
 #, no-c-format, c++-format
 msgid "Unknown mode '{0}'.\n"
 msgstr "Unbekannter Arbeitsmodus »{0}«\n"
 
-#: src/extract/extract_cli_parser.cpp:341
+#: src/extract/extract_cli_parser.cpp:348
 #, no-c-format, c++-format
 msgid "Unrecognized command line option '{0}'.\n"
 msgstr "Unbekannte Befehlszeilenoption »{0}«.\n"
 
-#: src/extract/extract_cli_parser.cpp:349
+#: src/extract/extract_cli_parser.cpp:356
 #, no-c-format, c++-format
 msgid "Invalid attachment ID/file name specification in argument '{0}'.\n"
 msgstr "Ungültige Angabe für Dateianhangs-ID und Dateiname in Argument »{0}«\n"
 
-#: src/extract/extract_cli_parser.cpp:351
+#: src/extract/extract_cli_parser.cpp:358
 #, no-c-format, c++-format
 msgid "Invalid track ID/file name specification in argument '{0}'.\n"
 msgstr "Ungültige Angabe von Spur-ID und Dateiname in Argument »{0}«\n"
 
-#: src/extract/extract_cli_parser.cpp:359
+#: src/extract/extract_cli_parser.cpp:366
 #, no-c-format, c++-format
 msgid "The ID '{0}' has already been used for another destination file.\n"
 msgstr "Die ID '{0}' wurde bereits für eine andere Zieldatei genutzt.\n"
 
-#: src/extract/extract_cli_parser.cpp:368
+#: src/extract/extract_cli_parser.cpp:375
 #, no-c-format
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "Es wurde kein Zieldateiname angegeben. Stattdessen wird der Name des Dateianhangs verwendet.\n"
 
-#: src/extract/extract_cli_parser.cpp:370
+#: src/extract/extract_cli_parser.cpp:377
 #, no-c-format, c++-format
 msgid "Missing destination file name in argument '{0}'.\n"
 msgstr "Im Argument »{0}« fehlt der Zieldateiname.\n"
 
-#: src/extract/extract_cli_parser.cpp:392
-#: src/extract/extract_cli_parser.cpp:396
+#: src/extract/extract_cli_parser.cpp:399
+#: src/extract/extract_cli_parser.cpp:403
 #, no-c-format, c++-format
 msgid "The name of one of the destination files is the same as the name of the source file ({0}).\n"
 msgstr "Der Name einer der Zieldateien stimmt mit dem Namen der Quelldatei überein ({0}).\n"
@@ -4919,37 +4924,32 @@ msgstr "In den ersten Frames der Spur konnten keine gültigen DTS-Kopfdaten gefu
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Ungültige Vorbis-Kopfdaten in AVI-Audiospur"
 
-#: src/input/r_flac.cpp:60
-#, no-c-format
-msgid "flac_reader: Could not read a header packet.\n"
-msgstr "flac_reader: Ein Kopfpaket konnte nicht gelesen werden.\n"
-
-#: src/input/r_flac.cpp:65
+#: src/input/r_flac.cpp:89
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: Das FLAC-Ausgabemodul konnte nicht initialisiert werden.\n"
 
-#: src/input/r_flac.cpp:95
+#: src/input/r_flac.cpp:124
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> Die FLAC-Datei wird gelesen. Dies kann eine Weile dauern.\n"
 
-#: src/input/r_flac.cpp:103
+#: src/input/r_flac.cpp:132
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Es wurde kein Metadatenblock gefunden. Diese Datei ist beschädigt.\n"
 
-#: src/input/r_flac.cpp:128
+#: src/input/r_flac.cpp:151
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> Die FLAC-Datei wird oberflächlich untersucht: {0}%{1}"
 
-#: src/input/r_flac.cpp:151
+#: src/input/r_flac.cpp:174
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Die FLAC-Datei wird oberflächlich untersucht: 100%\n"
 
-#: src/input/r_flac.cpp:156
+#: src/input/r_flac.cpp:179
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Es konnten nicht alle Kopfpakete gelesen werden.\n"
@@ -4980,144 +4980,144 @@ msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that
 msgstr "matroska_reader: (MS-Kompatibilitätsmodus für Spur {0}) Laut Matroska-Kopfdaten hat die Spur {1} Bits pro Abtastwert, doch die WAVEFORMATEX-Struktur enthält den Wert {2}.\n"
 
 #: src/input/r_matroska.cpp:478
-#: src/input/r_matroska.cpp:524
-#: src/input/r_matroska.cpp:547
-#: src/input/r_matroska.cpp:734
-#: src/input/r_matroska.cpp:744
-#: src/input/r_matroska.cpp:765
+#: src/input/r_matroska.cpp:525
+#: src/input/r_matroska.cpp:548
+#: src/input/r_matroska.cpp:735
+#: src/input/r_matroska.cpp:745
+#: src/input/r_matroska.cpp:766
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: Die CodecID für Spur {0} ist »{1}«, doch die privaten Codec-Konfigurationsdaten sind ungültig.\n"
 
-#: src/input/r_matroska.cpp:515
+#: src/input/r_matroska.cpp:516
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: Mkvmerge wurde ohne FLAC-Unterstützung kompiliert. Spur {0} wird ausgelassen.\n"
 
-#: src/input/r_matroska.cpp:651
+#: src/input/r_matroska.cpp:652
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: Die CodecID für Spur {0} ist »{1}«, doch wurde keine BITMAPINFOHEADER-Struktur gefunden. Deswegen gibt es keinen FourCC-Code, um festzustellen, um welchen Video-Codec es sich handelt.\n"
 
-#: src/input/r_matroska.cpp:663
+#: src/input/r_matroska.cpp:664
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS-Kompatibilitätsmodus für Spur {0}) Laut Matroska-Kopfdaten hat die Spur eine Breite von {1} Pixeln, laut BITMAPINFOHEADER-Struktur jedoch {2}.\n"
 
-#: src/input/r_matroska.cpp:672
+#: src/input/r_matroska.cpp:673
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS-Kompatibilitätsmodus für Spur {0}) Laut Matroska-Kopfdaten hat die Spur eine Höhe von {1} Pixeln, laut BITMAPINFOHEADER-Struktur jedoch {2}.\n"
 
-#: src/input/r_matroska.cpp:691
+#: src/input/r_matroska.cpp:692
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: Die CodecID für Spur {0} ist »{1}«, die Spur enthält jedoch keine privaten Codec-Konfigurationsdaten.\n"
 
-#: src/input/r_matroska.cpp:717
+#: src/input/r_matroska.cpp:718
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: Die Breite war für Spur {0} nicht gesetzt.\n"
 
-#: src/input/r_matroska.cpp:723
+#: src/input/r_matroska.cpp:724
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: The Höhe war für Spur {0} nicht gesetzt.\n"
 
-#: src/input/r_matroska.cpp:783
+#: src/input/r_matroska.cpp:784
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: Die CodecID für Spur {0} ist »{1}«, doch enthält die Spur keine privaten Codec-Konfigurationsdaten.\n"
 
-#: src/input/r_matroska.cpp:796
+#: src/input/r_matroska.cpp:797
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "Die VobSub-Untertitelspur {0} enthält ihren Index im CodecPrivate-Element nicht."
 
-#: src/input/r_matroska.cpp:797
+#: src/input/r_matroska.cpp:798
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Ein Standardindex und damit auch Standardwerte für Breite, Höhe und die Farbpalette werden statt dessen verwendet werden."
 
-#: src/input/r_matroska.cpp:830
+#: src/input/r_matroska.cpp:831
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: Die CodecID »{0}« für Spur {1} ist unbekannt.\n"
 
-#: src/input/r_matroska.cpp:863
+#: src/input/r_matroska.cpp:864
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: unbekannter Demultiplexertyp für Spur {0}: »{1}«\n"
 
-#: src/input/r_matroska.cpp:868
+#: src/input/r_matroska.cpp:869
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: Spur {0} scheint in Ordnung zu sein.\n"
 
-#: src/input/r_matroska.cpp:1344
+#: src/input/r_matroska.cpp:1345
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Die Pixelbreite fehlt.\n"
 
-#: src/input/r_matroska.cpp:1346
+#: src/input/r_matroska.cpp:1347
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Die Pixelhöhe fehlt.\n"
 
-#: src/input/r_matroska.cpp:1398
+#: src/input/r_matroska.cpp:1399
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "In Spur {0} fehlt das Spur-UID-Element, das von den Matroska-Spezifikationen vorgeschrieben wird. Falls die Datei Tags enthält, dann sind diese eventuell defekt.\n"
 
-#: src/input/r_matroska.cpp:1676
+#: src/input/r_matroska.cpp:1677
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: kein EBML-Kopf gefunden\n"
 
-#: src/input/r_matroska.cpp:1696
-#: src/input/r_matroska.cpp:1709
+#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1710
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Es wurde kein Segment gefunden.\n"
 
-#: src/input/r_matroska.cpp:1794
+#: src/input/r_matroska.cpp:1795
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Das allgemeine Ausgabemodul wird für den folgenden Spurtyp benutzt: »{0}«.\n"
 
-#: src/input/r_matroska.cpp:1868
+#: src/input/r_matroska.cpp:1869
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "Die UID {0} einer Spur kann nicht beibehalten werden, da die UID schon einer anderen Spur zugeordnet wurde. Eine neue, zufällige UID wird automatisch erzeugt.\n"
 
-#: src/input/r_matroska.cpp:1960
-#: src/input/r_matroska.cpp:1977
+#: src/input/r_matroska.cpp:1961
+#: src/input/r_matroska.cpp:1978
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Ungültige AAC-Codec-Initialisierungsdaten gefunden\n"
 
-#: src/input/r_matroska.cpp:1970
+#: src/input/r_matroska.cpp:1971
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Ungültige CodecID »{0}«\n"
 
-#: src/input/r_matroska.cpp:2088
+#: src/input/r_matroska.cpp:2089
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "»{0}«: Sie kopieren eine ursprünglich im experimentellen Modus geschriebene Opus-Spur. Die entstehende Spur wird im finalen Modus geschrieben, allerdings kann ein Detail nicht aus einer im experimentellen Modus geschriebenen Spur rekonstruiert werden: die Anzahl der am Ende zu entfernenden Samples. Das bedeutet, dass ein Decoder einige Samples mehr ausgeben könnte, als ursprünglich beabsichtigt war. Sie sollten statt dessen, falls möglich, die Original-Opus-Datei erneut multiplexen.\n"
 
-#: src/input/r_matroska.cpp:2322
+#: src/input/r_matroska.cpp:2323
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Nicht unterstützter Spurtyp\n"
 
-#: src/input/r_matroska.cpp:2531
-#: src/input/r_matroska.cpp:2651
+#: src/input/r_matroska.cpp:2532
+#: src/input/r_matroska.cpp:2652
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Es wurde ein Block für Spur Nummer {1} bei Zeitstempel {0} gefunden. Allerdings wurden bisher noch keine Spurkopfdaten gefunden. Der Block wird ausgelassen.\n"
 
-#: src/input/r_matroska.cpp:3001
+#: src/input/r_matroska.cpp:3002
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "unbekannt, Formatidentifikator 0x{0:04x}"
@@ -5177,27 +5177,27 @@ msgstr "Unbekannter Audiodatenstromtyp 0x{0:04x}. Datenstrom-ID {1} wird ausgela
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
 msgstr "Die Zeitstempel in diesem Datenstrom wurden mittendrin zurückgesetzt. Das wird nicht unterstützt. Das aktuelle Paket wird ausgelassen.\n"
 
-#: src/input/r_ogm.cpp:840
+#: src/input/r_ogm.cpp:843
 #, no-c-format
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
 msgstr "Diese Ogg-/OGM-Datei enthält Kapitelinformationen oder einen Titel. Leider kann der Zeichensatz, in dem diese Informationen gespeichert wurden, nicht automatisch eindeutig erkannt werden. Das Programm geht davon aus, dass der Zeichensatz, der in Ihrem Betriebssystem momentan eingestellt ist, der richtige für die Informationen in der Ogg-/OGM-Datei ist. Sollte das nicht der Fall sein, müssen Sie den Zeichensatz mit dem Befehlszeilenargument »--chapter-charset <Zeichnsatz>« explizit angeben.\n"
 
-#: src/input/r_ogm.cpp:847
+#: src/input/r_ogm.cpp:850
 #, no-c-format
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr "Diese Ogg/OGM-Datei enthält Kapitel, die nicht analysiert werden konnten. Dies kann an einem falsch oder nicht gesetzten Zeichensatz liegen, oder aber am Format der Einträge, falls sie nicht dem erwarteten SRT-Stil folgen.\n"
 
-#: src/input/r_ogm.cpp:1189
+#: src/input/r_ogm.cpp:1192
 #, no-c-format, c++-format
 msgid "Error decoding an Ogg Opus page at source timestamp {0}; page will be skipped: {1}\n"
 msgstr "Fehler beim Decodieren einer Ogg-Opus-Seite bei Quellzeitstempel {0}; Seite wird übersprungen: {1}\n"
 
-#: src/input/r_ogm.cpp:1480
+#: src/input/r_ogm.cpp:1483
 #, no-c-format, c++-format
 msgid "The Theora identification header could not be parsed ({0}).\n"
 msgstr "Die Theora-Identifikationskopfdaten konnten nicht ausgewertet werden ({0}).\n"
 
-#: src/input/r_ogm.cpp:1669
+#: src/input/r_ogm.cpp:1672
 #, no-c-format, c++-format
 msgid "The Kate identification header could not be parsed ({0}).\n"
 msgstr "Die Kate-Identifikationskopfdaten konnten nicht ausgewertet werden ({0}).\n"
@@ -8599,7 +8599,7 @@ msgstr "XML-Kapiteldateien"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:777
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:128
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1467
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1483
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:321
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
 #: src/mkvtoolnix-gui/merge/attachments.cpp:329
@@ -8781,7 +8781,7 @@ msgstr "Daten &erneut laden"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:591
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:478
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:492
 #: src/mkvtoolnix-gui/merge/tab.cpp:516
 #: src/mkvtoolnix-gui/merge/tool.cpp:486
 #: src/mkvtoolnix-gui/merge/tool.cpp:1118
@@ -9500,8 +9500,8 @@ msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below
 msgstr "Öffnen Sie eine Matroska- oder WebM-Datei über das »Info«-Menü, den nachfolgenden Knopf, oder ziehen Sie eine hier hin & lassen sie fallen."
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:274
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #, no-c-format
 msgid "Job queue"
 msgstr "Jobwarteschlange"
@@ -9704,7 +9704,7 @@ msgid "Save to &Matroska or WebM file"
 msgstr "In &Matroska- oder WebM-Datei speichern"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:682
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:442
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:456
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "&Multiplexer"
@@ -9716,7 +9716,7 @@ msgstr "E&xtraktions-Werkzeug"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:684
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:783
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:443
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:457
 #, no-c-format
 msgid "&Info tool"
 msgstr "&Info-Werkzeug"
@@ -9727,13 +9727,13 @@ msgid "&Header editor"
 msgstr "&Kopfdateneditor"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:686
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:445
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:459
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "Ka&piteleditor"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:460
 #, no-c-format
 msgid "&Job queue"
 msgstr "&Jobwarteschlange"
@@ -10139,9 +10139,9 @@ msgstr "Einstellungen automatisch &leeren:"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:116
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:56
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:66
-#: src/mkvtoolnix-gui/merge/input.cpp:1825
-#: src/mkvtoolnix-gui/merge/input.cpp:1827
-#: src/mkvtoolnix-gui/merge/input.cpp:1830
+#: src/mkvtoolnix-gui/merge/input.cpp:1826
+#: src/mkvtoolnix-gui/merge/input.cpp:1828
+#: src/mkvtoolnix-gui/merge/input.cpp:1831
 #: src/mkvtoolnix-gui/merge/track_model.cpp:137
 #: src/mkvtoolnix-gui/merge/track_model.cpp:141
 #: src/mkvtoolnix-gui/merge/track_model.cpp:142
@@ -10501,19 +10501,19 @@ msgid "Always enable copying for all tracks of the following types regardless of
 msgstr "Das Kopieren für Spuren der folgenden Typen unabhängig ihrer Sprache immer aktivieren:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2411
-#: src/mkvtoolnix-gui/merge/input.cpp:1801
+#: src/mkvtoolnix-gui/merge/input.cpp:1802
 #, no-c-format
 msgid "&Video"
 msgstr "&Video"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2412
-#: src/mkvtoolnix-gui/merge/input.cpp:1802
+#: src/mkvtoolnix-gui/merge/input.cpp:1803
 #, no-c-format
 msgid "&Audio"
 msgstr "&Audio"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2413
-#: src/mkvtoolnix-gui/merge/input.cpp:1803
+#: src/mkvtoolnix-gui/merge/input.cpp:1804
 #, no-c-format
 msgid "&Subtitles"
 msgstr "&Untertitel"
@@ -10536,9 +10536,9 @@ msgstr "Verzeichnis nach Abspiellisten durch&suchen:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2417
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:891
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:911
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:955
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:907
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:927
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:971
 #, no-c-format
 msgid "Always ask the user"
 msgstr "Immer nachfragen"
@@ -10581,8 +10581,8 @@ msgid "Defaults for jobs saving info tool output to text files"
 msgstr "Standardwerte für Jobs zum Speichern der Info-Werkzeug-Ausgabe in Textdateien"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:271
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:285
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
 #, no-c-format
 msgid "Header editor"
@@ -10599,8 +10599,8 @@ msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr "Daten && Uhrzeiten in &UTC anstatt der lokalen Zeitzone anzeigen"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:272
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "Chapter editor"
@@ -11847,9 +11847,9 @@ msgstr "Dateianhang ersetzen"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:116
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:56
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:66
-#: src/mkvtoolnix-gui/merge/input.cpp:1825
-#: src/mkvtoolnix-gui/merge/input.cpp:1827
-#: src/mkvtoolnix-gui/merge/input.cpp:1830
+#: src/mkvtoolnix-gui/merge/input.cpp:1826
+#: src/mkvtoolnix-gui/merge/input.cpp:1828
+#: src/mkvtoolnix-gui/merge/input.cpp:1831
 #: src/mkvtoolnix-gui/merge/track_model.cpp:137
 #: src/mkvtoolnix-gui/merge/track_model.cpp:141
 #: src/mkvtoolnix-gui/merge/track_model.cpp:142
@@ -12348,7 +12348,7 @@ msgid "Select destination file name"
 msgstr "Zieldateinamen auswählen"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:94
-#: src/mkvtoolnix-gui/merge/input.cpp:1411
+#: src/mkvtoolnix-gui/merge/input.cpp:1412
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:397
 #, no-c-format
 msgid "Text files"
@@ -12486,7 +12486,7 @@ msgid "Warnings/Errors"
 msgstr "Warnungen/Fehler"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:770
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:784
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:83
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -12618,19 +12618,19 @@ msgid "Running jobs cannot be edited."
 msgstr "Laufende Jobs können nicht bearbeitet werden."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:523
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:475
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:489
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "Laufende Jobs vorzeitig beenden"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:524
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:476
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "Wollen Sie wirklich alle aktuell laufenden Jobs vorzeitig beenden?"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:525
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:477
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:491
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "Jobs vorzeitig &beenden"
@@ -12743,154 +12743,154 @@ msgstr "<a href=\"%1\">Song</a> auf YouTube anhören"
 msgid "Version %1 \"%2\""
 msgstr "Version %1 »%2«"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:162
 #, no-c-format
 msgid "This has not been implemented yet."
 msgstr "Die Funktion wurde noch nicht implementiert."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:268
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:282
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "Multiplexer"
 msgstr "Multiplexer"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:270
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:284
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "Info tool"
 msgstr "Info-Werkzeug"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:275
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:289
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #, no-c-format
 msgid "Job output"
 msgstr "Jobausgabe"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:432
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "Extraction tool"
 msgstr "Extraktions-Werkzeug"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:432
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "Tag editor"
 msgstr "Tag-Editor"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:441
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:455
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:444
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:458
 #, no-c-format
 msgid "Header &editor"
 msgstr "&Kopfdateneditor"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:461
 #, no-c-format
 msgid "&Job output"
 msgstr "&Jobausgabe"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "&Help"
 msgstr "&Hilfe"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:476
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "Momentan läuft ein Job."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:670
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:684
 #, no-c-format
 msgid "The MKVToolNix Code of Conduct"
 msgstr "Der MKVToolNix-Verhaltenskodex"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:675
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:686
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:700
 #, no-c-format
 msgid "Markdown files"
 msgstr "Markdown-Dateien"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:684
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:698
 #, no-c-format
 msgid "System information"
 msgstr "Systeminformationen"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:766
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:780
 #, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "Die Datei »%1« konnte nicht im Installationsordner gefunden werden."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:774
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:788
 #, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "Die mkvmerge-Programmdatei wurde zwar gefunden, konnte aber nicht ausgeführt werden."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:778
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:792
 #, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "Die von mkvmerge gemeldete Versions-Zeile ('%1') konnte nicht erkannt werden."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:782
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:796
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr "Die Versionen von mkvmerge (%1) und der GUI (%2) unterscheiden sich."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:786
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:800
 #, no-c-format
 msgid "Temporary files cannot be created. Additional information: %1"
 msgstr "Temporäre Dateien können nicht erstellt werden. Zusätzliche Informationen: %1"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:790
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:804
 #, no-c-format
 msgid "MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'."
 msgstr "MKVToolNix GUI arbeitet im Modus für portable Anwendungen, kann aber nicht in sein Basisverzeichnis »%1« schreiben. Falls es im Modus für installierte Anwendungen laufen soll, muss die Datei »%2« entfernt werden."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:800
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:814
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
 msgstr[0] "Problem mit MKVToolNix-Installation"
 msgstr[1] "Probleme mit MKVToolNix-Installation"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:804
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:818
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
 msgstr[0] "Es wurde ein Problem mit der MKVToolNix-Installation festgestellt:"
 msgstr[1] "Es wurden mehrere Probleme mit der MKVToolNix-Installation festgestellt:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:806
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:820
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr "Gewisse Funktionen werden in dieser Situation nicht korrekt arbeiten."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:807
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:821
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
 msgstr[0] "Bitte installieren Sie MKVToolNix erneut, oder beheben Sie das Problem manuell."
 msgstr[1] "Bitte installieren Sie MKVToolNix erneut, oder beheben Sie die Probleme manuell."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:956
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:970
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
 msgstr "Die Audiodatei »%1« konnte nicht abgespielt werden."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:959
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:973
 #, no-c-format
 msgid "Either the file format or the audio codec is not supported."
 msgstr "Entweder das Dateiformat oder der Audiocodec wird nicht unterstützt."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:962
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:976
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
 msgstr "Es ist kein Audiogerät verfügbar, oder der Zugriff darauf schlug fehl."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:965
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:979
 #, no-c-format
 msgid "Error playing audio"
 msgstr "Fehler bei Audiowiedergabe"
@@ -13749,253 +13749,253 @@ msgstr "Standardmäßig fragt die GUI nach, was mit den fallen gelassenen Dateie
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
 msgstr "Abgesehen von der Nachfrage kann die GUI fallen gelassene Dateien immer als neue Tabs öffnen, oder sie kann sie immer als neue Dateianhänge dem aktuellen Tab hinzufügen."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:796
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:812
 #, no-c-format
 msgid "Highest priority"
 msgstr "Höchste Priorität"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:797
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:813
 #, no-c-format
 msgid "Higher priority"
 msgstr "Höhere Priorität"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:799
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:815
 #, no-c-format
 msgid "Normal priority"
 msgstr "Normale Priorität"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:800
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:816
 #, no-c-format
 msgid "Lower priority"
 msgstr "Niedrigere Priorität"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:801
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:817
 #, no-c-format
 msgid "Lowest priority"
 msgstr "Niedrigste Priorität"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:858
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:874
 #, no-c-format
 msgid "Select a directory"
 msgstr "Verzeichnis auswählen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:892
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:908
 #, no-c-format
 msgid "Add all files to the current multiplex settings"
 msgstr "Alle Dateien den aktuellen Multiplexeinstellungen hinzufügen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:893
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:909
 #, no-c-format
 msgid "Create one new multiplex settings tab and add all files there"
 msgstr "Einen neuen Tab mit Multiplexeinstellungen anlegen und alle Dateien diesem hinzufügen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:894
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:910
 #, no-c-format
 msgid "Create one new multiplex settings tab for each file"
 msgstr "Für jede Datei neue Multiplexeinstellungen anlegen und zu diesen hinzufügen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:912
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:928
 #, no-c-format
 msgid "Handle all files from all directories as a single list of files"
 msgstr "Alle Dateien aus allen Verzeichnissen als eine große Liste betrachten"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:913
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:929
 #, no-c-format
 msgid "Create a new multiplex settings tab for each directory"
 msgstr "Für jedes Verzeichnisse neue Multiplexeinstellungen anlegen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:924
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1087
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:940
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1103
 #, no-c-format
 msgid "Never"
 msgstr "Niemals"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:925
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:941
 #, no-c-format
 msgid "If audio tracks are present but none is enabled"
 msgstr "Falls Audiospuren vorhanden sind aber keine aktiviert ist"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:926
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:942
 #, no-c-format
 msgid "Even if no audio tracks are present"
 msgstr "Selbst wenn keine Audiospur vorhanden ist"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:947
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:963
 #, no-c-format
 msgid "Enter predefined track name"
 msgstr "Vordefinierten Spurnamen eingeben"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:947
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:963
 #, no-c-format
 msgid "Please enter the new predefined track name."
 msgstr "Bitte geben Sie den neuen vordefinierten Spurnamen ein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:949
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:965
 #, no-c-format
 msgid "Enter predefined split size"
 msgstr "Vordefinierte Aufteilungsgröße eingeben"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:949
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:965
 #, no-c-format
 msgid "Please enter the new predefined split size."
 msgstr "Bitte geben Sie die neue vordefinierte Aufteilungsgröße ein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:950
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:966
 #, no-c-format
 msgid "Enter predefined split duration"
 msgstr "Vordefinierte Aufteilungsdauer eingeben"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:950
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:966
 #, no-c-format
 msgid "Please enter the new predefined split duration."
 msgstr "Bitte geben Sie die neue vordefinierte Aufteilungsdauer ein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:956
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:972
 #, no-c-format
 msgid "Open all files as tabs in the header editor"
 msgstr "Alle Dateien als Tabs im Kopfdateneditor öffnen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:957
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:973
 #, no-c-format
 msgid "Add all files as new attachments to the current tab"
 msgstr "Alle Dateien als neue Dateianhänge dem aktuellen Tab hinzufügen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:978
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:994
 #, no-c-format
 msgid "Free-form input"
 msgstr "Freie Eingabe"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:979
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:995
 #, no-c-format
 msgid "Individually selected components"
 msgstr "Einzeln ausgewählte Komponenten"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:989
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1005
 #, no-c-format
 msgid "no normalization"
 msgstr "keine Normalisierung"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:990
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1006
 #, no-c-format
 msgid "canonical form"
 msgstr "kanonische Form"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:991
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1007
 #, no-c-format
 msgid "extended language subtags form"
 msgstr "Erweiterte-Sprach-Unterelemente-Form"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1001
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1017
 #, no-c-format
 msgid "Top"
 msgstr "Oben"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1002
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1018
 #, no-c-format
 msgid "Bottom"
 msgstr "Unten"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1003
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1019
 #, no-c-format
 msgid "Left"
 msgstr "Links"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1004
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1020
 #, no-c-format
 msgid "Right"
 msgstr "Rechts"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1088
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1108
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1104
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1124
 #, no-c-format
 msgid "Only if the source doesn't contain a language"
 msgstr "Nur dann, wenn die Quelle keine Sprache enthält"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1089
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1109
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1105
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1125
 #, no-c-format
 msgid "Also if the language is 'undetermined' ('und')"
 msgstr "Auch dann, wenn die Sprache 'nicht festgelegt' ('und') ist"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1110
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1126
 #, no-c-format
 msgid "Always"
 msgstr "Immer"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1455
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1471
 #, no-c-format
 msgid "Select destination directory"
 msgstr "Zielverzeichnis auswählen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1465
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1481
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
 msgstr "Programmdateien"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1469
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1485
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:324
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
 msgstr "Programmdatei auswählen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1528
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1544
 #, no-c-format
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " Sekunde"
 msgstr[1] " Sekunden"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1534
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1550
 #, no-c-format
 msgid " day"
 msgid_plural " days"
 msgstr[0] " Tag"
 msgstr[1] " Tage"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1580
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1592
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1611
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1627
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1643
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1663
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1576
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1588
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1607
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1623
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1639
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1659
 #, no-c-format
 msgid "Invalid settings"
 msgstr "Ungültige Einstellungen"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1581
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1577
 #, no-c-format
 msgid "The list of boundary characters for deriving the track language from file names must not be empty."
 msgstr "Die Liste der Grenzzeichen für das Ableiten der Spursprache von Dateinamen darf nicht leer sein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1593
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1589
 #, no-c-format
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr "Die Liste der erkannten Spursprachen in Dateinamen darf nicht leer sein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1612
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1608
 #, no-c-format
 msgid "The value for deriving the 'commentary' flag from file names must be a valid regular expression."
 msgstr "Der Wert fürs Ableiten des »Kommentare«-Schalters aus Dateinamen muss ein gültiger regulärer Ausdruck sein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1628
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1624
 #, no-c-format
 msgid "The value for deriving the 'hearing impaired' flag from file names must be a valid regular expression."
 msgstr "Der Wert fürs Ableiten des »Hörgeschädigt«-Schalters aus Dateinamen muss ein gültiger regulärer Ausdruck sein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1644
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1640
 #, no-c-format
 msgid "The value for deriving the 'forced display' flag for subtitles from file names must be a valid regular expression."
 msgstr "Der Wert fürs Ableiten des »Anzeige erzwingen«-Schalters aus Dateinamen muss ein gültiger regulärer Ausdruck sein."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1666
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1662
 #, no-c-format
 msgid "This configuration is currently invalid."
 msgstr "Die Konfiguration ist momentan ungültig."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1668
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1664
 #, no-c-format
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
 msgstr "Beheben Sie das Problem, oder entfernen Sie die Konfiguration, bevor Sie das Einstellungsfenster schließen."
@@ -14078,49 +14078,49 @@ msgid "Open the multiplexed file with a player:"
 msgstr "Die gemultiplexte Datei mit einem Abspielprogramm öffnen:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:327
+#: src/mkvtoolnix-gui/util/settings.cpp:351
 #, no-c-format
 msgid "Execute a program"
 msgstr "Ein Programm ausführen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:339
+#: src/mkvtoolnix-gui/util/settings.cpp:363
 #, no-c-format
 msgid "Play an audio file"
 msgstr "Eine Audiodatei abspielen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:314
+#: src/mkvtoolnix-gui/util/settings.cpp:338
 #, no-c-format
 msgid "Show a desktop notification"
 msgstr "Eine Desktopbenachrichtigung anzeigen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:315
+#: src/mkvtoolnix-gui/util/settings.cpp:339
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "Den Computer herunterfahren"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
-#: src/mkvtoolnix-gui/util/settings.cpp:316
+#: src/mkvtoolnix-gui/util/settings.cpp:340
 #, no-c-format
 msgid "Hibernate the computer"
 msgstr "Den Computer in den Ruhezustand versetzen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:200
-#: src/mkvtoolnix-gui/util/settings.cpp:317
+#: src/mkvtoolnix-gui/util/settings.cpp:341
 #, no-c-format
 msgid "Sleep the computer"
 msgstr "Den Computer in den Energiesparmodus versetzen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:201
-#: src/mkvtoolnix-gui/util/settings.cpp:318
+#: src/mkvtoolnix-gui/util/settings.cpp:342
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
 msgstr "Quelldateien löschen bei Multiplex-Jobs"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:202
-#: src/mkvtoolnix-gui/util/settings.cpp:319
+#: src/mkvtoolnix-gui/util/settings.cpp:343
 #, no-c-format
 msgid "Quit MKVToolNix"
 msgstr "MKVToolNix beenden"
@@ -14590,9 +14590,9 @@ msgstr[0] "Dateianhang &entfernen"
 msgstr[1] "Dateianhänge &entfernen"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:444
-#: src/mkvtoolnix-gui/merge/input.cpp:787
-#: src/mkvtoolnix-gui/merge/input.cpp:1780
-#: src/mkvtoolnix-gui/merge/input.cpp:1822
+#: src/mkvtoolnix-gui/merge/input.cpp:788
+#: src/mkvtoolnix-gui/merge/input.cpp:1781
+#: src/mkvtoolnix-gui/merge/input.cpp:1823
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<Nicht ändern>"
@@ -14638,483 +14638,483 @@ msgstr "MKVToolNix-Optionsdateien (JSON-formatiert)"
 msgid "Don't escape"
 msgstr "Nicht formatieren"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:549
+#: src/mkvtoolnix-gui/merge/input.cpp:550
 #, no-c-format
 msgid "Right-click to add, append and remove files"
 msgstr "Rechts-klicken, um Dateien hinzuzufügen, anzuhängen und zu entfernen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:550
+#: src/mkvtoolnix-gui/merge/input.cpp:551
 #, no-c-format
 msgid "Right-click for actions for all items"
 msgstr "Rechts-klicken für Aktionen für alle Einträge"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:552
+#: src/mkvtoolnix-gui/merge/input.cpp:553
 #, no-c-format
 msgid "If set to 'no' then the selected tracks will not be copied to the destination file."
 msgstr "Falls auf »nein« gesetzt, werden die ausgewählten Spuren nicht in die Zieldatei kopiert."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:553
+#: src/mkvtoolnix-gui/merge/input.cpp:554
 #, no-c-format
 msgid "A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."
 msgstr "Ein Name für diese Spur, den Abspielprogramme anzeigen können, um bei der Spurauswahl zu helfen, z.B. »Kommentare des Regisseurs«."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:554
+#: src/mkvtoolnix-gui/merge/input.cpp:555
 #, no-c-format
 msgid "The language for this track that players can use for automatic track selection and display for the user."
 msgstr "Die Sprache dieser Spur, die Abspielprogramme für die automatische Spurauswahl benutzen und den Benutzerinnen und Benutzern anzeigen können."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:557
+#: src/mkvtoolnix-gui/merge/input.cpp:558
 #, no-c-format
 msgid "Make this track eligible to be played by default."
 msgstr "Markiert die Spur als dafür geeignet, vom Abspielprogramm standardmäßig abgespielt zu werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:558
+#: src/mkvtoolnix-gui/merge/input.cpp:559
 #, no-c-format
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "Abspielprogramme sollten Spuren mit dem Standardspurschalter bevorzugen und dabei auch die Voreinstellungen der Benutzerinnen & Benutzer wie die präferierte Sprache berücksichtigen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:561
+#: src/mkvtoolnix-gui/merge/input.cpp:562
 #, no-c-format
 msgid "Mark this track as \"forced display\"."
 msgstr "Setzt den Schalter »Abspielen erzwingen« der Spur."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:562
+#: src/mkvtoolnix-gui/merge/input.cpp:563
 #, no-c-format
 msgid "Use this for tracks containing onscreen text or foreign-language dialogue."
 msgstr "Kann für Spuren genutzt werden, die auf dem Bildschirm angezeigten Text oder Dialoge in fremden Sprachen beinhalten."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:565
+#: src/mkvtoolnix-gui/merge/input.cpp:566
 #, no-c-format
 msgid "Mark this track as \"enabled\" (the default) or \"disabled\"."
 msgstr "Markiert diese Spur als »aktiviert« (Standard) oder »deaktiviert«."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:566
+#: src/mkvtoolnix-gui/merge/input.cpp:567
 #, no-c-format
 msgid "Players should only consider enabled tracks for playback."
 msgstr "Abspielprogramme sollten nur aktivierte Spuren fürs Abspielen berücksichtigen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:574
+#: src/mkvtoolnix-gui/merge/input.cpp:575
 #, no-c-format
 msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "Aktiviert einen verlustfreien Kompressionsalgorithmus für diese Spur."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:575
+#: src/mkvtoolnix-gui/merge/input.cpp:576
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."
 msgstr "Falls auf »automatisch festlegen« gesetzt, entscheidet Mkvmerge selbständig anhand des Spurtyps darüber, ob Kompression benutzt wird oder nicht und welcher Algorithmus zum Einsatz kommt."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:576
+#: src/mkvtoolnix-gui/merge/input.cpp:577
 #, no-c-format
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
 msgstr "Momentan werden nur bestimmte Untertitelformate mit dem zlib-Algorithmus komprimiert."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:579
+#: src/mkvtoolnix-gui/merge/input.cpp:580
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "Verzögert die Zeitstempel einer Spur um einige ms."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:580
+#: src/mkvtoolnix-gui/merge/input.cpp:581
 #, no-c-format
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Der Wert kann negativ sein, aber beachten Sie, dass alle Frames, deren Zeitstempel nach dieser Berechnung negativ sind, verworfen werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:581
+#: src/mkvtoolnix-gui/merge/input.cpp:582
 #, no-c-format
 msgid "This works with all track types."
 msgstr "Dies funktioniert mit allen Spurtypen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:582
-#: src/mkvtoolnix-gui/merge/input.cpp:588
+#: src/mkvtoolnix-gui/merge/input.cpp:583
+#: src/mkvtoolnix-gui/merge/input.cpp:589
 #, no-c-format
 msgid "This option can also be used for chapters."
 msgstr "Diese Option kann auch für Kapitel genutzt werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:585
+#: src/mkvtoolnix-gui/merge/input.cpp:586
 #, no-c-format
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Multipliziert die Zeitstempel dieser Spur mit einem Faktor."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:586
+#: src/mkvtoolnix-gui/merge/input.cpp:587
 #: src/mkvtoolnix-gui/merge/output.cpp:229
 #, no-c-format
 msgid "The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78)."
 msgstr "Der Wert kann als Fließkommazahl (z.B. 12.345) oder als Bruch aus zwei Zahlen (z.B. 123/456.78) angegeben werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:587
+#: src/mkvtoolnix-gui/merge/input.cpp:588
 #, no-c-format
 msgid "This works well for video and subtitle tracks but should not be used with audio tracks."
 msgstr "Dies funktioniert für Video- und Untertitelspuren gut, sollte aber nicht bei Audiospuren verwendet werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:591
+#: src/mkvtoolnix-gui/merge/input.cpp:592
 #, no-c-format
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "Erzwingt eine bestimmte Standardblockdauer bzw. die Anzahl Bilder pro Sekunde für eine Spur."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:592
-#: src/mkvtoolnix-gui/merge/input.cpp:606
+#: src/mkvtoolnix-gui/merge/input.cpp:593
+#: src/mkvtoolnix-gui/merge/input.cpp:607
 #, no-c-format
 msgid "The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."
 msgstr "Der Wert kann als Fließkommazahl (z.B. 12.345) oder als Bruch aus zwei ganzen Zahlen (z.B. 123/456) angegeben werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:593
+#: src/mkvtoolnix-gui/merge/input.cpp:594
 #, no-c-format
 msgid "You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
 msgstr "Sie können eine der Einheiten »s«, »ms«, »us«, »ns«, »fps«, »i« oder »p« angeben."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:594
+#: src/mkvtoolnix-gui/merge/input.cpp:595
 #, no-c-format
 msgid "If no unit is given, 'fps' will be used."
 msgstr "Falls keine Einheit angegeben wird, so »fps« benutzt."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:597
+#: src/mkvtoolnix-gui/merge/input.cpp:598
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
 msgstr "Normalerweise verändert mkvmerge die Zeitsteuerungsinformationen (Bild-/Feldrate) nicht, die im Video-Bitstrom gespeichert sind."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:598
+#: src/mkvtoolnix-gui/merge/input.cpp:599
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
 msgstr "Ist diese Option aktiviert, so wird die Zeitsteuerungsinformation im Bitstrom an die des Containers angepasst."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:599
+#: src/mkvtoolnix-gui/merge/input.cpp:600
 #, no-c-format
 msgid "There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr "Es gibt mehrere mögliche Quellen für die Zeitsteuerungsinformationen im Container: ein auf der Kommandozeile mit der Option »--default-duration« angegebener Wert, ein Quellcontainer oder aber der Video-Bitstrom."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:603
-#: src/mkvtoolnix-gui/merge/input.cpp:609
-#: src/mkvtoolnix-gui/merge/input.cpp:614
+#: src/mkvtoolnix-gui/merge/input.cpp:604
+#: src/mkvtoolnix-gui/merge/input.cpp:610
+#: src/mkvtoolnix-gui/merge/input.cpp:615
 #, no-c-format
 msgid "The Matroska container format can store the display width/height for a video track."
 msgstr "Das Matroska-Container-Format kann die Anzeigebreite/-höhe von Videospuren speichern."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:604
+#: src/mkvtoolnix-gui/merge/input.cpp:605
 #, no-c-format
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
 msgstr "Diese Option teilt mkvmerge das bei der Berechnung der Anzeigebreite/-höhe zu verwendende Seitenverhältnis mit."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:605
-#: src/mkvtoolnix-gui/merge/input.cpp:611
-#: src/mkvtoolnix-gui/merge/input.cpp:616
+#: src/mkvtoolnix-gui/merge/input.cpp:606
+#: src/mkvtoolnix-gui/merge/input.cpp:612
+#: src/mkvtoolnix-gui/merge/input.cpp:617
 #, no-c-format
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "Beachten Sie, dass viele Abspielprogramme die Werte für Anzeigebreite/-höhe nicht direkt benutzen, sondern nur ihr Verhältnis, wenn sie die initiale Fenstergröße festlegen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:610
+#: src/mkvtoolnix-gui/merge/input.cpp:611
 #, no-c-format
 msgid "This parameter is the display width in pixels."
 msgstr "Dieser Parmeter ist die Anzeigebreite in Pixeln."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:615
+#: src/mkvtoolnix-gui/merge/input.cpp:616
 #, no-c-format
 msgid "This parameter is the display height in pixels."
 msgstr "Dieser Parameter ist die Anzeigehöhe in Pixeln."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:619
+#: src/mkvtoolnix-gui/merge/input.cpp:620
 #, no-c-format
 msgid "Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."
 msgstr "Setzt die Schneideparameter, die einem Abspielprogramm mitteilen, beim Abspielen eine gewisse Anzahl von Pixeln an den vier Seiten wegzulassen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:620
+#: src/mkvtoolnix-gui/merge/input.cpp:621
 #, no-c-format
 msgid "This must be a comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."
 msgstr "Muss eine durch Kommas getrennte Liste von vier Zahlen sein, die die Werte für links, oben, rechts und unten angeben, z.B. »0,20,0,20«."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:621
+#: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
 msgid "Note that the video content is not modified by this option."
 msgstr "Beachten Sie, dass der Videoinhalt durch diese Option nicht verändert wird."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:622
+#: src/mkvtoolnix-gui/merge/input.cpp:623
 #, no-c-format
 msgid "The values are only stored in the track headers."
 msgstr "Die Werte werden nur in den Spurkopfdaten gespeichert."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:623
+#: src/mkvtoolnix-gui/merge/input.cpp:624
 #, no-c-format
 msgid "Note also that there are not a lot of players that support the cropping parameters."
 msgstr "Beachten Sie außerdem, dass es nicht viele Abspielprogramme gibt, die die Schneideparameter unterstützen."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:626
+#: src/mkvtoolnix-gui/merge/input.cpp:627
 #, no-c-format
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "Setzt den Stereo-Modus für eine Video-Spur auf diesen Wert."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:627
+#: src/mkvtoolnix-gui/merge/input.cpp:628
 #, no-c-format
 msgid "If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."
 msgstr "Falls das Feld leer gelassen wird, wird der bisherige Stereomodus der Spur übernommen, oder aber es wird keiner gesetzt, falls sie bisher auch keinen hatte."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:630
+#: src/mkvtoolnix-gui/merge/input.cpp:631
 #, no-c-format
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "Diese Spur enthält SBR-AAC-/HE-AAC-/AAC+-Daten."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:631
+#: src/mkvtoolnix-gui/merge/input.cpp:632
 #, no-c-format
 msgid "Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."
 msgstr "Wird nur bei AAC-Quelldateien benötigt, weil SBR AAC nicht automatisch von normalem AAC unterschieden werden kann."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:632
+#: src/mkvtoolnix-gui/merge/input.cpp:633
 #, no-c-format
 msgid "Not needed for AAC tracks read from other container formats like MP4 or Matroska files."
 msgstr "Wird nicht für AAC-Spuren benötigt, die aus anderen Container-Formaten wie MP4- oder Matroska-Dateien gelesen werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:635
+#: src/mkvtoolnix-gui/merge/input.cpp:636
 #, no-c-format
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
 msgstr "Entfernt alle HD-Erweiterungen von Audio-Spuren und behält nur den verlustbehafteten Kern."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:636
+#: src/mkvtoolnix-gui/merge/input.cpp:637
 #, no-c-format
 msgid "This only works with DTS audio tracks."
 msgstr "Dies funktioniert nur bei DTS-Audio-Spuren."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:639
+#: src/mkvtoolnix-gui/merge/input.cpp:640
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
 msgstr "Entfernt oder minimiert zumindest die Signalverstärkung zur Dialognormalisierung durch Modifikation der Audio-Kopfdaten."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:640
+#: src/mkvtoolnix-gui/merge/input.cpp:641
 #, no-c-format
 msgid "This only works with AC-3, DTS & TrueHD audio tracks."
 msgstr "Dies funktioniert nur bei AC-3-, DTS- & TrueHD-Audio-Spuren."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:643
+#: src/mkvtoolnix-gui/merge/input.cpp:644
 #, no-c-format
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "Wählen Sie den Zeichensatz aus, in dem eine Untertiteldatei oder Kapitelinformationen geschrieben wurden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:644
+#: src/mkvtoolnix-gui/merge/input.cpp:645
 #, no-c-format
 msgid "Only needed in certain situations:"
 msgstr "Nur in bestimmten Situationen benötigt:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:645
+#: src/mkvtoolnix-gui/merge/input.cpp:646
 #, no-c-format
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "für Untertiteldateien ohne Bytereihenfolgemarkierung (BOM), die nicht im aktuellen Zeichensatz des Systems (%1) codiert sind"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:646
+#: src/mkvtoolnix-gui/merge/input.cpp:647
 #, no-c-format
 msgid "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly"
 msgstr "für Dateien mit Kapitelinformationen (wie z.B. bei OGM, MP4), für die Mkvmerge die Zeichensatzkodierung nicht korrekt erkennt"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:649
+#: src/mkvtoolnix-gui/merge/input.cpp:650
 #, no-c-format
 msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entries)."
 msgstr "Legt fest, für welche Blöcke Mkvmerge Indexeinträge ( = CUE-Einträge) erstellt."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:650
+#: src/mkvtoolnix-gui/merge/input.cpp:651
 #, no-c-format
 msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "»Automatisch festlegen« ist in beinahe allen Situationen eine gute Wahl."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:653
+#: src/mkvtoolnix-gui/merge/input.cpp:654
 #, no-c-format
 msgid "Free-form edit field for user defined options for this track."
 msgstr "Freitextfeld für benutzerdefinierte Optionen für diese Spur."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:654
+#: src/mkvtoolnix-gui/merge/input.cpp:655
 #, no-c-format
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
 msgstr "Was Sie hier eingeben, wird vom GUI nach allen anderen anderen Optionen in der Befehlszeile eingefügt, sodass Sie alle Optionen des GUIs beliebig überschreiben können."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:655
+#: src/mkvtoolnix-gui/merge/input.cpp:656
 #, no-c-format
 msgid "All occurrences of the string \"<TID>\" will be replaced by the track's track ID."
 msgstr "Alle Vorkommen der Zeichenkette »<TID>« werden durch die Spur-ID der Spur ersetzt."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1411
+#: src/mkvtoolnix-gui/merge/input.cpp:1412
 #, no-c-format
 msgid "Select timestamp file"
 msgstr "Zeitstempel-Datei auswählen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1423
+#: src/mkvtoolnix-gui/merge/input.cpp:1424
 #: src/mkvtoolnix-gui/merge/output.cpp:468
 #, no-c-format
 msgid "Select tags file"
 msgstr "Tag-Datei auswählen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1423
+#: src/mkvtoolnix-gui/merge/input.cpp:1424
 #: src/mkvtoolnix-gui/merge/output.cpp:468
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML-Tag-Dateien"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1558
+#: src/mkvtoolnix-gui/merge/input.cpp:1559
 #, no-c-format
 msgid "Append media files"
 msgstr "Mediendateien anhängen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1558
+#: src/mkvtoolnix-gui/merge/input.cpp:1559
 #, no-c-format
 msgid "Add media files"
 msgstr "Mediendateien hinzufügen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1670
+#: src/mkvtoolnix-gui/merge/input.cpp:1671
 #, no-c-format
 msgid "Unable to append files"
 msgstr "Kann Dateien nicht anfügen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1670
+#: src/mkvtoolnix-gui/merge/input.cpp:1671
 #, no-c-format
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "Sie können keine zusätzliche Teile an Dateien anhängen, die keine Spuren enthalten."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1674
+#: src/mkvtoolnix-gui/merge/input.cpp:1675
 #, no-c-format
 msgid "Add media files as additional parts"
 msgstr "Mediendateien als zusätzliche Teile hinzufügen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1751
+#: src/mkvtoolnix-gui/merge/input.cpp:1752
 #, no-c-format
 msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "Datei &entfernen"
 msgstr[1] "Dateien &entfernen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1752
+#: src/mkvtoolnix-gui/merge/input.cpp:1753
 #, no-c-format
 msgid "Open file in &MediaInfo"
 msgid_plural "Open files in &MediaInfo"
 msgstr[0] "Datei in &MediaInfo öffnen"
 msgstr[1] "Dateien in &MediaInfo öffnen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1753
+#: src/mkvtoolnix-gui/merge/input.cpp:1754
 #, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
 msgstr[0] "Alle Elemente der ausgewählten &Quelldatei auswählen"
 msgstr[1] "Alle Elemente der ausgewählten &Quelldateien auswählen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1773
+#: src/mkvtoolnix-gui/merge/input.cpp:1774
 #, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
 msgstr[0] "Korrespondierende Datei in &MediaInfo öffnen"
 msgstr[1] "Korrespondierende Dateien in &MediaInfo öffnen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1785
 #: src/mkvtoolnix-gui/merge/input.cpp:1786
+#: src/mkvtoolnix-gui/merge/input.cpp:1787
 #, no-c-format
 msgid "&Add files"
 msgstr "Dateien &hinzufügen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1787
 #: src/mkvtoolnix-gui/merge/input.cpp:1788
+#: src/mkvtoolnix-gui/merge/input.cpp:1789
 #, no-c-format
 msgid "A&ppend files"
 msgstr "Dateien an&hängen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1789
 #: src/mkvtoolnix-gui/merge/input.cpp:1790
+#: src/mkvtoolnix-gui/merge/input.cpp:1791
 #, no-c-format
 msgid "Add files as a&dditional parts"
 msgstr "Dateien als &zusätzliche Teile hinzufügen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1792
+#: src/mkvtoolnix-gui/merge/input.cpp:1793
 #, no-c-format
 msgid "Remove a&ll files"
 msgstr "A&lle Dateien entfernen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1794
+#: src/mkvtoolnix-gui/merge/input.cpp:1795
 #, no-c-format
 msgid "Set destination &file name from selected file's name"
 msgstr "Zieldateinamen &anhand des Namens der ausgewählten Datei setzen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1796
+#: src/mkvtoolnix-gui/merge/input.cpp:1797
 #, no-c-format
 msgid "&Select all items"
 msgstr "Alle Elemente aus&wählen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1797
+#: src/mkvtoolnix-gui/merge/input.cpp:1798
 #, no-c-format
 msgid "Select all tracks of specific &type"
 msgstr "Alle Spuren eines bestimmten &Typs auswählen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1798
+#: src/mkvtoolnix-gui/merge/input.cpp:1799
 #, no-c-format
 msgid "&Enable all items"
 msgstr "Alle Elemente &aktivieren"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1799
+#: src/mkvtoolnix-gui/merge/input.cpp:1800
 #, no-c-format
 msgid "&Disable all items"
 msgstr "Alle Elemente &deaktivieren"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1805
-#: src/mkvtoolnix-gui/merge/input.cpp:1810
+#: src/mkvtoolnix-gui/merge/input.cpp:1806
+#: src/mkvtoolnix-gui/merge/input.cpp:1811
 #, no-c-format
 msgid "Afterwards &leave the settings as they are."
 msgstr "Anschließend die Einstellungen so &belassen, wie sie sind"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1806
-#: src/mkvtoolnix-gui/merge/input.cpp:1811
+#: src/mkvtoolnix-gui/merge/input.cpp:1807
+#: src/mkvtoolnix-gui/merge/input.cpp:1812
 #, no-c-format
 msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "Anschließend &neue Multiplexxeinstellungen anlegen und die aktuellen schließen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1807
-#: src/mkvtoolnix-gui/merge/input.cpp:1812
+#: src/mkvtoolnix-gui/merge/input.cpp:1808
+#: src/mkvtoolnix-gui/merge/input.cpp:1813
 #, no-c-format
 msgid "Afterwards &close the current multiplex settings."
 msgstr "Anschließend die aktuellen Multiplexeinstellungen &schließen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1808
-#: src/mkvtoolnix-gui/merge/input.cpp:1813
+#: src/mkvtoolnix-gui/merge/input.cpp:1809
+#: src/mkvtoolnix-gui/merge/input.cpp:1814
 #, no-c-format
 msgid "Afterwards &remove all source files."
 msgstr "Anschließend alle Quelldateien &entfernen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1828
 #: src/mkvtoolnix-gui/merge/input.cpp:1829
 #: src/mkvtoolnix-gui/merge/input.cpp:1830
+#: src/mkvtoolnix-gui/merge/input.cpp:1831
 #, no-c-format
 msgid "Determine automatically"
 msgstr "Automatisch festlegen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1828
+#: src/mkvtoolnix-gui/merge/input.cpp:1829
 #, no-c-format
 msgid "No extra compression"
 msgstr "Keine weitere Komprimierung"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1829
+#: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "Only for I frames"
 msgstr "Nur für I-Frames"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1829
+#: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "For all frames"
 msgstr "Für alle Frames"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1829
+#: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "No cues"
 msgstr "Keine Indizes (cues)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2247
+#: src/mkvtoolnix-gui/merge/input.cpp:2253
 #, no-c-format
 msgid "Executable not found"
 msgstr "Programmdatei nicht gefunden"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2249
+#: src/mkvtoolnix-gui/merge/input.cpp:2255
 #, no-c-format
 msgid "This function requires the application %1."
 msgstr "Diese Funktion benötigt die Anwendung %1."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2250
+#: src/mkvtoolnix-gui/merge/input.cpp:2256
 #, no-c-format
 msgid "Its installation location could not be determined automatically."
 msgstr "Ihr Installationsort konnte nicht automatisch ermittelt werden."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2251
+#: src/mkvtoolnix-gui/merge/input.cpp:2257
 #, no-c-format
 msgid "Please select its location below."
 msgstr "Bitte wählen Sie ihren Installationsort unten aus."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2252
+#: src/mkvtoolnix-gui/merge/input.cpp:2258
 #, no-c-format
 msgid "You can download the application from the following URL:"
 msgstr "Sie können die Anwendung von der folgenden URL herunterladen:"
@@ -16254,22 +16254,22 @@ msgstr "»S&ehbehindert«-Schalter umschalten"
 msgid "Toggle \"&text descriptions\" flag"
 msgstr "»&Textbeschreibung«-Schalter umschalten"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:295
+#: src/mkvtoolnix-gui/util/settings.cpp:319
 #, no-c-format
 msgid "The program to execute hasn't been set yet."
 msgstr "Das auszuführende Programm wurde noch nicht festgelegt."
 
-#: src/mkvtoolnix-gui/util/settings.cpp:296
+#: src/mkvtoolnix-gui/util/settings.cpp:320
 #, no-c-format
 msgid "The audio file to play hasn't been set yet."
 msgstr "Die abzuspielende Audiodatei wurde noch nicht festgelegt."
 
-#: src/mkvtoolnix-gui/util/settings.cpp:332
+#: src/mkvtoolnix-gui/util/settings.cpp:356
 #, no-c-format
 msgid "Execute program '%1'"
 msgstr "Programm »%1« ausführen"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:344
+#: src/mkvtoolnix-gui/util/settings.cpp:368
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Audiodatei »%1« abspielen"
@@ -17134,6 +17134,9 @@ msgstr "Die Datei wird gelesen, um Spur-Statistiken zu erstellen.\n"
 #, no-c-format, c++-format
 msgid "No track corresponding to the edit specification '{0}' was found. {1}\n"
 msgstr "Es wurde keine Spur gefunden, der zum Bearbeitungsziel »{0}« passt. {1}\n"
+
+#~ msgid "flac_reader: Could not read a header packet.\n"
+#~ msgstr "flac_reader: Ein Kopfpaket konnte nicht gelesen werden.\n"
 
 #~ msgid ""
 #~ "  --blockadd <TID:x>       Sets the max number of block additional\n"

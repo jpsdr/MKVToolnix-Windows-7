@@ -10,6 +10,15 @@
   registries.
 * translations: added a Hungarian translation of the programs & man pages by
   Viktor György, John Fowler & Attila Zsigus (see `AUTHORS`).
+* MKVToolNix GUI: preferences: the revert buttons for the various "default
+  regex for…" will only be enabled when the current text differs from the
+  default, in other words: when reverting would actually change the
+  text. Part of the implementation of #6099.
+* MKVToolNix GUI: preferences: the GUI will now auto-upgrade the "default
+  regex for…" to their respective current default values if they're still set
+  to one of the previous default values. Part of the implementation of #6099.
+* mkvextract: tags extraction: added an option `--no-track-tags` (short: `-T`)
+  for not extracting tags associated with tracks.
 
 
 # Version 92.0 "Everglow" 2025-04-26

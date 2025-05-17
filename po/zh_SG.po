@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-02-27 20:49+0100\n"
+"POT-Creation-Date: 2025-05-17 11:27+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2020,2022-2023\n"
 "Language-Team: Chinese (Singapore) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_SG/)\n"
@@ -48,7 +48,7 @@ msgstr "CD/DVD/MPEG 音频所采用的一阶滤波器"
 #: src/common/kax_info.cpp:880
 #: src/common/stereo_mode.cpp:70
 #: src/input/r_matroska.cpp:131
-#: src/input/r_matroska.cpp:3018
+#: src/input/r_matroska.cpp:3019
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -237,45 +237,45 @@ msgstr "缺少一个十六进制数字"
 msgid "The number of bytes to swap isn't divisible by {0}."
 msgstr "要交换的字节数目不能被 {0} 整除。"
 
-#: src/common/chapters/chapters.cpp:58
-#: src/mkvtoolnix-gui/util/settings.cpp:598
+#: src/common/chapters/chapters.cpp:59
+#: src/mkvtoolnix-gui/util/settings.cpp:623
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "第 <NUM:2> 章"
 
-#: src/common/chapters/chapters.cpp:171
+#: src/common/chapters/chapters.cpp:172
 #, no-c-format, c++-format
 msgid "Simple chapter parser: {0}\n"
 msgstr "简易格式章节解析器: {0}\n"
 
-#: src/common/chapters/chapters.cpp:294
-#: src/common/chapters/chapters.cpp:314
+#: src/common/chapters/chapters.cpp:307
+#: src/common/chapters/chapters.cpp:327
 #, no-c-format, c++-format
 msgid "'{0}' is not a CHAPTERxx=... line."
 msgstr "「{0}」: 该行格式不符合 CHAPTERxx=...。"
 
-#: src/common/chapters/chapters.cpp:303
+#: src/common/chapters/chapters.cpp:316
 #, no-c-format, c++-format
 msgid "Invalid minute: {0}"
 msgstr "分钟值无效: {0}"
 
-#: src/common/chapters/chapters.cpp:305
+#: src/common/chapters/chapters.cpp:318
 #, no-c-format, c++-format
 msgid "Invalid second: {0}"
 msgstr "秒值无效: {0}"
 
-#: src/common/chapters/chapters.cpp:318
+#: src/common/chapters/chapters.cpp:331
 #, no-c-format, c++-format
 msgid "'{0}' is not a CHAPTERxxNAME=... line."
 msgstr "「{0}」: 该行格式不符合 CHAPTERxxNAME=... 。"
 
-#: src/common/chapters/chapters.cpp:661
+#: src/common/chapters/chapters.cpp:674
 #, no-c-format, c++-format
 msgid "Could not parse the chapters in '{0}': {1}\n"
 msgstr "无法解析「{0}」中的章节: {1}\n"
 
-#: src/common/chapters/chapters.cpp:665
-#: src/common/chapters/chapters.cpp:667
+#: src/common/chapters/chapters.cpp:678
+#: src/common/chapters/chapters.cpp:680
 #: src/common/chapters/dvd.cpp:58
 #: src/input/r_vobsub.cpp:109
 #: src/input/r_vobsub.cpp:115
@@ -283,24 +283,24 @@ msgstr "无法解析「{0}」中的章节: {1}\n"
 msgid "Could not open '{0}' for reading.\n"
 msgstr "无法以读取模式打开「{0}」。\n"
 
-#: src/common/chapters/chapters.cpp:749
+#: src/common/chapters/chapters.cpp:762
 #, no-c-format, c++-format
 msgid "Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"
 msgstr "「{0}」的章节文件格式未知。它不含支持的章节格式。\n"
 
-#: src/common/chapters/chapters.cpp:753
+#: src/common/chapters/chapters.cpp:766
 #: src/common/xml/ebml_chapters_converter.cpp:252
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "XML 章节文件「{0}」无法读取。\n"
 
-#: src/common/chapters/chapters.cpp:755
+#: src/common/chapters/chapters.cpp:768
 #: src/common/xml/ebml_chapters_converter.cpp:255
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "XML 章节文件「{0}」存在错误，位于 {2}: {1}\n"
 
-#: src/common/chapters/chapters.cpp:757
+#: src/common/chapters/chapters.cpp:770
 #: src/common/xml/ebml_chapters_converter.cpp:258
 #, no-c-format, c++-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
@@ -1180,23 +1180,23 @@ msgstr "不是有效的 Matroska 文件 (未发现 EBML 头)"
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "不是有效的 Matroska 文件 (未发现剪辑/0 级元素)"
 
-#: src/common/kax_analyzer.cpp:1735
-#: src/common/kax_analyzer.cpp:1738
+#: src/common/kax_analyzer.cpp:1737
+#: src/common/kax_analyzer.cpp:1740
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened for reading: {1}."
 msgstr "文件「{0}」无法以读取模式打开: {1}。"
 
-#: src/common/kax_analyzer.cpp:1741
+#: src/common/kax_analyzer.cpp:1743
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "文件「{0}」无法打开或解析。"
 
-#: src/common/kax_analyzer.cpp:1745
+#: src/common/kax_analyzer.cpp:1747
 #, no-c-format, c++-format
 msgid "No segment UID could be found in the file '{0}'."
 msgstr "文件「{0}」中找不到剪辑 UID。"
 
-#: src/common/kax_analyzer.cpp:1808
+#: src/common/kax_analyzer.cpp:1810
 #, no-c-format, c++-format
 msgid "Progress: [{0}{1}] {2}%"
 msgstr "进度: [{0}{1}] {2}%"
@@ -2462,8 +2462,8 @@ msgstr "{0}: 发生异常 (消息: {1}；类型: {2})。"
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:2500
+#: src/input/r_matroska.cpp:1768
+#: src/input/r_matroska.cpp:2501
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "这通常表示文件结构损坏。"
@@ -2471,15 +2471,15 @@ msgstr "这通常表示文件结构损坏。"
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1767
-#: src/input/r_matroska.cpp:2500
+#: src/input/r_matroska.cpp:1768
+#: src/input/r_matroska.cpp:2501
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "将不会进一步处理该文件。"
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1766
-#: src/input/r_matroska.cpp:2499
+#: src/input/r_matroska.cpp:1767
+#: src/input/r_matroska.cpp:2500
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 发生未知异常。"
@@ -3182,7 +3182,7 @@ msgid "A unique ID to identify the Track. This should be kept the same when maki
 msgstr "用于识别「轨道」的唯一 ID。在将轨道数据流直接复制到其他文件时通常保持不变。"
 
 #: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/merge/input.cpp:571
+#: src/mkvtoolnix-gui/merge/input.cpp:572
 #, no-c-format
 msgid "Can be set if the track contains commentary."
 msgstr "若轨道包含评论内容，可以考虑设置该项。"
@@ -3208,25 +3208,25 @@ msgid "Can be set for tracks containing onscreen text or foreign-language dialog
 msgstr "适用于包含屏幕显示文字或外语对白翻译的轨道。"
 
 #: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/merge/input.cpp:567
+#: src/mkvtoolnix-gui/merge/input.cpp:568
 #, no-c-format
 msgid "Can be set if the track is suitable for users with hearing impairments."
 msgstr "若轨道适合听觉障碍人士，可以考虑设置该项。"
 
 #: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/merge/input.cpp:570
+#: src/mkvtoolnix-gui/merge/input.cpp:571
 #, no-c-format
 msgid "Can be set if the track is in the content's original language (not a translation)."
 msgstr "可用于内容原始语言（而非翻译）的轨道。"
 
 #: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/merge/input.cpp:569
+#: src/mkvtoolnix-gui/merge/input.cpp:570
 #, no-c-format
 msgid "Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
 msgstr "若轨道包含对视频内容的文字描述版本（适用于视觉障碍人士的文本转语音播放系统），可以考虑设置该项。"
 
 #: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/merge/input.cpp:568
+#: src/mkvtoolnix-gui/merge/input.cpp:569
 #, no-c-format
 msgid "Can be set if the track is suitable for users with visual impairments."
 msgstr "若轨道适合视觉障碍人士，可以考虑设置该项。"
@@ -4281,7 +4281,7 @@ msgid "All other arguments either switch to a certain extraction mode, change op
 msgstr "其他参数可切换到特定的提取模式，更改当前活动模式的选项，或指定将哪些内容提取到哪些文件中。"
 
 #: src/extract/extract_cli_parser.cpp:68
-#: src/extract/extract_cli_parser.cpp:140
+#: src/extract/extract_cli_parser.cpp:141
 #, no-c-format
 msgid "Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."
 msgstr "对 mkvextract 的同一次调用可以使用多种模式，这样可以只读取一遍就提取多种内容。"
@@ -4343,13 +4343,13 @@ msgid "Write track with the ID TID to the file 'out'."
 msgstr "将 ID 为 TID 的轨道写入到文件 'out'。"
 
 #: src/extract/extract_cli_parser.cpp:85
-#: src/extract/extract_cli_parser.cpp:93
-#: src/extract/extract_cli_parser.cpp:102
-#: src/extract/extract_cli_parser.cpp:111
-#: src/extract/extract_cli_parser.cpp:120
-#: src/extract/extract_cli_parser.cpp:128
-#: src/extract/extract_cli_parser.cpp:135
-#: src/extract/extract_cli_parser.cpp:142
+#: src/extract/extract_cli_parser.cpp:94
+#: src/extract/extract_cli_parser.cpp:103
+#: src/extract/extract_cli_parser.cpp:112
+#: src/extract/extract_cli_parser.cpp:121
+#: src/extract/extract_cli_parser.cpp:129
+#: src/extract/extract_cli_parser.cpp:136
+#: src/extract/extract_cli_parser.cpp:143
 #, no-c-format
 msgid "Example"
 msgstr "示例"
@@ -4369,168 +4369,173 @@ msgstr "标签提取"
 msgid "The second mode extracts the tags, converts them to XML and writes them to an output file."
 msgstr "第二种模式用于提取标签，并将其转换为 XML，写入到输出文件中。"
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:92
+#, no-c-format
+msgid "Do not exports track tags."
+msgstr ""
+
+#: src/extract/extract_cli_parser.cpp:96
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" tags movie_tags.xml"
 msgstr "mkvextract \"一部影片.mkv\" tags 影片标签.xml"
 
-#: src/extract/extract_cli_parser.cpp:97
+#: src/extract/extract_cli_parser.cpp:98
 #, no-c-format
 msgid "Attachment extraction"
 msgstr "附件提取"
 
-#: src/extract/extract_cli_parser.cpp:99
+#: src/extract/extract_cli_parser.cpp:100
 #, no-c-format
 msgid "The third mode extracts attachments from the source file."
 msgstr "第三种模式用于从输入文件中提取附件。"
 
-#: src/extract/extract_cli_parser.cpp:100
+#: src/extract/extract_cli_parser.cpp:101
 #, no-c-format
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "将 ID 为 'AID' 的附件写入到 'outname'。"
 
-#: src/extract/extract_cli_parser.cpp:104
+#: src/extract/extract_cli_parser.cpp:105
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" attachments 4:cover.jpg"
 msgstr "mkvextract \"一部影片.mkv\" attachments 4:封面.jpg"
 
-#: src/extract/extract_cli_parser.cpp:106
+#: src/extract/extract_cli_parser.cpp:107
 #, no-c-format
 msgid "Chapter extraction"
 msgstr "章节提取"
 
-#: src/extract/extract_cli_parser.cpp:107
+#: src/extract/extract_cli_parser.cpp:108
 #, no-c-format
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
 msgstr "第四种模式用于提取章节，并将其转换为 XML，写入到输出文件中。"
 
-#: src/extract/extract_cli_parser.cpp:108
+#: src/extract/extract_cli_parser.cpp:109
 #, no-c-format
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "以 OGM tools 所用的简易格式导出章节讯息 (内容类似 CHAPTER01=... CHAPTER01NAME=...)。"
 
-#: src/extract/extract_cli_parser.cpp:109
+#: src/extract/extract_cli_parser.cpp:110
 #, no-c-format
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
 msgstr "使用指定语言的章节名称，而非发现的第一个章节名称。"
 
-#: src/extract/extract_cli_parser.cpp:113
+#: src/extract/extract_cli_parser.cpp:114
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" chapters movie_chapters.xml"
 msgstr "mkvextract \"一部影片.mkv\" chapters 影片章节.xml"
 
-#: src/extract/extract_cli_parser.cpp:115
+#: src/extract/extract_cli_parser.cpp:116
 #, no-c-format
 msgid "Cue sheet extraction"
 msgstr "cue 表单提取"
 
-#: src/extract/extract_cli_parser.cpp:117
+#: src/extract/extract_cli_parser.cpp:118
 #, no-c-format
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a cue sheet with mkvmerge's '--chapters' option."
 msgstr "第五种模式尝试提取章节讯息和标签，并将其输出为 cue 表单。这是使用 mkvmerge 的“--chapters”选项搭配 cue 表单的逆操作。"
 
-#: src/extract/extract_cli_parser.cpp:122
+#: src/extract/extract_cli_parser.cpp:123
 #, no-c-format
 msgid "mkvextract \"audiofile.mka\" cuesheet audiofile.cue"
 msgstr "mkvextract \"音频文件.mka\" cuesheet 音频文件.cue"
 
-#: src/extract/extract_cli_parser.cpp:124
+#: src/extract/extract_cli_parser.cpp:125
 #, no-c-format
 msgid "Timestamp extraction"
 msgstr "时间戳提取"
 
-#: src/extract/extract_cli_parser.cpp:126
+#: src/extract/extract_cli_parser.cpp:127
 #, no-c-format
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
 msgstr "第六种模式用于查找指定轨道所有区块的时间戳，并将其输出为时间戳 v2 文件。"
 
-#: src/extract/extract_cli_parser.cpp:130
+#: src/extract/extract_cli_parser.cpp:131
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
 msgstr "mkvextract \"一部影片.mkv\" timestamps_v2 1:时间戳_轨道1.txt"
 
-#: src/extract/extract_cli_parser.cpp:132
+#: src/extract/extract_cli_parser.cpp:133
 #, no-c-format
 msgid "Cue extraction"
 msgstr "cue 提取"
 
-#: src/extract/extract_cli_parser.cpp:133
+#: src/extract/extract_cli_parser.cpp:134
 #, no-c-format
 msgid "This mode extracts cue information for some tracks to external text files."
 msgstr "该模式用于将某些轨道的索引讯息抽取到外部文本文件中。"
 
-#: src/extract/extract_cli_parser.cpp:137
+#: src/extract/extract_cli_parser.cpp:138
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" cues 0:cues_track0.txt"
 msgstr "mkvextract \"一部影片.mkv\" cues 0:cues_轨道0.txt"
 
-#: src/extract/extract_cli_parser.cpp:139
+#: src/extract/extract_cli_parser.cpp:140
 #, no-c-format
 msgid "Extracting multiple items at the same time"
 msgstr "同时提取多个项目"
 
-#: src/extract/extract_cli_parser.cpp:144
+#: src/extract/extract_cli_parser.cpp:145
 #, no-c-format
 msgid "mkvextract \"a movie.mkv\" tracks 0:video.h264 1:audio.aac timestamps_v2 0:timestamps.video.txt chapters chapters.xml tags tags.xml"
 msgstr "mkvextract \"一部影片.mkv\" tracks 0:视频.h264 1:音频.aac timestamps_v2 0:时间戳.视频.txt chapters 章节.xml tags 标签.xml"
 
-#: src/extract/extract_cli_parser.cpp:156
+#: src/extract/extract_cli_parser.cpp:157
 #, no-c-format, c++-format
 msgid "'{0}' is only allowed when extracting tracks.\n"
 msgstr "「{0}」仅允许在提取轨道时使用。\n"
 
-#: src/extract/extract_cli_parser.cpp:159
+#: src/extract/extract_cli_parser.cpp:160
 #, no-c-format, c++-format
 msgid "'{0}' is only allowed when extracting chapters.\n"
 msgstr "「{0}」仅允许在提取章节时使用。\n"
 
-#: src/extract/extract_cli_parser.cpp:183
+#: src/extract/extract_cli_parser.cpp:184
 #, no-c-format, c++-format
 msgid "Invalid BlockAddition level in argument '{0}'.\n"
 msgstr "参数 ｢{0}｣ 中的附加区块层级无效。\n"
 
-#: src/extract/extract_cli_parser.cpp:210
+#: src/extract/extract_cli_parser.cpp:217
 #, no-c-format, c++-format
 msgid "'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"
 msgstr "「{0}」既不是有效的 ISO 639-2 代码，也不是有效的 ISO 639-1 代码。参见 'mkvmerge --list-languages' 提供的语言列表及各语言的 ISO 639-2 代码。\n"
 
-#: src/extract/extract_cli_parser.cpp:270
+#: src/extract/extract_cli_parser.cpp:277
 #, no-c-format, c++-format
 msgid "Unknown mode '{0}'.\n"
 msgstr "未知模式「{0}」。\n"
 
-#: src/extract/extract_cli_parser.cpp:341
+#: src/extract/extract_cli_parser.cpp:348
 #, no-c-format, c++-format
 msgid "Unrecognized command line option '{0}'.\n"
 msgstr "无法识别的命令行选项「{0}」。\n"
 
-#: src/extract/extract_cli_parser.cpp:349
+#: src/extract/extract_cli_parser.cpp:356
 #, no-c-format, c++-format
 msgid "Invalid attachment ID/file name specification in argument '{0}'.\n"
 msgstr "参数「{0}」中的附件 ID 或文件名无效。\n"
 
-#: src/extract/extract_cli_parser.cpp:351
+#: src/extract/extract_cli_parser.cpp:358
 #, no-c-format, c++-format
 msgid "Invalid track ID/file name specification in argument '{0}'.\n"
 msgstr "参数「{0}」中指定的轨道 ID 或文件名无效。\n"
 
-#: src/extract/extract_cli_parser.cpp:359
+#: src/extract/extract_cli_parser.cpp:366
 #, no-c-format, c++-format
 msgid "The ID '{0}' has already been used for another destination file.\n"
 msgstr "ID 「{0}」已被另一个输出文件使用。\n"
 
-#: src/extract/extract_cli_parser.cpp:368
+#: src/extract/extract_cli_parser.cpp:375
 #, no-c-format
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "未指定输出文件名，将使用附件名称。\n"
 
-#: src/extract/extract_cli_parser.cpp:370
+#: src/extract/extract_cli_parser.cpp:377
 #, no-c-format, c++-format
 msgid "Missing destination file name in argument '{0}'.\n"
 msgstr "参数「{0}」中缺少输出文件名。\n"
 
-#: src/extract/extract_cli_parser.cpp:392
-#: src/extract/extract_cli_parser.cpp:396
+#: src/extract/extract_cli_parser.cpp:399
+#: src/extract/extract_cli_parser.cpp:403
 #, no-c-format, c++-format
 msgid "The name of one of the destination files is the same as the name of the source file ({0}).\n"
 msgstr "输出文件中存在与输入文件名称一致的文件 ({0})。\n"
@@ -4915,37 +4920,32 @@ msgstr "此轨道的初始帧中没有找到 DTS 头。\n"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "AVI 音频轨道中存在无效的 Vorbis 头。"
 
-#: src/input/r_flac.cpp:60
-#, no-c-format
-msgid "flac_reader: Could not read a header packet.\n"
-msgstr "flac_reader: 无法读取头部封包。\n"
-
-#: src/input/r_flac.cpp:65
+#: src/input/r_flac.cpp:89
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: 无法初始化 FLAC 封装器。\n"
 
-#: src/input/r_flac.cpp:95
+#: src/input/r_flac.cpp:124
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> 正在解析 FLAC 文件。这可能需要很长时间。\n"
 
-#: src/input/r_flac.cpp:103
+#: src/input/r_flac.cpp:132
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "未发现元数据区块。文件已损坏。\n"
 
-#: src/input/r_flac.cpp:128
+#: src/input/r_flac.cpp:151
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> 预解析 FLAC 文件: {0}%{1}"
 
-#: src/input/r_flac.cpp:151
+#: src/input/r_flac.cpp:174
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> 预解析 FLAC 文件: 100%\n"
 
-#: src/input/r_flac.cpp:156
+#: src/input/r_flac.cpp:179
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: 无法读取全部头部封包。\n"
@@ -4976,144 +4976,144 @@ msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that
 msgstr "matroska_reader: (轨道 {0} 的微软兼容模式) Matroska 报告采样深度为 {1} 位，但 WAVEFORMATEX 报告为 {2} 位。\n"
 
 #: src/input/r_matroska.cpp:478
-#: src/input/r_matroska.cpp:524
-#: src/input/r_matroska.cpp:547
-#: src/input/r_matroska.cpp:734
-#: src/input/r_matroska.cpp:744
-#: src/input/r_matroska.cpp:765
+#: src/input/r_matroska.cpp:525
+#: src/input/r_matroska.cpp:548
+#: src/input/r_matroska.cpp:735
+#: src/input/r_matroska.cpp:745
+#: src/input/r_matroska.cpp:766
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但编码格式私有数据不含有效的头部。\n"
 
-#: src/input/r_matroska.cpp:515
+#: src/input/r_matroska.cpp:516
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge 编译时没有启用 FLAC 支持。忽略轨道 {0}。\n"
 
-#: src/input/r_matroska.cpp:651
+#: src/input/r_matroska.cpp:652
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 BITMAPINFOHEADER 结构。因此我们没有可用于鉴别视频编码的 FourCC。\n"
 
-#: src/input/r_matroska.cpp:663
+#: src/input/r_matroska.cpp:664
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (微软兼容模式，轨道 {0}) Matroska 报告视频宽度为 {1}，但 BITMAPINFOHEADER 报告为 {2}。\n"
 
-#: src/input/r_matroska.cpp:672
+#: src/input/r_matroska.cpp:673
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (微软兼容模式，轨道 {0}) Matroska 报告视频高度为 {1}，但 BITMAPINFOHEADER 报告为 {2}。\n"
 
-#: src/input/r_matroska.cpp:691
+#: src/input/r_matroska.cpp:692
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但没有编码格式私有头部。\n"
 
-#: src/input/r_matroska.cpp:717
+#: src/input/r_matroska.cpp:718
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: 未设置轨道 {0} 的宽度。\n"
 
-#: src/input/r_matroska.cpp:723
+#: src/input/r_matroska.cpp:724
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: 未设置轨道 {0} 的高度。\n"
 
-#: src/input/r_matroska.cpp:783
+#: src/input/r_matroska.cpp:784
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但没发现私有数据。\n"
 
-#: src/input/r_matroska.cpp:796
+#: src/input/r_matroska.cpp:797
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "VobSub 字幕轨道 {0} 的 CodecPrivate 元素不含索引。"
 
-#: src/input/r_matroska.cpp:797
+#: src/input/r_matroska.cpp:798
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "将使用默认的索引，以及与之匹配的默认宽度、高度与配色板设置。"
 
-#: src/input/r_matroska.cpp:830
+#: src/input/r_matroska.cpp:831
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: 轨道 {1} 的 CodecID「{0}」未知。\n"
 
-#: src/input/r_matroska.cpp:863
+#: src/input/r_matroska.cpp:864
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: 轨道 {0} 的分离器类型未知: ｢{1}｣\n"
 
-#: src/input/r_matroska.cpp:868
+#: src/input/r_matroska.cpp:869
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: 轨道 {0} 应该是正常的。\n"
 
-#: src/input/r_matroska.cpp:1344
+#: src/input/r_matroska.cpp:1345
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: 缺少像素宽度。\n"
 
-#: src/input/r_matroska.cpp:1346
+#: src/input/r_matroska.cpp:1347
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: 缺少像素高度。\n"
 
-#: src/input/r_matroska.cpp:1398
+#: src/input/r_matroska.cpp:1399
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "轨道 {0} 中轨道 UID 元素缺失，而 Matroska 规范要求该元素必须存在。若文件包含标签，则标签可能损坏。\n"
 
-#: src/input/r_matroska.cpp:1676
+#: src/input/r_matroska.cpp:1677
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未发现 EBML 头。\n"
 
-#: src/input/r_matroska.cpp:1696
-#: src/input/r_matroska.cpp:1709
+#: src/input/r_matroska.cpp:1697
+#: src/input/r_matroska.cpp:1710
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: 未发现剪辑。\n"
 
-#: src/input/r_matroska.cpp:1794
+#: src/input/r_matroska.cpp:1795
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "使用「{0}」类型轨道通用输出模块。\n"
 
-#: src/input/r_matroska.cpp:1868
+#: src/input/r_matroska.cpp:1869
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "无法保留轨道的 UID {0}，因为它已经分配给其他轨道。将自动分配新的随机 UID。\n"
 
-#: src/input/r_matroska.cpp:1960
-#: src/input/r_matroska.cpp:1977
+#: src/input/r_matroska.cpp:1961
+#: src/input/r_matroska.cpp:1978
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "发现畸形的 AAC 编码格式初始化数据。\n"
 
-#: src/input/r_matroska.cpp:1970
+#: src/input/r_matroska.cpp:1971
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "畸形的编码格式 ID「{0}」。\n"
 
-#: src/input/r_matroska.cpp:2088
+#: src/input/r_matroska.cpp:2089
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "‘{0}’: 您正在复制一条在实验模式下写入的 Opus 轨道。输出的轨道将以最终模式写入，但实验模式下写入的轨道有一处细节损失无法恢复: 尾部裁剪讯息。这意味着解码器可能会比原本预期多输出几个采样。您应该尽可能使用原始的 Opus 文件重新混流。\n"
 
-#: src/input/r_matroska.cpp:2322
+#: src/input/r_matroska.cpp:2323
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "不支持此轨道的轨道类型。\n"
 
-#: src/input/r_matroska.cpp:2531
-#: src/input/r_matroska.cpp:2651
+#: src/input/r_matroska.cpp:2532
+#: src/input/r_matroska.cpp:2652
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "在时间戳 {0} 处找到了属于轨道编号 {1} 的区块，但没有找到该轨道编号的头部讯息。此区块将被跳过。\n"
 
-#: src/input/r_matroska.cpp:3001
+#: src/input/r_matroska.cpp:3002
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "未知，格式标识 0x{0:04x}"
@@ -5173,27 +5173,27 @@ msgstr "未知音频流类型 0x{0:04x}。流 ID {1} 将被忽略。\n"
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
 msgstr "此流的时间戳在文件中途重置。这是不支持的。当前数据包将被丢弃。\n"
 
-#: src/input/r_ogm.cpp:840
+#: src/input/r_ogm.cpp:843
 #, no-c-format
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
 msgstr "该 Ogg/OGM 文件包含章节或标题讯息。但文件中存储这些讯息所使用的字符集无法准确识别。程序默认假定它们以操作系统的当前字符集存储。您可以通过 '--chapter-charset <charset>' 选项手动指定字符集。\n"
 
-#: src/input/r_ogm.cpp:847
+#: src/input/r_ogm.cpp:850
 #, no-c-format
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr "该 Ogg/OGM 文件包含章节但无法解析。这可能是由于没有正确设置字符集，或章节条目与预期的 SRT 风格格式不匹配。\n"
 
-#: src/input/r_ogm.cpp:1189
+#: src/input/r_ogm.cpp:1192
 #, no-c-format, c++-format
 msgid "Error decoding an Ogg Opus page at source timestamp {0}; page will be skipped: {1}\n"
 msgstr "解码 Ogg Opus 页面出错，位于 {0}; 将跳过页面: {1}\n"
 
-#: src/input/r_ogm.cpp:1480
+#: src/input/r_ogm.cpp:1483
 #, no-c-format, c++-format
 msgid "The Theora identification header could not be parsed ({0}).\n"
 msgstr "无法解析 Theora 鉴别头 ({0})。\n"
 
-#: src/input/r_ogm.cpp:1669
+#: src/input/r_ogm.cpp:1672
 #, no-c-format, c++-format
 msgid "The Kate identification header could not be parsed ({0}).\n"
 msgstr "无法解析 Kate 鉴别头 ({0})。\n"
@@ -8509,7 +8509,7 @@ msgstr "XML 章节文件"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:777
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:128
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1467
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1483
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:321
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
 #: src/mkvtoolnix-gui/merge/attachments.cpp:329
@@ -8690,7 +8690,7 @@ msgstr "重新加载(&R)"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:591
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:478
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:492
 #: src/mkvtoolnix-gui/merge/tab.cpp:516
 #: src/mkvtoolnix-gui/merge/tool.cpp:486
 #: src/mkvtoolnix-gui/merge/tool.cpp:1118
@@ -9409,8 +9409,8 @@ msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below
 msgstr "通过「讯息工具」菜单或下方按钮打开 Matroska 或 WebM 文件，也可以拖放到这里。"
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:274
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #, no-c-format
 msgid "Job queue"
 msgstr "任务队列"
@@ -9613,7 +9613,7 @@ msgid "Save to &Matroska or WebM file"
 msgstr "保存到 &Matroska 或 WebM 文件"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:682
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:442
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:456
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "混流器(&M)"
@@ -9625,7 +9625,7 @@ msgstr "提取工具(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:684
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:783
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:443
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:457
 #, no-c-format
 msgid "&Info tool"
 msgstr "讯息工具(&I)"
@@ -9636,13 +9636,13 @@ msgid "&Header editor"
 msgstr "头部编辑器(&H)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:686
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:445
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:459
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "章节编辑器(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:460
 #, no-c-format
 msgid "&Job queue"
 msgstr "任务队列(&J)"
@@ -10048,9 +10048,9 @@ msgstr "自动清理设置(&M):"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:116
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:56
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:66
-#: src/mkvtoolnix-gui/merge/input.cpp:1825
-#: src/mkvtoolnix-gui/merge/input.cpp:1827
-#: src/mkvtoolnix-gui/merge/input.cpp:1830
+#: src/mkvtoolnix-gui/merge/input.cpp:1826
+#: src/mkvtoolnix-gui/merge/input.cpp:1828
+#: src/mkvtoolnix-gui/merge/input.cpp:1831
 #: src/mkvtoolnix-gui/merge/track_model.cpp:137
 #: src/mkvtoolnix-gui/merge/track_model.cpp:141
 #: src/mkvtoolnix-gui/merge/track_model.cpp:142
@@ -10410,19 +10410,19 @@ msgid "Always enable copying for all tracks of the following types regardless of
 msgstr "总将以下类型的轨道选中用于复制，而不考虑其语言:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2411
-#: src/mkvtoolnix-gui/merge/input.cpp:1801
+#: src/mkvtoolnix-gui/merge/input.cpp:1802
 #, no-c-format
 msgid "&Video"
 msgstr "视频(&V)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2412
-#: src/mkvtoolnix-gui/merge/input.cpp:1802
+#: src/mkvtoolnix-gui/merge/input.cpp:1803
 #, no-c-format
 msgid "&Audio"
 msgstr "音频(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2413
-#: src/mkvtoolnix-gui/merge/input.cpp:1803
+#: src/mkvtoolnix-gui/merge/input.cpp:1804
 #, no-c-format
 msgid "&Subtitles"
 msgstr "字幕(&S)"
@@ -10445,9 +10445,9 @@ msgstr "扫描目录中的其他播放列表(&S):"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2417
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:891
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:911
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:955
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:907
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:927
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:971
 #, no-c-format
 msgid "Always ask the user"
 msgstr "总是询问用户"
@@ -10490,8 +10490,8 @@ msgid "Defaults for jobs saving info tool output to text files"
 msgstr "将任务讯息工具输出保存到文本文件时的默认值"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:271
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:285
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
 #, no-c-format
 msgid "Header editor"
@@ -10508,8 +10508,8 @@ msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr "以 UTC 取代本地时区显示日期与时间(&U)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:272
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "Chapter editor"
@@ -11755,9 +11755,9 @@ msgstr "替换附件"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:116
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:56
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:66
-#: src/mkvtoolnix-gui/merge/input.cpp:1825
-#: src/mkvtoolnix-gui/merge/input.cpp:1827
-#: src/mkvtoolnix-gui/merge/input.cpp:1830
+#: src/mkvtoolnix-gui/merge/input.cpp:1826
+#: src/mkvtoolnix-gui/merge/input.cpp:1828
+#: src/mkvtoolnix-gui/merge/input.cpp:1831
 #: src/mkvtoolnix-gui/merge/track_model.cpp:137
 #: src/mkvtoolnix-gui/merge/track_model.cpp:141
 #: src/mkvtoolnix-gui/merge/track_model.cpp:142
@@ -12252,7 +12252,7 @@ msgid "Select destination file name"
 msgstr "选择输出文件名"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:94
-#: src/mkvtoolnix-gui/merge/input.cpp:1411
+#: src/mkvtoolnix-gui/merge/input.cpp:1412
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:397
 #, no-c-format
 msgid "Text files"
@@ -12390,7 +12390,7 @@ msgid "Warnings/Errors"
 msgstr "警告/错误"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:770
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:784
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:83
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -12518,19 +12518,19 @@ msgid "Running jobs cannot be edited."
 msgstr "无法编辑正在运行的任务。"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:523
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:475
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:489
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "中止正在运行的任务"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:524
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:476
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "确定要中止所有正在运行的任务吗？"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:525
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:477
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:491
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "中止任务(&A)"
@@ -12643,151 +12643,151 @@ msgstr "在 YouTube 收听<a href=\"%1\">歌曲</a>"
 msgid "Version %1 \"%2\""
 msgstr "版本 %1 \"%2\""
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:162
 #, no-c-format
 msgid "This has not been implemented yet."
 msgstr "该功能尚未实现。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:268
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:282
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "Multiplexer"
 msgstr "混流器"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:270
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:284
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "Info tool"
 msgstr "讯息工具"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:275
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:433
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:289
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #, no-c-format
 msgid "Job output"
 msgstr "任务输出"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:432
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "Extraction tool"
 msgstr "提取工具"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:432
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
 #, no-c-format
 msgid "Tag editor"
 msgstr "标签编辑器"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:441
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:455
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:444
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:458
 #, no-c-format
 msgid "Header &editor"
 msgstr "头部编辑器(&E)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:461
 #, no-c-format
 msgid "&Job output"
 msgstr "任务输出消息(&J)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:476
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "当前有一个任务正在运行。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:670
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:684
 #, no-c-format
 msgid "The MKVToolNix Code of Conduct"
 msgstr "MKVToolNix 项目行为规范"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:675
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:686
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:700
 #, no-c-format
 msgid "Markdown files"
 msgstr "Markdown 文件"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:684
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:698
 #, no-c-format
 msgid "System information"
 msgstr "系统讯息"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:766
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:780
 #, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "安装目录中找不到文件“%1”。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:774
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:788
 #, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "已找到 mkvmerge 可执行程序，但无法执行它。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:778
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:792
 #, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "mkvmerge 报告的版本字段 ('%1') 无法识别。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:782
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:796
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr "mkvmerge 的版本 (%1) 与 GUI (%2) 不符。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:786
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:800
 #, no-c-format
 msgid "Temporary files cannot be created. Additional information: %1"
 msgstr "无法创建临时文件。其他信息: %1"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:790
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:804
 #, no-c-format
 msgid "MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'."
 msgstr "MKVToolNix GUI 作为便携式应用启动，但没有自身目录 ｢%1｣ 的写入权限。若您打算以本机常驻应用模式启动，请删除目录中的 ｢%2｣ 文件。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:800
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:814
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
 msgstr[0] "MKVToolNix 程序问题"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:804
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:818
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
 msgstr[0] "检测到您安装的 MKVToolNix 存在问题:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:806
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:820
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr "该情况下某些功能可能无法正常工作。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:807
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:821
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
 msgstr[0] "请重新安装 MKVToolNix 或手动修复问题。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:956
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:970
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
 msgstr "无法播放音频文件 ｢%1｣。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:959
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:973
 #, no-c-format
 msgid "Either the file format or the audio codec is not supported."
 msgstr "不支持该文件格式或其音频编解码格式。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:962
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:976
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
 msgstr "没有音频设备可用于播放，或设备无法访问。"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:965
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:979
 #, no-c-format
 msgid "Error playing audio"
 msgstr "播放音频出错"
@@ -13646,251 +13646,251 @@ msgstr "默认询问用户如何处理正被拖入的文件。"
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
 msgstr "除了每次均询问以外，您可以选择让 GUI 总是将拖入的文件在新标签页打开，或作为新的附件添加到当前标签页。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:796
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:812
 #, no-c-format
 msgid "Highest priority"
 msgstr "最高优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:797
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:813
 #, no-c-format
 msgid "Higher priority"
 msgstr "较高优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:799
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:815
 #, no-c-format
 msgid "Normal priority"
 msgstr "常规优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:800
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:816
 #, no-c-format
 msgid "Lower priority"
 msgstr "较低优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:801
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:817
 #, no-c-format
 msgid "Lowest priority"
 msgstr "最低优先级"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:858
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:874
 #, no-c-format
 msgid "Select a directory"
 msgstr "选择目录"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:892
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:908
 #, no-c-format
 msgid "Add all files to the current multiplex settings"
 msgstr "全部作为输入文件添加到当前混流设置页面"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:893
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:909
 #, no-c-format
 msgid "Create one new multiplex settings tab and add all files there"
 msgstr "新建一个混流设置标签页，并添加所有文件"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:894
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:910
 #, no-c-format
 msgid "Create one new multiplex settings tab for each file"
 msgstr "为每个文件新建一个混流设置标签页"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:912
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:928
 #, no-c-format
 msgid "Handle all files from all directories as a single list of files"
 msgstr "将所有目录中的全部文件视为同一组文件进行处理"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:913
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:929
 #, no-c-format
 msgid "Create a new multiplex settings tab for each directory"
 msgstr "为每个目录新建一个混流设置标签页"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:924
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1087
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:940
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1103
 #, no-c-format
 msgid "Never"
 msgstr "从不"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:925
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:941
 #, no-c-format
 msgid "If audio tracks are present but none is enabled"
 msgstr "如果存在音频轨道但未启用"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:926
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:942
 #, no-c-format
 msgid "Even if no audio tracks are present"
 msgstr "即使不存在音频轨道"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:947
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:963
 #, no-c-format
 msgid "Enter predefined track name"
 msgstr "输入预先定义的轨道名称"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:947
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:963
 #, no-c-format
 msgid "Please enter the new predefined track name."
 msgstr "请输入新的预定义轨道名称。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:949
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:965
 #, no-c-format
 msgid "Enter predefined split size"
 msgstr "输入预先定义的切割大小"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:949
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:965
 #, no-c-format
 msgid "Please enter the new predefined split size."
 msgstr "请输入新的预定义切割大小。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:950
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:966
 #, no-c-format
 msgid "Enter predefined split duration"
 msgstr "输入预先定义的切割时长"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:950
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:966
 #, no-c-format
 msgid "Please enter the new predefined split duration."
 msgstr "请输入新的预定义切割时长。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:956
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:972
 #, no-c-format
 msgid "Open all files as tabs in the header editor"
 msgstr "在头部编辑器中将所有文件作为新标签页打开"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:957
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:973
 #, no-c-format
 msgid "Add all files as new attachments to the current tab"
 msgstr "全部作为新的附件添加到当前标签页"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:978
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:994
 #, no-c-format
 msgid "Free-form input"
 msgstr "自行输入"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:979
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:995
 #, no-c-format
 msgid "Individually selected components"
 msgstr "分别选择各部分"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:989
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1005
 #, no-c-format
 msgid "no normalization"
 msgstr "不作规范化处理"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:990
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1006
 #, no-c-format
 msgid "canonical form"
 msgstr "最简式"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:991
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1007
 #, no-c-format
 msgid "extended language subtags form"
 msgstr "扩展语言子标签形式"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1001
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1017
 #, no-c-format
 msgid "Top"
 msgstr "顶部"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1002
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1018
 #, no-c-format
 msgid "Bottom"
 msgstr "底部"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1003
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1019
 #, no-c-format
 msgid "Left"
 msgstr "左侧"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1004
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1020
 #, no-c-format
 msgid "Right"
 msgstr "右侧"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1088
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1108
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1104
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1124
 #, no-c-format
 msgid "Only if the source doesn't contain a language"
 msgstr "仅当输入文件中不含语言讯息时"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1089
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1109
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1105
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1125
 #, no-c-format
 msgid "Also if the language is 'undetermined' ('und')"
 msgstr "语言为“未指定”('und') 时也使用该语言"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1110
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1126
 #, no-c-format
 msgid "Always"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1455
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1471
 #, no-c-format
 msgid "Select destination directory"
 msgstr "选择输出目录"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1465
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1481
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
 msgstr "可执行文件"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1469
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1485
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:324
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
 msgstr "选择可执行程序"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1528
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1544
 #, no-c-format
 msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1534
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1550
 #, no-c-format
 msgid " day"
 msgid_plural " days"
 msgstr[0] " 天"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1580
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1592
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1611
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1627
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1643
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1663
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1576
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1588
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1607
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1623
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1639
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1659
 #, no-c-format
 msgid "Invalid settings"
 msgstr "无效设置"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1581
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1577
 #, no-c-format
 msgid "The list of boundary characters for deriving the track language from file names must not be empty."
 msgstr "用于根据文件名来推断轨道语言的边界字符列表不能为空。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1593
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1589
 #, no-c-format
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr "文件名中可识别轨道语言的列表不能为空。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1612
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1608
 #, fuzzy, no-c-format
 msgid "The value for deriving the 'commentary' flag from file names must be a valid regular expression."
 msgstr "用于根据字幕文件名推断 ｢强制显示｣ 标记的值必须是有效的正则表达式。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1628
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1624
 #, fuzzy, no-c-format
 msgid "The value for deriving the 'hearing impaired' flag from file names must be a valid regular expression."
 msgstr "用于根据字幕文件名推断 ｢强制显示｣ 标记的值必须是有效的正则表达式。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1644
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1640
 #, no-c-format
 msgid "The value for deriving the 'forced display' flag for subtitles from file names must be a valid regular expression."
 msgstr "用于根据字幕文件名推断 ｢强制显示｣ 标记的值必须是有效的正则表达式。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1666
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1662
 #, no-c-format
 msgid "This configuration is currently invalid."
 msgstr "该配置目前无效。"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1668
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1664
 #, no-c-format
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
 msgstr "关闭偏好设置对话框前，请先修正错误，或将配置移除。"
@@ -13973,49 +13973,49 @@ msgid "Open the multiplexed file with a player:"
 msgstr "用播放器打开混流后的文件:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
-#: src/mkvtoolnix-gui/util/settings.cpp:327
+#: src/mkvtoolnix-gui/util/settings.cpp:351
 #, no-c-format
 msgid "Execute a program"
 msgstr "执行程序"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
-#: src/mkvtoolnix-gui/util/settings.cpp:339
+#: src/mkvtoolnix-gui/util/settings.cpp:363
 #, no-c-format
 msgid "Play an audio file"
 msgstr "播放音频文件"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
-#: src/mkvtoolnix-gui/util/settings.cpp:314
+#: src/mkvtoolnix-gui/util/settings.cpp:338
 #, no-c-format
 msgid "Show a desktop notification"
 msgstr "显示桌面通知"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
-#: src/mkvtoolnix-gui/util/settings.cpp:315
+#: src/mkvtoolnix-gui/util/settings.cpp:339
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "关闭计算机"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
-#: src/mkvtoolnix-gui/util/settings.cpp:316
+#: src/mkvtoolnix-gui/util/settings.cpp:340
 #, no-c-format
 msgid "Hibernate the computer"
 msgstr "休眠计算机"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:200
-#: src/mkvtoolnix-gui/util/settings.cpp:317
+#: src/mkvtoolnix-gui/util/settings.cpp:341
 #, no-c-format
 msgid "Sleep the computer"
 msgstr "睡眠计算机"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:201
-#: src/mkvtoolnix-gui/util/settings.cpp:318
+#: src/mkvtoolnix-gui/util/settings.cpp:342
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
 msgstr "删除混流任务的输入文件"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:202
-#: src/mkvtoolnix-gui/util/settings.cpp:319
+#: src/mkvtoolnix-gui/util/settings.cpp:343
 #, fuzzy, no-c-format
 msgid "Quit MKVToolNix"
 msgstr "MKVToolNix &GUI"
@@ -14478,9 +14478,9 @@ msgid_plural "&Remove attachments"
 msgstr[0] "移除附件(&R)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:444
-#: src/mkvtoolnix-gui/merge/input.cpp:787
-#: src/mkvtoolnix-gui/merge/input.cpp:1780
-#: src/mkvtoolnix-gui/merge/input.cpp:1822
+#: src/mkvtoolnix-gui/merge/input.cpp:788
+#: src/mkvtoolnix-gui/merge/input.cpp:1781
+#: src/mkvtoolnix-gui/merge/input.cpp:1823
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<不更改>"
@@ -14526,479 +14526,479 @@ msgstr "MKVToolNix 选项文件 (JSON 格式)"
 msgid "Don't escape"
 msgstr "不转义"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:549
+#: src/mkvtoolnix-gui/merge/input.cpp:550
 #, no-c-format
 msgid "Right-click to add, append and remove files"
 msgstr "右击可添加、追加或移除文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:550
+#: src/mkvtoolnix-gui/merge/input.cpp:551
 #, no-c-format
 msgid "Right-click for actions for all items"
 msgstr "右击查看针对所有项目的选项"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:552
+#: src/mkvtoolnix-gui/merge/input.cpp:553
 #, no-c-format
 msgid "If set to 'no' then the selected tracks will not be copied to the destination file."
 msgstr "如果设为“否”，则选中的轨道将不会被复制到输出文件中。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:553
+#: src/mkvtoolnix-gui/merge/input.cpp:554
 #, no-c-format
 msgid "A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."
 msgstr "播放器中显示的该轨道的名称，以供用户选择需要的轨道进行播放，例如“导演评论”。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:554
+#: src/mkvtoolnix-gui/merge/input.cpp:555
 #, no-c-format
 msgid "The language for this track that players can use for automatic track selection and display for the user."
 msgstr "该轨道的语言，播放器可以用来进行自动轨道选择，及向用户显示。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:557
+#: src/mkvtoolnix-gui/merge/input.cpp:558
 #, no-c-format
 msgid "Make this track eligible to be played by default."
 msgstr "授予该轨道被默认播放的资格。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:558
+#: src/mkvtoolnix-gui/merge/input.cpp:559
 #, no-c-format
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "播放器应优先选择带「默认轨」标记的轨道，同时也应考虑用户的偏好设置，例如轨道的语言。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:561
+#: src/mkvtoolnix-gui/merge/input.cpp:562
 #, no-c-format
 msgid "Mark this track as \"forced display\"."
 msgstr "将该轨道标记为 ｢强制显示｣。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:562
+#: src/mkvtoolnix-gui/merge/input.cpp:563
 #, no-c-format
 msgid "Use this for tracks containing onscreen text or foreign-language dialogue."
 msgstr "适用于包含屏幕显示文字或外语对白翻译的轨道。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:565
+#: src/mkvtoolnix-gui/merge/input.cpp:566
 #, no-c-format
 msgid "Mark this track as \"enabled\" (the default) or \"disabled\"."
 msgstr "将该轨道标记为 ｢已启用｣ (默认) 或 ｢已禁用｣。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:566
+#: src/mkvtoolnix-gui/merge/input.cpp:567
 #, no-c-format
 msgid "Players should only consider enabled tracks for playback."
 msgstr "播放器应只选取已启用的轨道用于播放。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:574
+#: src/mkvtoolnix-gui/merge/input.cpp:575
 #, no-c-format
 msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "设置将使用在该轨道的无损压缩算法。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:575
+#: src/mkvtoolnix-gui/merge/input.cpp:576
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."
 msgstr "如果设为“自动决定”，则 mkvmerge 将根据轨道类型决定是否压缩以及压缩算法。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:576
+#: src/mkvtoolnix-gui/merge/input.cpp:577
 #, no-c-format
 msgid "Currently only certain subtitle formats are compressed with the zlib algorithm."
 msgstr "目前仅有某些字幕格式会使用 zlib 算法压缩。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:579
+#: src/mkvtoolnix-gui/merge/input.cpp:580
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "以毫秒为单位对该轨道的时间戳进行延迟。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:580
+#: src/mkvtoolnix-gui/merge/input.cpp:581
 #, no-c-format
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "数值可以为负数，但注意所有经过延迟计算后时间戳为负的帧将会被丢弃。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:581
+#: src/mkvtoolnix-gui/merge/input.cpp:582
 #, no-c-format
 msgid "This works with all track types."
 msgstr "该选项在所有轨道类型上均有效。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:582
-#: src/mkvtoolnix-gui/merge/input.cpp:588
+#: src/mkvtoolnix-gui/merge/input.cpp:583
+#: src/mkvtoolnix-gui/merge/input.cpp:589
 #, no-c-format
 msgid "This option can also be used for chapters."
 msgstr "此选项也可用于章节。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:585
+#: src/mkvtoolnix-gui/merge/input.cpp:586
 #, no-c-format
 msgid "Multiply this track's timestamps with a factor."
 msgstr "将该轨道的时间戳乘以一个系数。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:586
+#: src/mkvtoolnix-gui/merge/input.cpp:587
 #: src/mkvtoolnix-gui/merge/output.cpp:229
 #, no-c-format
 msgid "The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78)."
 msgstr "此数值既可以用浮点数 (如 12.345) 给出，也可以用分数形式 (如 123/456.78) 给出。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:587
+#: src/mkvtoolnix-gui/merge/input.cpp:588
 #, no-c-format
 msgid "This works well for video and subtitle tracks but should not be used with audio tracks."
 msgstr "该选项在视频和字幕轨道上有效，但不应使用在音频轨道上。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:591
+#: src/mkvtoolnix-gui/merge/input.cpp:592
 #, no-c-format
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "强制轨道的默认帧时长或每秒帧数。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:592
-#: src/mkvtoolnix-gui/merge/input.cpp:606
+#: src/mkvtoolnix-gui/merge/input.cpp:593
+#: src/mkvtoolnix-gui/merge/input.cpp:607
 #, no-c-format
 msgid "The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."
 msgstr "数值可以是浮点数 (如 12.345) 也可以是分数 (如 123/456)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:593
+#: src/mkvtoolnix-gui/merge/input.cpp:594
 #, no-c-format
 msgid "You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."
 msgstr "支持的单位包括: 's', 'ms', 'us', 'ns', 'fps', 'i' 或 'p'。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:594
+#: src/mkvtoolnix-gui/merge/input.cpp:595
 #, no-c-format
 msgid "If no unit is given, 'fps' will be used."
 msgstr "若未给出单位，则以“fps”为单位。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:597
+#: src/mkvtoolnix-gui/merge/input.cpp:598
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
 msgstr "通常 mkvmerge 不会更改存储在视频码流中的计时讯息 (帧/场速率)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:598
+#: src/mkvtoolnix-gui/merge/input.cpp:599
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
 msgstr "使用该选项后，以上讯息将被调整以匹配容器中的计时讯息。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:599
+#: src/mkvtoolnix-gui/merge/input.cpp:600
 #, no-c-format
 msgid "There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr "容器的计时讯息有多个可能的来源: 通过命令行「--default-duration」选项给出的默认时长值，输入容器，以及视频码流。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:603
-#: src/mkvtoolnix-gui/merge/input.cpp:609
-#: src/mkvtoolnix-gui/merge/input.cpp:614
+#: src/mkvtoolnix-gui/merge/input.cpp:604
+#: src/mkvtoolnix-gui/merge/input.cpp:610
+#: src/mkvtoolnix-gui/merge/input.cpp:615
 #, no-c-format
 msgid "The Matroska container format can store the display width/height for a video track."
 msgstr "Matroska 容器格式可以存储视频轨道的显示宽度/高度。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:604
+#: src/mkvtoolnix-gui/merge/input.cpp:605
 #, no-c-format
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
 msgstr "该选项指定 mkvmerge 计算显示宽度/高度所使用的显示宽高比。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:605
-#: src/mkvtoolnix-gui/merge/input.cpp:611
-#: src/mkvtoolnix-gui/merge/input.cpp:616
+#: src/mkvtoolnix-gui/merge/input.cpp:606
+#: src/mkvtoolnix-gui/merge/input.cpp:612
+#: src/mkvtoolnix-gui/merge/input.cpp:617
 #, no-c-format
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "注意，很多播放器设置初始窗口大小时，并不直接使用显示宽度/高度数值，而只使用它们的比值。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:610
+#: src/mkvtoolnix-gui/merge/input.cpp:611
 #, no-c-format
 msgid "This parameter is the display width in pixels."
 msgstr "该参数为显示宽度，单位为像素。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:615
+#: src/mkvtoolnix-gui/merge/input.cpp:616
 #, no-c-format
 msgid "This parameter is the display height in pixels."
 msgstr "该参数为显示高度，单位为像素。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:619
+#: src/mkvtoolnix-gui/merge/input.cpp:620
 #, no-c-format
 msgid "Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."
 msgstr "设置裁剪参数，告诉播放器在播放时忽略四个方向一定数量的像素。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:620
+#: src/mkvtoolnix-gui/merge/input.cpp:621
 #, no-c-format
 msgid "This must be a comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."
 msgstr "必须为逗号分隔的四个数字，分别代表从视频画面左边、上边、右边和下边移除的像素数，例如 '0,20,0,20'。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:621
+#: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
 msgid "Note that the video content is not modified by this option."
 msgstr "注意，视频内容不会被该选项所修改。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:622
+#: src/mkvtoolnix-gui/merge/input.cpp:623
 #, no-c-format
 msgid "The values are only stored in the track headers."
 msgstr "这些仅仅是存储在轨道头部的数值。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:623
+#: src/mkvtoolnix-gui/merge/input.cpp:624
 #, no-c-format
 msgid "Note also that there are not a lot of players that support the cropping parameters."
 msgstr "注意，支持裁剪参数的播放器并不多。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:626
+#: src/mkvtoolnix-gui/merge/input.cpp:627
 #, no-c-format
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "设置该视频轨道的立体模式。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:627
+#: src/mkvtoolnix-gui/merge/input.cpp:628
 #, no-c-format
 msgid "If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."
 msgstr "如果留空则保留原模式，原模式未设置时不会设置任何模式。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:630
+#: src/mkvtoolnix-gui/merge/input.cpp:631
 #, no-c-format
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "该轨道包含 SBR AAC/HE-AAC/AAC+ 数据。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:631
+#: src/mkvtoolnix-gui/merge/input.cpp:632
 #, no-c-format
 msgid "Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."
 msgstr "仅在输入文件为无容器 AAC 时需要，因为无法自动侦测此类文件是否为 SBR AAC。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:632
+#: src/mkvtoolnix-gui/merge/input.cpp:633
 #, no-c-format
 msgid "Not needed for AAC tracks read from other container formats like MP4 or Matroska files."
 msgstr "从 MP4 或 Matroska 文件等其他容器格式中读取的 AAC 轨道不需要此选项。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:635
+#: src/mkvtoolnix-gui/merge/input.cpp:636
 #, no-c-format
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
 msgstr "丢弃音频轨道中的所有高清晰扩展，仅保留其有损核心。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:636
+#: src/mkvtoolnix-gui/merge/input.cpp:637
 #, no-c-format
 msgid "This only works with DTS audio tracks."
 msgstr "仅在 DTS 音频轨道时有用。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:639
+#: src/mkvtoolnix-gui/merge/input.cpp:640
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
 msgstr "修改音频头部，从而移除或尽可能减小对白正规化增益。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:640
+#: src/mkvtoolnix-gui/merge/input.cpp:641
 #, no-c-format
 msgid "This only works with AC-3, DTS & TrueHD audio tracks."
 msgstr "仅对 AC-3、DTS 与 TrueHD 音频轨有效。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:643
+#: src/mkvtoolnix-gui/merge/input.cpp:644
 #, no-c-format
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "选择字幕文件或章节讯息中使用的字符集。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:644
+#: src/mkvtoolnix-gui/merge/input.cpp:645
 #, no-c-format
 msgid "Only needed in certain situations:"
 msgstr "仅在下列情况下需要:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:645
+#: src/mkvtoolnix-gui/merge/input.cpp:646
 #, no-c-format
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "字幕文件不包含字节顺序标记 (BOM) 且编码与系统当前字符集 (%1) 不一致时"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:646
+#: src/mkvtoolnix-gui/merge/input.cpp:647
 #, no-c-format
 msgid "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly"
 msgstr "从 mkvmerge 无法正确检测编码的文件 (如 OGM、MP4) 中读取章节讯息时"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:649
+#: src/mkvtoolnix-gui/merge/input.cpp:650
 #, no-c-format
 msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entries)."
 msgstr "选择 mkvmerge 将为哪些区块创建索引条目 (即 cue 条目)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:650
+#: src/mkvtoolnix-gui/merge/input.cpp:651
 #, no-c-format
 msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "在几乎所有情况下，“自动决定”是个合适的选择。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:653
+#: src/mkvtoolnix-gui/merge/input.cpp:654
 #, no-c-format
 msgid "Free-form edit field for user defined options for this track."
 msgstr "可在此处指定该轨道的自定义参数。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:654
+#: src/mkvtoolnix-gui/merge/input.cpp:655
 #, no-c-format
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
 msgstr "此处输入的所有内容将被添加到图形界面程序添加的所有其他选项之后，这样您可以覆盖程序为该轨道生成的任何选项。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:655
+#: src/mkvtoolnix-gui/merge/input.cpp:656
 #, no-c-format
 msgid "All occurrences of the string \"<TID>\" will be replaced by the track's track ID."
 msgstr "所有 \"<TID>\" 将会被替换为轨道的轨道 ID。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1411
+#: src/mkvtoolnix-gui/merge/input.cpp:1412
 #, no-c-format
 msgid "Select timestamp file"
 msgstr "选择时间戳文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1423
+#: src/mkvtoolnix-gui/merge/input.cpp:1424
 #: src/mkvtoolnix-gui/merge/output.cpp:468
 #, no-c-format
 msgid "Select tags file"
 msgstr "选择标签文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1423
+#: src/mkvtoolnix-gui/merge/input.cpp:1424
 #: src/mkvtoolnix-gui/merge/output.cpp:468
 #, no-c-format
 msgid "XML tag files"
 msgstr "XML 标签文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1558
+#: src/mkvtoolnix-gui/merge/input.cpp:1559
 #, no-c-format
 msgid "Append media files"
 msgstr "追加媒体文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1558
+#: src/mkvtoolnix-gui/merge/input.cpp:1559
 #, no-c-format
 msgid "Add media files"
 msgstr "添加媒体文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1670
+#: src/mkvtoolnix-gui/merge/input.cpp:1671
 #, no-c-format
 msgid "Unable to append files"
 msgstr "无法追加文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1670
+#: src/mkvtoolnix-gui/merge/input.cpp:1671
 #, no-c-format
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "不能为不包含轨道的文件添加其余部分。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1674
+#: src/mkvtoolnix-gui/merge/input.cpp:1675
 #, no-c-format
 msgid "Add media files as additional parts"
 msgstr "添加媒体文件为其余部分"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1751
+#: src/mkvtoolnix-gui/merge/input.cpp:1752
 #, no-c-format
 msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "移除文件(&R)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1752
+#: src/mkvtoolnix-gui/merge/input.cpp:1753
 #, no-c-format
 msgid "Open file in &MediaInfo"
 msgid_plural "Open files in &MediaInfo"
 msgstr[0] "在 &MediaInfo 中打开文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1753
+#: src/mkvtoolnix-gui/merge/input.cpp:1754
 #, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
 msgstr[0] "选中所选文件的所有项目(&I)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1773
+#: src/mkvtoolnix-gui/merge/input.cpp:1774
 #, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
 msgstr[0] "在 &MediaInfo 中打开对应文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1785
 #: src/mkvtoolnix-gui/merge/input.cpp:1786
+#: src/mkvtoolnix-gui/merge/input.cpp:1787
 #, no-c-format
 msgid "&Add files"
 msgstr "添加文件(&A)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1787
 #: src/mkvtoolnix-gui/merge/input.cpp:1788
+#: src/mkvtoolnix-gui/merge/input.cpp:1789
 #, no-c-format
 msgid "A&ppend files"
 msgstr "追加合并文件(&P)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1789
 #: src/mkvtoolnix-gui/merge/input.cpp:1790
+#: src/mkvtoolnix-gui/merge/input.cpp:1791
 #, no-c-format
 msgid "Add files as a&dditional parts"
 msgstr "添加为其余部分(&D)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1792
+#: src/mkvtoolnix-gui/merge/input.cpp:1793
 #, no-c-format
 msgid "Remove a&ll files"
 msgstr "移除所有文件(&L)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1794
+#: src/mkvtoolnix-gui/merge/input.cpp:1795
 #, no-c-format
 msgid "Set destination &file name from selected file's name"
 msgstr "根据选中文件的名称设置输出文件名(&F)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1796
+#: src/mkvtoolnix-gui/merge/input.cpp:1797
 #, no-c-format
 msgid "&Select all items"
 msgstr "全选(&S)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1797
+#: src/mkvtoolnix-gui/merge/input.cpp:1798
 #, no-c-format
 msgid "Select all tracks of specific &type"
 msgstr "选择所有同类轨道(&T)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1798
+#: src/mkvtoolnix-gui/merge/input.cpp:1799
 #, no-c-format
 msgid "&Enable all items"
 msgstr "全部启用(&E)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1799
+#: src/mkvtoolnix-gui/merge/input.cpp:1800
 #, no-c-format
 msgid "&Disable all items"
 msgstr "全部禁用(&D)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1805
-#: src/mkvtoolnix-gui/merge/input.cpp:1810
+#: src/mkvtoolnix-gui/merge/input.cpp:1806
+#: src/mkvtoolnix-gui/merge/input.cpp:1811
 #, no-c-format
 msgid "Afterwards &leave the settings as they are."
 msgstr "完成后保留各项设置(&L)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1806
-#: src/mkvtoolnix-gui/merge/input.cpp:1811
+#: src/mkvtoolnix-gui/merge/input.cpp:1807
+#: src/mkvtoolnix-gui/merge/input.cpp:1812
 #, no-c-format
 msgid "Afterwards create &new multiplex settings and close the current ones."
 msgstr "然后新建混流设置页面，并关闭当前各页(&N)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1807
-#: src/mkvtoolnix-gui/merge/input.cpp:1812
+#: src/mkvtoolnix-gui/merge/input.cpp:1808
+#: src/mkvtoolnix-gui/merge/input.cpp:1813
 #, no-c-format
 msgid "Afterwards &close the current multiplex settings."
 msgstr "然后关闭当前混流设置页面(&C)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1808
-#: src/mkvtoolnix-gui/merge/input.cpp:1813
+#: src/mkvtoolnix-gui/merge/input.cpp:1809
+#: src/mkvtoolnix-gui/merge/input.cpp:1814
 #, no-c-format
 msgid "Afterwards &remove all source files."
 msgstr "然后移除所有输入文件(&R)。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1828
 #: src/mkvtoolnix-gui/merge/input.cpp:1829
 #: src/mkvtoolnix-gui/merge/input.cpp:1830
+#: src/mkvtoolnix-gui/merge/input.cpp:1831
 #, no-c-format
 msgid "Determine automatically"
 msgstr "自动决定"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1828
+#: src/mkvtoolnix-gui/merge/input.cpp:1829
 #, no-c-format
 msgid "No extra compression"
 msgstr "不做额外压缩"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1829
+#: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "Only for I frames"
 msgstr "仅 I 帧"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1829
+#: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "For all frames"
 msgstr "全部帧"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1829
+#: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "No cues"
 msgstr "不写入索引"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2247
+#: src/mkvtoolnix-gui/merge/input.cpp:2253
 #, no-c-format
 msgid "Executable not found"
 msgstr "找不到可执行文件"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2249
+#: src/mkvtoolnix-gui/merge/input.cpp:2255
 #, no-c-format
 msgid "This function requires the application %1."
 msgstr "此功能需要应用程序 %1。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2250
+#: src/mkvtoolnix-gui/merge/input.cpp:2256
 #, no-c-format
 msgid "Its installation location could not be determined automatically."
 msgstr "其安装位置无法自动检测。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2251
+#: src/mkvtoolnix-gui/merge/input.cpp:2257
 #, no-c-format
 msgid "Please select its location below."
 msgstr "请在下方选择其所在位置。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:2252
+#: src/mkvtoolnix-gui/merge/input.cpp:2258
 #, no-c-format
 msgid "You can download the application from the following URL:"
 msgstr "您可以从以下地址下载该应用程序:"
@@ -16134,22 +16134,22 @@ msgstr "切换 ｢视觉障碍｣ 标记 (&V)"
 msgid "Toggle \"&text descriptions\" flag"
 msgstr "切换 ｢文字描述｣ 标记 (&T)"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:295
+#: src/mkvtoolnix-gui/util/settings.cpp:319
 #, no-c-format
 msgid "The program to execute hasn't been set yet."
 msgstr "要执行的程序尚未设置。"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:296
+#: src/mkvtoolnix-gui/util/settings.cpp:320
 #, no-c-format
 msgid "The audio file to play hasn't been set yet."
 msgstr "要播放的音频文件尚未设置。"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:332
+#: src/mkvtoolnix-gui/util/settings.cpp:356
 #, no-c-format
 msgid "Execute program '%1'"
 msgstr "执行程序“%1”"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:344
+#: src/mkvtoolnix-gui/util/settings.cpp:368
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "播放音频文件“%1”"
@@ -17013,6 +17013,9 @@ msgstr "要创建轨道统计讯息，需要读取该文件。\n"
 #, no-c-format, c++-format
 msgid "No track corresponding to the edit specification '{0}' was found. {1}\n"
 msgstr "没有找到编辑选项「{0}」对应的轨道。{1}\n"
+
+#~ msgid "flac_reader: Could not read a header packet.\n"
+#~ msgstr "flac_reader: 无法读取头部封包。\n"
 
 #~ msgid ""
 #~ "  --blockadd <TID:x>       Sets the max number of block additional\n"

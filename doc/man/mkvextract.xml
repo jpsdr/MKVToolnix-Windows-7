@@ -391,6 +391,17 @@
     Syntax: <command>mkvextract <parameter>source-filename</parameter> <option>tags</option> <optional><parameter>options</parameter></optional> <parameter>output-filename.xml</parameter></command>
    </para>
 
+   <variablelist>
+    <varlistentry id="mkvextract.description.global_tags">
+     <term><option>-T</option>, <option>--no-track-tags</option></term>
+     <listitem>
+      <para>
+       Exports only tags that aren't track-specific.
+      </para>
+     </listitem>
+    </varlistentry>
+   </variablelist>
+
    <para>
     The tags are written to specified output file in the &xml; format understood by &mkvmerge;. If no tags are found in the file, the output file is not created.
    </para>
