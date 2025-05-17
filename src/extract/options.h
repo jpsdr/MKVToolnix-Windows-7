@@ -30,7 +30,7 @@ public:
 
   class mode_options_c {
   public:
-    bool m_simple_chapter_format;
+    bool m_simple_chapter_format, m_no_track_tags;
     mtx::bcp47::language_c m_simple_chapter_language;
     extraction_mode_e m_extraction_mode;
 

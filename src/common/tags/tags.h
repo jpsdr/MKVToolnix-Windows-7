@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include <optional>
+
 #include "common/bcp47.h"
 #include "common/ebml.h"
 #include "common/strings/utf8.h"
@@ -37,6 +39,7 @@ namespace mtx::tags {
 void remove_track_uid_targets(libebml::EbmlMaster *tag);
 void remove_elements_unsupported_by_webm(libebml::EbmlMaster &master);
 bool remove_track_statistics(libmatroska::KaxTags *tags, std::optional<uint64_t> track_uid);
+bool remove_track_tags(libmatroska::KaxTags *tags, std::optional<uint64_t> track_uid_to_remove = std::nullopt);
 
 libmatroska::KaxTags *select_for_chapters(libmatroska::KaxTags &tags, libmatroska::KaxChapters &chapters);
 

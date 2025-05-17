@@ -17,6 +17,8 @@
 * MKVToolNix GUI: preferences: the GUI will now auto-upgrade the "default
   regex for…" to their respective current default values if they're still set
   to one of the previous default values. Part of the implementation of #6099.
+* mkvextract: tags extraction: added an option `--no-track-tags` (short: `-T`)
+  for not extracting tags associated with tracks.
 
 
 # Version 92.0 "Everglow" 2025-04-26
