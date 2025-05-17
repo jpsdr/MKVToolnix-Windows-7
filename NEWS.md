@@ -10,6 +10,10 @@
   registries.
 * translations: added a Hungarian translation of the programs & man pages by
   Viktor György, John Fowler & Attila Zsigus (see `AUTHORS`).
+* MKVToolNix GUI: preferences: the revert buttons for the various "default
+  regex for…" will only be enabled when the current text differs from the
+  default, in other words: when reverting would actually change the
+  text. Part of the implementation of #6099.
 
 
 # Version 92.0 "Everglow" 2025-04-26
