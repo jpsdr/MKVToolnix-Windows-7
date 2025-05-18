@@ -337,7 +337,7 @@ change_c::validate_deletion_of_mandatory() {
   if (!semantic || !semantic->IsMandatory())
     return;
 
-  std::unique_ptr<libebml::EbmlElement> elt(&semantic->Create());
+  std::unique_ptr<libebml::EbmlElement> elt(&create_ebml_element(*semantic));
 
   if (!has_default_value(*elt))
     mxerror(fmt::format(FY("This property is mandatory and cannot be deleted in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));

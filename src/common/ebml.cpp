@@ -107,6 +107,15 @@ create_ebml_element(const libebml::EbmlCallbacks &callbacks,
   return nullptr;
 }
 
+libebml::EbmlElement &
+create_ebml_element(const libebml::EbmlSemantic &semantic) {
+#if LIBEBML_VERSION < 0x020000
+  return semantic.Create();
+#else
+  return EBML_INFO_CREATE(semantic.GetCallbacks());
+#endif
+}
+
 static libebml::EbmlCallbacks const *
 do_find_ebml_callbacks(libebml::EbmlCallbacks const &base,
                        libebml::EbmlId const &id) {
@@ -763,7 +772,7 @@ must_be_present_in_master_by_id(libebml::EbmlId const &id) {
     return false;
   }
 
-  auto elt         = std::shared_ptr<libebml::EbmlElement>(&semantic->Create());
+  auto elt         = std::shared_ptr<libebml::EbmlElement>(&create_ebml_element(*semantic));
   auto has_default = has_default_value(*elt);
 
   mxdebug_if(s_debug, fmt::format("ID {0:08x}: {1} (does {2}have a default value)\n", id.GetValue(), !has_default, has_default ? "" : "not "));
