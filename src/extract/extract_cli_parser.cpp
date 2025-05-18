@@ -89,7 +89,7 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Tag extraction"));
   add_information(YT("The second mode extracts the tags, converts them to XML and writes them to an output file."));
-  add_option("T|no-track-tags", std::bind(&extract_cli_parser_c::set_no_track_tags, this), YT("Do not exports track tags."));
+  add_option("T|no-track-tags", std::bind(&extract_cli_parser_c::set_no_track_tags, this), YT("Do not export track tags."));
 
   add_section_header(YT("Example"));
 
