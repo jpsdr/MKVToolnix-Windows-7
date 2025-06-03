@@ -408,6 +408,10 @@ function build_mkvtoolnix {
   dmgcnt=$dmgbase/MKVToolNix-${MTX_VER}.app/Contents
   dmgmac=$dmgcnt/MacOS
 
+  if [[ ! -f ${SRCDIR}/mkvtoolnix-${MTX_VER}.tar.xz ]]; then
+    curl -o ${SRCDIR}/mkvtoolnix-${MTX_VER}.tar.xz https://mkvtoolnix.download/sources/mkvtoolnix-${MTX_VER}.tar.xz
+  fi
+
   NO_MAKE=1 NO_CONFIGURE=1 build_package /mkvtoolnix-${MTX_VER}.tar.xz
   build_configured_mkvtoolnix
 
