@@ -542,6 +542,8 @@ EOF
   ln -s ${dmgbuildname} ${latest_link}
 }
 
+mkdir -p ${TARGET} ${SRCDIR} ${DOCBOOK_XSL_ROOT_DIR:h}
+
 if [[ -z $MTX_VER ]]; then
   MTX_VER=$(awk -F, '/AC_INIT/ { gsub("[][]", "", $2); print $2 }' < ${SCRIPT_PATH}/../../configure.ac)
 fi
