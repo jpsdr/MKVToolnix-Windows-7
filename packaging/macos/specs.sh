@@ -4,6 +4,7 @@ spec_boost=(boost_1_85_0.tar.bz2 https://boostorg.jfrog.io/artifactory/main/rele
 spec_cmake=(cmake-3.31.3.tar.gz https://cmake.org/files/v3.31/cmake-3.31.3.tar.gz fac45bc6d410b49b3113ab866074888d6c9e9dc81a141874446eb239ac38cb87)
 spec_cmark=(cmark-0.30.3.tar.gz https://github.com/commonmark/cmark/archive/0.30.3.tar.gz 85e9fb515531cc2c9ae176d693f9871774830cf1f323a6758fb187a5148d7b16)
 spec_curl=(curl-8.11.1.tar.xz https://curl.se/download/curl-8.11.1.tar.xz c7ca7db48b0909743eaef34250da02c19bc61d4f1dcedd6603f109409536ab56)
+spec_docbook_xsl=(docbook-xsl-1.79.2.tar.gz https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F1.79.2/docbook-xsl-1.79.2.tar.gz 966188d7c05fc76eaca115a55893e643dd01a3486f6368733c9ad974fcee7a26)
 spec_flac=(flac-1.4.3.tar.xz http://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz 6c58e69cd22348f441b861092b825e591d0b822e106de6eb0ee4d05d27205b70)
 spec_gettext=(gettext-0.23.tar.lz https://ftp.gnu.org/gnu/gettext/gettext-0.23.tar.lz 9878994930a8e09f1e3186203b3ff2accb2c4e67ddc6098b2c1e4a74364d3c5a)
 spec_gmp=(gmp-6.3.0.tar.xz https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898)
