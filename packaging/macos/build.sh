@@ -377,6 +377,17 @@ function build_qt {
   CXXFLAGS=$saved_CXXFLAGS
 }
 
+function build_docbook_xsl {
+  if [[ -d ${DOCBOOK_XSL_ROOT_DIR} ]]; then
+    return
+  fi
+
+  retrieve_file docbook_xsl
+
+  tar xfC ${SRCDIR}/${spec_docbook_xsl[1]} ${DOCBOOK_XSL_ROOT_DIR:h}
+  ln -s ${${spec_docbook_xsl[1]}%%.tar*} ${DOCBOOK_XSL_ROOT_DIR}
+}
+
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
@@ -407,6 +418,10 @@ function build_mkvtoolnix {
   dmgbase=${CMPL}/dmg-${MTX_VER}
   dmgcnt=$dmgbase/MKVToolNix-${MTX_VER}.app/Contents
   dmgmac=$dmgcnt/MacOS
+
+  if [[ ! -f ${SRCDIR}/mkvtoolnix-${MTX_VER}.tar.xz ]]; then
+    curl -o ${SRCDIR}/mkvtoolnix-${MTX_VER}.tar.xz https://mkvtoolnix.download/sources/mkvtoolnix-${MTX_VER}.tar.xz
+  fi
 
   NO_MAKE=1 NO_CONFIGURE=1 build_package /mkvtoolnix-${MTX_VER}.tar.xz
   build_configured_mkvtoolnix
@@ -542,11 +557,14 @@ EOF
   ln -s ${dmgbuildname} ${latest_link}
 }
 
+mkdir -p ${TARGET} ${SRCDIR} ${DOCBOOK_XSL_ROOT_DIR:h}
+
 if [[ -z $MTX_VER ]]; then
   MTX_VER=$(awk -F, '/AC_INIT/ { gsub("[][]", "", $2); print $2 }' < ${SCRIPT_PATH}/../../configure.ac)
 fi
 
 if [[ -z $@ ]]; then
+  build_docbook_xsl
   build_autoconf
   build_automake
   build_pkgconfig
