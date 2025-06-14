@@ -1,4 +1,4 @@
-# Version ?
+# Version 93.0 "Goblu" 2025-06-14
 
 ## New features and enhancements
 
