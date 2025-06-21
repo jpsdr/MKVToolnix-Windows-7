@@ -576,6 +576,10 @@ App::setupAppearance() {
   setupPalette();
 #endif  // SYS_WINDOWS
   setupUiFont();
+#if defined(SYS_APPLE)
+  // Restore menu icons on macOS after a2aa1f81a81 in Qt 6.7.3
+  QApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
+#endif  // SYS_APPLE
 }
 
 #if defined(SYS_WINDOWS)
