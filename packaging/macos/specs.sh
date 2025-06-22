@@ -12,6 +12,6 @@ spec_libiconv=(libiconv-1.16.tar.gz https://ftp.gnu.org/gnu/libiconv/libiconv-1.
 spec_ogg=(libogg-1.3.4.tar.xz http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.xz c163bc12bc300c401b6aa35907ac682671ea376f13ae0969a220f7ddf71893fe)
 spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz 6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
-spec_zlib=(zlib-v1.3.1.tar.xz https://www.zlib.net/zlib-v1.3.1.tar.xz 38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32)
+spec_zlib=(zlib-v1.3.1.tar.xz https://zlib.net/zlib-1.3.1.tar.xz 38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32)
 
 spec_qt=(qt-everywhere-src-6.8.1.tar.xz https://download.qt.io/official_releases/qt/6.8/6.8.1/single/qt-everywhere-src-6.8.1.tar.xz 45e3a9f6d33c92ffe65a1fde1a8eba5b228112df675f7f9026eaa332b2e2edff)
