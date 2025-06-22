@@ -496,7 +496,10 @@ EOF
   cat $dmgcnt/Info.plist
 
   mkdir -p ${dmgmac}/libs
-  cp -v -a ${TARGET}/lib/libQt6{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Svg*.dylib,Widgets*.dylib} ${dmgmac}/libs/
+  cp -v -a \
+     ${TARGET}/lib/libQt6{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Svg*.dylib,Widgets*.dylib} \
+     ${TARGET}/lib/libboost_system*.dylib \
+     ${dmgmac}/libs/
 
   cd ${TARGET}/plugins
 
