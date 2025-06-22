@@ -268,6 +268,7 @@ function build_gmp {
     --enable-shared=no \
     --enable-static \
     --enable-cxx \
+    --with-pic \
     --without-readline
 }
 
