@@ -1,6 +1,6 @@
 spec_autoconf=(autoconf-2.69.tar.xz https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz 64ebcec9f8ac5b2487125a86a7760d2591ac9e1d3dbd59489633f9de62a57684)
 spec_automake=(automake-1.16.1.tar.gz https://ftp.gnu.org/gnu/automake/automake-1.16.1.tar.xz 5d05bb38a23fd3312b10aea93840feec685bdf4a41146e78882848165d3ae921)
-spec_boost=(boost_1_85_0.tar.bz2 https://boostorg.jfrog.io/artifactory/main/release/1.85.0/source/boost_1_85_0.tar.bz2 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617)
+spec_boost=(boost_1_88_0.tar.bz2 https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.bz2 46d9d2c06637b219270877c9e16155cbd015b6dc84349af064c088e9b5b12f7b)
 spec_cmake=(cmake-3.31.3.tar.gz https://cmake.org/files/v3.31/cmake-3.31.3.tar.gz fac45bc6d410b49b3113ab866074888d6c9e9dc81a141874446eb239ac38cb87)
 spec_cmark=(cmark-0.30.3.tar.gz https://github.com/commonmark/cmark/archive/0.30.3.tar.gz 85e9fb515531cc2c9ae176d693f9871774830cf1f323a6758fb187a5148d7b16)
 spec_curl=(curl-8.11.1.tar.xz https://curl.se/download/curl-8.11.1.tar.xz c7ca7db48b0909743eaef34250da02c19bc61d4f1dcedd6603f109409536ab56)
@@ -12,6 +12,8 @@ spec_libiconv=(libiconv-1.16.tar.gz https://ftp.gnu.org/gnu/libiconv/libiconv-1.
 spec_ogg=(libogg-1.3.4.tar.xz http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.xz c163bc12bc300c401b6aa35907ac682671ea376f13ae0969a220f7ddf71893fe)
 spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz 6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
-spec_zlib=(zlib-v1.3.1.tar.xz https://www.zlib.net/zlib-v1.3.1.tar.xz 38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32)
+spec_zlib=(zlib-v1.3.1.tar.xz https://zlib.net/zlib-1.3.1.tar.xz 38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32)
 
-spec_qt=(qt-everywhere-src-6.8.1.tar.xz https://download.qt.io/official_releases/qt/6.8/6.8.1/single/qt-everywhere-src-6.8.1.tar.xz 45e3a9f6d33c92ffe65a1fde1a8eba5b228112df675f7f9026eaa332b2e2edff)
+#spec_qt=(qt-everywhere-src-6.8.1.tar.xz https://download.qt.io/official_releases/qt/6.8/6.8.1/single/qt-everywhere-src-6.8.1.tar.xz 45e3a9f6d33c92ffe65a1fde1a8eba5b228112df675f7f9026eaa332b2e2edff)
+#spec_qt=(qt-everywhere-src-6.8.3.tar.xz https://download.qt.io/official_releases/qt/6.8/6.8.3/single/qt-everywhere-src-6.8.3.tar.xz cdd3a69967208276bb01af7ace7dba0ba53e679f886a4cbe624225c60fb73f2c)
+spec_qt=(qt-everywhere-src-6.9.1.tar.xz https://download.qt.io/official_releases/qt/6.9/6.9.1/single/qt-everywhere-src-6.9.1.tar.xz 364fde2d7fa42dd7c9b2ea6db3d462dd54f3869e9fd0ca0a0ca62f750cd8329b)

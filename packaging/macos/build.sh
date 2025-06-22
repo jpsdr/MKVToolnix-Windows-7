@@ -336,7 +336,6 @@ function build_qt {
     -skip qt3d,qt5compat,qtactiveqt,qtcharts,qtcoap,qtconnectivity,qtdatavis3d,qtdeclarative,qtdoc,qthttpserver,qtlanguageserver,qtlottie,qtmqtt,qtnetworkauth,qtopcua,qtpositioning,qtquick3d,qtquick3dphysics,qtquicktimeline,qtremoteobjects,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtvirtualkeyboard,qtwayland,qtwebchannel,qtwebengine,qtwebsockets,qtwebview,qtgraphs,qtlocation,qtquickeffectmaker
 
     -no-framework
-    -no-rpath
     -no-avx512
 
     -no-feature-cups
@@ -557,7 +556,7 @@ EOF
   ln -s ${dmgbuildname} ${latest_link}
 }
 
-mkdir -p ${TARGET} ${SRCDIR} ${DOCBOOK_XSL_ROOT_DIR:h}
+mkdir -p ${TARGET} ${TARGET}/include ${TARGET}/lib ${SRCDIR} ${DOCBOOK_XSL_ROOT_DIR:h}
 
 if [[ -z $MTX_VER ]]; then
   MTX_VER=$(awk -F, '/AC_INIT/ { gsub("[][]", "", $2); print $2 }' < ${SCRIPT_PATH}/../../configure.ac)
