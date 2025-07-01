@@ -16,6 +16,7 @@
 #include "common/common_pch.h"
 
 #include "common/id_info.h"
+#include "common/translation.h"
 
 constexpr auto ID_RESULT_TRACK_AUDIO     = "audio";
 constexpr auto ID_RESULT_TRACK_VIDEO     = "video";

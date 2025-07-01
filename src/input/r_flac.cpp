@@ -13,6 +13,11 @@
 
 #include "common/common_pch.h"
 
+#include "input/r_flac.h"
+#include "merge/id_result.h"
+
+#if defined(HAVE_FLAC_FORMAT_H)
+
 #include <FLAC/format.h>
 #include <FLAC/ordinals.h>
 #include <FLAC/stream_decoder.h>
@@ -29,12 +34,9 @@
 #include "common/mime.h"
 #include "common/tags/tags.h"
 #include "common/tags/vorbis.h"
-#include "input/r_flac.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
 #include "merge/output_control.h"
-
-#if defined(HAVE_FLAC_FORMAT_H)
 
 bool
 flac_reader_c::probe_file() {
