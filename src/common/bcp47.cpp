@@ -226,7 +226,7 @@ language_c::format_long(bool force)
   if (!get_language().empty()) {
     auto language_opt = mtx::iso639::look_up(get_language());
     if (language_opt)
-      return fmt::format("{0} ({1})", language_opt->english_name, formatted);
+      return fmt::format("{0} ({1})", gettext(language_opt->english_name.c_str()), formatted);
   }
 
   return formatted;
