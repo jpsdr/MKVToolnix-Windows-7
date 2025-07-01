@@ -563,7 +563,7 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   if (dlg.uiFontChanged())
     app.setupUiFont();
 
-  if (dlg.languageRegionCharacterSetSettingsChanged())
+  if (dlg.uiFontChanged() || dlg.languageRegionCharacterSetSettingsChanged())
     app.reinitializeLanguageLists();
 
   mtx::bcp47::language_c::set_normalization_mode(Util::Settings::get().m_bcp47NormalizationMode);

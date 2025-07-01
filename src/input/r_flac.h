@@ -15,19 +15,19 @@
 
 #include "common/common_pch.h"
 
-#include "common/bcp47.h"
-#include "common/debugging.h"
 #include "common/mm_io.h"
-#include "matroska/KaxSemantic.h"
-#include "merge/generic_reader.h"
 
 #if defined(HAVE_FLAC_FORMAT_H)
 
 #include <FLAC/export.h>
 #include <FLAC/stream_decoder.h>
 
+#include "common/bcp47.h"
+#include "common/debugging.h"
 #include "common/flac.h"
 #include "common/tags/vorbis.h"
+#include "matroska/KaxSemantic.h"
+#include "merge/generic_reader.h"
 #include "output/p_flac.h"
 
 struct flac_block_t {
