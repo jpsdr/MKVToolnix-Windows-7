@@ -281,7 +281,7 @@ FunctionEnd
 
 Function onClickExternalLinkgMKVExtractGUI
   Pop $0
-  ExecShell "open" "https://sourceforge.net/projects/gmkvextractgui/"
+  ExecShell "open" "https://github.com/Gpower2/gMKVExtractGUI"
 FunctionEnd
 
 Function onClickExternalLinkMKVcleaver
