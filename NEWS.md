@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: the "delete source files after multiplexing"
+  job runner will now delete both files of an `.idx`/`.sub` VobSub file
+  pair. Implements #6133.
+
 ## Bug fixes
 
 * all: fix compilation without FLAC. Fixes #6128.
