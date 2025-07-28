@@ -220,7 +220,19 @@ ProgramRunner::deleteSourceFiles(VariableMap const &variables) {
   if (!isJobType(variables, Q("multiplexer")))
     return;
 
+  QStringList toRemove;
+  auto vobsubRE = QRegularExpression{Q("(idx|sub)$"), QRegularExpression::PatternOption::CaseInsensitiveOption};
+
   for (auto const &sourceFileName : variables[Q("SOURCE_FILE_NAMES")]) {
+    toRemove << sourceFileName;
+
+    if (sourceFileName.contains(vobsubRE)) {
+      auto other = sourceFileName.last(3).toLower() == Q("idx") ? Q("sub") : Q("idx");
+      toRemove << sourceFileName.first(sourceFileName.length() - 3) + other;
+    }
+  }
+
+  for (auto const &sourceFileName : toRemove) {
     auto succeeded = QFile::remove(sourceFileName);
     qDebug() << Q("deleteSourceFiles: file removal %1 (%2)").arg(succeeded ? "succeeded" : "failed").arg(sourceFileName);
   }
