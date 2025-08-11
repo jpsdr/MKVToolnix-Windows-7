@@ -37,7 +37,7 @@ fi
 AC_MSG_RESULT([yes])
 
 # boost::system must be present.
-AX_BOOST_CHECK_HEADERS([boost/system.hpp],,[
+AX_BOOST_CHECK_HEADERS([boost/system/error_code.hpp],,[
   AC_MSG_ERROR([Boost's system library is required but wasn't found])
 ])
 
