@@ -100,7 +100,7 @@ programs and libraries you absolutely need are:
 
 - [Boost](http://www.boost.org/) — Several of Boost's libraries are
   used, e.g. `filesystem`, `multi-precision`, `operators`,
-  `system`. At least v1.66.0 is required.
+  `system`. At least v1.74.0 is required.
 
 - [libxslt's xsltproc binary](http://xmlsoft.org/libxslt/) and
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
