@@ -1,5 +1,5 @@
 # boost's headers must be present.
-AX_BOOST_BASE([1.66.0])
+AX_BOOST_BASE([1.74.0])
 
 AC_MSG_CHECKING([for Boost's multi-precision library with GMP backend])
 
@@ -37,17 +37,15 @@ fi
 AC_MSG_RESULT([yes])
 
 # boost::system must be present.
-AX_BOOST_SYSTEM()
+AX_BOOST_CHECK_HEADERS([boost/system/error_code.hpp],,[
+  AC_MSG_ERROR([Boost's system library is required but wasn't found])
+])
 
 # boost::filesystem must be present.
 AX_BOOST_FILESYSTEM()
 
 if test x"$ax_cv_boost_filesystem" != "xyes"; then
   AC_MSG_ERROR(The Boost Filesystem Library was not found.)
-fi
-
-if test x"$ax_cv_boost_system" != "xyes"; then
-  AC_MSG_ERROR(The Boost System Library was not found.)
 fi
 
 AX_BOOST_CHECK_HEADERS([boost/operators.hpp],,[

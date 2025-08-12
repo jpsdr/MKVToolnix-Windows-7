@@ -1,3 +1,16 @@
+# Version ?
+
+## Bug fixes
+
+* build system: fixed building with the upcoming Boost v1.89.0 by only
+  requiring the header part of the Boost.System library as it's been
+  header-only since v1.69.0. Fixes #6143.
+
+## Build system changes
+
+* Boost v1.74.0 or newer is now required.
+
+
 # Version 94.0 "Initiate" 2025-07-27
 
 ## New features and enhancements
