@@ -62,6 +62,25 @@ def parse_cli_args
   end
 end
 
+def parse_os_release
+  os_file = "/etc/os-release"
+
+  return false if !FileTest.file?(os_file)
+
+  values = Hash[*
+    IO.readlines(os_file).
+    map(&:chomp).
+    select { |line| %r{.+=.+}.match(line)                                      }.
+    map    { |line| a = line.split('=', 2); [ a[0], a[1].gsub(%r{^"|"$}, '') ] }.
+    flatten
+  ]
+
+  $distribution         = values["ID"].downcase
+  $distribution_version = values["VERSION_ID"]
+
+  return $distribution && $distribution_version
+end
+
 def parse_lsb_release
   lsb_file = "/etc/lsb-release"
 
@@ -189,6 +208,7 @@ end
 def guess_distribution
   return if parse_lsb_release
   return if parse_sources_list
+  return if parse_os_release
 end
 
 def main
