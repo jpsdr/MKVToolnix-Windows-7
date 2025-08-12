@@ -206,9 +206,9 @@ def parse_sources_list
 end
 
 def guess_distribution
-  return if parse_os_release
   return if parse_lsb_release
   return if parse_sources_list
+  return if parse_os_release
 end
 
 def main
