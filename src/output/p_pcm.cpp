@@ -17,6 +17,7 @@
 #include "common/bswap.h"
 #include "common/codec.h"
 #include "common/list_utils.h"
+#include "common/strings/formatting.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_pcm.h"
@@ -32,25 +33,16 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_channels(channels)
   , m_bits_per_sample(bits_per_sample)
   , m_samples_per_packet{}
-  , m_samples_per_packet_packaged{}
-  , m_packet_size(0)
-  , m_min_packet_size{}
+  , m_packet_size{}
   , m_samples_output(0)
-  , m_num_durations_provided{}
-  , m_num_packets_with_different_sample_count{}
   , m_format{format}
   , m_s2ts(1000000000ll, m_samples_per_sec)
 {
-
-  // make sure each packet will not be less than 4ms
-  if ((samples_per_sec % 225) == 0)
-    m_min_packet_size = samples_to_size(samples_per_sec / 225);
-  else
-    m_min_packet_size = samples_to_size(samples_per_sec / 250);
-
-  // fall back to 40ms; it merely happens to be "second-aligned" for all common rates
+  // 40ms per packet; this happens to be "second-aligned" for all common rates
   m_samples_per_packet = samples_per_sec / 25;
   m_packet_size        = samples_to_size(m_samples_per_packet);
+
+  mxdebug_if(m_debug, fmt::format("PCM packetizer ctor: samples_per_sec {0} samples_per_packet {1} packet_size {2} channels {3} bits_per_sample {4}\n", samples_per_sec, m_samples_per_packet, m_packet_size, m_channels, m_bits_per_sample));
 
   set_track_default_duration((int64_t)(1000000000.0 * m_samples_per_packet / m_samples_per_sec));
 
@@ -88,12 +80,41 @@ pcm_packetizer_c::size_to_samples(int64_t size)
 
 void
 pcm_packetizer_c::process_impl(packet_cptr const &packet) {
-  if (packet->has_timestamp() && (packet->data->get_size() >= m_min_packet_size))
-    return process_packaged(packet);
+  auto buffered_size      = m_buffer.get_size();
+  auto expected_timestamp = (m_samples_output + size_to_samples(buffered_size)) * m_s2ts;
+  auto ts_diff            = packet->timestamp - expected_timestamp;
 
-  m_buffer.add(packet->data->get_buffer(), packet->data->get_size());
+  if (packet->has_timestamp() && (std::abs(ts_diff) > 1'000'000)) {
+    // Next data has timestamp other than one we expect (e.g. a gap is
+    // following, or offset at the start of the track). Flush
+    // currently buffered data (if any) with old calculated timestamp,
+    // then re-derive number of samples output to provided timestamp
+    // so that new timestamps will be calculated from the basis of the
+    // incoming packet's timestamp.
+
+    mxdebug_if(m_debug, fmt::format("PCM packetizer process: have gap of {0} in expected ({1}) vs provided ({2}) timestamps; flushing {3} bytes of buffered data = {4} samples = {5}\n",
+                                    mtx::string::format_timestamp(ts_diff), mtx::string::format_timestamp(expected_timestamp), mtx::string::format_timestamp(packet->timestamp),
+                                    buffered_size, size_to_samples(buffered_size), mtx::string::format_timestamp(size_to_samples(buffered_size) * m_s2ts)));
+
+    flush_impl();
+    m_samples_output = packet->timestamp / m_s2ts;
+  }
+
+  if (!packet->data->get_size())
+    return;
+
+  m_buffer.add(*packet->data);
+
+  auto size_to_flush_before = m_buffer.get_size();
+  auto old_samples_output   = m_samples_output;
 
   flush_packets();
+
+  auto size_flushed = size_to_flush_before - m_buffer.get_size();
+
+  mxdebug_if(m_debug, fmt::format("PCM packetizer process: old TS {0} new TS {1} added {2} flushed {3} ({4}) remaining {5}\n",
+                                  mtx::string::format_timestamp(old_samples_output * m_s2ts), mtx::string::format_timestamp(m_samples_output * m_s2ts),
+                                  packet->data->get_size(), size_flushed, size_flushed / m_packet_size, m_buffer.get_size()));
 }
 
 void
@@ -111,49 +132,6 @@ pcm_packetizer_c::flush_packets() {
 }
 
 void
-pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
-  auto buffer_size = m_buffer.get_size();
-
-  if (buffer_size) {
-    auto data_size = packet->data->get_size();
-    packet->data->resize(data_size + buffer_size);
-
-    auto data = packet->data->get_buffer();
-
-    std::memmove(&data[buffer_size], &data[0],              data_size);
-    std::memmove(&data[0],           m_buffer.get_buffer(), buffer_size);
-
-    m_buffer.remove(buffer_size);
-
-    packet->timestamp -= size_to_samples(buffer_size) * m_s2ts;
-  }
-
-  auto samples_here = size_to_samples(packet->data->get_size());
-  packet->duration  = samples_here * m_s2ts;
-  m_samples_output  = packet->timestamp / m_s2ts + samples_here;
-
-  ++m_num_durations_provided;
-
-  if (1 == m_num_durations_provided) {
-    m_samples_per_packet_packaged = samples_here;
-    set_track_default_duration(samples_here * m_s2ts);
-    rerender_track_headers();
-
-  } else if (m_htrack_default_duration && (samples_here != m_samples_per_packet_packaged)) {
-    ++m_num_packets_with_different_sample_count;
-
-    if (1 < m_num_packets_with_different_sample_count) {
-      set_track_default_duration(0);
-      rerender_track_headers();
-    }
-  }
-
-  byte_swap_data(*packet->data);
-
-  add_packet(packet);
-}
-
-void
 pcm_packetizer_c::flush_impl() {
   uint32_t size = m_buffer.get_size();
   if (0 >= size)
@@ -165,6 +143,9 @@ pcm_packetizer_c::flush_impl() {
   byte_swap_data(*packet->data);
 
   add_packet(packet);
+
+  mxdebug_if(m_debug, fmt::format("PCM packetizer flush: TS {0} remaining {1} duration {2}\n", mtx::string::format_timestamp(m_samples_output * m_s2ts), m_buffer.get_size(),
+                                  mtx::string::format_timestamp(m_buffer.get_size() * m_s2ts)));
 
   m_samples_output += samples_here;
   m_buffer.remove(size);
