@@ -8,6 +8,8 @@
 * mkvmerge: PCM packetizer: mkvmerge will now always write frames with 40ms of
   samples, no matter how long or short the frames in the source files
   were. Part of the fix of #6149.
+* MP4/QuickTime reader: fix exorbitant memory usage when reading PCM audio
+  tracks. Part of the fix of #6149.
 
 ## Build system changes
 

@@ -2477,9 +2477,13 @@ qtmp4_demuxer_c::update_tables() {
     s                      += chunk_table[j].size;
   }
 
-  // workaround for fixed-size video frames (dv and uncompressed), but
-  // also for audio with constant sample size
-  if (sample_table.empty() && (sample_size > 1)) {
+  // Workaround for fixed-size video frames (dv and uncompressed), but
+  // also for non-PCM audio with constant sample size. PCM audio will
+  // be handled by the directly following code.
+  if (   sample_table.empty()
+      && (sample_size > 1)
+      && (   ('a' != type)
+          || !codec.is(codec_c::type_e::A_PCM))) {
     for (i = 0; i < s; ++i) {
       qt_sample_t sample;
 
