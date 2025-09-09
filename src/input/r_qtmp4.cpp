@@ -1124,7 +1124,7 @@ qtmp4_reader_c::handle_ilst_metadata_atom(qt_atom_t parent,
       mtx::string::strip(content, true);
 
       if (fourcc == fourcc_c{0xa96e'616du}) // ©nam
-        m_title = content;
+        m_ti.m_title = content;
 
       else if (fourcc == fourcc_c{0xa974'6f6fu}) // ©too
         m_encoder = content;
@@ -2091,7 +2091,7 @@ qtmp4_reader_c::process_global_tags() {
 
 void
 qtmp4_reader_c::create_packetizers() {
-  maybe_set_segment_title(m_title);
+  maybe_set_segment_title(m_ti.m_title);
   if (!m_ti.m_no_global_tags)
     process_global_tags();
 
@@ -2116,8 +2116,8 @@ qtmp4_reader_c::identify() {
   unsigned int i;
   auto info = mtx::id::info_c{};
 
-  if (!m_title.empty())
-    info.add(mtx::id::title, m_title);
+  if (!m_ti.m_title.empty())
+    info.add(mtx::id::title, m_ti.m_title);
 
   id_result_container(info.get());
 

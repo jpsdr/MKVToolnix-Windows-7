@@ -479,7 +479,7 @@ private:
 
   uint64_t m_attachment_id{};
 
-  std::string m_title, m_encoder, m_comment;
+  std::string m_encoder, m_comment;
 
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 

@@ -166,7 +166,7 @@ public:
   int64_t m_id;
 
   // Options used by the readers.
-  std::string m_fname;
+  std::string m_fname, m_title;
   item_selector_c<bool> m_atracks, m_vtracks, m_stracks, m_btracks, m_track_tags;
   bool m_disable_multi_file;
 

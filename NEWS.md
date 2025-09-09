@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge, MKVToolNix GUI: new chapter generation feature: a new placeholder has
+  been introduced when generating chapters for appended files, \<TITLE\>, which
+  will be replaced by the appended file's title metadata. Implements #6151.
+
 ## Bug fixes
 
 * build system: fixed building with the upcoming Boost v1.89.0 by only
