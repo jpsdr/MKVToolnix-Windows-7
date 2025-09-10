@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-05-17 14:09+0200\n"
+"POT-Creation-Date: 2025-09-10 20:01+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Roger Knutsen, 2024-2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/nb/)\n"
@@ -4925,32 +4925,32 @@ msgstr "Kunne ikke finne gyldige DTS-datahoder i dette sporets første rammer.\n
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Ugyldige Vorbis-datahoder i AVI-lydspor."
 
-#: src/input/r_flac.cpp:89
+#: src/input/r_flac.cpp:91
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: kunne ikke initialisere FLAC-pakkeformidleren.\n"
 
-#: src/input/r_flac.cpp:124
+#: src/input/r_flac.cpp:126
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> Analyserer FLAC-filen. Dette kan ta LANG tid.\n"
 
-#: src/input/r_flac.cpp:132
+#: src/input/r_flac.cpp:134
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Ingen metadatablokk funnet. Denne filen er ødelagt.\n"
 
-#: src/input/r_flac.cpp:151
+#: src/input/r_flac.cpp:153
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> Forhåndsanalyserer FLAC-fil: {0}%{1}"
 
-#: src/input/r_flac.cpp:174
+#: src/input/r_flac.cpp:176
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Forhåndsanalyserer FLAC-fil: 100%\n"
 
-#: src/input/r_flac.cpp:179
+#: src/input/r_flac.cpp:181
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: kunne ikke lese alle datahodepakker.\n"
@@ -5278,102 +5278,102 @@ msgstr "Quicktime/MP4-leser: atom-'mediadatahodet' ('mdhd') bruker den ikke-stø
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4-leser: parameteren 'time scale' var 0. Dette støttes ikke.\n"
 
-#: src/input/r_qtmp4.cpp:1236
+#: src/input/r_qtmp4.cpp:1246
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "MP4-filen '{0}' inneholder kapitler hvis format ikke ble gjenkjent. Dette er ofte tilfelle hvis kapitlene ikke er kodet i UTF-8. Bruk alternativet '--chapter-charset' for å spesifisere tegnsettet som skal brukes.\n"
 
-#: src/input/r_qtmp4.cpp:1366
+#: src/input/r_qtmp4.cpp:1376
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: størrelsesfeltet er for lite i strømmebeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1373
+#: src/input/r_qtmp4.cpp:1383
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese strømmebeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1672
+#: src/input/r_qtmp4.cpp:1682
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese delnummer {0}/{1} med størrelse {2} fra posisjon {3}. Avbryter.\n"
 
-#: src/input/r_qtmp4.cpp:1729
+#: src/input/r_qtmp4.cpp:1739
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Ingen AC-3-datahode funnet i første ramme; sporet hoppes over..\n"
 
-#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2512
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4-leser: konstant eksempelstørrelse og variabel varighet støttes ikke ennå. Kontakt forfatteren hvis du har en slik eksempelfil.\n"
 
-#: src/input/r_qtmp4.cpp:2903
+#: src/input/r_qtmp4.cpp:2917
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese lydbeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2913
-#: src/input/r_qtmp4.cpp:2997
+#: src/input/r_qtmp4.cpp:2927
+#: src/input/r_qtmp4.cpp:3011
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4-leser: Spor-ID {0} har mer enn én FourCC. Bruker bare den første ({1}) og ikke denne ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:2939
 #: src/input/r_qtmp4.cpp:2953
+#: src/input/r_qtmp4.cpp:2967
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese det utvidede lydbeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2988
+#: src/input/r_qtmp4.cpp:3002
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese videobeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3078
+#: src/input/r_qtmp4.cpp:3092
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Spor {0}: AAC-informasjonen kunne ikke analyseres.\n"
 
-#: src/input/r_qtmp4.cpp:3591
-#: src/input/r_qtmp4.cpp:3610
-#: src/input/r_qtmp4.cpp:3658
-#: src/input/r_qtmp4.cpp:3751
+#: src/input/r_qtmp4.cpp:3605
+#: src/input/r_qtmp4.cpp:3624
+#: src/input/r_qtmp4.cpp:3672
+#: src/input/r_qtmp4.cpp:3765
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4-leser: spor {0} mangler noen data. Ødelagte hodedata-atomer?\n"
 
-#: src/input/r_qtmp4.cpp:3627
+#: src/input/r_qtmp4.cpp:3641
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Ingen DTS-datahode funnet i første bilderammer; sporet hoppes over.\n"
 
-#: src/input/r_qtmp4.cpp:3640
+#: src/input/r_qtmp4.cpp:3654
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: lydsporet {0} bruker en ikke-støttet 'objekttype-ID' av {1} i 'esds'-atomet. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3645
+#: src/input/r_qtmp4.cpp:3659
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: AAC-sporet {0} mangler esds-atomet/dekoderkonfigurasjonen. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3707
+#: src/input/r_qtmp4.cpp:3721
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: MPEG4 del 10/AVC spor {0} mangler sin dekoderkonfigurasjon. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3714
+#: src/input/r_qtmp4.cpp:3728
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: MPEGH del 2/HEVC-sporet {0} mangler dekoderkonfigurasjonen. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3738
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: videosporet {0} mangler ESDS-atomet. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3730
+#: src/input/r_qtmp4.cpp:3744
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: MPEG4-sporet {0} mangler esds-atomet/dekoderkonfigurasjonen. Hopper over dette sporet.\n"
@@ -8500,7 +8500,7 @@ msgstr "Velg en eksisterende Matroska- eller WebM-fil, og grensesnittet vil legg
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:589
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:625
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:822
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:153
 #, no-c-format
@@ -8512,7 +8512,7 @@ msgstr "Filanalyse mislyktes"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:391
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:417
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:368
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:151
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:849
 #: src/mkvtoolnix-gui/info/tab.cpp:145
@@ -8522,7 +8522,7 @@ msgstr "Filen du prøvde å åpne (%1), kan ikke leses."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:84
@@ -8569,7 +8569,7 @@ msgstr "XML-kapittelfiler"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:809
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:206
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:191
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:219
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:777
@@ -8626,7 +8626,7 @@ msgstr "Støttede filtyper"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:807
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:197
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
 #: src/mkvtoolnix-gui/merge/output.cpp:444
 #, no-c-format
 msgid "Matroska files"
@@ -8806,104 +8806,109 @@ msgstr "Strengen '<START>' vil bli erstattet av kapitlets starttidsstempel."
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
 msgstr "Strengene '<FILE_NAME>' og '<FILE_NAME_WITH_EXT>', som bare fungerer når du genererer kapitler for tilføyde filer, vil bli erstattet av den tilføyde filens navn (førstnevnte utelater filtypen mens sistnevnte inkluderer den)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:337
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:336
+#, fuzzy, no-c-format
+msgid "The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."
+msgstr "Strengene '<FILE_NAME>' og '<FILE_NAME_WITH_EXT>', som bare fungerer når du genererer kapitler for tilføyde filer, vil bli erstattet av den tilføyde filens navn (førstnevnte utelater filtypen mens sistnevnte inkluderer den)."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #, no-c-format
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
 msgstr "Du kan angi et minimum antall plasser for kapittelnummeret med '<NUM:places>', eks. '<NUM:3>'."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #, no-c-format
 msgid "The resulting number will be padded with leading zeroes if the number of places is less than specified."
 msgstr "Det resulterende nummeret vil fylles med innledende nuller hvis antallet plasser er mindre enn spesifisert."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:340
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
 #, no-c-format
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Du kan kontrollere formatet som brukes av starttidsstempelet med <START:format>."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
 #, no-c-format
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "Formatet standardiseres til %H:%M:%S hvis ingen er gitt."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #, no-c-format
 msgid "Valid format codes are:"
 msgstr "Gyldige formatkoder er:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #, no-c-format
 msgid "%h – hours"
 msgstr "%h – timer"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
 #, no-c-format
 msgid "%H – hours zero-padded to two places"
 msgstr "%H – timer null-utfylt til to plasser"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
 #, no-c-format
 msgid "%m – minutes"
 msgstr "%m – minutter"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
 #, no-c-format
 msgid "%M – minutes zero-padded to two places"
 msgstr "%M – minutter null-utfylt til to plasser"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
 #, no-c-format
 msgid "%s – seconds"
 msgstr "%s – sekunder"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
 #, no-c-format
 msgid "%S – seconds zero-padded to two places"
 msgstr "%S – sekunder null-utfylt til to plasser"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
 #, no-c-format
 msgid "%n – nanoseconds with nine places"
 msgstr "%n – nanosekunder med ni plasser"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:352
 #, no-c-format
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
 msgstr "%<1-9>n – nanosekunder med opptil ni plasser (eks. tre plasser med %3n)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #, no-c-format
 msgid "If nothing is entered, chapters will be generated but no name will be set."
 msgstr "Hvis ingenting legges inn, genereres kapitler, men det angis ikke noe navn."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:358
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "Removing chapters from existing Matroska file"
 msgstr "Fjerner kapitler fra eksisterende Matroska-fil"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Filen du prøvde å åpne (%1), inneholder ingen kapitler."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:383
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
 msgid "Removing the chapters failed."
 msgstr "Fjerning av kapitlene mislyktes."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "All chapters have been removed from the file '%1'."
 msgstr "Alle kapitlene er fjernet fra filen '%1'."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:405
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
 #, no-c-format
 msgid "&Next chapter editor tab"
 msgstr "&Neste kapittel redigeringsfane"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:407
 #, no-c-format
 msgid "&Previous chapter editor tab"
 msgstr "&Forrige kapittel redigeringsfane"
@@ -16544,7 +16549,7 @@ msgstr "Opus"
 msgid "passthrough"
 msgstr "gjennomgang"
 
-#: src/output/p_pcm.h:45
+#: src/output/p_pcm.h:47
 #, no-c-format
 msgid "PCM"
 msgstr "PCM"
