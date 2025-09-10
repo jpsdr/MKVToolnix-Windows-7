@@ -964,6 +964,16 @@ qtmp4_reader_c::handle_udta_atom(qt_atom_t parent,
 
     else if (atom.fourcc == "meta")
       handle_meta_atom(atom.to_parent(), level + 1);
+
+    else if (atom.fourcc == fourcc_c{0xa96e'616du} && atom.size - atom.hsize > 4) { // ©nam
+      try {
+        auto content = read_string_atom(atom, 4);
+        mtx::string::strip(content, true);
+        m_ti.m_title = content;
+      } catch (mtx::exception const &ex) {
+        mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading title: {1}\n", space(level * 2 + 1), ex.what()));
+      }
+    }
   });
 }
 
