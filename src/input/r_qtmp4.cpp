@@ -27,6 +27,7 @@
 #include "avilib.h"
 #include "common/aac.h"
 #include "common/alac.h"
+#include "common/at_scope_exit.h"
 #include "common/avc/es_parser.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
@@ -949,6 +950,11 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   m_time_scale  = get_uint32_be(&mvhd.time_scale);
   auto duration = get_uint32_be(&mvhd.duration);
 
+  for (auto i = 0; i < 3; ++i) {
+    for (auto j = 0; j < 3; ++j)
+      m_display_matrix[i][j] = std::bit_cast<int32_t>(get_uint32_be(&mvhd.display_matrix[i][j]));
+  }
+
   if ((duration != std::numeric_limits<uint32_t>::max()) && (m_time_scale != 0))
     m_duration = mtx::to_uint(mtx::rational(duration, m_time_scale) * 1'000'000'000ull);
 
@@ -1554,6 +1560,71 @@ qtmp4_reader_c::handle_elst_atom(qtmp4_demuxer_c &dmx,
 }
 
 void
+qtmp4_reader_c::handle_display_matrix(qtmp4_demuxer_c &dmx, int level) {
+  dmx.yaw = dmx.roll = 0;
+
+  int32_t display_matrix[3][3];
+  for (auto i = 0; i < 3; ++i) {
+    for (auto j = 0; j < 3; ++j)
+      display_matrix[i][j] = std::bit_cast<int32_t>(m_in->read_uint32_be());
+  }
+
+  // Columns 1 and 2 are 16.16 fixed point, while column 3 is 2.30 fixed point.
+  const int32_t shifts[3] = { 16, 16, 30 };
+  int32_t matrix[3][3] = { { 0 } };
+  // display matrix = track display matrix x movie display matrix
+  for (auto i = 0; i < 3; ++i) {
+    for (auto j = 0; j < 3; ++j) {
+      for (auto k = 0; k < 3; ++k)
+        matrix[i][j] += (static_cast<int64_t>(display_matrix[i][k]) * m_display_matrix[k][j]) >> shifts[k];
+    }
+  }
+
+  bool ignored = true;
+  mtx::at_scope_exit_c show_ignored_warning([&]() {
+    if (ignored)
+      mxdebug_if(m_debug_headers, fmt::format("{0}Track ID: {1} ignoring display matrix indicating non-orthogonal transformation\n", space(level * 2 + 1), dmx.container_id));
+  });
+
+  // Check whether this is an affine transformation.
+  if (matrix[0][2] || matrix[1][2])
+    return;
+
+  // This together with the checks below test whether the upper-left 2x2 matrix is nonsingular.
+  if (!matrix[0][0] && !matrix[0][1])
+    return;
+
+  // We ignore the translation part of the matrix (matrix[2][0] and matrix[2][1]) as well as any scaling, i.e. we only
+  // look at the upper left 2x2 matrix.  We only accept matrices that are an exact multiple of an orthogonal one.  Apart
+  // from the multiple, every such matrix can be obtained by potentially flipping in the x-direction (corresponding to
+  // yaw = 180) followed by a rotation of (say) an angle phi in the counterclockwise direction. The upper-left 2x2
+  // matrix then looks like this:
+  //
+  //         | (+/-)cos(phi) (-/+)sin(phi) |
+  // scale * |                             |
+  //         |      sin(phi)      cos(phi) |
+  //
+  // The first set of signs in the first row apply in case of no flipping, the second set applies in case of flipping.
+
+  // The casts to int64_t are needed because -INT32_MIN doesn't fit in an int32_t.
+  if (   (matrix[0][0] == matrix[1][1])
+      && (-static_cast<int64_t>(matrix[0][1]) == matrix[1][0]))
+    dmx.yaw = 0;
+  else if (   (-static_cast<int64_t>(matrix[0][0]) == matrix[1][1])
+           && (matrix[0][1] == matrix[1][0]))
+    dmx.yaw = 180;
+  else
+    return;
+  dmx.roll = 180 / M_PI * atan2(matrix[1][0], matrix[1][1]);
+  ignored = false;
+
+  if (!dmx.yaw && !dmx.roll)
+    return;
+
+  mxdebug_if(m_debug_headers, fmt::format("{0}Track ID: {1} yaw {2}, roll {3}\n", space(level * 2 + 1), dmx.container_id, dmx.yaw, dmx.roll));
+}
+
+void
 qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
@@ -1576,8 +1647,9 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
              + (version == 1 ? 8 : 4) // duration
              + 2 * 4                  // reserved
              + 3 * 2                  // layer, alternate_group, volume
-             + 2                      // reserved
-             + 9 * 4);                // matrix
+             + 2);                    // reserved
+
+  handle_display_matrix(dmx, level);
 
   dmx.m_enabled            = (flags & QTMP4_TKHD_FLAG_ENABLED) == QTMP4_TKHD_FLAG_ENABLED;
   dmx.v_display_width_flt  = m_in->read_uint32_be();
@@ -1633,6 +1705,15 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
     else if (atom.fourcc == "tref")
       handle_tref_atom(dmx, atom.to_parent(), level + 1);
   });
+
+  // Only set these after parsing all sub atoms, because we only know if it's a video at the end.
+  if (dmx.yaw || dmx.roll) {
+    if (dmx.is_video()) {
+      m_ti.m_projection_pose_yaw.set(dmx.yaw, option_source_e::container);
+      m_ti.m_projection_pose_roll.set(dmx.roll, option_source_e::container);
+    } else
+      dmx.yaw = dmx.roll = 0;
+  }
 
   dmx.determine_codec();
   mxdebug_if(m_debug_headers, fmt::format("{0}Codec determination result: {1} ok {2} type {3}\n", space(level * 2 + 1), dmx.codec.get_name(), dmx.ok, dmx.type));
@@ -2158,6 +2239,8 @@ qtmp4_reader_c::identify() {
         info.set(mtx::id::color_transfer_characteristics, dmx.v_color_transfer_characteristics);
       if (dmx.v_color_matrix_coefficients != 2)
         info.set(mtx::id::color_matrix_coefficients, dmx.v_color_matrix_coefficients);
+      info.add(mtx::id::projection_pose_yaw, dmx.yaw);
+      info.add(mtx::id::projection_pose_roll, dmx.roll);
 
     } else if (dmx.is_audio()) {
       info.add(mtx::id::audio_channels,           dmx.a_channels);
