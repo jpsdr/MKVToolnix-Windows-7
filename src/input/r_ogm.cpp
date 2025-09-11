@@ -799,12 +799,12 @@ ogm_reader_c::handle_language_and_title(mtx::tags::converted_vorbis_comments_t c
   if (converted.m_title.empty())
     return;
 
+  m_ti.m_title = dmx->title = m_chapter_charset_converter->utf8(converted.m_title);
+
   if (dmx->ms_compat) {
-    maybe_set_segment_title(m_chapter_charset_converter->utf8(converted.m_title));
+    maybe_set_segment_title(m_ti.m_title);
     m_segment_title_set = true;
   }
-
-  dmx->title = m_chapter_charset_converter->utf8(converted.m_title);
 }
 
 void

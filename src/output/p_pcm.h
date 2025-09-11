@@ -16,6 +16,7 @@
 #include "common/common_pch.h"
 
 #include "common/byte_buffer.h"
+#include "common/debugging.h"
 #include "common/samples_to_timestamp_converter.h"
 #include "merge/generic_packetizer.h"
 
@@ -28,8 +29,9 @@ public:
   };
 
 private:
-  int m_samples_per_sec, m_channels, m_bits_per_sample, m_samples_per_packet, m_samples_per_packet_packaged;
-  size_t m_packet_size, m_min_packet_size, m_samples_output, m_num_durations_provided, m_num_packets_with_different_sample_count;
+  int m_samples_per_sec, m_channels, m_bits_per_sample, m_samples_per_packet;
+  std::size_t m_packet_size, m_samples_output;
+  debugging_option_c m_debug{"pcm_packetizer"};
   pcm_format_e m_format;
   mtx::bytes::buffer_c m_buffer;
   samples_to_timestamp_converter_c m_s2ts;
@@ -48,7 +50,6 @@ public:
 
 protected:
   virtual void process_impl(packet_cptr const &packet) override;
-  virtual void process_packaged(packet_cptr const &packet);
   virtual void flush_impl();
   virtual void flush_packets();
   virtual int64_t size_to_samples(int64_t size) const;

@@ -333,6 +333,7 @@ Tool::chapterNameTemplateToolTip() {
     .arg(QYH("The string '<START>' will be replaced by the chapter's start timestamp."))
     .arg(QYH("The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name "
              "(the former leaves the extension out while the latter includes it)."))
+    .arg(QYH("The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."))
 
     .arg(QYH("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."))
     .arg(QYH("The resulting number will be padded with leading zeroes if the number of places is less than specified."))

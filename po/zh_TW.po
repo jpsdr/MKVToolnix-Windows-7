@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-05-17 14:09+0200\n"
+"POT-Creation-Date: 2025-09-10 20:01+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Chun-Kai Mao <chunkai.mao@gmail.com>, 2019-2021,2025\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -4923,32 +4923,32 @@ msgstr "在這軌道的第一個影格裡找不到正確的 DTS 表頭。\n"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "有無效的 Vorbis 表頭，在 AVI 音訊軌中。"
 
-#: src/input/r_flac.cpp:89
+#: src/input/r_flac.cpp:91
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: 無法初始化 FLAC 分組器。\n"
 
-#: src/input/r_flac.cpp:124
+#: src/input/r_flac.cpp:126
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> 正在解析 FLAC 檔案。這可能要 *很長* 時間。\n"
 
-#: src/input/r_flac.cpp:132
+#: src/input/r_flac.cpp:134
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "未發現變換定位資料區塊。檔案已損壞。\n"
 
-#: src/input/r_flac.cpp:151
+#: src/input/r_flac.cpp:153
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> 預先解析 FLAC 檔案: {0}%{1}"
 
-#: src/input/r_flac.cpp:174
+#: src/input/r_flac.cpp:176
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> 預先解析 FLAC 檔案: 100%\n"
 
-#: src/input/r_flac.cpp:179
+#: src/input/r_flac.cpp:181
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: 無法讀取全部表頭套件。\n"
@@ -5276,102 +5276,102 @@ msgstr "Quicktime/MP4 讀取器:  'media header' 媒體表頭單元 ( 'mdhd' ) �
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 讀取器:  'time scale' 時間縮放參數為 0。這是不支援的。\n"
 
-#: src/input/r_qtmp4.cpp:1236
+#: src/input/r_qtmp4.cpp:1246
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "此 MP4 檔 '{0}' 含有無法辨識格式的章節。如果章節不是用 UTF-8 編碼時常發生這個情形。使用 '--chapter-charset' 選項來指定要使用的字元編碼集。\n"
 
-#: src/input/r_qtmp4.cpp:1366
+#: src/input/r_qtmp4.cpp:1376
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 {0} 的媒體流描述單元的 'size' 欄位過小。\n"
 
-#: src/input/r_qtmp4.cpp:1373
+#: src/input/r_qtmp4.cpp:1383
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 {0} 的流描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:1672
+#: src/input/r_qtmp4.cpp:1682
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取塊號 {0}/{1} 大小 {2} 位置 {3}。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:1729
+#: src/input/r_qtmp4.cpp:1739
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "第一個影格未發現 AC-3 表頭; 此軌將被跳過。\n"
 
-#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2512
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 讀取器: 尚不支援固定取樣大小與可變時間長度。如果有這樣的樣本檔案，請聯繫作者。\n"
 
-#: src/input/r_qtmp4.cpp:2903
+#: src/input/r_qtmp4.cpp:2917
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 {0} 的音訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:2913
-#: src/input/r_qtmp4.cpp:2997
+#: src/input/r_qtmp4.cpp:2927
+#: src/input/r_qtmp4.cpp:3011
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 ID {0} 有多個 FourCC。只會使用第一個 ({1}) 而不是這個 ({2})。\n"
 
-#: src/input/r_qtmp4.cpp:2939
 #: src/input/r_qtmp4.cpp:2953
+#: src/input/r_qtmp4.cpp:2967
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 {0} 的擴展音訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:2988
+#: src/input/r_qtmp4.cpp:3002
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 {0} 的視訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:3078
+#: src/input/r_qtmp4.cpp:3092
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "軌道 {0}: AAC 資訊無法解析。\n"
 
-#: src/input/r_qtmp4.cpp:3591
-#: src/input/r_qtmp4.cpp:3610
-#: src/input/r_qtmp4.cpp:3658
-#: src/input/r_qtmp4.cpp:3751
+#: src/input/r_qtmp4.cpp:3605
+#: src/input/r_qtmp4.cpp:3624
+#: src/input/r_qtmp4.cpp:3672
+#: src/input/r_qtmp4.cpp:3765
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 {0} 缺少一些資料。表頭單元損壞?\n"
 
-#: src/input/r_qtmp4.cpp:3627
+#: src/input/r_qtmp4.cpp:3641
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "第一個影格中未找到 AC-3 表頭; 將會略過此軌道。\n"
 
-#: src/input/r_qtmp4.cpp:3640
+#: src/input/r_qtmp4.cpp:3654
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 音訊軌 {0} 的 'esds' 單元使用了不支援的 'object type id' 物件類別號 {1}。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3645
+#: src/input/r_qtmp4.cpp:3659
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 該 AAC 軌道 {0} 缺少 esds 單元/解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3707
+#: src/input/r_qtmp4.cpp:3721
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEG4 part 10/AVC 軌道 {0} 缺少解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:3714
+#: src/input/r_qtmp4.cpp:3728
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEGH part 2/HEVC 軌道 {0} 缺少解碼器設定。正在略過該軌道。\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3738
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 視訊軌 {0} 遺失 ESDS 單元。正在跳過此軌。\n"
 
-#: src/input/r_qtmp4.cpp:3730
+#: src/input/r_qtmp4.cpp:3744
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEG4 軌 {0} 缺少 esds 單元/解碼器設定資訊。正在跳過該軌。\n"
@@ -8459,7 +8459,7 @@ msgstr "選擇一個現有的 Matroska 或 WebM 檔案，圖形使用者介面�
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:589
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:625
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:822
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:153
 #, no-c-format
@@ -8471,7 +8471,7 @@ msgstr "解析檔案失敗"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:391
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:417
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:368
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:151
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:849
 #: src/mkvtoolnix-gui/info/tab.cpp:145
@@ -8481,7 +8481,7 @@ msgstr "嘗試開啟的檔案 (%1) 無法讀取成功。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:84
@@ -8528,7 +8528,7 @@ msgstr "XML 章節檔"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:809
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:206
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:191
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:219
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:777
@@ -8585,7 +8585,7 @@ msgstr "支援的檔案類型"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:807
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:197
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
 #: src/mkvtoolnix-gui/merge/output.cpp:444
 #, no-c-format
 msgid "Matroska files"
@@ -8764,104 +8764,109 @@ msgstr "字串 '<START>' 將會被取代為相應章節的起始時間戳記。"
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
 msgstr "字串 '<FILE_NAME>'  '<FILE_NAME_WITH_EXT>' 僅當為附加檔案產生章節時有效，將被附加檔案的名稱取代 (前者省略副檔名，而後者保留)。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:337
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:336
+#, fuzzy, no-c-format
+msgid "The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."
+msgstr "字串 '<FILE_NAME>'  '<FILE_NAME_WITH_EXT>' 僅當為附加檔案產生章節時有效，將被附加檔案的名稱取代 (前者省略副檔名，而後者保留)。"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #, no-c-format
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
 msgstr "可以使用 '<NUM:位數>' 來指定章節編號的最小位數，如 '<NUM:3>'。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #, no-c-format
 msgid "The resulting number will be padded with leading zeroes if the number of places is less than specified."
 msgstr "如果產生的數字位數小於指定數值，將會在前面 加入 0 以補齊位數。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:340
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
 #, no-c-format
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "可以使用 <START:格式> 來控制起始時間戳記的格式。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
 #, no-c-format
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "如果沒有給出格式，則預設使用 %H:%M:%S。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #, no-c-format
 msgid "Valid format codes are:"
 msgstr "可用的格式代碼有："
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #, no-c-format
 msgid "%h – hours"
 msgstr "%h – 小時"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
 #, no-c-format
 msgid "%H – hours zero-padded to two places"
 msgstr "%H – 小時，不足兩位則加入 0 補齊"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
 #, no-c-format
 msgid "%m – minutes"
 msgstr "%m – 分鍾"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
 #, no-c-format
 msgid "%M – minutes zero-padded to two places"
 msgstr "%M – 分鍾，不足兩位則加入 0 補齊"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
 #, no-c-format
 msgid "%s – seconds"
 msgstr "%s – 秒"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
 #, no-c-format
 msgid "%S – seconds zero-padded to two places"
 msgstr "%S – 秒，不足兩位則加入 0 補齊"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
 #, no-c-format
 msgid "%n – nanoseconds with nine places"
 msgstr "%n – 小數點後第九位的奈秒"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:352
 #, no-c-format
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
 msgstr "%<1-9>n – 小數點後第九位的奈秒 (例如: 小數點後第三位為 %3n)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #, no-c-format
 msgid "If nothing is entered, chapters will be generated but no name will be set."
 msgstr "如果未輸入內容，將會自動產生章節，但不會設定名稱。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:358
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "Removing chapters from existing Matroska file"
 msgstr "從現有檔案移除章節"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "嘗試開啟的檔案 (%1) 不包含任何章節。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:383
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
 msgid "Removing the chapters failed."
 msgstr "移除章節失敗。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "All chapters have been removed from the file '%1'."
 msgstr "已從檔案 '%1' 移除所有章節。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:405
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
 #, no-c-format
 msgid "&Next chapter editor tab"
 msgstr "下一個章節編輯標籤(&N)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:407
 #, no-c-format
 msgid "&Previous chapter editor tab"
 msgstr "上一個章節編輯標籤(&P)"
@@ -16475,7 +16480,7 @@ msgstr "Opus"
 msgid "passthrough"
 msgstr "通過"
 
-#: src/output/p_pcm.h:45
+#: src/output/p_pcm.h:47
 #, no-c-format
 msgid "PCM"
 msgstr "PCM"
