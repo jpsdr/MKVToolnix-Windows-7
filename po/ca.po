@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-05-17 14:09+0200\n"
+"POT-Creation-Date: 2025-09-10 20:01+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2016-2025\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4935,32 +4935,32 @@ msgstr "No s'han trobat capçaleres DTS vàlides en els fotogrames inicials d'aq
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Les capçaleres Vorbis a una pista d'àudio AVI no són vàlides."
 
-#: src/input/r_flac.cpp:89
+#: src/input/r_flac.cpp:91
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: no s'ha pogut inicialitzar l'empaquetador FLAC.\n"
 
-#: src/input/r_flac.cpp:124
+#: src/input/r_flac.cpp:126
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> S'està analitzant el fitxer FLAC. Això pot trigar MOLT de temps.\n"
 
-#: src/input/r_flac.cpp:132
+#: src/input/r_flac.cpp:134
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "No s'ha trobat cap bloc de metadades. Aquest fitxer està malmès.\n"
 
-#: src/input/r_flac.cpp:151
+#: src/input/r_flac.cpp:153
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> S'està fent una anàlisi prèvia del fitxer FLAC: {0}%{1}"
 
-#: src/input/r_flac.cpp:174
+#: src/input/r_flac.cpp:176
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> S'està fent una anàlisi prèvia del fitxer FLAC: 100%\n"
 
-#: src/input/r_flac.cpp:179
+#: src/input/r_flac.cpp:181
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: No s'han pogut llegir tots els paquets de capçalera.\n"
@@ -5288,102 +5288,102 @@ msgstr "Lector de Quicktime/MP4: L'àtom «media header» («mdhd») usa una ver
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Lector de Quicktime/MP4: El paràmetre «escala de temps» ha estat 0. Això no és admès.\n"
 
-#: src/input/r_qtmp4.cpp:1236
+#: src/input/r_qtmp4.cpp:1246
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "El fitxer MP4 «{0}» conté capítols en què el format no es reconeix. Això succeeix quan els capítols no estan codificats en UTF-8. Useu l'opció «--chapter-charset» per a especificar el joc de caràcters a usar.\n"
 
-#: src/input/r_qtmp4.cpp:1366
+#: src/input/r_qtmp4.cpp:1376
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: El camp «mida» és massa petit a l'àtom de descripció del fitxer per a l'ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1373
+#: src/input/r_qtmp4.cpp:1383
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del flux per a l'ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1672
+#: src/input/r_qtmp4.cpp:1682
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir el fragment d'informació número {0}/{1} amb la mida {2} des de la posició {3}. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:1729
+#: src/input/r_qtmp4.cpp:1739
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera AC-3 al primer fotograma. La pista serà omesa.\n"
 
-#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2512
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Lector de Quicktime/MP4: La mida del flux constant i de la durada variable encara no són admeses. Contacteu amb l'autor si teniu algun fitxer de mostra.\n"
 
-#: src/input/r_qtmp4.cpp:2903
+#: src/input/r_qtmp4.cpp:2917
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del so per a l'ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2913
-#: src/input/r_qtmp4.cpp:2997
+#: src/input/r_qtmp4.cpp:2927
+#: src/input/r_qtmp4.cpp:3011
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Lector de Quicktime/MP4: L'ID de la pista {0} té més d'un FourCC. Només s'usarà el primer ({1}) i no aquest altre ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:2939
 #: src/input/r_qtmp4.cpp:2953
+#: src/input/r_qtmp4.cpp:2967
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció estesa del so per a l'ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2988
+#: src/input/r_qtmp4.cpp:3002
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del vídeo per a l'ID de la pista {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3078
+#: src/input/r_qtmp4.cpp:3092
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Pista {0}: La informació AAC no s'ha pogut analitzar.\n"
 
-#: src/input/r_qtmp4.cpp:3591
-#: src/input/r_qtmp4.cpp:3610
-#: src/input/r_qtmp4.cpp:3658
-#: src/input/r_qtmp4.cpp:3751
+#: src/input/r_qtmp4.cpp:3605
+#: src/input/r_qtmp4.cpp:3624
+#: src/input/r_qtmp4.cpp:3672
+#: src/input/r_qtmp4.cpp:3765
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Lector de Quicktime/MP4: A la pista {0} li manquen algunes dades. Estan malmesos els àtoms de la capçalera?\n"
 
-#: src/input/r_qtmp4.cpp:3627
+#: src/input/r_qtmp4.cpp:3641
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera DTS en els primers fotogrames. La pista serà omesa.\n"
 
-#: src/input/r_qtmp4.cpp:3640
+#: src/input/r_qtmp4.cpp:3654
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista d'àudio {0} està usant un «ID del tipus d'objecte» no admès de {1} a l'àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3645
+#: src/input/r_qtmp4.cpp:3659
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista AAC {0} a la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3707
+#: src/input/r_qtmp4.cpp:3721
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista {0} MPEG-4 part 10/AVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3714
+#: src/input/r_qtmp4.cpp:3728
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista {0} MPEGH part 2/HEVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3738
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista de vídeo {0} a l'àtom «ESDS». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:3730
+#: src/input/r_qtmp4.cpp:3744
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista {0} MPEG-4 part 10/AVC li falta la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
@@ -8572,7 +8572,7 @@ msgstr "Selecciona un fitxer Matroska o WebM existent i la IGU afegirà el vostr
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:589
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:625
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:822
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:153
 #, no-c-format
@@ -8584,7 +8584,7 @@ msgstr "L'anàlisi del fitxer ha fallat"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:391
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:417
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:368
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:151
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:849
 #: src/mkvtoolnix-gui/info/tab.cpp:145
@@ -8594,7 +8594,7 @@ msgstr "El fitxer que intenteu obrir (%1) no es pot llegir adequadament."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:84
@@ -8641,7 +8641,7 @@ msgstr "Fitxer de capítols en XML"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:809
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:206
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:191
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:219
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:777
@@ -8698,7 +8698,7 @@ msgstr "Tipus de fitxers acceptats"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:807
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:197
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
 #: src/mkvtoolnix-gui/merge/output.cpp:444
 #, no-c-format
 msgid "Matroska files"
@@ -8878,104 +8878,109 @@ msgstr "La cadena «<START>» serà substituïda pel codi de temps d'inici del c
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
 msgstr "Les cadenes «<NOM_FITXER>» i «<NOM_FITXER_AMB_EXT>», que només funcionen quan es generen capítols per a fitxers adjunts, seran substituides pel nom del fitxer adjuntat (la primera ometrà l'extensió, mentre que la segona l'inclourà)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:337
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:336
+#, fuzzy, no-c-format
+msgid "The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."
+msgstr "Les cadenes «<NOM_FITXER>» i «<NOM_FITXER_AMB_EXT>», que només funcionen quan es generen capítols per a fitxers adjunts, seran substituides pel nom del fitxer adjuntat (la primera ometrà l'extensió, mentre que la segona l'inclourà)."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #, no-c-format
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
 msgstr "Podeu especificar un nombre mínim de posicions per al número del capítol amb «<NUM:posicions>», p. ex., «<NUM:3>»."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #, no-c-format
 msgid "The resulting number will be padded with leading zeroes if the number of places is less than specified."
 msgstr "El nombre resultant serà emplenat amb zeros a l'esquerra si el nombre de posicions és menor que l'especificat."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:340
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
 #, no-c-format
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Podeu controlar el format emprat per al codi de temps d'inici amb <START:format>."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
 #, no-c-format
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "Si no s'indica, el format predeterminat és %-H:%M:%S."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #, no-c-format
 msgid "Valid format codes are:"
 msgstr "Els codis de format vàlids són:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #, no-c-format
 msgid "%h – hours"
 msgstr "%h – hora"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
 #, no-c-format
 msgid "%H – hours zero-padded to two places"
 msgstr "%H – hora de dos dígits farcida amb zeros"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
 #, no-c-format
 msgid "%m – minutes"
 msgstr "%m – minuts"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
 #, no-c-format
 msgid "%M – minutes zero-padded to two places"
 msgstr "%M – minuts de dos dígits farcits amb zeros"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
 #, no-c-format
 msgid "%s – seconds"
 msgstr "%s – segons"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
 #, no-c-format
 msgid "%S – seconds zero-padded to two places"
 msgstr "%S – segons de dos dígits farcits amb zeros"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
 #, no-c-format
 msgid "%n – nanoseconds with nine places"
 msgstr "%n – nanosegons amb nou dígits"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:352
 #, no-c-format
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
 msgstr "%<1-9>n – nanosegons amb fins a nou dígits (p. ex., tres dígits amb %3n)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #, no-c-format
 msgid "If nothing is entered, chapters will be generated but no name will be set."
 msgstr "Si no s'introdueix res, es generaran els capítols, però no s'establirà cap nom."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:358
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "Removing chapters from existing Matroska file"
 msgstr "Elimina els capítols des d'un fitxer Matroska existent"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "El fitxer que intenteu obrir (%1) no conté cap capítol."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:383
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
 msgid "Removing the chapters failed."
 msgstr "Ha fallat en eliminar els capítols."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "All chapters have been removed from the file '%1'."
 msgstr "S'han suprimit tots els capítols del fitxer «%1»."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:405
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
 #, no-c-format
 msgid "&Next chapter editor tab"
 msgstr "Següe&nt pestanya de l'editor de capítols"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:407
 #, no-c-format
 msgid "&Previous chapter editor tab"
 msgstr "Ante&rior pestanya de l'editor de capítols"
@@ -16617,7 +16622,7 @@ msgstr "Opus"
 msgid "passthrough"
 msgstr "Passa per"
 
-#: src/output/p_pcm.h:45
+#: src/output/p_pcm.h:47
 #, no-c-format
 msgid "PCM"
 msgstr "PCM"

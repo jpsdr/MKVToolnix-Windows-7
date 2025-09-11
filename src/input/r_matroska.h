@@ -206,7 +206,6 @@ private:
   std::shared_ptr<libebml::EbmlStream> m_es;
 
   int64_t m_segment_duration{}, m_last_timestamp{}, m_global_timestamp_offset{};
-  std::string m_title;
 
   using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;
   deferred_positions_t m_deferred_l1_positions, m_handled_l1_positions;

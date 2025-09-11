@@ -101,7 +101,7 @@ void regenerate_uids(libebml::EbmlMaster &master, libebml::EbmlMaster *tags = nu
 void align_uids(libmatroska::KaxChapters *chapters);
 void align_uids(libmatroska::KaxChapters &reference, libmatroska::KaxChapters &modify);
 
-std::string format_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp, std::string const &appended_file_name = std::string{});
+std::string format_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp, std::string const &appended_file_name = std::string{}, std::string const &appended_title = std::string{});
 
 void fix_country_codes(libebml::EbmlMaster &chapters);
 

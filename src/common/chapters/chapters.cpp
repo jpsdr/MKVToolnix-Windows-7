@@ -1491,12 +1491,14 @@ std::string
 format_name_template(std::string const &name_template,
                      int chapter_number,
                      timestamp_c const &start_timestamp,
-                     std::string const &appended_file_name) {
+                     std::string const &appended_file_name,
+                     std::string const &appended_title) {
   auto name                 = name_template;
   auto number_re            = QRegularExpression{"<NUM(?::(\\d+))?>"};
   auto timestamp_re         = QRegularExpression{"<START(?::([^>]+))?>"};
   auto file_name_re         = QRegularExpression{"<FILE_NAME>"};
   auto file_name_ext_re     = QRegularExpression{"<FILE_NAME_WITH_EXT>"};
+  auto title_re             = QRegularExpression{"<TITLE>"};
   auto appended_file_name_p = mtx::fs::to_path(appended_file_name);
 
   name = mtx::string::replace(name, number_re, [=](auto const &match) {
@@ -1519,7 +1521,8 @@ format_name_template(std::string const &name_template,
 
   return to_utf8(Q(name)
                  .replace(file_name_re,     Q(appended_file_name_p.stem()))
-                 .replace(file_name_ext_re, Q(appended_file_name_p.filename())));
+                 .replace(file_name_ext_re, Q(appended_file_name_p.filename()))
+                 .replace(title_re,         Q(appended_title)));
 }
 
 void

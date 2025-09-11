@@ -1,10 +1,21 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge, MKVToolNix GUI: new chapter generation feature: a new placeholder has
+  been introduced when generating chapters for appended files, \<TITLE\>, which
+  will be replaced by the appended file's title metadata. Implements #6151.
+
 ## Bug fixes
 
 * build system: fixed building with the upcoming Boost v1.89.0 by only
   requiring the header part of the Boost.System library as it's been
   header-only since v1.69.0. Fixes #6143.
+* mkvmerge: PCM packetizer: mkvmerge will now always write frames with 40ms of
+  samples, no matter how long or short the frames in the source files
+  were. Part of the fix of #6149.
+* MP4/QuickTime reader: fix exorbitant memory usage when reading PCM audio
+  tracks. Part of the fix of #6149.
 
 ## Build system changes
 
