@@ -133,7 +133,10 @@ class Controller
     puts "Finished '#{class_name}' after #{sprintf('%0.3f', duration)}s" if self.show_duration
 
     if (result)
-      if (!@results.exist? class_name)
+      if result.include?("failed")
+        self.add_result class_name, :failed, :message => "  #{class_name} FAILED: test failed with an exception"
+
+      elsif (!@results.exist? class_name)
         self.add_result class_name, :passed, :message => "  NEW test. Storing result '#{result}'.", :checksum => result, :duration => duration
 
       elsif (@results.hash?(class_name) == result)

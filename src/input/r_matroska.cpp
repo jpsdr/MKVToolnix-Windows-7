@@ -1147,7 +1147,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
 
   m_tc_scale          = find_child_value<kax_timestamp_scale_c, uint64_t>(info, 1000000);
   m_segment_duration  = std::llround(find_child_value<libmatroska::KaxDuration>(info) * m_tc_scale);
-  m_title             = to_utf8(find_child_value<libmatroska::KaxTitle>(info));
+  m_ti.m_title        = to_utf8(find_child_value<libmatroska::KaxTitle>(info));
   auto muxing_date    = find_child<libmatroska::KaxDateUTC>(info);
   if (muxing_date)
     m_muxing_date_epoch = muxing_date->GetEpochDate();
@@ -2335,7 +2335,7 @@ kax_reader_c::create_packetizers() {
   for (auto &track : m_tracks)
     create_packetizer(track->tnum);
 
-  maybe_set_segment_title(m_title);
+  maybe_set_segment_title(m_ti.m_title);
 
   m_in->restore_pos();
 }
@@ -2873,7 +2873,7 @@ kax_reader_c::identify() {
 
   info.set(mtx::id::muxing_application,  m_muxing_app);
   info.set(mtx::id::writing_application, m_raw_writing_app);
-  info.add(mtx::id::title,               m_title);
+  info.add(mtx::id::title,               m_ti.m_title);
   info.add(mtx::id::duration,            m_segment_duration);
   info.add(mtx::id::timestamp_scale,     m_tc_scale);
 

@@ -327,8 +327,8 @@ flac_reader_c::handle_language_and_title(mtx::tags::converted_vorbis_comments_t 
   if (converted.m_title.empty())
     return;
 
-  m_title = converted.m_title;
-  maybe_set_segment_title(m_title);
+  m_ti.m_title = converted.m_title;
+  maybe_set_segment_title(m_ti.m_title);
 }
 
 void
@@ -412,10 +412,10 @@ flac_reader_c::flac_eof_cb() {
 void
 flac_reader_c::identify() {
   auto container_info = mtx::id::info_c{};
-  container_info.add(mtx::id::title, m_title);
+  container_info.add(mtx::id::title, m_ti.m_title);
 
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::track_name,               m_title);
+  info.add(mtx::id::track_name,               m_ti.m_title);
   info.add(mtx::id::audio_bits_per_sample,    bits_per_sample);
   info.add(mtx::id::audio_channels,           channels);
   info.add(mtx::id::audio_sampling_frequency, sample_rate);

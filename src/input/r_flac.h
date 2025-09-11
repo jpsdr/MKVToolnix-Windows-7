@@ -52,7 +52,6 @@ private:
   std::vector<flac_block_t> m_metadata_block_info;
 
   mtx::bcp47::language_c m_language;
-  std::string m_title;
   std::shared_ptr<libmatroska::KaxTags> m_tags;
 
 public:

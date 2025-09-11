@@ -964,6 +964,16 @@ qtmp4_reader_c::handle_udta_atom(qt_atom_t parent,
 
     else if (atom.fourcc == "meta")
       handle_meta_atom(atom.to_parent(), level + 1);
+
+    else if (atom.fourcc == fourcc_c{0xa96e'616du} && atom.size - atom.hsize > 4) { // ©nam
+      try {
+        auto content = read_string_atom(atom, 4);
+        mtx::string::strip(content, true);
+        m_ti.m_title = content;
+      } catch (mtx::exception const &ex) {
+        mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading title: {1}\n", space(level * 2 + 1), ex.what()));
+      }
+    }
   });
 }
 
@@ -1124,7 +1134,7 @@ qtmp4_reader_c::handle_ilst_metadata_atom(qt_atom_t parent,
       mtx::string::strip(content, true);
 
       if (fourcc == fourcc_c{0xa96e'616du}) // ©nam
-        m_title = content;
+        m_ti.m_title = content;
 
       else if (fourcc == fourcc_c{0xa974'6f6fu}) // ©too
         m_encoder = content;
@@ -2091,7 +2101,7 @@ qtmp4_reader_c::process_global_tags() {
 
 void
 qtmp4_reader_c::create_packetizers() {
-  maybe_set_segment_title(m_title);
+  maybe_set_segment_title(m_ti.m_title);
   if (!m_ti.m_no_global_tags)
     process_global_tags();
 
@@ -2116,8 +2126,8 @@ qtmp4_reader_c::identify() {
   unsigned int i;
   auto info = mtx::id::info_c{};
 
-  if (!m_title.empty())
-    info.add(mtx::id::title, m_title);
+  if (!m_ti.m_title.empty())
+    info.add(mtx::id::title, m_ti.m_title);
 
   id_result_container(info.get());
 
@@ -2477,9 +2487,13 @@ qtmp4_demuxer_c::update_tables() {
     s                      += chunk_table[j].size;
   }
 
-  // workaround for fixed-size video frames (dv and uncompressed), but
-  // also for audio with constant sample size
-  if (sample_table.empty() && (sample_size > 1)) {
+  // Workaround for fixed-size video frames (dv and uncompressed), but
+  // also for non-PCM audio with constant sample size. PCM audio will
+  // be handled by the directly following code.
+  if (   sample_table.empty()
+      && (sample_size > 1)
+      && (   ('a' != type)
+          || !codec.is(codec_c::type_e::A_PCM))) {
     for (i = 0; i < s; ++i) {
       qt_sample_t sample;
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-05-17 14:09+0200\n"
+"POT-Creation-Date: 2025-09-10 20:01+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>, 2016-2018\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -4922,32 +4922,32 @@ msgstr "트랙의 첫 번째 프레임에 유효한 DTS 헤더를 찾을 수 없
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "AVI의 오디오 트랙에 있는 Vorbis 헤더가 잘못되었습니다."
 
-#: src/input/r_flac.cpp:89
+#: src/input/r_flac.cpp:91
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_리더: FLAC 패킷 나누기를 초기화할 수 없습니다.\n"
 
-#: src/input/r_flac.cpp:124
+#: src/input/r_flac.cpp:126
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> FLAC 파일을 분석 중입니다. 시간이 오래 걸릴 수 있습니다.\n"
 
-#: src/input/r_flac.cpp:132
+#: src/input/r_flac.cpp:134
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "메타 데이터 블록을 찾지 못했습니다. 이 파일은 손상되었습니다.\n"
 
-#: src/input/r_flac.cpp:151
+#: src/input/r_flac.cpp:153
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> FLAC 파일 미리 분석 중: {0}%{1}"
 
-#: src/input/r_flac.cpp:174
+#: src/input/r_flac.cpp:176
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> FLAC 파일 미리 분석 중: 100%\n"
 
-#: src/input/r_flac.cpp:179
+#: src/input/r_flac.cpp:181
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_리더: 모든 헤더 패킷을 읽을 수 없습니다.\n"
@@ -5275,102 +5275,102 @@ msgstr "Quicktime/MP4 리더: 'media header' atom ('mdhd')이 지원되지 않�
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 리더: 'time scale'의 매개변수가 0입니다. 이것은 지원되지 않습니다.\n"
 
-#: src/input/r_qtmp4.cpp:1236
+#: src/input/r_qtmp4.cpp:1246
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "MP4 파일 '{0}'은 알 수없는 형식의 챕터가 포함되어 있습니다. 이것은 챕터가 UTF-8로 인코딩 되지 않은 경우의 주된 사례입니다. '--chapter-charset' 옵션으로 챕터에서 사용될 문자 인코딩을 지정하십시오.\n"
 
-#: src/input/r_qtmp4.cpp:1366
+#: src/input/r_qtmp4.cpp:1376
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID {0}에 대한 스트림 설명 atom의 'size'필드가 너무 작습니다.\n"
 
-#: src/input/r_qtmp4.cpp:1373
+#: src/input/r_qtmp4.cpp:1383
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID {0}에 대한 스트림 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:1672
+#: src/input/r_qtmp4.cpp:1682
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 리더: 위치 {3}에서 크기 {2}, 청크 번호 {0}/{1}를 읽어올 수 없습니다. 중단합니다.\n"
 
-#: src/input/r_qtmp4.cpp:1729
+#: src/input/r_qtmp4.cpp:1739
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "첫 프레임에서 AC-3 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2512
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 리더: 일정 샘플 크기 및 가변 재생 시간은 아직 지원되지 않습니다. 이 같은 샘플을 가지고 있다면 제작자에게 보내주세요\n"
 
-#: src/input/r_qtmp4.cpp:2903
+#: src/input/r_qtmp4.cpp:2917
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID {0}에 대한 사운드 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:2913
-#: src/input/r_qtmp4.cpp:2997
+#: src/input/r_qtmp4.cpp:2927
+#: src/input/r_qtmp4.cpp:3011
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 리더: {0} 트랙 ID에는 하나 이상의 FourCC가 있습니다. 첫번째({1})만 사용하고 이것({2})은 사용하지 않습니다.\n"
 
-#: src/input/r_qtmp4.cpp:2939
 #: src/input/r_qtmp4.cpp:2953
+#: src/input/r_qtmp4.cpp:2967
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID {0}에 대한 확장 사운드 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:2988
+#: src/input/r_qtmp4.cpp:3002
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 리더: 트랙 ID {0}에 대한 비디오 설명 atom을 읽어올 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:3078
+#: src/input/r_qtmp4.cpp:3092
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "트랙 {0}: AAC 정보를 분석할 수 없습니다.\n"
 
-#: src/input/r_qtmp4.cpp:3591
-#: src/input/r_qtmp4.cpp:3610
-#: src/input/r_qtmp4.cpp:3658
-#: src/input/r_qtmp4.cpp:3751
+#: src/input/r_qtmp4.cpp:3605
+#: src/input/r_qtmp4.cpp:3624
+#: src/input/r_qtmp4.cpp:3672
+#: src/input/r_qtmp4.cpp:3765
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 리더: 트랙 {0}은 일부 데이터가 누락되어 있습니다. 헤더 atom이 손상됐을까요?\n"
 
-#: src/input/r_qtmp4.cpp:3627
+#: src/input/r_qtmp4.cpp:3641
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "첫 프레임에서 DTS 헤더를 찾지 못했습니다; 트랙을 건너뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3640
+#: src/input/r_qtmp4.cpp:3654
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 오디오 트랙 {0}은 'esds' atom에서 지원되지 않는 'object type id'의 {1}를 사용합니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3645
+#: src/input/r_qtmp4.cpp:3659
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 AAC 트랙 {0}은 esds atom/디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3707
+#: src/input/r_qtmp4.cpp:3721
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: MPEG4 part 10/AVC 트랙 {0}은 디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3714
+#: src/input/r_qtmp4.cpp:3728
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "퀵타임/MP4 리더: MPEGH part 2/HEVC 트랙 {0}을 디코더 설정에 없습니다. 이 트랙을 건너뛰는 중.\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3738
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: 이 비디오 트랙 {0}은 ESDS atom이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
 
-#: src/input/r_qtmp4.cpp:3730
+#: src/input/r_qtmp4.cpp:3744
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 리더: MPEG4 트랙 {0}은 esds atom/디코더 구성이 누락되어 있습니다. 이 트랙을 건너 뜁니다.\n"
@@ -8458,7 +8458,7 @@ msgstr "기존의 Matroska나 WebM파일을 선택하면 GUI에서 그 세그먼
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:589
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:625
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:822
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:371
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:153
 #, no-c-format
@@ -8470,7 +8470,7 @@ msgstr "파일 분석 실패"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:391
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:417
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:820
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:368
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:151
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:849
 #: src/mkvtoolnix-gui/info/tab.cpp:145
@@ -8480,7 +8480,7 @@ msgstr "열려고 했던 파일(%1)을 성공적으로 읽을 수 없었습니�
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:821
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:369
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:370
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:84
@@ -8527,7 +8527,7 @@ msgstr "XML 챕터 파일"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:809
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:206
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:361
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:191
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:219
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:777
@@ -8584,7 +8584,7 @@ msgstr "지원 파일 유형"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:807
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:197
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:360
 #: src/mkvtoolnix-gui/merge/output.cpp:444
 #, no-c-format
 msgid "Matroska files"
@@ -8763,104 +8763,109 @@ msgstr "'<START>' 문자열을 챕터의 시작 타임스탬프로 교체합니�
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
 msgstr "'<FILE_NAME>'과 '<FILE_NAME_WITH_EXT>' 문자열은 결합하는 파일의 챕터를 만들 때만 동작하는데, 결합하는 파일의 이름으로 대체됩니다 (전자는 확장자 없이, 후자는 확장자를 포함합니다)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:337
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:336
+#, fuzzy, no-c-format
+msgid "The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."
+msgstr "'<FILE_NAME>'과 '<FILE_NAME_WITH_EXT>' 문자열은 결합하는 파일의 챕터를 만들 때만 동작하는데, 결합하는 파일의 이름으로 대체됩니다 (전자는 확장자 없이, 후자는 확장자를 포함합니다)."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #, no-c-format
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
 msgstr "'<NUM:자릿수>'로 챕터 번호의 최소 자리 숫자를 지정할 수 있습니다. 예) '<NUM:3>'"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #, no-c-format
 msgid "The resulting number will be padded with leading zeroes if the number of places is less than specified."
 msgstr "자릿수가 지정한 것보다 작으면 결과로 나오는 숫자 앞에 0을 덧불입니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:340
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
 #, no-c-format
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "<START:format>으로 된 시작 타임스탬프가 사용하는 형식은 제어가 가능합니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:341
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
 #, no-c-format
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "주어진 값이 없으면 기본 형식은 %H:%M:%S입니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:342
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:343
 #, no-c-format
 msgid "Valid format codes are:"
 msgstr "유효한 형식 코덱:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
 #, no-c-format
 msgid "%h – hours"
 msgstr "%h – 시간"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
 #, no-c-format
 msgid "%H – hours zero-padded to two places"
 msgstr "%H – 0을 덧붙여 두 자리 수로 만든 시간"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
 #, no-c-format
 msgid "%m – minutes"
 msgstr "%m – 분"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:347
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
 #, no-c-format
 msgid "%M – minutes zero-padded to two places"
 msgstr "%M – 0을 덧붙여 두 자리 수로 만든 분"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
 #, no-c-format
 msgid "%s – seconds"
 msgstr "%s – 초"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
 #, no-c-format
 msgid "%S – seconds zero-padded to two places"
 msgstr "%S – 0을 덧붙여 두 자리 수로 만든 초"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:350
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
 #, no-c-format
 msgid "%n – nanoseconds with nine places"
 msgstr "%n – 아홉 자리 수의 나노초"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:351
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:352
 #, no-c-format
 msgid "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
 msgstr "%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:353
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:354
 #, fuzzy, no-c-format
 msgid "If nothing is entered, chapters will be generated but no name will be set."
 msgstr "아무 입력이 없으면 '%p - %t'를 사용합니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:358
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:359
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "Removing chapters from existing Matroska file"
 msgstr "기존의 Matroska 파일에서 챕터 삭제 중"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:376
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:377
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "열려고 했던 파일(%1)에 아무 챕터도 포함되어 있지 않습니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:383
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
 msgid "Removing the chapters failed."
 msgstr "챕터 삭제에 실패했습니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:386
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:387
 #, no-c-format
 msgid "All chapters have been removed from the file '%1'."
 msgstr "'%1' 파일에서 모든 챕터를 제거했습니다."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:405
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
 #, no-c-format
 msgid "&Next chapter editor tab"
 msgstr "다음 챕터 편집기 탭(&N)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:406
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:407
 #, no-c-format
 msgid "&Previous chapter editor tab"
 msgstr "이전 챕터 편집기 탭(&P)"
@@ -16480,7 +16485,7 @@ msgstr "Opus"
 msgid "passthrough"
 msgstr "통과"
 
-#: src/output/p_pcm.h:45
+#: src/output/p_pcm.h:47
 #, no-c-format
 msgid "PCM"
 msgstr "PCM"
