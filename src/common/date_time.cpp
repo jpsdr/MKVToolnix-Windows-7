@@ -12,12 +12,9 @@
 #include "common/common_pch.h"
 
 #include <QDateTime>
-#include <QRegularExpression>
 #include <QTimeZone>
 
 #include "common/date_time.h"
-#include "common/qt.h"
-#include "common/strings/parsing.h"
 
 namespace mtx::date_time {
 
@@ -82,57 +79,4 @@ format_iso_8601(QDateTime const &timestamp) {
   return format(timestamp, "%Y-%m-%dT%H:%M:%S"s + zone_specifier);
 }
 
-}
-
-std::optional<int64_t>
-mtx::date_time::parse_iso_8601_to_epoch(std::string const &s) {
-  //                      1        2        3                4        5        6           7  8     9        10
-  QRegularExpression re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", QRegularExpression::CaseInsensitiveOption};
-  int64_t year{}, month{}, day{}, hours{}, minutes{}, seconds{};
-  int64_t offset_hours{}, offset_minutes{}, offset_mult{1};
-
-  auto matches = re.match(Q(s));
-  if (!matches.hasMatch())
-    return std::nullopt;
-
-  if (   !mtx::string::parse_number(to_utf8(matches.captured(1)), year)
-      || !mtx::string::parse_number(to_utf8(matches.captured(2)), month)
-      || !mtx::string::parse_number(to_utf8(matches.captured(3)), day)
-      || !mtx::string::parse_number(to_utf8(matches.captured(4)), hours)
-      || !mtx::string::parse_number(to_utf8(matches.captured(5)), minutes)
-      || !mtx::string::parse_number(to_utf8(matches.captured(6)), seconds))
-    return std::nullopt;
-
-  if (to_utf8(matches.captured(7)) != "Z") {
-    if (   !mtx::string::parse_number(to_utf8(matches.captured(9)),  offset_hours)
-        || !mtx::string::parse_number(to_utf8(matches.captured(10)), offset_minutes))
-      return std::nullopt;
-
-    if (to_utf8(matches.captured(8)) == "-")
-      offset_mult = -1;
-  }
-
-  if (   (year           < 1900)
-      || (month          <    1)
-      || (month          >   12)
-      || (day            <    1)
-      || (day            >   31)
-      || (hours          <    0)
-      || (hours          >   23)
-      || (minutes        <    0)
-      || (minutes        >   59)
-      || (seconds        <    0)
-      || (seconds        >   59)
-      || (offset_hours   <    0)
-      || (offset_hours   >   23)
-      || (offset_minutes <    0)
-      || (offset_minutes >   59))
-    return std::nullopt;
-
-  QDate date(year, month, day);
-  QTime time(hours, minutes, seconds);
-  auto secs = QDateTime{date, time, QTimeZone::utc()}.toSecsSinceEpoch();
-  auto tz_offset_minutes = (offset_hours * 60 + offset_minutes) * offset_mult;
-  secs -= tz_offset_minutes * 60;
-  return std::make_optional(secs);
 }

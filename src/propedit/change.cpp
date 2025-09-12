@@ -164,14 +164,14 @@ change_c::parse_binary() {
 
 void
 change_c::parse_date_time() {
-  auto date_time = mtx::date_time::parse_iso_8601_to_epoch(m_value);
-  if (!date_time)
+  auto date_time = QDateTime::fromString(Q(m_value), Qt::ISODate);
+  if (!date_time.isValid())
     mxerror(fmt::format("{0} {1} {2} {3}\n",
                         fmt::format(FY("The property value is not a valid date & time string in '{0}'."), get_spec()),
                         Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."),
                         Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
                         Y("The file has not been modified.")));
-  m_ui_value = *date_time;
+  m_ui_value = date_time.toSecsSinceEpoch();
 }
 
 void

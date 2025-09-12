@@ -2391,10 +2391,10 @@ parse_args(std::vector<std::string> args) {
     else if (this_arg == "--date") {
       if (!next_arg || next_arg->empty())
         mxerror(Y("'--date' lacks the date & time argument.\n"));
-      auto date_secs = mtx::date_time::parse_iso_8601_to_epoch(*next_arg);
-      if (!date_secs)
+      auto date_time = QDateTime::fromString(Q(*next_arg), Qt::ISODate);
+      if (!date_time.isValid())
         mxerror(fmt::format(FY("The value for '--date' is not a valid date & time: '{0}'\n"), *next_arg));
-      g_writing_date = QDateTime::fromSecsSinceEpoch(*date_secs, QTimeZone::utc());
+      g_writing_date = date_time;
       sit++;
     }
 
