@@ -182,7 +182,7 @@ static mtx::bits::value_c s_seguid_prev(128), s_seguid_current(128), s_seguid_ne
 static std::unique_ptr<libebml::EbmlHead> s_head;
 
 static std::string s_muxing_app, s_writing_app;
-static QDateTime s_writing_date;
+QDateTime g_writing_date;
 
 static std::optional<int64_t> s_maximum_progress;
 int64_t s_current_progress{};
@@ -598,14 +598,15 @@ render_headers(mm_io_c *out) {
       auto info_data = get_default_segment_info_data("mkvmerge");
       s_muxing_app   = info_data.muxing_app;
       s_writing_app  = info_data.writing_app;
-      s_writing_date = info_data.writing_date;
+      if (g_writing_date.isNull())
+        g_writing_date = info_data.writing_date;
     }
 
     get_child<libmatroska::KaxMuxingApp >(*s_kax_infos).SetValueUTF8(s_muxing_app);
     get_child<libmatroska::KaxWritingApp>(*s_kax_infos).SetValueUTF8(s_writing_app);
 
     if (g_write_date)
-      get_child<libmatroska::KaxDateUTC>(*s_kax_infos).SetEpochDate(s_writing_date.toSecsSinceEpoch());
+      get_child<libmatroska::KaxDateUTC>(*s_kax_infos).SetEpochDate(g_writing_date.toSecsSinceEpoch());
     else
       delete_children<libmatroska::KaxDateUTC>(*s_kax_infos);
 
@@ -1608,7 +1609,7 @@ set_track_statistics_tags(libmatroska::KaxTags *tags) {
   if (!tags)
     tags = new libmatroska::KaxTags;
 
-  g_cluster_helper->create_tags_for_track_statistics(*tags, s_writing_app, s_writing_date);
+  g_cluster_helper->create_tags_for_track_statistics(*tags, s_writing_app, g_writing_date);
 
   return tags;
 }

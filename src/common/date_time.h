@@ -21,5 +21,6 @@ namespace mtx::date_time {
 
 std::string format(QDateTime const &timestamp, std::string const &format_string);
 std::string format_iso_8601(QDateTime const &timestamp);
+std::optional<int64_t> parse_iso_8601_to_epoch(std::string const &s);
 
 }
