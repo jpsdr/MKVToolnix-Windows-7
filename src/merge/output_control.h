@@ -161,6 +161,8 @@ extern double g_video_fps;
 extern generic_packetizer_c *g_video_packetizer;
 
 extern bool g_write_cues, g_cue_writing_requested, g_write_date, g_stop_after_video_ends;
+class QDateTime;
+extern QDateTime g_writing_date;
 extern bool g_no_lacing, g_no_linking, g_use_durations, g_no_track_statistics_tags;
 
 extern bool g_identifying;

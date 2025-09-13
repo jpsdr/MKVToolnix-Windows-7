@@ -237,6 +237,7 @@ struct qtmp4_demuxer_c {
 
   int64_t time_scale, track_duration, global_duration, num_frames_from_trun;
   uint32_t sample_size;
+  double yaw, roll;
 
   std::vector<qt_sample_t> sample_table;
   std::vector<qt_chunk_t> chunk_table;
@@ -477,6 +478,8 @@ private:
   bool m_timestamps_calculated{};
   std::optional<uint64_t> m_duration;
 
+  int32_t m_display_matrix[3][3];
+
   uint64_t m_attachment_id{};
 
   std::string m_encoder, m_comment;
@@ -560,6 +563,7 @@ protected:
   virtual void handle_sttd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_stts_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_tkhd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_display_matrix(qtmp4_demuxer_c &new_dmx, int level);
   virtual void handle_trak_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_edts_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_elst_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);

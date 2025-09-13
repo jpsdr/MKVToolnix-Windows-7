@@ -40,6 +40,7 @@
 # include <matroska/KaxInfoData.h>
 #endif
 #include <matroska/KaxSegment.h>
+#include <QTimeZone>
 
 #include "common/chapters/chapters.h"
 #include "common/checksums/base.h"
@@ -48,6 +49,7 @@
 #include "common/file_types.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/date_time.h"
 #include "common/kax_analyzer.h"
 #include "common/list_utils.h"
 #include "common/mime.h"
@@ -136,6 +138,8 @@ set_usage() {
   usage_text += Y("  --no-cues                Do not write the cue data (the index).\n");
   usage_text += Y("  --no-date                Do not write the 'date' field in the segment\n"
                   "                           information headers.\n");
+  usage_text += Y("  --date <timestamp>       Set the 'date' field (UTC or with offset,\n"
+                  "                           e.g. 2017-03-28T17:28:00Z).\n");
   usage_text += Y("  --disable-lacing         Do not use lacing.\n");
   usage_text += Y("  --disable-track-statistics-tags\n"
                   "                           Do not write tags with track statistics.\n");
@@ -2383,6 +2387,16 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--no-cues")
       g_write_cues = false;
+
+    else if (this_arg == "--date") {
+      if (!next_arg || next_arg->empty())
+        mxerror(Y("'--date' lacks the date & time argument.\n"));
+      auto date_time = QDateTime::fromString(Q(*next_arg), Qt::ISODate);
+      if (!date_time.isValid())
+        mxerror(fmt::format(FY("The value for '--date' is not a valid date & time: '{0}'\n"), *next_arg));
+      g_writing_date = date_time;
+      sit++;
+    }
 
     else if (this_arg == "--no-date")
       g_write_date = false;

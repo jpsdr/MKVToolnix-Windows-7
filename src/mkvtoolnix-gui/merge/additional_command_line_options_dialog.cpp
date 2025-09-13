@@ -60,6 +60,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
 
   add(Q("--no-date"), false, global, { QY("Tells mkvmerge not to write the 'date' field in the segment information headers."),
                                        QY("This field is normally set to the date the file is created.") });
+  add(Q("--date"), true, global, { QY("Sets the 'date' field (UTC or with a time zone offset) in the segment information headers."),
+                                   QY("This field is normally set to the date the file is created.") });
 
   add(Q("--timestamp-scale"), true,  global,
       { QY("Forces the timestamp scale factor to the given value."),
