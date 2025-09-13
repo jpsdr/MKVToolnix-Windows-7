@@ -5,6 +5,9 @@
 * mkvmerge, MKVToolNix GUI: new chapter generation feature: a new placeholder has
   been introduced when generating chapters for appended files, \<TITLE\>, which
   will be replaced by the appended file's title metadata. Implements #6151.
+* mkvmerge: the display matrix from MP4 files are now translated into
+  appropriate roll and yaw values for output MKV files. Implements #6150.
+* mkvmerge: add `--date` argument to set the date metadata. Implements #6155.
 
 ## Bug fixes
 

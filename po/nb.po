@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-09-10 20:01+0200\n"
+"POT-Creation-Date: 2025-09-13 10:41+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Roger Knutsen, 2024-2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/nb/)\n"
@@ -344,13 +344,13 @@ msgid "Unknown option '{0}'.\n"
 msgstr "Ukjent alternativ '{0}'.\n"
 
 #: src/common/cli_parser.cpp:188
-#: src/merge/mkvmerge.cpp:87
+#: src/merge/mkvmerge.cpp:89
 #, no-c-format
 msgid "Increase verbosity."
 msgstr "Øk detaljnivået."
 
 #: src/common/cli_parser.cpp:189
-#: src/merge/mkvmerge.cpp:88
+#: src/merge/mkvmerge.cpp:90
 #, no-c-format
 msgid "Suppress status output."
 msgstr "Demp statusutdata."
@@ -4194,7 +4194,7 @@ msgstr "Vedlegget #{0}, ID {1}, MIME-type {2}, størrelse {3}, skrives til '{4}'
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:197
-#: src/merge/output_control.cpp:1418
+#: src/merge/output_control.cpp:1419
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Filen '{0}' kunne ikke åpnes for skriving: {1}.\n"
@@ -4609,7 +4609,7 @@ msgstr "Finner ikke noe segment/nivå 0-element."
 
 #: src/extract/tracks.cpp:501
 #: src/extract/tracks.cpp:548
-#: src/merge/mkvmerge.cpp:2998
+#: src/merge/mkvmerge.cpp:3012
 #: src/merge/output_control.cpp:354
 #: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:362
@@ -5228,152 +5228,152 @@ msgstr "flac_header_extraction: kunne ikke initialisere FLAC-dekoderen.\n"
 msgid "Could not read the FLAC header packets.\n"
 msgstr "Kunne ikke lese FLAC-datahodepakkene.\n"
 
-#: src/input/r_qtmp4.cpp:112
+#: src/input/r_qtmp4.cpp:113
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Quicktime/MP4-leser: '{0}'-atom er for liten. Forventet størrelse: >= {1}. Faktisk størrelse: {2}.\n"
 
-#: src/input/r_qtmp4.cpp:139
+#: src/input/r_qtmp4.cpp:140
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime/MP4-leser: ugyldig delstørrelse {0} ved {1}.\n"
 
-#: src/input/r_qtmp4.cpp:315
+#: src/input/r_qtmp4.cpp:316
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Quicktime/MP4-leser: har ikke funnet noen datahode-atomer.\n"
 
-#: src/input/r_qtmp4.cpp:318
+#: src/input/r_qtmp4.cpp:319
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Quicktime/MP4-leser: har ikke funnet 'mdat'-atomet. Ingen filmdata funnet.\n"
 
-#: src/input/r_qtmp4.cpp:457
+#: src/input/r_qtmp4.cpp:458
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '{0}'. Aborting.\n"
 msgstr "Quicktime/MP4-leser: denne filen bruker komprimerte datahoder med en ukjent eller ikke støttet komprimeringsalgoritme '{0}'. Avbryter.\n"
 
-#: src/input/r_qtmp4.cpp:481
+#: src/input/r_qtmp4.cpp:482
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime/MP4-leser: denne filen bruker komprimerte datahoder, men zlib-biblioteket kan ikke initialiseres. Feilkode fra zlib: {0}. Avbryter.\n"
 
-#: src/input/r_qtmp4.cpp:486
+#: src/input/r_qtmp4.cpp:487
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime/MP4-leser: denne filen bruker komprimerte datahoder, men de kan ikke dekomprimeres. Feilkode fra zlib: {0}. Avbryter.\n"
 
-#: src/input/r_qtmp4.cpp:490
+#: src/input/r_qtmp4.cpp:491
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size ({0}) was not what is available after uncompressing ({1}).\n"
 msgstr "Quicktime/MP4-leser: denne filen bruker komprimerte datahoder, men den forventede ukomprimerte størrelsen ({0}) var ikke det som er tilgjengelig etter dekomprimering ({1}).\n"
 
-#: src/input/r_qtmp4.cpp:681
+#: src/input/r_qtmp4.cpp:682
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version {0}.\n"
 msgstr "Quicktime/MP4-leser: atom-'mediadatahodet' ('mdhd') bruker den ikke-støttede versjonen {0}.\n"
 
-#: src/input/r_qtmp4.cpp:686
+#: src/input/r_qtmp4.cpp:687
 #, no-c-format
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4-leser: parameteren 'time scale' var 0. Dette støttes ikke.\n"
 
-#: src/input/r_qtmp4.cpp:1246
+#: src/input/r_qtmp4.cpp:1252
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "MP4-filen '{0}' inneholder kapitler hvis format ikke ble gjenkjent. Dette er ofte tilfelle hvis kapitlene ikke er kodet i UTF-8. Bruk alternativet '--chapter-charset' for å spesifisere tegnsettet som skal brukes.\n"
 
-#: src/input/r_qtmp4.cpp:1376
+#: src/input/r_qtmp4.cpp:1382
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: størrelsesfeltet er for lite i strømmebeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1383
+#: src/input/r_qtmp4.cpp:1389
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese strømmebeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1682
+#: src/input/r_qtmp4.cpp:1763
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese delnummer {0}/{1} med størrelse {2} fra posisjon {3}. Avbryter.\n"
 
-#: src/input/r_qtmp4.cpp:1739
+#: src/input/r_qtmp4.cpp:1820
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Ingen AC-3-datahode funnet i første ramme; sporet hoppes over..\n"
 
-#: src/input/r_qtmp4.cpp:2512
+#: src/input/r_qtmp4.cpp:2595
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4-leser: konstant eksempelstørrelse og variabel varighet støttes ikke ennå. Kontakt forfatteren hvis du har en slik eksempelfil.\n"
 
-#: src/input/r_qtmp4.cpp:2917
+#: src/input/r_qtmp4.cpp:3000
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese lydbeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2927
-#: src/input/r_qtmp4.cpp:3011
+#: src/input/r_qtmp4.cpp:3010
+#: src/input/r_qtmp4.cpp:3094
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4-leser: Spor-ID {0} har mer enn én FourCC. Bruker bare den første ({1}) og ikke denne ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:2953
-#: src/input/r_qtmp4.cpp:2967
+#: src/input/r_qtmp4.cpp:3036
+#: src/input/r_qtmp4.cpp:3050
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese det utvidede lydbeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3002
+#: src/input/r_qtmp4.cpp:3085
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4-leser: kunne ikke lese videobeskrivelsesatomet for spor-ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3092
+#: src/input/r_qtmp4.cpp:3175
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Spor {0}: AAC-informasjonen kunne ikke analyseres.\n"
 
-#: src/input/r_qtmp4.cpp:3605
-#: src/input/r_qtmp4.cpp:3624
-#: src/input/r_qtmp4.cpp:3672
-#: src/input/r_qtmp4.cpp:3765
+#: src/input/r_qtmp4.cpp:3688
+#: src/input/r_qtmp4.cpp:3707
+#: src/input/r_qtmp4.cpp:3755
+#: src/input/r_qtmp4.cpp:3848
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4-leser: spor {0} mangler noen data. Ødelagte hodedata-atomer?\n"
 
-#: src/input/r_qtmp4.cpp:3641
+#: src/input/r_qtmp4.cpp:3724
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Ingen DTS-datahode funnet i første bilderammer; sporet hoppes over.\n"
 
-#: src/input/r_qtmp4.cpp:3654
+#: src/input/r_qtmp4.cpp:3737
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: lydsporet {0} bruker en ikke-støttet 'objekttype-ID' av {1} i 'esds'-atomet. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3659
+#: src/input/r_qtmp4.cpp:3742
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: AAC-sporet {0} mangler esds-atomet/dekoderkonfigurasjonen. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3721
+#: src/input/r_qtmp4.cpp:3804
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: MPEG4 del 10/AVC spor {0} mangler sin dekoderkonfigurasjon. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3728
+#: src/input/r_qtmp4.cpp:3811
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: MPEGH del 2/HEVC-sporet {0} mangler dekoderkonfigurasjonen. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3738
+#: src/input/r_qtmp4.cpp:3821
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: videosporet {0} mangler ESDS-atomet. Hopper over dette sporet.\n"
 
-#: src/input/r_qtmp4.cpp:3744
+#: src/input/r_qtmp4.cpp:3827
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4-leser: MPEG4-sporet {0} mangler esds-atomet/dekoderkonfigurasjonen. Hopper over dette sporet.\n"
@@ -5762,57 +5762,57 @@ msgstr "Fil '{0}': ikke støttet konteiner: {1}\n"
 msgid "The file '{0}' is a non-supported file type ({1}).\n"
 msgstr "Filen '{0}' er en ikke støttet filtype ({1}).\n"
 
-#: src/merge/mkvmerge.cpp:84
+#: src/merge/mkvmerge.cpp:86
 #, no-c-format
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
 msgstr "mkvmerge -o ut [globale alternativer] [alternativer1] <file1> [@option-file.json] …\n"
 
-#: src/merge/mkvmerge.cpp:86
+#: src/merge/mkvmerge.cpp:88
 #, no-c-format
 msgid " Global options:\n"
 msgstr " Globale alternativer:\n"
 
-#: src/merge/mkvmerge.cpp:89
+#: src/merge/mkvmerge.cpp:91
 #, no-c-format
 msgid "  -o, --output out         Write to the file 'out'.\n"
 msgstr "  -o, --output ut         Skriv til filen 'ut'.\n"
 
-#: src/merge/mkvmerge.cpp:90
+#: src/merge/mkvmerge.cpp:92
 #, no-c-format
 msgid "  -w, --webm               Create WebM compliant file.\n"
 msgstr "  -w, --webm               Opprett WebM-kompatibel fil.\n"
 
-#: src/merge/mkvmerge.cpp:91
+#: src/merge/mkvmerge.cpp:93
 #, no-c-format
 msgid "  --title <title>          Title for this destination file.\n"
 msgstr "  --title <title>          Tittel for denne målfilen.\n"
 
-#: src/merge/mkvmerge.cpp:92
+#: src/merge/mkvmerge.cpp:94
 #, no-c-format
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
 msgstr "  --global-tags <file>     Les globale tagger fra en XML-fil.\n"
 
-#: src/merge/mkvmerge.cpp:94
+#: src/merge/mkvmerge.cpp:96
 #, no-c-format
 msgid " Chapter handling:\n"
 msgstr " Kapittelhåndtering:\n"
 
-#: src/merge/mkvmerge.cpp:95
+#: src/merge/mkvmerge.cpp:97
 #, no-c-format
 msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <file>        Les kapittelinformasjon fra filen.\n"
 
-#: src/merge/mkvmerge.cpp:96
+#: src/merge/mkvmerge.cpp:98
 #, no-c-format
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
 msgstr "  --chapter-language <lng> Angi \"språk\"-elementet i kapitteloppføringer.\n"
 
-#: src/merge/mkvmerge.cpp:97
+#: src/merge/mkvmerge.cpp:99
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
 msgstr "  --chapter-charset <cset> Tegnsett for en enkel kapittelfil.\n"
 
-#: src/merge/mkvmerge.cpp:98
+#: src/merge/mkvmerge.cpp:100
 #, no-c-format
 msgid ""
 "  --chapter-sync <d[,o[/p]]>\n"
@@ -5831,7 +5831,7 @@ msgstr ""
 "                           1 hvis utelatt. Både 'o' og 'p' kan være\n"
 "                           flyttall.\n"
 
-#: src/merge/mkvmerge.cpp:105
+#: src/merge/mkvmerge.cpp:107
 #, no-c-format
 msgid ""
 "  --cue-chapter-name-format <format>\n"
@@ -5842,7 +5842,7 @@ msgstr ""
 "                           Mønster for konvertering fra cue-ark-\n"
 "                           oppføringer til kapittelnavn.\n"
 
-#: src/merge/mkvmerge.cpp:108
+#: src/merge/mkvmerge.cpp:110
 #, no-c-format
 msgid ""
 "  --default-language <lng> Use this language for all tracks unless\n"
@@ -5851,7 +5851,7 @@ msgstr ""
 "  --default-language <lng> Bruk dette språket for alle spor med mindre\n"
 "                           overstyrt med --language-alternativet.\n"
 
-#: src/merge/mkvmerge.cpp:110
+#: src/merge/mkvmerge.cpp:112
 #, no-c-format
 msgid ""
 "  --generate-chapters <mode>\n"
@@ -5862,7 +5862,7 @@ msgstr ""
 "                           Generer kapitler automatisk i henhold til\n"
 "                           modusen ('when-appending' eller 'interval:<duration>').\n"
 
-#: src/merge/mkvmerge.cpp:113
+#: src/merge/mkvmerge.cpp:115
 #, no-c-format
 msgid ""
 "  --generate-chapters-name-template <template>\n"
@@ -5873,17 +5873,17 @@ msgstr ""
 "                           Mal for nylig genererte kapittelnavn\n"
 "                           (standard: 'Kapittel <NUM:2>').\n"
 
-#: src/merge/mkvmerge.cpp:117
+#: src/merge/mkvmerge.cpp:119
 #, no-c-format
 msgid " Segment info handling:\n"
 msgstr " Håndtering av segmentinformasjon:\n"
 
-#: src/merge/mkvmerge.cpp:118
+#: src/merge/mkvmerge.cpp:120
 #, no-c-format
 msgid "  --segmentinfo <file>     Read segment information from the file.\n"
 msgstr "  --segmentinfo <file>     Les segmentinformasjon fra filen.\n"
 
-#: src/merge/mkvmerge.cpp:119
+#: src/merge/mkvmerge.cpp:121
 #, no-c-format
 msgid ""
 "  --segment-uid <SID1,[SID2...]>\n"
@@ -5892,12 +5892,12 @@ msgstr ""
 "  --segment-uid <SID1,[SID2...]>\n"
 "                           Sett segment-UID-ene til SID1, SID2 osv.\n"
 
-#: src/merge/mkvmerge.cpp:122
+#: src/merge/mkvmerge.cpp:124
 #, no-c-format
 msgid " General output control (advanced global options):\n"
 msgstr " Generell utdatakontroll (avanserte globale alternativer):\n"
 
-#: src/merge/mkvmerge.cpp:123
+#: src/merge/mkvmerge.cpp:125
 #, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
@@ -5914,7 +5914,7 @@ msgstr ""
 "                           vil sporene bli sortert etter type (video, lyd,\n"
 "                           undertekster, annet).\n"
 
-#: src/merge/mkvmerge.cpp:129
+#: src/merge/mkvmerge.cpp:131
 #, no-c-format
 msgid ""
 "  --cluster-length <n[ms]> Put at most n data blocks into each cluster.\n"
@@ -5927,27 +5927,27 @@ msgstr ""
 "                           legg inn maksimalt n millisekunder med data i hver\n"
 "                           klynge.\n"
 
-#: src/merge/mkvmerge.cpp:133
+#: src/merge/mkvmerge.cpp:135
 #, no-c-format
 msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  Skriv metasøkedata for klynger.\n"
 
-#: src/merge/mkvmerge.cpp:134
+#: src/merge/mkvmerge.cpp:136
 #, no-c-format
 msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
 msgstr "  --timestamp-scale <n>    Tving tidsstempelskalafaktoren til n.\n"
 
-#: src/merge/mkvmerge.cpp:135
+#: src/merge/mkvmerge.cpp:137
 #, no-c-format
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Aktiver blokkvarighet for alle blokker.\n"
 
-#: src/merge/mkvmerge.cpp:136
+#: src/merge/mkvmerge.cpp:138
 #, no-c-format
 msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                Ikke skriv signaldataen (indeksen).\n"
 
-#: src/merge/mkvmerge.cpp:137
+#: src/merge/mkvmerge.cpp:139
 #, no-c-format
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
@@ -5956,12 +5956,19 @@ msgstr ""
 "  --no-date                Ikke skriv \"dato\"-feltet i segment-\n"
 "                           informasjonsdatahodene.\n"
 
-#: src/merge/mkvmerge.cpp:139
+#: src/merge/mkvmerge.cpp:141
+#, no-c-format
+msgid ""
+"  --date <timestamp>       Set the 'date' field (UTC or with offset,\n"
+"                           e.g. 2017-03-28T17:28:00Z).\n"
+msgstr ""
+
+#: src/merge/mkvmerge.cpp:143
 #, no-c-format
 msgid "  --disable-lacing         Do not use lacing.\n"
 msgstr "  --disable-lacing         Ikke bruk fletting.\n"
 
-#: src/merge/mkvmerge.cpp:140
+#: src/merge/mkvmerge.cpp:144
 #, no-c-format
 msgid ""
 "  --disable-track-statistics-tags\n"
@@ -5970,7 +5977,7 @@ msgstr ""
 "  --disable-track-statistics-tags\n"
 "                           Ikke skriv tagger med statistikk for spor.\n"
 
-#: src/merge/mkvmerge.cpp:142
+#: src/merge/mkvmerge.cpp:146
 #, no-c-format
 msgid ""
 "  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
@@ -5979,7 +5986,7 @@ msgstr ""
 "  --disable-language-ietf  Ikke skriv IETF BCP 47 språkelementer i\n"
 "                           spordatahoder, kapitler og tagger.\n"
 
-#: src/merge/mkvmerge.cpp:144
+#: src/merge/mkvmerge.cpp:148
 #, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
@@ -5992,7 +5999,7 @@ msgstr ""
 "                           deres kanoniske eller utvidede språkundertagger-\n"
 "                           form eller ikke i det hele tatt (standard: kanonisk form).\n"
 
-#: src/merge/mkvmerge.cpp:148
+#: src/merge/mkvmerge.cpp:152
 #, no-c-format
 msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
@@ -6001,12 +6008,12 @@ msgstr ""
 "  --stop-after-video-ends  Stopper behandlingen etter at det primære videosporet avsluttes,\n"
 "                           forkaster eventuelle gjenværende pakker med andre spor.\n"
 
-#: src/merge/mkvmerge.cpp:151
+#: src/merge/mkvmerge.cpp:155
 #, no-c-format
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
 msgstr "Fildeling, kobling, tilføyelse og sammenkjeding (flere globale alternativer):\n"
 
-#: src/merge/mkvmerge.cpp:152
+#: src/merge/mkvmerge.cpp:156
 #, no-c-format
 msgid ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
@@ -6017,7 +6024,7 @@ msgstr ""
 "                           Opprett en ny fil etter d byte (KB, MB, GB)\n"
 "                           eller etter et bestemt tidspunkt.\n"
 
-#: src/merge/mkvmerge.cpp:155
+#: src/merge/mkvmerge.cpp:159
 #, no-c-format
 msgid ""
 "  --split timestamps:A[,B...]\n"
@@ -6028,7 +6035,7 @@ msgstr ""
 "                           Opprett en ny fil etter hvert tidsstempel A, B\n"
 "                           osv.\n"
 
-#: src/merge/mkvmerge.cpp:158
+#: src/merge/mkvmerge.cpp:162
 #, no-c-format
 msgid ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
@@ -6041,7 +6048,7 @@ msgstr ""
 "                           separate filer eller legg til filen i forrige område\n"
 "                           hvis prefikset med '+'.\n"
 
-#: src/merge/mkvmerge.cpp:162
+#: src/merge/mkvmerge.cpp:166
 #, no-c-format
 msgid ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
@@ -6052,7 +6059,7 @@ msgstr ""
 "                           Samme som 'deler:', men 'startN'/'endN' er ramme/\n"
 "                           feltnumre i stedet for tidsstempler.\n"
 
-#: src/merge/mkvmerge.cpp:165
+#: src/merge/mkvmerge.cpp:169
 #, no-c-format
 msgid ""
 "  --split frames:A[,B...]\n"
@@ -6063,7 +6070,7 @@ msgstr ""
 "                           Opprett en ny fil etter hver ramme/hvert felt A, B\n"
 "                           osv.\n"
 
-#: src/merge/mkvmerge.cpp:168
+#: src/merge/mkvmerge.cpp:172
 #, no-c-format
 msgid ""
 "  --split chapters:all|A[,B...]\n"
@@ -6074,27 +6081,27 @@ msgstr ""
 "                           Lag en ny fil før hvert kapittel (med 'all')\n"
 "                           eller før kapittelnummer A, B osv.\n"
 
-#: src/merge/mkvmerge.cpp:171
+#: src/merge/mkvmerge.cpp:175
 #, no-c-format
 msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    Lag maksimalt n filer.\n"
 
-#: src/merge/mkvmerge.cpp:172
+#: src/merge/mkvmerge.cpp:176
 #, no-c-format
 msgid "  --link                   Link splitted files.\n"
 msgstr "  --link                   Koble splittede filer.\n"
 
-#: src/merge/mkvmerge.cpp:173
+#: src/merge/mkvmerge.cpp:177
 #, no-c-format
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
 msgstr "  --link-to-previous <SID> Koble den første filen til gitt SID.\n"
 
-#: src/merge/mkvmerge.cpp:174
+#: src/merge/mkvmerge.cpp:178
 #, no-c-format
 msgid "  --link-to-next <SID>     Link the last file to the given SID.\n"
 msgstr "  --link-to-next <SID>     Koble den siste filen til gitt SID.\n"
 
-#: src/merge/mkvmerge.cpp:175
+#: src/merge/mkvmerge.cpp:179
 #, no-c-format
 msgid ""
 "  --append-to <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
@@ -6109,7 +6116,7 @@ msgstr ""
 "                           tilføyd et annet spor av den foregående\n"
 "                           filen.\n"
 
-#: src/merge/mkvmerge.cpp:180
+#: src/merge/mkvmerge.cpp:184
 #, no-c-format
 msgid ""
 "  --append-mode <file|track>\n"
@@ -6120,22 +6127,22 @@ msgstr ""
 "                           Velger hvordan mkvmerge beregner tidsstempler når\n"
 "                           filer tilføyes.\n"
 
-#: src/merge/mkvmerge.cpp:183
+#: src/merge/mkvmerge.cpp:187
 #, no-c-format
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
 msgstr "  <file1> + <file2>        Tilføy fil2 til fil1.\n"
 
-#: src/merge/mkvmerge.cpp:184
+#: src/merge/mkvmerge.cpp:188
 #, no-c-format
 msgid "  <file1> +<file2>         Same as \"<file1> + <file2>\".\n"
 msgstr "  <file1> +<file2>         Samme som \"<file1> + <file2>\".\n"
 
-#: src/merge/mkvmerge.cpp:185
+#: src/merge/mkvmerge.cpp:189
 #, no-c-format
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <file1> <file2> ]      Samme som \"<file1> + <file2>\".\n"
 
-#: src/merge/mkvmerge.cpp:186
+#: src/merge/mkvmerge.cpp:190
 #, no-c-format
 msgid ""
 "  = <file>                 Don't look for and concatenate files with the same\n"
@@ -6144,12 +6151,12 @@ msgstr ""
 "  = <file>                 Ikke se etter og kjede sammen filer med det samme\n"
 "                           grunn-navnet, men med et annet etterfølgende tall.\n"
 
-#: src/merge/mkvmerge.cpp:188
+#: src/merge/mkvmerge.cpp:192
 #, no-c-format
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file>                  Samme som \"= <file>\".\n"
 
-#: src/merge/mkvmerge.cpp:189
+#: src/merge/mkvmerge.cpp:193
 #, no-c-format
 msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
@@ -6158,12 +6165,12 @@ msgstr ""
 "  ( <file1> <file2> )      Behandle fil1 og fil2 som om de var slått sammen\n"
 "                           til én stor fil.\n"
 
-#: src/merge/mkvmerge.cpp:192
+#: src/merge/mkvmerge.cpp:196
 #, no-c-format
 msgid " Attachment support (more global options):\n"
 msgstr " Støtte for vedlegg (flere globale alternativer):\n"
 
-#: src/merge/mkvmerge.cpp:193
+#: src/merge/mkvmerge.cpp:197
 #, no-c-format
 msgid ""
 "  --attachment-description <desc>\n"
@@ -6172,7 +6179,7 @@ msgstr ""
 "  --attachment-description <desc>\n"
 "                           Beskrivelse av følgende vedlegg.\n"
 
-#: src/merge/mkvmerge.cpp:195
+#: src/merge/mkvmerge.cpp:199
 #, no-c-format
 msgid ""
 "  --attachment-mime-type <mime type>\n"
@@ -6181,7 +6188,7 @@ msgstr ""
 "  --attachment-mime-type <mime type>\n"
 "                           Mime-type for følgende vedlegg.\n"
 
-#: src/merge/mkvmerge.cpp:197
+#: src/merge/mkvmerge.cpp:201
 #, no-c-format
 msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
@@ -6190,7 +6197,7 @@ msgstr ""
 "  --attachment-name <name> Navnet skal lagres for \n"
 "                           følgende vedlegg.\n"
 
-#: src/merge/mkvmerge.cpp:199
+#: src/merge/mkvmerge.cpp:203
 #, no-c-format
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
@@ -6199,7 +6206,7 @@ msgstr ""
 "  --attach-file <file>     Oppretter et filvedlegg i\n"
 "                           Matroska-filen.\n"
 
-#: src/merge/mkvmerge.cpp:201
+#: src/merge/mkvmerge.cpp:205
 #, no-c-format
 msgid ""
 "  --attach-file-once <file>\n"
@@ -6210,7 +6217,7 @@ msgstr ""
 "                           Oppretter et filvedlegg i den\n"
 "                           første Matroska-filen som er skrevet.\n"
 
-#: src/merge/mkvmerge.cpp:204
+#: src/merge/mkvmerge.cpp:208
 #, no-c-format
 msgid ""
 "  --enable-legacy-font-mime-types\n"
@@ -6221,12 +6228,12 @@ msgstr ""
 "                           Bruk eldre MIME-skrifttyper når du legger til nye\n"
 "                           vedlegg, så vel som for eksisterende.\n"
 
-#: src/merge/mkvmerge.cpp:208
+#: src/merge/mkvmerge.cpp:212
 #, no-c-format
 msgid " Options for each source file:\n"
 msgstr " Alternativer for hver kildefil:\n"
 
-#: src/merge/mkvmerge.cpp:209
+#: src/merge/mkvmerge.cpp:213
 #, no-c-format
 msgid ""
 "  -a, --audio-tracks <n,m,...>\n"
@@ -6237,12 +6244,12 @@ msgstr ""
 "                           Kopier lydspor n,m osv. Standard: kopier alle\n"
 "                           lydspor.\n"
 
-#: src/merge/mkvmerge.cpp:212
+#: src/merge/mkvmerge.cpp:216
 #, no-c-format
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
 msgstr "  -A, --no-audio           Ikke kopier noen lydspor fra denne filen..\n"
 
-#: src/merge/mkvmerge.cpp:213
+#: src/merge/mkvmerge.cpp:217
 #, no-c-format
 msgid ""
 "  -d, --video-tracks <n,m,...>\n"
@@ -6253,12 +6260,12 @@ msgstr ""
 "                           Kopier videospor n,m osv. Standard: kopier alle\n"
 "                           videospor.\n"
 
-#: src/merge/mkvmerge.cpp:216
+#: src/merge/mkvmerge.cpp:220
 #, no-c-format
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           Ikke kopier noen videospor fra denne filen.\n"
 
-#: src/merge/mkvmerge.cpp:217
+#: src/merge/mkvmerge.cpp:221
 #, no-c-format
 msgid ""
 "  -s, --subtitle-tracks <n,m,...>\n"
@@ -6269,12 +6276,12 @@ msgstr ""
 "                           Kopier undertekstspor n,m osv. Standard: kopier\n"
 "                           alle undertekstspor.\n"
 
-#: src/merge/mkvmerge.cpp:220
+#: src/merge/mkvmerge.cpp:224
 #, no-c-format
 msgid "  -S, --no-subtitles       Don't copy any subtitle track from this file.\n"
 msgstr "  -S, --no-subtitles       Ikke kopier noen undertekstspor fra denne filen.\n"
 
-#: src/merge/mkvmerge.cpp:221
+#: src/merge/mkvmerge.cpp:225
 #, no-c-format
 msgid ""
 "  -b, --button-tracks <n,m,...>\n"
@@ -6285,12 +6292,12 @@ msgstr ""
 "                           Kopier knapper, spor n,m osv. Standard: kopier\n"
 "                           alle knapper, spor.\n"
 
-#: src/merge/mkvmerge.cpp:224
+#: src/merge/mkvmerge.cpp:228
 #, no-c-format
 msgid "  -B, --no-buttons         Don't copy any buttons track from this file.\n"
 msgstr "  -B, --no-buttons         Ikke kopier knapper, spor fra denne filen.\n"
 
-#: src/merge/mkvmerge.cpp:225
+#: src/merge/mkvmerge.cpp:229
 #, no-c-format
 msgid ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
@@ -6303,17 +6310,17 @@ msgstr ""
 "                           alle eller bare den første målfilen. Standard:\n"
 "                           kopier alle vedlegg til alle målfiler.\n"
 
-#: src/merge/mkvmerge.cpp:229
+#: src/merge/mkvmerge.cpp:233
 #, no-c-format
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
 msgstr "  -M, --no-attachments     Ikke kopier vedlegg fra en kildefil.\n"
 
-#: src/merge/mkvmerge.cpp:230
+#: src/merge/mkvmerge.cpp:234
 #, no-c-format
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
 msgstr "  -t, --tags <TID:file>    Les tagger for sporet fra en XML-fil.\n"
 
-#: src/merge/mkvmerge.cpp:231
+#: src/merge/mkvmerge.cpp:235
 #, no-c-format
 msgid ""
 "  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
@@ -6322,22 +6329,22 @@ msgstr ""
 "  --track-tags <n,m,...>   Kopier taggene for sporene n,m osv. Standard: kopier\n"
 "                           tagger for alle spor.\n"
 
-#: src/merge/mkvmerge.cpp:233
+#: src/merge/mkvmerge.cpp:237
 #, no-c-format
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
 msgstr "  -T, --no-track-tags      Ikke kopier tagger for spor fra kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:234
+#: src/merge/mkvmerge.cpp:238
 #, no-c-format
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
 msgstr "  --no-global-tags         Ikke behold globale tagger fra kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:235
+#: src/merge/mkvmerge.cpp:239
 #, no-c-format
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
 msgstr "  --no-chapters            Ikke behold kapitler fra kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:236
+#: src/merge/mkvmerge.cpp:240
 #, no-c-format
 msgid ""
 "  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
@@ -6346,7 +6353,7 @@ msgstr ""
 "  --regenerate-track-uids  Generer nye tilfeldige spor UID-er i stedet for å\n"
 "                           beholde eksisterende.\n"
 
-#: src/merge/mkvmerge.cpp:238
+#: src/merge/mkvmerge.cpp:242
 #, no-c-format
 msgid ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
@@ -6365,7 +6372,7 @@ msgstr ""
 "                           1 hvis utelatt. Både 'o' og 'p' kan være\n"
 "                           flyttallstall.\n"
 
-#: src/merge/mkvmerge.cpp:245
+#: src/merge/mkvmerge.cpp:249
 #, no-c-format
 msgid ""
 "  --default-track-flag <TID[:bool]>\n"
@@ -6376,7 +6383,7 @@ msgstr ""
 "                           Angir \"standard spor\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:248
+#: src/merge/mkvmerge.cpp:252
 #, no-c-format
 msgid ""
 "  --forced-display-flag <TID[:bool]>\n"
@@ -6387,7 +6394,7 @@ msgstr ""
 "                           Angir \"tvungen visning\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvisk boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:251
+#: src/merge/mkvmerge.cpp:255
 #, no-c-format
 msgid ""
 "  --track-enabled-flag <TID[:bool]>\n"
@@ -6398,7 +6405,7 @@ msgstr ""
 "                           Angir \"spor aktivert\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:254
+#: src/merge/mkvmerge.cpp:258
 #, no-c-format
 msgid ""
 "  --hearing-impaired-flag <TID[:bool]>\n"
@@ -6409,7 +6416,7 @@ msgstr ""
 "                           Angir \"hørselshemmet\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:257
+#: src/merge/mkvmerge.cpp:261
 #, no-c-format
 msgid ""
 "  --visual-impaired-flag <TID[:bool]>\n"
@@ -6420,7 +6427,7 @@ msgstr ""
 "                           Angir \"synshemmet\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:260
+#: src/merge/mkvmerge.cpp:264
 #, no-c-format
 msgid ""
 "  --text-descriptions-flag <TID[:bool]>\n"
@@ -6431,7 +6438,7 @@ msgstr ""
 "                           Angir \"tekstbeskrivelser\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:263
+#: src/merge/mkvmerge.cpp:267
 #, no-c-format
 msgid ""
 "  --original-flag <TID[:bool]>\n"
@@ -6442,7 +6449,7 @@ msgstr ""
 "                           Angir \"originalspråk\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:266
+#: src/merge/mkvmerge.cpp:270
 #, no-c-format
 msgid ""
 "  --commentary-flag <TID[:bool]>\n"
@@ -6453,12 +6460,12 @@ msgstr ""
 "                           Angir \"kommentar\"-flagget for dette sporet eller\n"
 "                           tvinger det til ikke å være til stede hvis boolsk variabel er 0.\n"
 
-#: src/merge/mkvmerge.cpp:269
+#: src/merge/mkvmerge.cpp:273
 #, no-c-format
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:name>  Angir navnet for et spor.\n"
 
-#: src/merge/mkvmerge.cpp:270
+#: src/merge/mkvmerge.cpp:274
 #, no-c-format
 msgid ""
 "  --cues <TID:none|iframes|all>\n"
@@ -6469,7 +6476,7 @@ msgstr ""
 "                           Opprett signal- (indeks) oppføringer for dette sporet:\n"
 "                           Ingen i det hele tatt, bare for I-rammer, for alle.\n"
 
-#: src/merge/mkvmerge.cpp:273
+#: src/merge/mkvmerge.cpp:277
 #, no-c-format
 msgid ""
 "  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
@@ -6478,12 +6485,12 @@ msgstr ""
 "  --language <TID:lang>    Angir språket for sporet (IETF BCP 47/\n"
 "                           RFC 5646-språktagg).\n"
 
-#: src/merge/mkvmerge.cpp:275
+#: src/merge/mkvmerge.cpp:279
 #, no-c-format
 msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
 msgstr "  --timestamps <TID:file>  Les tidsstemplene som skal brukes fra en fil.\n"
 
-#: src/merge/mkvmerge.cpp:276
+#: src/merge/mkvmerge.cpp:280
 #, no-c-format
 msgid ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
@@ -6494,12 +6501,12 @@ msgstr ""
 "                           Tvinge standardvarigheten for et spor til X.\n"
 "                           X kan være et flyttall eller en brøk.\n"
 
-#: src/merge/mkvmerge.cpp:280
+#: src/merge/mkvmerge.cpp:284
 #, no-c-format
 msgid " Options that only apply to audio tracks:\n"
 msgstr " Alternativer som bare gjelder lydspor:\n"
 
-#: src/merge/mkvmerge.cpp:281
+#: src/merge/mkvmerge.cpp:285
 #, no-c-format
 msgid ""
 "  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
@@ -6508,7 +6515,7 @@ msgstr ""
 "  --aac-is-sbr <TID[:0|1]> Sporet med ID-en er HE-AAC/AAC+/SBR-AAC\n"
 "                           eller ikke. Verdien ':1' kan utelates.\n"
 
-#: src/merge/mkvmerge.cpp:283
+#: src/merge/mkvmerge.cpp:287
 #, no-c-format
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
@@ -6519,7 +6526,7 @@ msgstr ""
 "                           HD-utvidelser i stedet for å kopiere både kjernen\n"
 "                           og utvidelsene.\n"
 
-#: src/merge/mkvmerge.cpp:286
+#: src/merge/mkvmerge.cpp:290
 #, no-c-format
 msgid ""
 "  --remove-dialog-normalization-gain <TID>\n"
@@ -6530,7 +6537,7 @@ msgstr ""
 "                           Fjerner eller minimerer normaliseringsforsterkningen for dialog\n"
 "                           Ved å endre lydrammedatahoder.\n"
 
-#: src/merge/mkvmerge.cpp:289
+#: src/merge/mkvmerge.cpp:293
 #, no-c-format
 msgid ""
 "  --audio-emphasis <TID:n|keyword>\n"
@@ -6543,12 +6550,12 @@ msgstr ""
 "                           enten være et nummer eller et nøkkelord (se\n"
 "                           '--list-audio-emphasis' for den hele listen).\n"
 
-#: src/merge/mkvmerge.cpp:294
+#: src/merge/mkvmerge.cpp:298
 #, no-c-format
 msgid " Options that only apply to video tracks:\n"
 msgstr " Alternativer som bare gjelder videospor:\n"
 
-#: src/merge/mkvmerge.cpp:295
+#: src/merge/mkvmerge.cpp:299
 #, no-c-format
 msgid ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
@@ -6559,7 +6566,7 @@ msgstr ""
 "                           Juster ramme-/feltfrekvensen som er lagret i videobitstrømmen\n"
 "                           slik at den samsvarer med sporets standard varighet.\n"
 
-#: src/merge/mkvmerge.cpp:298
+#: src/merge/mkvmerge.cpp:302
 #, no-c-format
 msgid ""
 "  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
@@ -6568,7 +6575,7 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    Tvinger FourCC til den angitte verdien.\n"
 "                           Fungerer bare for videospor.\n"
 
-#: src/merge/mkvmerge.cpp:300
+#: src/merge/mkvmerge.cpp:304
 #, no-c-format
 msgid ""
 "  --aspect-ratio <TID:f|a/b>\n"
@@ -6579,7 +6586,7 @@ msgstr ""
 "                           Angir visningsdimensjoner ved å beregne\n"
 "                           bredde og høyde for dette sideforholdet.\n"
 
-#: src/merge/mkvmerge.cpp:303
+#: src/merge/mkvmerge.cpp:307
 #, no-c-format
 msgid ""
 "  --aspect-ratio-factor <TID:f|a/b>\n"
@@ -6594,7 +6601,7 @@ msgstr ""
 "                           med denne faktoren og beregner\n"
 "                           visningsdimensjonene fra denne faktoren.\n"
 
-#: src/merge/mkvmerge.cpp:308
+#: src/merge/mkvmerge.cpp:312
 #, no-c-format
 msgid ""
 "  --display-dimensions <TID:width>x<height>\n"
@@ -6603,7 +6610,7 @@ msgstr ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           Angi visningsdimensjonene eksplisitt.\n"
 
-#: src/merge/mkvmerge.cpp:310
+#: src/merge/mkvmerge.cpp:314
 #, no-c-format
 msgid ""
 "  --cropping <TID:left,top,right,bottom>\n"
@@ -6612,7 +6619,7 @@ msgstr ""
 "  --cropping <TID:left,top,right,bottom>\n"
 "                           Angir beskjæringsparametrene.\n"
 
-#: src/merge/mkvmerge.cpp:312
+#: src/merge/mkvmerge.cpp:316
 #, no-c-format
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
@@ -6621,7 +6628,7 @@ msgstr ""
 "  --field-order <TID:n>    Angir parameteren for rekkefølgen for videofeltet\n"
 "                           (se dokumentasjon for gyldige verdier).\n"
 
-#: src/merge/mkvmerge.cpp:314
+#: src/merge/mkvmerge.cpp:318
 #, no-c-format
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
@@ -6634,7 +6641,7 @@ msgstr ""
 "                           enten være et nummer 0 - 14 eller et nøkkelord\n"
 "                           (bruk '--list-stereo-modes' for å se hele listen).\n"
 
-#: src/merge/mkvmerge.cpp:318
+#: src/merge/mkvmerge.cpp:322
 #, no-c-format
 msgid ""
 "  --color-matrix-coefficients <TID:n>\n"
@@ -6647,7 +6654,7 @@ msgstr ""
 "                           til å utlede luma- og kromaverdier fra røde, grønne\n"
 "                           og blå fargeprimærfarger.\n"
 
-#: src/merge/mkvmerge.cpp:322
+#: src/merge/mkvmerge.cpp:326
 #, no-c-format
 msgid ""
 "  --color-bits-per-channel <TID:n>\n"
@@ -6660,7 +6667,7 @@ msgstr ""
 "                           kanal. En verdi på 0 angir at tallet er\n"
 "                           uspesifisert.\n"
 
-#: src/merge/mkvmerge.cpp:326
+#: src/merge/mkvmerge.cpp:330
 #, no-c-format
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
@@ -6673,7 +6680,7 @@ msgstr ""
 "                           kanaler for hvert bildepunkt som ikke fjernes horisontalt\n"
 "                           og vertikalt.\n"
 
-#: src/merge/mkvmerge.cpp:330
+#: src/merge/mkvmerge.cpp:334
 #, no-c-format
 msgid ""
 "  --cb-subsample <TID:hori,vert>\n"
@@ -6688,7 +6695,7 @@ msgstr ""
 "                           vertikalt. Dette er additiv med\n"
 "                           --chroma-subsample.\n"
 
-#: src/merge/mkvmerge.cpp:335
+#: src/merge/mkvmerge.cpp:339
 #, no-c-format
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
@@ -6697,12 +6704,12 @@ msgstr ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            Hvordan kroma er plassert horisontalt/vertikalt.\n"
 
-#: src/merge/mkvmerge.cpp:337
+#: src/merge/mkvmerge.cpp:341
 #, no-c-format
 msgid "  --color-range <TID:n>   Clipping of the color ranges.\n"
 msgstr "  --color-range <TID:n>   Klipp av fargeområdene.\n"
 
-#: src/merge/mkvmerge.cpp:338
+#: src/merge/mkvmerge.cpp:342
 #, no-c-format
 msgid ""
 "  --color-transfer-characteristics <TID:n>\n"
@@ -6711,7 +6718,7 @@ msgstr ""
 "  --color-transfer-characteristics <TID:n>\n"
 "                           Overføringsegenskapene til videoen.\n"
 
-#: src/merge/mkvmerge.cpp:340
+#: src/merge/mkvmerge.cpp:344
 #, no-c-format
 msgid ""
 "  --color-primaries <TID:n>\n"
@@ -6720,7 +6727,7 @@ msgstr ""
 "  --color-primaries <TID:n>\n"
 "                           Primærfargene til videoen.\n"
 
-#: src/merge/mkvmerge.cpp:342
+#: src/merge/mkvmerge.cpp:346
 #, no-c-format
 msgid ""
 "  --max-content-light <TID:n>\n"
@@ -6731,7 +6738,7 @@ msgstr ""
 "                           Maksimal lysstyrke på en enkelt piksel i candela\n"
 "                           per kvadratmeter (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:345
+#: src/merge/mkvmerge.cpp:349
 #, no-c-format
 msgid ""
 "  --max-frame-light <TID:n>\n"
@@ -6742,7 +6749,7 @@ msgstr ""
 "                           Maksimal ramme-gjennomsnittlig lysnivå i candela per\n"
 "                           kvadratmeter (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:348
+#: src/merge/mkvmerge.cpp:352
 #, no-c-format
 msgid ""
 "  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
@@ -6753,7 +6760,7 @@ msgstr ""
 "                           Røde/grønne/blå kromatisitetskoordinater som definert\n"
 "                           av CIE 1931.\n"
 
-#: src/merge/mkvmerge.cpp:351
+#: src/merge/mkvmerge.cpp:355
 #, no-c-format
 msgid ""
 "  --white-color-coordinates <TID:x,y>\n"
@@ -6764,7 +6771,7 @@ msgstr ""
 "                           Kromatisitetskoordinater for hvit farge som definert\n"
 "                           av CIE 1931.\n"
 
-#: src/merge/mkvmerge.cpp:354
+#: src/merge/mkvmerge.cpp:358
 #, no-c-format
 msgid ""
 "  --max-luminance <TID:float>\n"
@@ -6775,7 +6782,7 @@ msgstr ""
 "                           Maksimal luminans i candela per kvadratmeter\n"
 "                           (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:357
+#: src/merge/mkvmerge.cpp:361
 #, no-c-format
 msgid ""
 "  --min-luminance <TID:float>\n"
@@ -6786,7 +6793,7 @@ msgstr ""
 "                           Minimum luminans i candela per kvadratmeter\n"
 "                           (cd/m²).\n"
 
-#: src/merge/mkvmerge.cpp:360
+#: src/merge/mkvmerge.cpp:364
 #, no-c-format
 msgid ""
 "  --projection-type <TID:method>\n"
@@ -6795,7 +6802,7 @@ msgstr ""
 "  --projection-type <TID:method>\n"
 "                           Projeksjonsmetode brukt (0–3).\n"
 
-#: src/merge/mkvmerge.cpp:362
+#: src/merge/mkvmerge.cpp:366
 #, no-c-format
 msgid ""
 "  --projection-private <TID:data>\n"
@@ -6806,7 +6813,7 @@ msgstr ""
 "                           Private data som bare gjelder for en bestemt\n"
 "                           projeksjon (som hex-sifre).\n"
 
-#: src/merge/mkvmerge.cpp:365
+#: src/merge/mkvmerge.cpp:369
 #, no-c-format
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
@@ -6815,7 +6822,7 @@ msgstr ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           En girrotasjon til projeksjonen.\n"
 
-#: src/merge/mkvmerge.cpp:367
+#: src/merge/mkvmerge.cpp:371
 #, no-c-format
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
@@ -6824,7 +6831,7 @@ msgstr ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           En tonehøyderotasjon til projeksjonen.\n"
 
-#: src/merge/mkvmerge.cpp:369
+#: src/merge/mkvmerge.cpp:373
 #, no-c-format
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
@@ -6833,12 +6840,12 @@ msgstr ""
 "  --projection-pose-roll <TID:float>\n"
 "                           En rullrotasjon til projeksjonen.\n"
 
-#: src/merge/mkvmerge.cpp:372
+#: src/merge/mkvmerge.cpp:376
 #, no-c-format
 msgid " Options that only apply to text subtitle tracks:\n"
 msgstr " Alternativer som bare gjelder for tekst-undertekstspor:\n"
 
-#: src/merge/mkvmerge.cpp:373
+#: src/merge/mkvmerge.cpp:377
 #, no-c-format
 msgid ""
 "  --sub-charset <TID:charset>\n"
@@ -6849,12 +6856,12 @@ msgstr ""
 "                           Bestemmer tegnsettet tekst-undertekster er\n"
 "                           lest som for konverteringen til UTF-8.\n"
 
-#: src/merge/mkvmerge.cpp:377
+#: src/merge/mkvmerge.cpp:381
 #, no-c-format
 msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " Alternativer som bare gjelder for VobSub-undertekstspor:\n"
 
-#: src/merge/mkvmerge.cpp:378
+#: src/merge/mkvmerge.cpp:382
 #, no-c-format
 msgid ""
 "  --compression <TID:method>\n"
@@ -6865,17 +6872,17 @@ msgstr ""
 "                           Angir komprimeringsmetoden som brukes for det\n"
 "                           spesifiserte sporet ('ingen' eller 'zlib').\n"
 
-#: src/merge/mkvmerge.cpp:382
+#: src/merge/mkvmerge.cpp:386
 #, no-c-format
 msgid " Other options:\n"
 msgstr "Andre alternativer:\n"
 
-#: src/merge/mkvmerge.cpp:383
+#: src/merge/mkvmerge.cpp:387
 #, no-c-format
 msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr "  -i, --identify <file>    Skriv ut informasjon om kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:384
+#: src/merge/mkvmerge.cpp:388
 #, no-c-format
 msgid ""
 "  -J <file>                This is a convenient alias for\n"
@@ -6884,7 +6891,7 @@ msgstr ""
 "  -J <file>                Dette er et praktisk alias for\n"
 "                           \"--identification-format json --identify file\".\n"
 
-#: src/merge/mkvmerge.cpp:386
+#: src/merge/mkvmerge.cpp:390
 #, no-c-format
 msgid ""
 "  -F, --identification-format <format>\n"
@@ -6895,7 +6902,7 @@ msgstr ""
 "                           Angi formatet for identifikasjonsresultater\n"
 "                           ('text' or 'json'; standard er 'text').\n"
 
-#: src/merge/mkvmerge.cpp:389
+#: src/merge/mkvmerge.cpp:393
 #, no-c-format
 msgid ""
 "  --probe-range-percentage <percent>\n"
@@ -6908,12 +6915,12 @@ msgstr ""
 "                           av den totale filstørrelsen for visse filtyper\n"
 "                           (standard: 0.3).\n"
 
-#: src/merge/mkvmerge.cpp:393
+#: src/merge/mkvmerge.cpp:397
 #, no-c-format
 msgid "  -l, --list-types         Lists supported source file types.\n"
 msgstr "  -l, --list-types         Viser en liste over støttede kildefiltyper.\n"
 
-#: src/merge/mkvmerge.cpp:394
+#: src/merge/mkvmerge.cpp:398
 #, no-c-format
 msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
@@ -6922,7 +6929,7 @@ msgstr ""
 "  --list-audio-emphasis    Viser alle støttede verdier for\n"
 "                           '--audio-emphasis'-alternativet og deres betydning.\n"
 
-#: src/merge/mkvmerge.cpp:396
+#: src/merge/mkvmerge.cpp:400
 #, no-c-format
 msgid ""
 "  --list-languages         Lists all ISO 639 languages and their\n"
@@ -6931,7 +6938,7 @@ msgstr ""
 "  --list-languages         Viser alle ISO 639-språk og deres\n"
 "                           ISO 639-2-koder.\n"
 
-#: src/merge/mkvmerge.cpp:398
+#: src/merge/mkvmerge.cpp:402
 #, no-c-format
 msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
@@ -6940,22 +6947,22 @@ msgstr ""
 "  --list-stereo-modes      Viser alle støttede verdier for '--stereo-mode'-\n"
 "                           alternativet og deres betydning.\n"
 
-#: src/merge/mkvmerge.cpp:400
+#: src/merge/mkvmerge.cpp:404
 #, no-c-format
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
 msgstr "  --capabilities           Lister valgfrie funksjoner mkvmerge ble kompilert med.\n"
 
-#: src/merge/mkvmerge.cpp:401
+#: src/merge/mkvmerge.cpp:405
 #, no-c-format
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>    Angi prioritet mkvmerge kjører med.\n"
 
-#: src/merge/mkvmerge.cpp:402
+#: src/merge/mkvmerge.cpp:406
 #, no-c-format
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
 msgstr "  --ui-language <code>     Tving oversettelsene for 'kode' som skal brukes..\n"
 
-#: src/merge/mkvmerge.cpp:403
+#: src/merge/mkvmerge.cpp:407
 #, no-c-format
 msgid ""
 "  --command-line-charset <charset>\n"
@@ -6964,12 +6971,12 @@ msgstr ""
 "  --command-line-charset <charset>\n"
 "                           Tegnsett for strenger på kommandolinjen\n"
 
-#: src/merge/mkvmerge.cpp:405
+#: src/merge/mkvmerge.cpp:409
 #, no-c-format
 msgid "  --output-charset <cset>  Output messages in this charset\n"
 msgstr "  --output-charset <cset>  Send ut meldinger i dette tegnsettet\n"
 
-#: src/merge/mkvmerge.cpp:406
+#: src/merge/mkvmerge.cpp:410
 #, no-c-format
 msgid ""
 "  -r, --redirect-output <file>\n"
@@ -6978,7 +6985,7 @@ msgstr ""
 "  -r, --redirect-output <file>\n"
 "                           Omdirigerer alle meldinger til denne filen.\n"
 
-#: src/merge/mkvmerge.cpp:408
+#: src/merge/mkvmerge.cpp:412
 #, no-c-format
 msgid ""
 "  --flush-on-close         Flushes all cached data to storage when closing\n"
@@ -6987,7 +6994,7 @@ msgstr ""
 "  --flush-on-close         Tømmer alle hurtigbufrede data til lagring når du lukker\n"
 "                           en fil som er åpnet for skriving.\n"
 
-#: src/merge/mkvmerge.cpp:410
+#: src/merge/mkvmerge.cpp:414
 #, no-c-format
 msgid ""
 "  --abort-on-warnings      Aborts the program after the first warning is\n"
@@ -6996,7 +7003,7 @@ msgstr ""
 "  --abort-on-warnings      Avbryter programmet etter at den første advarselen er\n"
 "                           sendt ut.\n"
 
-#: src/merge/mkvmerge.cpp:412
+#: src/merge/mkvmerge.cpp:416
 #, no-c-format
 msgid ""
 "  --deterministic <seed>   Enables the creation of byte-identical files\n"
@@ -7007,17 +7014,17 @@ msgstr ""
 "                           hvis de samme kildefilene med de samme alternativene\n"
 "                           og det samme \"frøet\" brukes.\n"
 
-#: src/merge/mkvmerge.cpp:416
+#: src/merge/mkvmerge.cpp:420
 #, no-c-format
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr "  --debug <topic>          Slår på feilsøkingsutdata for \"emne\"'.\n"
 
-#: src/merge/mkvmerge.cpp:417
+#: src/merge/mkvmerge.cpp:421
 #, no-c-format
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>       Slår på eksperimentell funksjon 'funksjon''.\n"
 
-#: src/merge/mkvmerge.cpp:418
+#: src/merge/mkvmerge.cpp:422
 #, no-c-format
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
@@ -7026,17 +7033,17 @@ msgstr ""
 "  @option-file.json        Leser ytterligere kommandolinjealternativer fra\n"
 "                           den spesifiserte JSON-filen (se manualside).\n"
 
-#: src/merge/mkvmerge.cpp:420
+#: src/merge/mkvmerge.cpp:424
 #, no-c-format
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               Viser denne hjelpen.\n"
 
-#: src/merge/mkvmerge.cpp:421
+#: src/merge/mkvmerge.cpp:425
 #, no-c-format
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            Vis versjonsinformasjon\n"
 
-#: src/merge/mkvmerge.cpp:423
+#: src/merge/mkvmerge.cpp:427
 #, no-c-format
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
@@ -7047,537 +7054,535 @@ msgstr ""
 "forklarer flere detaljer i stor lengde som ikke er åpenbare fra\n"
 "denne oppføringen.\n"
 
-#: src/merge/mkvmerge.cpp:445
+#: src/merge/mkvmerge.cpp:449
 #, no-c-format, c++-format
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
 msgstr "Automatisk MIME-typegjenkjenning for '{0}': {1}\n"
 
-#: src/merge/mkvmerge.cpp:449
+#: src/merge/mkvmerge.cpp:453
 #, no-c-format, c++-format
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
 msgstr "Ingen MIME-type er angitt for vedlegget '{0}', og den kan ikke gjettes.\n"
 
-#: src/merge/mkvmerge.cpp:491
+#: src/merge/mkvmerge.cpp:495
 #, no-c-format
 msgid "Supported file types:\n"
 msgstr "Filtyper som støttes:\n"
 
-#: src/merge/mkvmerge.cpp:518
+#: src/merge/mkvmerge.cpp:522
 #, no-c-format, c++-format
 msgid "The type of file '{0}' is not supported.\n"
 msgstr "Filtypen '{0}' støttes ikke.\n"
 
-#: src/merge/mkvmerge.cpp:572
+#: src/merge/mkvmerge.cpp:576
 #: src/propedit/tag_target.cpp:164
 #, no-c-format, c++-format
 msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
 msgstr "Feil ved analyse av taggene i '{0}': noen obligatoriske elementer mangler.\n"
 
-#: src/merge/mkvmerge.cpp:586
+#: src/merge/mkvmerge.cpp:590
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr "'{0}' er ikke en gyldig språktagg for IETF BCP 47/RFC 5646 i '{1}'. Ytterligere informasjon fra analysereren: {2}.\n"
 
-#: src/merge/mkvmerge.cpp:646
+#: src/merge/mkvmerge.cpp:650
 #, no-c-format, c++-format
 msgid "Invalid sync option. No track ID specified in '{0} {1}'.\n"
 msgstr "Ugyldig synkroniseringsalternativ. Ingen spor-ID angitt i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:649
-#: src/merge/mkvmerge.cpp:1308
-#: src/merge/mkvmerge.cpp:1471
-#: src/merge/mkvmerge.cpp:1615
-#: src/merge/mkvmerge.cpp:1626
+#: src/merge/mkvmerge.cpp:653
+#: src/merge/mkvmerge.cpp:1312
+#: src/merge/mkvmerge.cpp:1475
+#: src/merge/mkvmerge.cpp:1619
+#: src/merge/mkvmerge.cpp:1630
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '{0} {1}'.\n"
 msgstr "Ugyldig spor-ID spesifisert i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:654
-#: src/merge/mkvmerge.cpp:690
+#: src/merge/mkvmerge.cpp:658
+#: src/merge/mkvmerge.cpp:694
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'.\n"
 msgstr "Ugyldig synkroniseringsalternativ spesifisert i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:680
+#: src/merge/mkvmerge.cpp:684
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'. The divisor is zero.\n"
 msgstr "Ugyldig synkroniseringsalternativ spesifisert i '{0} {1}'. Deleren er null.\n"
 
-#: src/merge/mkvmerge.cpp:685
+#: src/merge/mkvmerge.cpp:689
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"
 msgstr "Ugyldig synkroniseringsalternativ spesifisert i '{0} {1}'. Den lineære synkroniseringsverdien er kanskje ikke lik eller mindre enn null.\n"
 
-#: src/merge/mkvmerge.cpp:707
+#: src/merge/mkvmerge.cpp:711
 #, no-c-format
 msgid "Aspect ratio factor"
 msgstr "Sideforholdsfaktor"
 
-#: src/merge/mkvmerge.cpp:707
+#: src/merge/mkvmerge.cpp:711
 #, no-c-format
 msgid "Aspect ratio"
 msgstr "Sideforhold"
 
-#: src/merge/mkvmerge.cpp:712
+#: src/merge/mkvmerge.cpp:716
 #, no-c-format, c++-format
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: manglende spor-ID i '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:716
+#: src/merge/mkvmerge.cpp:720
 #, no-c-format, c++-format
 msgid "{0}: invalid track ID in '{1} {2}'.\n"
 msgstr "{0}: ugyldig spor-ID i '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:733
+#: src/merge/mkvmerge.cpp:737
 #, no-c-format, c++-format
 msgid "{0}: missing dividend in '{1} {2}'.\n"
 msgstr "{0}: manglende dividend i '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:736
+#: src/merge/mkvmerge.cpp:740
 #, no-c-format, c++-format
 msgid "{0}: missing divisor in '{1} {2}'.\n"
 msgstr "{0}: manglende divisor i '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:741
+#: src/merge/mkvmerge.cpp:745
 #, no-c-format, c++-format
 msgid "{0}: divisor is 0 in '{1} {2}'.\n"
 msgstr "{0}: divisor er 0 i '{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:759
-#: src/merge/mkvmerge.cpp:765
+#: src/merge/mkvmerge.cpp:763
+#: src/merge/mkvmerge.cpp:769
 #, no-c-format, c++-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"
 msgstr "Visningsdimensjoner: ikke gitt i form av <TID>:<width>x<height>, f.eks. 1:640x480 (argument var '{0}').\n"
 
-#: src/merge/mkvmerge.cpp:784
+#: src/merge/mkvmerge.cpp:788
 #, no-c-format, c++-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '{0}').\n"
 msgstr "Beskjæringsparametere: ikke gitt i form av <TID>:<left>,<top>,<right>,<bottom> f.eks. 0:10,5,10,5 (argument var '{0}').\n"
 
-#: src/merge/mkvmerge.cpp:981
+#: src/merge/mkvmerge.cpp:985
 #, no-c-format, c++-format
 msgid "Unknown format in '{0} {1}'.\n"
 msgstr "Ukjent format i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1014
+#: src/merge/mkvmerge.cpp:1018
 #, no-c-format, c++-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and {0} or one of these keywords: {1} (argument was '{2}').\n"
 msgstr "Stereomodusparameter: ikke gitt i form av <TID>:<n|keyword> der n er et tall mellom 0 og {0} eller et av disse nøkkelordene: {1} (argument var '{2}').\n"
 
-#: src/merge/mkvmerge.cpp:1044
-#: src/merge/mkvmerge.cpp:1050
-#: src/merge/mkvmerge.cpp:1056
+#: src/merge/mkvmerge.cpp:1048
+#: src/merge/mkvmerge.cpp:1054
+#: src/merge/mkvmerge.cpp:1060
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid."
 msgstr "Argumentet '{0}' til '{1}' er ugyldig."
 
-#: src/merge/mkvmerge.cpp:1045
+#: src/merge/mkvmerge.cpp:1049
 #, no-c-format
 msgid "It does not consist of a track ID and a value separated by a colon."
 msgstr "Den består ikke av en spor-ID og en verdi atskilt med kolon."
 
-#: src/merge/mkvmerge.cpp:1051
+#: src/merge/mkvmerge.cpp:1055
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid track ID."
 msgstr "'{0}' er ikke en gyldig spor-ID."
 
-#: src/merge/mkvmerge.cpp:1057
+#: src/merge/mkvmerge.cpp:1061
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid field order."
 msgstr "'{0}' er ikke en gyldig feltrekkefølge."
 
-#: src/merge/mkvmerge.cpp:1065
+#: src/merge/mkvmerge.cpp:1069
 #, no-c-format, c++-format
 msgid "Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n"
 msgstr "Alternativ for lyduthevingsmodus: ikke gitt i form av <TID>:<mode> der modusen er enten et tall eller nøkkelord fra denne listen: {0} (argument var '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:1103
+#: src/merge/mkvmerge.cpp:1107
 #, no-c-format, c++-format
 msgid "Invalid time for '--split' in '--split {0}'. Additional error message: {1}\n"
 msgstr "Ugyldig tid for '--split' i '--split {0}'. Ytterligere feilmelding: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1124
+#: src/merge/mkvmerge.cpp:1128
 #, no-c-format, c++-format
 msgid "Invalid time for '--split' in '--split {0}'. Additional error message: {1}.\n"
 msgstr "Ugyldig tid for '--split' i '--split {0}'. Ytterligere feilmelding: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1145
+#: src/merge/mkvmerge.cpp:1149
 #, no-c-format, c++-format
 msgid "Invalid frame for '--split' in '--split {0}'.\n"
 msgstr "Ugyldig ramme for '--split' i '--split {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1166
-#: src/merge/mkvmerge.cpp:3143
+#: src/merge/mkvmerge.cpp:1170
+#: src/merge/mkvmerge.cpp:3157
 #, no-c-format, c++-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "Ugyldig kapittelnummer '{0}' for '--split' i '--split {1}': {2}\n"
 
-#: src/merge/mkvmerge.cpp:1166
+#: src/merge/mkvmerge.cpp:1170
 #, no-c-format
 msgid "Not a valid number or not positive."
 msgstr "Ikke et gyldig nummer eller ikke positivt."
 
-#: src/merge/mkvmerge.cpp:1172
+#: src/merge/mkvmerge.cpp:1176
 #, no-c-format, c++-format
 msgid "No chapter numbers listed after '--split {0}'.\n"
 msgstr "Ingen kapittelnumre oppført etter '--split {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1196
+#: src/merge/mkvmerge.cpp:1200
 #, no-c-format, c++-format
 msgid "Invalid split size in '--split {0}'.\n"
 msgstr "Ugyldig splittstørrelse i '--split {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1242
+#: src/merge/mkvmerge.cpp:1246
 #, no-c-format, c++-format
 msgid "Invalid format for '--split' in '--split {0}'.\n"
 msgstr "Ugyldig format for '--split' i '--split {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1314
+#: src/merge/mkvmerge.cpp:1318
 #, no-c-format, c++-format
 msgid "Invalid boolean option specified in '{0} {1}'.\n"
 msgstr "Ugyldig boolsk alternativ spesifisert i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1332
+#: src/merge/mkvmerge.cpp:1336
 #, no-c-format, c++-format
 msgid "Invalid cues option. No track ID specified in '--cues {0}'.\n"
 msgstr "Ugyldig signaler-alternativ. Ingen spor-ID spesifisert i '--cues {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1336
+#: src/merge/mkvmerge.cpp:1340
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--cues {0}'.\n"
 msgstr "Ugyldig spor-ID spesifisert i '--cues {0}'\n"
 
-#: src/merge/mkvmerge.cpp:1339
+#: src/merge/mkvmerge.cpp:1343
 #, no-c-format, c++-format
 msgid "Invalid cues option specified in '--cues {0}'.\n"
 msgstr "Ugyldig signaler-alternativ spesifisert i '--cues {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1348
+#: src/merge/mkvmerge.cpp:1352
 #, no-c-format, c++-format
 msgid "'{0}' is an unsupported argument for --cues.\n"
 msgstr "'{0}' er et argument som ikke støttes for --cues.\n"
 
-#: src/merge/mkvmerge.cpp:1362
+#: src/merge/mkvmerge.cpp:1366
 #, no-c-format, c++-format
 msgid "Invalid compression option. No track ID specified in '--compression {0}'.\n"
 msgstr "Ugyldig komprimeringsalternativ. Ingen spor-ID spesifisert i '--compression {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1366
+#: src/merge/mkvmerge.cpp:1370
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--compression {0}'.\n"
 msgstr "Ugyldig spor-ID spesifisert i '--compression {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1369
+#: src/merge/mkvmerge.cpp:1373
 #, no-c-format, c++-format
 msgid "Invalid compression option specified in '--compression {0}'.\n"
 msgstr "Ugyldig komprimeringsalternativ spesifisert i '--compression {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1393
+#: src/merge/mkvmerge.cpp:1397
 #, no-c-format, c++-format
 msgid "'{0}' is an unsupported argument for --compression. Available compression methods are: {1}\n"
 msgstr "'{0}' er et argument som ikke støttes for --compression. Tilgjengelige komprimeringsmetoder er: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1405
+#: src/merge/mkvmerge.cpp:1409
 #, no-c-format, c++-format
 msgid "No track ID specified in '--{0} {1}'.\n"
 msgstr "Ingen spor-ID spesifisert i '--{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1408
+#: src/merge/mkvmerge.cpp:1412
 #, no-c-format, c++-format
 msgid "No {0} specified in '--{1} {2}'.\n"
 msgstr "Ingen {0} spesifisert i '--{1} {2}'.\n"
 
-#: src/merge/mkvmerge.cpp:1414
+#: src/merge/mkvmerge.cpp:1418
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--{0} {1}'.\n"
 msgstr "Ugyldig spor-ID spesifisert i '--{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1428
+#: src/merge/mkvmerge.cpp:1432
 #, no-c-format
 msgid "language"
 msgstr "språk"
 
-#: src/merge/mkvmerge.cpp:1443
+#: src/merge/mkvmerge.cpp:1447
 #, no-c-format, c++-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset {0}'.\n"
 msgstr "Ugyldig alternativ for undertegnsett. Ingen spor-ID spesifisert i '--sub-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1447
+#: src/merge/mkvmerge.cpp:1451
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--sub-charset {0}'.\n"
 msgstr "Ugyldig spor-ID spesifisert i '--sub-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1450
+#: src/merge/mkvmerge.cpp:1454
 #, no-c-format, c++-format
 msgid "Invalid sub charset specified in '--sub-charset {0}'.\n"
 msgstr "Ugyldig undertegnsett spesifisert i '--sub-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1467
+#: src/merge/mkvmerge.cpp:1471
 #, no-c-format, c++-format
 msgid "Invalid tags option. No track ID specified in '{0} {1}'.\n"
 msgstr "Ugyldig alternativ for tagger. Ingen spor-ID spesifisert i '{0} {1}'\n"
 
-#: src/merge/mkvmerge.cpp:1474
+#: src/merge/mkvmerge.cpp:1478
 #, no-c-format, c++-format
 msgid "Invalid tags file name specified in '{0} {1}'.\n"
 msgstr "Ugyldig taggerfilnavn spesifisert i '{0} {1}'\n"
 
-#: src/merge/mkvmerge.cpp:1491
+#: src/merge/mkvmerge.cpp:1495
 #, no-c-format, c++-format
 msgid "FourCC: Missing track ID in '{0} {1}'.\n"
 msgstr "FourCC: mangler spor-ID i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1495
+#: src/merge/mkvmerge.cpp:1499
 #, no-c-format, c++-format
 msgid "FourCC: Invalid track ID in '{0} {1}'.\n"
 msgstr "FourCC: ugyldig spor-ID i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1498
+#: src/merge/mkvmerge.cpp:1502
 #, no-c-format, c++-format
 msgid "The FourCC must be exactly four characters long in '{0} {1}'.\n"
 msgstr "FourCC-en må være nøyaktig fire tegn lang i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1519
+#: src/merge/mkvmerge.cpp:1523
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid pair of file ID and track ID in '--track-order {1}'.\n"
 msgstr "'{0}' er ikke et gyldig par fil-ID og spor-ID i '--track-order {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1522
-#: src/merge/mkvmerge.cpp:1525
+#: src/merge/mkvmerge.cpp:1526
+#: src/merge/mkvmerge.cpp:1529
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "'{0}' er ikke en gyldig fil-ID i '--track-order {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1565
+#: src/merge/mkvmerge.cpp:1569
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid mapping of file and track IDs in '--append-to {1}'.\n"
 msgstr "'{0}' er ikke en gyldig tilordning av fil- og spor-IDer i '--append-to {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1580
+#: src/merge/mkvmerge.cpp:1584
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
 msgstr "'{0}' er ikke en gyldig tilføyingsmodus i '--append-mode {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1594
+#: src/merge/mkvmerge.cpp:1598
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"
 msgstr "'{0}' er ikke et gyldig par spor-ID og standard varighet i '--default-duration {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1598
+#: src/merge/mkvmerge.cpp:1602
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid track ID in '--default-duration {1}'.\n"
 msgstr "'{0}' er ikke en gyldig spor-ID i '--default-duration {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1602
+#: src/merge/mkvmerge.cpp:1606
 #, no-c-format, c++-format
 msgid "'{0}' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '{1}'.\n"
 msgstr "'{0}' gjenkjennes ikke som et gyldig tallformat, eller det inneholder ikke en gyldig enhet ('s', 'ms', 'us', 'ns', 'fps', 'p' eller 'i') i '{1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1644
+#: src/merge/mkvmerge.cpp:1648
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--aac-is-sbr {0}'.\n"
 msgstr "Ugyldig spor-ID spesifisert i '--aac-is-sbr {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1647
+#: src/merge/mkvmerge.cpp:1651
 #, no-c-format, c++-format
 msgid "Invalid boolean specified in '--aac-is-sbr {0}'.\n"
 msgstr "Ugyldig boolsk variabel spesifisert i '--aac-is-sbr {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1663
+#: src/merge/mkvmerge.cpp:1667
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid priority class.\n"
 msgstr "'{0}' er ikke en gyldig prioritetsklasse.\n"
 
-#: src/merge/mkvmerge.cpp:1687
+#: src/merge/mkvmerge.cpp:1691
 #, no-c-format, c++-format
 msgid "The previous UID was already given in '{0} {1}'.\n"
 msgstr "Den forrige UID-en var allerede gitt i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1692
+#: src/merge/mkvmerge.cpp:1696
 #, no-c-format, c++-format
 msgid "Unknown format for the previous UID in '{0} {1}'.\n"
 msgstr "Ukjent format for den forrige UID-en i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1700
+#: src/merge/mkvmerge.cpp:1704
 #, no-c-format, c++-format
 msgid "The next UID was already given in '{0} {1}'.\n"
 msgstr "Den neste UID-en var allerede gitt i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1705
+#: src/merge/mkvmerge.cpp:1709
 #, no-c-format, c++-format
 msgid "Unknown format for the next UID in '{0} {1}'.\n"
 msgstr "Ukjent format for den neste UID-en i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1717
+#: src/merge/mkvmerge.cpp:1721
 #, no-c-format, c++-format
 msgid "Unknown format for the segment UID '{2}' in '{0} {1}'.\n"
 msgstr "Ukjent format for segment UID-en '{2}' i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1729
+#: src/merge/mkvmerge.cpp:1733
 #, no-c-format, c++-format
 msgid "Cluster length '{0}' out of range (100..32000).\n"
 msgstr "Klyngelengde '{0}' utenfor rekkevidde (100..32000).\n"
 
-#: src/merge/mkvmerge.cpp:1736
+#: src/merge/mkvmerge.cpp:1740
 #, no-c-format, c++-format
 msgid "Cluster length '{0}' out of range (0..65535).\n"
 msgstr "Klyngelengde '{0}' utenfor rekkevidde (0..65535).\n"
 
-#: src/merge/mkvmerge.cpp:1752
+#: src/merge/mkvmerge.cpp:1756
 #, no-c-format, c++-format
 msgid "The attachment ({0}) is too big ({1})."
 msgstr "Vedlegget ({0}) er for stort ({1})."
 
-#: src/merge/mkvmerge.cpp:1753
+#: src/merge/mkvmerge.cpp:1757
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:840
 #: src/mkvtoolnix-gui/merge/attachments.cpp:242
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "Bare filer mindre enn 2 GiB støttes."
 
-#: src/merge/mkvmerge.cpp:1756
+#: src/merge/mkvmerge.cpp:1760
 #, no-c-format, c++-format
 msgid "The file '{0}' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Filen '{0}' kan ikke legges ved fordi den ikke eksisterer eller ikke kan leses.\n"
 
-#: src/merge/mkvmerge.cpp:1769
+#: src/merge/mkvmerge.cpp:1773
 #, no-c-format, c++-format
 msgid "The size of attachment '{0}' is 0.\n"
 msgstr "Størrelsen på vedlegget '{0}' er 0.\n"
 
-#: src/merge/mkvmerge.cpp:1775
+#: src/merge/mkvmerge.cpp:1779
 #, no-c-format, c++-format
 msgid "The attachment '{0}' could not be read.\n"
 msgstr "Vedlegget '{0}' kan ikke leses.\n"
 
-#: src/merge/mkvmerge.cpp:1785
+#: src/merge/mkvmerge.cpp:1789
 #, no-c-format, c++-format
 msgid "'--chapter-language' may only be given once in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' kan bare gis én gang i '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1788
+#: src/merge/mkvmerge.cpp:1792
 #, no-c-format, c++-format
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' må gis før '--chapters' i '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1798
+#: src/merge/mkvmerge.cpp:1802
 #, no-c-format, c++-format
 msgid "'--chapter-charset' may only be given once in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' kan bare gis én gang i '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1801
+#: src/merge/mkvmerge.cpp:1805
 #, no-c-format, c++-format
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' må gis før '--chapters' i '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:1814
+#: src/merge/mkvmerge.cpp:1818
 #, no-c-format, c++-format
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
 msgstr "Bare én kapittelfil tillatt i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1869
+#: src/merge/mkvmerge.cpp:1873
 #, no-c-format, c++-format
 msgid "Only one segment info file allowed in '{0} {1}'.\n"
 msgstr "Bare én segmentinformasjonsfil tillatt i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1880
+#: src/merge/mkvmerge.cpp:1884
 #, no-c-format
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' ble brukt mer enn én gang.\n"
 
-#: src/merge/mkvmerge.cpp:1884
+#: src/merge/mkvmerge.cpp:1888
 #, no-c-format
 msgid "The argument to '--timestamp-scale' must be a number.\n"
 msgstr "Argumentet til '--timestamp-scale' må være et nummer.\n"
 
-#: src/merge/mkvmerge.cpp:1890
+#: src/merge/mkvmerge.cpp:1894
 #, no-c-format
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "Den angitte tidsstempelskaleringsfaktoren er utenfor det gyldige området (1...10000000 eller -1 for 'sample-presisjon selv om det finnes et videospor').\n"
 
-#: src/merge/mkvmerge.cpp:1921
+#: src/merge/mkvmerge.cpp:1925
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid: too many colons in element '{2}'.\n"
 msgstr "Argumentet '{0}' til '{1}' er ugyldig: for mange kolon i element '{2}'.\n"
 
-#: src/merge/mkvmerge.cpp:1925
+#: src/merge/mkvmerge.cpp:1929
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid: '{2}' is not a valid track ID.\n"
 msgstr "Argumentet '{0}' til '{1}' er ugyldig: '{2}' er ikke en gyldig spor-ID.\n"
 
-#: src/merge/mkvmerge.cpp:1934
+#: src/merge/mkvmerge.cpp:1938
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid: '{2}' must be either 'all' or 'first'.\n"
 msgstr "Argumentet '{0}' til '{1}' er ugyldig: '{2}' må enten være 'all' eller 'first'.\n"
 
-#: src/merge/mkvmerge.cpp:1962
+#: src/merge/mkvmerge.cpp:1966
 #, no-c-format, c++-format
 msgid "The closing character '{0}' is missing.\n"
 msgstr "Avslutningstegnet '{0}' mangler.\n"
 
-#: src/merge/mkvmerge.cpp:1965
+#: src/merge/mkvmerge.cpp:1969
 #, no-c-format, c++-format
 msgid "No file names were listed between '{0}' and '{1}'.\n"
 msgstr "Ingen filnavn ble oppført mellom '{0}' og '{1}'.\n"
 
-#: src/merge/mkvmerge.cpp:1987
+#: src/merge/mkvmerge.cpp:1991
 #, no-c-format
 msgid "An empty file name is not valid.\n"
 msgstr "Et tomt filnavn er ikke gyldig.\n"
 
-#: src/merge/mkvmerge.cpp:1991
+#: src/merge/mkvmerge.cpp:1995
 #, no-c-format, c++-format
 msgid "The name of the destination file '{0}' and of one of the source files is the same."
 msgstr "Navnet på målfilen '{0}' og en av kildefilene er det samme."
 
-#: src/merge/mkvmerge.cpp:1992
+#: src/merge/mkvmerge.cpp:1996
 #, no-c-format
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr "Dette vil føre mkvmerge til å overskrive en av kildefilene dine."
 
-#: src/merge/mkvmerge.cpp:1996
+#: src/merge/mkvmerge.cpp:2000
 #, no-c-format
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "'-A' og '-a' brukt på den samme kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:1999
+#: src/merge/mkvmerge.cpp:2003
 #, no-c-format
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "'-D' og '-d' brukt på den samme kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:2002
+#: src/merge/mkvmerge.cpp:2006
 #, no-c-format
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' og '-s' brukt på den samme kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:2005
+#: src/merge/mkvmerge.cpp:2009
 #, no-c-format
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "'-B' og '-b' brukt på den samme kildefilen.\n"
 
-#: src/merge/mkvmerge.cpp:2026
+#: src/merge/mkvmerge.cpp:2030
 #, no-c-format
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr "Den første filen kan ikke tilføyes fordi det ikke er noen filer å tilføye til.\n"
 
-#: src/merge/mkvmerge.cpp:2037
-#: src/merge/mkvmerge.cpp:3021
+#: src/merge/mkvmerge.cpp:2041
+#: src/merge/mkvmerge.cpp:3035
 #, no-c-format, c++-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "Filtypen '{0}' kunne ikke gjenkjennes.\n"
 
-#: src/merge/mkvmerge.cpp:2078
-#: src/merge/mkvmerge.cpp:2098
-#: src/merge/mkvmerge.cpp:2113
-#: src/merge/mkvmerge.cpp:2182
-#: src/merge/mkvmerge.cpp:2263
-#: src/merge/mkvmerge.cpp:2318
-#: src/merge/mkvmerge.cpp:2517
-#: src/merge/mkvmerge.cpp:2534
-#: src/merge/mkvmerge.cpp:2768
-#: src/merge/mkvmerge.cpp:2775
+#: src/merge/mkvmerge.cpp:2082
+#: src/merge/mkvmerge.cpp:2102
+#: src/merge/mkvmerge.cpp:2117
+#: src/merge/mkvmerge.cpp:2186
+#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2322
+#: src/merge/mkvmerge.cpp:2531
+#: src/merge/mkvmerge.cpp:2548
+#: src/merge/mkvmerge.cpp:2782
 #: src/merge/mkvmerge.cpp:2789
-#: src/merge/mkvmerge.cpp:2796
 #: src/merge/mkvmerge.cpp:2803
 #: src/merge/mkvmerge.cpp:2810
 #: src/merge/mkvmerge.cpp:2817
@@ -7589,63 +7594,65 @@ msgstr "Filtypen '{0}' kunne ikke gjenkjennes.\n"
 #: src/merge/mkvmerge.cpp:2859
 #: src/merge/mkvmerge.cpp:2866
 #: src/merge/mkvmerge.cpp:2873
+#: src/merge/mkvmerge.cpp:2880
 #: src/merge/mkvmerge.cpp:2887
-#: src/merge/mkvmerge.cpp:2894
-#: src/merge/mkvmerge.cpp:2902
-#: src/merge/mkvmerge.cpp:2910
-#: src/merge/mkvmerge.cpp:2920
-#: src/merge/mkvmerge.cpp:2927
+#: src/merge/mkvmerge.cpp:2901
+#: src/merge/mkvmerge.cpp:2908
+#: src/merge/mkvmerge.cpp:2916
+#: src/merge/mkvmerge.cpp:2924
 #: src/merge/mkvmerge.cpp:2934
-#: src/merge/mkvmerge.cpp:2946
-#: src/merge/mkvmerge.cpp:2953
+#: src/merge/mkvmerge.cpp:2941
+#: src/merge/mkvmerge.cpp:2948
 #: src/merge/mkvmerge.cpp:2960
+#: src/merge/mkvmerge.cpp:2967
+#: src/merge/mkvmerge.cpp:2974
 #: src/propedit/propedit_cli_parser.cpp:221
 #, no-c-format, c++-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}' mangler argumentet sitt.\n"
 
-#: src/merge/mkvmerge.cpp:2090
+#: src/merge/mkvmerge.cpp:2094
 #, no-c-format, c++-format
 msgid "Invalid identification format in '{0} {1}'.\n"
 msgstr "Ugyldig identifikasjonsformat i '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:2105
+#: src/merge/mkvmerge.cpp:2109
 #, no-c-format, c++-format
 msgid "The probe range percentage '{0}' is invalid.\n"
 msgstr "Prosenten for søkeområde '{0}' er ugyldig.\n"
 
-#: src/merge/mkvmerge.cpp:2116
+#: src/merge/mkvmerge.cpp:2120
 #: src/propedit/propedit_cli_parser.cpp:224
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid language normalization mode.\n"
 msgstr "'{0}' er ikke en gyldig språknormaliseringsmodus.\n"
 
-#: src/merge/mkvmerge.cpp:2175
+#: src/merge/mkvmerge.cpp:2179
 #, no-c-format, c++-format
 msgid "The argument '{0}' is not allowed in identification mode.\n"
 msgstr "Argumentet '{0}' er ikke tillatt i identifikasjonsmodus.\n"
 
-#: src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2219
 #, no-c-format, c++-format
 msgid "'{0}' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "'{0}' kan bare brukes med et filnavn. Ingen flere alternativer er tillatt hvis dette alternativet brukes.\n"
 
-#: src/merge/mkvmerge.cpp:2242
+#: src/merge/mkvmerge.cpp:2246
 #, no-c-format, c++-format
 msgid "'{0}' lacks a file name.\n"
 msgstr "'{0}' mangler et filnavn.\n"
 
-#: src/merge/mkvmerge.cpp:2245
+#: src/merge/mkvmerge.cpp:2249
 #, no-c-format
 msgid "Only one destination file allowed.\n"
 msgstr "Bare én målfil tillatt.\n"
 
-#: src/merge/mkvmerge.cpp:2252
+#: src/merge/mkvmerge.cpp:2256
 #, no-c-format
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' mangler malen\n"
 
-#: src/merge/mkvmerge.cpp:2293
+#: src/merge/mkvmerge.cpp:2297
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -7654,173 +7661,181 @@ msgstr ""
 "Feil: ingen målfilnavn ble gitt.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:2299
+#: src/merge/mkvmerge.cpp:2303
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Aktiverer WebM-kompatibilitetsmodus automatisk på grunn av målfilnavnet.\n"
 
-#: src/merge/mkvmerge.cpp:2331
+#: src/merge/mkvmerge.cpp:2335
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' mangler tittelen.\n"
 
-#: src/merge/mkvmerge.cpp:2339
+#: src/merge/mkvmerge.cpp:2343
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' mangler størrelsen.\n"
 
-#: src/merge/mkvmerge.cpp:2346
+#: src/merge/mkvmerge.cpp:2350
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' mangler antall filer.\n"
 
-#: src/merge/mkvmerge.cpp:2349
+#: src/merge/mkvmerge.cpp:2353
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Feil argument til '--split-max-files'.\n"
 
-#: src/merge/mkvmerge.cpp:2358
+#: src/merge/mkvmerge.cpp:2362
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' mangler den forrige UID-en.\n"
 
-#: src/merge/mkvmerge.cpp:2365
+#: src/merge/mkvmerge.cpp:2369
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' mangler den neste UID-en.\n"
 
-#: src/merge/mkvmerge.cpp:2372
+#: src/merge/mkvmerge.cpp:2376
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' mangler segment UID-en.\n"
 
-#: src/merge/mkvmerge.cpp:2379
+#: src/merge/mkvmerge.cpp:2383
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' mangler lengden.\n"
 
-#: src/merge/mkvmerge.cpp:2407
+#: src/merge/mkvmerge.cpp:2393
+#, fuzzy, no-c-format
+msgid "'--date' lacks the date & time argument.\n"
+msgstr "'--engage' mangler argumentet.\n"
+
+#: src/merge/mkvmerge.cpp:2396
+#, fuzzy, no-c-format, c++-format
+msgid "The value for '--date' is not a valid date & time: '{0}'\n"
+msgstr "Egenskapsverdien er ikke en gyldig dato- og klokkeslettstreng i '{0}'."
+
+#: src/merge/mkvmerge.cpp:2421
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' mangler beskrivelsen.\n"
 
-#: src/merge/mkvmerge.cpp:2410
+#: src/merge/mkvmerge.cpp:2424
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Det ble gitt mer enn én beskrivelse for et enkelt vedlegg.\n"
 
-#: src/merge/mkvmerge.cpp:2416
+#: src/merge/mkvmerge.cpp:2430
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' mangler MIME-type.\n"
 
-#: src/merge/mkvmerge.cpp:2419
+#: src/merge/mkvmerge.cpp:2433
 #, no-c-format, c++-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Det ble angitt mer enn én MIME-type for ett enkelt vedlegg. '{0}' forkastes og '{1}' brukes i stedet.\n"
 
-#: src/merge/mkvmerge.cpp:2426
+#: src/merge/mkvmerge.cpp:2440
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' mangler navnet.\n"
 
-#: src/merge/mkvmerge.cpp:2429
+#: src/merge/mkvmerge.cpp:2443
 #, no-c-format, c++-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Det ble angitt mer enn ett navn for et enkelt vedlegg. '{0}' forkastes og '{1}' brukes i stedet.\n"
 
-#: src/merge/mkvmerge.cpp:2436
+#: src/merge/mkvmerge.cpp:2450
 #, no-c-format, c++-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}' mangler filnavnet.\n"
 
-#: src/merge/mkvmerge.cpp:2446
+#: src/merge/mkvmerge.cpp:2460
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' mangler filnavnet.\n"
 
-#: src/merge/mkvmerge.cpp:2455
+#: src/merge/mkvmerge.cpp:2469
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' mangler språket.\n"
 
-#: src/merge/mkvmerge.cpp:2462
+#: src/merge/mkvmerge.cpp:2476
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' mangler tegnsettet.\n"
 
-#: src/merge/mkvmerge.cpp:2469
-#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2483
+#: src/merge/mkvmerge.cpp:2796
 #, no-c-format, c++-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}' mangler forsinkelsen.\n"
 
-#: src/merge/mkvmerge.cpp:2476
+#: src/merge/mkvmerge.cpp:2490
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' mangler formatet.\n"
 
-#: src/merge/mkvmerge.cpp:2479
+#: src/merge/mkvmerge.cpp:2493
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' må gis før '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2486
+#: src/merge/mkvmerge.cpp:2500
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' mangler filnavnet.\n"
 
-#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2509
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' mangler modusen.\n"
 
-#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2516
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' mangler filnavnet.\n"
 
-#: src/merge/mkvmerge.cpp:2529
+#: src/merge/mkvmerge.cpp:2543
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "Alternativet '--meta-seek-size' støttes ikke lenger. Vennligst les mkvmerges dokumentasjon, spesielt avsnittet om MATROSKA FILOPPSETT.\n"
 
-#: src/merge/mkvmerge.cpp:2558
-#: src/merge/mkvmerge.cpp:2565
 #: src/merge/mkvmerge.cpp:2572
 #: src/merge/mkvmerge.cpp:2579
 #: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
 #, no-c-format, c++-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}' mangler spornumrene.\n"
 
-#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2607
 #, no-c-format, c++-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}' mangler FourCC-en.\n"
 
-#: src/merge/mkvmerge.cpp:2600
+#: src/merge/mkvmerge.cpp:2614
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' mangler sideforholdet.\n"
 
-#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2621
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' mangler sideforholdsfaktoren.\n"
 
-#: src/merge/mkvmerge.cpp:2614
+#: src/merge/mkvmerge.cpp:2628
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' mangler dimensjonene.\n"
 
-#: src/merge/mkvmerge.cpp:2621
+#: src/merge/mkvmerge.cpp:2635
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' mangler beskjæringsparametrene.\n"
 
-#: src/merge/mkvmerge.cpp:2628
-#: src/merge/mkvmerge.cpp:2635
 #: src/merge/mkvmerge.cpp:2642
 #: src/merge/mkvmerge.cpp:2649
 #: src/merge/mkvmerge.cpp:2656
@@ -7839,81 +7854,83 @@ msgstr "'--cropping' mangler beskjæringsparametrene.\n"
 #: src/merge/mkvmerge.cpp:2747
 #: src/merge/mkvmerge.cpp:2754
 #: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
 #, no-c-format, c++-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}' mangler parameteren.\n"
 
-#: src/merge/mkvmerge.cpp:2880
+#: src/merge/mkvmerge.cpp:2894
 #, no-c-format, c++-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}' mangler spor-ID-en.\n"
 
-#: src/merge/mkvmerge.cpp:2896
+#: src/merge/mkvmerge.cpp:2910
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:75
 #, no-c-format
 msgid "track name"
 msgstr "spornavn"
 
-#: src/merge/mkvmerge.cpp:2904
+#: src/merge/mkvmerge.cpp:2918
 #, no-c-format
 msgid "timestamps"
 msgstr "tidsstempler"
 
-#: src/merge/mkvmerge.cpp:2913
+#: src/merge/mkvmerge.cpp:2927
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' kan bare gis én gang.\n"
 
-#: src/merge/mkvmerge.cpp:2979
+#: src/merge/mkvmerge.cpp:2993
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' er bare nyttig i kombinasjon med '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:2982
+#: src/merge/mkvmerge.cpp:2996
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "Ingen kildefiler ble gitt.\n"
 
-#: src/merge/mkvmerge.cpp:3054
+#: src/merge/mkvmerge.cpp:3068
 #, no-c-format, c++-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
 msgstr[0] "Skanner {0} filer i {1} spilleliste.\n"
 msgstr[1] "Skanner {0} filer i {1} spillelister.\n"
 
-#: src/merge/mkvmerge.cpp:3094
+#: src/merge/mkvmerge.cpp:3108
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "Ferdig med å skanne spillelister.\n"
 
-#: src/merge/mkvmerge.cpp:3140
+#: src/merge/mkvmerge.cpp:3154
 #, no-c-format, c++-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
 msgstr[0] "Bare {0} kapittel funnet i kildefiler og kapittelfiler"
 msgstr[1] "Bare {0} kapitler funnet i kildefiler og kapittelfiler."
 
-#: src/merge/mkvmerge.cpp:3141
+#: src/merge/mkvmerge.cpp:3155
 #, no-c-format
 msgid "There are no chapters in source files & chapter files."
 msgstr "Det er ingen kapitler i kildefiler og kapittelfiler."
 
-#: src/merge/mkvmerge.cpp:3216
+#: src/merge/mkvmerge.cpp:3230
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Det oppstod et unntak ved skriving av målfilen."
 
-#: src/merge/mkvmerge.cpp:3216
+#: src/merge/mkvmerge.cpp:3230
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Stasjonen kan være full."
 
-#: src/merge/mkvmerge.cpp:3216
+#: src/merge/mkvmerge.cpp:3230
 #, no-c-format
 msgid "Exception details:"
 msgstr "Detaljer om unntak:"
 
-#: src/merge/mkvmerge.cpp:3222
+#: src/merge/mkvmerge.cpp:3236
 #, no-c-format, c++-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Multipleksing tok {0}.\n"
@@ -8003,138 +8020,138 @@ msgstr "Fremdrift: 100%{0}"
 msgid "filelist_t not found for generic_packetizer_c. {0}\n"
 msgstr "filelist_t ikke funnet for generic_packetizer_c. {0}\n"
 
-#: src/merge/output_control.cpp:726
+#: src/merge/output_control.cpp:727
 #, no-c-format, c++-format
 msgid "The track headers could not be rendered correctly. {0}\n"
 msgstr "Spordatahodene kunne ikke gjengis riktig. {0}\n"
 
-#: src/merge/output_control.cpp:801
+#: src/merge/output_control.cpp:802
 #, no-c-format, c++-format
 msgid "Error reading from the file '{0}'.\n"
 msgstr "Feil ved lesing fra filen '{0}'.\n"
 
-#: src/merge/output_control.cpp:967
-#: src/merge/output_control.cpp:977
+#: src/merge/output_control.cpp:968
+#: src/merge/output_control.cpp:978
 #, no-c-format, c++-format
 msgid "There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"
 msgstr "Det er ingen fil med ID-en '{0}'. Argument for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:973
+#: src/merge/output_control.cpp:974
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Filnr. {0} ('{1}') blir ikke tilføyd. Argumentet for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:981
+#: src/merge/output_control.cpp:982
 #, no-c-format
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Filer kan ikke tilføyes til seg selv. Argumentet for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:995
 #, no-c-format, c++-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Det ble kun gitt delvise tilføyningstilordninger for filnr. {0} ('{1}'). Enten ikke spesifiser noen tilordning (i så fall vil standardtilordningen brukes) eller angi en tilordning for alle spor som skal kopieres.\n"
 
-#: src/merge/output_control.cpp:1013
+#: src/merge/output_control.cpp:1014
 #, no-c-format, c++-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Det ble ikke gitt noen tilføyningstilordning for filnr. {0} ('{1}'). En standardtilordning av {2} vil bli brukt i stedet. Husk det hvis mkvmerge avbryter med en feilmelding om ugyldige '--append-to'-alternativer.\n"
 
-#: src/merge/output_control.cpp:1027
+#: src/merge/output_control.cpp:1028
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Filnr. {0} ('{1}') inneholder ikke et spor med ID-en {2}, eller at sporet ikke skal kopieres. Argumentet for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:1033
+#: src/merge/output_control.cpp:1034
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Filnr. {0} ('{1}') inneholder ikke et spor med ID-en {2}, eller at sporet ikke skal kopieres. Derfor kan ingen spor tilføyes det. Argumentet for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:1043
+#: src/merge/output_control.cpp:1044
 #, no-c-format, c++-format
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "Sporet {0} fra fil nr. {1} ('{2}') skal tilføyes mer enn én gang. Argumentet for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1055
 #, no-c-format, c++-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
 msgstr "Mer enn ett spor skal tilføyes sporet {0} fra filnr. {1} ('{2}'). Argumentet for '--append-to' var ugyldig.\n"
 
-#: src/merge/output_control.cpp:1075
+#: src/merge/output_control.cpp:1076
 #, no-c-format, c++-format
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Spornummeret {0} fra filen '{1}' kan sannsynligvis ikke tilføyes riktig til spornummeret {2} fra filen '{3}': {4} Forsikre deg om at den resulterende filen spilles av riktig hele tiden. Forfatteren av dette programmet vil sannsynligvis ikke gi støtte for avspillingsproblemer med den resulterende filen.\n"
 
-#: src/merge/output_control.cpp:1084
+#: src/merge/output_control.cpp:1085
 #, no-c-format
 msgid "The formats do not match."
 msgstr "Formatene samsvarer ikke."
 
-#: src/merge/output_control.cpp:1085
+#: src/merge/output_control.cpp:1086
 #, no-c-format
 msgid "The track parameters do not match."
 msgstr "Sporparametrene stemmer ikke overens."
 
-#: src/merge/output_control.cpp:1086
+#: src/merge/output_control.cpp:1087
 #, no-c-format
 msgid "Appending tracks of this type is not supported."
 msgstr "Tilføyelse av spor av denne typen støttes ikke."
 
-#: src/merge/output_control.cpp:1087
+#: src/merge/output_control.cpp:1088
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Årsaken er ukjent."
 
-#: src/merge/output_control.cpp:1089
+#: src/merge/output_control.cpp:1090
 #, no-c-format, c++-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "Spornummeret {0} fra filen '{1}' kan ikke tilføyes spornummeret {2} fra filen '{3}'. {4}\n"
 
-#: src/merge/output_control.cpp:1140
+#: src/merge/output_control.cpp:1141
 #, no-c-format
 msgid "Splitting tracks of this type is not supported."
 msgstr "Splitting av spor av denne typen støttes ikke."
 
-#: src/merge/output_control.cpp:1142
+#: src/merge/output_control.cpp:1143
 #, no-c-format, c++-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
 msgstr "Spor ID-en {0} fra filen '{1}' kan ikke splittes. {2}\n"
 
-#: src/merge/output_control.cpp:1392
+#: src/merge/output_control.cpp:1393
 #, no-c-format, c++-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Noen taggelementer mangler (denne feilen burde ikke ha oppstått - en annen lignende feil burde ha oppstått tidligere). {0}\n"
 
-#: src/merge/output_control.cpp:1422
+#: src/merge/output_control.cpp:1423
 #, no-c-format, c++-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Filen '{0}' er åpnet for skriving.\n"
 
-#: src/merge/output_control.cpp:1640
+#: src/merge/output_control.cpp:1641
 #, no-c-format, c++-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "Filen '{0}' ble omdøpt til '{1}'.\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1643
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "Filen '{0}' kunne ikke omdøpes til '{1}'.\n"
 
-#: src/merge/output_control.cpp:1678
+#: src/merge/output_control.cpp:1679
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Signaloppføringene (indeksen) skrives...\n"
 
-#: src/merge/output_control.cpp:1795
+#: src/merge/output_control.cpp:1796
 #, no-c-format, c++-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Dette burde VIRKELIG ikke ha skjedd. Plassen reservert for det første metasøk-elementet var for liten. Størrelse som trengs {0}. {1}\n"
 
-#: src/merge/output_control.cpp:1882
+#: src/merge/output_control.cpp:1883
 #, no-c-format, c++-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Kunne ikke finne gptzr ved tilføying. {0}\n"
 
-#: src/merge/output_control.cpp:1956
+#: src/merge/output_control.cpp:1957
 #, no-c-format, c++-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Tilføyer spor {0} fra filnr. {1} ('{2}') til spor {3} fra filnr. {4} ('{5}').\n"
@@ -14410,46 +14427,52 @@ msgid "Tells mkvmerge not to write the 'date' field in the segment information h
 msgstr "Ber mkvmerge ikke skrive 'dato'-feltet i segmentinformasjonsdatahodene."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
 msgstr "Dette feltet er normalt satt til datoen filen ble opprettet."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
+#, fuzzy, no-c-format
+msgid "Sets the 'date' field (UTC or with a time zone offset) in the segment information headers."
+msgstr "Ber mkvmerge ikke skrive 'dato'-feltet i segmentinformasjonsdatahodene."
+
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "Tvinger tidsstempelskaleringsfaktoren til den gitte verdien."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Du må angi en verdi mellom 1000 og 10000000 eller den magiske verdien -1."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
 msgstr "Normalt vil mkvmerge bruke en verdi på 1000000 som betyr at tidsstempler og varighet vil ha en presisjon på 1ms."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "For filer som ikke vil inneholde et videospor, men minst ett lydspor vil mkvmerge automatisk velge en tidsstempelskaleringsfaktor slik at alle tidsstempler og varigheter har en presisjon på én sample."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
 #, no-c-format
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "Dette fører til større etterprosessering, men tillater presis søking og utvinning."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
 msgstr "Hvis den magiske verdien -1 brukes, vil mkvmerge bruke samplepresisjon selv om et videospor er til stede."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
 msgid "Generate new random track UIDs instead of keeping existing ones."
 msgstr "Generer nye tilfeldige spor-UID-er i stedet for å beholde eksisterende."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
 #, no-c-format
 msgid "When given, this option applies to all source files."
 msgstr "Når det er angitt, gjelder dette alternativet for alle kildefiler."
@@ -16016,9 +16039,9 @@ msgstr "Prosessen blir avbrutt."
 #: src/propedit/change.cpp:151
 #: src/propedit/change.cpp:160
 #: src/propedit/change.cpp:161
-#: src/propedit/change.cpp:213
-#: src/propedit/change.cpp:299
-#: src/propedit/change.cpp:343
+#: src/propedit/change.cpp:173
+#: src/propedit/change.cpp:252
+#: src/propedit/change.cpp:296
 #: src/propedit/options.cpp:179
 #: src/propedit/propedit.cpp:60
 #: src/propedit/track_target.cpp:200
@@ -16675,62 +16698,62 @@ msgstr "Egenskapsverdien er ikke en gyldig binær spesifikasjon, eller den er ik
 msgid "The property value is not a valid binary spec in '{0}'. {1}\n"
 msgstr "Egenskapsverdien er ikke en gyldig binær spesifikasjon i '{0}'. {1}\n"
 
-#: src/propedit/change.cpp:210
+#: src/propedit/change.cpp:170
 #, no-c-format, c++-format
 msgid "The property value is not a valid date & time string in '{0}'."
 msgstr "Egenskapsverdien er ikke en gyldig dato- og klokkeslettstreng i '{0}'."
 
-#: src/propedit/change.cpp:211
+#: src/propedit/change.cpp:171
 #, no-c-format
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."
 msgstr "Det gjenkjente formatet er 'YYYY-mm-ddTHH:MM:SS+zz:zz': året, måned, dag, bokstav 'T', timer, minutter, sekunder og tidssonens forskyvning fra UTC; eksempel: 2017-03-28T17:28:00-02:00."
 
-#: src/propedit/change.cpp:212
+#: src/propedit/change.cpp:172
 #, no-c-format
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
 msgstr "Bokstaven 'Z' kan brukes i stedet for tidssonens forskyvning fra UTC for å indikere UTC ,som kjent som Zulu-tid."
 
-#: src/propedit/change.cpp:255
+#: src/propedit/change.cpp:208
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. Number of entries deleted: {1}\n"
 msgstr "Endring for '{0}' utført. Antall oppføringer slettet: {1}\n"
 
-#: src/propedit/change.cpp:287
+#: src/propedit/change.cpp:240
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. No property of this type found. One entry added.\n"
 msgstr "Endring for '{0}' utført. Ingen egenskap av denne typen funnet. Én oppføring lagt til.\n"
 
-#: src/propedit/change.cpp:293
+#: src/propedit/change.cpp:246
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. Number of entries set: {1}.\n"
 msgstr "Endring for '{0}' utført. Antall oppføringer satt: {1}.\n"
 
-#: src/propedit/change.cpp:299
+#: src/propedit/change.cpp:252
 #, no-c-format, c++-format
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Denne egenskapen er unik. Flere forekomster kan ikke legges til i '{0}'. {1}\n"
 
-#: src/propedit/change.cpp:304
+#: src/propedit/change.cpp:257
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. One entry added.\n"
 msgstr "Endring for '{0}' utført. En oppføring lagt til.\n"
 
-#: src/propedit/change.cpp:343
+#: src/propedit/change.cpp:296
 #, no-c-format, c++-format
 msgid "This property is mandatory and cannot be deleted in '{0}'. {1}\n"
 msgstr "Denne egenskapen er obligatorisk og kan ikke slettes i '{0}'. {1}\n"
 
-#: src/propedit/change.cpp:361
+#: src/propedit/change.cpp:314
 #, no-c-format
 msgid "missing value"
 msgstr "mangler verdi"
 
-#: src/propedit/change.cpp:368
+#: src/propedit/change.cpp:321
 #, no-c-format
 msgid "missing property name"
 msgstr "mangler egenskapsnavn"
 
-#: src/propedit/change.cpp:394
+#: src/propedit/change.cpp:347
 #, no-c-format, c++-format
 msgid "invalid language tag '{0}': {1}"
 msgstr "ugyldig språktagg '{0}': {1}"

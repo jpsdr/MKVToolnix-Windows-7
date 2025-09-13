@@ -164,61 +164,14 @@ change_c::parse_binary() {
 
 void
 change_c::parse_date_time() {
-  //                      1        2        3                4        5        6           7  8     9        10
-  QRegularExpression re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", QRegularExpression::CaseInsensitiveOption};
-  int64_t year{}, month{}, day{}, hours{}, minutes{}, seconds{};
-  int64_t offset_hours{}, offset_minutes{}, offset_mult{1};
-
-  auto matches = re.match(Q(m_value));
-  auto valid   = matches.hasMatch();
-
-  if (valid)
-    valid = mtx::string::parse_number(to_utf8(matches.captured(1)), year)
-         && mtx::string::parse_number(to_utf8(matches.captured(2)), month)
-         && mtx::string::parse_number(to_utf8(matches.captured(3)), day)
-         && mtx::string::parse_number(to_utf8(matches.captured(4)), hours)
-         && mtx::string::parse_number(to_utf8(matches.captured(5)), minutes)
-         && mtx::string::parse_number(to_utf8(matches.captured(6)), seconds);
-
-  if (valid && (to_utf8(matches.captured(7)) != "Z")) {
-    valid = mtx::string::parse_number(to_utf8(matches.captured(9)),  offset_hours)
-         && mtx::string::parse_number(to_utf8(matches.captured(10)), offset_minutes);
-
-    if (to_utf8(matches.captured(8)) == "-")
-      offset_mult = -1;
-  }
-
-  valid = valid
-    && (year           >= 1900)
-    && (month          >=   1)
-    && (month          <=  12)
-    && (day            >=   1)
-    && (day            <=  31)
-    && (hours          >=   0)
-    && (hours          <=  23)
-    && (minutes        >=   0)
-    && (minutes        <=  59)
-    && (seconds        >=   0)
-    && (seconds        <=  59)
-    && (offset_hours   >=   0)
-    && (offset_hours   <=  23)
-    && (offset_minutes >=   0)
-    && (offset_minutes <=  59);
-
-  if (!valid)
+  auto date_time = QDateTime::fromString(Q(m_value), Qt::ISODate);
+  if (!date_time.isValid())
     mxerror(fmt::format("{0} {1} {2} {3}\n",
                         fmt::format(FY("The property value is not a valid date & time string in '{0}'."), get_spec()),
                         Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."),
                         Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
                         Y("The file has not been modified.")));
-
-  QDate date(year, month, day);
-  QTime time(hours, minutes, seconds);
-
-  m_ui_value              = QDateTime{date, time, QTimeZone::utc()}.toSecsSinceEpoch();
-
-  auto tz_offset_minutes  = (offset_hours * 60 + offset_minutes) * offset_mult;
-  m_ui_value             -= tz_offset_minutes * 60;
+  m_ui_value = date_time.toSecsSinceEpoch();
 }
 
 void

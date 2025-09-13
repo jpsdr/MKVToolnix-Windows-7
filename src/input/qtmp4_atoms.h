@@ -27,7 +27,7 @@ struct PACKED_STRUCTURE mvhd_atom_t {
   uint32_t preferred_rate;
   uint16_t preferred_volume;
   uint8_t  reserved[10];
-  uint8_t  matrix_structure[36];
+  int32_t  display_matrix[3][3];
   uint32_t preview_time;
   uint32_t preview_duration;
   uint32_t poster_time;

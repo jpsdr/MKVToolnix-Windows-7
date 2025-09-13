@@ -530,6 +530,18 @@
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.date">
+     <term><option>--date</option> <replaceable>timestamp</replaceable></term>
+     <listitem>
+      <para>
+       Sets the <literal>DateUTC</literal> field written to the segment information. The timestamp must be ISO 8601-like:
+       <literal>YYYY-mm-ddTHH:MM:SSZ</literal> for UTC or with an offset <literal>&#x00B1;HH:MM</literal> (a space instead of
+       <literal>T</literal> is also accepted), e.g. <literal>2017-03-28T17:28:00Z</literal> or <literal>2017-03-28 17:28:00+02:00</literal>.
+       If used together with <option>--no-date</option>, <option>--no-date</option> takes precedence and no date will be written.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.disable_lacing">
      <term><option>--disable-lacing</option></term>
      <listitem>
