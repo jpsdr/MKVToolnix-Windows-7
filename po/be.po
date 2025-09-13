@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 82.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-09-10 20:01+0200\n"
+"POT-Creation-Date: 2025-09-13 10:41+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Prydespar <prydespar@gmail.com>, 2024-2025\n"
 "Language-Team: Belarusian (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/be/)\n"
@@ -343,13 +343,13 @@ msgid "Unknown option '{0}'.\n"
 msgstr "Невядомы параметр «{0}».\n"
 
 #: src/common/cli_parser.cpp:188
-#: src/merge/mkvmerge.cpp:87
+#: src/merge/mkvmerge.cpp:89
 #, no-c-format
 msgid "Increase verbosity."
 msgstr "Павялічыць дэталізацыю."
 
 #: src/common/cli_parser.cpp:189
-#: src/merge/mkvmerge.cpp:88
+#: src/merge/mkvmerge.cpp:90
 #, no-c-format
 msgid "Suppress status output."
 msgstr "Схаваць вывад стану."
@@ -4205,7 +4205,7 @@ msgstr "Далучэнне #{0}, ідэнтыфікатар {1}, тып MIME {2}
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:197
-#: src/merge/output_control.cpp:1418
+#: src/merge/output_control.cpp:1419
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Файл «{0}» не можа быць адкрыты для запісу: {1}.\n"
@@ -4624,7 +4624,7 @@ msgstr "Не знойдзена сегмента/элемента нулявог
 
 #: src/extract/tracks.cpp:501
 #: src/extract/tracks.cpp:548
-#: src/merge/mkvmerge.cpp:2998
+#: src/merge/mkvmerge.cpp:3012
 #: src/merge/output_control.cpp:354
 #: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:362
@@ -5267,154 +5267,154 @@ msgstr "flac_header_extraction: не ўдалося ініцыялізаваць
 msgid "Could not read the FLAC header packets.\n"
 msgstr "Немагчыма прачытаць загалоўкавыя пакеты FLAC.\n"
 
-#: src/input/r_qtmp4.cpp:112
+#: src/input/r_qtmp4.cpp:113
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Чытальнік Quicktime/MP4: атам «{0}» замалы. Чаканы памер: >= {1}. Фактычны памер: {2}.\n"
 
-#: src/input/r_qtmp4.cpp:139
+#: src/input/r_qtmp4.cpp:140
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Чытальнік Quicktime/MP4: недапушчальны памер участка {0} у {1}.\n"
 
-#: src/input/r_qtmp4.cpp:315
+#: src/input/r_qtmp4.cpp:316
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Чытальнік Quicktime/MP4: не знойдзена аніводнага загалоўкавага атама.\n"
 
-#: src/input/r_qtmp4.cpp:318
+#: src/input/r_qtmp4.cpp:319
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Чытальнік Quicktime/MP4: не знойдзены атам mdat. Даныя відэа не знойдзеныя.\n"
 
-#: src/input/r_qtmp4.cpp:457
+#: src/input/r_qtmp4.cpp:458
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '{0}'. Aborting.\n"
 msgstr "Чытальнік Quicktime/MP4: гэты файл выкарыстоўвае невядомы або непадтрымліваны алгарытм сціскання загалоўкаў «{0}». Перапыненне.\n"
 
-#: src/input/r_qtmp4.cpp:481
+#: src/input/r_qtmp4.cpp:482
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: {0}. Aborting.\n"
 msgstr "Чытальнік Quicktime/MP4: гэты файл выкарыстоўвае сціснутыя загалоўкі, але бібліятэка zlib не можа быць ініцыялізаваная. Код памылкі zlib: {0}. Перапыненне.\n"
 
-#: src/input/r_qtmp4.cpp:486
+#: src/input/r_qtmp4.cpp:487
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Чытальнік Quicktime/MP4: гэты файл выкарыстоўвае сціснутыя загалоўкі, але яны не могуць быць расціснутыя. Код памылкі zlib: {0}. Перапыненне.\n"
 
-#: src/input/r_qtmp4.cpp:490
+#: src/input/r_qtmp4.cpp:491
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size ({0}) was not what is available after uncompressing ({1}).\n"
 msgstr "Чытальнік Quicktime/MP4: гэты файл выкарыстоўвае сціснутыя загалоўкі, але чаканы нясціснуты памер ({0}) не супадае з атрыманым пасля расціскання ({1}).\n"
 
-#: src/input/r_qtmp4.cpp:681
+#: src/input/r_qtmp4.cpp:682
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version {0}.\n"
 msgstr "Чытальнік Quicktime/MP4: атам «медыязагаловак» (mdhd) выкарыстоўвае непадтрымліваную версію {0}.\n"
 
-#: src/input/r_qtmp4.cpp:686
+#: src/input/r_qtmp4.cpp:687
 #, no-c-format
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr ""
 "Чытальнік Quicktime/MP4: параметр «маштаб часу» зададзены на 0. Гэтае значэнне не падтрымліваецца.\n"
 "\n"
 
-#: src/input/r_qtmp4.cpp:1246
+#: src/input/r_qtmp4.cpp:1252
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "MP4-файл «{0}» утрымлівае раздзелы, фармат якіх не распазнаны. Такое часта адбываецца, калі раздзелы не былі закадзіраваныя ў UTF-8. Скарыстайцеся ключом --chapter-charset\", каб задаць кадзіроўку.\n"
 
-#: src/input/r_qtmp4.cpp:1376
+#: src/input/r_qtmp4.cpp:1382
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Чытальнік Quicktime/MP4: поле «памер» замалое ў атаме апісання патока для трэка з ідэнтыфікатарам {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1383
+#: src/input/r_qtmp4.cpp:1389
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Чытальнік Quicktime/MP4: немагчыма прачытаць атам апісання патока для трэка з ідэнтыфікатарам {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1682
+#: src/input/r_qtmp4.cpp:1763
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Чытальнік Quicktime/MP4: немагчыма прачытаць участак {0}/{1} з памерам {2} з пазіцыі {3}. Перапыненне.\n"
 
-#: src/input/r_qtmp4.cpp:1739
+#: src/input/r_qtmp4.cpp:1820
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Не знойдзены загаловак AC-3 у першым кадры; трэк будзе прапушчаны.\n"
 
-#: src/input/r_qtmp4.cpp:2512
+#: src/input/r_qtmp4.cpp:2595
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Чытальнік Quicktime/MP4: пастаянны памер узора і пераменная даўжыні пакуль не падтрымліваюцца. Калі ў вас ёсць узор такога вайла, звяжыцеся з аўтарам.\n"
 
-#: src/input/r_qtmp4.cpp:2917
+#: src/input/r_qtmp4.cpp:3000
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Чытальнік Quicktime/MP4: немагчыма прачытаць атам апісання гука для трэка з ідэнтыфікатарам {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2927
-#: src/input/r_qtmp4.cpp:3011
+#: src/input/r_qtmp4.cpp:3010
+#: src/input/r_qtmp4.cpp:3094
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Чытальнік Quicktime/MP4: трэк з ідэнтыфікатарам {0} мае больш заадзін FourCC. Выкарыстаецца толькі першы ({1}), а не гэты ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:2953
-#: src/input/r_qtmp4.cpp:2967
+#: src/input/r_qtmp4.cpp:3036
+#: src/input/r_qtmp4.cpp:3050
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Чытальнік Quicktime/MP4: немагчыма прачытаць атам пашыранага апісання гука для трэка з ідэнтыфікатарам {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3002
+#: src/input/r_qtmp4.cpp:3085
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Чытальнік Quicktime/MP4: немагчыма прачытаць атам апісання відэа для трэка з ідэнтыфікатарам {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3092
+#: src/input/r_qtmp4.cpp:3175
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Трэк {0}: звесткі AAC немагчыма разабраць.\n"
 
-#: src/input/r_qtmp4.cpp:3605
-#: src/input/r_qtmp4.cpp:3624
-#: src/input/r_qtmp4.cpp:3672
-#: src/input/r_qtmp4.cpp:3765
+#: src/input/r_qtmp4.cpp:3688
+#: src/input/r_qtmp4.cpp:3707
+#: src/input/r_qtmp4.cpp:3755
+#: src/input/r_qtmp4.cpp:3848
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Чытальнік Quicktime/MP4: у трэку {0} адсутнічаюць некаторыя даныя. Ці пашкоджаныя атамы загалоўка?\n"
 
-#: src/input/r_qtmp4.cpp:3641
+#: src/input/r_qtmp4.cpp:3724
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Не знойдзены загаловак DTS у першых кадрах; трэк будзе прапушчаны.\n"
 
-#: src/input/r_qtmp4.cpp:3654
+#: src/input/r_qtmp4.cpp:3737
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Чытальнік Quicktime/MP4: аўдыятрэк {0} выкарыстоўвае непадтрымліваны «ідэнтыфікатар тыпа аб'екта» {1} у атаме esds. Гэты трэк прапускаецца.\n"
 
-#: src/input/r_qtmp4.cpp:3659
+#: src/input/r_qtmp4.cpp:3742
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Чытальнік Quicktime/MP4: трэк AAC {0} не ме атама esds/канфігурацыі дэкадзіроўшчыка. Гэты трэк прапускаецца.\n"
 
-#: src/input/r_qtmp4.cpp:3721
+#: src/input/r_qtmp4.cpp:3804
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Чытальнік Quicktime/MP4: трэк MPEG4 part 10/AVC {0} не мае канфігурацыі дэкадзіроўшчыка. Гэты трэк прапускаецца.\n"
 
-#: src/input/r_qtmp4.cpp:3728
+#: src/input/r_qtmp4.cpp:3811
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Чытальнік Quicktime/MP4: трэк MPEGH part 2/HEVC {0} не мае канфігурацыі дэкадзіроўшчыка. Гэты трэк прапускаецца.\n"
 
-#: src/input/r_qtmp4.cpp:3738
+#: src/input/r_qtmp4.cpp:3821
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Чытальнік Quicktime/MP4: відэатрэк {0} не мае атама ESDS. Гэты трэк прапускаецца.\n"
 
-#: src/input/r_qtmp4.cpp:3744
+#: src/input/r_qtmp4.cpp:3827
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Чытальнік Quicktime/MP4: трэк MPEG4 {0} не ме атама esds/канфігурацыі дэкадзіроўшчыка. Гэты трэк прапускаецца.\n"
@@ -5813,59 +5813,59 @@ msgstr "Файл «{0}»: непадтрымліванык кантэйнер: {
 msgid "The file '{0}' is a non-supported file type ({1}).\n"
 msgstr "Файл «{0}» мае непадтрымліваны тып ({1}).\n"
 
-#: src/merge/mkvmerge.cpp:84
+#: src/merge/mkvmerge.cpp:86
 #, no-c-format
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
 msgstr "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
 
-#: src/merge/mkvmerge.cpp:86
+#: src/merge/mkvmerge.cpp:88
 #, no-c-format
 msgid " Global options:\n"
 msgstr " Глабальныя параметры:\n"
 
-#: src/merge/mkvmerge.cpp:89
+#: src/merge/mkvmerge.cpp:91
 #, no-c-format
 msgid "  -o, --output out         Write to the file 'out'.\n"
 msgstr "  -o, --output out         Захоўвае файл у «out».\n"
 
-#: src/merge/mkvmerge.cpp:90
+#: src/merge/mkvmerge.cpp:92
 #, no-c-format
 msgid "  -w, --webm               Create WebM compliant file.\n"
 msgstr "  -w, --webm - Задае стварыць WebM-сумяшчальны файл.\n"
 
-#: src/merge/mkvmerge.cpp:91
+#: src/merge/mkvmerge.cpp:93
 #, no-c-format
 msgid "  --title <title>          Title for this destination file.\n"
 msgstr "  --title <title>          Задае назву для гэтага файла назначэння.\n"
 
-#: src/merge/mkvmerge.cpp:92
+#: src/merge/mkvmerge.cpp:94
 #, no-c-format
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
 msgstr "  --global-tags <file>     Счытвае глабальныя тэгі з файла XML.\n"
 
-#: src/merge/mkvmerge.cpp:94
+#: src/merge/mkvmerge.cpp:96
 #, no-c-format
 msgid " Chapter handling:\n"
 msgstr " Кіраванне раздзеламі:\n"
 
-#: src/merge/mkvmerge.cpp:95
+#: src/merge/mkvmerge.cpp:97
 #, no-c-format
 msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr ""
 "  --chapters <file>        Атрымлівае звесткі па раздзелах з файла.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:96
+#: src/merge/mkvmerge.cpp:98
 #, no-c-format
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
 msgstr "  --chapter-language <lng> Задае элемент «мова» ў запісах раздзелаў.\n"
 
-#: src/merge/mkvmerge.cpp:97
+#: src/merge/mkvmerge.cpp:99
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
 msgstr "  --chapter-charset <cset> Кадзіроўка для простага файла раздзелаў.\n"
 
-#: src/merge/mkvmerge.cpp:98
+#: src/merge/mkvmerge.cpp:100
 #, no-c-format
 msgid ""
 "  --chapter-sync <d[,o[/p]]>\n"
@@ -5884,7 +5884,7 @@ msgstr ""
 "                           Значэнне p па змаўчанні роўна 1, калі не зададзена.\n"
 "                           Параметры o і p могуць быць лікамі з плаваючай кропкай.\n"
 
-#: src/merge/mkvmerge.cpp:105
+#: src/merge/mkvmerge.cpp:107
 #, no-c-format
 msgid ""
 "  --cue-chapter-name-format <format>\n"
@@ -5896,7 +5896,7 @@ msgstr ""
 "                           файла разметкі Сue ў імі раздзелаў.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:108
+#: src/merge/mkvmerge.cpp:110
 #, no-c-format
 msgid ""
 "  --default-language <lng> Use this language for all tracks unless\n"
@@ -5905,7 +5905,7 @@ msgstr ""
 "  --default-language <lng> Задае выкарыстоўваць гэту мову для ўсіх трэкаў,\n"
 "                           калі яна не перавызначана параметрам --language.\n"
 
-#: src/merge/mkvmerge.cpp:110
+#: src/merge/mkvmerge.cpp:112
 #, no-c-format
 msgid ""
 "  --generate-chapters <mode>\n"
@@ -5916,7 +5916,7 @@ msgstr ""
 "                           Задае аўтаматычна ствараць раздзелы ў адпаведнасці\n"
 "                           з рэжымам (when-appending або interval:<даўжыня>).\n"
 
-#: src/merge/mkvmerge.cpp:113
+#: src/merge/mkvmerge.cpp:115
 #, no-c-format
 msgid ""
 "  --generate-chapters-name-template <template>\n"
@@ -5927,17 +5927,17 @@ msgstr ""
 "                           Шаблон для імяў зноў створаных раздзелаў\n"
 "                           (па змаўчанні: «Раздзел <NUM:2>»).\n"
 
-#: src/merge/mkvmerge.cpp:117
+#: src/merge/mkvmerge.cpp:119
 #, no-c-format
 msgid " Segment info handling:\n"
 msgstr " Апрацоўка звестак аб сегментах:\n"
 
-#: src/merge/mkvmerge.cpp:118
+#: src/merge/mkvmerge.cpp:120
 #, no-c-format
 msgid "  --segmentinfo <file>     Read segment information from the file.\n"
 msgstr "  --segmentinfo <file>     Атрымлівае звесткі аб сегментах з файла.\n"
 
-#: src/merge/mkvmerge.cpp:119
+#: src/merge/mkvmerge.cpp:121
 #, no-c-format
 msgid ""
 "  --segment-uid <SID1,[SID2...]>\n"
@@ -5946,12 +5946,12 @@ msgstr ""
 "  --segment-uid <SID1,[SID2...]>\n"
 "                           Задае UID сегментаў у SID1, SID2 ды г.д.\n"
 
-#: src/merge/mkvmerge.cpp:122
+#: src/merge/mkvmerge.cpp:124
 #, no-c-format
 msgid " General output control (advanced global options):\n"
 msgstr " Асноўныя налады вываду (пашыраныя глабальныя параметры):\n"
 
-#: src/merge/mkvmerge.cpp:123
+#: src/merge/mkvmerge.cpp:125
 #, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
@@ -5968,7 +5968,7 @@ msgstr ""
 "                           адсартаваныя па тыпе (відэа, аўдыя, субцітры\n"
 "                           ды іншае).\n"
 
-#: src/merge/mkvmerge.cpp:129
+#: src/merge/mkvmerge.cpp:131
 #, no-c-format
 msgid ""
 "  --cluster-length <n[ms]> Put at most n data blocks into each cluster.\n"
@@ -5981,27 +5981,27 @@ msgstr ""
 "                           не больш за n мілісекунд даных у кожны\n"
 "                           кластар.\n"
 
-#: src/merge/mkvmerge.cpp:133
+#: src/merge/mkvmerge.cpp:135
 #, no-c-format
 msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  Стварае метаданыя пошуку для кластараў.\n"
 
-#: src/merge/mkvmerge.cpp:134
+#: src/merge/mkvmerge.cpp:136
 #, no-c-format
 msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
 msgstr "  --timestamp-scale <n>    Прымусова задае множнік меткі часу ў n.\n"
 
-#: src/merge/mkvmerge.cpp:135
+#: src/merge/mkvmerge.cpp:137
 #, no-c-format
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Уключыць даўжыню блока для ўсіх блокаў.\n"
 
-#: src/merge/mkvmerge.cpp:136
+#: src/merge/mkvmerge.cpp:138
 #, no-c-format
 msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                Задае не пісаць даныя cue (індэкс).\n"
 
-#: src/merge/mkvmerge.cpp:137
+#: src/merge/mkvmerge.cpp:139
 #, no-c-format
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
@@ -6011,12 +6011,19 @@ msgstr ""
 "                           інфармацыі аб сегментах.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:139
+#: src/merge/mkvmerge.cpp:141
+#, no-c-format
+msgid ""
+"  --date <timestamp>       Set the 'date' field (UTC or with offset,\n"
+"                           e.g. 2017-03-28T17:28:00Z).\n"
+msgstr ""
+
+#: src/merge/mkvmerge.cpp:143
 #, no-c-format
 msgid "  --disable-lacing         Do not use lacing.\n"
 msgstr "  --disable-lacing         Адключыць сшыванне.\n"
 
-#: src/merge/mkvmerge.cpp:140
+#: src/merge/mkvmerge.cpp:144
 #, no-c-format
 msgid ""
 "  --disable-track-statistics-tags\n"
@@ -6025,7 +6032,7 @@ msgstr ""
 "  --disable-track-statistics-tags\n"
 "                           Не пісаць тэгі са статыстыкай трэка.\n"
 
-#: src/merge/mkvmerge.cpp:142
+#: src/merge/mkvmerge.cpp:146
 #, no-c-format
 msgid ""
 "  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
@@ -6034,7 +6041,7 @@ msgstr ""
 "  --disable-language-ietf  Не захоўваць моўныя элементы\n"
 "                           IETF BCP 47 у загалоўках трэкаў, раздзелах і тэгах.\n"
 
-#: src/merge/mkvmerge.cpp:144
+#: src/merge/mkvmerge.cpp:148
 #, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
@@ -6047,7 +6054,7 @@ msgstr ""
 "                           ў іх кананічныя або іх пашыраныя моўныя формы падтэгаў\n"
 "                           або наогул без іх (па змаўчанні: кананічная форма).\n"
 
-#: src/merge/mkvmerge.cpp:148
+#: src/merge/mkvmerge.cpp:152
 #, no-c-format
 msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
@@ -6056,12 +6063,12 @@ msgstr ""
 "  --stop-after-video-ends  Спыняе апрацоўку па заканчэнні асноўнага відэатрэка,\n"
 "                           адкідаючы ўсе астатнія пакеты іншых трэкаў.\n"
 
-#: src/merge/mkvmerge.cpp:151
+#: src/merge/mkvmerge.cpp:155
 #, no-c-format
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
 msgstr " Разбіццё, злучэнне і счапленне файлаў (іншыя глабальныя параметры):\n"
 
-#: src/merge/mkvmerge.cpp:152
+#: src/merge/mkvmerge.cpp:156
 #, no-c-format
 msgid ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
@@ -6071,7 +6078,7 @@ msgstr ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
 "                           Задае ствараць новы файл пасля d байтаў (КБ, МБ, ГБ) або пасля пэўнага часу.\n"
 
-#: src/merge/mkvmerge.cpp:155
+#: src/merge/mkvmerge.cpp:159
 #, no-c-format
 msgid ""
 "  --split timestamps:A[,B...]\n"
@@ -6081,7 +6088,7 @@ msgstr ""
 "  --split timestamps:A[,B...]\n"
 "                           Задае стварыць новы файл пасля кожнай меткі часу A, B ды г.д.\n"
 
-#: src/merge/mkvmerge.cpp:158
+#: src/merge/mkvmerge.cpp:162
 #, no-c-format
 msgid ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
@@ -6092,7 +6099,7 @@ msgstr ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
 "                           Меткі часу, якія захоўваюцца, дыяпазонаў у выглядзе пачатак-канчатак. Новая частка захоўваецца ў асобны файл, або, калі дыяпазон зададзены з прэфіксам \"+\", далучаецца да папярэдняга файла.\n"
 
-#: src/merge/mkvmerge.cpp:162
+#: src/merge/mkvmerge.cpp:166
 #, no-c-format
 msgid ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
@@ -6102,7 +6109,7 @@ msgstr ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           Гэтак жа, як parts:, але startN/endN - нумары кадраў/палёў, а не меткі часу.\n"
 
-#: src/merge/mkvmerge.cpp:165
+#: src/merge/mkvmerge.cpp:169
 #, no-c-format
 msgid ""
 "  --split frames:A[,B...]\n"
@@ -6113,7 +6120,7 @@ msgstr ""
 "                           Задае ствараць новы файл пасля кожнага кадра/поля A, B\n"
 "ды г.д.\n"
 
-#: src/merge/mkvmerge.cpp:168
+#: src/merge/mkvmerge.cpp:172
 #, no-c-format
 msgid ""
 "  --split chapters:all|A[,B...]\n"
@@ -6124,27 +6131,27 @@ msgstr ""
 "                           Задае ствараць новы файл перад кожным раздзелам (калі выбрана all)\n"
 "або перад раздзеламі нумар A, B ды г.д.\n"
 
-#: src/merge/mkvmerge.cpp:171
+#: src/merge/mkvmerge.cpp:175
 #, no-c-format
 msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    Стварыць не больш за n файлаў.\n"
 
-#: src/merge/mkvmerge.cpp:172
+#: src/merge/mkvmerge.cpp:176
 #, no-c-format
 msgid "  --link                   Link splitted files.\n"
 msgstr "  --link                   Звязвае падзеленыя фалйы.\n"
 
-#: src/merge/mkvmerge.cpp:173
+#: src/merge/mkvmerge.cpp:177
 #, no-c-format
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
 msgstr "  --link-to-previous <SID>     Звязвае першы файл з данымі SID.\n"
 
-#: src/merge/mkvmerge.cpp:174
+#: src/merge/mkvmerge.cpp:178
 #, no-c-format
 msgid "  --link-to-next <SID>     Link the last file to the given SID.\n"
 msgstr "  --link-to-next <SID>     Звязвае апошні файл з данымі SID.\n"
 
-#: src/merge/mkvmerge.cpp:175
+#: src/merge/mkvmerge.cpp:179
 #, no-c-format
 msgid ""
 "  --append-to <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
@@ -6158,7 +6165,7 @@ msgstr ""
 "                           якія вызначаюць які трэк ці файл будзе\n"
 "                           далучаны да іншага трэку папярэдняга файла.\n"
 
-#: src/merge/mkvmerge.cpp:180
+#: src/merge/mkvmerge.cpp:184
 #, no-c-format
 msgid ""
 "  --append-mode <file|track>\n"
@@ -6169,34 +6176,34 @@ msgstr ""
 "                           Вызначае якім чынам mkvmerge будзе вызначаць\n"
 "                           часавыя меткі падчас далучэння файлаў.\n"
 
-#: src/merge/mkvmerge.cpp:183
+#: src/merge/mkvmerge.cpp:187
 #, no-c-format
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
 msgstr "  <file1> + <file2> - Дадае file2 да file1.\n"
 
-#: src/merge/mkvmerge.cpp:184
+#: src/merge/mkvmerge.cpp:188
 #, no-c-format
 msgid "  <file1> +<file2>         Same as \"<file1> + <file2>\".\n"
 msgstr "  <file1> +<file2> - Тое ж, што і «<file1> + <file2>».\n"
 
-#: src/merge/mkvmerge.cpp:185
+#: src/merge/mkvmerge.cpp:189
 #, no-c-format
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <file1> <file2> ]      Тое ж, што і «<file1> + <file2>».\n"
 
-#: src/merge/mkvmerge.cpp:186
+#: src/merge/mkvmerge.cpp:190
 #, no-c-format
 msgid ""
 "  = <file>                 Don't look for and concatenate files with the same\n"
 "                           base name but with a different trailing number.\n"
 msgstr "  = <file> - Задае не шукаць, а адразу злучаць файлы з аднолькавым імем і наступным па ліку нумарам.\n"
 
-#: src/merge/mkvmerge.cpp:188
+#: src/merge/mkvmerge.cpp:192
 #, no-c-format
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file> - Тое ж, што і «= <file>».\n"
 
-#: src/merge/mkvmerge.cpp:189
+#: src/merge/mkvmerge.cpp:193
 #, no-c-format
 msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
@@ -6205,12 +6212,12 @@ msgstr ""
 "  ( <file1> <file2> )      Счытаць файлы file1 і file2 аб'яднанымі\n"
 "                           ў адзін вялікі файл.\n"
 
-#: src/merge/mkvmerge.cpp:192
+#: src/merge/mkvmerge.cpp:196
 #, no-c-format
 msgid " Attachment support (more global options):\n"
 msgstr " Падтрымка далучэнняў (іншыя глабальныя параметры):\n"
 
-#: src/merge/mkvmerge.cpp:193
+#: src/merge/mkvmerge.cpp:197
 #, no-c-format
 msgid ""
 "  --attachment-description <desc>\n"
@@ -6220,7 +6227,7 @@ msgstr ""
 "                           Апісанне для наступнага далучэння.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:195
+#: src/merge/mkvmerge.cpp:199
 #, no-c-format
 msgid ""
 "  --attachment-mime-type <mime type>\n"
@@ -6229,7 +6236,7 @@ msgstr ""
 "  --attachment-mime-type <mime type>\n"
 "                           Тып MIME для наступнага далучэння.\n"
 
-#: src/merge/mkvmerge.cpp:197
+#: src/merge/mkvmerge.cpp:201
 #, no-c-format
 msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
@@ -6239,7 +6246,7 @@ msgstr ""
 "                           наступнага далучэння.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:199
+#: src/merge/mkvmerge.cpp:203
 #, no-c-format
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
@@ -6248,7 +6255,7 @@ msgstr ""
 "  --attach-file <file>     Стварае далучэнне файла ўнутры\n"
 "                           файла Matroska.\n"
 
-#: src/merge/mkvmerge.cpp:201
+#: src/merge/mkvmerge.cpp:205
 #, no-c-format
 msgid ""
 "  --attach-file-once <file>\n"
@@ -6259,7 +6266,7 @@ msgstr ""
 "                           Стварае далучэнне файла ў першым\n"
 "                           запісаным файле Matroska.\n"
 
-#: src/merge/mkvmerge.cpp:204
+#: src/merge/mkvmerge.cpp:208
 #, no-c-format
 msgid ""
 "  --enable-legacy-font-mime-types\n"
@@ -6270,12 +6277,12 @@ msgstr ""
 "                           Выкарыстоўваць састарэлыя MIME-тыпы шрыфтоў\n"
 "                           пры даданні новых і існуючых далучэнняў.\n"
 
-#: src/merge/mkvmerge.cpp:208
+#: src/merge/mkvmerge.cpp:212
 #, no-c-format
 msgid " Options for each source file:\n"
 msgstr " Параметры для кожнага зыходнага файла:\n"
 
-#: src/merge/mkvmerge.cpp:209
+#: src/merge/mkvmerge.cpp:213
 #, no-c-format
 msgid ""
 "  -a, --audio-tracks <n,m,...>\n"
@@ -6285,12 +6292,12 @@ msgstr ""
 "  -a, --audio-tracks <n,m,...>\n"
 "                           Задае капіяваць аўдыятрэкі n, m ды г. д. Па змаўчанні: капіююцца ўсе аўдыятрэкі.\n"
 
-#: src/merge/mkvmerge.cpp:212
+#: src/merge/mkvmerge.cpp:216
 #, no-c-format
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
 msgstr "  -A, --no-audio           Задае не капіяваць аўдыятрэкі з гэтага файла.\n"
 
-#: src/merge/mkvmerge.cpp:213
+#: src/merge/mkvmerge.cpp:217
 #, no-c-format
 msgid ""
 "  -d, --video-tracks <n,m,...>\n"
@@ -6301,12 +6308,12 @@ msgstr ""
 "                           Задае капіяваць відэатрэкі n, m ды г. д. Па змаўчанні:\n"
 "                           капіююцца ўсе відэатрэкі.\n"
 
-#: src/merge/mkvmerge.cpp:216
+#: src/merge/mkvmerge.cpp:220
 #, no-c-format
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           Задае не капіяваць відэатрэкі з гэтага файла.\n"
 
-#: src/merge/mkvmerge.cpp:217
+#: src/merge/mkvmerge.cpp:221
 #, no-c-format
 msgid ""
 "  -s, --subtitle-tracks <n,m,...>\n"
@@ -6314,12 +6321,12 @@ msgid ""
 "                           all subtitle tracks.\n"
 msgstr "  -s, --subtitle-tracks <n,m,...> - Задае капіяваць субцітры n, m і г.д. Па змаўчанні: капіруюцца ўсе субцітры.\n"
 
-#: src/merge/mkvmerge.cpp:220
+#: src/merge/mkvmerge.cpp:224
 #, no-c-format
 msgid "  -S, --no-subtitles       Don't copy any subtitle track from this file.\n"
 msgstr "  -S, --no-subtitles     Задае не капіяваць субцітры з гэтага файла.\n"
 
-#: src/merge/mkvmerge.cpp:221
+#: src/merge/mkvmerge.cpp:225
 #, no-c-format
 msgid ""
 "  -b, --button-tracks <n,m,...>\n"
@@ -6330,12 +6337,12 @@ msgstr ""
 "                           Задае капіяваць трэкі кнопак n, m ды г.д. Па змаўчанні:\n"
 "                           капіююцца ўсе трэкі кнопак.\n"
 
-#: src/merge/mkvmerge.cpp:224
+#: src/merge/mkvmerge.cpp:228
 #, no-c-format
 msgid "  -B, --no-buttons         Don't copy any buttons track from this file.\n"
 msgstr "  -B, --no-buttons           Задае не капіяваць трэкі кнопак з гэтага файла.\n"
 
-#: src/merge/mkvmerge.cpp:225
+#: src/merge/mkvmerge.cpp:229
 #, no-c-format
 msgid ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
@@ -6348,17 +6355,17 @@ msgstr ""
 "                           ва ўсе або толькі ў першы файл назначэння. Па змаўчанні:\n"
 "                           капіююцца ўсе далучэнні ва ўсе файлы назначэння.\n"
 
-#: src/merge/mkvmerge.cpp:229
+#: src/merge/mkvmerge.cpp:233
 #, no-c-format
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
 msgstr "  -M, --no-attachments     Задае не капіяваць далучэнні з зыходнага файла.\n"
 
-#: src/merge/mkvmerge.cpp:230
+#: src/merge/mkvmerge.cpp:234
 #, no-c-format
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
 msgstr "  -t, --tags <TID:file> - Атрымлівае тэгі для трэка з XML-файла.\n"
 
-#: src/merge/mkvmerge.cpp:231
+#: src/merge/mkvmerge.cpp:235
 #, no-c-format
 msgid ""
 "  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
@@ -6367,22 +6374,22 @@ msgstr ""
 "  --track-tags <n,m,...>   Задае капіяваць тэгі для трэкаў n, m ды г.д.\n"
 "                           Па змаўчанні: капіююцца тэгі для ўсіх трэкаў.\n"
 
-#: src/merge/mkvmerge.cpp:233
+#: src/merge/mkvmerge.cpp:237
 #, no-c-format
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
 msgstr "  -T, --no-track-tags     Задае не капіяваць тэгі для трэкаў з зыходнага файла.\n"
 
-#: src/merge/mkvmerge.cpp:234
+#: src/merge/mkvmerge.cpp:238
 #, no-c-format
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
 msgstr "  --no-global-tags         Задае не захоўваць глабальныя тэгі з зыходнага файла.\n"
 
-#: src/merge/mkvmerge.cpp:235
+#: src/merge/mkvmerge.cpp:239
 #, no-c-format
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
 msgstr "  --no-chapters            Задае не захоўваць раздзелы з зыходнага файла.\n"
 
-#: src/merge/mkvmerge.cpp:236
+#: src/merge/mkvmerge.cpp:240
 #, no-c-format
 msgid ""
 "  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
@@ -6391,7 +6398,7 @@ msgstr ""
 "  --regenerate-track-uids  Ствараць новыя выпадковыя UID трэкаў замест\n"
 "                           захоўвання існуючых.\n"
 
-#: src/merge/mkvmerge.cpp:238
+#: src/merge/mkvmerge.cpp:242
 #, no-c-format
 msgid ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
@@ -6403,7 +6410,7 @@ msgid ""
 "                           floating point numbers.\n"
 msgstr "  -y, --sync <TID:d[,o[/p]]> - Сінхранізацыя, прыстасаванне метак часу трэка з TID по «d» мілісекунд. Параметры «o/p» служаць для рэгулявання метак часу памнажэннем іх на значэнні «o/p» для выпрашлення лінейных змяшчэнняў. Значэнне «p» па змаўчанні роўна 1, калі не зададзена. Параметры «o» і «p» могуць быць лікамі з плаваючай кропкай.\n"
 
-#: src/merge/mkvmerge.cpp:245
+#: src/merge/mkvmerge.cpp:249
 #, no-c-format
 msgid ""
 "  --default-track-flag <TID[:bool]>\n"
@@ -6414,7 +6421,7 @@ msgstr ""
 "                           Задае пазнаку «трэк па змаўчанні» гэтаму трэку або\n"
 "                           прымусова прыбірае яго, калі булевы параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:248
+#: src/merge/mkvmerge.cpp:252
 #, no-c-format
 msgid ""
 "  --forced-display-flag <TID[:bool]>\n"
@@ -6424,7 +6431,7 @@ msgstr ""
 "  --forced-display-flag <TID[:bool]> - Задае пазнаку «прымусовы паказ» гэтаму трэку\n"
 "                           або прымусова прыбірае яго, калі булевы параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:251
+#: src/merge/mkvmerge.cpp:255
 #, no-c-format
 msgid ""
 "  --track-enabled-flag <TID[:bool]>\n"
@@ -6435,7 +6442,7 @@ msgstr ""
 "                           Задае для гэтага трэка пазнаку «трэк уключаны» або адключае яго,\n"
 "                           калі булевае значэнне роўнае 0.\n"
 
-#: src/merge/mkvmerge.cpp:254
+#: src/merge/mkvmerge.cpp:258
 #, no-c-format
 msgid ""
 "  --hearing-impaired-flag <TID[:bool]>\n"
@@ -6446,7 +6453,7 @@ msgstr ""
 "                           Задае пазнаку «парушэнне слыху» гэтаму трэку\n"
 "                           або прымусова прыбірае яго, калі булевы параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:257
+#: src/merge/mkvmerge.cpp:261
 #, no-c-format
 msgid ""
 "  --visual-impaired-flag <TID[:bool]>\n"
@@ -6457,7 +6464,7 @@ msgstr ""
 "                           Задае пазнаку «для людзей з парушэннямі зроку» гэтаму трэку\n"
 "                           або прымусова прыбірае яго, калі буевы параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:260
+#: src/merge/mkvmerge.cpp:264
 #, no-c-format
 msgid ""
 "  --text-descriptions-flag <TID[:bool]>\n"
@@ -6468,7 +6475,7 @@ msgstr ""
 "                           Задае пазнаку «тэкставыя апісанні» гэтаму трэку\n"
 "                           або прымусова прыбірае яго, калі булевы параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:263
+#: src/merge/mkvmerge.cpp:267
 #, no-c-format
 msgid ""
 "  --original-flag <TID[:bool]>\n"
@@ -6479,7 +6486,7 @@ msgstr ""
 "                           Задае пазнаку «мова арыгінала» гэтаму трэку або\n"
 "                           прымусова прыбірае яго, калі булевы параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:266
+#: src/merge/mkvmerge.cpp:270
 #, no-c-format
 msgid ""
 "  --commentary-flag <TID[:bool]>\n"
@@ -6489,12 +6496,12 @@ msgstr ""
 "  --commentary-flag <TID[:bool]>\n"
 "                           Задае пазнаку «каментарый» гэтаму трэку або прымусова прыбірае яго, калі лагічны параметр роўны 0.\n"
 
-#: src/merge/mkvmerge.cpp:269
+#: src/merge/mkvmerge.cpp:273
 #, no-c-format
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:name>   Задае імя трэка.\n"
 
-#: src/merge/mkvmerge.cpp:270
+#: src/merge/mkvmerge.cpp:274
 #, no-c-format
 msgid ""
 "  --cues <TID:none|iframes|all>\n"
@@ -6504,7 +6511,7 @@ msgstr ""
 "  --cues <TID:none|iframes|all>\n"
 "                           Стварае запісы cue (індэкс) для гэтага трэка: не ствараць / толькі для I-кадраў / для ўсіх кадраў.\n"
 
-#: src/merge/mkvmerge.cpp:273
+#: src/merge/mkvmerge.cpp:277
 #, no-c-format
 msgid ""
 "  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
@@ -6513,12 +6520,12 @@ msgstr ""
 "  --language <TID:lang>    Задае мову трэка (IETF BCP 47/\n"
 "                           RFC 5646 language tag).\n"
 
-#: src/merge/mkvmerge.cpp:275
+#: src/merge/mkvmerge.cpp:279
 #, no-c-format
 msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
 msgstr "  --timestamps <TID:file>  Атрымлівае меткі часу з файла.\n"
 
-#: src/merge/mkvmerge.cpp:276
+#: src/merge/mkvmerge.cpp:280
 #, no-c-format
 msgid ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
@@ -6529,14 +6536,14 @@ msgstr ""
 "                           Прымусова задае даўжыню трэка па змаўчанні ў X.\n"
 "                           X можа быць дробам або лікам з плаваючай кропкай.\n"
 
-#: src/merge/mkvmerge.cpp:280
+#: src/merge/mkvmerge.cpp:284
 #, no-c-format
 msgid " Options that only apply to audio tracks:\n"
 msgstr ""
 " Параметры, якія ўжываюцца толькі да аўдыятрэкаў:\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:281
+#: src/merge/mkvmerge.cpp:285
 #, no-c-format
 msgid ""
 "  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
@@ -6545,7 +6552,7 @@ msgstr ""
 "  --aac-is-sbr <TID[:0|1]> Ці ёсць трэк з дадзеным ID HE-AAC/AAC+/SBR-AAC\n"
 "                           або не. Значэнне «:1» можа быць апушчана.\n"
 
-#: src/merge/mkvmerge.cpp:283
+#: src/merge/mkvmerge.cpp:287
 #, no-c-format
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
@@ -6553,7 +6560,7 @@ msgid ""
 "                           and the extensions.\n"
 msgstr "  --reduce-to-core <TID>   Захоўвае толькі ядро аўдыятрэкаў, якія падтрымліваюць\\v                           пашырэнні HD замест капіявання ядра і пашырэнняў.\n"
 
-#: src/merge/mkvmerge.cpp:286
+#: src/merge/mkvmerge.cpp:290
 #, no-c-format
 msgid ""
 "  --remove-dialog-normalization-gain <TID>\n"
@@ -6563,7 +6570,7 @@ msgstr ""
 "  --remove-dialog-normalization-gain <TID>\n"
 "                           Выдаляе або мінімізуе каэфіцэнт нармалізацыі дыялога,\\v                           змяняючы загалоўкі адўыякадраў.\n"
 
-#: src/merge/mkvmerge.cpp:289
+#: src/merge/mkvmerge.cpp:293
 #, no-c-format
 msgid ""
 "  --audio-emphasis <TID:n|keyword>\n"
@@ -6576,12 +6583,12 @@ msgstr ""
 "                           Може быць лік або ключавое слова\n"
 "                           (поўны спіс гл. у --list-audio-emphasis)\n"
 
-#: src/merge/mkvmerge.cpp:294
+#: src/merge/mkvmerge.cpp:298
 #, no-c-format
 msgid " Options that only apply to video tracks:\n"
 msgstr " Параметры, якія ўжываюцца толькі да відэатрэкаў:\n"
 
-#: src/merge/mkvmerge.cpp:295
+#: src/merge/mkvmerge.cpp:299
 #, no-c-format
 msgid ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
@@ -6591,7 +6598,7 @@ msgstr ""
 "  --forced-display-flag <TID[:bool]>\n"
 "                           Задае пазнаку «прымусова» для гэтага трэка або прымусова выключае з прайгравання, калі 0.\n"
 
-#: src/merge/mkvmerge.cpp:298
+#: src/merge/mkvmerge.cpp:302
 #, no-c-format
 msgid ""
 "  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
@@ -6600,7 +6607,7 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    Прымусова задае выбраны FourCC.\n"
 "                           Працуе толькі для відэатрэкаў.\n"
 
-#: src/merge/mkvmerge.cpp:300
+#: src/merge/mkvmerge.cpp:304
 #, no-c-format
 msgid ""
 "  --aspect-ratio <TID:f|a/b>\n"
@@ -6611,7 +6618,7 @@ msgstr ""
 "                           Задае памеры выявы шляхам разліку\n"
 "                           шырыні і вышыні для дадзеных прапорцый.\n"
 
-#: src/merge/mkvmerge.cpp:303
+#: src/merge/mkvmerge.cpp:307
 #, no-c-format
 msgid ""
 "  --aspect-ratio-factor <TID:f|a/b>\n"
@@ -6626,7 +6633,7 @@ msgstr ""
 "                           затым разлічвае памеры выявы\n"
 "                           зыходзячы з множніка.\n"
 
-#: src/merge/mkvmerge.cpp:308
+#: src/merge/mkvmerge.cpp:312
 #, no-c-format
 msgid ""
 "  --display-dimensions <TID:width>x<height>\n"
@@ -6635,7 +6642,7 @@ msgstr ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           Задае памеры выявы ўручную.\n"
 
-#: src/merge/mkvmerge.cpp:310
+#: src/merge/mkvmerge.cpp:314
 #, no-c-format
 msgid ""
 "  --cropping <TID:left,top,right,bottom>\n"
@@ -6644,7 +6651,7 @@ msgstr ""
 "  --cropping <TID:left,top,right,bottom>\n"
 "                           Задае параметры кадравання.\n"
 
-#: src/merge/mkvmerge.cpp:312
+#: src/merge/mkvmerge.cpp:316
 #, no-c-format
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
@@ -6653,7 +6660,7 @@ msgstr ""
 "  --field-order <TID:n>    Задае парадак відэапалёў\n"
 "                           (гл. дакументацыю па дапушчальных значэннях).\n"
 
-#: src/merge/mkvmerge.cpp:314
+#: src/merge/mkvmerge.cpp:318
 #, no-c-format
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
@@ -6665,7 +6672,7 @@ msgstr ""
 "                           Задае параметр рэжыма стэрэа. Можа\n"
 "                           быць лікам 0 - 14 або ключавым словам (--list-stereo-modes для вываду поўнага спіса).\n"
 
-#: src/merge/mkvmerge.cpp:318
+#: src/merge/mkvmerge.cpp:322
 #, no-c-format
 msgid ""
 "  --color-matrix-coefficients <TID:n>\n"
@@ -6678,7 +6685,7 @@ msgstr ""
 "выкарыстоўваецца для вымання яркасці і колернасці са значэнняў\n"
 "чырвонага, зялёнага і сінега базавых колераў.\n"
 
-#: src/merge/mkvmerge.cpp:322
+#: src/merge/mkvmerge.cpp:326
 #, no-c-format
 msgid ""
 "  --color-bits-per-channel <TID:n>\n"
@@ -6692,7 +6699,7 @@ msgstr ""
 "не зададзенае.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:326
+#: src/merge/mkvmerge.cpp:330
 #, no-c-format
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
@@ -6705,7 +6712,7 @@ msgstr ""
 "                           для кожнага невыдаленага пікселя па гарызанталі\n"
 "                           і па вертыкалі.\n"
 
-#: src/merge/mkvmerge.cpp:330
+#: src/merge/mkvmerge.cpp:334
 #, no-c-format
 msgid ""
 "  --cb-subsample <TID:hori,vert>\n"
@@ -6719,7 +6726,7 @@ msgstr ""
 "                           для кожнага невыдаленага пікселя па гарызанталі і па вертыкалі.\n"
 "                           Гэта дабаўка да --chroma-subsample.\n"
 
-#: src/merge/mkvmerge.cpp:335
+#: src/merge/mkvmerge.cpp:339
 #, no-c-format
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
@@ -6728,12 +6735,12 @@ msgstr ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            Размяшчэнне колернасці гарызантальна/вертыкальна.\n"
 
-#: src/merge/mkvmerge.cpp:337
+#: src/merge/mkvmerge.cpp:341
 #, no-c-format
 msgid "  --color-range <TID:n>   Clipping of the color ranges.\n"
 msgstr "  --color-range <TID:n>   Абмежаванне колеравага дыяпазону.\n"
 
-#: src/merge/mkvmerge.cpp:338
+#: src/merge/mkvmerge.cpp:342
 #, no-c-format
 msgid ""
 "  --color-transfer-characteristics <TID:n>\n"
@@ -6742,7 +6749,7 @@ msgstr ""
 "  --color-transfer-characteristics <TID:n>\n"
 "                           Перадае характарыстыкі відэа.\n"
 
-#: src/merge/mkvmerge.cpp:340
+#: src/merge/mkvmerge.cpp:344
 #, no-c-format
 msgid ""
 "  --color-primaries <TID:n>\n"
@@ -6751,7 +6758,7 @@ msgstr ""
 "  --color-primaries <TID:n>\n"
 "                           Базавы колер відэа.\n"
 
-#: src/merge/mkvmerge.cpp:342
+#: src/merge/mkvmerge.cpp:346
 #, no-c-format
 msgid ""
 "  --max-content-light <TID:n>\n"
@@ -6762,7 +6769,7 @@ msgstr ""
 "                           Максімальная яркасць аднаго пікселя ў кандэлах\n"
 "                           на квадратны метр (кд/м²).\n"
 
-#: src/merge/mkvmerge.cpp:345
+#: src/merge/mkvmerge.cpp:349
 #, no-c-format
 msgid ""
 "  --max-frame-light <TID:n>\n"
@@ -6773,7 +6780,7 @@ msgstr ""
 "                           Максімальная сярэднекадравая асветленасць у кандэлах\n"
 "                           на квадратны метр (кд/м²).\n"
 
-#: src/merge/mkvmerge.cpp:348
+#: src/merge/mkvmerge.cpp:352
 #, no-c-format
 msgid ""
 "  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
@@ -6784,7 +6791,7 @@ msgstr ""
 "                           Каардынаты чырвонага/зялёнага/сінега колера колернасці, як гэта вызначана\n"
 "                           ў CIE 1931.\n"
 
-#: src/merge/mkvmerge.cpp:351
+#: src/merge/mkvmerge.cpp:355
 #, no-c-format
 msgid ""
 "  --white-color-coordinates <TID:x,y>\n"
@@ -6795,7 +6802,7 @@ msgstr ""
 "                           Каардынаты белага колера колернасці, як гэта вызначана\n"
 "                           ў CIE 1931.\n"
 
-#: src/merge/mkvmerge.cpp:354
+#: src/merge/mkvmerge.cpp:358
 #, no-c-format
 msgid ""
 "  --max-luminance <TID:float>\n"
@@ -6806,7 +6813,7 @@ msgstr ""
 "                           Максімальная яркасць у кандэлах на квадратны метр\n"
 "                           (кд/м²).\n"
 
-#: src/merge/mkvmerge.cpp:357
+#: src/merge/mkvmerge.cpp:361
 #, no-c-format
 msgid ""
 "  --min-luminance <TID:float>\n"
@@ -6817,7 +6824,7 @@ msgstr ""
 "                           Мінімальная яркасць у кандэлах на квадратны метр\n"
 "                           (кд/м²).\n"
 
-#: src/merge/mkvmerge.cpp:360
+#: src/merge/mkvmerge.cpp:364
 #, no-c-format
 msgid ""
 "  --projection-type <TID:method>\n"
@@ -6826,7 +6833,7 @@ msgstr ""
 "  --projection-type <TID:method>\n"
 "                           Скарыстаны метад праекцыі (0–3).\n"
 
-#: src/merge/mkvmerge.cpp:362
+#: src/merge/mkvmerge.cpp:366
 #, no-c-format
 msgid ""
 "  --projection-private <TID:data>\n"
@@ -6836,7 +6843,7 @@ msgstr ""
 "  --projection-private <TID:data>\\v                           Унутраныя даныя, якія ўжываюцца толькі да пэўнай\\vпраекцыі (у выглядзе шаснаццатковых лічбаў).\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:365
+#: src/merge/mkvmerge.cpp:369
 #, no-c-format
 msgid ""
 "  --projection-pose-yaw <TID:float>\n"
@@ -6845,7 +6852,7 @@ msgstr ""
 "  --projection-pose-yaw <TID:float>\n"
 "                           Кручэнне праекцыі вакол перпендыкулярнай восі.\n"
 
-#: src/merge/mkvmerge.cpp:367
+#: src/merge/mkvmerge.cpp:371
 #, no-c-format
 msgid ""
 "  --projection-pose-pitch <TID:float>\n"
@@ -6854,19 +6861,19 @@ msgstr ""
 "  --projection-pose-pitch <TID:float>\n"
 "                           Кручэнне праекцыі вакол папярочнай восі.\n"
 
-#: src/merge/mkvmerge.cpp:369
+#: src/merge/mkvmerge.cpp:373
 #, no-c-format
 msgid ""
 "  --projection-pose-roll <TID:float>\n"
 "                           A roll rotation to the projection.\n"
 msgstr "  --projection-pose-roll <TID:float>\\v                           Кручэнне праекцыі вакол падоўжнай восі.\n"
 
-#: src/merge/mkvmerge.cpp:372
+#: src/merge/mkvmerge.cpp:376
 #, no-c-format
 msgid " Options that only apply to text subtitle tracks:\n"
 msgstr " Параметры, якія ўжываюцца толькі для тэкставых субцітраў:\n"
 
-#: src/merge/mkvmerge.cpp:373
+#: src/merge/mkvmerge.cpp:377
 #, no-c-format
 msgid ""
 "  --sub-charset <TID:charset>\n"
@@ -6877,12 +6884,12 @@ msgstr ""
 "                           Вызначае кадзіроўку, у якой тэкставыя субцітры\n"
 "                           чытаюцца для канвертавання ў UTF-8.\n"
 
-#: src/merge/mkvmerge.cpp:377
+#: src/merge/mkvmerge.cpp:381
 #, no-c-format
 msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " Параметры, якія ўжываюцца толькі для VobSub-субцітраў:\n"
 
-#: src/merge/mkvmerge.cpp:378
+#: src/merge/mkvmerge.cpp:382
 #, no-c-format
 msgid ""
 "  --compression <TID:method>\n"
@@ -6893,17 +6900,17 @@ msgstr ""
 "                           Задае метад сціскання, які выкарыстоўваецца\n"
 "                           для дадзенага трэка (none або zlib).\n"
 
-#: src/merge/mkvmerge.cpp:382
+#: src/merge/mkvmerge.cpp:386
 #, no-c-format
 msgid " Other options:\n"
 msgstr " Іншыя параметры\n"
 
-#: src/merge/mkvmerge.cpp:383
+#: src/merge/mkvmerge.cpp:387
 #, no-c-format
 msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr "  -i, --identify <file>    Паказвае звесткі аб зыходным файле.\n"
 
-#: src/merge/mkvmerge.cpp:384
+#: src/merge/mkvmerge.cpp:388
 #, no-c-format
 msgid ""
 "  -J <file>                This is a convenient alias for\n"
@@ -6912,7 +6919,7 @@ msgstr ""
 "  -J <file>                Гэта зручны псеўданім для\n"
 "                --identification-format json --identify file.\n"
 
-#: src/merge/mkvmerge.cpp:386
+#: src/merge/mkvmerge.cpp:390
 #, no-c-format
 msgid ""
 "  -F, --identification-format <format>\n"
@@ -6923,7 +6930,7 @@ msgstr ""
 "                           Задае фармат вынікаў ідэнтыфікацыі\n"
 "                           (text або json; па змаўчанні text).\n"
 
-#: src/merge/mkvmerge.cpp:389
+#: src/merge/mkvmerge.cpp:393
 #, no-c-format
 msgid ""
 "  --probe-range-percentage <percent>\n"
@@ -6936,12 +6943,12 @@ msgstr ""
 "                           ад агульнага памера файла для пэўных тыпаў файлаў\n"
 "                           (па змаўанні: 0.3).\n"
 
-#: src/merge/mkvmerge.cpp:393
+#: src/merge/mkvmerge.cpp:397
 #, no-c-format
 msgid "  -l, --list-types         Lists supported source file types.\n"
 msgstr "  -l, --list-types         Паказвае спіс падтрымліваных тыпаў зыходных файлаў.\n"
 
-#: src/merge/mkvmerge.cpp:394
+#: src/merge/mkvmerge.cpp:398
 #, no-c-format
 msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
@@ -6950,7 +6957,7 @@ msgstr ""
 "  --list-audio-emphasis    Выводзіць спіс усіх падтрымліваных значэнняў\n"
 "                           для параметра --audio-emphasis і іх азначэнне.\n"
 
-#: src/merge/mkvmerge.cpp:396
+#: src/merge/mkvmerge.cpp:400
 #, no-c-format
 msgid ""
 "  --list-languages         Lists all ISO 639 languages and their\n"
@@ -6959,7 +6966,7 @@ msgstr ""
 "  --list-languages         Паказвае ўсе мовы ISO 639 і іх\n"
 "                           коды ISO 639-2.\n"
 
-#: src/merge/mkvmerge.cpp:398
+#: src/merge/mkvmerge.cpp:402
 #, no-c-format
 msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
@@ -6968,24 +6975,24 @@ msgstr ""
 "  --list-stereo-modes      Выводзіць спіс усіх падтрымліваных значэнняў\n"
 "                           для параметра --stereo-mode і іх азначэнне.\n"
 
-#: src/merge/mkvmerge.cpp:400
+#: src/merge/mkvmerge.cpp:404
 #, no-c-format
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
 msgstr "  --capabilities           Выводзіць спіс дадатковых функцый, якія былі ўключаныя пры кампіляцыі mkvmerge.\n"
 
-#: src/merge/mkvmerge.cpp:401
+#: src/merge/mkvmerge.cpp:405
 #, no-c-format
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>    Задае прыярытэт выканання mkvmerge.\n"
 
-#: src/merge/mkvmerge.cpp:402
+#: src/merge/mkvmerge.cpp:406
 #, no-c-format
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
 msgstr ""
 "  --ui-language <code>     Прымусова задае \n"
 "пераклад, які выкарыстоўваецца, як code.\n"
 
-#: src/merge/mkvmerge.cpp:403
+#: src/merge/mkvmerge.cpp:407
 #, no-c-format
 msgid ""
 "  --command-line-charset <charset>\n"
@@ -6994,12 +7001,12 @@ msgstr ""
 "  --command-line-charset <charset>\n"
 "                           Кадзіроўка тэкста ў камандным радку.\n"
 
-#: src/merge/mkvmerge.cpp:405
+#: src/merge/mkvmerge.cpp:409
 #, no-c-format
 msgid "  --output-charset <cset>  Output messages in this charset\n"
 msgstr "  --output-charset <cset>  Задае вывад паведамлення ў гэтай кадзіроўцы.\n"
 
-#: src/merge/mkvmerge.cpp:406
+#: src/merge/mkvmerge.cpp:410
 #, no-c-format
 msgid ""
 "  -r, --redirect-output <file>\n"
@@ -7008,7 +7015,7 @@ msgstr ""
 "  -r, --redirect-output <file>\n"
 "                           Перанакіроўвае ўсе паведамленні ў гэты файл.\n"
 
-#: src/merge/mkvmerge.cpp:408
+#: src/merge/mkvmerge.cpp:412
 #, no-c-format
 msgid ""
 "  --flush-on-close         Flushes all cached data to storage when closing\n"
@@ -7017,7 +7024,7 @@ msgstr ""
 "  --flush-on-close         Ачысціць усе кэшаваныя даныя ў сховішчы\n"
 "                           пры закрыцці файла, адкрытага для запісу.\n"
 
-#: src/merge/mkvmerge.cpp:410
+#: src/merge/mkvmerge.cpp:414
 #, no-c-format
 msgid ""
 "  --abort-on-warnings      Aborts the program after the first warning is\n"
@@ -7026,7 +7033,7 @@ msgstr ""
 "  --abort-on-warnings      Перапыняе праграму пасля з'яўлення першага\n"
 "                           папярэджання.\n"
 
-#: src/merge/mkvmerge.cpp:412
+#: src/merge/mkvmerge.cpp:416
 #, no-c-format
 msgid ""
 "  --deterministic <seed>   Enables the creation of byte-identical files\n"
@@ -7037,34 +7044,34 @@ msgstr ""
 "                           калі выкарыстоўваюцца адны і тыя ж зыходныя файлы з аднолькавымі\n"
 "                           параметрамі і пачатковымі значэннямі.\n"
 
-#: src/merge/mkvmerge.cpp:416
+#: src/merge/mkvmerge.cpp:420
 #, no-c-format
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr "  --debug <topic>          Уключае вывад адладкі для «topic».\n"
 
-#: src/merge/mkvmerge.cpp:417
+#: src/merge/mkvmerge.cpp:421
 #, no-c-format
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>       Уключае эксперыментальную функцыю feature.\n"
 
-#: src/merge/mkvmerge.cpp:418
+#: src/merge/mkvmerge.cpp:422
 #, no-c-format
 msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
 msgstr "  @option-file.json - Атрымлівае дадатковыя параметры каманднага радку з зададзенага файла JSON (гл. дакументацыю).\n"
 
-#: src/merge/mkvmerge.cpp:420
+#: src/merge/mkvmerge.cpp:424
 #, no-c-format
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               Паказвае даведку.\n"
 
-#: src/merge/mkvmerge.cpp:421
+#: src/merge/mkvmerge.cpp:425
 #, no-c-format
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            Паказвае звесткі аб версіі праграмы.\n"
 
-#: src/merge/mkvmerge.cpp:423
+#: src/merge/mkvmerge.cpp:427
 #, no-c-format
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
@@ -7074,537 +7081,535 @@ msgstr ""
 "Азнаёмцеся з дапамогай або HTML-дакументацыяй для mkvmerge, дзе падрабязна \n"
 "падрабязна тлумачацца многія дэталі, якія не бачныя з гэтай кароткай дапамогі.\n"
 
-#: src/merge/mkvmerge.cpp:445
+#: src/merge/mkvmerge.cpp:449
 #, no-c-format, c++-format
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
 msgstr "Аўтаматычнае распазнаванне тыпу MIME для «{0}»: {1}\n"
 
-#: src/merge/mkvmerge.cpp:449
+#: src/merge/mkvmerge.cpp:453
 #, no-c-format, c++-format
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
 msgstr "Не быў зададзены тып MIME для далучэння «{0}», аўтаматычнае вызначэнне не выкананае.\n"
 
-#: src/merge/mkvmerge.cpp:491
+#: src/merge/mkvmerge.cpp:495
 #, no-c-format
 msgid "Supported file types:\n"
 msgstr "Падтрыманыя тыпы файлаў:\n"
 
-#: src/merge/mkvmerge.cpp:518
+#: src/merge/mkvmerge.cpp:522
 #, no-c-format, c++-format
 msgid "The type of file '{0}' is not supported.\n"
 msgstr "Тып файла «{0}» не падтрымліваецца.\n"
 
-#: src/merge/mkvmerge.cpp:572
+#: src/merge/mkvmerge.cpp:576
 #: src/propedit/tag_target.cpp:164
 #, no-c-format, c++-format
 msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
 msgstr "Памылка пры разборы тэгаў у «{0}»: некаторыя абавязковыя элементы адсутнічаюць.\n"
 
-#: src/merge/mkvmerge.cpp:586
+#: src/merge/mkvmerge.cpp:590
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr "«{0}» не з'яўляецца дапушчальным моўным тэгам IETF BCP 47/RFC 5646 у «{1}». Дадатковая інфармацыя ад аналізатара: {2}\n"
 
-#: src/merge/mkvmerge.cpp:646
+#: src/merge/mkvmerge.cpp:650
 #, no-c-format, c++-format
 msgid "Invalid sync option. No track ID specified in '{0} {1}'.\n"
 msgstr "Памылковы параметр сінхранізацыі у {0} {1}. Не зададзены ідэнтыфікатар трэка ў {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:649
-#: src/merge/mkvmerge.cpp:1308
-#: src/merge/mkvmerge.cpp:1471
-#: src/merge/mkvmerge.cpp:1615
-#: src/merge/mkvmerge.cpp:1626
+#: src/merge/mkvmerge.cpp:653
+#: src/merge/mkvmerge.cpp:1312
+#: src/merge/mkvmerge.cpp:1475
+#: src/merge/mkvmerge.cpp:1619
+#: src/merge/mkvmerge.cpp:1630
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '{0} {1}'.\n"
 msgstr "Памылковы ідэнтыфікатар трэка ў {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:654
-#: src/merge/mkvmerge.cpp:690
+#: src/merge/mkvmerge.cpp:658
+#: src/merge/mkvmerge.cpp:694
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'.\n"
 msgstr "Памылковы параметр сінхранізацыі ў  {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:680
+#: src/merge/mkvmerge.cpp:684
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'. The divisor is zero.\n"
 msgstr "Памылковы параметр сінхранізацыі у {0} {1}. Дзельнік роўны нулю.\n"
 
-#: src/merge/mkvmerge.cpp:685
+#: src/merge/mkvmerge.cpp:689
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"
 msgstr "Памылковы параметр сінхранізацыі у {0} {1}. Значэнне лінейнай сінхранізацыі не можа быць роўным або меншым за нуль.\n"
 
-#: src/merge/mkvmerge.cpp:707
+#: src/merge/mkvmerge.cpp:711
 #, no-c-format
 msgid "Aspect ratio factor"
 msgstr "Множнік суадносін бакоў"
 
-#: src/merge/mkvmerge.cpp:707
+#: src/merge/mkvmerge.cpp:711
 #, no-c-format
 msgid "Aspect ratio"
 msgstr "Суадносіны бакоў"
 
-#: src/merge/mkvmerge.cpp:712
+#: src/merge/mkvmerge.cpp:716
 #, no-c-format, c++-format
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: адсутнічае ID трэка ў \"{1} {2}\".\n"
 
-#: src/merge/mkvmerge.cpp:716
+#: src/merge/mkvmerge.cpp:720
 #, no-c-format, c++-format
 msgid "{0}: invalid track ID in '{1} {2}'.\n"
 msgstr "{0}: некарэктны ID трэка ў \"{1} {2}\".\n"
 
-#: src/merge/mkvmerge.cpp:733
+#: src/merge/mkvmerge.cpp:737
 #, no-c-format, c++-format
 msgid "{0}: missing dividend in '{1} {2}'.\n"
 msgstr "{0}: адсутнічае дзеліва ў \"{1} {2}\".\n"
 
-#: src/merge/mkvmerge.cpp:736
+#: src/merge/mkvmerge.cpp:740
 #, no-c-format, c++-format
 msgid "{0}: missing divisor in '{1} {2}'.\n"
 msgstr "{0}: адсутнічае дзельнік ў \"{1} {2}\".\n"
 
-#: src/merge/mkvmerge.cpp:741
+#: src/merge/mkvmerge.cpp:745
 #, no-c-format, c++-format
 msgid "{0}: divisor is 0 in '{1} {2}'.\n"
 msgstr "{0}: дзельнік роўны 0 у \"{1} {2}\".\n"
 
-#: src/merge/mkvmerge.cpp:759
-#: src/merge/mkvmerge.cpp:765
+#: src/merge/mkvmerge.cpp:763
+#: src/merge/mkvmerge.cpp:769
 #, no-c-format, c++-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"
 msgstr "Памеры выявы: не зададзеныя ў выглядзе <TID>:<шырыня>x<вышыня>, напрыклад, 1:640x480 (параметр быў {0}).\n"
 
-#: src/merge/mkvmerge.cpp:784
+#: src/merge/mkvmerge.cpp:788
 #, no-c-format, c++-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '{0}').\n"
 msgstr "Параметры кадравання: дадзеныя не ў форме <TID>:<left>,<top>,<right>,<bottom> напрыклад  0:10,5,10,5 (параметр быў «{0}»).\n"
 
-#: src/merge/mkvmerge.cpp:981
+#: src/merge/mkvmerge.cpp:985
 #, no-c-format, c++-format
 msgid "Unknown format in '{0} {1}'.\n"
 msgstr "Невядомы фармат в {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1014
+#: src/merge/mkvmerge.cpp:1018
 #, no-c-format, c++-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and {0} or one of these keywords: {1} (argument was '{2}').\n"
 msgstr "Параметр стэрэарэжыма не зададзены ў выглядзе <TID>:<n|ключавое слова> дзе n — лік ад 0 да {0} або адно з ключавых слоў {1} (аргумент быў \"{2}\").\n"
 
-#: src/merge/mkvmerge.cpp:1044
-#: src/merge/mkvmerge.cpp:1050
-#: src/merge/mkvmerge.cpp:1056
+#: src/merge/mkvmerge.cpp:1048
+#: src/merge/mkvmerge.cpp:1054
+#: src/merge/mkvmerge.cpp:1060
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid."
 msgstr "Аргумент «{0}» у «{1}» з'яўляецца памылковым."
 
-#: src/merge/mkvmerge.cpp:1045
+#: src/merge/mkvmerge.cpp:1049
 #, no-c-format
 msgid "It does not consist of a track ID and a value separated by a colon."
 msgstr "Даныя не складаюцца з ідэнтыфікатара трэка і значэння, падзеленых двухкроп'ем."
 
-#: src/merge/mkvmerge.cpp:1051
+#: src/merge/mkvmerge.cpp:1055
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid track ID."
 msgstr "«{0}» не з'яўляецца дапушчальным ідэнтыфікатарам трэка."
 
-#: src/merge/mkvmerge.cpp:1057
+#: src/merge/mkvmerge.cpp:1061
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid field order."
 msgstr "«{0}» не з'яўляецца дапушчальным парадкам палёў."
 
-#: src/merge/mkvmerge.cpp:1065
+#: src/merge/mkvmerge.cpp:1069
 #, no-c-format, c++-format
 msgid "Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n"
 msgstr "Параметр рэжыму эмфазісу аўдыя: не зададзены ў форме <TID>:<mode>, дзе рэжым з'яўляецца лікам або ключавым словам з гэага спісу: {0} (аргумент быў «{1}»).\n"
 
-#: src/merge/mkvmerge.cpp:1103
+#: src/merge/mkvmerge.cpp:1107
 #, no-c-format, c++-format
 msgid "Invalid time for '--split' in '--split {0}'. Additional error message: {1}\n"
 msgstr "Памылковы час для --split у --split {0}. Дадатковае паведамленне аб памылках: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1124
+#: src/merge/mkvmerge.cpp:1128
 #, no-c-format, c++-format
 msgid "Invalid time for '--split' in '--split {0}'. Additional error message: {1}.\n"
 msgstr "Памылковы час для --split у --split {0}. Дадатковае паведамленне аб памылках: {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1145
+#: src/merge/mkvmerge.cpp:1149
 #, no-c-format, c++-format
 msgid "Invalid frame for '--split' in '--split {0}'.\n"
 msgstr "Памылковы кадр для --split у --split {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1166
-#: src/merge/mkvmerge.cpp:3143
+#: src/merge/mkvmerge.cpp:1170
+#: src/merge/mkvmerge.cpp:3157
 #, no-c-format, c++-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "Памылковы нумар раздзела {0} для --split у --split {1}: {2}\n"
 
-#: src/merge/mkvmerge.cpp:1166
+#: src/merge/mkvmerge.cpp:1170
 #, no-c-format
 msgid "Not a valid number or not positive."
 msgstr "Лік памылковы або не дадатны."
 
-#: src/merge/mkvmerge.cpp:1172
+#: src/merge/mkvmerge.cpp:1176
 #, no-c-format, c++-format
 msgid "No chapter numbers listed after '--split {0}'.\n"
 msgstr "Не зададзена нумароў раздзелаў пасля --split {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1196
+#: src/merge/mkvmerge.cpp:1200
 #, no-c-format, c++-format
 msgid "Invalid split size in '--split {0}'.\n"
 msgstr "Памылковая памер разбіцця у --split {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1242
+#: src/merge/mkvmerge.cpp:1246
 #, no-c-format, c++-format
 msgid "Invalid format for '--split' in '--split {0}'.\n"
 msgstr "Памылковы фармат для--spli у --split {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1314
+#: src/merge/mkvmerge.cpp:1318
 #, no-c-format, c++-format
 msgid "Invalid boolean option specified in '{0} {1}'.\n"
 msgstr "Памылковы булевы параметр у {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1332
+#: src/merge/mkvmerge.cpp:1336
 #, no-c-format, c++-format
 msgid "Invalid cues option. No track ID specified in '--cues {0}'.\n"
 msgstr "Памылковы параметр Cue. Не зададзены ідэнтыфікатар трэка у --cues {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1336
+#: src/merge/mkvmerge.cpp:1340
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--cues {0}'.\n"
 msgstr "Памылковы ідэнтыфікатар трэка ў --cues {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1339
+#: src/merge/mkvmerge.cpp:1343
 #, no-c-format, c++-format
 msgid "Invalid cues option specified in '--cues {0}'.\n"
 msgstr "Памылкова зададзены параметр Cue у --cues {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1348
+#: src/merge/mkvmerge.cpp:1352
 #, no-c-format, c++-format
 msgid "'{0}' is an unsupported argument for --cues.\n"
 msgstr "«{0}» не з'яўляецца падтрымліваным аргументам для --cues.\n"
 
-#: src/merge/mkvmerge.cpp:1362
+#: src/merge/mkvmerge.cpp:1366
 #, no-c-format, c++-format
 msgid "Invalid compression option. No track ID specified in '--compression {0}'.\n"
 msgstr "Памылковы параметр сціскання. Не зададзены ідэнтыфікатар трэка --compression {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1366
+#: src/merge/mkvmerge.cpp:1370
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--compression {0}'.\n"
 msgstr "Памылковы ідэнтыфікатар трэка ў --compression {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1369
+#: src/merge/mkvmerge.cpp:1373
 #, no-c-format, c++-format
 msgid "Invalid compression option specified in '--compression {0}'.\n"
 msgstr "Памылкова зададзены параметр сціскання у --compression {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1393
+#: src/merge/mkvmerge.cpp:1397
 #, no-c-format, c++-format
 msgid "'{0}' is an unsupported argument for --compression. Available compression methods are: {1}\n"
 msgstr "«{0}» не з'яўляецца падтрымліваным аргументам для --compression. Даступныя метады сціскання: {1}\n"
 
-#: src/merge/mkvmerge.cpp:1405
+#: src/merge/mkvmerge.cpp:1409
 #, no-c-format, c++-format
 msgid "No track ID specified in '--{0} {1}'.\n"
 msgstr "Не зададзены ідэнтыфікатар трэка ў --{0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1408
+#: src/merge/mkvmerge.cpp:1412
 #, no-c-format, c++-format
 msgid "No {0} specified in '--{1} {2}'.\n"
 msgstr "Не вызначана {0}, в --{1} {2}.\n"
 
-#: src/merge/mkvmerge.cpp:1414
+#: src/merge/mkvmerge.cpp:1418
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--{0} {1}'.\n"
 msgstr "Памылковы ідэнтыфікатар трэка ў --{0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1428
+#: src/merge/mkvmerge.cpp:1432
 #, no-c-format
 msgid "language"
 msgstr "мова"
 
-#: src/merge/mkvmerge.cpp:1443
+#: src/merge/mkvmerge.cpp:1447
 #, no-c-format, c++-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset {0}'.\n"
 msgstr "Памылковы параметр субкадзіроўкі. Не зададзены ідэнтыфікатар трэка у --sub-charset {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1447
+#: src/merge/mkvmerge.cpp:1451
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--sub-charset {0}'.\n"
 msgstr "Памылковы ідэнтыфікатар трэка ў --sub-charset {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1450
+#: src/merge/mkvmerge.cpp:1454
 #, no-c-format, c++-format
 msgid "Invalid sub charset specified in '--sub-charset {0}'.\n"
 msgstr "Памылковы параметр субкадзіроўкі ў --sub-charset {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1467
+#: src/merge/mkvmerge.cpp:1471
 #, no-c-format, c++-format
 msgid "Invalid tags option. No track ID specified in '{0} {1}'.\n"
 msgstr "Памылковы параметр тэгаў. Не зададзены ідэнтыфікатар трэка ў {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1474
+#: src/merge/mkvmerge.cpp:1478
 #, no-c-format, c++-format
 msgid "Invalid tags file name specified in '{0} {1}'.\n"
 msgstr "Памылкова зададзена імя файла тэгаў у {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1491
+#: src/merge/mkvmerge.cpp:1495
 #, no-c-format, c++-format
 msgid "FourCC: Missing track ID in '{0} {1}'.\n"
 msgstr "FourCC: адсутнічае ідэнтыфікатар трэка ў «{0} {1}».\n"
 
-#: src/merge/mkvmerge.cpp:1495
+#: src/merge/mkvmerge.cpp:1499
 #, no-c-format, c++-format
 msgid "FourCC: Invalid track ID in '{0} {1}'.\n"
 msgstr "FourCC: памылковы ідэнтыфікатар трэка ў «{0} {1}».\n"
 
-#: src/merge/mkvmerge.cpp:1498
+#: src/merge/mkvmerge.cpp:1502
 #, no-c-format, c++-format
 msgid "The FourCC must be exactly four characters long in '{0} {1}'.\n"
 msgstr "FourCC павінен быць даўжынёй роўна чатыры сімвалы ў {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1519
+#: src/merge/mkvmerge.cpp:1523
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid pair of file ID and track ID in '--track-order {1}'.\n"
 msgstr "«{0}» не з'яўляецца дапушчальнай парай ідэнтыфікатараў файла і трэка ў --track-order {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1522
-#: src/merge/mkvmerge.cpp:1525
+#: src/merge/mkvmerge.cpp:1526
+#: src/merge/mkvmerge.cpp:1529
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "«{0}» не з'яўляецца дапушчальным ідэнтыфікатарам файла ў --track-order {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1565
+#: src/merge/mkvmerge.cpp:1569
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid mapping of file and track IDs in '--append-to {1}'.\n"
 msgstr "«{0}» не з'яўляецца дапушчальным супастаўленнем файлаў і ідэнтыфікатараў трэкаў у --append-to {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1580
+#: src/merge/mkvmerge.cpp:1584
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
 msgstr "«{0}» не з'яўляецца дапушчальным рэжымам дадання ў --append-mode {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1594
+#: src/merge/mkvmerge.cpp:1598
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"
 msgstr "«{0}» не з'яўляецца дапушчальнай паслядоўнасцю ідэнтыфікатара трэка і даўжыні па змаўчанні ў --default-duration {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1598
+#: src/merge/mkvmerge.cpp:1602
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid track ID in '--default-duration {1}'.\n"
 msgstr "«{0}» не з'яўляецца дапушчальным ідэнтыфікатарам трэка ў --default-duration {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1602
+#: src/merge/mkvmerge.cpp:1606
 #, no-c-format, c++-format
 msgid "'{0}' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '{1}'.\n"
 msgstr "«{0}» не распазнаецца як дапушчальны фармат ліку або не ўтрымлівае дапушчальную адзінку вымярэння (s, ms, us, ns, fps, p або i) у «{1}».\n"
 
-#: src/merge/mkvmerge.cpp:1644
+#: src/merge/mkvmerge.cpp:1648
 #, no-c-format, c++-format
 msgid "Invalid track ID specified in '--aac-is-sbr {0}'.\n"
 msgstr "Памылковы ідэнтыфікатар трэка ў --aac-is-sbr {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1647
+#: src/merge/mkvmerge.cpp:1651
 #, no-c-format, c++-format
 msgid "Invalid boolean specified in '--aac-is-sbr {0}'.\n"
 msgstr "Памылкова зададзеная булевая пераменная у --aac-is-sbr {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1663
+#: src/merge/mkvmerge.cpp:1667
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid priority class.\n"
 msgstr "«{0}» не з'яўляецца дапушчальным класам прыярытэта.\n"
 
-#: src/merge/mkvmerge.cpp:1687
+#: src/merge/mkvmerge.cpp:1691
 #, no-c-format, c++-format
 msgid "The previous UID was already given in '{0} {1}'.\n"
 msgstr "Папярэдні UID ужо зададзены ў «{0} {1}».\n"
 
-#: src/merge/mkvmerge.cpp:1692
+#: src/merge/mkvmerge.cpp:1696
 #, no-c-format, c++-format
 msgid "Unknown format for the previous UID in '{0} {1}'.\n"
 msgstr "Невядомы фармат для папярэдняга UID у {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1700
+#: src/merge/mkvmerge.cpp:1704
 #, no-c-format, c++-format
 msgid "The next UID was already given in '{0} {1}'.\n"
 msgstr "Наступны UID ужо зададзены ў «{0} {1}»ы.\n"
 
-#: src/merge/mkvmerge.cpp:1705
+#: src/merge/mkvmerge.cpp:1709
 #, no-c-format, c++-format
 msgid "Unknown format for the next UID in '{0} {1}'.\n"
 msgstr "Невядомы фармат для наступнага UID у {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1717
+#: src/merge/mkvmerge.cpp:1721
 #, no-c-format, c++-format
 msgid "Unknown format for the segment UID '{2}' in '{0} {1}'.\n"
 msgstr "Невядомы фармат сегмента UID \"{2}\" в {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:1729
+#: src/merge/mkvmerge.cpp:1733
 #, no-c-format, c++-format
 msgid "Cluster length '{0}' out of range (100..32000).\n"
 msgstr "Даўжыня кластара «{0}» па-за дыяпазонам (100..32000).\n"
 
-#: src/merge/mkvmerge.cpp:1736
+#: src/merge/mkvmerge.cpp:1740
 #, no-c-format, c++-format
 msgid "Cluster length '{0}' out of range (0..65535).\n"
 msgstr "Даўжыня кластара «{0}» па-за дыяпазонам (0..65535).\n"
 
-#: src/merge/mkvmerge.cpp:1752
+#: src/merge/mkvmerge.cpp:1756
 #, no-c-format, c++-format
 msgid "The attachment ({0}) is too big ({1})."
 msgstr "Далучэнне ({0}) завялікае ({1})."
 
-#: src/merge/mkvmerge.cpp:1753
+#: src/merge/mkvmerge.cpp:1757
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:840
 #: src/mkvtoolnix-gui/merge/attachments.cpp:242
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "Падтрымліваюцца толькі файлы меншы за 2 ГБ."
 
-#: src/merge/mkvmerge.cpp:1756
+#: src/merge/mkvmerge.cpp:1760
 #, no-c-format, c++-format
 msgid "The file '{0}' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Файл «{0}» не можа быць далучаны — ён не існуе або не можа быць прачытаны.\n"
 
-#: src/merge/mkvmerge.cpp:1769
+#: src/merge/mkvmerge.cpp:1773
 #, no-c-format, c++-format
 msgid "The size of attachment '{0}' is 0.\n"
 msgstr "Памер далучэння «{0}» роўны нулю.\n"
 
-#: src/merge/mkvmerge.cpp:1775
+#: src/merge/mkvmerge.cpp:1779
 #, no-c-format, c++-format
 msgid "The attachment '{0}' could not be read.\n"
 msgstr "Далучэнне «{0}» не можа быць прачытана.\n"
 
-#: src/merge/mkvmerge.cpp:1785
+#: src/merge/mkvmerge.cpp:1789
 #, no-c-format, c++-format
 msgid "'--chapter-language' may only be given once in '--chapter-language {0}'.\n"
 msgstr "--chapter-language можа быць зададзены толькі адзін раз у --chapter-language {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1788
+#: src/merge/mkvmerge.cpp:1792
 #, no-c-format, c++-format
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "--chapter-language павінен быць зададзены перад --chapters у --chapter-language {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1798
+#: src/merge/mkvmerge.cpp:1802
 #, no-c-format, c++-format
 msgid "'--chapter-charset' may only be given once in '--chapter-charset {0}'.\n"
 msgstr "--chapter-charset можа быць зададзены толькі адзін раз у --chapter-charset {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1801
+#: src/merge/mkvmerge.cpp:1805
 #, no-c-format, c++-format
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "--chapter-charset павінен быць зададзены перад --chapters у --chapter-charset {0}.\n"
 
-#: src/merge/mkvmerge.cpp:1814
+#: src/merge/mkvmerge.cpp:1818
 #, no-c-format, c++-format
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
 msgstr "Дапускаецца толькі адзін файл раздзелаў у «{0} {1}».\n"
 
-#: src/merge/mkvmerge.cpp:1869
+#: src/merge/mkvmerge.cpp:1873
 #, no-c-format, c++-format
 msgid "Only one segment info file allowed in '{0} {1}'.\n"
 msgstr "Дапускаецца толькі адзін файл звестак аб сегментах у «{0} {1}».\n"
 
-#: src/merge/mkvmerge.cpp:1880
+#: src/merge/mkvmerge.cpp:1884
 #, no-c-format
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "--timestamp-scale скарыстана больш за адзін раз.\n"
 
-#: src/merge/mkvmerge.cpp:1884
+#: src/merge/mkvmerge.cpp:1888
 #, no-c-format
 msgid "The argument to '--timestamp-scale' must be a number.\n"
 msgstr "Аргумент --timestamp-scale\" павінен быць лікам.\n"
 
-#: src/merge/mkvmerge.cpp:1890
+#: src/merge/mkvmerge.cpp:1894
 #, no-c-format
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "Дадзены множнік метак часу ляжыць за межамі дапушчальнага дыяпазону (1 ... 10000000 або -1 для «дакладнасць да аднаго ўзору, нават калі відэатрэк прысутнічае»).\n"
 
-#: src/merge/mkvmerge.cpp:1921
+#: src/merge/mkvmerge.cpp:1925
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid: too many colons in element '{2}'.\n"
 msgstr "Аргумент «{0}» у «{1}» памылковы: зашмат двухкроп'яў у элеменце «{2}».\n"
 
-#: src/merge/mkvmerge.cpp:1925
+#: src/merge/mkvmerge.cpp:1929
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid: '{2}' is not a valid track ID.\n"
 msgstr "Аргумент «{0}» у «{1}» памылковы: «{2}» не з'яўляецца дапушчальным ідэнтыфікатарам трэка.\n"
 
-#: src/merge/mkvmerge.cpp:1934
+#: src/merge/mkvmerge.cpp:1938
 #, no-c-format, c++-format
 msgid "The argument '{0}' to '{1}' is invalid: '{2}' must be either 'all' or 'first'.\n"
 msgstr "Аргумент «{0}» у «{1}» памылковы: «{2}» павінна быць або \"all\", або \"first\".\n"
 
-#: src/merge/mkvmerge.cpp:1962
+#: src/merge/mkvmerge.cpp:1966
 #, no-c-format, c++-format
 msgid "The closing character '{0}' is missing.\n"
 msgstr "Адсутнічае закрывальны сімвал «{0}».\n"
 
-#: src/merge/mkvmerge.cpp:1965
+#: src/merge/mkvmerge.cpp:1969
 #, no-c-format, c++-format
 msgid "No file names were listed between '{0}' and '{1}'.\n"
 msgstr "Няма файаў з імямі між «{0}» і «{1}».\n"
 
-#: src/merge/mkvmerge.cpp:1987
+#: src/merge/mkvmerge.cpp:1991
 #, no-c-format
 msgid "An empty file name is not valid.\n"
 msgstr "Пустое імя файла недапушчальна.\n"
 
-#: src/merge/mkvmerge.cpp:1991
+#: src/merge/mkvmerge.cpp:1995
 #, no-c-format, c++-format
 msgid "The name of the destination file '{0}' and of one of the source files is the same."
 msgstr "Імя файла назначэння «{0}» і аднаго з зыходных файлаў супадаюць."
 
-#: src/merge/mkvmerge.cpp:1992
+#: src/merge/mkvmerge.cpp:1996
 #, no-c-format
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr "Гэта прымусіць mkvmerge перазапісаць адзін з зыходных файлаў."
 
-#: src/merge/mkvmerge.cpp:1996
+#: src/merge/mkvmerge.cpp:2000
 #, no-c-format
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "-A і -a скарыстаны на адным і тым жа зыходным файле.\n"
 
-#: src/merge/mkvmerge.cpp:1999
+#: src/merge/mkvmerge.cpp:2003
 #, no-c-format
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "-D і -d скарыстаны на адным і тым жа зыходным файле.\n"
 
-#: src/merge/mkvmerge.cpp:2002
+#: src/merge/mkvmerge.cpp:2006
 #, no-c-format
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "-S і -s скарыстаны на адным і тым жа зыходным файле.\n"
 
-#: src/merge/mkvmerge.cpp:2005
+#: src/merge/mkvmerge.cpp:2009
 #, no-c-format
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "-B і -b скарыстаны на адным і тым жа зыходным файле.\n"
 
-#: src/merge/mkvmerge.cpp:2026
+#: src/merge/mkvmerge.cpp:2030
 #, no-c-format
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr "Першы файл не можа быць дададзены, бо няма файла, да якога можна было б нешта дадаць.\n"
 
-#: src/merge/mkvmerge.cpp:2037
-#: src/merge/mkvmerge.cpp:3021
+#: src/merge/mkvmerge.cpp:2041
+#: src/merge/mkvmerge.cpp:3035
 #, no-c-format, c++-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "Тып файла «{0}» немагчыма распазнаць.\n"
 
-#: src/merge/mkvmerge.cpp:2078
-#: src/merge/mkvmerge.cpp:2098
-#: src/merge/mkvmerge.cpp:2113
-#: src/merge/mkvmerge.cpp:2182
-#: src/merge/mkvmerge.cpp:2263
-#: src/merge/mkvmerge.cpp:2318
-#: src/merge/mkvmerge.cpp:2517
-#: src/merge/mkvmerge.cpp:2534
-#: src/merge/mkvmerge.cpp:2768
-#: src/merge/mkvmerge.cpp:2775
+#: src/merge/mkvmerge.cpp:2082
+#: src/merge/mkvmerge.cpp:2102
+#: src/merge/mkvmerge.cpp:2117
+#: src/merge/mkvmerge.cpp:2186
+#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2322
+#: src/merge/mkvmerge.cpp:2531
+#: src/merge/mkvmerge.cpp:2548
+#: src/merge/mkvmerge.cpp:2782
 #: src/merge/mkvmerge.cpp:2789
-#: src/merge/mkvmerge.cpp:2796
 #: src/merge/mkvmerge.cpp:2803
 #: src/merge/mkvmerge.cpp:2810
 #: src/merge/mkvmerge.cpp:2817
@@ -7616,63 +7621,65 @@ msgstr "Тып файла «{0}» немагчыма распазнаць.\n"
 #: src/merge/mkvmerge.cpp:2859
 #: src/merge/mkvmerge.cpp:2866
 #: src/merge/mkvmerge.cpp:2873
+#: src/merge/mkvmerge.cpp:2880
 #: src/merge/mkvmerge.cpp:2887
-#: src/merge/mkvmerge.cpp:2894
-#: src/merge/mkvmerge.cpp:2902
-#: src/merge/mkvmerge.cpp:2910
-#: src/merge/mkvmerge.cpp:2920
-#: src/merge/mkvmerge.cpp:2927
+#: src/merge/mkvmerge.cpp:2901
+#: src/merge/mkvmerge.cpp:2908
+#: src/merge/mkvmerge.cpp:2916
+#: src/merge/mkvmerge.cpp:2924
 #: src/merge/mkvmerge.cpp:2934
-#: src/merge/mkvmerge.cpp:2946
-#: src/merge/mkvmerge.cpp:2953
+#: src/merge/mkvmerge.cpp:2941
+#: src/merge/mkvmerge.cpp:2948
 #: src/merge/mkvmerge.cpp:2960
+#: src/merge/mkvmerge.cpp:2967
+#: src/merge/mkvmerge.cpp:2974
 #: src/propedit/propedit_cli_parser.cpp:221
 #, no-c-format, c++-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "«{0}» бракуе аргумента.\n"
 
-#: src/merge/mkvmerge.cpp:2090
+#: src/merge/mkvmerge.cpp:2094
 #, no-c-format, c++-format
 msgid "Invalid identification format in '{0} {1}'.\n"
 msgstr "Памылковы фармат ідэнтыфікацыі {0} {1}.\n"
 
-#: src/merge/mkvmerge.cpp:2105
+#: src/merge/mkvmerge.cpp:2109
 #, no-c-format, c++-format
 msgid "The probe range percentage '{0}' is invalid.\n"
 msgstr "Недапушчальны «{0}» адсоткавы дыяпазон даследавання.\n"
 
-#: src/merge/mkvmerge.cpp:2116
+#: src/merge/mkvmerge.cpp:2120
 #: src/propedit/propedit_cli_parser.cpp:224
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid language normalization mode.\n"
 msgstr "«{0}» не з'яўляецца дапушчальным рэжымам нармалізацыі мовы.\n"
 
-#: src/merge/mkvmerge.cpp:2175
+#: src/merge/mkvmerge.cpp:2179
 #, no-c-format, c++-format
 msgid "The argument '{0}' is not allowed in identification mode.\n"
 msgstr "Аргумент «{0}» не дапускаецца ў рэжыме ідэнтыфікацыі.\n"
 
-#: src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2219
 #, no-c-format, c++-format
 msgid "'{0}' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "«{0}» можа быць скарыстана толькі з імем файла. Ніякія наступныя параметры недапушчальныя, калі выкарыстоўваецца гэты.\n"
 
-#: src/merge/mkvmerge.cpp:2242
+#: src/merge/mkvmerge.cpp:2246
 #, no-c-format, c++-format
 msgid "'{0}' lacks a file name.\n"
 msgstr "«{0}» бракуе імя файла.\n"
 
-#: src/merge/mkvmerge.cpp:2245
+#: src/merge/mkvmerge.cpp:2249
 #, no-c-format
 msgid "Only one destination file allowed.\n"
 msgstr "Дапускаецца толькі адзін файл назначэння.\n"
 
-#: src/merge/mkvmerge.cpp:2252
+#: src/merge/mkvmerge.cpp:2256
 #, no-c-format
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "--generate-chapters-name-template бракуе шаблона імяў.\n"
 
-#: src/merge/mkvmerge.cpp:2293
+#: src/merge/mkvmerge.cpp:2297
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -7681,173 +7688,181 @@ msgstr ""
 "Памылка: не зададзена імя файла назначэння.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:2299
+#: src/merge/mkvmerge.cpp:2303
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Аўтаматычнае ўключэнне рэжыма сумяшчальнасці з WebM у адпаведнасці з пашырэннем файла назначэння.\n"
 
-#: src/merge/mkvmerge.cpp:2331
+#: src/merge/mkvmerge.cpp:2335
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "--title бракуе назвы.\n"
 
-#: src/merge/mkvmerge.cpp:2339
+#: src/merge/mkvmerge.cpp:2343
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "--split бракуе памеру.\n"
 
-#: src/merge/mkvmerge.cpp:2346
+#: src/merge/mkvmerge.cpp:2350
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "--split-max-files бракуе колькасці файлаў.\n"
 
-#: src/merge/mkvmerge.cpp:2349
+#: src/merge/mkvmerge.cpp:2353
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Няправільны аргумент для --split-max-files\".\n"
 
-#: src/merge/mkvmerge.cpp:2358
+#: src/merge/mkvmerge.cpp:2362
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "--link-to-previous бракуе папярэдняга UID.\n"
 
-#: src/merge/mkvmerge.cpp:2365
+#: src/merge/mkvmerge.cpp:2369
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "--link-to-next\" бракуе наступнага UID.\n"
 
-#: src/merge/mkvmerge.cpp:2372
+#: src/merge/mkvmerge.cpp:2376
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "--segment-uid бракуе UID сегмента.\n"
 
-#: src/merge/mkvmerge.cpp:2379
+#: src/merge/mkvmerge.cpp:2383
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "--cluster-length бракуе даўжыні.\n"
 
-#: src/merge/mkvmerge.cpp:2407
+#: src/merge/mkvmerge.cpp:2393
+#, fuzzy, no-c-format
+msgid "'--date' lacks the date & time argument.\n"
+msgstr "--engage бракуе аргумента.\n"
+
+#: src/merge/mkvmerge.cpp:2396
+#, fuzzy, no-c-format, c++-format
+msgid "The value for '--date' is not a valid date & time: '{0}'\n"
+msgstr "Значэнне ў радку «{0}» не з'яўляецца дапушчальнай датай і часам."
+
+#: src/merge/mkvmerge.cpp:2421
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "--attachment-description бракуе апісання.\n"
 
-#: src/merge/mkvmerge.cpp:2410
+#: src/merge/mkvmerge.cpp:2424
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Для аднаго далучэння дадзена больш за адно апісанне.\n"
 
-#: src/merge/mkvmerge.cpp:2416
+#: src/merge/mkvmerge.cpp:2430
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "--attachment-mime-type бракуе тыпу MIME.\n"
 
-#: src/merge/mkvmerge.cpp:2419
+#: src/merge/mkvmerge.cpp:2433
 #, no-c-format, c++-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Зададзена больш за адзін MIME-тып для аднаго далучэння. {0} будзе адхілены, замест яго будзе выкарыстаны {1}.\n"
 
-#: src/merge/mkvmerge.cpp:2426
+#: src/merge/mkvmerge.cpp:2440
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "--attachment-name бракуе імя.\n"
 
-#: src/merge/mkvmerge.cpp:2429
+#: src/merge/mkvmerge.cpp:2443
 #, no-c-format, c++-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Зададзена больш за адно імя для аднаго далучэння. {0}  будзе адхілена, і замест яго будзе выкарыстана «{1}».\n"
 
-#: src/merge/mkvmerge.cpp:2436
+#: src/merge/mkvmerge.cpp:2450
 #, no-c-format, c++-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "«{0}» бракуе імя файла.\n"
 
-#: src/merge/mkvmerge.cpp:2446
+#: src/merge/mkvmerge.cpp:2460
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "--global-tags бракуе імя файла.\n"
 
-#: src/merge/mkvmerge.cpp:2455
+#: src/merge/mkvmerge.cpp:2469
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "--chapter-language бракуе мовы.\n"
 
-#: src/merge/mkvmerge.cpp:2462
+#: src/merge/mkvmerge.cpp:2476
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "--chapter-charset бракуе кадзіроўкі.\n"
 
-#: src/merge/mkvmerge.cpp:2469
-#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2483
+#: src/merge/mkvmerge.cpp:2796
 #, no-c-format, c++-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "«{0}» бракуе затрымкі.\n"
 
-#: src/merge/mkvmerge.cpp:2476
+#: src/merge/mkvmerge.cpp:2490
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "--cue-chapter-name-forma бракуе фармата.\n"
 
-#: src/merge/mkvmerge.cpp:2479
+#: src/merge/mkvmerge.cpp:2493
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "--cue-chapter-name-format павінен быць зададзены перад --chapters.\n"
 
-#: src/merge/mkvmerge.cpp:2486
+#: src/merge/mkvmerge.cpp:2500
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "--chapters бракуе імя файла.\n"
 
-#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2509
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "--generate-chapters бракуе рэжыму.\n"
 
-#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2516
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "--segmentinfo бракуе імя файла.\n"
 
-#: src/merge/mkvmerge.cpp:2529
+#: src/merge/mkvmerge.cpp:2543
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "Параметр --meta-seek-size больш не падтрымліваецца. Прачытайце дакументацыю mkvmerge, асабліва главу пра структуру файлаў Matroska.\n"
 
-#: src/merge/mkvmerge.cpp:2558
-#: src/merge/mkvmerge.cpp:2565
 #: src/merge/mkvmerge.cpp:2572
 #: src/merge/mkvmerge.cpp:2579
 #: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
 #, no-c-format, c++-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "«{0}» бракуе нумароў трэка.\n"
 
-#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2607
 #, no-c-format, c++-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "«{0}» бракуе FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2600
+#: src/merge/mkvmerge.cpp:2614
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "--aspect-ratio бракуе суадносін бакоў.\n"
 
-#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2621
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "--aspect-ratio-factor бракуе множніка прапорцый.\n"
 
-#: src/merge/mkvmerge.cpp:2614
+#: src/merge/mkvmerge.cpp:2628
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "--display-dimensions бракуе памераў.\n"
 
-#: src/merge/mkvmerge.cpp:2621
+#: src/merge/mkvmerge.cpp:2635
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "--cropping бракуе параметраў кадравання.\n"
 
-#: src/merge/mkvmerge.cpp:2628
-#: src/merge/mkvmerge.cpp:2635
 #: src/merge/mkvmerge.cpp:2642
 #: src/merge/mkvmerge.cpp:2649
 #: src/merge/mkvmerge.cpp:2656
@@ -7866,42 +7881,44 @@ msgstr "--cropping бракуе параметраў кадравання.\n"
 #: src/merge/mkvmerge.cpp:2747
 #: src/merge/mkvmerge.cpp:2754
 #: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
 #, no-c-format, c++-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "«{0}» бракуе параметра.\n"
 
-#: src/merge/mkvmerge.cpp:2880
+#: src/merge/mkvmerge.cpp:2894
 #, no-c-format, c++-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "«{0}» бракуе ідэнтыфікатара трэка.\n"
 
-#: src/merge/mkvmerge.cpp:2896
+#: src/merge/mkvmerge.cpp:2910
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:75
 #, no-c-format
 msgid "track name"
 msgstr "назва трэка"
 
-#: src/merge/mkvmerge.cpp:2904
+#: src/merge/mkvmerge.cpp:2918
 #, no-c-format
 msgid "timestamps"
 msgstr "меткі часу"
 
-#: src/merge/mkvmerge.cpp:2913
+#: src/merge/mkvmerge.cpp:2927
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "--track-order можа быць зададзены толькі адзін раз.\n"
 
-#: src/merge/mkvmerge.cpp:2979
+#: src/merge/mkvmerge.cpp:2993
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "--link мае сэнс толькі ў спалучэнні са --split.\n"
 
-#: src/merge/mkvmerge.cpp:2982
+#: src/merge/mkvmerge.cpp:2996
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "Не зададзена імя зыходнага файла.\n"
 
-#: src/merge/mkvmerge.cpp:3054
+#: src/merge/mkvmerge.cpp:3068
 #, no-c-format, c++-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -7910,14 +7927,14 @@ msgstr[1] "Сканаванне {0} файлаў у {1} плэй-лістах.\n
 msgstr[2] "Сканаванне {0} файлаў у {1} плэй-лістах.\n"
 msgstr[3] "Сканаванне {0} файлаў у {1} плэй-лістах.\n"
 
-#: src/merge/mkvmerge.cpp:3094
+#: src/merge/mkvmerge.cpp:3108
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr ""
 "Праверка наяўнасці плэй-лістоў завершаная.\n"
 "\n"
 
-#: src/merge/mkvmerge.cpp:3140
+#: src/merge/mkvmerge.cpp:3154
 #, no-c-format, c++-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -7926,27 +7943,27 @@ msgstr[1] "Толькі {0} раздзелы знойдзены ў зыходн�
 msgstr[2] "Толькі {0} раздзелаў знойдзена ў зыходных файлах і файлах раздзелаў."
 msgstr[3] "Толькі {0} раздзелаў знойдзена ў зыходных файлах і файлах раздзелаў."
 
-#: src/merge/mkvmerge.cpp:3141
+#: src/merge/mkvmerge.cpp:3155
 #, no-c-format
 msgid "There are no chapters in source files & chapter files."
 msgstr "Раздзелы не знойдзеныя ў зыходных файлах і файлах раздзелаў."
 
-#: src/merge/mkvmerge.cpp:3216
+#: src/merge/mkvmerge.cpp:3230
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Адбылася праблема пры запісе файла назначэння."
 
-#: src/merge/mkvmerge.cpp:3216
+#: src/merge/mkvmerge.cpp:3230
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Дыск, магчыма, перапоўнены."
 
-#: src/merge/mkvmerge.cpp:3216
+#: src/merge/mkvmerge.cpp:3230
 #, no-c-format
 msgid "Exception details:"
 msgstr "Звесткі аб выключэнні:"
 
-#: src/merge/mkvmerge.cpp:3222
+#: src/merge/mkvmerge.cpp:3236
 #, no-c-format, c++-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Зліццё {0}.\n"
@@ -8036,138 +8053,138 @@ msgstr "Прагрэс: 100%{0}"
 msgid "filelist_t not found for generic_packetizer_c. {0}\n"
 msgstr "filelist_t не знойдзены для generic_packetizer_c. {0}\n"
 
-#: src/merge/output_control.cpp:726
+#: src/merge/output_control.cpp:727
 #, no-c-format, c++-format
 msgid "The track headers could not be rendered correctly. {0}\n"
 msgstr "Загалоўкі трэка не могуць быць апрацаваныя правільна. {0}\n"
 
-#: src/merge/output_control.cpp:801
+#: src/merge/output_control.cpp:802
 #, no-c-format, c++-format
 msgid "Error reading from the file '{0}'.\n"
 msgstr "Памылка пры чытанні з файла «{0}».\n"
 
-#: src/merge/output_control.cpp:967
-#: src/merge/output_control.cpp:977
+#: src/merge/output_control.cpp:968
+#: src/merge/output_control.cpp:978
 #, no-c-format, c++-format
 msgid "There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"
 msgstr "Няма файла з ідэнтыфікатарам «{0}». Параметр для --append-to памылковы.\n"
 
-#: src/merge/output_control.cpp:973
+#: src/merge/output_control.cpp:974
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Файл № {0} («{1}») не будзе дададзены. Аргумент для --append-to памылковы.\n"
 
-#: src/merge/output_control.cpp:981
+#: src/merge/output_control.cpp:982
 #, no-c-format
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Файл немагчыма далучыць да самога сябе. Аргумент для «--append-to» памылковы.\n"
 
-#: src/merge/output_control.cpp:994
+#: src/merge/output_control.cpp:995
 #, no-c-format, c++-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Зададзенае няпоўнае супастаўленне для файла № {0} ({1}). Або не задавайце супастаўленне наогул (тады будзе выкарыстоўвацца супастаўленне зададзенае па змаўчанні), або задайце для ўсіх трэкаў, якія капіююцца.\n"
 
-#: src/merge/output_control.cpp:1013
+#: src/merge/output_control.cpp:1014
 #, no-c-format, c++-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Не зададзена супастаўленне для файла № {0} ({1}). Будзе выкарыстоўвацца супастаўленне па змаўчанні {2}. Улічыце гэта, калі mkvmerge перапынецца з паведамленнем аб памылцы адосна недапушчальнага параметра --append-to.\n"
 
-#: src/merge/output_control.cpp:1027
+#: src/merge/output_control.cpp:1028
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Файл № {0} («{1}») не ўтрымлівае трэкі з ідэнтыфікатарам {2} або гэты трэк не павінен быць скапіраваны. Аргумент для --append-to памылковы.\n"
 
-#: src/merge/output_control.cpp:1033
+#: src/merge/output_control.cpp:1034
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Файл № {0} («{1}») не ўтрымлівае трэкі з ідэнтыфікатарам {2} або гэты трэк не павінен быць скапіраваны. Таму трэк не можа быць далучаны да яго. Аргумент для --append-to памылковы.\n"
 
-#: src/merge/output_control.cpp:1043
+#: src/merge/output_control.cpp:1044
 #, no-c-format, c++-format
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "Трэк {0} файла нумар {1} ({2}) далучаецца больш чым адзін раз. Параметр для \\--append-to\\ памылковы.\n"
 
-#: src/merge/output_control.cpp:1054
+#: src/merge/output_control.cpp:1055
 #, no-c-format, c++-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
 msgstr "Да трэка {0} павінен быць далучаны больш за адзін трэк з файла № {1} ({2}). Параметр для --append-to памылковы.\n"
 
-#: src/merge/output_control.cpp:1075
+#: src/merge/output_control.cpp:1076
 #, no-c-format, c++-format
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Трэк нумар {0} файла «{1}», імаверна, можа быць далучаны няправільна да трэка нумар {2} файла «{3}»: {4} Пераканайцеся, што атрыманы файл будзе прайгравацца правільна і поўнасцю. Аўтар гэтай праграмы наўрад ці стане аказваць падтрымку пры праблемах прайгравання атрыманага файла.\n"
 
-#: src/merge/output_control.cpp:1084
+#: src/merge/output_control.cpp:1085
 #, no-c-format
 msgid "The formats do not match."
 msgstr "Фарматы не супадаюць."
 
-#: src/merge/output_control.cpp:1085
+#: src/merge/output_control.cpp:1086
 #, no-c-format
 msgid "The track parameters do not match."
 msgstr "Параметры трэкаў не супадаюць."
 
-#: src/merge/output_control.cpp:1086
+#: src/merge/output_control.cpp:1087
 #, no-c-format
 msgid "Appending tracks of this type is not supported."
 msgstr "Далучэнне трэкаў дадзенага тыпу не падтрымліваецца."
 
-#: src/merge/output_control.cpp:1087
+#: src/merge/output_control.cpp:1088
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Прычына невядомая."
 
-#: src/merge/output_control.cpp:1089
+#: src/merge/output_control.cpp:1090
 #, no-c-format, c++-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "Трэк нумар {0} файла «{1}» не можа быць далучаны да трэка нумар{2} файла «{3}». {4}\n"
 
-#: src/merge/output_control.cpp:1140
+#: src/merge/output_control.cpp:1141
 #, no-c-format
 msgid "Splitting tracks of this type is not supported."
 msgstr "Разбіццё трэкў дадзенага тыпа не падтрымліваецца."
 
-#: src/merge/output_control.cpp:1142
+#: src/merge/output_control.cpp:1143
 #, no-c-format, c++-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
 msgstr "Трэк ID {0} з файла «{1}» нельга разбіць. {2}\n"
 
-#: src/merge/output_control.cpp:1392
+#: src/merge/output_control.cpp:1393
 #, no-c-format, c++-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Некаторыя элементы тэга адсутнічаюць (гэтая памылка не павінная адбывацца — іншая падобная памылка мусіла быць раней). {0}\n"
 
-#: src/merge/output_control.cpp:1422
+#: src/merge/output_control.cpp:1423
 #, no-c-format, c++-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Файл «{0}» адкрыты для запісу.\n"
 
-#: src/merge/output_control.cpp:1640
+#: src/merge/output_control.cpp:1641
 #, no-c-format, c++-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "Файл «{0}» быў перайменаваны на «{1}».\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1643
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "Файл «{0}» не можа быць перайменаваны ў «{1}».\n"
 
-#: src/merge/output_control.cpp:1678
+#: src/merge/output_control.cpp:1679
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Пішуцца запісы Cue (індэкс)...\n"
 
-#: src/merge/output_control.cpp:1795
+#: src/merge/output_control.cpp:1796
 #, no-c-format, c++-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Такога НАСАМРЭЧ не павінна адбывацца. Прастора, зарэзерваваная для першага метаэлемента пошуку, замалая. Неабходна месца: {0}. {1}\n"
 
-#: src/merge/output_control.cpp:1882
+#: src/merge/output_control.cpp:1883
 #, no-c-format, c++-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Не ўдалося выявіць gptzr пры далучэнні. {0}\n"
 
-#: src/merge/output_control.cpp:1956
+#: src/merge/output_control.cpp:1957
 #, no-c-format, c++-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Далучэнне трэка {0} з файла № {1} («{2}») да трэка {3} з файла № {4} («{5}»).\n"
@@ -14483,46 +14500,52 @@ msgid "Tells mkvmerge not to write the 'date' field in the segment information h
 msgstr "Задае mkvmerge не запісваць у поле «дата» у загалоўках звестак аб сегментах."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
 msgstr "Звычайна ў гэтым полі паказваецца дата стварэння файла."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
+#, fuzzy, no-c-format
+msgid "Sets the 'date' field (UTC or with a time zone offset) in the segment information headers."
+msgstr "Задае mkvmerge не запісваць у поле «дата» у загалоўках звестак аб сегментах."
+
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "Прымусова задаць множнік меткі часу ў зададзенае значэнне."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Вы павінныя ўвесці значэнне між 1000 і 10000000 або магічнае значэнне -1."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
 msgstr "Звычайна mkvmerge будзе выкарыстоўваць значэнне 1000000, якое азначае, што меткі часу і даўжыні будуць мець дакладнасць 1 мс."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "Для файлаў, якія не будуць утрымліваць відэарэк, але будуць мець хаця б адзін аўдыятрэк, mkvmerge будзе аўтаматычна выбіраць каэфіцэнт маштабу меткі часу такім, каб усе меткі часу і даўжыні мелі дакладнасць аднаго ўзору."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
 #, no-c-format
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "Гэта прыводзіць да большай загружанасці, але дазваляе рабіць дакладныя пошук і выманне."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
 msgstr "Калі выкарыстоўваецца значэнне -1, то mkvmerge будзе выкарыстоўваць дакладнасць да аднаго ўзора нават калі відэатрэк прысутінчае."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 #, no-c-format
 msgid "Generate new random track UIDs instead of keeping existing ones."
 msgstr "Згенераваць новыя выпадковыя UID трэкаў замест захавання існуючых."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
 #, no-c-format
 msgid "When given, this option applies to all source files."
 msgstr "Калі зададзена, то ўжываецца да ўсіх зыходных файлаў."
@@ -16109,9 +16132,9 @@ msgstr "Працэс будзе перапынены."
 #: src/propedit/change.cpp:151
 #: src/propedit/change.cpp:160
 #: src/propedit/change.cpp:161
-#: src/propedit/change.cpp:213
-#: src/propedit/change.cpp:299
-#: src/propedit/change.cpp:343
+#: src/propedit/change.cpp:173
+#: src/propedit/change.cpp:252
+#: src/propedit/change.cpp:296
 #: src/propedit/options.cpp:179
 #: src/propedit/propedit.cpp:60
 #: src/propedit/track_target.cpp:200
@@ -16774,62 +16797,62 @@ msgstr "Значэнне ўласцівасці не з'яўляецца пра�
 msgid "The property value is not a valid binary spec in '{0}'. {1}\n"
 msgstr "Значэнне ўласцівасці не з'яўляецца правільнай двайковай спецыфікацыяй у «{0}». {1}\n"
 
-#: src/propedit/change.cpp:210
+#: src/propedit/change.cpp:170
 #, no-c-format, c++-format
 msgid "The property value is not a valid date & time string in '{0}'."
 msgstr "Значэнне ў радку «{0}» не з'яўляецца дапушчальнай датай і часам."
 
-#: src/propedit/change.cpp:211
+#: src/propedit/change.cpp:171
 #, no-c-format
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."
 msgstr "Распазнавальны фармат YYYY-mm-ddTHH:MM:SS+zz:zz: год, месяц, дзень, літара T, гадзіны, хвіліны, секунды і змяшчэнне часавага пояса ад UTC; напрыклад: 2017-03-28T17:28:00-02:00."
 
-#: src/propedit/change.cpp:212
+#: src/propedit/change.cpp:172
 #, no-c-format
 msgid "The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."
 msgstr "Літару Z можна выкарыстоўваць замест змяшчэння часавага поясу ад UTC, каб задаць UTC, таксама вядомы як час Зулу."
 
-#: src/propedit/change.cpp:255
+#: src/propedit/change.cpp:208
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. Number of entries deleted: {1}\n"
 msgstr "Змяненне для «{0}» выкананае. Выдалена запісаў: {1}\n"
 
-#: src/propedit/change.cpp:287
+#: src/propedit/change.cpp:240
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. No property of this type found. One entry added.\n"
 msgstr "Змяненне для «{0}» выкананае. Не выяўлена ўласцівасцяў гэтага тыпа. Дададзены адзін запіс.\n"
 
-#: src/propedit/change.cpp:293
+#: src/propedit/change.cpp:246
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. Number of entries set: {1}.\n"
 msgstr "Змяненне для «{0}» выкананае. Запісаў зададзена: {1}\n"
 
-#: src/propedit/change.cpp:299
+#: src/propedit/change.cpp:252
 #, no-c-format, c++-format
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Гэтая ўласцівасць унікальная. Больш такіх не можа быць уключана ў «{0}». {1}\n"
 
-#: src/propedit/change.cpp:304
+#: src/propedit/change.cpp:257
 #, no-c-format, c++-format
 msgid "Change for '{0}' executed. One entry added.\n"
 msgstr "Змяненне для «{0}» выкананае. Дададзены адзін запіс.\n"
 
-#: src/propedit/change.cpp:343
+#: src/propedit/change.cpp:296
 #, no-c-format, c++-format
 msgid "This property is mandatory and cannot be deleted in '{0}'. {1}\n"
 msgstr "Гэтая ўласцівасць абавязковая і не можа быць выдаленая ў «{0}». {1}\n"
 
-#: src/propedit/change.cpp:361
+#: src/propedit/change.cpp:314
 #, no-c-format
 msgid "missing value"
 msgstr "адсутнічае значэнне"
 
-#: src/propedit/change.cpp:368
+#: src/propedit/change.cpp:321
 #, no-c-format
 msgid "missing property name"
 msgstr "адсутнічае імя ўласцівасці"
 
-#: src/propedit/change.cpp:394
+#: src/propedit/change.cpp:347
 #, no-c-format, c++-format
 msgid "invalid language tag '{0}': {1}"
 msgstr "недапушчальная метка мовы «{0}»: {1}"
