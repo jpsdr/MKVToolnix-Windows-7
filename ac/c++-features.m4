@@ -57,5 +57,32 @@ AC_DEFUN([AX_CXX17_LIBSTDCPPFS],[
   AC_SUBST(STDCPPFS_LIBS)
 ])
 
+AC_DEFUN([AX_CXX20_BIT_CAST],[
+  AC_CACHE_CHECK([for std::bit_cast], [ax_cv_cxx20_bit_cast],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+        [[#include <bit>]],
+        [[unsigned int v1 = 42;
+          return std::bit_cast<>(v1);]])],
+      [ax_cv_cxx20_bit_cast="yes"],
+      [ax_cv_cxx20_bit_cast="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if test x"$ax_cv_cxx20_bit_cast" == xyes; then
+    AC_DEFINE(HAVE_STD_BIT_CAST, 1, [Define if std::bit_cast is available])
+  else
+    AC_DEFINE(HAVE_STD_BIT_CAST, 0, [Define if std::bit_cast is available])
+  fi
+])
+
 AX_CXX_STD_CXX_FLAG
 AX_CXX17_LIBSTDCPPFS
+AX_CXX20_BIT_CAST
