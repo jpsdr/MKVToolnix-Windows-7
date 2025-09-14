@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
-"POT-Creation-Date: 2025-09-13 10:41+0200\n"
+"POT-Creation-Date: 2025-09-14 11:42+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>, 2016-2025\n"
 "Language-Team: French (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -32,8 +32,8 @@ msgstr "mkvextract"
 #: doc/man/mkvmerge.xml:6
 #: doc/man/mkvpropedit.xml:6
 #: doc/man/mkvtoolnix-gui.xml:6
-msgid "94.0"
-msgstr "94.0"
+msgid "95.0"
+msgstr "95.0"
 
 #. type: Content of the date entity
 #: doc/man/mkvextract.xml:7
@@ -41,7 +41,9 @@ msgstr "94.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-msgid "2025-07-27"
+#, fuzzy
+#| msgid "2025-07-27"
+msgid "2025-09-14"
 msgstr "2025-07-27"
 
 #. type: Content of the mkvmerge entity
@@ -777,7 +779,7 @@ msgstr "La position absolue en octets dans le fichier &matroska; où la grappe c
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:504
 msgid "Inside the &matroska; file the <classname>CueClusterPosition</classname> is relative to the segment's data start offset. The value output by &mkvextract;'s cue extraction mode, however, contains that offset already and is an absolute offset from the beginning of the file."
-msgstr "Dans un fichier &matroska; <classname>CueClusterPosition</classname> est relatif au décalage du début des données de l'élément. Toutefois, la valeur fournie par le mode d'extraction de données de montage de &mkvextract; contient déjà ce décalage et est un décalage absolu depuis le début du fichier."
+msgstr "Dans un fichier &matroska;, <classname>CueClusterPosition</classname> est relatif au décalage de début des données du segment. Toutefois, la valeur fournie par le mode d'extraction de données de montage (CUE) de &mkvextract; contient déjà ce décalage. C'est un décalage absolu depuis le début du fichier."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:512
@@ -1439,7 +1441,7 @@ msgstr "L'option <link linkend=\"mkvinfo.description.verbose\"><option>-v</optio
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:289
 msgid "At level 0 &mkvinfo; will print only the track headers it finds and their types. &mkvinfo; will exit as soon as the headers are parsed completely (more technical: as soon as the first cluster is encountered). In this level the seek head entries and the cues will not be displayed -- even if they're located in front of the track information."
-msgstr "Au niveau 0 &mkvinfo; imprimera seulement les entêtes de piste qu'il trouvera et leurs types. &mkvinfo; quittera dès que les entêtes sont totalement analysées (techniquement dès que la première grappe est rencontrée). Dans ce niveau, les entrées de positionnement de tête et les entrées de montage ne sont pas affichées -- même si elles sont situées devant les informations de piste."
+msgstr "Au niveau 0 &mkvinfo; imprimera seulement les entêtes de piste qu'il trouvera et leurs types. &mkvinfo; quittera dès que les entêtes sont totalement analysées (techniquement dès que la première grappe est rencontrée). Dans ce niveau, les entrées de positionnement de tête et les entrées de montage (CUE) ne sont pas affichées -- même si elles sont situées devant les informations de piste."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:295
@@ -2016,19 +2018,17 @@ msgstr "<option>--no-date</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:527
 msgid "By default &mkvmerge; sets the \"date\" segment information field to the time &amp; date when multiplexing started.  With this option that field is not written at all."
-msgstr "Par défaut &mkvmerge; défini le champ d'information de segment « date » à la date et heure courante quand le multiplexage débute. Avec cette option ce champ n'est pas du tout écrit."
+msgstr "Par défaut &mkvmerge; définit le champ d'informations de segment « date » à la date et heure courante quand le multiplexage débute. Avec cette option ce champ n'est pas du tout écrit."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:534
-#, fuzzy
-#| msgid "<option>--debug</option> <parameter>topic</parameter>"
 msgid "<option>--date</option> <replaceable>timestamp</replaceable>"
-msgstr "<option>--debug</option> <parameter>topic</parameter>"
+msgstr "<option>--date</option> <replaceable>timestamp</replaceable>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:537
 msgid "Sets the <literal>DateUTC</literal> field written to the segment information. The timestamp must be ISO 8601-like: <literal>YYYY-mm-ddTHH:MM:SSZ</literal> for UTC or with an offset <literal>&#x00B1;HH:MM</literal> (a space instead of <literal>T</literal> is also accepted), e.g. <literal>2017-03-28T17:28:00Z</literal> or <literal>2017-03-28 17:28:00+02:00</literal>.  If used together with <option>--no-date</option>, <option>--no-date</option> takes precedence and no date will be written."
-msgstr ""
+msgstr "Définit le champ <literal>DateUTC</literal> écrit dans les informations de segment. L'horodatage doit être conforme à ISO 8601 : <literal>YYYY-mm-ddTHH:MM:SSZ</literal> pour UTC ou avec un décalage <literal>&#x00B1;HH:MM</literal> (une espace au lieu de <literal>T</literal> est aussi acceptée), par ex. <literal>2017-03-28T17:28:00Z</literal> ou <literal>2017-03-28 17:28:00+02:00</literal>. Si utilisé avec <option>--no-date</option>, <option>--no-date</option> sera prioritaire et aucune date ne sera écrite."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:546
@@ -3625,7 +3625,7 @@ msgstr "<option>--deterministic</option> <parameter>seed</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2338
 msgid "Enables the creation of byte-identical files if the same version of &mkvmerge; is used with the same source files, the same set of options and the same seed.  Note that the \"date\" segment information field is not written in this mode."
-msgstr "Permet la création de fichiers identiques à l'octet près si la même version de &mkvmerge; est utilisée avec les mêmes fichiers source, le même jeu d'options et la même amorce. Noter que le champ d'information de segment « date » n'est pas écrit dans ce mode."
+msgstr "Permet la création de fichiers identiques à l'octet près si la même version de &mkvmerge; est utilisée avec les mêmes fichiers source, le même jeu d'options et la même amorce. Noter que le champ d'informations de segment « date » n'est pas écrit dans ce mode."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2342
@@ -5323,12 +5323,12 @@ msgstr "Sélecteurs d'édition"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:581
 msgid "The <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option sets the &matroska; file section (segment information or a certain track's headers) that all following <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> and <link linkend=\"mkvpropedit.description.delete\">delete</link> actions operate on. This stays valid until the next <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option is found. The argument to this option is called the edit selector."
-msgstr "L'option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> définit la section de fichier &matroska; (informations de segment ou certaines entêtes de pistes) sur lesquelles opèrent toutes les actions <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> et <link linkend=\"mkvpropedit.description.delete\">delete</link>. Ceci reste valide jusqu'à temps que l'option suivante <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> soit trouvée. L'argument de cette option est appelé le sélecteur d'édition."
+msgstr "L'option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> définit la section de fichier &matroska; (informations de segment ou certaines entêtes de pistes) sur lesquelles opèrent toutes les actions <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> et <link linkend=\"mkvpropedit.description.delete\">delete</link>. Ceci reste valide jusqu'à temps que l'option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> suivante soit trouvée. L'argument de cette option est appelé le sélecteur d'édition."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvpropedit.xml:595
 msgid "The segment information can be selected with one of these three words: '<literal>info</literal>', '<literal>segment_info</literal>' or '<literal>segmentinfo</literal>'. It contains properties like the segment title or the segment <abbrev>UID</abbrev>."
-msgstr "L' information de segment peut être sélectionnée avec de ces trois mots : '<literal>info</literal>', '<literal>segment_info</literal>' ou '<literal>segmentinfo</literal>'. Il contient des propriétés comme le titre de segment ou l'<abbrev>UID</abbrev> de segment."
+msgstr "Les informations de segment peuvent être sélectionnées avec de ces trois mots : '<literal>info</literal>', '<literal>segment_info</literal>' ou '<literal>segmentinfo</literal>'. Elles contiennent des propriétés comme le titre de segment ou l'<abbrev>UID</abbrev> de segment."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvpropedit.xml:601
@@ -5404,7 +5404,7 @@ msgstr "Sélecteurs de pièce jointe"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:675
 msgid "An attachment selector is used with the two actions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> and <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. It can have one of the following four forms:"
-msgstr "Un sélecteur de pièce jointe est utilisé avec ces deux actions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> et <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. Il peut avoir une des quatre formes suivantes :"
+msgstr "Un sélecteur de pièce jointe est utilisé avec ces deux actions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> et <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. Il peut avoir une des quatre formes suivantes :"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:684
@@ -5419,12 +5419,12 @@ msgstr "Sélection par l'UID (ID unique) de pièce jointe. Dans cette forme, le 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:698
 msgid "Selection by attachment name. In this form the selector is the literal word <literal>name:</literal> followed by the existing attachment's name. If this selector is used with <option>--replace-attachment</option> then colons within the name to match must be escaped as <literal>\\c</literal>."
-msgstr "Sélection par le nom de pièce jointe. Dans cette forme, le sélecteur est le mot littéral <literal>name:</literal> suivi par le nom de la pièce jointe existante. Si ce sélecteur est utilisé avec <option>--replace-attachment</option> alors les deux-points dans le nom à correspondre devront être échappées avec <literal>\\c</literal>."
+msgstr "Sélection par le nom de pièce jointe. Dans cette forme, le sélecteur est le mot littéral <literal>name:</literal> suivi par le nom de la pièce jointe existante. Si ce sélecteur est utilisé avec <option>--replace-attachment</option> alors les deux-points dans le nom à correspondre devront être échappés avec <literal>\\c</literal>."
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:706
 msgid "Selection by MIME type. In this form the selector is the literal word <literal>mime-type:</literal> followed by the existing attachment's MIME type. If this selector is used with <option>--replace-attachment</option> then colons within the MIME type to match must be escaped as <literal>\\c</literal>."
-msgstr "Sélection par le type MIME. Dans cette forme, le sélecteur est le mot littéral <literal>mime-type:</literal> suivi par le type MIME de la pièce jointe existante. Si ce sélecteur est utilisé avec <option>--replace-attachment</option> alors les deux-points dans le type MIME à correspondre devront être échappées avec <literal>\\c</literal>."
+msgstr "Sélection par le type MIME. Dans cette forme, le sélecteur est le mot littéral <literal>mime-type:</literal> suivi par le type MIME de la pièce jointe existante. Si ce sélecteur est utilisé avec <option>--replace-attachment</option> alors les deux-points dans le type MIME à correspondre devront être échappés avec <literal>\\c</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:718
@@ -5434,7 +5434,7 @@ msgstr "Globalement, &mkvpropedit; essaie de faire les choses correctement par d
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:726
 msgid "Additionally there's a new track header property named <option>language-ietf</option> that can be set or removed. Changes to this property only apply to the new \"LanguageIETF\" track header element. A caveat is that the old \"Language\" track header element is a mandatory element in Matroska — meaning even if it isn't present in the file it still has an implied value. When the user only sets the <option>language-ietf</option> property but not the <option>language</option> property, &mkvpropedit; will therefore add the old \"Language\" element in certain cases &amp; set it to <literal>und</literal> (meaning \"undetermined\") as the user didn't specify a value for it."
-msgstr "De plus il existe une nouvelle propriété d'entête de piste nommée <option>language-ietf</option> qui peut être définie ou retirée. Les modifications de cette propriété s'appliquent seulement au nouvel élément d'entête de piste « LanguageIETF ». Il faut noter ici que l'ancien élément d'entête de piste « Language » est un élément requis pour Matroska — ce qui signifie que même absent du fichier, il a une valeur implicite. Quand l'utilisateur définit seulement  la propriété <option>language-ietf</option> mais pas la propriété <option>language</option>, &mkvpropedit; ajoute l'ancien élément « Language » dans certains cas, et la définit à <literal>und</literal> (« undetermined », c'est-à-dire indéterminé) si l'utilisateur n'en a pas spécifié une valeur."
+msgstr "De plus, il existe une nouvelle propriété d'entête de piste nommée <option>language-ietf</option> qui peut être définie ou retirée. Les modifications de cette propriété s'appliquent seulement au nouvel élément d'entête de piste « LanguageIETF ». Il faut noter ici que l'ancien élément d'entête de piste « Language » est un élément requis pour Matroska — ce qui signifie que même absent du fichier, il a une valeur implicite. Quand l'utilisateur définit seulement  la propriété <option>language-ietf</option> mais pas la propriété <option>language</option>, &mkvpropedit; ajoute l'ancien élément « Language » dans certains cas, et la définit à <literal>und</literal> (« undetermined », c'est-à-dire indéterminé) si l'utilisateur n'en a pas spécifié une valeur."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:734
@@ -5454,7 +5454,7 @@ msgstr "Il est possible de choisir la méthode de normalisation appliquée aux s
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:746
 msgid "The following example edits a file called '<literal>movie.mkv</literal>'. It sets the segment title and modifies the language code of an audio and a subtitle track. Note that this example can be shortened by leaving out the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option because editing the segment information element is the default for all options found before the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option anyway."
-msgstr "L'exemple suivant édite un fichier nommé '<literal>movie.mkv</literal>'. Il définit le titre du segment et modifie le code de langue d'une piste audio et d'une piste de sous-titres. Noter que cet exemple peut être simplifié en omettant la 1ère option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> parce que l'édition de l'élément d'information du segment est dans tous les cas l'action par défaut pour toutes les options trouvées avant la 1ère option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>."
+msgstr "L'exemple suivant édite un fichier nommé « <literal>movie.mkv</literal> ». Il définit le titre du segment et modifie le code de langue d'une piste audio et d'une piste de sous-titres. Noter que cet exemple peut être simplifié en omettant la 1ère option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> parce que l'édition de l'élément d'informations du segment est dans tous les cas l'action par défaut pour toutes les options trouvées avant la 1ère option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>."
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:752
@@ -5465,7 +5465,7 @@ msgstr "$ mkvpropedit movie.mkv --edit info --set \"title=The movie\" --edit tra
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:755
 msgid "The second example removes the 'default track flag' from the first subtitle track and sets it for the second one. Note that &mkvpropedit;, unlike &mkvmerge;, does not set the 'default track flag' of other tracks to '0' if it is set to '1' for a different track automatically."
-msgstr "Le deuxième exemple retire l'indicateur « Piste par défaut » de la 1ère piste de sous-titres et le définit pour la 2nde. Noter que &mkvpropedit;, à la différence de &mkvmerge;, ne définit pas l'indicateur « Piste par défaut » des autres pistes à « 0 » s'il est définit automatiquement à « 1 » pour une autres piste."
+msgstr "Le deuxième exemple retire l'indicateur « Piste par défaut » de la 1ère piste de sous-titres et le définit pour la 2nde. Noter que &mkvpropedit;, à la différence de &mkvmerge;, ne définit pas l'indicateur « Piste par défaut » des autres pistes à « 0 » s'il est définit automatiquement à « 1 » pour piste différente."
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:760
@@ -5476,7 +5476,7 @@ msgstr "$ mkvpropedit movie.mkv --edit track:s1 --set flag-default=0 --edit trac
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:763
 msgid "Replacing the tags for the second subtitle track in a file looks like this:"
-msgstr "Remplacer les balises pour la 2nde piste de sous-titres dans un fichier ressemble à ceci :"
+msgstr "Remplacer les balises pour la seconde piste de sous-titres dans un fichier ressemble à ceci :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:766
@@ -5487,7 +5487,7 @@ msgstr "$ mkvpropedit movie.mkv --tags track:s2:new-subtitle-tags.xml"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:769
 msgid "Removing all tags requires leaving out the file name:"
-msgstr "Supprimer toutes les balises nécessite d'omettre le nom de fichier :"
+msgstr "Supprimer toutes les balises nécessite d'omettre le nom de fichier :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:772
@@ -5498,7 +5498,7 @@ msgstr "$ mkvpropedit movie.mkv --tags all:"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:775
 msgid "Replacing the chapters in a file looks like this:"
-msgstr "Remplacer les chapitres dans un fichier ressemble à ceci :"
+msgstr "Remplacer les chapitres dans un fichier ressemble à ceci :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:778
@@ -5509,7 +5509,7 @@ msgstr "$ mkvpropedit movie.mkv --chapters new-chapters.xml"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:781
 msgid "Removing all chapters requires leaving out the file name:"
-msgstr "Suppression de tous les chapitres nécessite d'omettre le nom de fichier :"
+msgstr "Supprimer tous les chapitres nécessite d'omettre le nom de fichier :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:784
@@ -5520,7 +5520,7 @@ msgstr "$ mkvpropedit movie.mkv --chapters ''"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:787
 msgid "Adding a font file (<literal>Arial.ttf</literal>) as an attachment:"
-msgstr "Ajout d'un fichier de police (<literal>Arial.ttf</literal>) en pièce jointe :"
+msgstr "Ajout d'un fichier de police (<literal>Arial.ttf</literal>) en pièce jointe :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:790
@@ -5531,7 +5531,7 @@ msgstr "$ mkvpropedit movie.mkv --add-attachment Arial.ttf"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:793
 msgid "Adding a font file (<literal>89719823.ttf</literal>) as an attachment and providing some information as it really is just Arial:"
-msgstr "Ajout d'un fichier de police (<literal>89719823.ttf</literal>) en pièce jointe et de quelques informations comme quoi ce n'est juste qu'Arial :"
+msgstr "Ajout d'un fichier de police (<literal>89719823.ttf</literal>) en pièce jointe et de quelques informations comme quoi ce n'est juste qu'Arial :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:796
@@ -5542,7 +5542,7 @@ msgstr "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-descrip
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:799
 msgid "Replacing one attached font (<literal>Comic.ttf</literal>) file with another one (<literal>Arial.ttf</literal>):"
-msgstr "Remplacement d'un fichier de police (<literal>Comic.ttf</literal>) en pièce jointe avec un autre (<literal>Arial.ttf</literal>) :"
+msgstr "Remplacement d'un fichier de police (<literal>Comic.ttf</literal>) en pièce jointe avec un autre (<literal>Arial.ttf</literal>) :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:802
@@ -5553,7 +5553,7 @@ msgstr "$ mkvpropedit movie.mkv --attachment-name Arial.ttf --attachment-descrip
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:805
 msgid "Deleting the second attached file, whatever it may be:"
-msgstr "Suppression du second fichier en pièce jointe, quel qu'il soit :"
+msgstr "Suppression du second fichier en pièce jointe, quel qu'il soit :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:808
@@ -5564,7 +5564,7 @@ msgstr "$ mkvpropedit movie.mkv --delete-attachment 2"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:811
 msgid "Deleting all attached fonts by MIME type:"
-msgstr "Suppression de toutes les polices en pièces jointes de type MIME :"
+msgstr "Suppression de toutes les polices en pièces jointes de type MIME :"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:814
@@ -5575,7 +5575,7 @@ msgstr "$ mkvpropedit movie.mkv --delete-attachment mime-type:application/x-true
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:821
 msgid "&mkvpropedit; exits with one of three exit codes:"
-msgstr "&mkvpropedit; ferme avec l'un de ces 3 codes de fermeture :"
+msgstr "&mkvpropedit; ferme avec l'un de ces 3 codes de fermeture :"
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:827
@@ -5585,7 +5585,7 @@ msgstr "<constant>0</constant> -- Ce code de sortie signifie que la modification
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:833
 msgid "<constant>1</constant> -- In this case &mkvpropedit; has output at least one warning, but the modification did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
-msgstr "<constant>1</constant> -- Dans ce cas &mkvpropedit; a émis au moins un avertissement, mais la modification a continué. Un avertissement est préfixé avec le texte '<literal>Avertissement :</literal>'. Selon le problème les fichiers résultants pourront être OK ou pas. L'utilisateur est vivement conseillé de vérifier et l'avertissement et les fichiers résultants."
+msgstr "<constant>1</constant> -- Dans ce cas &mkvpropedit; a émis au moins un avertissement, mais la modification a continué. Un avertissement est préfixé avec le texte « <literal>Avertissement :</literal> ». Selon le problème, les fichiers résultants pourront être valides ou non. L'utilisateur est vivement encouragé à vérifier et l'avertissement et les fichiers résultants."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:841
@@ -5595,12 +5595,12 @@ msgstr "<constant>2</constant> -- Ce code de fermeture est utilisé lorsqu'une e
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:861
 msgid "&mkvpropedit; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr "&mkvpropedit; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
+msgstr "&mkvpropedit; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:867
 msgid "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
-msgstr "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
+msgstr "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> et sa forme courte <varname>MTX_DEBUG</varname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:869
@@ -5640,7 +5640,7 @@ msgstr "<command>mkvtoolnix-gui</command> <group> <arg choice=\"opt\">configurat
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:65
 msgid "&mkvtoolnix-gui; is a <productname>Qt</productname> based <abbrev>GUI</abbrev> for &mkvmerge;. It also implements &mkvinfo;'s and &mkvpropedit;'s functionality and will evolve to cover &mkvextract; as well. All settings (e.g. source files, track options etc) can be saved and restored."
-msgstr "&mkvtoolnix-gui; est une interface graphique basée sur <productname>Qt</productname> pour &mkvmerge;. Elle implémente aussi les fonctionnalités de &mkvinfo; et &mkvpropedit; et évoluera pour couvrir en plus &mkvextract;. Tous les paramètres (par ex.. fichiers source, options de piste, etc.) peuvent être enregistrés et restaurés."
+msgstr "&mkvtoolnix-gui; est une interface graphique basée sur <productname>Qt</productname> pour &mkvmerge;. Elle implémente aussi les fonctionnalités de &mkvinfo; et &mkvpropedit; et évoluera pour couvrir en plus &mkvextract;. Tous les paramètres (par ex. fichiers source, options de piste, etc.) peuvent être enregistrés et restaurés."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:71
@@ -5650,7 +5650,7 @@ msgstr "Lister les noms de fichiers de configuration avec l'extension <literal>.
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:78
 msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
-msgstr "Remarque : si une instance de l'application est déjà exécutée quand elle est lancée une seconde fois, tous les noms saisis sur le ligne de commande seront pris en charge par l'instance déjà exécutée."
+msgstr "Remarque : si une instance de l'application est déjà exécutée quand elle est lancée une seconde fois, tous les noms saisis en ligne de commande seront pris en charge par l'instance déjà exécutée."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:84
@@ -5660,7 +5660,7 @@ msgstr "<option>--merge</option>"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:86
 msgid "All following file names will be added as source files to the current multiplex job. This is the default mode."
-msgstr "Tous les noms de fichiers suivants seront ajoutés comme fichiers source à la tâche actuelle de multiplexage. Mode par défaut."
+msgstr "Tous les noms de fichiers suivants seront ajoutés comme fichiers source à la tâche actuelle de multiplexage. C'est le mode par défaut."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:91

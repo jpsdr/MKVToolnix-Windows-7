@@ -1,13 +1,16 @@
-# Version ?
+# Version 95.0 "Goodbye Stranger" 2025-09-14
 
 ## New features and enhancements
 
-* mkvmerge, MKVToolNix GUI: new chapter generation feature: a new placeholder has
-  been introduced when generating chapters for appended files, \<TITLE\>, which
-  will be replaced by the appended file's title metadata. Implements #6151.
+* mkvmerge, MKVToolNix GUI: new chapter generation feature: a new placeholder
+  has been introduced when generating chapters for appended files, \<TITLE\>,
+  which will be replaced by the appended file's title metadata. Implements
+  #6151. Implementation by Jason Donenfeld.
 * mkvmerge: the display matrix from MP4 files are now translated into
-  appropriate roll and yaw values for output MKV files. Implements #6150.
-* mkvmerge: add `--date` argument to set the date metadata. Implements #6155.
+  appropriate roll and yaw values for output MKV files. Implements
+  #6150. Implementation by Jason Donenfeld.
+* mkvmerge: add `--date` argument to set the date metadata. Implements
+  #6155. Implementation by Jason Donenfeld.
 
 ## Bug fixes
 
@@ -17,8 +20,8 @@
 * mkvmerge: PCM packetizer: mkvmerge will now always write frames with 40ms of
   samples, no matter how long or short the frames in the source files
   were. Part of the fix of #6149.
-* MP4/QuickTime reader: fix exorbitant memory usage when reading PCM audio
-  tracks. Part of the fix of #6149.
+* mkvmerge: MP4/QuickTime reader: fix exorbitant memory usage when reading PCM
+  audio tracks. Part of the fix of #6149.
 
 ## Build system changes
 
