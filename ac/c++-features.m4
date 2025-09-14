@@ -68,7 +68,7 @@ AC_DEFUN([AX_CXX20_BIT_CAST],[
     AC_LINK_IFELSE([AC_LANG_PROGRAM(
         [[#include <bit>]],
         [[unsigned int v1 = 42;
-          return std::bit_cast<>(v1);]])],
+          return std::bit_cast<int>(v1);]])],
       [ax_cv_cxx20_bit_cast="yes"],
       [ax_cv_cxx20_bit_cast="no"])
     AC_LANG_POP
