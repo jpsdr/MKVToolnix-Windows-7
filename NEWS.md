@@ -1,4 +1,4 @@
-# Version ?
+# Version 95.0 "Goodbye Stranger" 2025-09-14
 
 ## New features and enhancements
 
