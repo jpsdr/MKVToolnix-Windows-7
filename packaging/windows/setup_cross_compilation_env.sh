@@ -17,7 +17,7 @@ set -e
 # outside the script to something like "x86_64-w64-mingw32.static".
 ARCHITECTURE=${ARCHITECTURE:-64}
 # Installation defaults to ~/mxe.
-INSTALL_DIR=${INSTALL_DIR:-$HOME/mxe}
+INSTALL_DIR=${INSTALL_DIR:-$HOME/MKVToolNixQT5/mxe}
 # Leave PARALLEL empty if you want the script to use all of your CPU
 # cores.
 PARALLEL=${PARALLEL:-$(nproc --all)}
@@ -40,13 +40,13 @@ LOGFILE=${LOGFILE:-$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)
 function update_mingw_cross_env {
   if [[ ! -d $INSTALL_DIR ]]; then
     echo Retrieving the M cross environment build scripts >> $LOGFILE
-    git clone --branch master https://codeberg.org/mbunkus/mxe $INSTALL_DIR >> $LOGFILE 2>&1
+    git clone --branch QT5_Windows7 https://github.com/jpsdr/mxe-Windows-7.git $INSTALL_DIR >> $LOGFILE 2>&1
   else
     echo Updating the M cross environment build scripts >> $LOGFILE
     cd $INSTALL_DIR
     git fetch >> $LOGFILE 2>&1 \
-      && git reset --hard origin/master >> $LOGFILE 2>&1 \
-      && git config branch.$(git branch --show-current).merge refs/heads/master >> $LOGFILE 2>&1
+      && git reset --hard origin/QT5_Windows7 >> $LOGFILE 2>&1 \
+      && git config branch.$(git branch --show-current).merge refs/heads/QT5_Windows7 >> $LOGFILE 2>&1
   fi
 
   cd ${INSTALL_DIR}
@@ -57,7 +57,7 @@ MXE_PLUGIN_DIRS += plugins/gcc14
 JOBS = ${PARALLEL}
 
 MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost flac ogg pthreads vorbis cmark libdvdread gmp
-MKVTOOLNIX_DEPENDENCIES+=qt6 qt6-qtmultimedia
+MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
 
 LOCAL_PKG_LIST=\$(MKVTOOLNIX_DEPENDENCIES)
 local-pkg-list: \$(LOCAL_PKG_LIST)

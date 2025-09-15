@@ -274,6 +274,9 @@ return 0;
 AC_ARG_ENABLE([gui],
   AS_HELP_STRING([--enable-gui],[compile the Qt-based GUI (yes)]),
   [],[enable_gui=yes])
+AC_ARG_ENABLE([qt6],
+  AS_HELP_STRING([--enable-qt6],[compile with Qt 6 (yes)]),
+  [],[enable_qt6=yes])
 
 AC_ARG_ENABLE([dbus],
   AS_HELP_STRING([--enable-dbus],[compile DBus support (auto)]),
@@ -281,39 +284,17 @@ AC_ARG_ENABLE([dbus],
 
 have_qt6=no
 
-check_qt6
-
-unset qmake_dir qt_bindir qt_libdir qt_searchpath
-
-if test $have_qt6 != yes; then
-  AC_MSG_ERROR([The Qt library version >= $qt_min_ver is required for building MKVToolNix.])
-fi
-
-if test x"$enable_gui" = xyes; then
-  BUILD_GUI=yes
-  opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI"
+if test x"$enable_qt6" != "xyes"; then
+  AC_MSG_CHECKING(for Qt 6)
+  AC_MSG_RESULT(no: disabled by user request)
 
 else
-  BUILD_GUI=no
-  opt_features_no="$opt_features_no\n   * MKVToolNix GUI"
+  check_qt6
+
+ unset qmake_dir qt_bindir qt_libdir qt_searchpath
+
+
+  if test $have_qt6 != yes; then
+    unset QT_CFLAGS QT_LIBS QT_LIBS_NON_GUI LCONVERT MOC RCC UIC ac_cv_path_LCONVERT ac_cv_path_MOC ac_cv_path_RCC ac_cv_path_UIC
+  fi
 fi
-
-if test x"$enable_dbus" = xno; then
-  opt_features_no="$opt_features_no\n   * DBus support"
-elif test "x$have_qtdbus" = xyes; then
-  # have_dbus == yes && enable_dbus != no
-  opt_features_yes="$opt_features_yes\n   * DBus support"
-  AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
-elif test x"$enable_dbus" = xyes; then
-  # have_dbus == no && enable_dbus == yes
-  AC_MSG_ERROR([QtDBus not found.])
-else
-  # have_dbus == no && enable_dbus == auto
-  opt_features_no="$opt_features_no\n   * DBus support"
-fi
-
-
-AC_SUBST(QT_CFLAGS)
-AC_SUBST(QT_LIBS)
-AC_SUBST(QT_LIBS_NON_GUI)
-AC_SUBST(BUILD_GUI)

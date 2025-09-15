@@ -2,10 +2,12 @@
 
 #include <QRegularExpression>
 #include <QVariant>
+#include <QDebug>
 
 #include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
+#include "common/qt6_compat/meta_type.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/merge/enums.h"
@@ -136,11 +138,11 @@ Track::isPropertySet(QString const &property)
 
   auto var = m_properties.value(property);
 
-  return var.isNull()                                                              ? false
-       : !var.isValid()                                                            ? false
-       : QMetaType::canConvert(var.metaType(), QMetaType(QMetaType::QVariantList)) ? !var.toList().isEmpty()
-       : QMetaType::canConvert(var.metaType(), QMetaType(QMetaType::QString))      ? !var.toString().isEmpty()
-       :                                                                             true;
+  return var.isNull()                                         ? false
+       : !var.isValid()                                       ? false
+       : mtxCanConvertVariantTo(var, QMetaType::QVariantList) ? !var.toList().isEmpty()
+       : mtxCanConvertVariantTo(var, QMetaType::QString)      ? !var.toString().isEmpty()
+       :                                                        true;
 }
 
 void

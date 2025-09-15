@@ -31,6 +31,8 @@
 #include <QtCore/QTimer>
 #include <QtCore/QPropertyAnimation>
 
+#include "common/qt6_compat/event.h"
+
 class QPainter;
 class QStackedLayout;
 
@@ -88,7 +90,7 @@ public:
   void paintTab(QPainter *painter, int tabIndex) const;
   void mousePressEvent(QMouseEvent *);
   void mouseMoveEvent(QMouseEvent *);
-  void enterEvent(QEnterEvent *);
+  void enterEvent(MtxQEnterEventArgType *);
   void leaveEvent(QEvent *);
   bool validIndex(int index) const;
 

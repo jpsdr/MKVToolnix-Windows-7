@@ -972,7 +972,12 @@ MainWindow::handleMediaPlaybackError(QMediaPlayer::Error error,
   if (error == QMediaPlayer::FormatError)
     messages << QY("Either the file format or the audio codec is not supported.");
 
-  else if ((error == QMediaPlayer::ResourceError) || (error == QMediaPlayer::AccessDeniedError))
+  else if (   (error == QMediaPlayer::ResourceError)
+           || (error == QMediaPlayer::AccessDeniedError)
+# if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+           || (error == QMediaPlayer::ServiceMissingError)
+# endif
+           )
     messages << QY("No audio device is available for playback, or accessing it failed.");
 
   Util::MessageBox::critical(this)

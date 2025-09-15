@@ -704,7 +704,7 @@ Tool::dropEvent(QDropEvent *event) {
 
   if (p.filesDDHandler.handle(event, true)) {
     auto fileNames    = p.filesDDHandler.fileNames();
-    auto mouseButtons = event->buttons();
+    auto mouseButtons = mtxMouseButtonsFor(event);
 
     QTimer::singleShot(0, this, [this, fileNames, mouseButtons]() {
       handleExternallyAddedFiles(fileNames, mouseButtons);
@@ -1376,7 +1376,7 @@ Tool::filterEventsForFileDNDZones(QObject *watched,
   auto fileNames = p.filesDDHandler.fileNames();
 
   if (mtx::included_in(watched, p.ui->wDNDFilesAllCurrent, p.ui->wDNDFilesAllOneNew, p.ui->wDNDFilesOneNewPerFile)) {
-    handleSourceFilesDroppedOnSpecialZones(&widget, fileNames, dropEvent->buttons());
+	handleSourceFilesDroppedOnSpecialZones(&widget, fileNames, dropEvent->mouseButtons());
     return true;
   }
 

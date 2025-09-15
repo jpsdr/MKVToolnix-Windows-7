@@ -1,7 +1,9 @@
 #include "common/common_pch.h"
 
 #include <Qt>
-#include <QAudioOutput>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+# include <QAudioOutput>
+#endif
 #include <QDebug>
 #include <QMediaPlayer>
 
@@ -15,15 +17,21 @@ class MediaPlayerPrivate {
 public:
 
   std::unique_ptr<QMediaPlayer> player;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
   std::unique_ptr<QAudioOutput> audioOutput;
+#endif
   QString lastPlayedFile;
   bool errorReported{};
 
   explicit MediaPlayerPrivate()
     : player{new QMediaPlayer}
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
     , audioOutput{new QAudioOutput}
+#endif
   {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
     player->setAudioOutput(audioOutput.get());
+#endif
   }
 };
 
@@ -31,7 +39,11 @@ MediaPlayer::MediaPlayer()
   : QObject{}
   , p_ptr{new MediaPlayerPrivate}
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
   connect(p_ptr->player.get(), &QMediaPlayer::errorOccurred, this, &MediaPlayer::handleError);
+#else
+  connect(p_ptr->player.get(), static_cast<void (QMediaPlayer::*)(QMediaPlayer::Error)>(&QMediaPlayer::error), this, &MediaPlayer::handleError);
+#endif
 }
 
 MediaPlayer::~MediaPlayer() {
@@ -54,7 +66,11 @@ MediaPlayer::handleError(QMediaPlayer::Error error) {
 bool
 MediaPlayer::isPlaying()
   const {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
   return p_func()->player->playbackState() == QMediaPlayer::PlayingState;
+#else
+  return p_func()->player->state() == QMediaPlayer::PlayingState;
+#endif
 }
 
 void
@@ -66,8 +82,13 @@ MediaPlayer::playFile(QString const &fileName,
 
   p.lastPlayedFile = fileName;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
   p.audioOutput->setVolume(volume);
   p.player->setSource(QUrl::fromLocalFile(fileName));
+#else
+  p.player->setVolume(volume);
+  p.player->setMedia(QUrl::fromLocalFile(fileName));
+#endif
   p.player->play();
 }
 
@@ -76,7 +97,11 @@ MediaPlayer::stopPlayback() {
   auto &p = *p_func();
 
   p.player->stop();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
   p.player->setSource({});
+#else
+  p.player->setMedia({});
+#endif
 
   p.lastPlayedFile.clear();
   p.errorReported = false;

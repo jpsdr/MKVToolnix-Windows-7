@@ -84,7 +84,7 @@ formatDateFinishedForSorting(JobPtr const &job) {
 
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
-  , m_mutex{}
+  , m_mutex{MTX_QT_RECURSIVE_MUTEX_INIT}
   , m_warningsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("dialog-warning")))}
   , m_errorsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("dialog-error")))}
   , m_started{}

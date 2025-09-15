@@ -5,9 +5,6 @@
 * mkvmerge, MKVToolNix GUI: new chapter generation feature: a new placeholder has
   been introduced when generating chapters for appended files, \<TITLE\>, which
   will be replaced by the appended file's title metadata. Implements #6151.
-* mkvmerge: the display matrix from MP4 files are now translated into
-  appropriate roll and yaw values for output MKV files. Implements #6150.
-* mkvmerge: add `--date` argument to set the date metadata. Implements #6155.
 
 ## Bug fixes
 
@@ -26,14 +23,6 @@
 
 
 # Version 94.0 "Initiate" 2025-07-27
-
-## New features and enhancements
-
-* MKVToolNix GUI: multiplexer: the "delete source files after multiplexing"
-  job runner will now delete both files of an `.idx`/`.sub` VobSub file
-  pair. Implements #6133.
-
-## Bug fixes
 
 * all: fix compilation without FLAC. Fixes #6128.
 
@@ -467,7 +456,7 @@
 * Qt 6 detection: `configure` will now fail to detect Qt 6 if the 'multimedia'
   module is not found by `qmake` (e.g. due to development packages not being
   installed). See #3649.
-* The bundled `fmt` library was updated to v10.1.1.
+ The bundled `fmt` library was updated to v10.1.1.
 
 
 # Version 81.0 "Milliontown" 2023-12-02

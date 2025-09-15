@@ -1,6 +1,10 @@
 MKVToolNix 94.0
 =================
 
+# Moving to Codeberg
+
+**2025-03-15: this project is moving to [Codeberg](https://codeberg.org/mbunkus/mkvtoolnix). The project on Gitlab will be removed in May & is archived (read-only) until then.**
+
 # Table of contents
 
 1. [Introduction](#1-introduction)
@@ -138,7 +142,7 @@ These libraries are:
 - [nlohmann's JSON](https://github.com/nlohmann/json) — JSON for
   Modern C++
 
-- [Qt](http://www.qt.io/) v6.2.0 or newer — a cross-platform library
+- [Qt](http://www.qt.io/) v5.9.0 or newer — a cross-platform library
   including a UI toolkit. The library is needed for all programs, even
   if you decide not to build MKVToolNix GUI.
 

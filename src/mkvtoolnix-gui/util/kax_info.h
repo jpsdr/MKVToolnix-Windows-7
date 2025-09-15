@@ -16,9 +16,9 @@
 #include "common/common_pch.h"
 
 #include <QObject>
-#include <QRecursiveMutex>
 
 #include "common/kax_info.h"
+#include "common/qt6_compat/mutex.h"
 #include "mkvtoolnix-gui/util/runnable.h"
 
 namespace mtx::gui::Util {
@@ -49,7 +49,7 @@ public:
   virtual result_e open_and_process_file() override;
   virtual result_e process_file() override;
 
-  virtual QRecursiveMutex &mutex();
+  virtual MtxQRecursiveMutex &mutex();
 
   void disableFrameInfo();
 
