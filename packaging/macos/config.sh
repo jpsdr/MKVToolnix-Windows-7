@@ -9,7 +9,7 @@ export CPP="clang -E"
 export CXX="clang++"
 export CXXCPP="clang++ -E"
 export CFLAGS="-Wno-int-conversion -Wno-incompatible-pointer-types"
-export CXXFLAGS="-std=c++17 -Wno-unused-parameter -Wno-deprecated-declarations -Wno-int-conversion -Wno-incompatible-pointer-types"
+export CXXFLAGS="-std=c++20 -Wno-unused-parameter -Wno-deprecated-declarations -Wno-int-conversion -Wno-incompatible-pointer-types"
 export QT_CXXFLAGS="-stdlib=libc++"
 export MACOSX_DEPLOYMENT_TARGET="13"
 export DRAKETHREADS=${DRAKETHREADS:-4}
