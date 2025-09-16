@@ -211,8 +211,8 @@ dnl     export CXXFLAGS
 dnl
 dnl     AC_LANG_PUSH(C++)
 dnl     AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
-dnl         [[#include <â€¦>]],
-dnl         [[code("â€¦");]])],
+dnl         [[#include <…>]],
+dnl         [[code("…");]])],
 dnl       [ax_cv_cxx17_def_name="yes"],
 dnl       [ax_cv_cxx17_def_name="no"])
 dnl     AC_LANG_POP
@@ -225,6 +225,32 @@ dnl     missing_cxx_features="$missing_cxx_features\n  * human (C++17)"
 dnl   fi
 dnl ])
 
+
+AC_DEFUN([AX_CXX20_BIT_CAST],[
+  AC_CACHE_CHECK([for std::bit_cast], [ax_cv_cxx20_bit_cast],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+        [[#include <bit>]],
+        [[unsigned int v1 = 42;
+          return std::bit_cast<int>(v1);]])],
+      [ax_cv_cxx20_bit_cast="yes"],
+      [ax_cv_cxx20_bit_cast="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if test x"$ax_cv_cxx20_bit_cast" == xyes; then
+    AC_DEFINE(HAVE_STD_BIT_CAST, 1, [Define if std::bit_cast is available])
+  else
+    AC_DEFINE(HAVE_STD_BIT_CAST, 0, [Define if std::bit_cast is available])
+  fi
+])
 AX_CXX_STD_CXX_FLAG
 AX_CXX17_ATTRIBUTE_MAYBE_UNUSED
 AX_CXX17_NESTED_NAMESPACE_DEFINITION
@@ -234,6 +260,7 @@ AX_CXX17_STD_GCD
 AX_CXX17_CONSTEXPR_IF
 AX_CXX17_LIBSTDCPPFS
 
+AX_CXX20_BIT_CAST
 if test x"$missing_cxx_features" != x ; then
   printf "The following features of the C++17 standards are not supported by $CXX:$missing_cxx_features\n"
   printf "If you are using the GNU C compiler collection (gcc), you need\n"
