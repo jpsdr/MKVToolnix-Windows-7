@@ -17,7 +17,6 @@
 
 #include "common/common_pch.h"
 
-#include <bit>
 #include <cstring>
 #include <unordered_map>
 
@@ -34,7 +33,6 @@
 #include "common/construct.h"
 #include "common/endian.h"
 #include "common/frame_timing.h"
-#include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
