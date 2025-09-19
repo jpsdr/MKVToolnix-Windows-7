@@ -65,3 +65,18 @@ std::string normalize_unicode_string(std::string const &src, unicode_normalizati
 #endif  // SYS_APPLE
 
 }
+
+
+#if !HAVE_STD_BIT_CAST
+namespace std {
+
+template<class Tdest, class Tsrc>
+Tdest
+bit_cast(Tsrc const &src) noexcept {
+  Tdest dest;
+  std::memcpy(&dest, &src, sizeof(Tdest));
+  return dest;
+}
+
+};
+#endif  // HAVE_STD_BIT_CAST
