@@ -87,10 +87,10 @@ vobsub_reader_c::probe_file() {
   auto idx_path = idx_and_sub_file_names(m_in->get_file_name()).first;
 
   try {
-    mm_file_io_c in{idx_path};
+    auto in    = std::make_unique<mm_text_io_c>(std::make_shared<mm_file_io_c>(idx_path));
+    auto chunk = in->getline(id_string.size());
 
-    std::string chunk;
-    return (in.read(chunk, id_string.size()) == id_string.size())
+    return (chunk.size() == id_string.size())
       && boost::istarts_with(chunk, id_string);
 
   } catch (mtx::mm_io::exception &) {
@@ -104,7 +104,7 @@ vobsub_reader_c::read_headers() {
   auto [idx_name, sub_name] = idx_and_sub_file_names(m_ti.m_fname);
 
   try {
-    m_in = std::make_shared<mm_file_io_c>(idx_name);
+    m_in = std::make_unique<mm_text_io_c>(std::make_shared<mm_file_io_c>(idx_name));
   } catch (...) {
     throw mtx::input::extended_x(fmt::format(FY("Could not open '{0}' for reading.\n"), idx_name));
   }
