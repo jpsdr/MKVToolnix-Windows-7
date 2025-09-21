@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: VobSub reader: VobSub `.idx` files that start with a byte-order
+  mark (BOM) are now read again correctly. Fixes #6162.
+
+
 # Version 95.0 "Goodbye Stranger" 2025-09-14
 
 ## New features and enhancements
