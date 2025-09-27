@@ -327,7 +327,7 @@ Tool::tabTitleChanged() {
 
 QString
 Tool::chapterNameTemplateToolTip() {
-  return Q("<p>%1 %2 %3 %4</p><p>%5 %6</p><p>%7 %8 %9</p><ul><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li><li>%17</li></ul>")
+  return Q("<p>%1 %2 %3 %4</p><p>%5 %6</p><p>%7 %8 %9</p><ul><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li><li>%17</li><li>%18</li></ul>")
     .arg(QYH("This template will be used for new chapter entries."))
     .arg(QYH("The string '<NUM>' will be replaced by the chapter number."))
     .arg(QYH("The string '<START>' will be replaced by the chapter's start timestamp."))
