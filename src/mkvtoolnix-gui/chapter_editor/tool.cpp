@@ -349,7 +349,8 @@ Tool::chapterNameTemplateToolTip() {
     .arg(QYH("%s – seconds"))
     .arg(QYH("%S – seconds zero-padded to two places"))
     .arg(QYH("%n – nanoseconds with nine places"))
-    .arg(QYH("%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"))
+    .arg(QYH("%<1-9>n – nanoseconds with up to nine places (e.g. three places with %{}3n)"))
+    .remove(Q("{}"))
   + Q("<p>%1</p>")
     .arg(QYH("If nothing is entered, chapters will be generated but no name will be set."));
 }
