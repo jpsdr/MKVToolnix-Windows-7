@@ -15,9 +15,10 @@ MKVToolNix 95.0
         2. [Configuration and compilation](#242-configuration-and-compilation)
     5. [Notes for compilation on (Open)Solaris](#25-notes-for-compilation-on-opensolaris)
     6. [Unit tests](#26-unit-tests)
-3. [Reporting bugs & getting support](#3-reporting-bugs-getting-support)
+3. [Reporting bugs & security issues & getting support](#3-reporting-bugs-security-issues-getting-support)
     1. [Reporting bugs](#31-reporting-bugs)
-    2. [Getting support](#32-getting-support)
+    2. [Reporting seucrity issues)(#32-reporting-security-issues)
+    3. [Getting support](#33-getting-support)
 4. [Test suite and continuous integration tests](#4-test-suite-and-continuous-integration-tests)
 5. [Code of Conduct](#5-code-of-conduct)
 6. [Included third-party components and their licenses](#6-included-third-party-components-and-their-licenses)
@@ -61,7 +62,7 @@ Eduard Geier. They're licensed under the terms of the
 The newest version can always be found at
 https://mkvtoolnix.download/
 
-Moritz Bunkus <moritz@bunkus.org>
+Moritz Bunkus <mo@bunkus.online>
 
 
 # 2. Installation
@@ -260,7 +261,7 @@ do this, you have to follow these steps:
         rake tests:run_unit
 
 
-# 3. Reporting bugs & getting support
+# 3. Reporting bugs & security issues & getting support
 
 # 3.1. Reporting bugs
 
@@ -279,7 +280,16 @@ them somewhere and post a link in the issue. You can also upload them
 to my FTP server. Details on how to connect can be found in the
 [MKVToolNix FAQ](https://codeberg.org/mbunkus/mkvtoolnix/wiki/FTP-server).
 
-# 3.2. Getting support
+# 3.2. Reporting security issues
+
+If you think you've found a security issue, please reach out via email
+to the author, Moritz Bunkus <mo@bunkus.online>. Please don't file an
+issue on Codeberg for it as security issues are usually sensitive &
+Codeberg doesn't support private/restricted access to issues. I will
+prioritize reported security issues over regular bug reports. Thank
+you.
+
+# 3.3. Getting support
 
 The issue tracker above is not meant for general support which you can
 find in the following places:
