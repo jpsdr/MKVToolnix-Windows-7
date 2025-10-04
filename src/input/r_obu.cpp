@@ -35,7 +35,7 @@ obu_reader_c::probe_file() {
   parser.parse(*m_buffer);
   parser.flush();
 
-  if (!parser.headers_parsed() || !parser.frame_available())
+  if (!parser.headers_parsed())
     return false;
 
   auto dimensions = parser.get_pixel_dimensions();

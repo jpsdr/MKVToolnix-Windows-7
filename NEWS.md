@@ -4,6 +4,9 @@
 
 * mkvmerge: VobSub reader: VobSub `.idx` files that start with a byte-order
   mark (BOM) are now read again correctly. Fixes #6162.
+* mkvmerge: OBU reader: fixed probing files in which the first frame ends
+  after the 1MB mark, which is how big the memory buffer used for probing
+  content is. Fixes #6165.
 
 
 # Version 95.0 "Goodbye Stranger" 2025-09-14

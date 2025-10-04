@@ -429,6 +429,9 @@ parser_c::parse_obu() {
                          *obu_size,
                          r.get_remaining_bits() / 8));
 
+  if (mtx::included_in(p->obu_type, OBU_FRAME, OBU_FRAME_HEADER))
+    p->frame_found = true;
+
   auto next_obu_bit_position = r.get_bit_position() + (*obu_size * 8);
   if ((*obu_size * 8) > static_cast<uint64_t>(r.get_remaining_bits())) {
     r.set_bit_position(start_bit_position);
@@ -490,18 +493,15 @@ parser_c::parse_obu() {
     return true;
   }
 
+  if (mtx::included_in(p->obu_type, OBU_FRAME, OBU_FRAME_HEADER)) {
+    if (p->sequence_header_obu)
+      parse_frame_header_obu(sub_r);
+
+    return !!p->sequence_header_obu;
+  }
+
   if (p->parse_sequence_header_obus_only)
     return true;
-
-  if (mtx::included_in(p->obu_type, OBU_FRAME, OBU_FRAME_HEADER)) {
-    if (!p->sequence_header_obu)
-      return false;
-
-    parse_frame_header_obu(sub_r);
-    p->frame_found = true;
-
-    return true;
-  }
 
   if (p->obu_type == OBU_METADATA) {
     if (!p->frame_found) {
