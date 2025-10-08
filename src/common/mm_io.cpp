@@ -26,6 +26,11 @@
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
+
+namespace {
+bool s_disable_writing_byte_order_markers = false;
+};
+
 union double_to_uint64_t {
   uint64_t i;
   double d;
@@ -414,8 +419,16 @@ mm_io_c::restore_pos() {
   return true;
 }
 
+void
+mm_io_c::disable_writing_byte_order_markers() {
+  s_disable_writing_byte_order_markers = true;
+}
+
 bool
 mm_io_c::write_bom(const std::string &charset_) {
+  if (s_disable_writing_byte_order_markers)
+    return false;
+
   auto p = p_func();
 
   static const uint8_t utf8_bom[3]    = {0xef, 0xbb, 0xbf};

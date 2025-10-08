@@ -218,6 +218,10 @@ handle_common_args(std::vector<std::string> &args,
       g_abort_on_warnings = true;
       args.erase(args.begin() + i, args.begin() + i + 1);
 
+    } else if (args[i] == "--no-bom") {
+      mm_io_c::disable_writing_byte_order_markers();
+      args.erase(args.begin() + i, args.begin() + i + 1);
+
     } else
       ++i;
   }

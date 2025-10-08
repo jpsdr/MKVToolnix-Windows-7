@@ -98,4 +98,7 @@ public:
 protected:
   virtual uint32_t _read(void *buffer, size_t size) = 0;
   virtual size_t _write(const void *buffer, size_t size) = 0;
+
+public:
+  static void disable_writing_byte_order_markers();
 };
