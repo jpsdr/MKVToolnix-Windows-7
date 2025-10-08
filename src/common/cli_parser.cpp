@@ -191,6 +191,7 @@ parser_c::add_common_options() {
   OPT("command-line-charset=<charset>", YT("Charset for strings on the command line"));
   OPT("output-charset=<cset>",          YT("Output messages in this charset"));
   OPT("r|redirect-output=<file>",       YT("Redirects all messages into this file."));
+  OPT("no-bom",                         YT("Disables writing byte order markers to text files."));
   OPT("flush-on-close",                 YT("Flushes all cached data to storage when closing a file opened for writing."));
   OPT("abort-on-warnings",              YT("Aborts the program after the first warning is emitted."));
   OPT("@option-file.json",              YT("Reads additional command line options from the specified JSON file (see man page)."));

@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* all programs: added a command-line parameter `--no-bom` that disables
+  writing byte order marks to text files encoded with one of the UTF
+  variants. Implements #6166.
+
 ## Bug fixes
 
 * mkvmerge: VobSub reader: VobSub `.idx` files that start with a byte-order
