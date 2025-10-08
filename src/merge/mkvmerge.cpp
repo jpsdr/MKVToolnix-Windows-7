@@ -409,6 +409,7 @@ set_usage() {
   usage_text += Y("  --output-charset <cset>  Output messages in this charset\n");
   usage_text += Y("  -r, --redirect-output <file>\n"
                   "                           Redirects all messages into this file.\n");
+  usage_text += Y("  --no-bom                 Disables writing byte order markers to text files.\n");
   usage_text += Y("  --flush-on-close         Flushes all cached data to storage when closing\n"
                   "                           a file opened for writing.\n");
   usage_text += Y("  --abort-on-warnings      Aborts the program after the first warning is\n"
