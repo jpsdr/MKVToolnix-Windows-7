@@ -9,7 +9,7 @@
    Kate helper functions
 
    Written by ogg.k.ogg.k <ogg.k.ogg.k@googlemail.com>.
-   Adapted from code by Moritz Bunkus <moritz@bunkus.org>.
+   Adapted from code by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

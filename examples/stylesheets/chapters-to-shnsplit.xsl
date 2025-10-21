@@ -67,7 +67,7 @@ Here we go:
   # 6: Assign tags (artist and title):
   $ cuetag source.cue split-*.flac
 
-Written by Moritz Bunkus <moritz@bunkus.org>.
+Written by Moritz Bunkus <mo@bunkus.online>.
 
 -->
 

@@ -7,7 +7,7 @@
 
    extracts tracks and other items from Matroska files into other files
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

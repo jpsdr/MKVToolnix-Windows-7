@@ -32,7 +32,7 @@ mkvtoolnix (${TO}-0~bunkus01) ${ubuntu}; urgency=low
 
   * New version.
 
- -- Moritz Bunkus <moritz@bunkus.org>  ${date}
+ -- Moritz Bunkus <mo@bunkus.online>  ${date}
 
 EOF
   cat packaging/debian/changelog >> ${tmp}
@@ -61,7 +61,7 @@ function update_spec {
     s/^Version:.*/Version: ${TO}/;
     s/^Release:.*/Release: 1/;
     s/^(\\%changelog.*)/\${1}
-* ${date} Moritz Bunkus <moritz\\@bunkus.org> ${TO}-1
+* ${date} Moritz Bunkus <mo\\@bunkus.online> ${TO}-1
 - New version
 /" packaging/centos-fedora-opensuse/mkvtoolnix.spec
 }

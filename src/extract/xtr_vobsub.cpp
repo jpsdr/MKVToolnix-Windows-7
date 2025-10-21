@@ -7,7 +7,7 @@
 
    extracts tracks from Matroska files into other files
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Parts of this code (the MPEG header generation) was written by
    Mike Matsnev <mike@po.cs.msu.su>.
 */

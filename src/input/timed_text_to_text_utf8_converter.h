@@ -8,7 +8,7 @@
 
    class definitions for the Timed Text (tx3g) to text/UTF-8 converter
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

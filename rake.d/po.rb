@@ -269,7 +269,7 @@ EOT
       gsub(/\A.*?msgid ""\n/m, header).
       gsub(/^"PO-Revision-Date:.*?$/m, %{"PO-Revision-Date: #{now.strftime('%Y-%m-%d %H:%M%z')}\\n"}).
       gsub(/^"Last-Translator:.*?$/m,  %{"Last-Translator: #{email}\\n"}).
-      gsub(/^"Language-Team:.*?$/m,    %{"Language-Team: #{language} <moritz@bunkus.org>\\n"}).
+      gsub(/^"Language-Team:.*?$/m,    %{"Language-Team: #{language} <mo@bunkus.online>\\n"}).
       gsub(/^"Language: \\n"$/,        %{"Language: #{locale}\\n"})
 
     out.puts content

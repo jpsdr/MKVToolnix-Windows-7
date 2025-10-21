@@ -8,7 +8,7 @@
 
    class definitions for the AVC/H.264 ES demultiplexer module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

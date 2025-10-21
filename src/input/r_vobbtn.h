@@ -9,7 +9,7 @@
    class definitions for the Vob Buttons stream reader
 
    Written by Steve Lhomme <steve.lhomme@free.fr>.
-   Modified by Moritz Bunkus <moritz@bunkus.org>.
+   Modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

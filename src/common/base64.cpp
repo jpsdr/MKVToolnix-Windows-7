@@ -40,7 +40,7 @@
    base64 encoding and decoding functions
 
    See the above URLs for the original authors.
-   Modified by Moritz Bunkus <moritz@bunkus.org>.
+   Modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

@@ -9,7 +9,7 @@
 
    \file
 
-   \author Written by Moritz Bunkus <moritz@bunkus.org>.
+   \author Written by Moritz Bunkus <mo@bunkus.online>.
    \author Modified by Steve Lhomme <steve.lhomme@free.fr>.
 */
 

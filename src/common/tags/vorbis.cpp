@@ -8,7 +8,7 @@
 
    definition of functions for converting between Vorbis comments and Matroska tags
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

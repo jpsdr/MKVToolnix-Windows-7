@@ -6,7 +6,7 @@
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
    extracts chapters from Matroska files into other files
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

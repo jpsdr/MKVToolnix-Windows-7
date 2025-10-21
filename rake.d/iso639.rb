@@ -152,7 +152,7 @@ def create_iso639_language_list_file
 
    ISO 639 language definitions, lookup functions
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 // -----------------------------------------------------------------------

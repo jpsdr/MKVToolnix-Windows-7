@@ -8,7 +8,7 @@
 
    class definition for the Flac packetizer
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

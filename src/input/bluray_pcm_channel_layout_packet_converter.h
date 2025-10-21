@@ -8,7 +8,7 @@
 
    class definitions for the Blu-ray PCM channel layout converter
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

@@ -8,7 +8,7 @@
 
    class definitions for the IVF demultiplexer module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

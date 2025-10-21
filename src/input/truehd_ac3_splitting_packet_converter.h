@@ -8,7 +8,7 @@
 
    class definitions for the TrueHD/AC-3 splitting converter
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once
