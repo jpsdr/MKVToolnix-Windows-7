@@ -14,6 +14,10 @@
 SetCompressor /SOLID lzma
 SetCompressorDictSize 64
 
+!if ${MINGW_PROCESSOR_ARCH} == "amd64"
+  Target amd64-unicode
+!endif
+
 !include "MUI2.nsh"
 !include "file_association.nsh"
 !include "nsDialogs.nsh"
