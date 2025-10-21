@@ -6,6 +6,7 @@
 #include <QUrl>
 #include <QVector>
 
+#include "common/common_urls.h"
 #include "common/compression.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -148,22 +149,22 @@ UpdateChecker::parseXml(QByteArray const &content) {
 
 QString
 UpdateChecker::versionCheckURL() {
-  return Q("https://mkvtoolnix.download/latest-release.xml");
+  return Q(MTX_URL_VERSION_CHECK);
 }
 
 QString
 UpdateChecker::releasesInfoURL() {
-  return Q("https://mkvtoolnix.download/releases.xml");
+  return Q(MTX_URL_RELEASES_INFO);
 }
 
 QString
 UpdateChecker::downloadURL() {
-  return Q("https://mkvtoolnix.download/downloads.html");
+  return Q(MTX_URL_DOWNLOADS);
 }
 
 QString
 UpdateChecker::newsURL() {
-  return Q("https://mkvtoolnix.download/doc/NEWS.md");
+  return Q(MTX_URL_NEWS);
 }
 
 }
