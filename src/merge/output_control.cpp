@@ -46,6 +46,7 @@
 
 #include "common/chapters/chapters.h"
 #include "common/command_line.h"
+#include "common/common_urls.h"
 #include "common/construct.h"
 #include "common/container.h"
 #include "common/date_time.h"

@@ -17,6 +17,7 @@
 
 #include "common/ape.h"
 #include "common/codec.h"
+#include "common/common_urls.h"
 #include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"
