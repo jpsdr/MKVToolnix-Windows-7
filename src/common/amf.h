@@ -8,7 +8,7 @@
 
    helper functions for AMF (Action Message Format) data
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

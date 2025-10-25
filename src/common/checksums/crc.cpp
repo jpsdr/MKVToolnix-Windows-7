@@ -8,7 +8,7 @@
 
    checksum calculations – CRC variations
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 
    This code was adopted from the ffmpeg project, files
    "libavutil/crc.h" and "libavutil/crc.c".

@@ -8,7 +8,7 @@
 
    checksum calculations – MD5 implementation
 
-   Adopted by Moritz Bunkus <moritz@bunkus.org> from the Public Domain
+   Adopted by Moritz Bunkus <mo@bunkus.online> from the Public Domain
    source code available at
    http://openwall.info/wiki/people/solar/software/public-domain-source-code/md5
 */

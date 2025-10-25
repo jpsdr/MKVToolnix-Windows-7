@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

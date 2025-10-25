@@ -8,7 +8,7 @@
 
    class definition for a memory slice cursor
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

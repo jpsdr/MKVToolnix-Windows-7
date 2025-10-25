@@ -8,7 +8,7 @@
 
    Quicktime and MP4 reader
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    The second half of the parse_headers() function after the
      "// process chunkmap:" comment was taken from mplayer's
      demux_mov.c file which is distributed under the GPL as well. Thanks to

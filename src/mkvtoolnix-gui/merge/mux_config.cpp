@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/at_scope_exit.h"
+#include "common/common_urls.h"
 #include "common/logger.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"

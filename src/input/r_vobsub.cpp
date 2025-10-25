@@ -8,7 +8,7 @@
 
    VobSub stream reader
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"
@@ -129,8 +129,8 @@ vobsub_reader_c::read_headers() {
     len++;
   }
   if (version < 7)
-    mxerror_fn(m_ti.m_fname, Y("Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from "
-                               "http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"));
+    mxerror_fn(m_ti.m_fname, fmt::format(FY("Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from "
+                                            "{0} to convert these files to v7 files.\n"), "https://sourceforge.net/projects/guliverkli/files/VSConv/"));
 
   parse_headers();
   show_demuxer_info();

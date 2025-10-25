@@ -8,7 +8,7 @@
 
    helper functions for SPU data (SubPicture Unist — subtitles on DVDs)
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

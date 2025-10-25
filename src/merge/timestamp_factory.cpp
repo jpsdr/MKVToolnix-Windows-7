@@ -8,7 +8,7 @@
 
    the timestamp factory
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Modifications by Steve Lhomme <steve.lhomme@free.fr>.
 */
 

@@ -8,7 +8,7 @@
 
    MPEG PS (program stream) demultiplexer module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"
@@ -17,6 +17,7 @@
 
 #include "common/ac3.h"
 #include "common/bit_reader.h"
+#include "common/common_urls.h"
 #include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"

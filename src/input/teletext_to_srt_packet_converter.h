@@ -8,7 +8,7 @@
 
    class definitions for the converter from teletext to SRT subtitles
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

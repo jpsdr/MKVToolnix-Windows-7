@@ -170,7 +170,7 @@ def create_iso3166_country_list_file
 
    ISO 3166 countries & UN M.49 regions
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 // ------------------------------------------------------------------------

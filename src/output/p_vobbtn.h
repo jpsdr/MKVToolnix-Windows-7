@@ -9,7 +9,7 @@
    class definition for the VobBtn output module
 
    Written by Steve Lhomme <steve.lhomme@free.fr>.
-   Modified by Moritz Bunkus <moritz@bunkus.org>.
+   Modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

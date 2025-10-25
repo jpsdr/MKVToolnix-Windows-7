@@ -8,7 +8,7 @@
 
    Matroska reader
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Modified by Steve Lhomme <steve.lhomme@free.fr>.
 */
 

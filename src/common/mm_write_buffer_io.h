@@ -8,7 +8,7 @@
 
    IO callback class definitions
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Modifications by Nils Maier <maierman@web.de>
 */
 

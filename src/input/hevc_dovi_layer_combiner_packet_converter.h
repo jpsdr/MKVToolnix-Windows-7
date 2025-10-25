@@ -8,7 +8,7 @@
 
    class definitions for the HEVC DOVI layer combiner converter
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once
