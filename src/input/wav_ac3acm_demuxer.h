@@ -8,7 +8,7 @@
 
    WAV AC-3 (ACM mode) demuxer module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

@@ -8,7 +8,7 @@
 
    AVC/h2.64 ES demultiplexer module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

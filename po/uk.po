@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
-"Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2025-10-08 17:34+0200\n"
+"Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
+"POT-Creation-Date: 2025-10-21 17:37+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Altron 320, 2023-2025\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -466,8 +466,8 @@ msgid "There is no translation available for '{0}'.\n"
 msgstr "Немає доступного перекладу для '{0}'.\n"
 
 #: src/common/common.h:88
-#, no-c-format
-msgid "This should not have happened. Please file an issue at https://mkvtoolnix.download/issues with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
+#, fuzzy, no-c-format, c++-format
+msgid "This should not have happened. Please file an issue at {0} with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Цього не повинно було статися. Будь ласка, повідомте про проблему на https://mkvtoolnix.download/issues з цим повідомленням про помилку/попередження, описом того, що ви намагалися зробити, використаним командним рядком і використаною операційною системою. Дякую."
 
 #: src/common/compression/header_removal.cpp:50
@@ -805,7 +805,7 @@ msgstr "MicroDVD"
 #: src/output/p_mp3.h:43
 #, no-c-format
 msgid "MPEG-1/2 Audio Layer II/III"
-msgstr "Аудио MPEG-1/2 Layer II/III"
+msgstr "Аудіо MPEG-1/2 Layer II/III"
 
 #: src/common/file_types.cpp:94
 #, no-c-format
@@ -4204,7 +4204,7 @@ msgstr "Вкладення #{0} з ID {1}, MIME-типом {2}, розміром
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:197
-#: src/merge/output_control.cpp:1419
+#: src/merge/output_control.cpp:1420
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Файл '{0}' не може бути відкритий для запису: {1}.\n"
@@ -4620,7 +4620,7 @@ msgstr "Не знайдено сегменту/елементу рівня 0."
 #: src/extract/tracks.cpp:501
 #: src/extract/tracks.cpp:548
 #: src/merge/mkvmerge.cpp:3013
-#: src/merge/output_control.cpp:354
+#: src/merge/output_control.cpp:355
 #: src/propedit/tag_target.cpp:349
 #: src/propedit/tag_target.cpp:362
 #: src/propedit/tag_target.cpp:367
@@ -4637,8 +4637,8 @@ msgstr "Прогрес виконання: {0}%{1}"
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
-#: src/extract/xtr_textsubs.cpp:99
-#: src/extract/xtr_textsubs.cpp:277
+#: src/extract/xtr_textsubs.cpp:100
+#: src/extract/xtr_textsubs.cpp:278
 #: src/extract/xtr_wav.cpp:179
 #: src/extract/xtr_webvtt.cpp:34
 #, no-c-format, c++-format
@@ -4688,7 +4688,7 @@ msgstr "Для доріжки {0} з CodecID '{1}' відсутній елеме
 #: src/extract/xtr_avi.cpp:51
 #: src/extract/xtr_base.cpp:68
 #: src/extract/xtr_ivf.cpp:55
-#: src/extract/xtr_textsubs.cpp:289
+#: src/extract/xtr_textsubs.cpp:290
 #, no-c-format, c++-format
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "Неможливо записати доріжку {0} з CodecID '{1}' до файлу '{2}', тому що доріжка {3} з CodecID '{4}' вже записується в той же файл.\n"
@@ -4723,38 +4723,38 @@ msgstr "Помилка розподілу пам'яті: {0} ({1}).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Неможливо виділити об'єм пам'яті для кадрів RealAudio/RealVideo.\n"
 
-#: src/extract/xtr_textsubs.cpp:139
+#: src/extract/xtr_textsubs.cpp:140
 #, no-c-format, c++-format
 msgid "Internal bug: tracks.cpp SSA #1. {0}"
 msgstr "Внутрішня помилка: tracks.cpp SSA #1. {0}"
 
-#: src/extract/xtr_textsubs.cpp:177
+#: src/extract/xtr_textsubs.cpp:178
 #, no-c-format, c++-format
 msgid "Subtitle track {0} is missing some duration elements. Please check the resulting SSA/ASS file for entries that have the same start and end time.\n"
 msgstr "Для доріжки субтитрів {0} відсутні деякі елементи тривалості. Будь ласка, перевірте результуючий SSA/ASS файл на наявність записів, які мають однаковий час початку і закінчення.\n"
 
-#: src/extract/xtr_textsubs.cpp:200
+#: src/extract/xtr_textsubs.cpp:201
 #, no-c-format, c++-format
 msgid "Invalid format for a SSA line ('{0}') at timestamp {1}: The first field is not an integer. This entry will be skipped.\n"
 msgstr "Невірний формат SSA лінії ('{0}') для мітки часу {1}: перше поле не є цілим числом. Цей запис буде пропущено.\n"
 
-#: src/extract/xtr_textsubs.cpp:294
+#: src/extract/xtr_textsubs.cpp:295
 #, no-c-format, c++-format
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file, and their CodecPrivate data (the USF styles etc.) do not match.\n"
 msgstr "Неможливо записати доріжку {0} з CodecID '{1}' до файлу '{2}', тому що доріжка {3} з CodecID '{4}' вже записується в той же файл, і їх специфічні дані CodecPrivate (USF-стилі і т.д.) не збігаються.\n"
 
-#: src/extract/xtr_textsubs.cpp:339
+#: src/extract/xtr_textsubs.cpp:340
 #: src/extract/xtr_vobsub.cpp:267
 #, no-c-format, c++-format
 msgid "Failed to create the file '{0}': {1}\n"
 msgstr "Не вдалося створити файл '{0}': {1}\n"
 
-#: src/extract/xtr_textsubs.cpp:342
+#: src/extract/xtr_textsubs.cpp:343
 #, no-c-format, c++-format
 msgid "Failed to parse the USF codec private data for track {0}: {1}\n"
 msgstr "Не вдалося обробити специфічні дані кодека USF для доріжки {0}: {1}\n"
 
-#: src/extract/xtr_textsubs.cpp:366
+#: src/extract/xtr_textsubs.cpp:367
 #, no-c-format, c++-format
 msgid "Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"
 msgstr "Доріжка {0}: запис субтитрів USF, що починається згідно мітки часу {1}, не є вірно скомпонованим XML і буде пропущений.\n"
@@ -5138,22 +5138,22 @@ msgstr "невідомий, тег форматування 0x{0:04x}"
 msgid "Skipping {0} bytes at the beginning (no valid MP3 header found).\n"
 msgstr "Пропуск {0} байт на початку (не знайдено жодного корректного заголовку MP3).\n"
 
-#: src/input/r_mpeg_ps.cpp:377
+#: src/input/r_mpeg_ps.cpp:378
 #, no-c-format
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Читання зашифрованих VOBів не підтримується.\n"
 
-#: src/input/r_mpeg_ps.cpp:1082
+#: src/input/r_mpeg_ps.cpp:1083
 #, no-c-format
 msgid "Error parsing a MPEG PS packet during the header reading phase. This stream seems to be badly damaged.\n"
 msgstr "Помилка при обробці пакетів MPEG PS під час фази читання заголовків. Цей потік, здається, серйозно пошкоджено.\n"
 
-#: src/input/r_mpeg_ps.cpp:1232
+#: src/input/r_mpeg_ps.cpp:1233
 #, no-c-format, c++-format
 msgid "mpeg_ps_reader: Should not have happened #1. {0}"
 msgstr "mpeg_ps_reader: Цього не повинно було трапитися #1. {0}"
 
-#: src/input/r_mpeg_ps.cpp:1253
+#: src/input/r_mpeg_ps.cpp:1254
 #, no-c-format, c++-format
 msgid "mpeg_ps_reader: Should not have happened #2. {0}"
 msgstr "mpeg_ps_reader: Цього не повинно було трапитися #2. {0}"
@@ -5424,17 +5424,17 @@ msgstr "Несумісний AAC аудіопакет (довжина: {0} != {1
 msgid "Video packet assembly failed. Error code: {0} ({1})\n"
 msgstr "Відеопакет зібрати не вдалося. Код помилки: {0} ({1})\n"
 
-#: src/input/r_tta.cpp:51
+#: src/input/r_tta.cpp:52
 #, no-c-format, c++-format
 msgid "tta_reader: tag_size < 0 in the c'tor. {0}\n"
 msgstr "tta_reader: tag_size < 0 в c'tor. {0}\n"
 
-#: src/input/r_tta.cpp:55
+#: src/input/r_tta.cpp:56
 #, no-c-format
 msgid "The file header is too short.\n"
 msgstr "Заголовок файлу є занадто коротким.\n"
 
-#: src/input/r_tta.cpp:79
+#: src/input/r_tta.cpp:80
 #, no-c-format
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "Таблиця пошуку в даному файлі TTA пошкоджена.\n"
@@ -5460,8 +5460,8 @@ msgid "No version number found.\n"
 msgstr "Номер версії не знайдено.\n"
 
 #: src/input/r_vobsub.cpp:132
-#, no-c-format
-msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
+#, fuzzy, no-c-format, c++-format
+msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from {0} to convert these files to v7 files.\n"
 msgstr "Підтримуються лише файли VobSub версії 7 і вище. Якщо у вас більш старіша версія, тоді використовуйте утиліту VSConv з http://sourceforge.net/projects/guliverkli/ для конвертації цих файлів до версії 7.\n"
 
 #: src/input/r_vobsub.cpp:251
@@ -5666,32 +5666,32 @@ msgstr "CodecID двох доріжок різні: {0} i {1}"
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Специфічні дані кодеків не співпадають (довжини: {0} i {1})."
 
-#: src/merge/generic_packetizer.cpp:202
+#: src/merge/generic_packetizer.cpp:203
 #, no-c-format
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "Було задано і коефіцієнт співвідношення сторін екрану, і розміри відображення '--display-dimensions' дати.\n"
 
-#: src/merge/generic_packetizer.cpp:204
+#: src/merge/generic_packetizer.cpp:205
 #, no-c-format
 msgid "Both the aspect ratio and '--display-dimensions' were given.\n"
 msgstr "Було задано і співвідношення сторін екрану, і розміри відображення '--display-dimensions'.\n"
 
-#: src/merge/generic_packetizer.cpp:371
+#: src/merge/generic_packetizer.cpp:372
 #, no-c-format, c++-format
 msgid "The tags in '{0}' could not be parsed: some mandatory elements are missing.\n"
 msgstr "Теги в '{0}' не можливо було проаналізувати: деякі необхідні елементи відсутні.\n"
 
-#: src/merge/generic_packetizer.cpp:1419
+#: src/merge/generic_packetizer.cpp:1420
 #, no-c-format, c++-format
 msgid "Compression failed: {0}\n"
 msgstr "Стиснення перервано: {0}\n"
 
-#: src/merge/generic_packetizer.cpp:1509
-#, no-c-format, c++-format
-msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
+#: src/merge/generic_packetizer.cpp:1510
+#, fuzzy, no-c-format, c++-format
+msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should open an issue over on {1}.\n"
 msgstr "Мітка часу поточного пакету є меншою ніж для попереднього пакета. Це зазвичай означає, що вхідний файл являє собою файл Matroska, який не було створено на 100% корректно. Мітки часу всіх пакетів будуть скореговані на {0}мс, щоб не втратити дані. Даний крок може призвести до розсинхронізації аудіо і відео, але це може бути виправлено за допомогою параметра mkvmerge \"--sync\". Якщо ви вже використовуєте параметр \"--sync\" і все одно отримуєте це попередження - не хвилюйтеся - це нормально. Якщо ж дана помилка виникає кілька разів і ви отримуєте це повідомлення більше одного разу для певної доріжки, тоді або вхідний файл некоректно створений, або це помилка mkvmerge. У цьому випадку вам слід зв'язатися з автором Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/merge/generic_packetizer.cpp:1802
+#: src/merge/generic_packetizer.cpp:1803
 #, no-c-format, c++-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Майте на увазі, що специфікації Matroska щодо зберігання '{0}' ще не були завершені. Тому підтримка з боку mkvmerge для них може змінюватись і використовує CodecID '{1}/EXPERIMENTAL' замість '{1}'. Це попередження перестане відображатись коли специфікації будуть завершені і mkvmerge буде відповідно оновлено.\n"
@@ -7937,40 +7937,40 @@ msgstr "Деталі обробки винятку:"
 msgid "Multiplexing took {0}.\n"
 msgstr "Мультиплексування тривало {0}.\n"
 
-#: src/merge/output_control.cpp:228
+#: src/merge/output_control.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:269
 #: src/propedit/propedit.cpp:111
 #, no-c-format
 msgid "No 'EBML head' element was found."
 msgstr "Жодного елемента 'EBML head' не знайдено."
 
-#: src/merge/output_control.cpp:229
+#: src/merge/output_control.cpp:230
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:270
 #: src/propedit/propedit.cpp:112
 #, no-c-format
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
 msgstr "На початку файлу недостатньо місця, щоб вмістити оновлений елемент \"заголовок EBML\"."
 
-#: src/merge/output_control.cpp:230
+#: src/merge/output_control.cpp:231
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:271
 #: src/propedit/propedit.cpp:113
 #, no-c-format
 msgid "A generic read or write failure occurred."
 msgstr "Сталася загальна помилка читання або запису."
 
-#: src/merge/output_control.cpp:232
+#: src/merge/output_control.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:272
 #: src/propedit/propedit.cpp:115
 #, no-c-format
 msgid "Updating the 'document type version' or 'document type read version' header fields failed."
 msgstr "Не вдалося оновити поля заголовка \"версія типу документа\" або \"версія для читання типу документа\"."
 
-#: src/merge/output_control.cpp:248
+#: src/merge/output_control.cpp:249
 #, no-c-format
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "Роботу mkvmerge було перервано через SIGINT (Ctrl+C?)\n"
 
-#: src/merge/output_control.cpp:258
+#: src/merge/output_control.cpp:259
 #, no-c-format
 msgid ""
 "\n"
@@ -7979,181 +7979,181 @@ msgstr ""
 "\n"
 "mkvmerge отримав команду SIGINT (ймовірно тому, що користувач натиснув Ctrl+C). Спроба виправити файл. Якщо mkvmerge 'зависає' під час цього процесу, вам доведеться завершити виконання програми вручну.\n"
 
-#: src/merge/output_control.cpp:262
+#: src/merge/output_control.cpp:263
 #, no-c-format
 msgid "The file is being fixed, part 1/4..."
 msgstr "Файл в процесі виправлення, частина 1/4..."
 
-#: src/merge/output_control.cpp:266
-#: src/merge/output_control.cpp:276
-#: src/merge/output_control.cpp:284
-#: src/merge/output_control.cpp:291
+#: src/merge/output_control.cpp:267
+#: src/merge/output_control.cpp:277
+#: src/merge/output_control.cpp:285
+#: src/merge/output_control.cpp:292
 #, no-c-format
 msgid " done\n"
 msgstr " зроблено\n"
 
-#: src/merge/output_control.cpp:268
+#: src/merge/output_control.cpp:269
 #, no-c-format
 msgid "The file is being fixed, part 2/4..."
 msgstr "Файл в процесі виправлення, частина 2/4..."
 
-#: src/merge/output_control.cpp:278
+#: src/merge/output_control.cpp:279
 #, no-c-format
 msgid "The file is being fixed, part 3/4..."
 msgstr "Файл в процесі виправлення, частина 3/4..."
 
-#: src/merge/output_control.cpp:282
+#: src/merge/output_control.cpp:283
 #, no-c-format, c++-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"
 msgstr "Цього ДІЙСНО не повинно було статися. Простір, зарезервований для першого елемента мета пошуку, був надто малим. {0}\n"
 
-#: src/merge/output_control.cpp:286
+#: src/merge/output_control.cpp:287
 #, no-c-format
 msgid "The file is being fixed, part 4/4..."
 msgstr "Файл в процесі виправлення, частина 4/4..."
 
-#: src/merge/output_control.cpp:331
+#: src/merge/output_control.cpp:332
 #, no-c-format, c++-format
 msgid "Progress: 100%{0}"
 msgstr "Прогрес виконання: 100%{0}"
 
-#: src/merge/output_control.cpp:429
+#: src/merge/output_control.cpp:430
 #, no-c-format, c++-format
 msgid "filelist_t not found for generic_packetizer_c. {0}\n"
 msgstr "filelist_t не знайдено для generic_packetizer_c. {0}\n"
 
-#: src/merge/output_control.cpp:727
+#: src/merge/output_control.cpp:728
 #, no-c-format, c++-format
 msgid "The track headers could not be rendered correctly. {0}\n"
 msgstr "Заголовки доріжки не можуть бути опрацьовані корректно. {0}\n"
 
-#: src/merge/output_control.cpp:802
+#: src/merge/output_control.cpp:803
 #, no-c-format, c++-format
 msgid "Error reading from the file '{0}'.\n"
 msgstr "Повідомлення про помилку зчитування з файлу '{0}'.\n"
 
-#: src/merge/output_control.cpp:968
-#: src/merge/output_control.cpp:978
+#: src/merge/output_control.cpp:969
+#: src/merge/output_control.cpp:979
 #, no-c-format, c++-format
 msgid "There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"
 msgstr "Немає файлу з ID '{0}'. Аргумент для '--append-to' був некорректним.\n"
 
-#: src/merge/output_control.cpp:974
+#: src/merge/output_control.cpp:975
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Файл номер {0} ('{1}') не приєднується. Аргумент '--append-to' є некорректним.\n"
 
-#: src/merge/output_control.cpp:982
+#: src/merge/output_control.cpp:983
 #, no-c-format
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Файли не можуть бути приєднані самі до себе. Аргумент '--append-to' був некорректним.\n"
 
-#: src/merge/output_control.cpp:995
+#: src/merge/output_control.cpp:996
 #, no-c-format, c++-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Для файлу номер {0} ('{1}') було надано лише часткове приєднання розподілення. Необхідно, або не задавати ніякого розподілення (тоді буде використовуватись розподілення за замовчуванням), або задати розподілення для всіх доріжок, які будуть скопійовані.\n"
 
-#: src/merge/output_control.cpp:1014
+#: src/merge/output_control.cpp:1015
 #, no-c-format, c++-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Для файлу номер {0} ('{1}') не було надано приєднання розподілення. Натомість, за замовчуванням буде застосовано розподілення {2}. Будь ласка, прийміть це до уваги, якщо робота mkvmerge перерветься з повідомленням про помилку щодо неприпустимого параметра '--append-to'.\n"
 
-#: src/merge/output_control.cpp:1028
+#: src/merge/output_control.cpp:1029
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Файл номер {0} ('{1}') не містить доріжку з ID {2}, або дана доріжка не повинна бути скопійована. Аргумент '--append-to' є некорректним.\n"
 
-#: src/merge/output_control.cpp:1034
+#: src/merge/output_control.cpp:1035
 #, no-c-format, c++-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Файл номер {0} ('{1}') не містить доріжку з ID {2}, або дана доріжка не повинна бути скопійована. Тому, жодної доріжки не може бути приєднано. Аргумент '--append-to' є некорректним.\n"
 
-#: src/merge/output_control.cpp:1044
+#: src/merge/output_control.cpp:1045
 #, no-c-format, c++-format
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "Доріжка {0} файлу номер {1} ({2}) буде приєднана більше одного разу. Параметр для '--append-to' був некоректним.\n"
 
-#: src/merge/output_control.cpp:1055
+#: src/merge/output_control.cpp:1056
 #, no-c-format, c++-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
 msgstr "Більше ніж одна доріжка повинна бути додана до доріжки {0} з файлу номер {1} ({2}). Аргумент для '--append-to' був некорректним.\n"
 
-#: src/merge/output_control.cpp:1076
+#: src/merge/output_control.cpp:1077
 #, no-c-format, c++-format
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Доріжка {0} файлу '{1}' ймовірно не може бути корректно приєднана до доріжки {2} файлу '{3}': {4} Будь ласка, впевніться, що отриманий файл відтворюється корреткно протягом всього часу перегляду. Автор цієї програми ймовірно не буде надавати підтримку при проблемах відтворення отримуваних файлів.\n"
 
-#: src/merge/output_control.cpp:1085
+#: src/merge/output_control.cpp:1086
 #, no-c-format
 msgid "The formats do not match."
 msgstr "Формати не збігаються."
 
-#: src/merge/output_control.cpp:1086
+#: src/merge/output_control.cpp:1087
 #, no-c-format
 msgid "The track parameters do not match."
 msgstr "Параметри доріжок не співпадають."
 
-#: src/merge/output_control.cpp:1087
+#: src/merge/output_control.cpp:1088
 #, no-c-format
 msgid "Appending tracks of this type is not supported."
 msgstr "Додавання доріжок цього типу не підтримується."
 
-#: src/merge/output_control.cpp:1088
+#: src/merge/output_control.cpp:1089
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Причини цього поки невідомі."
 
-#: src/merge/output_control.cpp:1090
+#: src/merge/output_control.cpp:1091
 #, no-c-format, c++-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "Доріжка {0} файлу '{1}' не може бути приєднана до доріжки {2} файлу '{3}'. {4}\n"
 
-#: src/merge/output_control.cpp:1141
+#: src/merge/output_control.cpp:1142
 #, no-c-format
 msgid "Splitting tracks of this type is not supported."
 msgstr "Розділення доріжок цього типу не підтримується."
 
-#: src/merge/output_control.cpp:1143
+#: src/merge/output_control.cpp:1144
 #, no-c-format, c++-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
 msgstr "Ідентифікатор доріжки {0} з файлу \"{1}\" не може бути розділеним. {2}\n"
 
-#: src/merge/output_control.cpp:1393
+#: src/merge/output_control.cpp:1394
 #, no-c-format, c++-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Деякі елементи тегів відсутні (ця помилка не повинна була виникнути - подібна помилка повинна була виникнути раніше). {0}\n"
 
-#: src/merge/output_control.cpp:1423
+#: src/merge/output_control.cpp:1424
 #, no-c-format, c++-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Файл '{0}' був відкритий для запису.\n"
 
-#: src/merge/output_control.cpp:1641
+#: src/merge/output_control.cpp:1642
 #, no-c-format, c++-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "Файл \"{0}\" було перейменовано на \"{1}\".\n"
 
-#: src/merge/output_control.cpp:1643
+#: src/merge/output_control.cpp:1644
 #, no-c-format, c++-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "Не вдалося перейменувати файл \"{0}\" на \"{1}\".\n"
 
-#: src/merge/output_control.cpp:1679
+#: src/merge/output_control.cpp:1680
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Елементи cue (індекс) в процесі запису...\n"
 
-#: src/merge/output_control.cpp:1796
+#: src/merge/output_control.cpp:1797
 #, no-c-format, c++-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Цього ДІЙСНО не повинно було статися. Простір, зарезервований для першого елемента мета пошуку, був надто малим. Необхідний розмір: {0}. {1}\n"
 
-#: src/merge/output_control.cpp:1883
+#: src/merge/output_control.cpp:1884
 #, no-c-format, c++-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Не знайдено gptzr при приєднанні. {0}\n"
 
-#: src/merge/output_control.cpp:1957
+#: src/merge/output_control.cpp:1958
 #, no-c-format, c++-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Приєднання доріжки {0} з файлу номер {1} ('{2}') до доріжки {3} з файлу номер {4} ('{5}').\n"
@@ -8777,7 +8777,7 @@ msgstr "&Перезавантажити файл"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:526
 #: src/mkvtoolnix-gui/jobs/tool.cpp:591
 #: src/mkvtoolnix-gui/jobs/tool.cpp:629
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:492
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:493
 #: src/mkvtoolnix-gui/merge/tab.cpp:516
 #: src/mkvtoolnix-gui/merge/tool.cpp:486
 #: src/mkvtoolnix-gui/merge/tool.cpp:1118
@@ -9501,8 +9501,8 @@ msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below
 msgstr "Відкрийте файл Matroska або WebM за допомогою меню \"Інфо\", кнопки нижче або перетягніть файл сюди."
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:289
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #, no-c-format
 msgid "Job queue"
 msgstr "Черга завдань"
@@ -9652,7 +9652,7 @@ msgstr "&Норми поведінки"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:760
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:133
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:91
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:102
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:103
 #, no-c-format
 msgid "&Close"
 msgstr "&Закрити"
@@ -9705,7 +9705,7 @@ msgid "Save to &Matroska or WebM file"
 msgstr "Зберегти до файлу &Matroska або WebM"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:682
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:456
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:457
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "&Мультиплексер"
@@ -9717,7 +9717,7 @@ msgstr "&Інструмент витягнення"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:684
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:783
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:457
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:458
 #, no-c-format
 msgid "&Info tool"
 msgstr "&Інфо"
@@ -9728,13 +9728,13 @@ msgid "&Header editor"
 msgstr "&Редактор заголовків"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:686
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:459
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:460
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "&Редактор розділів"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:687
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:460
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:461
 #, no-c-format
 msgid "&Job queue"
 msgstr "&Черга завдань"
@@ -10582,8 +10582,8 @@ msgid "Defaults for jobs saving info tool output to text files"
 msgstr "Значення за замовчуванням для виведення інформації інструментом збереження завдань у текстові файли"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:285
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
 #, no-c-format
 msgid "Header editor"
@@ -10600,8 +10600,8 @@ msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr "Показувати дати і час у UTC замість місцевого часового поясу"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "Chapter editor"
@@ -12492,7 +12492,7 @@ msgid "Warnings/Errors"
 msgstr "Попередження\\Помилки"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:784
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:785
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:83
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -12628,19 +12628,19 @@ msgid "Running jobs cannot be edited."
 msgstr "Виконувані завдання не можуть бути відредаговані."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:523
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:489
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "Перервати запущені завдання"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:524
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:491
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "Ви дійсно хочете перервати усі поточні завдання?"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:525
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:491
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:492
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "&Перервати завдань"
@@ -12697,169 +12697,169 @@ msgstr "Ви хочете перезаписати файл?"
 msgid "&Overwrite file"
 msgstr "&Перезаписати файл"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:27
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:28
 #, no-c-format
 msgid "Online check for updates"
 msgstr "Перевірка наявності оновлень онлайн"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:62
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:63
 #, no-c-format
 msgid "MKVToolNix news & changes"
 msgstr "Новини та зміни MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:64
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:215
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:65
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:216
 #, no-c-format
 msgid "Read full NEWS.md file online"
 msgstr "Читати онлайн повний текст змін NEWS.md"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:91
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:92
 #, no-c-format
 msgid "Downloading release information"
 msgstr "Завантаження інформації про реліз"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:92
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:93
 #, no-c-format
 msgid "Currently no newer version is available online."
 msgstr "Наразі жодної нової версії не доступно онлайн."
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:93
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:94
 #, no-c-format
 msgid "There is a new version available online."
 msgstr "Онлайн доступна нова версія."
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:94
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:95
 #, no-c-format
 msgid "There was an error querying the update status."
 msgstr "Сталася помилка при запиті статусу оновлення."
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:120
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:121
 #, no-c-format
 msgid "Version %1"
 msgstr "Версія %1"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:138
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:139
 #, no-c-format
 msgid "Listen to <a href=\"%1\">song</a> or <a href=\"%2\">album</a> on YouTube"
 msgstr "Прослухати <a href=\"%1\">пісню</a> або <a href=\"%2\">альбом</a> на YouTube"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:143
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:144
 #, no-c-format
 msgid "Listen to <a href=\"%1\">song</a> on YouTube"
 msgstr "Прослухати <a href=\"%1\">пісню</a> на YouTube"
 
-#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:146
+#: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:147
 #, no-c-format
 msgid "Version %1 \"%2\""
 msgstr "Версія %1 \"%2\""
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:162
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:163
 #, no-c-format
 msgid "This has not been implemented yet."
 msgstr "Це, ще не було реалізовано."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:282
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:283
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "Multiplexer"
 msgstr "Мультиплексер"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:284
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:285
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "Info tool"
 msgstr "Інфо"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:289
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:290
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #, no-c-format
 msgid "Job output"
 msgstr "Вивід завдання"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #, no-c-format
 msgid "Extraction tool"
 msgstr "Інструмент витягнення"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:446
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:447
 #, no-c-format
 msgid "Tag editor"
 msgstr "Редактор тегів"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:455
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:456
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:458
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:459
 #, no-c-format
 msgid "Header &editor"
 msgstr "Редактор &заголовків"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:461
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "&Job output"
 msgstr "&Вивід завдання"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #, no-c-format
 msgid "&Help"
 msgstr "&Довідка"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:490
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:491
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "В даний час виконується завдання."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:684
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:685
 #, no-c-format
 msgid "The MKVToolNix Code of Conduct"
 msgstr "Кодекс поведінки MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:700
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:690
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:701
 #, no-c-format
 msgid "Markdown files"
 msgstr "Файли розмітки"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:698
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:699
 #, no-c-format
 msgid "System information"
 msgstr "Інформація про систему"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:780
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:781
 #, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "Не вдалося знайти файл «%1» в каталозі встановлення."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:788
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:789
 #, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "Виконуваний файл mkvmerge було знайдено, проте він не може бути запущений на виконання."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:792
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:793
 #, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "Не вдалося розпізнати рядок версії, про який повідомляє mkvmerge ('%1')."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:796
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:797
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr "Версія mkvmerge (%1) та GUI (%2) відрізняється."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:800
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:801
 #, no-c-format
 msgid "Temporary files cannot be created. Additional information: %1"
 msgstr "Тимчасові файли неможливо створити. Деталі: %1"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:804
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:805
 #, no-c-format
 msgid "MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'."
 msgstr "MKVToolNix GUI працює як портативна програма, але не може записувати у свою базову папку %1. Якщо програма має працювати як встановлена, видаліть файл %2."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:814
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:815
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
@@ -12867,7 +12867,7 @@ msgstr[0] "Проблема з встановленням MKVToolNix"
 msgstr[1] "Проблеми з встановленням MKVToolNix"
 msgstr[2] "Проблем з встановленням MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:818
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:819
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
@@ -12875,12 +12875,12 @@ msgstr[0] "Виявлено проблему з цією установкою MK
 msgstr[1] "Під час встановлення MKVToolNix було виявлено кілька проблем:"
 msgstr[2] "Під час встановлення MKVToolNix були виявлені проблеми:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:820
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:821
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr "Деякі функції в цій ситуації працюватимуть неправильно."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:821
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:822
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
@@ -12888,22 +12888,22 @@ msgstr[0] "Будь ласка, повторно встановіть MKVToolNix
 msgstr[1] "Будь ласка, повторно встановіть MKVToolNix або виправте проблеми самостійно."
 msgstr[2] "Будь ласка, повторно встановіть MKVToolNix або виправте проблем самостійно."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:970
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:971
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
 msgstr "Не вдалося відтворити аудіофайл '%1'."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:973
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:974
 #, no-c-format
 msgid "Either the file format or the audio codec is not supported."
 msgstr "Формат файлу або аудіокодек не підтримуються."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:976
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:977
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
 msgstr "Немає аудіопристрою, доступного для відтворення, або не вдалося отримати доступ до нього."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:979
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:980
 #, no-c-format
 msgid "Error playing audio"
 msgstr "Помилка відтворення аудіо"
@@ -15153,17 +15153,17 @@ msgstr "Будь ласка, оберіть файл."
 msgid "You can download the application from the following URL:"
 msgstr "Ви можете завантажити додаток за вказаним URL:"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:278
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:279
 #, no-c-format
 msgid "The following non-recoverable error was found: %1."
 msgstr "Була виявлена ​​така невиправна помилка: %1."
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:280
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:281
 #, no-c-format
 msgid "The application will terminate now."
 msgstr "Зараз дію програми буде припинено."
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:284
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:285
 #, no-c-format
 msgid "Error"
 msgstr "Помилка"
@@ -16432,12 +16432,12 @@ msgstr "Пропуск {0} байт (не знайдено корректног�
 msgid "The AAC profiles are different: {0} and {1}"
 msgstr "Профілі AAC різні: {0} i {1}"
 
-#: src/output/p_ac3.cpp:64
+#: src/output/p_ac3.cpp:65
 #, no-c-format, c++-format
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "Дана доріжка AC-3 містить {0} байт не-AC-3 даних на початку. Це відповідає затримці {1} мс. Ця затримка буде використовуватися замість не-AC-3 даних.\n"
 
-#: src/output/p_ac3.cpp:79
+#: src/output/p_ac3.cpp:80
 #: src/output/p_mp3.cpp:68
 #, no-c-format, c++-format
 msgid "This audio track contains {0} byte of invalid data which was skipped before timestamp {1}."
@@ -16446,15 +16446,15 @@ msgstr[0] "Ця аудіодоріжка містить {0} байт недій�
 msgstr[1] "Ця аудіодоріжка містить {0} байти недійсних даних, які були пропущені до позначки часу {1}."
 msgstr[2] "Ця аудіодоріжка містить {0} байтів недійсних даних, які були пропущені до позначки часу {1}."
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:83
 #: src/output/p_mp3.cpp:71
 #, no-c-format
 msgid "The audio/video synchronization may have been lost."
 msgstr "Аудіо/відео синхронізація могла бути втрачена."
 
-#: src/output/p_ac3.cpp:239
-#, no-c-format
-msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
+#: src/output/p_ac3.cpp:240
+#, fuzzy, no-c-format, c++-format
+msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please open an issue over on {0}.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): Неперевірений код ('size' є непарним). Якщо робота mkvmerge аварійно принилася або отриманий файл не містить повної і корректної звукової доріжки, то, будь ласка, зв'яжіться з автором Moritz Bunkus через <moritz@bunkus.org>.\n"
 
 #: src/output/p_alac.h:31
@@ -16512,7 +16512,7 @@ msgstr "Заголовки FLAC не можуть бути проаналізо�
 msgid "Packet number {0} contained an invalid FLAC header and is being skipped.\n"
 msgstr "Пакет номер {0} містив неприпустимий заголовок FLAC і тому пропускається.\n"
 
-#: src/output/p_generic_video.cpp:69
+#: src/output/p_generic_video.cpp:70
 #, no-c-format, c++-format
 msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. {0}\n"
 msgstr "Значення кадрів за секунду є 0.0, але зчитувач не надав мітки часу для пакета. {0}\n"

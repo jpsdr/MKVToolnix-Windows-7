@@ -7,6 +7,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 
+#include "common/common_urls.h"
 #include "common/markdown.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
@@ -165,7 +166,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto reNewlines        = QRegularExpression{"\r?\n"};
   auto bugFormatter      = [](QRegularExpressionMatch const &matches) {
     auto number_str = matches.captured(1).mid(1);
-    return Q("<a href=\"https://codeberg.org/mbunkus/mkvtoolnix/issues/%1\">#%1</a>").arg(number_str);
+    return Q("<a href=\"%2%1\">#%1</a>").arg(number_str).arg(MTX_URL_ISSUES);
   };
 
   releases.sort();

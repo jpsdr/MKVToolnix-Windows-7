@@ -9,7 +9,7 @@
    A class for file-like read access on the bit level
 
    The mtx::bits::reader_c class was originally written by Peter Niemayer
-     <niemayer@isg.de> and modified by Moritz Bunkus <moritz@bunkus.org>.
+     <niemayer@isg.de> and modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

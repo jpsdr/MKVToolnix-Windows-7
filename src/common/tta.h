@@ -8,7 +8,7 @@
 
    definitions for the TTA file format
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

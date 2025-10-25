@@ -8,7 +8,7 @@
 
    class definitions for the WAV reader module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Modified by Peter Niemayer <niemayer@isg.de>.
 */
 

@@ -74,7 +74,7 @@ def create_iso15924_script_list_file
 
    ISO 15924 script list
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 // -------------------------------------------------------------------------

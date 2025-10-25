@@ -8,7 +8,7 @@
 
    the generic_packetizer_c implementation
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"
@@ -19,6 +19,7 @@
 
 #include <matroska/KaxTracks.h>
 
+#include "common/common_urls.h"
 #include "common/compression.h"
 #include "common/container.h"
 #include "common/debugging.h"
@@ -1513,8 +1514,8 @@ generic_packetizer_c::add_packet2(packet_cptr const &pack) {
                                 "If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. "
                                 "If this error happens more than once and you get this message more than once for a particular track "
                                 "then either is the source file badly mastered, or mkvmerge contains a bug. "
-                                "In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"),
-                             (needed_timestamp_offset + 500000) / 1000000));
+                                "In this case you should open an issue over on {1}.\n"),
+                             (needed_timestamp_offset + 500000) / 1000000, MTX_URL_ISSUES));
 
     } else
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,

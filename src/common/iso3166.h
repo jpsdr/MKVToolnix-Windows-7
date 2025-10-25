@@ -8,7 +8,7 @@
 
    ISO 3166 countries & UN M.49 regions
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

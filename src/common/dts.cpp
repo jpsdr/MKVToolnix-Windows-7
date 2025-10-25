@@ -9,7 +9,7 @@
    helper function for DTS data
 
    Written by Peter Niemayer <niemayer@isg.de>.
-   Modified by Moritz Bunkus <moritz@bunkus.org>.
+   Modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

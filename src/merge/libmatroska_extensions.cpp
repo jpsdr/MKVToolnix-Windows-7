@@ -9,7 +9,7 @@
    The cluster helper groups frames into blocks groups and those
    into clusters, sets the durations, renders the clusters etc.
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

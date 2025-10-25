@@ -8,7 +8,7 @@
 
    class definition for the MPEG 4 part 10 ES video output module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

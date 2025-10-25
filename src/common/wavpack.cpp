@@ -10,7 +10,7 @@
 
    Written by Steve Lhomme <steve.lhomme@free.fr>.
    Based on a software from David Bryant <dbryant@impulse.net>.
-   Modified by Moritz Bunkus <moritz@bunkus.org>.
+   Modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include <cctype>

@@ -8,7 +8,7 @@
 
    Removal of the PES framing used in MPEG transport streams for DVB subtitles
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

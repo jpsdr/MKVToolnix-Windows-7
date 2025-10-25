@@ -8,7 +8,7 @@
 
    definitions used in all programs, helper functions
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once
@@ -85,11 +85,11 @@ using namespace std::string_literals;
 #define NY(s_singular, s_plural, count)  ngettext(s_singular, s_plural, count)
 #define FNY(s_singular, s_plural, count) fmt::runtime(ngettext(s_singular, s_plural, count))
 
-#define BUGMSG Y("This should not have happened. Please file an issue at " \
-                 "https://mkvtoolnix.download/issues with this error/warning " \
-                 "message, a description of what you were trying to do, " \
-                 "the command line used and which operating system you are " \
-                 "using. Thank you.")
+#define BUGMSG fmt::format(FY("This should not have happened. Please file an issue at " \
+                              "{0} with this error/warning " \
+                              "message, a description of what you were trying to do, " \
+                              "the command line used and which operating system you are " \
+                              "using. Thank you."), MTX_URL_ISSUES)
 
 namespace mtx {
 constexpr uint32_t calc_fourcc(char a, char b, char c, char d) {

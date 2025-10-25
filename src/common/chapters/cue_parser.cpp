@@ -8,7 +8,7 @@
 
    chapter parser for cue sheets
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Patches by Nicolas Le Guen <nleguen@pepper-prod.com> and
    Vegard Pettersen <vegard_p@broadpark.no>
 */

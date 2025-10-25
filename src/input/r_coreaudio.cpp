@@ -8,7 +8,7 @@
 
    CoreAudio reader module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Initial DTS support by Peter Niemayer <niemayer@isg.de> and
      modified by Moritz Bunkus.
 */
