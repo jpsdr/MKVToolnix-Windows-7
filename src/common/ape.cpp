@@ -9,7 +9,7 @@
    helper functions for APE tags
 
    Written by James Almer <jamrial@gmail.com>
-   Adapted from ID3 parsing code by Moritz Bunkus <moritz@bunkus.org>
+   Adapted from ID3 parsing code by Moritz Bunkus <mo@bunkus.online>
 */
 
 #include "common/common_pch.h"

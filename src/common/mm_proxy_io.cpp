@@ -8,7 +8,7 @@
 
    IO callback class implementation
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Modifications by Peter Niemayer <niemayer@isg.de>.
 */
 

@@ -242,7 +242,7 @@ e.g. [poedit](http://www.poedit.net/) if you're using Windows.
 Alternatively you can use the [Transifex](https://www.transifex.com/)
 web service for translating MKVToolNix. Please apply to join the
 [MKVToolNix project](https://www.transifex.com/moritz-bunkus/mkvtoolnix/dashboard/)
-and drop me a line via [email](mailto:moritz@bunkus.org). I'll add you
+and drop me a line via [email](mailto:mo@bunkus.online). I'll add you
 to the project as soon as possible.
 
 Please ask the author for an up-to-date template of the untranslated

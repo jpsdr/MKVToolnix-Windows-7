@@ -8,7 +8,7 @@
 
    PCM output module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
    Patches by Robert Millan <rmh@aybabtu.com>.
 */
 

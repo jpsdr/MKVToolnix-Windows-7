@@ -8,7 +8,7 @@
 
    \file
 
-   \author Written by Moritz Bunkus <moritz@bunkus.org>.
+   \author Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

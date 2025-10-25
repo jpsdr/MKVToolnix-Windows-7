@@ -9,7 +9,7 @@
    Kate packetizer
 
    Written by ogg.k.ogg.k <ogg.k.ogg.k@googlemail.com>.
-   Adapted from code by Moritz Bunkus <moritz@bunkus.org>.
+   Adapted from code by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

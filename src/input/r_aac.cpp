@@ -8,7 +8,7 @@
 
    AAC demultiplexer module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

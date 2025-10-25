@@ -8,7 +8,7 @@
 
   definitions and helper functions for Blu-ray track/chapter names meta data
 
-  Written by Moritz Bunkus <moritz@bunkus.org>.
+  Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

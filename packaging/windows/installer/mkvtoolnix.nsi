@@ -2,7 +2,7 @@
 !define PRODUCT_VERSION "95.0.0"
 !define PRODUCT_VERSION_BUILD ""
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
-!define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
+!define PRODUCT_WEB_SITE "https://mkvtoolnix.download/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mkvtoolnix-gui.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -13,6 +13,10 @@
 #SetCompress off
 SetCompressor /SOLID lzma
 SetCompressorDictSize 64
+
+!if ${MINGW_PROCESSOR_ARCH} == "amd64"
+  Target amd64-unicode
+!endif
 
 !include "MUI2.nsh"
 !include "file_association.nsh"

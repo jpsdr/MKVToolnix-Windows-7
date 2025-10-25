@@ -8,11 +8,12 @@
 
    AC-3 output module
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"
 
+#include "common/common_urls.h"
 #include "common/ac3.h"
 #include "common/codec.h"
 #include "common/hacks.h"
@@ -236,9 +237,9 @@ void
 ac3_bs_packetizer_c::add_to_buffer(uint8_t *const buf,
                                    int size) {
   if (((size % 2) == 1) && !s_warning_printed) {
-    mxwarn(Y("ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). "
-             "If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, "
-             "then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"));
+    mxwarn(fmt::format(FY("ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). "
+                          "If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, "
+                          "then please open an issue over on {0}.\n"), MTX_URL_ISSUES));
     s_warning_printed = true;
   }
 

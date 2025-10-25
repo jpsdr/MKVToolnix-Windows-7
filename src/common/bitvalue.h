@@ -8,7 +8,7 @@
 
    The "mtx::bits::value_c" class definition
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

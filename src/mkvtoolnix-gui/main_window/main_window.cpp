@@ -13,6 +13,7 @@
 #include <QVBoxLayout>
 #include <QtConcurrent>
 
+#include "common/common_urls.h"
 #include "common/fs_sys_helpers.h"
 #include "common/list_utils.h"
 #include "common/locale_string.h"
@@ -312,12 +313,12 @@ void
 MainWindow::setupHelpURLs() {
   auto p = p_func();
 
-  p->helpURLs[p->ui->actionHelpFAQ]                   = "https://codeberg.org/mbunkus/mkvtoolnix/wiki/FAQ";
-  p->helpURLs[p->ui->actionHelpKnownProblems]         = "https://codeberg.org/mbunkus/mkvtoolnix/wiki/Troubleshooting";
-  p->helpURLs[p->ui->actionHelpMkvmergeDocumentation] = "https://mkvtoolnix.download/doc/mkvmerge.html";
-  p->helpURLs[p->ui->actionHelpWebSite]               = "https://mkvtoolnix.download/";
-  p->helpURLs[p->ui->actionHelpReportBug]             = "https://codeberg.org/mbunkus/mkvtoolnix/issues/";
-  p->helpURLs[p->ui->actionHelpForum]                 = "https://help.mkvtoolnix.download/";
+  p->helpURLs[p->ui->actionHelpFAQ]                   = MTX_URL_FAQ;
+  p->helpURLs[p->ui->actionHelpKnownProblems]         = MTX_URL_KNOWN_PROBLEMS;
+  p->helpURLs[p->ui->actionHelpMkvmergeDocumentation] = MTX_URL_MKVMERGE_MAN;
+  p->helpURLs[p->ui->actionHelpWebSite]               = MTX_URL_WEBSITE;
+  p->helpURLs[p->ui->actionHelpReportBug]             = MTX_URL_ISSUES;
+  p->helpURLs[p->ui->actionHelpForum]                 = MTX_URL_FORUM;
 }
 
 void

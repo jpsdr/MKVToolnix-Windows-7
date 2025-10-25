@@ -9,7 +9,7 @@
    VobBtn stream reader
 
    Written by Steve Lhomme <steve.lhomme@free.fr>.
-   Modified by Moritz Bunkus <moritz@bunkus.org>.
+   Modified by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

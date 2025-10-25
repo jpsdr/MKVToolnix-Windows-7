@@ -9,7 +9,7 @@
    MPEG TS (transport stream) demultiplexer module
 
    Written by Massimo Callegari <massimocallegari@yahoo.it>
-   and Moritz Bunkus <moritz@bunkus.org>.
+   and Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

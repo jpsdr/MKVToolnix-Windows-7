@@ -8,7 +8,7 @@
 
    helper functions that need libebml/libmatroska
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

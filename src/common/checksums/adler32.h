@@ -8,7 +8,7 @@
 
    checksum calculations – Adler-32 definition
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

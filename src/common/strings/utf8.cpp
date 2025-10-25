@@ -8,7 +8,7 @@
 
    locale handling functions
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 
    These functions should normally reside in locale.cpp. But the
    'utf8' namespace declared by utf8.h clases with the 'utf8' symbol

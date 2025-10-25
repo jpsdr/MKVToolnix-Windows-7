@@ -8,7 +8,7 @@
 
   Exceptios for the I/O callback class
 
-  Written by Moritz Bunkus <moritz@bunkus.org>.
+  Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

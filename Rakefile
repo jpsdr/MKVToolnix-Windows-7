@@ -173,6 +173,7 @@ def setup_globals
   cxxflags                += " -Wmisleading-indentation -Wduplicated-cond"                               if check_compiler_version("gcc", "6.0.0")
   cxxflags                += " -Wshadow-compatible-local -Wduplicated-branches"                          if check_compiler_version("gcc", "7.0.0")
   cxxflags                += " -Wno-deprecated-copy -Wno-stringop-overflow"                              if check_compiler_version("gcc", "9.0.0")
+  cxxflags                += " -Wno-c++23-attribute-extensions"                                          if check_compiler_version("clang", "20.0.0")
   cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)} #{c(:GTEST_CFLAGS)}"
 
   ldflags                  = ""
@@ -541,8 +542,8 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   flags     = %w{Y NY FY FNY YT QTR QY QNY QYH}.map { |func| "--flag=#{func}:1:no-c-format --flag=#{func}:1:no-boost-format" }.join(" ")
 
   options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --language=c++}
-  options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
-  options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
+  options  += ["'--msgid-bugs-address=Moritz Bunkus <mo@bunkus.online>'"]
+  options  += ["'--copyright-holder=Moritz Bunkus <mo@bunkus.online>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
 
   runq "xgettext", t.name, "xgettext #{keywords.join(" ")} #{flags} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
 end

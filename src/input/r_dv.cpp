@@ -8,7 +8,7 @@
 
   DV demultiplexer module
 
-  Written by Moritz Bunkus <moritz@bunkus.org>.
+  Written by Moritz Bunkus <mo@bunkus.online>.
   Probe code from ffmpeg's libavformat.
 */
 

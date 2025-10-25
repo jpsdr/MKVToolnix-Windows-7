@@ -7,7 +7,7 @@
 
    extracts chapters and tags as cue sheets from Matroska files
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

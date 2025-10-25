@@ -9,7 +9,7 @@
    class definitions for the MPEG TS demultiplexer module
 
    Written by Massimo Callegari <massimocallegari@yahoo.it>
-   and Moritz Bunkus <moritz@bunkus.org>.
+   and Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

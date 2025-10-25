@@ -8,7 +8,7 @@
 
    class definition for the audio emphasis helper
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

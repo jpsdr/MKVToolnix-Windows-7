@@ -8,7 +8,7 @@
 
    retrieves and displays information about a Matroska file (Qt binding)
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

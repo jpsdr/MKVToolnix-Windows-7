@@ -8,7 +8,7 @@
 
    formatting tabular data as a string
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #include "common/common_pch.h"

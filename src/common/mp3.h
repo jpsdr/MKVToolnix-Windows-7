@@ -8,7 +8,7 @@
 
    helper functions for MP3 data
 
-   Written by Moritz Bunkus <moritz@bunkus.org>.
+   Written by Moritz Bunkus <mo@bunkus.online>.
 */
 
 #pragma once

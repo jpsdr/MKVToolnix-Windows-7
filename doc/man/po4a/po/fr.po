@@ -41,10 +41,8 @@ msgstr "95.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2025-07-27"
 msgid "2025-09-14"
-msgstr "2025-07-27"
+msgstr "2025-09-14"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -345,10 +343,8 @@ msgstr "Écrit tous les messages dans le fichier <parameter>file-name</parameter
 #: doc/man/mkvinfo.xml:190
 #: doc/man/mkvmerge.xml:2303
 #: doc/man/mkvpropedit.xml:489
-#, fuzzy
-#| msgid "<option>--info</option>"
 msgid "<option>--no-bom</option>"
-msgstr "<option>--info</option>"
+msgstr "<option>--no-bom</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:139
@@ -356,7 +352,7 @@ msgstr "<option>--info</option>"
 #: doc/man/mkvmerge.xml:2306
 #: doc/man/mkvpropedit.xml:492
 msgid "Normally text files that are created &amp; encoded in one of the UTF variants will start with a byte order marker (BOM).  Using this option disables writing that byte order marker."
-msgstr ""
+msgstr "Les fichiers texte qui sont créés et encodés en UTF devraient normalement débuter avec un indicateur d'ordre des octets (BOM).  Cette option désactive l'écriture de cet indicateur."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:146
@@ -4131,17 +4127,17 @@ msgstr "Tout le texte dans un fichier &matroska; est encodé en UTF-8. Cela sign
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2810
 msgid "&mkvmerge; does this conversion automatically based on the presence of a byte order marker (short: <abbrev>BOM</abbrev>) or the system's current locale. How the character set is inferred from the locale depends on the operating system that &mkvmerge; is run on."
-msgstr "&mkvmerge; effectue cette conversion automatiquement d'après la présence d'un marqueur d'ordre d'octet (byte order marker, soit : <abbrev>BOM</abbrev>) ou la « locale » du système. Le jeu de caractères déduit de la « locale » dépend du système d'exploitation sur lequel est exécuté &mkvmerge;."
+msgstr "&mkvmerge; effectue cette conversion automatiquement d'après la présence d'un indicateur d'ordre des octets (byte order marker, soit : <abbrev>BOM</abbrev>) ou la « locale » du système. Le jeu de caractères déduit de la « locale » dépend du système d'exploitation sur lequel est exécuté &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2816
 msgid "Byte order markers (BOM)"
-msgstr "Marqueur d'ordre d'octet (byte order markers ou BOM)"
+msgstr "Indicateur d'ordre des octets (byte order markers ou BOM)"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2819
 msgid "Text files that start with a BOM are already encoded in one representation of UTF. &mkvmerge; supports the following five modes: UTF-8, UTF-16 Little and Big Endian, UTF-32 Little and Big Endian. Text files with a BOM are automatically converted to UTF-8. Any of the parameters that would otherwise set the character set for such a file (e.g. <link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset</option></link>) is silently ignored."
-msgstr "Les fichiers texte qui débutent avec un BOM sont déjà encodés avec une des représentations UTF. &mkvmerge; prend en charge les cinq modes suivant : UTF-8, UTF-16 Little et Big Endian, UTF-32 Little et Big Endian. Les fichiers texte avec un BOM sont automatiquement convertis en UTF-8. Tout paramètre qui autrement définirait le jeu de caractères pour un tel fichier (par ex. <link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset</option></link>) est silencieusement ignoré."
+msgstr "Les fichiers texte qui débutent avec un indicateur d'ordre des octets (BOM) sont déjà encodés avec une des représentations UTF. &mkvmerge; prend en charge les cinq modes suivant : UTF-8, UTF-16 Little et Big Endian, UTF-32 Little et Big Endian. Les fichiers texte avec un BOM sont automatiquement convertis en UTF-8. Tout paramètre qui autrement définirait le jeu de caractères pour un tel fichier (par ex. <link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset</option></link>) est silencieusement ignoré."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2827
@@ -4231,7 +4227,7 @@ msgstr "Un fichier d'options est un fichier où &mkvmerge; peut lire des argumen
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2934
 msgid "An option file contains JSON-formatted data. Its content must be a valid JSON array consisting solely of JSON strings. The file's encoding must be UTF-8. The file should not start with a byte order marker (<abbrev>BOM</abbrev>), but if one exists, it will be skipped."
-msgstr "Un fichier d'option contient des données formatées en JSON. Son contenu doit être un tableau valide JSON comprenant seulement des chaînes JSON. L'encodage du fichier doit être UTF-8. Le fichier ne devrait pas débuter avec un marquer d'ordre d'octet (<abbrev>BOM</abbrev>), mais si c'est le cas, il sera ignoré."
+msgstr "Un fichier d'option contient des données formatées en JSON. Son contenu doit être un tableau valide JSON comprenant seulement des chaînes JSON. L'encodage du fichier doit être UTF-8. Le fichier ne devrait pas débuter avec un indicateur d'ordre des octets (<abbrev>BOM</abbrev>), mais si c'est le cas, il sera ignoré."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2939
