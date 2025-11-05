@@ -464,9 +464,9 @@ msgid "There is no translation available for '{0}'.\n"
 msgstr "'{0}' için mevcut çeviri yok.\n"
 
 #: src/common/common.h:88
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "This should not have happened. Please file an issue at {0} with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
-msgstr "Bu olmamalıydı. Lütfen hangi işletim sistemini kullandığınız, kullandığınız komut satırı, ne yapmaya çalıştığınızın açıklaması ve bu hata/uyarı iletisiyle birlikte https://mkvtoolnix.download/issues adresinden bir sorun bildirin. Teşekkür ederiz."
+msgstr "Bu olmamalıydı. Lütfen hangi işletim sistemini kullandığınız, kullandığınız komut satırı, ne yapmaya çalıştığınızın açıklaması ve bu hata/uyarı iletisiyle birlikte {0} adresinden bir sorun bildirin. Teşekkür ederiz."
 
 #: src/common/compression/header_removal.cpp:50
 #, no-c-format, c++-format
@@ -5459,9 +5459,9 @@ msgid "No version number found.\n"
 msgstr "Bulunan sürüm numarası yok.\n"
 
 #: src/input/r_vobsub.cpp:132
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from {0} to convert these files to v7 files.\n"
-msgstr "Sadece v7 ve daha yeni VobSub dosyaları desteklenir. Eğer daha eski sürüme sahipseniz, bu dosyaları v7 dosyalarına dönüştürmek için o zaman http://sourceforge.net/projects/guliverkli/ adresinden VSConv yardımcı uygulamasını kullanın.\n"
+msgstr "Sadece v7 ve daha yeni VobSub dosyaları desteklenir. Eğer daha eski sürüme sahipseniz, bu dosyaları v7 dosyalarına dönüştürmek için o zaman {0} adresinden VSConv yardımcı uygulamasını kullanın.\n"
 
 #: src/input/r_vobsub.cpp:251
 #, no-c-format, c++-format
@@ -5686,9 +5686,9 @@ msgid "Compression failed: {0}\n"
 msgstr "Sıkıştırma başarısız oldu: {0}\n"
 
 #: src/merge/generic_packetizer.cpp:1510
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should open an issue over on {1}.\n"
-msgstr "Şu anki paketin zaman damgası, önceki paketten daha küçük. Bu genellikle kaynak dosyanın %100 doğru olarak oluşturulmamış bir Matroska dosyası olduğu anlamına gelir. Herhangi bir veri kaybetmemek için tüm paketlerin zaman damgaları {0}ms olarak ayarlanacaktır. Bu, ses/görüntü eşitlemesini kapatabilir, ancak bu mkvmerge'ün \"--sync\" seçeneğiyle düzeltilebilir. Eğer zaten \"--sync\" kullanıyorsanız ve hala bu uyarıyı alıyorsanız endişelenmeyin -- bu normaldir. Eğer bu hata birden fazla kez meydana gelirse ve bu iletiyi belirli bir iz için birden fazla alırsanız, o zaman ya kaynak dosyada kötü bir şekilde uygulanmıştır ya da mkvmerge bir hata içeriyordur. Bu durumda yazar Moritz Bunkus <moritz@bunkus.org> ile iletişime geçmelisiniz.\n"
+msgstr "Şu anki paketin zaman damgası, önceki paketten daha küçük. Bu genellikle kaynak dosyanın %100 doğru olarak oluşturulmamış bir Matroska dosyası olduğu anlamına gelir. Herhangi bir veri kaybetmemek için tüm paketlerin zaman damgaları {0}ms olarak ayarlanacaktır. Bu, ses/görüntü eşitlemesini kapatabilir, ancak bu mkvmerge'ün \"--sync\" seçeneğiyle düzeltilebilir. Eğer zaten \"--sync\" kullanıyorsanız ve hala bu uyarıyı alıyorsanız endişelenmeyin -- bu normaldir. Eğer bu hata birden fazla kez meydana gelirse ve bu iletiyi belirli bir iz için birden fazla alırsanız, o zaman ya kaynak dosyada kötü bir şekilde uygulanmıştır ya da mkvmerge bir hata içeriyordur. Bu durumda {1} üzerinde bir sorun konusu açmalısınız.\n"
 
 #: src/merge/generic_packetizer.cpp:1803
 #, no-c-format, c++-format
@@ -16423,9 +16423,9 @@ msgid "The audio/video synchronization may have been lost."
 msgstr "Ses/görüntü eşitlemesi kaybolmuş olabilir."
 
 #: src/output/p_ac3.cpp:240
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please open an issue over on {0}.\n"
-msgstr "ac3_bs_packetizer::add_to_buffer(): Denenmemiş koddur ('boyut' tek sayıdır). Eğer mkvmerge arızalanırsa ya da sonuçta oluşan dosya tam ve doğru ses izi içermezse, o zaman lütfen moritz@bunkus.org adresinden yazar Moritz Bunkus ile irtibata geçin.\n"
+msgstr "ac3_bs_packetizer::add_to_buffer(): Denenmemiş koddur ('boyut' tek sayıdır). Eğer mkvmerge çökerse veya ortaya çıkan dosya tam ve doğru ses izi içermiyorsa, o zaman lütfen {0} üzerinde bir sorun konusu açın.\n"
 
 #: src/output/p_alac.h:31
 #, no-c-format
