@@ -5,6 +5,9 @@
 * all programs: added a command-line parameter `--no-bom` that disables
   writing byte order marks to text files encoded with one of the UTF
   variants. Implements #6166.
+* MKVToolNix GUI: multiplexer: added variable `<MTX_CHAPTERS_FILE_NAME>` to
+  the "run program after job completion" mechanism containing the absolute
+  path to the chapters file name. Implements #6172.
 
 ## Bug fixes
 
