@@ -45,7 +45,12 @@ class FormatStringVerifier
               missing = store[:id]  - store[:str]
               added   = store[:str] - store[:id]
 
-              error_digests << sha1 if !missing.empty? || !added.empty?
+              next if missing.empty? && added.empty?
+              next if (missing == [[]]) && (added == [[["%100"]]])  # 100% → %100 in languages such as Turkish
+
+              pp({ missing: missing, added: added })
+
+              error_digests << sha1
             end
         end
       end
