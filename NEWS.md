@@ -13,6 +13,8 @@
 * mkvmerge: OBU reader: fixed probing files in which the first frame ends
   after the 1MB mark, which is how big the memory buffer used for probing
   content is. Fixes #6165.
+* mkvextract: AV1/IVF: fixed inserting a temporal delimiter OBU at the start
+  of each frame if there is none. Mostly fixes #6120.
 
 
 # Version 95.0 "Goodbye Stranger" 2025-09-14

@@ -106,7 +106,7 @@ xtr_ivf_c::av1_prepend_temporal_delimiter_obu_if_needed(memory_c &frame) {
   if (!m_is_av1 || !frame.get_size())
     return;
 
-  auto type = (frame.get_buffer()[0] & 0x74) >> 3;
+  auto type = (frame.get_buffer()[0] & 0x78) >> 3;
 
   if (type != mtx::av1::OBU_TEMPORAL_DELIMITER)
     frame.prepend(s_av1_temporal_delimiter_obu, 2);
