@@ -15,6 +15,9 @@
   content is. Fixes #6165.
 * mkvextract: AV1/IVF: fixed inserting a temporal delimiter OBU at the start
   of each frame if there is none. Mostly fixes #6120.
+* mkvextract: AV1/IVF: fixed a potential calculation error when deriving frame
+  rate numerator & denominator from Matroska's default duration. Part of the
+  fix of #6120.
 
 
 # Version 95.0 "Goodbye Stranger" 2025-09-14

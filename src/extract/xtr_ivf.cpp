@@ -12,6 +12,8 @@
 
 #include "common/common_pch.h"
 
+#include <type_traits>
+
 #include "common/av1.h"
 #include "common/codec.h"
 #include "common/ebml.h"
@@ -44,7 +46,7 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   auto rate             = mtx::frame_timing::determine_frame_rate(default_duration);
   if (!rate)
     rate                = mtx::rational(1'000'000'000ll, default_duration);
-  rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<uint16_t>::max());
+  rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<decltype(m_file_header.frame_rate_num)>::max());
 
   m_frame_rate_num      = static_cast<uint64_t>(boost::multiprecision::numerator(rate));
   m_frame_rate_den      = static_cast<uint64_t>(boost::multiprecision::denominator(rate));
@@ -66,8 +68,8 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   put_uint16_le(&m_file_header.header_size,    sizeof(m_file_header));
   put_uint16_le(&m_file_header.width,          kt_get_v_pixel_width(track));
   put_uint16_le(&m_file_header.height,         kt_get_v_pixel_height(track));
-  put_uint16_le(&m_file_header.frame_rate_num, m_frame_rate_num);
-  put_uint16_le(&m_file_header.frame_rate_den, m_frame_rate_den);
+  put_uint32_le(&m_file_header.frame_rate_num, m_frame_rate_num);
+  put_uint32_le(&m_file_header.frame_rate_den, m_frame_rate_den);
 
   m_out->write(&m_file_header, sizeof(m_file_header));
 }
