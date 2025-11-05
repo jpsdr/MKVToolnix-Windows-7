@@ -18,6 +18,9 @@
 * mkvextract: AV1/IVF: fixed a potential calculation error when deriving frame
   rate numerator & denominator from Matroska's default duration. Part of the
   fix of #6120.
+* mkvextract: AV1/IVF: fixed calculation of IVF frame number calculation from
+  Matroska's frame timestamps by rounding instead of truncating. Part of the
+  fix of #6120.
 
 
 # Version 95.0 "Goodbye Stranger" 2025-09-14

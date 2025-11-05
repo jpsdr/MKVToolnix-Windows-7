@@ -76,12 +76,14 @@ xtr_ivf_c::create_file(xtr_base_c *master,
 
 void
 xtr_ivf_c::handle_frame(xtr_frame_t &f) {
-  uint64_t frame_number = f.timestamp * m_frame_rate_num / m_frame_rate_den / 1'000'000'000ull;
+  auto frame_number_ns = f.timestamp * m_frame_rate_num / m_frame_rate_den;
+  auto frame_number    = (frame_number_ns + 500'000'000ull) / 1'000'000'000ull;
 
   mxdebug_if(m_debug,
-             fmt::format("handle frame: timestamp {0} num {1} den {2} frame_number {3} calculated back {4}\n",
+             fmt::format("handle frame: timestamp {0} size {5} num {1} den {2} frame_number {3} (actually {6:.3f}) calculated back {4}\n",
                          f.timestamp, m_frame_rate_num, m_frame_rate_den, frame_number,
-                         frame_number * 1'000'000'000ull * m_frame_rate_den / m_frame_rate_num));
+                         frame_number * 1'000'000'000ull * m_frame_rate_den / m_frame_rate_num,
+                         f.frame->get_size(), static_cast<double>(frame_number_ns) / 1'000'000'000.0));
 
   av1_prepend_temporal_delimiter_obu_if_needed(*f.frame);
 
