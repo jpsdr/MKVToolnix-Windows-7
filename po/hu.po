@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
 "POT-Creation-Date: 2025-11-05 22:31+0100\n"
-"PO-Revision-Date: 2025-05-10 13:24+0200\n"
+"PO-Revision-Date: 2025-11-06 15:25+0100\n"
 "Last-Translator: John Fowler <john@madarasz.page>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Flags-xgettext: --add-comments=\"TRANSLATORS: John Fowler\"\n"
 
 #: src/common/audio_emphasis.cpp:49
@@ -376,7 +376,7 @@ msgstr "Az összes üzenetet átirányítja ebbe a fájlba."
 #: src/common/cli_parser.cpp:194
 #, no-c-format
 msgid "Disables writing byte order markers to text files."
-msgstr ""
+msgstr "Letiltja a bájtsorrend-jelölők szövegfájlokba írását."
 
 #: src/common/cli_parser.cpp:195
 #, no-c-format
@@ -462,9 +462,9 @@ msgid "There is no translation available for '{0}'.\n"
 msgstr "A(z) '{0}' kifejezéshez nem áll rendelkezésre fordítás.\n"
 
 #: src/common/common.h:88
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "This should not have happened. Please file an issue at {0} with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
-msgstr "Ennek nem lett volna szabad megtörténnie. Kérjük, jelentsen be egy problémát a https://mkvtoolnix.download/issues ezzel a hiba-/figyelmeztető üzenettel, a tenni kívánt művelet leírásával, a használt parancssorral és a használt operációs rendszerrel. Köszönöm."
+msgstr "Ennek nem lett volna szabad megtörténnie. Kérjük, jelezze a problémát a(z) {0} címen ezzel a hiba-/figyelmeztető üzenettel, annak leírásával, hogy mit próbált tenni, a használt parancssort és a használt operációs rendszert. Köszönöm."
 
 #: src/common/compression/header_removal.cpp:50
 #, no-c-format, c++-format
@@ -4380,7 +4380,7 @@ msgstr "A második mód kibontja a címkéket, XML-be konvertálja és egy kimen
 #: src/extract/extract_cli_parser.cpp:92
 #, no-c-format
 msgid "Do not export track tags."
-msgstr ""
+msgstr "Ne exportáljon sávcímkéket."
 
 #: src/extract/extract_cli_parser.cpp:96
 #, no-c-format
@@ -5453,9 +5453,9 @@ msgid "No version number found.\n"
 msgstr "Nem található verziószám.\n"
 
 #: src/input/r_vobsub.cpp:132
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from {0} to convert these files to v7 files.\n"
-msgstr "Csak a v7 és újabb VobSub fájlok támogatottak. Ha régebbi verziója van, akkor használja a http://sourceforge.net/projects/guliverkli/ VSConv segédprogramját a fájlok v7 fájlokká konvertálásához.\n"
+msgstr "Csak a v7 vagy újabb VobSub fájlok támogatottak. Ha egy régebbi verzióval rendelkezik, akkor használja a VSConv segédprogramot a(z) {0}-ból ezeknek a fájloknak a v7 formátumra történő konvertálásához.\n"
 
 #: src/input/r_vobsub.cpp:251
 #, no-c-format, c++-format
@@ -5680,9 +5680,9 @@ msgid "Compression failed: {0}\n"
 msgstr "A tömörítés sikertelen: {0}\n"
 
 #: src/merge/generic_packetizer.cpp:1510
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should open an issue over on {1}.\n"
-msgstr "Az aktuális csomag időbélyegzője kisebb, mint az előző csomagé. Ez általában azt jelenti, hogy a forrásfájl egy Matroska fájl, amely nem 100%-ban lett megfelelően létrehozva. Az összes csomag időbélyegzői {0} ms-mal módosulnak, hogy ne veszítsenek el adatokat. Ez megzavarhatja az audio/video szinkronizálást, de ez javítható az mkvmerge \"--sync\" opciójával. Ha már használja a \"--sync\" -t, és továbbra is ezt a figyelmeztetést kapja, akkor NE aggódjon - ez normális. Ha ez a hiba többször is előfordul, és ezt az üzenetet többször is megkapja egy adott sávhoz, akkor vagy a forrásfájl rosszul van elsajátítva, vagy az mkvmerge hibát tartalmaz. Ebben az esetben vegye fel a kapcsolatot Moritz Bunkus <moritz@bunkus.org> szerzővel.\n"
+msgstr "A jelenlegi csomag időbélyege kisebb, mint az előző csomagé. Ez általában azt jelenti, hogy a forrásfájl egy Matroska fájl, amelyet nem 100%-ban helyesen hoztak létre. Minden csomag időbélyegét {0} ms-mal módosítjuk, hogy ne veszítsünk el adatot. Ez felboríthatja a hang/videó szinkronizációját, de ez javítható az mkvmerge \"--sync\" opciójával. Ha már használod a \"--sync\" opciót, és még mindig megjelenik ez a figyelmeztetés, ne aggódj -- ez normális. Ha ez a hiba többször is előfordul, és ezt az üzenetet többször is megkapod egy adott sávhoz, akkor vagy a forrásfájl rosszul lett masterelve, vagy az mkvmerge hibát tartalmaz. Ebben az esetben érdemes hibajegyet nyitnod a {1} oldalon.\n"
 
 #: src/merge/generic_packetizer.cpp:1803
 #, no-c-format, c++-format
@@ -5965,6 +5965,8 @@ msgid ""
 "  --date <timestamp>       Set the 'date' field (UTC or with offset,\n"
 "                           e.g. 2017-03-28T17:28:00Z).\n"
 msgstr ""
+"  --date <timestamp>       Állítsa be a 'date' mezőt (UTC-ben vagy eltolással,\n"
+"                           pl. 2017-03-28T17:28:00Z).\n"
 
 #: src/merge/mkvmerge.cpp:143
 #, no-c-format
@@ -6989,9 +6991,9 @@ msgstr ""
 "                           Az összes üzenetet átirányítja ebbe a fájlba.\n"
 
 #: src/merge/mkvmerge.cpp:412
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "  --no-bom                 Disables writing byte order markers to text files.\n"
-msgstr "  --no-cues                Ne írja a jelzésadatokat (az indexet).\n"
+msgstr "  --no-bom                 Letiltja a bájtsorrend-jelölők írását szöveges fájlokba.\n"
 
 #: src/merge/mkvmerge.cpp:413
 #, no-c-format
@@ -7715,14 +7717,14 @@ msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' hiányzik a hossza.\n"
 
 #: src/merge/mkvmerge.cpp:2394
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'--date' lacks the date & time argument.\n"
-msgstr "'--engage' nem tartalmaz argumentumot.\n"
+msgstr "'--date'-ból hiányzik a dátum és idő argumentum.\n"
 
 #: src/merge/mkvmerge.cpp:2397
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The value for '--date' is not a valid date & time: '{0}'\n"
-msgstr "A tulajdonság értéke nem érvényes dátum- és időkarakterlánc a(z) '{0}' mezőben."
+msgstr "A tulajdonság értéke nem érvényes dátum- és időkarakterlánc a(z) '{0}' mezőben.\n"
 
 #: src/merge/mkvmerge.cpp:2422
 #, no-c-format
@@ -8836,9 +8838,9 @@ msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work whe
 msgstr "A '<FILE_NAME>' és a '<FILE_NAME_WITH_EXT>' karakterláncok, amelyek csak akkor működnek, amikor fejezeteket generálnak a csatolt fájlokhoz, helyébe a csatolt fájl neve kerül (az előbbi kihagyja a kiterjesztést, míg az utóbbi tartalmazza)."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:336
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."
-msgstr "A '<FILE_NAME>' és a '<FILE_NAME_WITH_EXT>' karakterláncok, amelyek csak akkor működnek, amikor fejezeteket generálnak a csatolt fájlokhoz, helyébe a csatolt fájl neve kerül (az előbbi kihagyja a kiterjesztést, míg az utóbbi tartalmazza)."
+msgstr "A '<TITLE>' karakterlánc, amely csak a csatolt fájlok fejezeteinek generálásakor működik, a csatolt fájl címére lesz cserélve, ha az be van állítva."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #, no-c-format
@@ -14216,9 +14218,9 @@ msgid "Source files' absolute paths"
 msgstr "A forrásfájlok abszolút elérési útjai"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:254
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter file's absolute path"
-msgstr "A célfájl abszolút elérési útja"
+msgstr "A fejezetfájl abszolút elérési útja"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
 #, no-c-format
@@ -14450,9 +14452,9 @@ msgid "This field is normally set to the date the file is created."
 msgstr "Ez a mező általában a fájl létrehozásának dátumára van beállítva."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sets the 'date' field (UTC or with a time zone offset) in the segment information headers."
-msgstr "Arra utasítja az mkvmerge parancsot, hogy ne írja be a 'dátum' mezőt a szegmensinformációk fejlécébe."
+msgstr "Beállítja a 'date' mezőt (UTC-ben vagy időzóna-eltolással) a szegmensinformációs fejlécekben."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 #, no-c-format
@@ -16438,9 +16440,9 @@ msgid "The audio/video synchronization may have been lost."
 msgstr "Lehet, hogy a hang/videó szinkronizálás megszakadt."
 
 #: src/output/p_ac3.cpp:240
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please open an issue over on {0}.\n"
-msgstr "ac3_bs_packetizer::add_to_buffer(): Nem tesztelt kód (a \"méret\" páratlan). Ha az mkvmerge összeomlik, vagy ha az eredményül kapott fájl nem tartalmazza a teljes és helyes hangsávot, kérjük, vegye fel a kapcsolatot Moritz Bunkus szerzővel a moritz@bunkus.org.\n"
+msgstr "ac3_bs_packetizer::add_to_buffer(): Nem tesztelt kód ('size' páratlan).Ha a mkvmerge összeomlik, vagy ha a létrehozott fájl nem tartalmazza a teljes és helyes hangcsatornát, kérjük, nyisson egy hibajegyet a {0} oldalon.\n"
 
 #: src/output/p_alac.h:31
 #, no-c-format
@@ -17303,7 +17305,8 @@ msgstr "Nem található a(z) '{0}' szerkesztési specifikációnak megfelelő s�
 #~ msgstr "A/52 (más néven AC-3)"
 
 #~ msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
-#~ msgstr "Az AAC fájlok HE-AAC / AAC+ / SBR AAC hangot tartalmazhatnak. Ez NEM észlelhető automatikusan. Ezért manuálisan kell megadnod a '--aac-is-sbr 0' értéket ehhez a bemeneti fájlhoz, ha a fájl valóban tartalmaz SBR AAC-t. A fájl egyébként ROSSZ módon lesz muxolva. Olvassa el az mkvmerge dokumentációját is.\n"
+#~ msgstr ""
+#~ "Az AAC fájlok HE-AAC / AAC+ / SBR AAC hangot tartalmazhatnak. Ez NEM észlelhető automatikusan. Ezért manuálisan kell megadnod a '--aac-is-sbr 0' értéket ehhez a bemeneti fájlhoz, ha a fájl valóban tartalmaz SBR AAC-t. A fájl egyébként ROSSZ módon lesz muxolva. Olvassa el az mkvmerge dokumentációját is.\n"
 
 #~ msgid "About mkvinfo"
 #~ msgstr "Az mkvinfo-ról"
@@ -17816,8 +17819,12 @@ msgstr "Nem található a(z) '{0}' szerkesztési specifikációnak megfelelő s�
 #~ msgid "Ready"
 #~ msgstr "Kész"
 
-#~ msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
-#~ msgstr "A RealMedia fájlok HE-AAC / AAC+ / SBR AAC hangot tartalmazhatnak. Bizonyos esetekben ez NEM észlelhető automatikusan. Ezért manuálisan kell megadnia a '--aac-is-sbr %1%' értéket ehhez a bemeneti fájlhoz, ha a fájl valóban tartalmaz SBR AAC-t. A fájl egyébként ROSSZ módon lesz muxolva. Olvassa el az mkvmerge dokumentációját is.\n"
+#~ msgid ""
+#~ "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's "
+#~ "documentation.\n"
+#~ msgstr ""
+#~ "A RealMedia fájlok HE-AAC / AAC+ / SBR AAC hangot tartalmazhatnak. Bizonyos esetekben ez NEM észlelhető automatikusan. Ezért manuálisan kell megadnia a '--aac-is-sbr %1%' értéket ehhez a bemeneti fájlhoz, ha a fájl valóban tartalmaz SBR AAC-t. A fájl egyébként ROSSZ módon lesz muxolva. Olvassa el az "
+#~ "mkvmerge dokumentációját is.\n"
 
 #~ msgid "Reference block: -%1%.%|2$06d|ms"
 #~ msgstr "Referencia blokk: -%1%.%|2$06d|ms"
@@ -17927,8 +17934,12 @@ msgstr "Nem található a(z) '{0}' szerkesztési specifikációnak megfelelő s�
 #~ msgid "Subtitle tracks:"
 #~ msgstr "Feliratos sávok:"
 
-#~ msgid "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/H.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
-#~ msgstr "Az AVC videósávból hiányzik a 'CTTS' elem a képkocka időbélyeg eltolásaihoz. Az AVC/H.264 azonban lehetővé teszi, hogy a képkockák a hagyományos (P képkockák) vagy két (B képkockák) hivatkozással rendelkezzenek más képkockákra. Az ilyen keretek időbélyegei nem lesznek rendben, és a 'CTTS' elemre van szükség az időbélyegek helyes eléréséhez. Mivel hiányzik, ennek a számnak az időbélyegei hibásak lehetnek. Figyelje meg a kapott fájlt, és győződjön meg arról, hogy úgy néz ki, ahogy várta.\n"
+#~ msgid ""
+#~ "The AVC video track is missing the 'CTTS' atom for frame timestamp offsets. However, AVC/H.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timestamps for such frames will be out-of-order, and the 'CTTS' atom is needed for getting "
+#~ "the timestamps right. As it is missing the timestamps for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
+#~ msgstr ""
+#~ "Az AVC videósávból hiányzik a 'CTTS' elem a képkocka időbélyeg eltolásaihoz. Az AVC/H.264 azonban lehetővé teszi, hogy a képkockák a hagyományos (P képkockák) vagy két (B képkockák) hivatkozással rendelkezzenek más képkockákra. Az ilyen keretek időbélyegei nem lesznek rendben, és a 'CTTS' elemre van szükség "
+#~ "az időbélyegek helyes eléréséhez. Mivel hiányzik, ennek a számnak az időbélyegei hibásak lehetnek. Figyelje meg a kapott fájlt, és győződjön meg arról, hogy úgy néz ki, ahogy várta.\n"
 
 #~ msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 #~ msgstr "A Matroska fájl módosult, de a meta keresési bejegyzést nem lehetett frissíteni. Ez azt jelenti, hogy a játékosok nehezen találják meg ezt az elemet. Kérjük, használja kedvenc lejátszóját a fájl ellenőrzéséhez."
