@@ -239,14 +239,17 @@ MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   const{
   Job::runProgramSetupVariables(variables);
 
+  auto &cfg = config();
+
   // OUTPUT_… are kept for backwards compatibility.
   variables[Q("JOB_TYPE")]                   << Q("multiplexer");
-  variables[Q("OUTPUT_FILE_NAME")]           << QDir::toNativeSeparators(config().m_destination);
-  variables[Q("OUTPUT_FILE_DIRECTORY")]      << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
-  variables[Q("DESTINATION_FILE_NAME")]      << QDir::toNativeSeparators(config().m_destination);
-  variables[Q("DESTINATION_FILE_DIRECTORY")] << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
+  variables[Q("OUTPUT_FILE_NAME")]           << QDir::toNativeSeparators(cfg.m_destination);
+  variables[Q("OUTPUT_FILE_DIRECTORY")]      << QDir::toNativeSeparators(QFileInfo{ cfg.m_destination }.path());
+  variables[Q("DESTINATION_FILE_NAME")]      << QDir::toNativeSeparators(cfg.m_destination);
+  variables[Q("DESTINATION_FILE_DIRECTORY")] << QDir::toNativeSeparators(QFileInfo{ cfg.m_destination }.path());
+  variables[Q("CHAPTERS_FILE_NAME")]         << QDir::toNativeSeparators(cfg.m_chapters);
 
-  for (auto const &sourceFile : config().m_files) {
+  for (auto const &sourceFile : cfg.m_files) {
     variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(sourceFile->m_fileName);
 
     for (auto const &appendedSourceFile : sourceFile->m_appendedFiles)

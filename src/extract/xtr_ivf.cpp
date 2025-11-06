@@ -12,6 +12,8 @@
 
 #include "common/common_pch.h"
 
+#include <type_traits>
+
 #include "common/av1.h"
 #include "common/codec.h"
 #include "common/ebml.h"
@@ -44,7 +46,7 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   auto rate             = mtx::frame_timing::determine_frame_rate(default_duration);
   if (!rate)
     rate                = mtx::rational(1'000'000'000ll, default_duration);
-  rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<uint16_t>::max());
+  rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<decltype(m_file_header.frame_rate_num)>::max());
 
   m_frame_rate_num      = static_cast<uint64_t>(boost::multiprecision::numerator(rate));
   m_frame_rate_den      = static_cast<uint64_t>(boost::multiprecision::denominator(rate));
@@ -66,20 +68,22 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   put_uint16_le(&m_file_header.header_size,    sizeof(m_file_header));
   put_uint16_le(&m_file_header.width,          kt_get_v_pixel_width(track));
   put_uint16_le(&m_file_header.height,         kt_get_v_pixel_height(track));
-  put_uint16_le(&m_file_header.frame_rate_num, m_frame_rate_num);
-  put_uint16_le(&m_file_header.frame_rate_den, m_frame_rate_den);
+  put_uint32_le(&m_file_header.frame_rate_num, m_frame_rate_num);
+  put_uint32_le(&m_file_header.frame_rate_den, m_frame_rate_den);
 
   m_out->write(&m_file_header, sizeof(m_file_header));
 }
 
 void
 xtr_ivf_c::handle_frame(xtr_frame_t &f) {
-  uint64_t frame_number = f.timestamp * m_frame_rate_num / m_frame_rate_den / 1'000'000'000ull;
+  auto frame_number_ns = f.timestamp * m_frame_rate_num / m_frame_rate_den;
+  auto frame_number    = (frame_number_ns + 500'000'000ull) / 1'000'000'000ull;
 
   mxdebug_if(m_debug,
-             fmt::format("handle frame: timestamp {0} num {1} den {2} frame_number {3} calculated back {4}\n",
+             fmt::format("handle frame: timestamp {0} size {5} num {1} den {2} frame_number {3} (actually {6:.3f}) calculated back {4}\n",
                          f.timestamp, m_frame_rate_num, m_frame_rate_den, frame_number,
-                         frame_number * 1'000'000'000ull * m_frame_rate_den / m_frame_rate_num));
+                         frame_number * 1'000'000'000ull * m_frame_rate_den / m_frame_rate_num,
+                         f.frame->get_size(), static_cast<double>(frame_number_ns) / 1'000'000'000.0));
 
   av1_prepend_temporal_delimiter_obu_if_needed(*f.frame);
 
@@ -106,7 +110,7 @@ xtr_ivf_c::av1_prepend_temporal_delimiter_obu_if_needed(memory_c &frame) {
   if (!m_is_av1 || !frame.get_size())
     return;
 
-  auto type = (frame.get_buffer()[0] & 0x74) >> 3;
+  auto type = (frame.get_buffer()[0] & 0x78) >> 3;
 
   if (type != mtx::av1::OBU_TEMPORAL_DELIMITER)
     frame.prepend(s_av1_temporal_delimiter_obu, 2);
