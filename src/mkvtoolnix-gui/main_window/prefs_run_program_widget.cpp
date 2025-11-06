@@ -251,6 +251,7 @@ PrefsRunProgramWidget::setupMenu() {
     { QY("Destination file's absolute path"),                            Q("DESTINATION_FILE_NAME")      },
     { QY("Destination folders's absolute path"),                         Q("DESTINATION_FILE_DIRECTORY") },
     { QY("Source files' absolute paths"),                                Q("SOURCE_FILE_NAMES")          },
+    { QY("Chapter file's absolute path"),                                Q("CHAPTERS_FILE_NAME")         },
 
     { QY("General variables"),                                           Q("")                           },
     { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")               },

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2025-10-21 17:37+0200\n"
+"POT-Creation-Date: 2025-11-05 22:31+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: BouRock, 2016-2025\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -464,9 +464,9 @@ msgid "There is no translation available for '{0}'.\n"
 msgstr "'{0}' için mevcut çeviri yok.\n"
 
 #: src/common/common.h:88
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "This should not have happened. Please file an issue at {0} with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
-msgstr "Bu olmamalıydı. Lütfen hangi işletim sistemini kullandığınız, kullandığınız komut satırı, ne yapmaya çalıştığınızın açıklaması ve bu hata/uyarı iletisiyle birlikte https://mkvtoolnix.download/issues adresinden bir sorun bildirin. Teşekkür ederiz."
+msgstr "Bu olmamalıydı. Lütfen hangi işletim sistemini kullandığınız, kullandığınız komut satırı, ne yapmaya çalıştığınızın açıklaması ve bu hata/uyarı iletisiyle birlikte {0} adresinden bir sorun bildirin. Teşekkür ederiz."
 
 #: src/common/compression/header_removal.cpp:50
 #, no-c-format, c++-format
@@ -4686,7 +4686,7 @@ msgstr "KodekID '{1}' ile iz {0}, \"default duration\" öğesi eksik ve çıkar�
 
 #: src/extract/xtr_avi.cpp:51
 #: src/extract/xtr_base.cpp:68
-#: src/extract/xtr_ivf.cpp:55
+#: src/extract/xtr_ivf.cpp:57
 #: src/extract/xtr_textsubs.cpp:290
 #, no-c-format, c++-format
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
@@ -5459,9 +5459,9 @@ msgid "No version number found.\n"
 msgstr "Bulunan sürüm numarası yok.\n"
 
 #: src/input/r_vobsub.cpp:132
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from {0} to convert these files to v7 files.\n"
-msgstr "Sadece v7 ve daha yeni VobSub dosyaları desteklenir. Eğer daha eski sürüme sahipseniz, bu dosyaları v7 dosyalarına dönüştürmek için o zaman http://sourceforge.net/projects/guliverkli/ adresinden VSConv yardımcı uygulamasını kullanın.\n"
+msgstr "Sadece v7 ve daha yeni VobSub dosyaları desteklenir. Eğer daha eski sürüme sahipseniz, bu dosyaları v7 dosyalarına dönüştürmek için o zaman {0} adresinden VSConv yardımcı uygulamasını kullanın.\n"
 
 #: src/input/r_vobsub.cpp:251
 #, no-c-format, c++-format
@@ -5686,9 +5686,9 @@ msgid "Compression failed: {0}\n"
 msgstr "Sıkıştırma başarısız oldu: {0}\n"
 
 #: src/merge/generic_packetizer.cpp:1510
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should open an issue over on {1}.\n"
-msgstr "Şu anki paketin zaman damgası, önceki paketten daha küçük. Bu genellikle kaynak dosyanın %100 doğru olarak oluşturulmamış bir Matroska dosyası olduğu anlamına gelir. Herhangi bir veri kaybetmemek için tüm paketlerin zaman damgaları {0}ms olarak ayarlanacaktır. Bu, ses/görüntü eşitlemesini kapatabilir, ancak bu mkvmerge'ün \"--sync\" seçeneğiyle düzeltilebilir. Eğer zaten \"--sync\" kullanıyorsanız ve hala bu uyarıyı alıyorsanız endişelenmeyin -- bu normaldir. Eğer bu hata birden fazla kez meydana gelirse ve bu iletiyi belirli bir iz için birden fazla alırsanız, o zaman ya kaynak dosyada kötü bir şekilde uygulanmıştır ya da mkvmerge bir hata içeriyordur. Bu durumda yazar Moritz Bunkus <moritz@bunkus.org> ile iletişime geçmelisiniz.\n"
+msgstr "Şu anki paketin zaman damgası, önceki paketten daha küçük. Bu genellikle kaynak dosyanın %100 doğru olarak oluşturulmamış bir Matroska dosyası olduğu anlamına gelir. Herhangi bir veri kaybetmemek için tüm paketlerin zaman damgaları {0}ms olarak ayarlanacaktır. Bu, ses/görüntü eşitlemesini kapatabilir, ancak bu mkvmerge'ün \"--sync\" seçeneğiyle düzeltilebilir. Eğer zaten \"--sync\" kullanıyorsanız ve hala bu uyarıyı alıyorsanız endişelenmeyin -- bu normaldir. Eğer bu hata birden fazla kez meydana gelirse ve bu iletiyi belirli bir iz için birden fazla alırsanız, o zaman ya kaynak dosyada kötü bir şekilde uygulanmıştır ya da mkvmerge bir hata içeriyordur. Bu durumda {1} üzerinde bir sorun konusu açmalısınız.\n"
 
 #: src/merge/generic_packetizer.cpp:1803
 #, no-c-format, c++-format
@@ -8595,8 +8595,8 @@ msgstr "XML bölüm dosyaları"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:128
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1483
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:321
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:322
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:399
 #: src/mkvtoolnix-gui/merge/attachments.cpp:329
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
@@ -13928,14 +13928,14 @@ msgid "Select destination directory"
 msgstr "Hedef dizini seç"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1481
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
 msgstr "Çalıştırılabilir dosyalar"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1485
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:324
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:325
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -14205,22 +14205,27 @@ msgstr "Hedef klasörlerin tam yolu"
 msgid "Source files' absolute paths"
 msgstr "Kaynak dosyaların tam yolları"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:255
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:254
+#, fuzzy, no-c-format
+msgid "Chapter file's absolute path"
+msgstr "Hedef dosyanın tam yolu"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
 #, no-c-format
 msgid "General variables"
 msgstr "Genel değişkenler"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "ISO 8601 biçiminde şu anki tarih ve saat"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:258
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "MKVToolNix GKA'nün kurulum dizini"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:401
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:402
 #, no-c-format
 msgid "Select audio file"
 msgstr "Ses dosyası seç"
@@ -16423,9 +16428,9 @@ msgid "The audio/video synchronization may have been lost."
 msgstr "Ses/görüntü eşitlemesi kaybolmuş olabilir."
 
 #: src/output/p_ac3.cpp:240
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please open an issue over on {0}.\n"
-msgstr "ac3_bs_packetizer::add_to_buffer(): Denenmemiş koddur ('boyut' tek sayıdır). Eğer mkvmerge arızalanırsa ya da sonuçta oluşan dosya tam ve doğru ses izi içermezse, o zaman lütfen moritz@bunkus.org adresinden yazar Moritz Bunkus ile irtibata geçin.\n"
+msgstr "ac3_bs_packetizer::add_to_buffer(): Denenmemiş koddur ('boyut' tek sayıdır). Eğer mkvmerge çökerse veya ortaya çıkan dosya tam ve doğru ses izi içermiyorsa, o zaman lütfen {0} üzerinde bir sorun konusu açın.\n"
 
 #: src/output/p_alac.h:31
 #, no-c-format

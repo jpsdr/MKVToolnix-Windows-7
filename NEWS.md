@@ -5,6 +5,9 @@
 * all programs: added a command-line parameter `--no-bom` that disables
   writing byte order marks to text files encoded with one of the UTF
   variants. Implements #6166.
+* MKVToolNix GUI: multiplexer: added variable `<MTX_CHAPTERS_FILE_NAME>` to
+  the "run program after job completion" mechanism containing the absolute
+  path to the chapters file name. Implements #6172.
 
 ## Bug fixes
 
@@ -13,6 +16,14 @@
 * mkvmerge: OBU reader: fixed probing files in which the first frame ends
   after the 1MB mark, which is how big the memory buffer used for probing
   content is. Fixes #6165.
+* mkvextract: AV1/IVF: fixed inserting a temporal delimiter OBU at the start
+  of each frame if there is none. Mostly fixes #6120.
+* mkvextract: AV1/IVF: fixed a potential calculation error when deriving frame
+  rate numerator & denominator from Matroska's default duration. Part of the
+  fix of #6120.
+* mkvextract: AV1/IVF: fixed calculation of IVF frame number calculation from
+  Matroska's frame timestamps by rounding instead of truncating. Part of the
+  fix of #6120.
 
 
 # Version 95.0 "Goodbye Stranger" 2025-09-14
