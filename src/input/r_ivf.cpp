@@ -49,6 +49,8 @@ ivf_reader_c::read_headers() {
   m_frame_rate_den = get_uint32_le(&m_header.frame_rate_den);
   m_ok             = m_width && m_height && m_frame_rate_num && m_frame_rate_den;
 
+  mxdebug_if(m_debug, fmt::format("IVF headers num/den {0}/{1}\n", m_frame_rate_num, m_frame_rate_den));
+
   show_demuxer_info();
 
   if (m_codec.is(codec_c::type_e::V_AV1))

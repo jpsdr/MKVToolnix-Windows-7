@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2025-10-21 17:37+0200\n"
+"POT-Creation-Date: 2025-11-05 22:31+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2015\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -378,7 +378,7 @@ msgstr "Omdirigerar alla meddelanden till den här filen."
 #: src/common/cli_parser.cpp:194
 #, no-c-format
 msgid "Disables writing byte order markers to text files."
-msgstr ""
+msgstr "Inaktiverar skrivning av byteordningsmarkörer till textfiler."
 
 #: src/common/cli_parser.cpp:195
 #, no-c-format
@@ -464,9 +464,9 @@ msgid "There is no translation available for '{0}'.\n"
 msgstr "Det finns ingen tillgänglig översättning för \"{0}\".\n"
 
 #: src/common/common.h:88
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "This should not have happened. Please file an issue at {0} with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
-msgstr "Detta borde inte ha hänt. Skicka in ett ärende till https://mkvtoolnix.download/issues med detta fel-/varningsmeddelande, en beskrivning av vad du försökte göra, kommandoraden som användes och vilket operativsystem du använder. Vi tackar dig så mycket."
+msgstr "Detta borde inte ha hänt. Rapportera ett fel på {0} med detta fel-/varningsmeddelande, en beskrivning av vad du försökte göra, kommandoraden som användes och vilket operativsystem du använder. Tack."
 
 #: src/common/compression/header_removal.cpp:50
 #, no-c-format, c++-format
@@ -4682,7 +4682,7 @@ msgstr "Spår {0} med CodecID '{1}' saknar elementet \"default duration\" och ka
 
 #: src/extract/xtr_avi.cpp:51
 #: src/extract/xtr_base.cpp:68
-#: src/extract/xtr_ivf.cpp:55
+#: src/extract/xtr_ivf.cpp:57
 #: src/extract/xtr_textsubs.cpp:290
 #, no-c-format, c++-format
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
@@ -5455,9 +5455,9 @@ msgid "No version number found.\n"
 msgstr "Inget versionsnummer hittades.\n"
 
 #: src/input/r_vobsub.cpp:132
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from {0} to convert these files to v7 files.\n"
-msgstr "Endast v7 och nyare VobSub-filer stöds. Om du har en äldre version kan du använda verktyget VSConv från http://sourceforge.net/projects/guliverkli/ för att konvertera dessa filer till v7-filer.\n"
+msgstr "Endast v7 och nyare VobSub-filer stöds. Om du har en äldre version kan du använda verktyget VSConv från {0} för att konvertera dessa filer till v7-filer.\n"
 
 #: src/input/r_vobsub.cpp:251
 #, no-c-format, c++-format
@@ -5682,9 +5682,9 @@ msgid "Compression failed: {0}\n"
 msgstr "Komprimeringen misslyckades: {0}\n"
 
 #: src/merge/generic_packetizer.cpp:1510
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should open an issue over on {1}.\n"
-msgstr "Tidsstämpeln för det aktuella paketet är mindre än för det föregående paketet. Detta betyder vanligtvis att källfilen är en Matroska-fil som inte har skapats 100% coriktigt. Tidsstämplarna för alla paket kommer att justeras med {0}ms för att inte förlora någon data. Detta kan göra att ljud-/videosynkroniseringen inte fungerar, men det kan korrigeras med mkvmerges alternativ \"--sync\". Om du redan använder \"--sync\" och fortfarande får den här varningen ska du INTE oroa dig - det är normalt. Om detta fel inträffar mer än en gång och du får detta meddelande mer än en gång för ett visst spår är antingen källfilen dåligt mastrad eller så innehåller mkvmerge en bugg. I så fall bör du kontakta författaren Moritz Bunkus <moritz@bunkus.org>.\n"
+msgstr "Det aktuella paketets tidsstämpel är mindre än det föregående paketets. Detta betyder vanligtvis att källfilen är en Matroska-fil som inte har skapats 100 % korrekt. Tidsstämplarna för alla paket kommer att justeras med {0} ms för att inte förlora någon data. Detta kan störa synkroniseringen mellan ljud och bild, men det kan korrigeras med mkvmerges alternativ ”--sync”. Om du redan använder ”--sync” och fortfarande får denna varning behöver du INTE oroa dig – detta är normalt. Om detta fel inträffar mer än en gång och du får detta meddelande mer än en gång för ett visst spår är antingen källfilen dåligt mastrad eller så innehåller mkvmerge en bugg. I detta fall bör du öppna ett ärende på {1}.\n"
 
 #: src/merge/generic_packetizer.cpp:1803
 #, no-c-format, c++-format
@@ -5967,6 +5967,8 @@ msgid ""
 "  --date <timestamp>       Set the 'date' field (UTC or with offset,\n"
 "                           e.g. 2017-03-28T17:28:00Z).\n"
 msgstr ""
+"  --date <timestamp>       Ställ in fältet 'date' (UTC eller med förskjutning,\n"
+"                           t.ex. 2017-03-28T17:28:00Z).\n"
 
 #: src/merge/mkvmerge.cpp:143
 #, no-c-format
@@ -6991,9 +6993,9 @@ msgstr ""
 "                           Omdirigerar alla meddelanden till den här filen.\n"
 
 #: src/merge/mkvmerge.cpp:412
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "  --no-bom                 Disables writing byte order markers to text files.\n"
-msgstr "  --no-cues Skriv inte cue-data (indexet).\n"
+msgstr "  --no-bom                 Inaktiverar skrivning av byteordningsmarkörer till textfiler.\n"
 
 #: src/merge/mkvmerge.cpp:413
 #, no-c-format
@@ -7717,14 +7719,14 @@ msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' saknar längden.\n"
 
 #: src/merge/mkvmerge.cpp:2394
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'--date' lacks the date & time argument.\n"
-msgstr "'--engage' saknar sitt argument.\n"
+msgstr "'--date' saknar argumentet för datum och tid.\n"
 
 #: src/merge/mkvmerge.cpp:2397
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "The value for '--date' is not a valid date & time: '{0}'\n"
-msgstr "Egenskapsvärdet är inte en giltig datum- och tidssträng i '{0}'."
+msgstr "Värdet för '--date' är inte ett giltigt datum och tid: '{0}'\n"
 
 #: src/merge/mkvmerge.cpp:2422
 #, no-c-format
@@ -8603,8 +8605,8 @@ msgstr "XML-kapitelfiler"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:128
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1483
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:321
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:322
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:399
 #: src/mkvtoolnix-gui/merge/attachments.cpp:329
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
@@ -8834,9 +8836,9 @@ msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work whe
 msgstr "Strängarna \"<FILE_NAME>\" och \"<FILE_NAME_WITH_EXT>\", som bara fungerar när du genererar kapitel för bifogade filer, kommer att ersättas av den bifogade filens namn (den förra utelämnar tillägget medan den senare inkluderar det)."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:336
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The string '<TITLE>', which only work when generating chapters for appended files, will be replaced by the appended file's title if one is set."
-msgstr "Strängarna \"<FILE_NAME>\" och \"<FILE_NAME_WITH_EXT>\", som bara fungerar när du genererar kapitel för bifogade filer, kommer att ersättas av den bifogade filens namn (den förra utelämnar tillägget medan den senare inkluderar det)."
+msgstr "Strängen ’<TITLE>’, som endast fungerar när kapitel genereras för bifogade filer, kommer att ersättas med den bifogade filens titel om en sådan har angetts."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #, no-c-format
@@ -13936,14 +13938,14 @@ msgid "Select destination directory"
 msgstr "Välj målkatalog"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1481
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
 msgstr "Exekverbara filer"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1485
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:324
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:325
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -14213,22 +14215,27 @@ msgstr "Målmapparnas absoluta sökväg"
 msgid "Source files' absolute paths"
 msgstr "Källfilernas absoluta sökvägar"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:255
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:254
+#, fuzzy, no-c-format
+msgid "Chapter file's absolute path"
+msgstr "Målfilens absoluta sökväg"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
 #, no-c-format
 msgid "General variables"
 msgstr "Allmänna variabler"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "Aktuellt datum och tid i ISO 8601-format"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:258
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "MKVToolNix GUI:s installationskatalog"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:401
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:402
 #, no-c-format
 msgid "Select audio file"
 msgstr "Välj ljudfil"
@@ -14443,9 +14450,9 @@ msgid "This field is normally set to the date the file is created."
 msgstr "Detta fält är normalt inställt på det datum då filen skapades."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sets the 'date' field (UTC or with a time zone offset) in the segment information headers."
-msgstr "Anger att mkvmerge inte ska skriva fältet \"date\" i segmentinformationens rubriker."
+msgstr "Ställer in fältet ”date” (UTC eller med tidszonsförskjutning) i segmentinformationsrubrikerna."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 #, no-c-format
@@ -16431,9 +16438,9 @@ msgid "The audio/video synchronization may have been lost."
 msgstr "Synkroniseringen av ljud/video kan ha gått förlorad."
 
 #: src/output/p_ac3.cpp:240
-#, fuzzy, no-c-format, c++-format
+#, no-c-format, c++-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please open an issue over on {0}.\n"
-msgstr "ac3_bs_packetizer::add_to_buffer(): Otestad kod ('size' är udda). Om mkvmerge kraschar eller om den resulterande filen inte innehåller det fullständiga och korrekta ljudspåret, vänligen kontakta författaren Moritz Bunkus på moritz@bunkus.org.\n"
+msgstr "ac3_bs_packetizer::add_to_buffer(): Otestad kod (’size’ är udda). Om mkvmerge kraschar eller om den resulterande filen inte innehåller det fullständiga och korrekta ljudspåret, öppna ett ärende på {0}.\n"
 
 #: src/output/p_alac.h:31
 #, no-c-format
