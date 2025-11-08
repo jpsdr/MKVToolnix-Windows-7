@@ -1,4 +1,4 @@
-Building MKVToolNix 95.0 for Windows
+Building MKVToolNix 96.0 for Windows
 =====================================
 
 There is currently only one supported way to build MKVToolNix for
