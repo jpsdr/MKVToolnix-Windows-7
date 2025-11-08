@@ -1,4 +1,4 @@
-# Version ?
+# Version 96.0 "It's My Life" 2025-11-08
 
 ## New features and enhancements
 
