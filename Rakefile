@@ -174,6 +174,7 @@ def setup_globals
   cxxflags                += " -Wshadow-compatible-local -Wduplicated-branches"                          if check_compiler_version("gcc", "7.0.0")
   cxxflags                += " -Wno-deprecated-copy -Wno-stringop-overflow"                              if check_compiler_version("gcc", "9.0.0")
   cxxflags                += " -Wno-c++23-attribute-extensions"                                          if check_compiler_version("clang", "20.0.0")
+  cxxflags                += " -Wno-c++26-extensions"                                                    if check_compiler_version("clang", "21.0.0")
   cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:USER_CXXFLAGS)} #{c(:GTEST_CFLAGS)}"
 
   ldflags                  = ""

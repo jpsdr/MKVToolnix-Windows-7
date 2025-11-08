@@ -1,4 +1,4 @@
-# Version ?
+# Version 96.0 "It's My Life" 2025-11-08
 
 ## New features and enhancements
 
@@ -11,11 +11,11 @@
 
 ## Bug fixes
 
-* mkvmerge: VobSub reader: VobSub `.idx` files that start with a byte-order
-  mark (BOM) are now read again correctly. Fixes #6162.
 * mkvmerge: OBU reader: fixed probing files in which the first frame ends
   after the 1MB mark, which is how big the memory buffer used for probing
   content is. Fixes #6165.
+* mkvmerge: VobSub reader: VobSub `.idx` files that start with a byte-order
+  mark (BOM) are now read again correctly. Fixes #6162.
 * mkvextract: AV1/IVF: fixed inserting a temporal delimiter OBU at the start
   of each frame if there is none. Mostly fixes #6120.
 * mkvextract: AV1/IVF: fixed a potential calculation error when deriving frame
