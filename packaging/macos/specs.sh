@@ -14,7 +14,4 @@ spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/rele
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
 spec_zlib=(zlib-v1.3.1.tar.xz https://zlib.net/zlib-1.3.1.tar.xz 38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32)
 
-#spec_qt=(qt-everywhere-src-6.8.1.tar.xz https://download.qt.io/official_releases/qt/6.8/6.8.1/single/qt-everywhere-src-6.8.1.tar.xz 45e3a9f6d33c92ffe65a1fde1a8eba5b228112df675f7f9026eaa332b2e2edff)
-#spec_qt=(qt-everywhere-src-6.8.3.tar.xz https://download.qt.io/official_releases/qt/6.8/6.8.3/single/qt-everywhere-src-6.8.3.tar.xz cdd3a69967208276bb01af7ace7dba0ba53e679f886a4cbe624225c60fb73f2c)
-#spec_qt=(qt-everywhere-src-6.9.1.tar.xz https://download.qt.io/official_releases/qt/6.9/6.9.1/single/qt-everywhere-src-6.9.1.tar.xz 364fde2d7fa42dd7c9b2ea6db3d462dd54f3869e9fd0ca0a0ca62f750cd8329b)
-spec_qt=(qt-everywhere-src-6.9.2.tar.xz https://download.qt.io/official_releases/qt/6.9/6.9.2/single/qt-everywhere-src-6.9.2.tar.xz 643f1fe35a739e2bf5e1a092cfe83dbee61ff6683684e957351c599767ca279c)
+spec_qt=(qt-everywhere-src-6.10.0.tar.xz https://download.qt.io/official_releases/qt/6.10/6.10.0/single/qt-everywhere-src-6.10.0.tar.xz 81895fb038a9c3d6c6f698d7611339a189eb45c3d91746c7789b0b77a5981aa3)
