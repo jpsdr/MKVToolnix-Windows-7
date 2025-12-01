@@ -223,8 +223,6 @@ function build_vorbis {
 function build_flac {
   build_package flac \
     --prefix=${TARGET} \
-    --disable-asm-optimizations \
-    --disable-xmms-plugin \
     --with-ogg-libraries=${TARGET}/lib \
     --with-ogg-includes=${TARGET}/include/ \
     --with-libiconv-prefix=${TARGET} \
