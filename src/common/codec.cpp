@@ -170,7 +170,7 @@ codec_c::initialize() {
   s_codecs.emplace_back("RealAudio-Lossless",      type_e::A_RALF,         track_audio,    "ralf|A_REAL/RALF");
   s_codecs.emplace_back("Sipro/ACELP-NET",         type_e::A_ACELP_NET,    track_audio,    "sipr|A_REAL/SIPR");
   s_codecs.emplace_back("TrueAudio",               type_e::A_TTA,          track_audio,    "tta1|A_TTA1?");
-  s_codecs.emplace_back("TrueHD",                  type_e::A_TRUEHD,       track_audio,    "trhd|A_TRUEHD");
+  s_codecs.emplace_back("TrueHD",                  type_e::A_TRUEHD,       track_audio,    "trhd|mlpa|A_TRUEHD");
   s_codecs.emplace_back("VSELP",                   type_e::A_VSELP,        track_audio,    "lpcj|14_4|A_REAL/LPCJ|A_REAL/14_4");
   s_codecs.emplace_back("Vorbis",                  type_e::A_VORBIS,       track_audio,    "vor[1b]|A_VORBIS",                      std::vector<uint16_t>{ 0x566fu, 0xfffeu });
   s_codecs.emplace_back("WavPack4",                type_e::A_WAVPACK4,     track_audio,    "wvpk|A_WAVPACK4");

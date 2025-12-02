@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: MP4 reader: added support for TrueHD in MP4 with FourCC
+  `mlpa`. Implements #6178.
+
+
 # Version 96.0 "It's My Life" 2025-11-08
 
 ## New features and enhancements
