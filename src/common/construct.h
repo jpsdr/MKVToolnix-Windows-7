@@ -33,9 +33,8 @@ void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
 template<mtx::derived_from_ebml_u_integer_cc Tobject,
@@ -44,9 +43,8 @@ void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
 template<mtx::derived_from_ebml_s_integer_cc Tobject,
@@ -55,9 +53,8 @@ void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
 template<mtx::derived_from_ebml_float_cc Tobject,
@@ -66,9 +63,8 @@ void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
 template<mtx::derived_from_ebml_string_cc Tobject,
@@ -77,9 +73,8 @@ void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
 template<mtx::derived_from_ebml_unicode_string_cc Tobject,
@@ -88,9 +83,8 @@ void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(to_wide(value)));
+  if (object)
+    master->PushElement(object->SetValue(to_wide(value)));
 }
 
 template<mtx::derived_from_ebml_binary_cc Tobject,
@@ -101,6 +95,7 @@ cons_impl(libebml::EbmlMaster *master,
           Tvalue const &value) {
   if (!object)
     return;
+
   object->CopyBuffer(value->get_buffer(), value->get_size());
   master->PushElement(*object);
 }
@@ -108,9 +103,8 @@ cons_impl(libebml::EbmlMaster *master,
 inline void
 cons_impl(libebml::EbmlMaster *master,
           libebml::EbmlMaster *sub_master) {
-  if (!sub_master)
-    return;
-  master->PushElement(*sub_master);
+  if (sub_master)
+    master->PushElement(*sub_master);
 }
 
 template<typename... Targs>
