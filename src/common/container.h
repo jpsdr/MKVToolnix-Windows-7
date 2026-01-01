@@ -15,6 +15,8 @@
 
 #include <functional>
 
+#include "common/concepts.h"
+
 namespace mtx {
 
 // Support for hashing all scoped and unscoped enums via their
@@ -27,41 +29,25 @@ struct hash {
   }
 };
 
-template<typename,
-         typename = void>
-struct is_associative_container: std::false_type {
-};
-
-template<typename T>
-struct is_associative_container<T, typename std::enable_if<sizeof(typename T::key_type) != 0>::type>: std::true_type {
-};
-
-template<typename Tcontainer,
+template<is_associative_container_cc Tcontainer,
          typename Tkey>
-auto
+bool
 includes(Tcontainer const &container,
-         Tkey const &key)
-  -> typename std::enable_if< is_associative_container<Tcontainer>::value , bool >::type
-{
+         Tkey const &key) {
   return container.find(key) != container.end();
 }
 
-template<typename Tcontainer,
+template<is_not_associative_container_cc Tcontainer,
          typename Tkey>
-auto
+bool
 includes(Tcontainer const &container,
-         Tkey const &key)
-  -> typename std::enable_if< !is_associative_container<Tcontainer>::value , bool >::type
-{
+         Tkey const &key) {
   return std::find(container.begin(), container.end(), key) != container.end();
 }
 
-template<typename Tcontainer>
-auto
-keys(Tcontainer const &container,
-     typename std::enable_if< is_associative_container<Tcontainer>::value , bool >::type = {})
-  -> std::vector< typename Tcontainer::key_type >
-{
+template<is_associative_container_cc Tcontainer>
+std::vector< typename Tcontainer::key_type >
+keys(Tcontainer const &container) {
   std::vector< typename Tcontainer::key_type > the_keys;
 
   for (auto const &pair : container)

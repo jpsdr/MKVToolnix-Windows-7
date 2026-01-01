@@ -21,85 +21,81 @@
 #include <ebml/EbmlUInteger.h>
 #include <ebml/EbmlUnicodeString.h>
 
+#include "common/ebml_concepts.h"
 #include "common/strings/utf8.h"
 
 namespace mtx {
 namespace construct {
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_date_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlDate, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_u_integer_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlUInteger, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_s_integer_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlSInteger, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_float_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlFloat, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_string_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlString, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(value));
+  if (object)
+    master->PushElement(object->SetValue(value));
 }
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_unicode_string_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlUnicodeString, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
-  if (!object)
-    return;
-  master->PushElement(object->SetValue(to_wide(value)));
+  if (object)
+    master->PushElement(object->SetValue(to_wide(value)));
 }
 
-template<typename Tobject,
+template<mtx::derived_from_ebml_binary_cc Tobject,
          typename Tvalue>
-inline typename std::enable_if< std::is_base_of<libebml::EbmlBinary, Tobject>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
   if (!object)
     return;
+
   object->CopyBuffer(value->get_buffer(), value->get_size());
   master->PushElement(*object);
 }
@@ -107,9 +103,8 @@ cons_impl(libebml::EbmlMaster *master,
 inline void
 cons_impl(libebml::EbmlMaster *master,
           libebml::EbmlMaster *sub_master) {
-  if (!sub_master)
-    return;
-  master->PushElement(*sub_master);
+  if (sub_master)
+    master->PushElement(*sub_master);
 }
 
 template<typename... Targs>
@@ -122,10 +117,10 @@ cons_impl(libebml::EbmlMaster *master,
   cons_impl(master, args...);
 }
 
-template<typename Tobject,
+template<mtx::not_derived_from_ebml_master_cc Tobject,
          typename Tvalue,
          typename... Targs>
-inline typename std::enable_if< !std::is_convertible<Tobject *, libebml::EbmlMaster *>::value >::type
+void
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value,
