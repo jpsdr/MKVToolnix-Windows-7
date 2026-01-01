@@ -14,14 +14,16 @@
 #pragma once
 
 #include "common/common_pch.h"
-#include "ebml/EbmlElement.h"
 
+#include <ebml/EbmlElement.h>
 #include <ebml/EbmlId.h>
 #include <ebml/EbmlDummy.h>
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlUnicodeString.h>
 
 #include <matroska/KaxTracks.h>
+
+#include "common/ebml_concepts.h"
 
 namespace libmatroska {
 class KaxCluster;
@@ -299,22 +301,20 @@ find_child_value(libebml::EbmlMaster const *master,
   return child ? static_cast<Tvalue>(child->GetValue()) : default_value;
 }
 
-template<typename T>
+template<mtx::derived_from_ebml_binary_cc T>
 memory_cptr
 find_child_value(libebml::EbmlMaster const &master,
-               bool clone = true,
-               typename std::enable_if< std::is_base_of<libebml::EbmlBinary, T>::value >::type * = nullptr) {
+               bool clone = true) {
   auto child = find_child<T>(master);
   return !child ? memory_cptr()
        : clone  ? memory_c::clone(child->GetBuffer(), child->GetSize())
        :          memory_c::borrow(child->GetBuffer(), child->GetSize());
 }
 
-template<typename T>
+template<mtx::derived_from_ebml_binary_cc T>
 memory_cptr
 find_child_value(libebml::EbmlMaster const *master,
-               bool clone = true,
-               typename std::enable_if< std::is_base_of<libebml::EbmlBinary, T>::value >::type * = nullptr) {
+               bool clone = true) {
   return find_child_value<T>(*master, clone);
 }
 
