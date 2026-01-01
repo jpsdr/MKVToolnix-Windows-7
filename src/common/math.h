@@ -19,8 +19,6 @@
 # include <intrin.h>
 #endif
 
-#include <concepts>
-
 #include "common/math_fwd.h"
 
 namespace mtx::math {
@@ -43,8 +41,11 @@ mtx_mp_rational_t clamp_values_to(mtx_mp_rational_t const &r, int64_t max_value)
 // underlying bits in memory should represent the 2's complement of a
 // signed integer. See https://stackoverflow.com/a/13208789/507077
 
-template<std::unsigned_integral Tunsigned>
-typename std::make_signed<Tunsigned>::type
+template<typename Tunsigned>
+typename std::enable_if<
+  std::is_unsigned<Tunsigned>::value,
+  typename std::make_signed<Tunsigned>::type
+>::type
 to_signed(Tunsigned const &u) {
   using Tsigned = typename std::make_signed<Tunsigned>::type;
 
@@ -54,8 +55,11 @@ to_signed(Tunsigned const &u) {
   return static_cast<Tsigned>(u - std::numeric_limits<Tsigned>::min()) + std::numeric_limits<Tsigned>::min();
 }
 
-template<std::signed_integral Tsigned>
-Tsigned
+template<typename Tsigned>
+typename std::enable_if<
+  std::is_signed<Tsigned>::value,
+  Tsigned
+>::type
 to_signed(Tsigned const &s) {
   return s;
 }

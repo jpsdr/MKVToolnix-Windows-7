@@ -12,7 +12,6 @@
 
 #include "common/common_pch.h"
 
-#include <concepts>
 #include <typeinfo>
 
 #include "common/mm_file_io.h"
@@ -122,14 +121,11 @@ create_and_prepare_reader(mm_io_cptr const &io,
   return reader;
 }
 
-template<typename T>
-concept derived_from_generic_reader_cc = std::derived_from<T, generic_reader_c>;
-
-template<typename T>
-concept not_derived_from_generic_reader_cc = !derived_from_generic_reader_cc<T>;
-
-template<derived_from_generic_reader_cc Treader>
-std::unique_ptr<generic_reader_c>
+template<typename Treader>
+typename std::enable_if<
+  std::is_base_of<generic_reader_c, Treader>::value,
+  std::unique_ptr<generic_reader_c>
+>::type
 do_probe(mm_io_cptr const &io,
          probe_range_info_t const &probe_range_info = {}) {
   auto reader    = create_and_prepare_reader<Treader>(io, probe_range_info);
@@ -153,8 +149,11 @@ do_probe(mm_io_cptr const &io,
   return {};
 }
 
-template<not_derived_from_generic_reader_cc Treader>
-std::unique_ptr<generic_reader_c>
+template<typename Treader>
+typename std::enable_if<
+  !std::is_base_of<generic_reader_c, Treader>::value,
+  std::unique_ptr<generic_reader_c>
+>::type
 do_probe(mm_io_cptr const &io,
          probe_range_info_t const & = {}) {
   io->setFilePointer(0);

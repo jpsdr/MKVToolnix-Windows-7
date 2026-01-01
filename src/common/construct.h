@@ -21,15 +21,14 @@
 #include <ebml/EbmlUInteger.h>
 #include <ebml/EbmlUnicodeString.h>
 
-#include "common/ebml_concepts.h"
 #include "common/strings/utf8.h"
 
 namespace mtx {
 namespace construct {
 
-template<mtx::derived_from_ebml_date_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlDate, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -37,9 +36,9 @@ cons_impl(libebml::EbmlMaster *master,
     master->PushElement(object->SetValue(value));
 }
 
-template<mtx::derived_from_ebml_u_integer_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlUInteger, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -47,9 +46,9 @@ cons_impl(libebml::EbmlMaster *master,
     master->PushElement(object->SetValue(value));
 }
 
-template<mtx::derived_from_ebml_s_integer_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlSInteger, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -57,9 +56,9 @@ cons_impl(libebml::EbmlMaster *master,
     master->PushElement(object->SetValue(value));
 }
 
-template<mtx::derived_from_ebml_float_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlFloat, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -67,9 +66,9 @@ cons_impl(libebml::EbmlMaster *master,
     master->PushElement(object->SetValue(value));
 }
 
-template<mtx::derived_from_ebml_string_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlString, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -77,9 +76,9 @@ cons_impl(libebml::EbmlMaster *master,
     master->PushElement(object->SetValue(value));
 }
 
-template<mtx::derived_from_ebml_unicode_string_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlUnicodeString, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -87,9 +86,9 @@ cons_impl(libebml::EbmlMaster *master,
     master->PushElement(object->SetValue(to_wide(value)));
 }
 
-template<mtx::derived_from_ebml_binary_cc Tobject,
+template<typename Tobject,
          typename Tvalue>
-void
+inline typename std::enable_if< std::is_base_of<libebml::EbmlBinary, Tobject>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value) {
@@ -117,10 +116,10 @@ cons_impl(libebml::EbmlMaster *master,
   cons_impl(master, args...);
 }
 
-template<mtx::not_derived_from_ebml_master_cc Tobject,
+template<typename Tobject,
          typename Tvalue,
          typename... Targs>
-void
+inline typename std::enable_if< !std::is_convertible<Tobject *, libebml::EbmlMaster *>::value >::type
 cons_impl(libebml::EbmlMaster *master,
           Tobject *object,
           Tvalue const &value,
