@@ -1,4 +1,4 @@
-# Version ?
+# Version 97.0 "You Don't Have A Clue" 2026-01-02
 
 ## New features and enhancements
 

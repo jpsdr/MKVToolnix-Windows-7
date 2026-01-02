@@ -1,4 +1,4 @@
-MKVToolNix 96.0
+MKVToolNix 97.0
 =================
 
 # Table of contents
