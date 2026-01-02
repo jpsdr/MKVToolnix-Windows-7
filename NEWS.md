@@ -1,9 +1,11 @@
-# Version ?
+# Version 97.0 "You Don't Have A Clue" 2026-01-02
 
 ## New features and enhancements
 
 * mkvmerge: MP4 reader: added support for TrueHD in MP4 with FourCC
   `mlpa`. Implements #6178.
+* installer: the Windows installer will request admin permissions again, as it
+  did before release 96.0.
 
 
 # Version 96.0 "It's My Life" 2025-11-08
