@@ -75,7 +75,7 @@ class Target
     list           = list.collect { |e| e.respond_to?(:to_a) ? e.to_a : e }.flatten
     file_mode      = (options[:type] || :file) == :file
     except         = !file_mode && options[:except].is_a?(Array) ? options[:except].collect { |file| list.collect { |dir| "#{dir}/#{file}" } }.flatten.to_hash_by : {}
-    new_sources    = list.collect { |entry| file_mode ? (entry.respond_to?(:to_a) ? entry.to_a : entry) : FileList["#{entry}/*.c", "#{entry}/*.cpp", "#{entry}/*.cc"].to_a }.flatten.select { |file| !except[file] }.for_target!
+    new_sources    = list.collect { |entry| file_mode ? (entry.respond_to?(:to_a) ? entry.to_a : entry) : FileList["#{entry}/*.c", "#{entry}/*.cpp", "#{entry}/*.cc", "#{entry}/*.mm"].to_a }.flatten.select { |file| !except[file] }.for_target!
     new_deps       = new_sources.collect { |file| [ file.ext(ext_map[ file.pathmap('%x') ] || 'o'), file ] }
     new_file_deps  = new_deps.reject { |src, tgt| no_file_deps_re.match src }
     new_file_deps += new_sources.select { |file| %r{\.moc$}.match file }.map { |file| [ file, file.ext('h') ] }
@@ -90,7 +90,7 @@ class Target
   def qt_dependencies_and_sources(subdir, options = {})
     ui_files         = FileList["src/#{subdir}/forms/**/*.ui"].to_a
     ui_h_files       = ui_files.collect { |ui| ui.ext 'h' }
-    cpp_files        = FileList["src/#{subdir}/**/*.cpp"].to_a.for_target! - (options[:cpp_except] || [])
+    cpp_files        = FileList["src/#{subdir}/**/*.cpp", "src/#{subdir}/**/*.mm"].to_a.for_target! - (options[:cpp_except] || [])
     h_files          = FileList["src/#{subdir}/**/*.h"].to_a.for_target! - ui_h_files
     content          = read_files(cpp_files + h_files)
     qobject_h_files  = h_files.select { |h| content[h].any? { |line| /\bQ_OBJECT\b/.match line } }

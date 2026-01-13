@@ -85,6 +85,7 @@ Q_SIGNALS:
   void openConfigFilesRequested(QStringList const &fileNames);
   void runningInfoOnRequested(QStringList const &fileNames);
   void toolRequested(ToolBase *tool);
+  void systemColorSchemeChanged();
 
 public Q_SLOTS:
   void saveSettings() const;
