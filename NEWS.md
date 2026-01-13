@@ -1,3 +1,16 @@
+# Version ?
+
+## New features and enhancements
+
+* GUI: macOS: added dock icon progress bar for job queue. Patch by Miklos
+  Juhasz.
+
+## Bug fixes
+
+* GUI: macOS: fixed refreshing widgets after system switches between dark &
+  light modes. Patch by Miklos Juhasz.
+
+
 # Version 97.0 "You Don't Have A Clue" 2026-01-02
 
 ## New features and enhancements

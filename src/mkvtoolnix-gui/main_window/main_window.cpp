@@ -254,6 +254,7 @@ MainWindow::setupConnections() {
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::showOrHideDebuggingMenu);
 
   connect(app,                                    &App::toolRequested,                                    this,                 &MainWindow::switchToTool);
+  connect(app,                                    &App::systemColorSchemeChanged,                         this,                 &MainWindow::refreshWidgetsAfterColorSchemeChange);
   connect(&app->mediaPlayer(),                    &Util::MediaPlayer::errorOccurred,                      this,                 &MainWindow::handleMediaPlaybackError);
 }
 
@@ -706,6 +707,30 @@ void
 MainWindow::showEvent(QShowEvent *event) {
   Q_EMIT windowShown();
   event->accept();
+}
+
+void
+MainWindow::refreshWidgetsAfterColorSchemeChange() {
+  // On macOS, Qt doesn't automatically refresh widgets when the system
+  // appearance changes. Re-applying the style forces all widgets to
+  // re-read their palette and style properties.
+  //
+  // We need to preserve the font because setStyle() resets it.
+  auto currentFont = App::font();
+  auto styleName = App::style()->objectName();
+
+  App::setStyle(styleName);
+  App::setFont(currentFont);
+
+  // Clear Qt's icon theme cache by toggling the theme name.
+  // Icons are rendered and cached with colors from the active color scheme.
+  // Without clearing the cache, icons retain their old-scheme colors.
+  auto themeName = QIcon::themeName();
+  QIcon::setThemeName(QString{});
+  QIcon::setThemeName(themeName);
+
+  // Notify other components that may need to update after the color scheme change.
+  Q_EMIT preferencesChanged();
 }
 
 void
