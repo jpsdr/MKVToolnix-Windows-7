@@ -2,7 +2,7 @@
 
 ## Bug fixes
 
-  GUI: macOS: fixed refreshing widgets after system switches between dark &
+* GUI: macOS: fixed refreshing widgets after system switches between dark &
   light modes. Patch by Miklos Juhasz.
 
 
