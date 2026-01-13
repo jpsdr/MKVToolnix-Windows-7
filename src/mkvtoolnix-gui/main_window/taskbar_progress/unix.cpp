@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#if !defined(SYS_APPLE)
+
 #include <QObject>
 #include <QWidget>
 
@@ -33,3 +35,5 @@ TaskbarProgress::updateTaskbarStatus([[maybe_unused]] Jobs::QueueStatus status) 
 }
 
 }
+
+#endif // !defined(SYS_APPLE)
