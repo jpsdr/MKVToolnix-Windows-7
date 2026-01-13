@@ -15,6 +15,7 @@
 #include <QSettings>
 #include <QTextStream>
 #include <QThread>
+#include <QTimer>
 #include <QTranslator>
 
 #include "common/character_sets.h"
@@ -651,6 +652,14 @@ App::event(QEvent *event) {
 
     else
       Q_EMIT addingFilesToMergeRequested(fileNames);
+
+  } else if (event->type() == QEvent::ApplicationPaletteChange) {
+    // Defer the signal to the next event loop iteration using singleShot(0).
+    // This ensures Qt has fully processed all palette-related updates before
+    // we attempt to refresh widgets.
+    QTimer::singleShot(0, this, [this]() {
+      Q_EMIT systemColorSchemeChanged();
+    });
   }
 
   return QApplication::event(event);

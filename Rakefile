@@ -402,9 +402,33 @@ qrc_compiler = lambda do |*args|
   runq "rcc", sources[0], "#{c(:RCC)} -o #{t.name} -binary #{sources.join(" ")}"
 end
 
+# Objective-C++ compiler for .mm files
+objcxx_compiler = lambda do |*args|
+  t = args.first
+
+  create_dependency_dirs
+
+  source = t.source ? t.source : t.prerequisites.first
+  dep    = dependency_output_name_for t.name
+  flags  = $flags[:cxxflags].dup
+
+  args = [
+    "cxx", source,
+    "#{c(:CXX)} #{flags} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x objective-c++ #{source}",
+    :allow_failure => true
+  ]
+
+  Mtx::CompilationDatabase.add "directory" => $source_dir, "file" => source, "command" => args[2]
+
+  runq(*args)
+
+  handle_deps t.name, last_exit_code, true
+end
+
 # Pattern rules
 rule '.o' => '.cpp', &cxx_compiler
 rule '.o' => '.cc',  &cxx_compiler
+rule '.o' => '.mm',  &objcxx_compiler
 
 rule '.o' => '.c' do |t|
   create_dependency_dirs
@@ -1228,7 +1252,7 @@ if $build_mkvtoolnix_gui
     sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
     libraries($common_libs - [ :qt_non_gui ], :qt, :vorbis, :ogg).
     libraries("-mwindows", :ole32, :powrprof, :uuid, :if => $building_for[:windows]).
-    libraries("-framework IOKit", :if => $building_for[:macos]).
+    libraries("-framework IOKit", "-framework AppKit", :if => $building_for[:macos]).
     libraries($custom_libs).
     create
 end

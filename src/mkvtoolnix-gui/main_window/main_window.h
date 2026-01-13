@@ -143,6 +143,7 @@ protected:
   virtual void showEvent(QShowEvent *event);
   virtual void closeEvent(QCloseEvent *event);
   virtual bool beforeCloseCheckRunningJobs();
+  virtual void refreshWidgetsAfterColorSchemeChange();
 
   virtual std::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
 

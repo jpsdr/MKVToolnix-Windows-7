@@ -142,7 +142,9 @@ ElideLabel::paintEvent(QPaintEvent *event) {
 
   if (p.m_clickable && isEnabled()) {
     p.m_label->setTextFormat(Qt::RichText);
-    p.m_label->setText(Q("<a href=\"click://\">%1</a>").arg(elidedText.toHtmlEscaped()));
+    // Explicitly set link color from palette to ensure it updates with color scheme changes
+    auto linkColor = palette().color(QPalette::Link).name();
+    p.m_label->setText(Q("<a href=\"click://\" style=\"color: %1;\">%2</a>").arg(linkColor).arg(elidedText.toHtmlEscaped()));
 
   } else {
     p.m_label->setTextFormat(Qt::PlainText);
