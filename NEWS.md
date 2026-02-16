@@ -10,6 +10,11 @@
 * GUI: macOS: fixed refreshing widgets after system switches between dark &
   light modes. Patch by Miklos Juhasz.
 
+## Build system changes
+
+* The bundled `fmt` library was updated to v12.1.0, fixing a build issue on
+  FreeBSD. Fixes #6191.
+
 
 # Version 97.0 "You Don't Have A Clue" 2026-01-02
 
