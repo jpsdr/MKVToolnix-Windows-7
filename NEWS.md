@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* all: huge update to the Japanese translation which had been not worked on
+  for several years. It's now complete again & was reworked in most
+  places. Translation by coolvitto.
 * GUI: macOS: added dock icon progress bar for job queue. Patch by Miklos
   Juhasz.
 
