@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
 "POT-Creation-Date: 2025-11-05 22:31+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025-2026\n"
 "Language-Team: Swedish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -341,7 +341,7 @@ msgstr "Saknar argument till '{0}'.\n"
 #: src/common/cli_parser.cpp:125
 #, no-c-format, c++-format
 msgid "Unknown option '{0}'.\n"
-msgstr "Okänt alternativ '{0}'.\n"
+msgstr "Okänd flagga '{0}'.\n"
 
 #: src/common/cli_parser.cpp:188
 #: src/merge/mkvmerge.cpp:89
@@ -393,7 +393,7 @@ msgstr "Programmet avbryts efter att den första varningen har avgetts."
 #: src/common/cli_parser.cpp:197
 #, no-c-format
 msgid "Reads additional command line options from the specified JSON file (see man page)."
-msgstr "Läser ytterligare kommandoradsalternativ från den angivna JSON-filen (se man-sidan)."
+msgstr "Läser ytterligare kommandoradsflaggor från den angivna JSON-filen (se man-sidan)."
 
 #: src/common/cli_parser.cpp:198
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:66
@@ -421,7 +421,7 @@ msgstr "Filen '{0}' kunde inte öppnas för läsning: {1}.\n"
 #: src/common/command_line.cpp:65
 #, no-c-format
 msgid "JSON option files must contain a JSON array consisting solely of JSON strings"
-msgstr "JSON-alternativfiler måste innehålla en JSON-array som endast består av JSON-strängar"
+msgstr "JSON-flaggfiler måste innehålla en JSON-array som endast består av JSON-strängar"
 
 #: src/common/command_line.cpp:120
 #, no-c-format
@@ -973,7 +973,7 @@ msgstr "Gör det möjligt att lagra AVC/H.264-video i kompatibilitetsläget Vide
 #: src/common/hacks.cpp:44
 #, no-c-format
 msgid "This option does nothing and is only kept for backwards compatibility."
-msgstr "Detta alternativ gör ingenting och behålls endast för bakåtkompatibilitet."
+msgstr "Denna flagga gör ingenting och behålls endast för bakåtkompatibilitet."
 
 #: src/common/hacks.cpp:45
 #, no-c-format
@@ -1003,7 +1003,7 @@ msgstr "Normalt behåller mkvmerge information om bildförhållande i MPEG4-vide
 #: src/common/hacks.cpp:51
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
-msgstr "Detta alternativ gör att mkvmerge tar bort informationen om bildförhållande från bitströmmen."
+msgstr "Denna flagga gör att mkvmerge tar bort informationen om bildförhållande från bitströmmen."
 
 #: src/common/hacks.cpp:52
 #, no-c-format
@@ -1013,12 +1013,12 @@ msgstr "Gör att mkvmerge lägger till kommandot \"stop display\" i VobSub-under
 #: src/common/hacks.cpp:53
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
-msgstr "Gör att mkvmerge inte skriver \"CueDuration\"-element i ledtrådarna."
+msgstr "Gör att mkvmerge inte skriver \"CueDuration\"-element i cues."
 
 #: src/common/hacks.cpp:54
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
-msgstr "Gör att mkvmerge inte skriver in 'CueRelativePosition'-element i ledtrådarna."
+msgstr "Gör att mkvmerge inte skriver in 'CueRelativePosition'-element i cues."
 
 #: src/common/hacks.cpp:55
 #, no-c-format
@@ -1033,7 +1033,7 @@ msgstr "mkvmerge beräknar normalt den fördröjning som dess närvaro innebär 
 #: src/common/hacks.cpp:57
 #, no-c-format
 msgid "This option prevents that behavior."
-msgstr "Detta alternativ förhindrar detta beteende."
+msgstr "Denna flagga förhindrar detta beteende."
 
 #: src/common/hacks.cpp:58
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
@@ -1049,7 +1049,7 @@ msgstr "mkvmerge tar normalt bort den sista posten om dess tidsstämpel ligger i
 #: src/common/hacks.cpp:60
 #, no-c-format
 msgid "Enabling this option causes mkvmerge to keep that last entry."
-msgstr "Om du aktiverar det här alternativet behåller mkvmerge den sista posten."
+msgstr "Om du aktiverar den här flaggan behåller mkvmerge den sista posten."
 
 #: src/common/hacks.cpp:61
 #, no-c-format
@@ -1064,7 +1064,7 @@ msgstr "Vissa AVC/H.264-spår innehåller I slices men saknar riktiga key frames
 #: src/common/hacks.cpp:63
 #, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
-msgstr "Detta alternativ tvingar mkvmerge att behandla alla dessa I-snitt som nyckelrutor."
+msgstr "Denna flagga tvingar mkvmerge att behandla alla dessa I-snitt som nyckelrutor."
 
 #: src/common/hacks.cpp:64
 #, no-c-format
@@ -1206,7 +1206,7 @@ msgstr "Ingen UID för segmentet kunde hittas i filen '{0}'."
 #: src/common/kax_analyzer.cpp:1810
 #, no-c-format, c++-format
 msgid "Progress: [{0}{1}] {2}%"
-msgstr "Framsteg: [{0}{1}] {2}%"
+msgstr "Förlopp: [{0}{1}] {2}%"
 
 #: src/common/kax_element_names.cpp:75
 #, no-c-format
@@ -1971,7 +1971,7 @@ msgstr "Sök position"
 #: src/common/kax_element_names.cpp:230
 #, no-c-format
 msgid "Cues"
-msgstr "Ledtrådar"
+msgstr "Cues"
 
 #: src/common/kax_element_names.cpp:231
 #, no-c-format
@@ -2607,7 +2607,7 @@ msgstr "Sök huvud (underposter kommer att hoppas över)"
 #: src/common/kax_info.cpp:535
 #, no-c-format
 msgid "Cues (subentries will be skipped)"
-msgstr "Ledtrådar (underposter kommer att hoppas över)"
+msgstr "Cues (underposter kommer att hoppas över)"
 
 #: src/common/kax_info.cpp:564
 #, no-c-format, c++-format
@@ -4217,17 +4217,17 @@ msgstr "Det finns inga cues för spår-ID {0}.\n"
 #: src/extract/cues.cpp:59
 #, no-c-format, c++-format
 msgid "The cues for track {0} are written to '{1}'.\n"
-msgstr "Ledtrådarna för spår {0} skrivs till '{1}'.\n"
+msgstr "Cues för spår {0} skrivs till '{1}'.\n"
 
 #: src/extract/cues.cpp:116
 #, no-c-format
 msgid "No cues were found.\n"
-msgstr "Inga ledtrådar hittades.\n"
+msgstr "Inga cues hittades.\n"
 
 #: src/extract/extract_cli_parser.cpp:49
 #, no-c-format
 msgid "mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"
-msgstr "mkvextract <source-filename> <mode1> [alternativ] <extraction-spec1> [<mode2> [alternativ] <extraction-spec2>...]"
+msgstr "mkvextract <source-filename> <mode1> [flaggor] <extraction-spec1> [<mode2> [flaggor] <extraction-spec2>...]"
 
 #: src/extract/extract_cli_parser.cpp:51
 #, no-c-format
@@ -4237,27 +4237,27 @@ msgstr "Lägen"
 #: src/extract/extract_cli_parser.cpp:52
 #, no-c-format
 msgid "tracks [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "spår [alternativ] [TID1:out1 [TID2:out2 ...]]"
+msgstr "tracks [flaggor] [TID1:ut1 [TID2:ut2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:53
 #, no-c-format
 msgid "tags [options] out.xml"
-msgstr "taggar [alternativ] out.xml"
+msgstr "tags [flaggor] ut.xml"
 
 #: src/extract/extract_cli_parser.cpp:54
 #, no-c-format
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
-msgstr "attachments [options] [AID1:out1 [AID2:out2 ...]]"
+msgstr "attachments [flaggor] [AID1:out1 [AID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:55
 #, no-c-format
 msgid "chapters [options] out.xml"
-msgstr "kapitel [alternativ] out.xml"
+msgstr "chapters [flaggor] ut.xml"
 
 #: src/extract/extract_cli_parser.cpp:56
 #, no-c-format
 msgid "cuesheet [options] out.cue"
-msgstr "cuesheet [alternativ] out.cue"
+msgstr "cuesheet [flaggor] ut.cue"
 
 #: src/extract/extract_cli_parser.cpp:57
 #, no-c-format
@@ -4267,13 +4267,13 @@ msgstr "timestamps_v2 [TID1:out1 [TID2:out2 ...]]"
 #: src/extract/extract_cli_parser.cpp:58
 #, no-c-format
 msgid "cues [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "cues [alternativ] [TID1:out1 [TID2:out2 ...]]"
+msgstr "cues [flaggor] [TID1:ut1 [TID2:ut2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:60
 #: src/propedit/propedit_cli_parser.cpp:270
 #, no-c-format
 msgid "Other options"
-msgstr "Andra alternativ"
+msgstr "Andra flaggor"
 
 #: src/extract/extract_cli_parser.cpp:61
 #, no-c-format
@@ -4288,7 +4288,7 @@ msgstr "Det första argumentet måste vara namnet på källfilen."
 #: src/extract/extract_cli_parser.cpp:67
 #, no-c-format
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."
-msgstr "Alla andra argument växlar antingen till ett visst extraktionsläge, ändrar alternativen för det aktuella läget eller anger vad som ska extraheras till vilken fil."
+msgstr "Alla andra argument växlar antingen till ett visst extraktionsläge, ändrar flaggor för det aktuella läget eller anger vad som ska extraheras till vilken fil."
 
 #: src/extract/extract_cli_parser.cpp:68
 #: src/extract/extract_cli_parser.cpp:141
@@ -4299,13 +4299,13 @@ msgstr "Flera lägen kan användas i samma anrop av mkvextract, vilket gör det 
 #: src/extract/extract_cli_parser.cpp:69
 #, no-c-format
 msgid "Most options can only be used in certain modes with a few options applying to all modes."
-msgstr "De flesta alternativ kan endast användas i vissa lägen, medan några få alternativ gäller för alla lägen."
+msgstr "De flesta flaggor kan endast användas i vissa lägen, medan några få flaggor gäller för alla lägen."
 
 #: src/extract/extract_cli_parser.cpp:71
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:64
 #, no-c-format
 msgid "Global options"
-msgstr "Globala alternativ"
+msgstr "Globala flaggor"
 
 #: src/extract/extract_cli_parser.cpp:72
 #, no-c-format
@@ -4437,12 +4437,12 @@ msgstr "mkvextract \"en film.mkv\" kapitel movie_chapters.xml"
 #: src/extract/extract_cli_parser.cpp:116
 #, no-c-format
 msgid "Cue sheet extraction"
-msgstr "Extrahering av ledtrådar"
+msgstr "Extrahering av cue sheet"
 
 #: src/extract/extract_cli_parser.cpp:118
 #, no-c-format
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a cue sheet. This is the reverse of using a cue sheet with mkvmerge's '--chapters' option."
-msgstr "Det femte läget försöker extrahera kapitelinformation och taggar och mata ut dem som ett cue sheet. Detta är motsatsen till att använda en cue sheet med mkvmerges alternativ \"--chapters\"."
+msgstr "Det femte läget försöker extrahera kapitelinformation och taggar och mata ut dem som ett cue sheet. Detta är motsatsen till att använda en cue sheet med mkvmerges flagga \"--chapters\"."
 
 #: src/extract/extract_cli_parser.cpp:123
 #, no-c-format
@@ -4467,7 +4467,7 @@ msgstr "mkvextract \"a movie.mkv\" timestamps_v2 1:timestamps_track1.txt"
 #: src/extract/extract_cli_parser.cpp:133
 #, no-c-format
 msgid "Cue extraction"
-msgstr "Extrahering av ledtrådar"
+msgstr "Extrahering av cue"
 
 #: src/extract/extract_cli_parser.cpp:134
 #, no-c-format
@@ -4517,7 +4517,7 @@ msgstr "Okänt läge '{0}'.\n"
 #: src/extract/extract_cli_parser.cpp:348
 #, no-c-format, c++-format
 msgid "Unrecognized command line option '{0}'.\n"
-msgstr "Oigenkänt kommandoradsalternativ '{0}'.\n"
+msgstr "Okänd kommandoradsflagga '{0}'.\n"
 
 #: src/extract/extract_cli_parser.cpp:356
 #, no-c-format, c++-format
@@ -4621,7 +4621,7 @@ msgstr "Inget segment/nivå 0-element hittades."
 #: src/propedit/tag_target.cpp:367
 #, no-c-format, c++-format
 msgid "Progress: {0}%{1}"
-msgstr "Framsteg: {0}%{1}"
+msgstr "Förlopp: {0}%{1}"
 
 #: src/extract/xtr_aac.cpp:45
 #: src/extract/xtr_alac.cpp:49
@@ -4811,14 +4811,14 @@ msgstr "Spår {0}: Undertextens postnummer {1} saknar sin varaktighet. Anta en v
 #: src/info/info_cli_parser.cpp:31
 #, no-c-format
 msgid "mkvinfo [options] <inname>"
-msgstr "mkvinfo [alternativ] <inname>"
+msgstr "mkvinfo [flaggor] <inname>"
 
 #: src/info/info_cli_parser.cpp:33
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:56
 #: src/propedit/propedit_cli_parser.cpp:242
 #, no-c-format
 msgid "Options"
-msgstr "Alternativ"
+msgstr "Flaggor"
 
 #: src/info/info_cli_parser.cpp:35
 #, no-c-format
@@ -5286,7 +5286,7 @@ msgstr "Quicktime/MP4-läsare: Parametern 'tidsskala' var 0. Detta stöds inte.\
 #: src/input/r_qtmp4.cpp:1252
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
-msgstr "MP4-filen '{0}' innehåller kapitel vars format inte identifierades. Detta är ofta fallet om kapitlen inte är kodade i UTF-8. Använd alternativet '--chapter-charset' för att ange vilket charset som ska användas.\n"
+msgstr "MP4-filen '{0}' innehåller kapitel vars format inte identifierades. Detta är ofta fallet om kapitlen inte är kodade i UTF-8. Använd flaggan '--chapter-charset' för att ange vilken teckenuppsättning som ska användas.\n"
 
 #: src/input/r_qtmp4.cpp:1382
 #, no-c-format, c++-format
@@ -5684,7 +5684,7 @@ msgstr "Komprimeringen misslyckades: {0}\n"
 #: src/merge/generic_packetizer.cpp:1510
 #, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should open an issue over on {1}.\n"
-msgstr "Det aktuella paketets tidsstämpel är mindre än det föregående paketets. Detta betyder vanligtvis att källfilen är en Matroska-fil som inte har skapats 100 % korrekt. Tidsstämplarna för alla paket kommer att justeras med {0} ms för att inte förlora någon data. Detta kan störa synkroniseringen mellan ljud och bild, men det kan korrigeras med mkvmerges alternativ ”--sync”. Om du redan använder ”--sync” och fortfarande får denna varning behöver du INTE oroa dig – detta är normalt. Om detta fel inträffar mer än en gång och du får detta meddelande mer än en gång för ett visst spår är antingen källfilen dåligt mastrad eller så innehåller mkvmerge en bugg. I detta fall bör du öppna ett ärende på {1}.\n"
+msgstr "Det aktuella paketets tidsstämpel är mindre än det föregående paketets. Detta betyder vanligtvis att källfilen är en Matroska-fil som inte har skapats 100 % korrekt. Tidsstämplarna för alla paket kommer att justeras med {0} ms för att inte förlora någon data. Detta kan störa synkroniseringen mellan ljud och bild, men det kan korrigeras med mkvmerges flagga ”--sync”. Om du redan använder ”--sync” och fortfarande får denna varning behöver du INTE oroa dig – detta är normalt. Om detta fel inträffar mer än en gång och du får detta meddelande mer än en gång för ett visst spår är antingen källfilen dåligt mastrad eller så innehåller mkvmerge en bugg. I detta fall bör du öppna ett ärende på {1}.\n"
 
 #: src/merge/generic_packetizer.cpp:1803
 #, no-c-format, c++-format
@@ -5699,7 +5699,7 @@ msgstr "Kodektypen '{0}' kan inte användas i en WebM-kompatibel fil.\n"
 #: src/merge/generic_reader.cpp:177
 #, no-c-format, c++-format
 msgid "A track with the ID {0} was requested but not found in the file. The corresponding option will be ignored.\n"
-msgstr "Ett spår med ID {0} begärdes men hittades inte i filen. Motsvarande alternativ kommer att ignoreras.\n"
+msgstr "Ett spår med ID {0} begärdes men hittades inte i filen. Motsvarande flagga kommer att ignoreras.\n"
 
 #: src/merge/generic_reader.cpp:278
 #, no-c-format, c++-format
@@ -5770,32 +5770,32 @@ msgstr "Filen '{0}' är en filtyp som inte stöds ({1}).\n"
 #: src/merge/mkvmerge.cpp:86
 #, no-c-format
 msgid "mkvmerge -o out [global options] [options1] <file1> [@option-file.json] …\n"
-msgstr "mkvmerge -o out [globala alternativ] [alternativ1] <file1> [@alternativfil.json] ..\n"
+msgstr "mkvmerge -o ut [globala flaggor] [flagga1] <fil1> [@flaggfil.json] ..\n"
 
 #: src/merge/mkvmerge.cpp:88
 #, no-c-format
 msgid " Global options:\n"
-msgstr " Globala alternativ:\n"
+msgstr " Globala flaggor:\n"
 
 #: src/merge/mkvmerge.cpp:91
 #, no-c-format
 msgid "  -o, --output out         Write to the file 'out'.\n"
-msgstr "  -o, --output out Skriv till filen \"out\".\n"
+msgstr "  -o, --output ut          Skriv till filen \"ut\".\n"
 
 #: src/merge/mkvmerge.cpp:92
 #, no-c-format
 msgid "  -w, --webm               Create WebM compliant file.\n"
-msgstr "  -w, --webm Skapa en WebM-kompatibel fil.\n"
+msgstr "  -w, --webm               Skapa en WebM-kompatibel fil.\n"
 
 #: src/merge/mkvmerge.cpp:93
 #, no-c-format
 msgid "  --title <title>          Title for this destination file.\n"
-msgstr "  --title <title> Titel för den här målfilen.\n"
+msgstr "  --title <titel>          Titel för den här målfilen.\n"
 
 #: src/merge/mkvmerge.cpp:94
 #, no-c-format
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
-msgstr "  --global-tags <file> Läs globala taggar från en XML-fil.\n"
+msgstr "  --global-tags <fil>      Läs globala taggar från en XML-fil.\n"
 
 #: src/merge/mkvmerge.cpp:96
 #, no-c-format
@@ -5805,7 +5805,7 @@ msgstr " Kapitelhantering:\n"
 #: src/merge/mkvmerge.cpp:97
 #, no-c-format
 msgid "  --chapters <file>        Read chapter information from the file.\n"
-msgstr "  --chapters <file> Läs kapitelinformation från filen.\n"
+msgstr "  --chapters <fil>         Läs kapitelinformation från filen.\n"
 
 #: src/merge/mkvmerge.cpp:98
 #, no-c-format
@@ -5815,7 +5815,7 @@ msgstr "  --chapter-language <lng> Ställ in elementet \"language\" i kapitelpos
 #: src/merge/mkvmerge.cpp:99
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
-msgstr "  --chapter-charset <cset> Teckensnitt för en enkel kapitelfil.\n"
+msgstr "  --chapter-charset <cset> Teckenuppsättning för en enkel kapitelfil.\n"
 
 #: src/merge/mkvmerge.cpp:100
 #, no-c-format
@@ -5843,7 +5843,7 @@ msgid ""
 "                           Pattern for the conversion from cue sheet\n"
 "                           entries to chapter names.\n"
 msgstr ""
-"  --cue-kapitel-namn-format <format>\n"
+"  --cue-chapter-name-format <format>\n"
 "                           Mönster för konvertering från kölappar\n"
 "                           poster till kapitelnamn.\n"
 
@@ -5854,7 +5854,7 @@ msgid ""
 "                           overridden with the --language option.\n"
 msgstr ""
 "  --default-language <lng> Använd detta språk för alla spår om inte\n"
-"                           om det inte åsidosätts med alternativet --language.\n"
+"                           om det inte åsidosätts med flaggan --language.\n"
 
 #: src/merge/mkvmerge.cpp:112
 #, no-c-format
@@ -5874,7 +5874,7 @@ msgid ""
 "                           Template for newly generated chapter names\n"
 "                           (default: 'Chapter <NUM:2>').\n"
 msgstr ""
-"  --generate-chapters-name-template <template>\n"
+"  --generate-chapters-name-template <mall>\n"
 "                           Mall för nygenererade kapitelnamn\n"
 "                           (standard: \"Kapitel <NUM:2>\").\n"
 
@@ -5886,7 +5886,7 @@ msgstr " Hantering av segmentinformation:\n"
 #: src/merge/mkvmerge.cpp:120
 #, no-c-format
 msgid "  --segmentinfo <file>     Read segment information from the file.\n"
-msgstr "  --segmentinfo <file> Läs segmentinformation från filen.\n"
+msgstr "  --segmentinfo <fil>      Läs segmentinformation från filen.\n"
 
 #: src/merge/mkvmerge.cpp:121
 #, no-c-format
@@ -5900,7 +5900,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:124
 #, no-c-format
 msgid " General output control (advanced global options):\n"
-msgstr " Allmän styrning av utdata (avancerade globala alternativ):\n"
+msgstr " Allmän styrning av utdata (avancerade globala flaggor):\n"
 
 #: src/merge/mkvmerge.cpp:125
 #, no-c-format
@@ -5912,7 +5912,7 @@ msgid ""
 "                           the tracks will sorted by type (video, audio,\n"
 "                           subtitles, others).\n"
 msgstr ""
-"  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...> -track-order\n"
+"  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           En kommaseparerad lista med både fil-ID:n\n"
 "                           och spår-ID:n som styr ordningen på spåren i\n"
 "                           spåren i målfilen. Om den inte anges,\n"
@@ -5940,17 +5940,17 @@ msgstr "  --clusters-in-meta-seek  Skriva metasökdata för kluster.\n"
 #: src/merge/mkvmerge.cpp:136
 #, no-c-format
 msgid "  --timestamp-scale <n>    Force the timestamp scale factor to n.\n"
-msgstr "  --timestamp-scale <n> Ställ in tidsstämpelns skalfaktor på n.\n"
+msgstr "  --timestamp-scale <n>    Ställ in tidsstämpelns skalfaktor på n.\n"
 
 #: src/merge/mkvmerge.cpp:137
 #, no-c-format
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
-msgstr "  --enable-durations Aktivera blockvaraktighet för alla block.\n"
+msgstr "  --enable-durations       Aktivera blockvaraktighet för alla block.\n"
 
 #: src/merge/mkvmerge.cpp:138
 #, no-c-format
 msgid "  --no-cues                Do not write the cue data (the index).\n"
-msgstr "  --no-cues Skriv inte cue-data (indexet).\n"
+msgstr "  --no-cues                Skriv inte cue-data (indexet).\n"
 
 #: src/merge/mkvmerge.cpp:139
 #, no-c-format
@@ -5958,7 +5958,7 @@ msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  --no-date Skriv inte fältet \"date\" i segmentinformationens\n"
+"  --no-date                Skriv inte fältet \"date\" i segmentinformationens\n"
 "                           informationsrubrikerna.\n"
 
 #: src/merge/mkvmerge.cpp:141
@@ -5967,13 +5967,13 @@ msgid ""
 "  --date <timestamp>       Set the 'date' field (UTC or with offset,\n"
 "                           e.g. 2017-03-28T17:28:00Z).\n"
 msgstr ""
-"  --date <timestamp>       Ställ in fältet 'date' (UTC eller med förskjutning,\n"
+"  --date <tidsstämpel>     Ställ in fältet 'date' (UTC eller med förskjutning,\n"
 "                           t.ex. 2017-03-28T17:28:00Z).\n"
 
 #: src/merge/mkvmerge.cpp:143
 #, no-c-format
 msgid "  --disable-lacing         Do not use lacing.\n"
-msgstr "  --disable-lacing Använd inte lacing.\n"
+msgstr "  --disable-lacing         Använd inte lacing.\n"
 
 #: src/merge/mkvmerge.cpp:144
 #, no-c-format
@@ -5990,7 +5990,7 @@ msgid ""
 "  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
 "                           track headers, chapters and tags.\n"
 msgstr ""
-"  --disable-language-ietf Skriv inte IETF BCP 47-språkelement i\n"
+"  --disable-language-ietf  Skriv inte IETF BCP 47-språkelement i\n"
 "                           spårrubriker, kapitel och taggar.\n"
 
 #: src/merge/mkvmerge.cpp:148
@@ -6001,7 +6001,7 @@ msgid ""
 "                           their canonical or their extended language subtags\n"
 "                           form or not at all (default: canonical form).\n"
 msgstr ""
-"  --normalize-language-ietf <canonical|extlang|off> (normalisera språk-ietf)\n"
+"  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalisera alla IETF BCP 47-språktaggar till antingen\n"
 "                           deras kanoniska eller deras utökade språkundertaggar\n"
 "                           form eller inte alls (standard: kanonisk form).\n"
@@ -6012,13 +6012,13 @@ msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
 "                           discarding any remaining packets of other tracks.\n"
 msgstr ""
-"  --stop-after-video-ends Stoppar bearbetningen när det primära videospåret är slut,\n"
+"  --stop-after-video-ends  Stoppar bearbetningen när det primära videospåret är slut,\n"
 "                           och kasserar eventuella återstående paket från andra spår.\n"
 
 #: src/merge/mkvmerge.cpp:155
 #, no-c-format
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
-msgstr " Fildelning, länkning, appendiering och konkatenering (fler globala alternativ):\n"
+msgstr " Fildelning, länkning, appendiering och konkatenering (fler globala flaggor):\n"
 
 #: src/merge/mkvmerge.cpp:156
 #, no-c-format
@@ -6038,7 +6038,7 @@ msgid ""
 "                           Create a new file after each timestamp A, B\n"
 "                           etc.\n"
 msgstr ""
-"  --split tidsstämplar:A[,B...]\n"
+"  --split timestamps:A[,B...]\n"
 "                           Skapa en ny fil efter varje tidsstämpel A, B\n"
 "                           etc.\n"
 
@@ -6084,19 +6084,19 @@ msgid ""
 "                           Create a new file before each chapter (with 'all')\n"
 "                           or before chapter numbers A, B etc.\n"
 msgstr ""
-"  --split kapitel:all|A[,B...]\n"
+"  --split chapters:all|A[,B...]\n"
 "                           Skapa en ny fil före varje kapitel (med 'all')\n"
 "                           eller före kapitelnumren A, B etc.\n"
 
 #: src/merge/mkvmerge.cpp:175
 #, no-c-format
 msgid "  --split-max-files <n>    Create at most n files.\n"
-msgstr "  --split-max-files <n> Skapa högst n filer.\n"
+msgstr "  --split-max-files <n>    Skapa högst n filer.\n"
 
 #: src/merge/mkvmerge.cpp:176
 #, no-c-format
 msgid "  --link                   Link splitted files.\n"
-msgstr "  --link Länka delade filer.\n"
+msgstr "  --link                   Länka delade filer.\n"
 
 #: src/merge/mkvmerge.cpp:177
 #, no-c-format
@@ -6106,7 +6106,7 @@ msgstr "  --link-to-previous <SID> Länka den första filen till den angivna SID
 #: src/merge/mkvmerge.cpp:178
 #, no-c-format
 msgid "  --link-to-next <SID>     Link the last file to the given SID.\n"
-msgstr "  --link-to-next <SID> Länka den sista filen till den angivna SID.\n"
+msgstr "  --link-to-next <SID>     Länka den sista filen till den angivna SID.\n"
 
 #: src/merge/mkvmerge.cpp:179
 #, no-c-format
@@ -6130,24 +6130,24 @@ msgid ""
 "                           Selects how mkvmerge calculates timestamps when\n"
 "                           appending files.\n"
 msgstr ""
-"  --append-läge <fil|spår>\n"
+"  --append-mode <file|track>\n"
 "                           Väljer hur mkvmerge beräknar tidsstämplar när\n"
 "                           när filer läggs till.\n"
 
 #: src/merge/mkvmerge.cpp:187
 #, no-c-format
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
-msgstr "  <fil1> + <fil2> Lägg till fil2 i fil1.\n"
+msgstr "  <fil1> + <fil2>          Lägg till fil2 i fil1.\n"
 
 #: src/merge/mkvmerge.cpp:188
 #, no-c-format
 msgid "  <file1> +<file2>         Same as \"<file1> + <file2>\".\n"
-msgstr "  <fil1> +<fil2> Samma som \"<fil1> + <fil2>\".\n"
+msgstr "  <fil1> +<fil2>           Samma som \"<fil1> + <fil2>\".\n"
 
 #: src/merge/mkvmerge.cpp:189
 #, no-c-format
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
-msgstr "  [ <fil1> <fil2> ] Samma som \"<fil1> + <fil2>\".\n"
+msgstr "  [ <fil1> <fil2> ]        Samma som \"<fil1> + <fil2>\".\n"
 
 #: src/merge/mkvmerge.cpp:190
 #, no-c-format
@@ -6155,13 +6155,13 @@ msgid ""
 "  = <file>                 Don't look for and concatenate files with the same\n"
 "                           base name but with a different trailing number.\n"
 msgstr ""
-"  = <fil> Leta inte efter och sammanlänka filer med samma\n"
+"  = <fil>                  Leta inte efter och sammanlänka filer med samma\n"
 "                           basnamn men med ett annat efterföljande nummer.\n"
 
 #: src/merge/mkvmerge.cpp:192
 #, no-c-format
 msgid "  =<file>                  Same as \"= <file>\".\n"
-msgstr "  =<fil> Samma som \"= <fil>\".\n"
+msgstr "  =<fil>                   Samma som \"= <fil>\".\n"
 
 #: src/merge/mkvmerge.cpp:193
 #, no-c-format
@@ -6169,13 +6169,13 @@ msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
 "                           into a single big file.\n"
 msgstr ""
-"  ( <fil1> <fil2> ) Behandla fil1 och fil2 som om de var sammankopplade\n"
+"  ( <fil1> <fil2> )        Behandla fil1 och fil2 som om de var sammankopplade\n"
 "                           till en enda stor fil.\n"
 
 #: src/merge/mkvmerge.cpp:196
 #, no-c-format
 msgid " Attachment support (more global options):\n"
-msgstr " Stöd för fastsättning (fler globala alternativ):\n"
+msgstr " Stöd för bifogning (fler globala flaggor):\n"
 
 #: src/merge/mkvmerge.cpp:197
 #, no-c-format
@@ -6183,7 +6183,7 @@ msgid ""
 "  --attachment-description <desc>\n"
 "                           Description for the following attachment.\n"
 msgstr ""
-"  --beskrivning av bifogad fil <desc>\n"
+"  --attachment-description <desc>\n"
 "                           Beskrivning för följande bilaga.\n"
 
 #: src/merge/mkvmerge.cpp:199
@@ -6192,7 +6192,7 @@ msgid ""
 "  --attachment-mime-type <mime type>\n"
 "                           Mime type for the following attachment.\n"
 msgstr ""
-"  --attachment-mime-typ <mime type>\n"
+"  --attachment-mime-type <mime-typ>\n"
 "                           Mime-typ för följande bilaga.\n"
 
 #: src/merge/mkvmerge.cpp:201
@@ -6201,7 +6201,7 @@ msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
 "                           following attachment.\n"
 msgstr ""
-"  --attachment-name <name> Namnet som ska sparas för följande \n"
+"  --attachment-name <namn> Namnet som ska sparas för följande \n"
 "                           följande bilaga.\n"
 
 #: src/merge/mkvmerge.cpp:203
@@ -6210,7 +6210,7 @@ msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
 msgstr ""
-"  --attach-file <file> Skapar en bifogad fil i Matroska-filen\n"
+"  --attach-file <fil>      Skapar en bifogad fil i Matroska-filen\n"
 "                           Matroska-filen.\n"
 
 #: src/merge/mkvmerge.cpp:205
@@ -6220,7 +6220,7 @@ msgid ""
 "                           Creates a file attachment inside the\n"
 "                           first Matroska file written.\n"
 msgstr ""
-"  --attach-fil-en-gång <file>\n"
+"  --attach-file-once <fil>\n"
 "                           Skapar en filbilaga inuti den\n"
 "                           första Matroska-filen som skrivs.\n"
 
@@ -6231,14 +6231,14 @@ msgid ""
 "                           Use legacy font MIME types when adding new\n"
 "                           attachments as well as for existing ones.\n"
 msgstr ""
-"  --enable-legacy-teckensnitt-mime-typer\n"
+"  --enable-legacy-font-mime-types\n"
 "                           Använd MIME-typer för äldre teckensnitt när du lägger till nya\n"
 "                           bilagor samt för befintliga bilagor.\n"
 
 #: src/merge/mkvmerge.cpp:212
 #, no-c-format
 msgid " Options for each source file:\n"
-msgstr " Alternativ för varje källfil:\n"
+msgstr " Flaggor för varje källfil:\n"
 
 #: src/merge/mkvmerge.cpp:213
 #, no-c-format
@@ -6254,7 +6254,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:216
 #, no-c-format
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
-msgstr "  -A, --no-audio Kopiera inte något ljudspår från den här filen.\n"
+msgstr "  -A, --no-audio           Kopiera inte något ljudspår från den här filen.\n"
 
 #: src/merge/mkvmerge.cpp:217
 #, no-c-format
@@ -6270,7 +6270,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:220
 #, no-c-format
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
-msgstr "  -D, --no-video Kopiera inte något videospår från den här filen.\n"
+msgstr "  -D, --no-video           Kopiera inte något videospår från den här filen.\n"
 
 #: src/merge/mkvmerge.cpp:221
 #, no-c-format
@@ -6279,14 +6279,14 @@ msgid ""
 "                           Copy subtitle tracks n,m etc. Default: copy\n"
 "                           all subtitle tracks.\n"
 msgstr ""
-"  -s, --subtitle-tracks <n,m,...> (undertextspår)\n"
+"  -s, --subtitle-tracks <n,m,...>\n"
 "                           Kopiera undertextspår n,m etc. Standard: kopiera\n"
 "                           alla undertextspår.\n"
 
 #: src/merge/mkvmerge.cpp:224
 #, no-c-format
 msgid "  -S, --no-subtitles       Don't copy any subtitle track from this file.\n"
-msgstr "  -S, --no-subtitles Kopiera inte något undertextspår från den här filen.\n"
+msgstr "  -S, --no-subtitles       Kopiera inte något undertextspår från den här filen.\n"
 
 #: src/merge/mkvmerge.cpp:225
 #, no-c-format
@@ -6302,7 +6302,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:228
 #, no-c-format
 msgid "  -B, --no-buttons         Don't copy any buttons track from this file.\n"
-msgstr "  -B, --no-buttons Kopiera inte något knappspår från den här filen.\n"
+msgstr "  -B, --no-buttons         Kopiera inte något knappspår från den här filen.\n"
 
 #: src/merge/mkvmerge.cpp:229
 #, no-c-format
@@ -6312,7 +6312,7 @@ msgid ""
 "                           all or only the first destination file. Default:\n"
 "                           copy all attachments to all destination files.\n"
 msgstr ""
-"  -m, --attachments <n[:alla|först],m[:alla|först],...>\n"
+"  -m, --attachments <n[:all|first],m[:all|first],...>\n"
 "                           Kopiera bilagorna med ID:n n, m etc. till alla eller\n"
 "                           till alla eller endast den första målfilen. Standardinställning:\n"
 "                           kopiera alla bilagor till alla målfiler.\n"
@@ -6320,12 +6320,12 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:233
 #, no-c-format
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
-msgstr "  -M, --no-attachments Kopierar inte bilagor från en källfil.\n"
+msgstr "  -M, --no-attachments     Kopierar inte bilagor från en källfil.\n"
 
 #: src/merge/mkvmerge.cpp:234
 #, no-c-format
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
-msgstr "  -t, --tags <TID:file> Läs in taggar för spåret från en XML-fil.\n"
+msgstr "  -t, --tags <TID:file>    Läs in taggar för spåret från en XML-fil.\n"
 
 #: src/merge/mkvmerge.cpp:235
 #, no-c-format
@@ -6333,23 +6333,23 @@ msgid ""
 "  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
 "                           tags for all tracks.\n"
 msgstr ""
-"  --track-tags <n,m,...> Kopiera taggarna för spår n,m etc. Standard: kopiera\n"
+"  --track-tags <n,m,...>   Kopiera taggarna för spår n,m etc. Standard: kopiera\n"
 "                           taggar för alla spår.\n"
 
 #: src/merge/mkvmerge.cpp:237
 #, no-c-format
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
-msgstr "  -T, --no-track-tags Kopiera inte taggar för spår från källfilen.\n"
+msgstr "  -T, --no-track-tags      Kopiera inte taggar för spår från källfilen.\n"
 
 #: src/merge/mkvmerge.cpp:238
 #, no-c-format
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
-msgstr "  --no-global-tags Behåll inte globala taggar från källfilen.\n"
+msgstr "  --no-global-tags         Behåll inte globala taggar från källfilen.\n"
 
 #: src/merge/mkvmerge.cpp:239
 #, no-c-format
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
-msgstr "  --no-chapters Behåller inte kapitel från källfilen.\n"
+msgstr "  --no-chapters            Behåller inte kapitel från källfilen.\n"
 
 #: src/merge/mkvmerge.cpp:240
 #, no-c-format
@@ -6357,7 +6357,7 @@ msgid ""
 "  --regenerate-track-uids  Generate new random track UIDs instead of keeping\n"
 "                           existing ones.\n"
 msgstr ""
-"  --regenerate-track-uids Generera nya slumpmässiga UID:er för spår istället för att behålla\n"
+"  --regenerate-track-uids  Generera nya slumpmässiga UID:er för spår istället för att behålla\n"
 "                           befintliga.\n"
 
 #: src/merge/mkvmerge.cpp:242
@@ -6470,7 +6470,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:273
 #, no-c-format
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
-msgstr "  --track-name <TID:name> Ställer in namnet på ett spår.\n"
+msgstr "  --track-name <TID:namn>  Ställer in namnet på ett spår.\n"
 
 #: src/merge/mkvmerge.cpp:274
 #, no-c-format
@@ -6479,7 +6479,7 @@ msgid ""
 "                           Create cue (index) entries for this track:\n"
 "                           None at all, only for I frames, for all.\n"
 msgstr ""
-"  --cues <TID:ingen|iframes|alla>\n"
+"  --cues <TID:none|iframes|all>\n"
 "                           Skapa cue-poster (index) för det här spåret:\n"
 "                           Ingen alls, endast för I frames, för alla.\n"
 
@@ -6489,13 +6489,13 @@ msgid ""
 "  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
 "                           RFC 5646 language tag).\n"
 msgstr ""
-"  --language <TID:lang> Ställer in språket för spåret (IETF BCP 47/\n"
+"  --language <TID:lang>    Ställer in språket för spåret (IETF BCP 47/\n"
 "                           RFC 5646 språktagg).\n"
 
 #: src/merge/mkvmerge.cpp:279
 #, no-c-format
 msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
-msgstr "  --timestamps <TID:file> Läs in de tidsstämplar som ska användas från en fil.\n"
+msgstr "  --timestamps <TID:file>  Läs in de tidsstämplar som ska användas från en fil.\n"
 
 #: src/merge/mkvmerge.cpp:280
 #, no-c-format
@@ -6511,7 +6511,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:284
 #, no-c-format
 msgid " Options that only apply to audio tracks:\n"
-msgstr " Alternativ som endast gäller för ljudspår:\n"
+msgstr " Flaggor som endast gäller för ljudspår:\n"
 
 #: src/merge/mkvmerge.cpp:285
 #, no-c-format
@@ -6529,7 +6529,7 @@ msgid ""
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --reduce-to-core <TID> Behåller endast kärnan av ljudspår som stöder\n"
+"  --reduce-to-core <TID>   Behåller endast kärnan av ljudspår som stöder\n"
 "                           HD-tillägg istället för att kopiera både kärnan\n"
 "                           och tilläggen.\n"
 
@@ -6552,7 +6552,7 @@ msgid ""
 "                           be either a number or a keyword (see\n"
 "                           '--list-audio-emphasis' for the full list).\n"
 msgstr ""
-"  --audio-emphasis <TID:n|nyckelord>\n"
+"  --audio-emphasis <TID:n|keyword>\n"
 "                           Ställer in spårhuvudvärdet för ljudets betoning. Det kan\n"
 "                           vara antingen ett nummer eller ett nyckelord (se\n"
 "                           \"--list-audio-emphasis\" för en fullständig lista).\n"
@@ -6560,7 +6560,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:298
 #, no-c-format
 msgid " Options that only apply to video tracks:\n"
-msgstr " Alternativ som endast gäller för videospår:\n"
+msgstr " Flaggor som endast gäller för videospår:\n"
 
 #: src/merge/mkvmerge.cpp:299
 #, no-c-format
@@ -6579,7 +6579,7 @@ msgid ""
 "  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
 "                           Works only for video tracks.\n"
 msgstr ""
-"  -f, --fourcc <FOURCC> Forcerar FourCC till det angivna värdet.\n"
+"  -f, --fourcc <FOURCC>    Forcerar FourCC till det angivna värdet.\n"
 "                           Fungerar endast för videospår.\n"
 
 #: src/merge/mkvmerge.cpp:304
@@ -6602,7 +6602,7 @@ msgid ""
 "                           with this factor and calculates the display\n"
 "                           dimensions from this factor.\n"
 msgstr ""
-"  --aspect-ratio-faktor <TID:f|a/b>\n"
+"  --aspect-ratio-factor <TID:f|a/b>\n"
 "                           Beräknar först bildförhållandet genom att multiplicera\n"
 "                           genom att multiplicera videons ursprungliga bildförhållande\n"
 "                           med denna faktor och beräknar visningsdimensionerna\n"
@@ -6614,7 +6614,7 @@ msgid ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           Explicitly set the display dimensions.\n"
 msgstr ""
-"  --display-dimensions <TID:width>x<height>\n"
+"  --display-dimensions <TID:bredd>x<höjd>\n"
 "                           Explicit inställning av visningsdimensionerna.\n"
 
 #: src/merge/mkvmerge.cpp:314
@@ -6632,7 +6632,7 @@ msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
 "                           (see documentation for valid values).\n"
 msgstr ""
-"  --field-order <TID:n> Ställer in parametern för videofältordning\n"
+"  --field-order <TID:n>    Ställer in parametern för videofältordning\n"
 "                           (se dokumentation för giltiga värden).\n"
 
 #: src/merge/mkvmerge.cpp:318
@@ -6708,7 +6708,7 @@ msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --chroma-sittning <TID:hori,vert>\n"
+"  --chroma-siting <TID:hori,vert>\n"
 "                            Hur chroma är placerad horisontellt/vertikalt.\n"
 
 #: src/merge/mkvmerge.cpp:341
@@ -6850,7 +6850,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:376
 #, no-c-format
 msgid " Options that only apply to text subtitle tracks:\n"
-msgstr " Alternativ som endast gäller för textundertextspår:\n"
+msgstr " Flaggor som endast gäller för textundertextspår:\n"
 
 #: src/merge/mkvmerge.cpp:377
 #, no-c-format
@@ -6866,7 +6866,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:381
 #, no-c-format
 msgid " Options that only apply to VobSub subtitle tracks:\n"
-msgstr " Alternativ som endast gäller för VobSub-undertextspår:\n"
+msgstr " Flaggor som endast gäller för VobSub-undertextspår:\n"
 
 #: src/merge/mkvmerge.cpp:382
 #, no-c-format
@@ -6882,12 +6882,12 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:386
 #, no-c-format
 msgid " Other options:\n"
-msgstr " Andra alternativ:\n"
+msgstr " Andra flaggor:\n"
 
 #: src/merge/mkvmerge.cpp:387
 #, no-c-format
 msgid "  -i, --identify <file>    Print information about the source file.\n"
-msgstr "  -i, --identify <file> Skriv ut information om källfilen.\n"
+msgstr "  -i, --identify <fil>     Skriv ut information om källfilen.\n"
 
 #: src/merge/mkvmerge.cpp:388
 #, no-c-format
@@ -6895,8 +6895,8 @@ msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
 msgstr ""
-"  -J <file> Detta är ett praktiskt alias för\n"
-"                           \"--identifieringsformat json --identifieringsfil\".\n"
+"  -J <fil>                 Detta är ett praktiskt alias för\n"
+"                           \"--identification-format json --identify file\".\n"
 
 #: src/merge/mkvmerge.cpp:390
 #, no-c-format
@@ -6917,7 +6917,7 @@ msgid ""
 "                           of the total file size for certain file types\n"
 "                           (default: 0.3).\n"
 msgstr ""
-"  --probe-range-percentage <percent>\n"
+"  --probe-range-percentage <procent>\n"
 "                           Ställer in maximal storlek för att söka efter spår i procent\n"
 "                           av den totala filstorleken för vissa filtyper\n"
 "                           (standard: 0,3).\n"
@@ -6925,7 +6925,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:397
 #, no-c-format
 msgid "  -l, --list-types         Lists supported source file types.\n"
-msgstr "  -l, --list-types Lista över källfiltyper som stöds.\n"
+msgstr "  -l, --list-types         Lista över källfiltyper som stöds.\n"
 
 #: src/merge/mkvmerge.cpp:398
 #, no-c-format
@@ -6933,7 +6933,7 @@ msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
 "                           '--audio-emphasis' option and their meaning.\n"
 msgstr ""
-"  --list-audio-emphasis Listar alla värden som stöds för alternativet\n"
+"  --list-audio-emphasis    Listar alla värden som stöds för flaggan\n"
 "                           \"--audio-emphasis\" och deras betydelse.\n"
 
 #: src/merge/mkvmerge.cpp:400
@@ -6942,7 +6942,7 @@ msgid ""
 "  --list-languages         Lists all ISO 639 languages and their\n"
 "                           ISO 639-2 codes.\n"
 msgstr ""
-"  --list-languages Listar alla ISO 639-språk och deras\n"
+"  --list-languages         Listar alla ISO 639-språk och deras\n"
 "                           ISO 639-2-koder.\n"
 
 #: src/merge/mkvmerge.cpp:402
@@ -6951,23 +6951,23 @@ msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
 "                           option and their meaning.\n"
 msgstr ""
-"  --list-stereo-modes Listar alla värden som stöds för alternativet '--stereo-mode'\n"
+"  --list-stereo-modes      Listar alla värden som stöds för flaggan '--stereo-mode'\n"
 "                           och vad de betyder.\n"
 
 #: src/merge/mkvmerge.cpp:404
 #, no-c-format
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
-msgstr "  --capabilities Listar valfria funktioner som mkvmerge kompilerades med.\n"
+msgstr "  --capabilities           Listar valfria funktioner som mkvmerge kompilerades med.\n"
 
 #: src/merge/mkvmerge.cpp:405
 #, no-c-format
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
-msgstr "  --priority <priority> Ange den prioritet som mkvmerge körs med.\n"
+msgstr "  --priority <prioritet>   Ange den prioritet som mkvmerge körs med.\n"
 
 #: src/merge/mkvmerge.cpp:406
 #, no-c-format
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
-msgstr "  --ui-language <code> Tvinga översättningarna för \"code\" att användas.\n"
+msgstr "  --ui-language <kod>      Tvinga översättningarna för \"kod\" att användas.\n"
 
 #: src/merge/mkvmerge.cpp:407
 #, no-c-format
@@ -6981,7 +6981,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:409
 #, no-c-format
 msgid "  --output-charset <cset>  Output messages in this charset\n"
-msgstr "  --output-charset <cset> Utmatning av meddelanden i denna charset\n"
+msgstr "  --output-charset <cset>  Utmatning av meddelanden i denna charset\n"
 
 #: src/merge/mkvmerge.cpp:410
 #, no-c-format
@@ -7003,7 +7003,7 @@ msgid ""
 "  --flush-on-close         Flushes all cached data to storage when closing\n"
 "                           a file opened for writing.\n"
 msgstr ""
-"  --flush-on-close Raderar all cachad data till lagringsutrymmet när du stänger\n"
+"  --flush-on-close         Raderar all cachad data till lagringsutrymmet när du stänger\n"
 "                           en fil som är öppen för skrivning.\n"
 
 #: src/merge/mkvmerge.cpp:415
@@ -7022,19 +7022,19 @@ msgid ""
 "                           if the same source files with the same options\n"
 "                           and the same seed are used.\n"
 msgstr ""
-"  --deterministic <seed> Gör det möjligt att skapa byte-identiska filer\n"
-"                           om samma källfiler med samma alternativ och samma\n"
+"  --deterministic <seed>   Gör det möjligt att skapa byte-identiska filer\n"
+"                           om samma källfiler med samma flaggor och samma\n"
 "                           och samma seed används.\n"
 
 #: src/merge/mkvmerge.cpp:421
 #, no-c-format
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
-msgstr "  --debug <topic> Aktiverar felsökningsutmatning för \"topic\".\n"
+msgstr "  --debug <ämne>           Aktiverar felsökningsutmatning för \"ämne\".\n"
 
 #: src/merge/mkvmerge.cpp:422
 #, no-c-format
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
-msgstr "  --engage <feature> Slår på experimentell funktion \"funktion\".\n"
+msgstr "  --engage <funktion>      Slår på experimentell funktion \"funktion\".\n"
 
 #: src/merge/mkvmerge.cpp:423
 #, no-c-format
@@ -7042,18 +7042,18 @@ msgid ""
 "  @option-file.json        Reads additional command line options from\n"
 "                           the specified JSON file (see man page).\n"
 msgstr ""
-"  @option-file.json Läser ytterligare kommandoradsalternativ från\n"
+"  @flaggfil.json          Läser ytterligare kommandoradsflaggor från\n"
 "                           den angivna JSON-filen (se man-sidan).\n"
 
 #: src/merge/mkvmerge.cpp:425
 #, no-c-format
 msgid "  -h, --help               Show this help.\n"
-msgstr "  -h, --help Visa den här hjälpen.\n"
+msgstr "  -h, --help               Visa den här hjälpen.\n"
 
 #: src/merge/mkvmerge.cpp:426
 #, no-c-format
 msgid "  -V, --version            Show version information.\n"
-msgstr "  -V, --version Visa versionsinformation.\n"
+msgstr "  -V, --version            Visa versionsinformation.\n"
 
 #: src/merge/mkvmerge.cpp:428
 #, no-c-format
@@ -7100,7 +7100,7 @@ msgstr "'{0}' är inte en giltig IETF BCP 47/RFC 5646-språktagg i '{1}'. Ytterl
 #: src/merge/mkvmerge.cpp:651
 #, no-c-format, c++-format
 msgid "Invalid sync option. No track ID specified in '{0} {1}'.\n"
-msgstr "Ogiltigt synkroniseringsalternativ. Inget spår-ID angivet i '{0} {1}'.\n"
+msgstr "Ogiltig synkroniseringsflagga. Inget spår-ID angivet i '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:654
 #: src/merge/mkvmerge.cpp:1313
@@ -7115,17 +7115,17 @@ msgstr "Ogiltigt spår-ID angivet i '{0} {1}'.\n"
 #: src/merge/mkvmerge.cpp:695
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'.\n"
-msgstr "Ogiltigt synkroniseringsalternativ anges i '{0} {1}'.\n"
+msgstr "Ogiltig synkroniseringsflagga anges i '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:685
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'. The divisor is zero.\n"
-msgstr "Ogiltigt synkroniseringsalternativ specificerat i '{0} {1}'. Divisorn är noll.\n"
+msgstr "Ogiltig synkroniseringsflagga specificerad i '{0} {1}'. Divisorn är noll.\n"
 
 #: src/merge/mkvmerge.cpp:690
 #, no-c-format, c++-format
 msgid "Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"
-msgstr "Ogiltigt synkroniseringsalternativ anges i '{0} {1}'. Det linjära synkroniseringsvärdet får inte vara lika med eller mindre än noll.\n"
+msgstr "Ogiltig synkroniseringsflagga anges i '{0} {1}'. Det linjära synkroniseringsvärdet får inte vara lika med eller mindre än noll.\n"
 
 #: src/merge/mkvmerge.cpp:712
 #, no-c-format
@@ -7254,12 +7254,12 @@ msgstr "Ogiltigt format för '--split' i '--split {0}'.\n"
 #: src/merge/mkvmerge.cpp:1319
 #, no-c-format, c++-format
 msgid "Invalid boolean option specified in '{0} {1}'.\n"
-msgstr "Ogiltigt booleanskt alternativ angivet i '{0} {1}'.\n"
+msgstr "Ogiltig boolean-flagga angiven i '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:1337
 #, no-c-format, c++-format
 msgid "Invalid cues option. No track ID specified in '--cues {0}'.\n"
-msgstr "Ogiltigt cues-alternativ. Inget spår-ID specificerat i '--cues {0}'.\n"
+msgstr "Ogiltig cues-flagga. Inget spår-ID specificerat i '--cues {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1341
 #, no-c-format, c++-format
@@ -7269,7 +7269,7 @@ msgstr "Ogiltigt spår-ID angivet i '--cues {0}'.\n"
 #: src/merge/mkvmerge.cpp:1344
 #, no-c-format, c++-format
 msgid "Invalid cues option specified in '--cues {0}'.\n"
-msgstr "Ogiltigt cues-alternativ angivet i '--cues {0}'.\n"
+msgstr "Ogiltig cues-flagga angiven i '--cues {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1353
 #, no-c-format, c++-format
@@ -7279,7 +7279,7 @@ msgstr "'{0}' är ett icke underbyggt argument för --cues.\n"
 #: src/merge/mkvmerge.cpp:1367
 #, no-c-format, c++-format
 msgid "Invalid compression option. No track ID specified in '--compression {0}'.\n"
-msgstr "Ogiltigt komprimeringsalternativ. Inget spår-ID anges i '--komprimering {0}'.\n"
+msgstr "Ogiltig komprimeringsflagga. Inget spår-ID anges i '--compression {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1371
 #, no-c-format, c++-format
@@ -7289,7 +7289,7 @@ msgstr "Ogiltigt spår-ID som anges i '--komprimering {0}'.\n"
 #: src/merge/mkvmerge.cpp:1374
 #, no-c-format, c++-format
 msgid "Invalid compression option specified in '--compression {0}'.\n"
-msgstr "Ogiltigt komprimeringsalternativ som anges i '--compression {0}'.\n"
+msgstr "Ogiltig komprimeringsflagga som anges i '--compression {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1398
 #, no-c-format, c++-format
@@ -7319,7 +7319,7 @@ msgstr "språk"
 #: src/merge/mkvmerge.cpp:1448
 #, no-c-format, c++-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset {0}'.\n"
-msgstr "Ogiltigt alternativ för sub-charset. Inget spår-ID angivet i '--sub-charset {0}'.\n"
+msgstr "Ogiltig flagga för sub-charset. Inget spår-ID angivet i '--sub-charset {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1452
 #, no-c-format, c++-format
@@ -7334,7 +7334,7 @@ msgstr "Ogiltig sub-charset som anges i '--sub-charset {0}'.\n"
 #: src/merge/mkvmerge.cpp:1472
 #, no-c-format, c++-format
 msgid "Invalid tags option. No track ID specified in '{0} {1}'.\n"
-msgstr "Ogiltigt alternativ för taggar. Inget spår-ID angivet i '{0} {1}'.\n"
+msgstr "Ogiltig flagga för taggar. Inget spår-ID angivet i '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:1479
 #, no-c-format, c++-format
@@ -7647,7 +7647,7 @@ msgstr "Argumentet '{0}' är inte tillåtet i identifieringsläget.\n"
 #: src/merge/mkvmerge.cpp:2220
 #, no-c-format, c++-format
 msgid "'{0}' can only be used with a file name. No further options are allowed if this option is used.\n"
-msgstr "'{0}' kan endast användas med ett filnamn. Inga ytterligare alternativ tillåts om detta alternativ används.\n"
+msgstr "'{0}' kan endast användas med ett filnamn. Inga ytterligare flaggor tillåts om denna flagga används.\n"
 
 #: src/merge/mkvmerge.cpp:2247
 #, no-c-format, c++-format
@@ -7812,7 +7812,7 @@ msgstr "\"--segmentinfo\" saknar filnamn.\n"
 #: src/merge/mkvmerge.cpp:2544
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
-msgstr "Alternativet '--meta-seek-size' stöds inte längre. Läs mkvmerges dokumentation, särskilt avsnittet om MATROSKA FILE LAYOUT.\n"
+msgstr "Flaggan '--meta-seek-size' stöds inte längre. Läs mkvmerges dokumentation, särskilt avsnittet om MATROSKA FILE LAYOUT.\n"
 
 #: src/merge/mkvmerge.cpp:2573
 #: src/merge/mkvmerge.cpp:2580
@@ -8025,7 +8025,7 @@ msgstr "Filen håller på att fixas, del 4/4..."
 #: src/merge/output_control.cpp:332
 #, no-c-format, c++-format
 msgid "Progress: 100%{0}"
-msgstr "Framsteg: 100%{0}"
+msgstr "Förlopp: 100%{0}"
 
 #: src/merge/output_control.cpp:430
 #, no-c-format, c++-format
@@ -8066,7 +8066,7 @@ msgstr "Endast partiella append mappningar gavs för filen nr. {0} ('{1}'). Ange
 #: src/merge/output_control.cpp:1015
 #, no-c-format, c++-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
-msgstr "Ingen append-mappning gavs för filen nr. {0} ('{1}'). En standardmappning på {2} kommer att användas istället. Tänk på detta om mkvmerge avbryter med ett felmeddelande om ogiltiga alternativ för '--append-to'.\n"
+msgstr "Ingen append-mappning gavs för filen nr. {0} ('{1}'). En standardmappning på {2} kommer att användas istället. Tänk på detta om mkvmerge avbryter med ett felmeddelande om ogiltiga flaggor för '--append-to'.\n"
 
 #: src/merge/output_control.cpp:1029
 #, no-c-format, c++-format
@@ -9611,7 +9611,7 @@ msgstr "Ctrl+R"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:638
 #, no-c-format
 msgid "C&reate option file"
-msgstr "S&kapa alternativfil"
+msgstr "S&kapa flaggfil"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
 #, no-c-format
@@ -10314,7 +10314,7 @@ msgstr "Standardvärden för nya multiplexinställningar"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2366
 #, no-c-format
 msgid "Default additional co&mmand line options:"
-msgstr "Standard för ytterligare alternativ för ko&mmandoraden:"
+msgstr "Standard för ytterligare flaggor för ko&mmandoraden:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
 #, no-c-format
@@ -10887,12 +10887,12 @@ msgstr "S&kapa en ny flik för multiplexinställningar för varje katalog"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
 #, no-c-format
 msgid "Additional command line options"
-msgstr "Ytterligare kommandoradsalternativ"
+msgstr "Ytterligare kommandoradsflaggor"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
 #, no-c-format
 msgid "Add additional command line options for mkvmerge"
-msgstr "Lägg till ytterligare kommandoradsalternativ för mkvmerge"
+msgstr "Lägg till ytterligare kommandoradsflaggor för mkvmerge"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 #, no-c-format
@@ -10902,13 +10902,13 @@ msgstr "Global utgångskontroll"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 #, no-c-format
 msgid "These are less often used options that control the output structure that mkvmerge creates."
-msgstr "Dessa är mindre ofta använda alternativ som styr den utdatastruktur som mkvmerge skapar."
+msgstr "Dessa är mindre ofta använda flaggor som styr den utdatastruktur som mkvmerge skapar."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 #, no-c-format
 msgid "Option"
-msgstr "Alternativ"
+msgstr "Flagga"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 #, no-c-format
@@ -10923,7 +10923,7 @@ msgstr "Hacks för utveckling"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #, no-c-format
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
-msgstr "Detta är alternativ avsedda för utveckling. De stöds inte officiellt och kan ändras från release till release."
+msgstr "Dessa är flaggor avsedda för utveckling. De stöds inte officiellt och kan ändras från utgåva till utgåva."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 #, no-c-format
@@ -11349,13 +11349,13 @@ msgstr "Teckenuppsättning:"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2266
 #, no-c-format
 msgid "Indexing (cues):"
-msgstr "Indexering (ledtrådar):"
+msgstr "Indexering (cues):"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2267
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2286
 #, no-c-format
 msgid "Additional options:"
-msgstr "Ytterligare alternativ:"
+msgstr "Ytterligare flaggor:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2268
 #, no-c-format
@@ -11416,7 +11416,7 @@ msgstr "Länka filer"
 #: src/mkvtoolnix-gui/merge/output.cpp:346
 #, no-c-format
 msgid "Options:"
-msgstr "Alternativ:"
+msgstr "Flaggor:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2284
 #, no-c-format
@@ -11720,7 +11720,7 @@ msgstr "F&ler åtgärder"
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:42
 #, no-c-format
 msgid "mkvtoolnix-gui [options] [file names]"
-msgstr "mkvtoolnix-gui [alternativ] [filnamn]"
+msgstr "mkvtoolnix-gui [flaggor] [filnamn]"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:44
 #, no-c-format
@@ -12964,7 +12964,7 @@ msgstr "Om den är aktiverad kommer automatisk skalning för skärmar med hög D
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
 #, no-c-format
 msgid "Changes to this option will only take effect the next time the application is started."
-msgstr "Ändringar av detta alternativ kommer endast att träda i kraft nästa gång programmet startas."
+msgstr "Ändringar till denna flagga kommer endast att träda i kraft nästa gång programmet startas."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
 #, no-c-format
@@ -13130,17 +13130,17 @@ msgstr "Vissa filformat har egenskapen \"title\"."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:376
 #, no-c-format
 msgid "When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."
-msgstr "När användaren lägger till en fil som innehåller en sådan titel kopierar programmet titeln till inmatningsrutan \"filtitel\" om det här alternativet är aktiverat."
+msgstr "När användaren lägger till en fil som innehåller en sådan titel kopierar programmet titeln till inmatningsrutan \"filtitel\" om den här flaggan är aktiverad."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:377
 #, no-c-format
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
-msgstr "Observera att även om alternativet är inaktiverat kommer mkvmerge att kopiera en källfils titelegenskap om inte en titel har angetts manuellt av användaren."
+msgstr "Observera att även om flaggan är inaktiverad kommer mkvmerge att kopiera en källfils titelegenskap om inte en titel har angetts manuellt av användaren."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:378
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
-msgstr "Om detta alternativ är aktiverat kommer GUI alltid att rensa inmatningsrutan \"file title\" när den sista källfilen tas bort."
+msgstr "Om denna flagga är aktiverad kommer grafiska gränssnittet alltid att rensa inmatningsrutan \"file title\" när den sista källfilen tas bort."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:383
 #, no-c-format
@@ -13202,7 +13202,7 @@ msgstr "Normalt kommer mkvmerge att tillämpa ytterligare förlustfri komprimeri
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 #, no-c-format
 msgid "Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files."
-msgstr "Om du markerar det här alternativet ställer GUI in komprimeringen till \"none\" som standard för alla spårtyper när du lägger till filer."
+msgstr "Om du markerar den här flaggan ställer grafiska gränssnittet in komprimeringen till \"none\" som standard för alla spårtyper när du lägger till filer."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
 #, no-c-format
@@ -13545,7 +13545,7 @@ msgstr "Om en teckenuppsättning väljs här, kommer programmet automatiskt att 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:570
 #, no-c-format
 msgid "The options entered here are set for all new multiplex jobs by default."
-msgstr "De alternativ som anges här är standardinställningar för alla nya multiplexjobb."
+msgstr "De flaggor som anges här är standardinställningar för alla nya multiplexjobb."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:574
 #, no-c-format
@@ -13600,7 +13600,7 @@ msgstr "Om den är aktiverad kommer sådana filer alltid att hoppas över utan a
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:593
 #, no-c-format
 msgid "If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."
-msgstr "Om detta alternativ är aktiverat och om det för närvarande inte finns något målfilnamn angivet, kommer programmet att ange ett åt dig när du lägger till en källfil."
+msgstr "Om denna flaggan är aktiverad och om det för närvarande inte finns något målfilnamn angivet, kommer programmet att ange ett åt dig när du lägger till en källfil."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:594
 #, no-c-format
@@ -13610,7 +13610,7 @@ msgstr "Det genererade målfilnamnet har samma basnamn som källfilnamnet men me
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:598
 #, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
-msgstr "Om detta alternativ är aktiverat kommer endast källfiler som innehåller videospår att användas för att ange målfilens namn."
+msgstr "Om denna flaggan är aktiverad kommer endast källfiler som innehåller videospår att användas för att ange målfilens namn."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:599
 #, no-c-format
@@ -13620,7 +13620,7 @@ msgstr "Andra filer ignoreras när de läggs till."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:603
 #, no-c-format
 msgid "If this option is enabled, the file title will be used as the basis for the destination file name if a file title is set."
-msgstr "Om det här alternativet är aktiverat kommer filtiteln att användas som grund för målfilnamnet om en filtitel har angetts."
+msgstr "Om den här flaggan är aktiverad kommer filtiteln att användas som grund för målfilnamnet om en filtitel har angetts."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:604
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:609
@@ -13631,7 +13631,7 @@ msgstr "I annat fall härleds målfilnamnet från källfilnamnen."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:608
 #, no-c-format
 msgid "If this option is enabled, the name of the directory the file is located in will be used as the basis for the destination file name."
-msgstr "Om det här alternativet är aktiverat kommer namnet på den katalog som filen finns i att användas som utgångspunkt för målfilens namn."
+msgstr "Om den här flaggan är aktiverad kommer namnet på den katalog som filen finns i att användas som utgångspunkt för målfilens namn."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:613
 #, no-c-format
@@ -13646,7 +13646,7 @@ msgstr "Detta görs endast om det redan finns en fil vars namn matchar det omodi
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:615
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
-msgstr "Om detta alternativ är aktiverat kommer GUI alltid att rensa inmatningsrutan \"destination file name\" när den sista källfilen tas bort."
+msgstr "Om denna flaggan är aktiverat kommer grafiska gränssnittet alltid att rensa inmatningsrutan \"destination file name\" när den sista källfilen tas bort."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:617
 #, no-c-format
@@ -13661,7 +13661,7 @@ msgstr "När du lägger till källfiler är alla spår normalt inställda på at
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:621
 #, no-c-format
 msgid "If this option is enabled, only those tracks will be set to be copied whose language is selected below."
-msgstr "Om det här alternativet är aktiverat kommer endast de spår att kopieras vars språk har valts nedan."
+msgstr "Om den här flaggan är aktiverad kommer endast de spår att kopieras vars språk har valts nedan."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:622
 #, no-c-format
@@ -14216,9 +14216,9 @@ msgid "Source files' absolute paths"
 msgstr "Källfilernas absoluta sökvägar"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:254
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter file's absolute path"
-msgstr "Målfilens absoluta sökväg"
+msgstr "Kapitelfilens absoluta sökväg"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
 #, no-c-format
@@ -14335,7 +14335,7 @@ msgstr "Standardinställningen är \"file\" med \"track\" som ett alternativt l�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:35
 #, no-c-format
 msgid "This option needs an additional argument 'n'."
-msgstr "Detta alternativ kräver ytterligare ett argument \"n\"."
+msgstr "Denna flagga kräver ytterligare ett argument \"n\"."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:36
 #, no-c-format
@@ -14365,7 +14365,7 @@ msgstr "Anger att mkvmerge ska skapa ett meta seek-element i slutet av filen som
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 #, no-c-format
 msgid "Enables the creation of byte-identical files if the same source files with the same options and the same seed are used."
-msgstr "Gör det möjligt att skapa byte-identiska filer om samma källfiler med samma alternativ och samma seed används."
+msgstr "Gör det möjligt att skapa byte-identiska filer om samma källfiler med samma flaggor och samma seed används."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
@@ -14492,7 +14492,7 @@ msgstr "Generera nya slumpmässiga spår UID:er istället för att behålla de b
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
 #, no-c-format
 msgid "When given, this option applies to all source files."
-msgstr "När detta alternativ anges gäller det för alla källfiler."
+msgstr "När denna flagga anges gäller det för alla källfiler."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:31
 #, no-c-format
@@ -14652,7 +14652,7 @@ msgstr "Linux/Unix-skal (bash, zsh etc.)"
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
 #, no-c-format
 msgid "MKVToolNix option files (JSON-formatted)"
-msgstr "MKVToolNix-alternativfiler (JSON-formaterade)"
+msgstr "MKVToolNix-flaggfiler (JSON-formaterade)"
 
 #: src/mkvtoolnix-gui/merge/command_line_dialog.cpp:63
 #, no-c-format
@@ -14748,7 +14748,7 @@ msgstr "Detta fungerar med alla spårtyper."
 #: src/mkvtoolnix-gui/merge/input.cpp:589
 #, no-c-format
 msgid "This option can also be used for chapters."
-msgstr "Detta alternativ kan också användas för kapitel."
+msgstr "Denna flagga kan också användas för kapitel."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:586
 #, no-c-format
@@ -14795,12 +14795,12 @@ msgstr "Normalt ändrar mkvmerge inte tidsinformationen (frame/field rate) som f
 #: src/mkvtoolnix-gui/merge/input.cpp:599
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
-msgstr "Med det här alternativet justeras informationen så att den stämmer överens med behållarens tidsinformation."
+msgstr "Med den här flaggan justeras informationen så att den stämmer överens med behållarens tidsinformation."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:600
 #, no-c-format
 msgid "There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr "Det finns flera potentiella källor för behållarens tidsinformation: ett värde som anges på kommandoraden med alternativet \"--default-duration\", källbehållaren eller videobitströmmen."
+msgstr "Det finns flera potentiella källor för behållarens tidsinformation: ett värde som anges på kommandoraden med flaggan \"--default-duration\", källbehållaren eller videobitströmmen."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:604
 #: src/mkvtoolnix-gui/merge/input.cpp:610
@@ -14812,7 +14812,7 @@ msgstr "Matroska-containerformatet kan lagra visningsbredd/höjd för ett videos
 #: src/mkvtoolnix-gui/merge/input.cpp:605
 #, no-c-format
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
-msgstr "Detta alternativ talar om för mkvmerge vilket bildförhållande som ska användas när den beräknar bildskärmens bredd/höjd."
+msgstr "Denna flagga talar om för mkvmerge vilket bildförhållande som ska användas när den beräknar bildskärmens bredd/höjd."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:606
 #: src/mkvtoolnix-gui/merge/input.cpp:612
@@ -14844,7 +14844,7 @@ msgstr "Detta måste vara en kommaseparerad lista med fyra siffror för den besk
 #: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
 msgid "Note that the video content is not modified by this option."
-msgstr "Observera att videoinnehållet inte ändras med detta alternativ."
+msgstr "Observera att videoinnehållet inte ändras med denna flagga."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:623
 #, no-c-format
@@ -14934,12 +14934,12 @@ msgstr "\"Bestäm automatiskt\" är ett bra val i nästan alla situationer."
 #: src/mkvtoolnix-gui/merge/input.cpp:654
 #, no-c-format
 msgid "Free-form edit field for user defined options for this track."
-msgstr "Fritt redigeringsfält för användardefinierade alternativ för detta spår."
+msgstr "Fritt redigeringsfält för användardefinierade flaggor för detta spår."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:655
 #, no-c-format
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
-msgstr "Det du skriver in här läggs till efter alla andra alternativ som GUI lägger till så att du kan skriva över alla GUI:s alternativ för det här spåret."
+msgstr "Det du skriver in här läggs till efter alla andra flaggor som GUI lägger till så att du kan skriva över alla grafiska gränssnittsflaggor för det här spåret."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:656
 #, no-c-format
@@ -15113,7 +15113,7 @@ msgstr "För alla ramar"
 #: src/mkvtoolnix-gui/merge/input.cpp:1830
 #, no-c-format
 msgid "No cues"
-msgstr "Inga ledtrådar"
+msgstr "Inga cues"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:2253
 #, no-c-format
@@ -15273,7 +15273,7 @@ msgstr "mkvmerge stöder två kapitelformat: Det OGM-liknande textformatet och d
 #: src/mkvtoolnix-gui/merge/output.cpp:210
 #, no-c-format
 msgid "This option specifies the language to be associated with chapters if the OGM chapter format is used."
-msgstr "Detta alternativ anger vilket språk som ska associeras med kapitlen om OGM-kapitelformatet används."
+msgstr "Denna flagga anger vilket språk som ska associeras med kapitlen om OGM-kapitelformatet används."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:211
 #: src/mkvtoolnix-gui/merge/output.cpp:217
@@ -15289,7 +15289,7 @@ msgstr "Det språk som ställs in här används också när kapitlen genereras."
 #: src/mkvtoolnix-gui/merge/output.cpp:216
 #, no-c-format
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
-msgstr "Om OGM-formatet används och filens teckenuppsättning inte identifieras korrekt kan detta alternativ användas för att korrigera detta."
+msgstr "Om OGM-formatet används och filens teckenuppsättning inte identifieras korrekt kan denna flagga användas för att korrigera detta."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:220
 #, no-c-format
@@ -15299,7 +15299,7 @@ msgstr "mkvmerge kan läsa cue sheets för ljud-CD-skivor och automatiskt konver
 #: src/mkvtoolnix-gui/merge/output.cpp:221
 #, no-c-format
 msgid "This option controls how the chapter names are created."
-msgstr "Detta alternativ styr hur kapitelnamnen skapas."
+msgstr "Denna flagga styr hur kapitelnamnen skapas."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:222
 #, no-c-format
@@ -15395,7 +15395,7 @@ msgstr "Alla senare paket med andra spår kommer att kasseras."
 #: src/mkvtoolnix-gui/merge/output.cpp:252
 #, no-c-format
 msgid "Any option given here will be added at the end of the mkvmerge command line."
-msgstr "Alla alternativ som anges här kommer att läggas till i slutet av kommandoraden för mkvmerge."
+msgstr "Alla flaggor som anges här kommer att läggas till i slutet av kommandoraden för mkvmerge."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:265
 #, no-c-format
@@ -15665,12 +15665,12 @@ msgstr "Konfigurationen har sparats."
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
 #, no-c-format
 msgid "Save option file"
-msgstr "Spara alternativfil"
+msgstr "Spara flaggfil"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
 #, no-c-format
 msgid "The option file has been created."
-msgstr "Alternativfilen har skapats."
+msgstr "Flaggfilen har skapats."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:229
 #: src/mkvtoolnix-gui/merge/tool.cpp:544
@@ -15827,7 +15827,7 @@ msgstr "Dessa behandlas inte som andra källfiler i MKVToolNix."
 #: src/mkvtoolnix-gui/merge/tool.cpp:1159
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
-msgstr "Istället måste en sådan fil ställas in via alternativet \"chapter file\" på fliken \"output\"."
+msgstr "Istället måste en sådan fil ställas in via flaggan \"chapter file\" på fliken \"output\"."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:1160
 #: src/mkvtoolnix-gui/merge/tool.cpp:1175
@@ -15849,7 +15849,7 @@ msgstr "Filen '%1' innehåller segmentinformation."
 #: src/mkvtoolnix-gui/merge/tool.cpp:1174
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
-msgstr "Istället måste en sådan fil ställas in via alternativet \"segmentinfo\" på fliken \"output\"."
+msgstr "Istället måste en sådan fil ställas in via flaggan \"segmentinfo\" på fliken \"output\"."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:1185
 #, no-c-format
@@ -15864,7 +15864,7 @@ msgstr "Filen '%1' innehåller taggar."
 #: src/mkvtoolnix-gui/merge/tool.cpp:1189
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
-msgstr "Istället måste en sådan fil ställas in via alternativet \"global tags\" på fliken \"output\"."
+msgstr "Istället måste en sådan fil ställas in via flaggan \"global tags\" på fliken \"output\"."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:1205
 #, no-c-format
@@ -16921,7 +16921,7 @@ msgstr "Element i kategorin '{0}' ('--edit {1}'):\n"
 #: src/propedit/propedit_cli_parser.cpp:240
 #, no-c-format
 msgid "mkvpropedit [options] <file> <actions>"
-msgstr "mkvpropedit [alternativ] <file> <actions>"
+msgstr "mkvpropedit [flaggor] <fil> <åtgärder>"
 
 #: src/propedit/propedit_cli_parser.cpp:243
 #, no-c-format
@@ -17021,22 +17021,22 @@ msgstr "Ta bort en eller flera bilagor"
 #: src/propedit/propedit_cli_parser.cpp:265
 #, no-c-format
 msgid "Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Ange det namn som ska användas för följande alternativ \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment"
+msgstr "Ange det namn som ska användas för följande flagga \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment\""
 
 #: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Ange den beskrivning som ska användas för följande alternativ \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment"
+msgstr "Ange den beskrivning som ska användas för följande flagga \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment\""
 
 #: src/propedit/propedit_cli_parser.cpp:267
 #, no-c-format
 msgid "Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Ange vilken MIME-typ som ska användas för följande alternativ \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment"
+msgstr "Ange vilken MIME-typ som ska användas för följande flagga \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment\""
 
 #: src/propedit/propedit_cli_parser.cpp:268
 #, no-c-format
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Ange det UID som ska användas för följande alternativ \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment"
+msgstr "Ange det UID som ska användas för följande flaggor \"--add-attachment\", \"--replace-attachment\" eller \"--update-attachment\""
 
 #: src/propedit/propedit_cli_parser.cpp:271
 #, no-c-format
@@ -17051,7 +17051,7 @@ msgstr "Normalisera alla IETF BCP 47-språktaggar för ändrade element till ant
 #: src/propedit/propedit_cli_parser.cpp:276
 #, no-c-format
 msgid "The order of the various options is not important."
-msgstr "Ordningen på de olika alternativen är inte viktig."
+msgstr "Ordningen på de olika flaggorna är inte viktig."
 
 #: src/propedit/propedit_cli_parser.cpp:278
 #, no-c-format
@@ -17061,7 +17061,7 @@ msgstr "Redigera väljare för egenskaper"
 #: src/propedit/propedit_cli_parser.cpp:280
 #, no-c-format
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
-msgstr "Strängarna 'info', 'segment_info' eller 'segmentinfo' väljer segmentinformationselementet. Detta är också standardinställningen tills det första alternativet '--edit' hittas."
+msgstr "Strängarna 'info', 'segment_info' eller 'segmentinfo' väljer segmentinformationselementet. Detta är också standardinställningen tills den första flaggan '--edit' hittas."
 
 #: src/propedit/propedit_cli_parser.cpp:283
 #, no-c-format
@@ -17131,7 +17131,7 @@ msgstr "3. Antingen 'name:<value>' eller 'mime-type:<value>', i vilket fall väl
 #: src/propedit/propedit_cli_parser.cpp:308
 #, no-c-format
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
-msgstr "Ett av alternativen '--attachment-name', '--attachment-description', '--attachment-mime-type' eller '--attachment-uid' har använts utan ett efterföljande alternativ '--add-attachment', '--replace-attachment' eller '--update-attachment'.\n"
+msgstr "En av flaggorna '--attachment-name', '--attachment-description', '--attachment-mime-type' eller '--attachment-uid' har använts utan efterföljande flaggan '--add-attachment', '--replace-attachment' eller '--update-attachment'.\n"
 
 #: src/propedit/tag_target.cpp:257
 #, no-c-format
