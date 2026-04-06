@@ -5,9 +5,7 @@
 #include <QDialog>
 #include <QFlags>
 
-namespace mtx::bcp47 {
-class language_c;
-}
+#include "common/bcp47.h"
 
 namespace mtx::gui::ChapterEditor {
 
@@ -31,6 +29,14 @@ public:
   };
   Q_DECLARE_FLAGS(Actions, Action)
 
+  struct Options {
+    Actions actions;
+    int64_t shiftBy;
+    double multiplyBy;
+    bool applyToAllTabs;
+    mtx::bcp47::language_c language;
+  };
+
 private:
   std::unique_ptr<Ui::MassModificationDialog> m_ui;
   bool m_editionOrChapterSelected;
@@ -39,10 +45,7 @@ public:
   explicit MassModificationDialog(QWidget *parent, bool editionOrChapterSelected, QStringList const &additionalLanguages);
   ~MassModificationDialog();
 
-  Actions actions() const;
-  int64_t shiftBy() const;
-  double multiplyBy() const;
-  mtx::bcp47::language_c language() const;
+  Options const options() const;
 
   void setupUi(QStringList const &additionalLanguages);
   void retranslateUi();
@@ -53,6 +56,12 @@ public Q_SLOTS:
 protected:
   bool isShiftByValid() const;
   bool isMultiplyByValid() const;
+
+  Actions actions() const;
+  int64_t shiftBy() const;
+  double multiplyBy() const;
+  bool applyToAllTabs() const;
+  mtx::bcp47::language_c language() const;
 };
 
 }

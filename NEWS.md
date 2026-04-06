@@ -1,15 +1,21 @@
-# Version ?
+# Version 98.0 "Chonks" 2026-04-05
 
 ## New features and enhancements
 
-* all: huge update to the Japanese translation which had been not worked on
-  for several years. It's now complete again & was reworked in most
-  places. Translation by coolvitto.
+* all: huge update to the Japanese translations which had been not worked on
+  for several years. The program translation is now complete again, the man
+  page translation has been extended as well. Both were reworked in most
+  places. Translations by coolvitto.
+* GUI: chapter editor: added an option in the "additional modifications"
+  dialog that toggles applying the selected modifications to all currently
+  open chapter editor tabs. Implements #6189.
 * GUI: macOS: added dock icon progress bar for job queue. Patch by Miklos
   Juhasz.
 
 ## Bug fixes
 
+* GUI: chapter editor: when renumbering chapters limiting the number of
+  chapters to renumber did not work. Fixes #6199.
 * GUI: macOS: fixed refreshing widgets after system switches between dark &
   light modes. Patch by Miklos Juhasz.
 
