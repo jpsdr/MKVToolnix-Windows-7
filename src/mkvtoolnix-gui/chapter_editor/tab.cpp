@@ -30,7 +30,6 @@
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
-#include "mkvtoolnix-gui/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tab_p.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
@@ -1693,19 +1692,37 @@ Tab::massModify() {
     return;
 
   auto selectedIdx = Util::selectedRowIdx(p->ui->elements);
-  auto item        = selectedIdx.isValid() ? p->chapterModel->itemFromIndex(selectedIdx) : p->chapterModel->invisibleRootItem();
 
   MassModificationDialog dlg{this, selectedIdx.isValid(), usedNameLanguages()};
   if (!dlg.exec())
     return;
 
-  auto actions = dlg.actions();
+  auto options = dlg.options();
+
+  if (!options.applyToAllTabs) {
+    massModifyImpl(options, selectedIdx);
+    return;
+  }
+
+  for (auto const &tab : MainWindow::chapterEditorTool()->tabs())
+    tab->massModifyImpl(options);
+}
+
+void
+Tab::massModifyImpl(MassModificationDialog::Options const &options,
+                    QModelIndex const selectedIdx) {
+  if (!copyControlsToStorage())
+    return;
+
+  auto p       = p_func();
+  auto item    = selectedIdx.isValid() ? p->chapterModel->itemFromIndex(selectedIdx) : p->chapterModel->invisibleRootItem();
+  auto actions = options.actions;
 
   if (actions & MassModificationDialog::Shift)
-    shiftTimestamps(item, dlg.shiftBy());
+    shiftTimestamps(item, options.shiftBy);
 
   if (actions & MassModificationDialog::Multiply)
-    multiplyTimestamps(item, dlg.multiplyBy());
+    multiplyTimestamps(item, options.multiplyBy);
 
   if (actions & MassModificationDialog::Constrict)
     constrictTimestamps(item, {}, {});
@@ -1714,7 +1731,7 @@ Tab::massModify() {
     expandTimestamps(item);
 
   if (actions & MassModificationDialog::SetLanguage)
-    setLanguages(item, dlg.language());
+    setLanguages(item, options.language);
 
   if (actions & MassModificationDialog::Sort)
     item->sortChildren(1);
@@ -1923,8 +1940,10 @@ Tab::renumberSubChapters() {
   while ((row < numRows) && (0 < toRenumber)) {
     auto renumbered = changeChapterName(selectedIdx, row, chapterNumber, nameTemplate, nameMatchingMode, languageToReplace, skipHidden);
 
-    if (renumbered)
+    if (renumbered) {
       ++chapterNumber;
+      --toRenumber;
+    }
     ++row;
   }
 }

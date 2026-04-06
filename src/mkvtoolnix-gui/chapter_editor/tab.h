@@ -9,6 +9,7 @@
 #include "common/qt.h"
 #include "common/timestamp.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
+#include "mkvtoolnix-gui/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/util/kax_analyzer.h"
 #include "mkvtoolnix-gui/types.h"
@@ -179,6 +180,8 @@ protected:
   void saveAsXmlImpl(bool requireNewFileName);
   void saveToMatroskaImpl(bool requireNewFileName);
   void updateFileNameDisplay();
+
+  void massModifyImpl(MassModificationDialog::Options const &options, QModelIndex const selectedIdx = QModelIndex{});
 
   void applyModificationToTimestamps(QStandardItem *item, std::function<int64_t(int64_t)> const &unaryOp);
   void multiplyTimestamps(QStandardItem *item, double factor);
