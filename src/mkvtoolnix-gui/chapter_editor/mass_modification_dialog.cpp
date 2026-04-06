@@ -114,6 +114,12 @@ MassModificationDialog::shiftBy()
   return timestamp;
 }
 
+bool
+MassModificationDialog::applyToAllTabs()
+  const {
+  return m_ui->cbApplyToAllTabs->isChecked();
+}
+
 mtx::bcp47::language_c
 MassModificationDialog::language()
   const {
@@ -137,6 +143,20 @@ MassModificationDialog::isShiftByValid()
 
   auto timestamp = int64_t{};
   return mtx::string::parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
+}
+
+MassModificationDialog::Options const
+MassModificationDialog::options()
+  const {
+  Options opts;
+
+  opts.actions        = actions();
+  opts.shiftBy        = shiftBy();
+  opts.multiplyBy     = multiplyBy();
+  opts.applyToAllTabs = applyToAllTabs();
+  opts.language       = language();
+
+  return opts;
 }
 
 void
