@@ -69,6 +69,13 @@ SideBySideMultiSelect::setItems(ItemList const &all,
   p->initiallyAvailableItems = all;
   p->initiallySelectedItems  = selected;
 
+  // Block model signals during batch population to prevent O(n²)
+  // macOS accessibility element creation per addItem() call.
+  auto availableModel      = p->ui->available->model();
+  auto selectedModel       = p->ui->selected->model();
+  auto availableWasBlocked = availableModel->blockSignals(true);
+  auto selectedWasBlocked  = selectedModel->blockSignals(true);
+
   p->ui->available->clear();
   p->ui->selected->clear();
 
@@ -84,6 +91,12 @@ SideBySideMultiSelect::setItems(ItemList const &all,
     lwItem->setData(Qt::UserRole, item.second);
     addTo->addItem(lwItem);
   }
+
+  availableModel->blockSignals(availableWasBlocked);
+  selectedModel->blockSignals(selectedWasBlocked);
+
+  p->ui->available->reset();
+  p->ui->selected->reset();
 
   p->ui->moveToAvailableButton->setEnabled(false);
   p->ui->moveToSelectedButton->setEnabled(false);
@@ -132,11 +145,20 @@ SideBySideMultiSelect::selectedItemValues()
 void
 SideBySideMultiSelect::moveSelectedListWidgetItems(QListWidget &from,
                                                    QListWidget &to) {
+  auto fromModelBlocked = from.model()->blockSignals(true);
+  auto toModelBlocked   = to.model()->blockSignals(true);
+
   for (auto const &item : from.selectedItems()) {
     auto actualItem = from.takeItem(from.row(item));
     if (actualItem)
       to.addItem(actualItem);
   }
+
+  from.model()->blockSignals(fromModelBlocked);
+  to.model()->blockSignals(toModelBlocked);
+
+  from.reset();
+  to.reset();
 
   Q_EMIT listsChanged();
 }
