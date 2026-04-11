@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QAbstractItemView>
 #include <QStringList>
 
 #include "mkvtoolnix-gui/util/combo_box_base.h"
@@ -95,6 +96,11 @@ ComboBoxBase::reInitialize() {
     additionalModified = true;
   }
 
+  // Also block the underlying model's signals so that clear() and
+  // setup() don't cause per-item accessibility updates on macOS.
+  auto itemModel       = model();
+  auto modelWasBlocked = itemModel->blockSignals(true);
+
   clear();
   setup(p->m_withEmpty, p->m_emptyTitle);
 
@@ -108,6 +114,9 @@ ComboBoxBase::reInitialize() {
 
   if (additionalModified)
     p->m_additionalItems.removeLast();
+
+  itemModel->blockSignals(modelWasBlocked);
+  view()->reset();
 
   blockSignals(previousBlocked);
 }

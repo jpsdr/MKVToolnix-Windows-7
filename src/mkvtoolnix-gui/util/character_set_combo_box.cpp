@@ -40,6 +40,11 @@ CharacterSetComboBox::setup(bool withEmpty,
 
   ComboBoxBase::setup(withEmpty, emptyTitle);
 
+  // Block the underlying model's signals during batch population to
+  // prevent O(n²) macOS accessibility element creation per addItem().
+  auto itemModel       = model();
+  auto modelWasBlocked = itemModel->blockSignals(true);
+
   if (withEmpty)
     addItem(emptyTitle, Q(""));
 
@@ -67,6 +72,10 @@ CharacterSetComboBox::setup(bool withEmpty,
     for (auto const &characterSet : App::characterSets())
       addItem(characterSet, characterSet);
 
+  itemModel->blockSignals(modelWasBlocked);
+
+  // Single view refresh after all items are added.
+  view()->reset();
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   Util::fixComboBoxViewWidth(*this);
 

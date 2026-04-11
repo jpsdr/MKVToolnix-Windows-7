@@ -39,6 +39,15 @@ LanguageComboBox::setup(bool withEmpty,
 
   ComboBoxBase::setup(withEmpty, emptyTitle);
 
+  // Block the underlying model's signals during batch population.
+  // Without this, each addItem() triggers
+  // QAbstractItemModel::endInsertRows() which on macOS causes the
+  // accessibility layer to rebuild the entire element array — O(n²)
+  // allocations for n items, leading to multi-GB memory spikes with
+  // the ~8800 ISO 639 language entries.
+  auto itemModel       = model();
+  auto modelWasBlocked = itemModel->blockSignals(true);
+
   auto separatorOffset = 0;
 
   if (withEmpty) {
@@ -76,6 +85,10 @@ LanguageComboBox::setup(bool withEmpty,
       addItem(language.first, language.second);
   }
 
+  itemModel->blockSignals(modelWasBlocked);
+
+  // Single view refresh after all items are added.
+  view()->reset();
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   Util::fixComboBoxViewWidth(*this);
 
