@@ -310,8 +310,8 @@ Tab::setupUi() {
   connect(ui->elements,                              &Util::BasicTreeView::filesDropped,                  this, &Tab::handleDroppedFiles);
   connect(ui->elements,                              &Util::BasicTreeView::deletePressed,                 this, &Tab::removeSelectedAttachment);
   connect(ui->elements,                              &Util::BasicTreeView::insertPressed,                 this, &Tab::selectAttachmentsAndAdd);
-  connect(ui->elements,                              &Util::BasicTreeView::ctrlDownPressed,               this, [this]() { moveElementUpOrDown(false); });
-  connect(ui->elements,                              &Util::BasicTreeView::ctrlUpPressed,                 this, [this]() { moveElementUpOrDown(true); });
+  connect(ui->elements,                              &Util::BasicTreeView::ctrlDownPressed,               this, &Tab::moveElementDown);
+  connect(ui->elements,                              &Util::BasicTreeView::ctrlUpPressed,                 this, &Tab::moveElementUp);
   connect(ui->elements,                              &Util::BasicTreeView::doubleClicked,                 this, &Tab::treeItemDoubleClicked);
   connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,                this, &Tab::selectionChanged);
   connect(m_expandAllAction,                         &QAction::triggered,                                 this, &Tab::expandAll);
@@ -329,11 +329,41 @@ Tab::setupUi() {
   connect(mts.m_toggleVisualImpairedFlag,            &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
   connect(mts.m_toggleTextDescriptionsFlag,          &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
   connect(&mts,                                      &Util::ModifyTracksSubmenu::languageChangeRequested, this, &Tab::changeTrackLanguage);
-  connect(m_replaceAttachmentContentAction,          &QAction::triggered,                                 [this]() { replaceAttachmentContent(false); });
-  connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                                 [this]() { replaceAttachmentContent(true); });
-  connect(m_model,                                   &PageModel::attachmentsReordered,                    [this]() { m_attachmentsPage->rereadChildren(*m_model); });
+  connect(m_replaceAttachmentContentAction,          &QAction::triggered,                                 this, &Tab::replaceAttachmentContentKeepValues);
+  connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                                 this, &Tab::replaceAttachmentContentSetValues);
+  connect(m_model,                                   &PageModel::attachmentsReordered,                    this, &Tab::handleReorderedAttachments);
   connect(m_model,                                   &PageModel::tracksReordered,                         this, &Tab::handleReorderedTracks);
-  connect(MainWindow::get(),                         &MainWindow::preferencesChanged,                     [this]() { m_modifyTracksSubmenu.setupLanguage(*m_languageShortcutsMenu); });
+  connect(MainWindow::get(),                         &MainWindow::preferencesChanged,                     this, &Tab::applyPreferences);
+}
+
+void
+Tab::moveElementUp() {
+  moveElementUpOrDown(true);
+}
+
+void
+Tab::moveElementDown() {
+  moveElementUpOrDown(false);
+}
+
+void
+Tab::replaceAttachmentContentKeepValues() {
+  replaceAttachmentContent(false);
+}
+
+void
+Tab::replaceAttachmentContentSetValues() {
+  replaceAttachmentContent(true);
+}
+
+void
+Tab::handleReorderedAttachments() {
+  m_attachmentsPage->rereadChildren(*m_model);
+}
+
+void
+Tab::applyPreferences() {
+  m_modifyTracksSubmenu.setupLanguage(*m_languageShortcutsMenu);
 }
 
 void

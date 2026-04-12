@@ -61,7 +61,12 @@ Tool::setupActions() {
   connect(ui->widgets,                   &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
   connect(m_jobOutputMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
   connect(mw,                            &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
-  connect(mw,                            &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->widgets); });
+  connect(mw,                            &MainWindow::preferencesChanged, this, &Tool::applyPreferences);
+}
+
+void
+Tool::applyPreferences() {
+  Util::setupTabWidgetHeaders(*ui->widgets);
 }
 
 void
