@@ -111,6 +111,13 @@ protected:
   std::unordered_map<uint64_t, uint64_t> determineTrackUIDChanges();
   void updateSelectedTopLevelPageModelItems();
 
+  void moveElementUp();
+  void moveElementDown();
+  void replaceAttachmentContentKeepValues();
+  void replaceAttachmentContentSetValues();
+  void handleReorderedAttachments();
+  void applyPreferences();
+
   ValuePage *createValuePage(TopLevelPage &parentPage, libebml::EbmlMaster &parentMaster, property_element_c const &element);
   PageBase *currentlySelectedPage() const;
 

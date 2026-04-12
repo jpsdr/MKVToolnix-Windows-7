@@ -54,6 +54,10 @@ public Q_SLOTS:
   virtual void openFiles(QStringList const &fileNames);
   virtual void openFilesFromCommandLine(QStringList const &fileNames);
 
+  virtual void selectAndOpenFile();
+  virtual void selectAndAppendFile();
+  virtual void applyPreferences();
+
   virtual void removeChaptersFromExistingMatroskaFile();
 
 protected:

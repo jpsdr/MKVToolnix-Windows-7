@@ -52,6 +52,7 @@ public Q_SLOTS:
   virtual void saveAllTabs();
   virtual void enableMenuActions();
   virtual void retranslateUi();
+  virtual void applyPreferences();
   virtual void switchToCurrentJobTab();
 
 protected:

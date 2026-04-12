@@ -59,8 +59,8 @@ Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
   connect(mwUi->actionChapterEditorNew,                &QAction::triggered,             this, &Tool::newFile);
-  connect(mwUi->actionChapterEditorOpen,               &QAction::triggered,             this, [this]() { selectFileToOpen(false); });
-  connect(mwUi->actionChapterEditorAppend,             &QAction::triggered,             this, [this]() { selectFileToOpen(true); });
+  connect(mwUi->actionChapterEditorOpen,               &QAction::triggered,             this, &Tool::selectAndOpenFile);
+  connect(mwUi->actionChapterEditorAppend,             &QAction::triggered,             this, &Tool::selectAndAppendFile);
   connect(mwUi->actionChapterEditorSave,               &QAction::triggered,             this, &Tool::save);
   connect(mwUi->actionChapterEditorSaveAsXml,          &QAction::triggered,             this, &Tool::saveAsXml);
   connect(mwUi->actionChapterEditorSaveToMatroska,     &QAction::triggered,             this, &Tool::saveToMatroska);
@@ -71,13 +71,28 @@ Tool::setupActions() {
   connect(mwUi->actionChapterEditorRemoveFromMatroska, &QAction::triggered,             this, &Tool::removeChaptersFromExistingMatroskaFile);
 
   connect(ui->newFileButton,                           &QPushButton::clicked,           this, &Tool::newFile);
-  connect(ui->openFileButton,                          &QPushButton::clicked,           this, [this]() { selectFileToOpen(false); });
+  connect(ui->openFileButton,                          &QPushButton::clicked,           this, &Tool::selectAndOpenFile);
 
   connect(m_chapterEditorMenu,                         &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
-  connect(mw,                                          &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->editors); });
+  connect(mw,                                          &MainWindow::preferencesChanged, this, &Tool::applyPreferences);
   connect(mw,                                          &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),                             &App::editingChaptersRequested,  this, &Tool::openFilesFromCommandLine);
+}
+
+void
+Tool::selectAndOpenFile() {
+  selectFileToOpen(false);
+}
+
+void
+Tool::selectAndAppendFile() {
+  selectFileToOpen(true);
+}
+
+void
+Tool::applyPreferences() {
+  Util::setupTabWidgetHeaders(*ui->editors);
 }
 
 void

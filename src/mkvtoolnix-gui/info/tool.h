@@ -51,6 +51,8 @@ public Q_SLOTS:
   virtual void enableMenuActions();
   virtual void tabTitleChanged();
 
+  virtual void applyPreferences();
+
   virtual void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
   virtual void openMultipleFilesFromCommandLine(QStringList const &fileNames);
 
