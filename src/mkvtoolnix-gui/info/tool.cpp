@@ -62,10 +62,15 @@ Tool::setupActions() {
   connect(ui->infos,                &QTabWidget::tabCloseRequested,  this, &Tool::closeTab);
   connect(ui->openFileButton,       &QPushButton::clicked,           this, &Tool::selectAndOpenFile);
 
-  connect(mw,                       &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->infos); });
+  connect(mw,                       &MainWindow::preferencesChanged, this, &Tool::applyPreferences);
   connect(mw,                       &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),          &App::runningInfoOnRequested,    this, &Tool::openMultipleFilesFromCommandLine);
+}
+
+void
+Tool::applyPreferences() {
+  Util::setupTabWidgetHeaders(*ui->infos);
 }
 
 void
