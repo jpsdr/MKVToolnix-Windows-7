@@ -286,6 +286,7 @@ function build_boost {
 function build_cmark {
   build_package cmark \
     -DCMAKE_INSTALL_PREFIX=${TARGET} \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMARK_TESTS=OFF \
     -DCMARK_STATIC=ON \
     -DCMARK_SHARED=OFF
@@ -323,8 +324,8 @@ function build_qt {
     -opensource
     -confirm-license
     -release
-    -force-pkg-config
-    -pkg-config
+    -force-bundled-libs
+    -no-feature-zstd
 
     -nomake benchmarks
     -nomake examples
@@ -370,7 +371,7 @@ function build_qt {
        --parallel $DRAKETHREADS
 
   # cd ${CMPL}/${package}
-  build_tarball command "make DESTDIR=TMPDIR install"
+  build_tarball command "cmake --install . --prefix TMPDIR${TARGET}"
 
   CXXFLAGS=$saved_CXXFLAGS
 }
@@ -510,6 +511,9 @@ EOF
   cd -
 
   ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}
+
+  # Strip debug symbols from all dylibs and plugins
+  strip -x ${dmgmac}/**/*.dylib(.)
 
   if [[ -n ${SIGNATURE_IDENTITY} ]]; then
     typeset -a non_executables
