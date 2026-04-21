@@ -1,5 +1,13 @@
 # Version ?
 
+## Bug fixes
+
+* macOS: GUI: the default audio file for program runners of type "play audio
+  file" has been changed to an AIFF file as Qt's Multimedia backend routes
+  through Core Audio which doesn't support WebM/VP8/Vorbis/Opus. Existing
+  configurations will be updated if they point to the prior default WebM audio
+  file. Fixes #6209.
+
 ## Build system changes
 
 * macOS: `build.sh`: the Qt installation is now done via `cmake --install`

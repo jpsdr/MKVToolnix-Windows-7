@@ -521,8 +521,11 @@ EOF
       if [[ ${FILE} != */MacOS/mkv* ]] non_executables+=(${FILE})
     }
 
+    harden=""
+    if [[ -n ${NOTARY_PROFILE} ]] harden="--options=runtime"
+
     codesign --force --sign ${SIGNATURE_IDENTITY} ${non_executables}
-    codesign --force --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
+    codesign --force ${harden} --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
   fi
 
   if [[ -n $DMG_NO_DMG ]] return
@@ -556,6 +559,10 @@ EOF
     ${CMPL}/MKVToolNix-${MTX_VER}
 
   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
+
+  if [[ -n ${NOTARY_PROFILE} ]]; then
+    xcrun notarytool submit ${dmgname} --keychain-profile ${NOTARY_PROFILE} --wait
+  fi
 
   if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
 
