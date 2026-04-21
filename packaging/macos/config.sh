@@ -17,3 +17,4 @@ export MAKEFLAGS="-j ${DRAKETHREADS}"
 export QTVER=${QTVER:-6.11.0}
 export SIGNATURE_IDENTITY="Developer ID Application: Moritz Bunkus (YZ9DVS8D8C)"
 export DYLD_LIBRARY_PATH=${TARGET}/lib:${DYLD_LIBRARY_PATH}
+export NOTARY_PROFILE=""
