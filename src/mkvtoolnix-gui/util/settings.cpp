@@ -929,14 +929,24 @@ Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
 
 bool
 Settings::fixDefaultAudioFileNameBug() {
-#if defined(SYS_WINDOWS)
+#if defined(SYS_WINDOWS) || defined(SYS_APPLE)
+  auto changed = false;
+
+# if defined(SYS_WINDOWS)
   // In version v11.0.0 the default audio file name is wrong:
   // <MTX_INSTALLATION_DIRECTORY>\sounds\… instead of
   // <MTX_INSTALLATION_DIRECTORY>\data\sounds\… where the default
   // sound files are actually installed. As each configuration is only
   // added once, update an existing configuration to the actual path.
   QRegularExpression wrongFileNameRE{"<MTX_INSTALLATION_DIRECTORY>[/\\\\]sounds[/\\\\]finished-1\\.ogg"};
-  auto changed = false;
+
+# else // → SYS_APPLE
+  // Qt Multimedia's macOS backend cannot decode WebM as the Darwin
+  // backend (`libdarwinmediaplugin.dylib`) routes through
+  // AVFoundation → Core Audio, which has no WebM/VP8/Vorbis/Opus
+  // codec.
+  QRegularExpression wrongFileNameRE{"<MTX_INSTALLATION_DIRECTORY>/sounds/finished-1\\.webm"};
+# endif
 
   for (auto const &config : m_runProgramConfigurations) {
     if (   (config->m_type != RunProgramType::PlayAudioFile)
