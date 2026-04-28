@@ -1,0 +1,22 @@
+--- qt-everywhere-src-6.11.0/qtbase/src/corelib/thread/qyieldcpu.h	2026-03-05 07:51:49
++++ qt-everywhere-src-6.11.0.fixed/qtbase/src/corelib/thread/qyieldcpu.h	2026-04-22 18:12:34
+@@ -33,7 +33,9 @@
+     noexcept
+ #endif
+ {
+-#if __has_builtin(__yield)
++#if __has_builtin(__builtin_arm_yield)
++    __builtin_arm_yield();
++#elif __has_builtin(__yield)
+     __yield();              // Generic
+ #elif defined(_YIELD_PROCESSOR) && defined(Q_CC_MSVC)
+     _YIELD_PROCESSOR();     // Generic; MSVC's <atomic>
+@@ -48,8 +50,6 @@
+ #elif defined(Q_PROCESSOR_X86)
+     __asm__("pause");           // hopefully asm() works in this compiler
+ 
+-#elif __has_builtin(__builtin_arm_yield)
+-    __builtin_arm_yield();
+ #elif defined(Q_PROCESSOR_ARM) && Q_PROCESSOR_ARM >= 7 && defined(Q_CC_GNU)
+     __asm__("yield");           // this works everywhere
+ 
