@@ -662,6 +662,7 @@ Settings::load() {
   loadDefaultInfoJobSettings(reg);
   loadFileColors(reg);
   loadRunProgramConfigurations(reg);
+  loadLastProgramRunnerAudioDir(reg);
   loadLanguageShortcuts(reg);
   addDefaultRunProgramConfigurations(reg);
   setDefaults(enableMuxingTracksByTheseTypes);
@@ -839,6 +840,15 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
 }
 
 void
+Settings::loadLastProgramRunnerAudioDir(QSettings &reg) {
+  reg.beginGroup(s_grpSettings);
+  m_lastProgramRunnerAudioDir = QDir{reg.value(s_valLastProgramRunnerAudioDir).toString()};
+  if (m_lastProgramRunnerAudioDir.path().isEmpty() || (m_lastProgramRunnerAudioDir.path() == Q(".")))
+    m_lastProgramRunnerAudioDir = QFileInfo{replaceMtxVariableWithApplicationDirectory(App::programRunner().defaultAudioFileName())}.dir();
+  reg.endGroup();               // settings
+}
+
+void
 Settings::loadLanguageShortcuts(QSettings &reg) {
   m_languageShortcuts.clear();
 
@@ -1003,6 +1013,7 @@ Settings::save()
   reg.setValue(s_valLastOpenDir,                               m_lastOpenDir.path());
   reg.setValue(s_valLastOutputDir,                             m_lastOutputDir.path());
   reg.setValue(s_valLastConfigDir,                             m_lastConfigDir.path());
+  reg.setValue(s_valLastProgramRunnerAudioDir,                 m_lastProgramRunnerAudioDir.path());
   reg.setValue(s_valNumRecentlyUsedStringsToRemember,          m_numRecentlyUsedStringsToRemember);
 
   reg.setValue(s_valOftenUsedLanguages,                        m_oftenUsedLanguages);

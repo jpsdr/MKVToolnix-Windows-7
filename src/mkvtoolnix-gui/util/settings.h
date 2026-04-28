@@ -203,7 +203,7 @@ public:
   double m_probeRangePercentage;
   QTabWidget::TabPosition m_tabPosition;
   bool m_elideTabHeaderLabels;
-  QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
+  QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir, m_lastProgramRunnerAudioDir;
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_autoClearFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers, m_mergeAttachmentsAlwaysSkipForExistingName, m_mergeEnsureAtLeastOneTrackEnabled, m_mergeShowDNDZones;
   ClearMergeSettingsAction m_clearMergeSettings;
@@ -294,6 +294,7 @@ protected:
   void loadSplitterSizes(QSettings &reg);
   void loadDefaultInfoJobSettings(QSettings &reg);
   void loadRunProgramConfigurations(QSettings &reg);
+  void loadLastProgramRunnerAudioDir(QSettings &reg);
   void loadLanguageShortcuts(QSettings &reg);
   void loadFileColors(QSettings &reg);
 
