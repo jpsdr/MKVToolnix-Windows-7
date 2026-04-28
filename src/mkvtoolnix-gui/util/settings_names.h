@@ -75,6 +75,7 @@ char const * const s_valLanguageShortcuts                                       
 char const * const s_valLastConfigDir                                           = "lastConfigDir";
 char const * const s_valLastOpenDir                                             = "lastOpenDir";
 char const * const s_valLastOutputDir                                           = "lastOutputDir";
+char const * const s_valLastProgramRunnerAudioDir                               = "lastProgramRunnerAudioDir";
 char const * const s_valLastUpdateCheck                                         = "lastUpdateCheck";
 char const * const s_valMaximumConcurrentJobs                                   = "maximumConcurrentJobs";
 char const * const s_valMediaInfoExe                                            = "mediaInfoExe";

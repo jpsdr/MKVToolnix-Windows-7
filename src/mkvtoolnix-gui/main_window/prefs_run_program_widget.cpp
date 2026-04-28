@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -399,11 +400,17 @@ PrefsRunProgramWidget::changeAudioFile() {
   auto filters       = QStringList{} << QY("All files") + Q(" (*)");
 
   auto realAudioFile = Util::replaceMtxVariableWithApplicationDirectory(p->ui->leAudioFile->text());
-  auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), realAudioFile, filters.join(Q(";;")));
-  newAudioFile       = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newAudioFile));
+  auto startDir      = realAudioFile.isEmpty() ? Util::Settings::get().m_lastProgramRunnerAudioDir.path() : realAudioFile;
+  auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), startDir, filters.join(Q(";;")));
 
   if (newAudioFile.isEmpty())
     return;
+
+  Util::Settings::change([&newAudioFile](Util::Settings &settings) {
+    settings.m_lastProgramRunnerAudioDir.setPath(QFileInfo{newAudioFile}.path());
+  });
+
+  newAudioFile = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newAudioFile));
 
   p->ui->leAudioFile->setText(newAudioFile);
 
