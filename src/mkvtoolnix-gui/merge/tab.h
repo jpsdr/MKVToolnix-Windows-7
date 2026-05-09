@@ -67,6 +67,8 @@ public:
   virtual void toggleSpecificTrackFlag(unsigned int wantedId);
   virtual void changeTrackLanguage(QString const &formattedLanguage, QString const &trackName);
 
+  virtual void runProgramSetupVariables(QMap<QString, QStringList> &variables);
+
 Q_SIGNALS:
   void removeThisTab();
   void titleChanged();

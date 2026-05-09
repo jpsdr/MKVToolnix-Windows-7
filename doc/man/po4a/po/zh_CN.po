@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2026-04-05 14:39+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2024\n"
+"Last-Translator: RERBIN MA, 2026\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "98.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2026-04-05"
-msgstr ""
+msgstr "2026-04-05"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -338,10 +338,8 @@ msgstr "将所有信息输出至文件 <parameter>文件名</parameter> 而不�
 #: doc/man/mkvinfo.xml:190
 #: doc/man/mkvmerge.xml:2303
 #: doc/man/mkvpropedit.xml:489
-#, fuzzy
-#| msgid "<option>--info</option>"
 msgid "<option>--no-bom</option>"
-msgstr "<option>--info</option>"
+msgstr "<option>--no-bom</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:139
@@ -349,7 +347,7 @@ msgstr "<option>--info</option>"
 #: doc/man/mkvmerge.xml:2306
 #: doc/man/mkvpropedit.xml:492
 msgid "Normally text files that are created &amp; encoded in one of the UTF variants will start with a byte order marker (BOM).  Using this option disables writing that byte order marker."
-msgstr ""
+msgstr "一般来说，使用 UTF 编码创建的文本文件开头都会包含一个字节顺序标记 (BOM)。勾选此选项后，程序在写入文件时将不再添加该标记。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:146
@@ -671,7 +669,7 @@ msgstr "<option>-T</option>, <option>--no-track-tags</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:409
 msgid "Exports only tags that aren't track-specific."
-msgstr ""
+msgstr "仅导出全局标签，不包含特定轨道的标签。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:416
@@ -1858,10 +1856,8 @@ msgstr "<literal>%&lt;1-9&gt;n</literal> – 纳秒，精度最高为九位 (如
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:354
-#, fuzzy
-#| msgid "The strings <literal>'&lt;FILE_NAME&gt;'</literal> and <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> are only filled when generating chapters for appended files.  They will be replaced by the appended file's name without respectively with its extension.  Note that only the file's base name and extension are inserted, not its directory or drive components."
 msgid "The string '<literal>&lt;TITLE&gt;</literal>' is only filled when generating chapters for appended files.  It'll be replaced by the appended file's title if one is present."
-msgstr "字符串 ｢<literal>&lt;FILE_NAME&gt;</literal>｣ 与 ｢<literal>'&lt;FILE_NAME_WITH_EXT&gt;</literal>｣ 只会在为追加文件生成章节时进行填充。 它们会被替换为追加文件的文件名，前者不含扩展名，后者包含扩展名。 注意，只会插入文件本身的名称（及扩展名），不会插入其目录名或盘符。"
+msgstr "只有在为追加的文件生成章节时，才会填充字符串'<literal>&lt;TITLE&gt;</literal>' 。如果追加的文件本身带有标题，该占位符将被替换为该文件的实际标题。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:361
@@ -2035,15 +2031,13 @@ msgstr "默认情况下，&mkvmerge; 会将剪辑信息中的「date」字段设
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:534
-#, fuzzy
-#| msgid "<option>--debug</option> <parameter>topic</parameter>"
 msgid "<option>--date</option> <replaceable>timestamp</replaceable>"
-msgstr "<option>--debug</option> <parameter>主题</parameter>"
+msgstr "<option>--date</option> <replaceable>时间戳</replaceable>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:537
 msgid "Sets the <literal>DateUTC</literal> field written to the segment information. The timestamp must be ISO 8601-like: <literal>YYYY-mm-ddTHH:MM:SSZ</literal> for UTC or with an offset <literal>&#x00B1;HH:MM</literal> (a space instead of <literal>T</literal> is also accepted), e.g. <literal>2017-03-28T17:28:00Z</literal> or <literal>2017-03-28 17:28:00+02:00</literal>.  If used together with <option>--no-date</option>, <option>--no-date</option> takes precedence and no date will be written."
-msgstr ""
+msgstr "设置写入剪辑信息中的<literal>DateUTC</literal>字段。时间戳格式必须类似于 ISO 8601：UTC 时间为<literal>YYYY-mm-ddTHH:MM:SSZ</literal>，或带有偏移量<literal>±HH:MM</literal>（也接受用空格代替 <literal>T</literal>），例如<literal>2017-03-28T17:28:00Z</literal> 或<literal>2017-03-28 17:28:00+02:00</literal>。如果与<option>--no-date</option>选项同时使用，则以<option>--no-date</option> 为准，文件将不写入日期。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:546
@@ -2667,10 +2661,8 @@ msgstr "<option>--attach-file</option> <parameter>文件名</parameter>, <option
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1181
-#, fuzzy
-#| msgid "Creates a file attachment inside the &matroska; file. The <abbrev>MIME</abbrev> type must have been set before this option can used. The difference between the two forms is that during splitting the files attached with <option>--attach-file</option> are attached to all output files while the ones attached with <option>--attach-file-once</option> are only attached to the first file created.  If splitting is not used then both do the same."
 msgid "Creates a file attachment inside the &matroska; file. The difference between the two forms is that during splitting the files attached with <option>--attach-file</option> are attached to all output files while the ones attached with <option>--attach-file-once</option> are only attached to the first file created. If splitting is not used then both do the same."
-msgstr "在 &matroska; 文件中创建文件附件。<abbrev>MIME</abbrev> 类型必须在使用此选项之前设定。两种形式的不同之处在于使用 <option>--attach-file</option> 附加的文件在切割过程中将被附加到所有输出文件中，而使用 <option>--attach-file-once</option> 附加的文件只被附加到创建的首个文件中。如果未使用切割功能，两种形式效果相同。"
+msgstr "在 &matroska; 文件中创建文件附件。两种形式的不同之处在于使用 <option>--attach-file</option> 附加的文件在切割过程中将被附加到所有输出文件中，而使用 <option>--attach-file-once</option> 附加的文件只被附加到创建的首个文件中。如果未使用切割功能，两种形式效果相同。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1187
@@ -3546,10 +3538,8 @@ msgstr "<literal>json</literal> 格式输出机器可读的 JSON 表达式。此
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2186
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v18.json\"><literal>mkvmerge-identification-output-schema-v18.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v20.json\"><literal>mkvmerge-identification-output-schema-v20.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v18.json\"><literal>mkvmerge-identification-output-schema-v18.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v20.json\"><literal>mkvmerge-identification-output-schema-v20.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2190
@@ -3689,13 +3679,13 @@ msgstr "从文件 <parameter>选项文件</parameter> 读取其他命令行参�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2418
 msgid "If you want to use the <literal>@</literal> sign as the first character in the argument to an option such as '<literal>--title</literal>', you have to escape it with a second <literal>@</literal> sign. Example:"
-msgstr ""
+msgstr "若要在 “<literal>--title</literal>” 等选项的参数首位使用 <literal>@</literal> 符号，需在其前面额外添加一个<literal> @</literal>符号进行转义。示例："
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvmerge.xml:2422
 #, no-wrap
 msgid "$ mkvmerge -o midnight-s01e01.mkv --title @@midnight midnight-s01e01.mp4"
-msgstr ""
+msgstr "$ mkvmerge -o midnight-s01e01.mkv --title @@midnight midnight-s01e01.mp4"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2427

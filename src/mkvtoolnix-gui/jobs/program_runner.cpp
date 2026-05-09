@@ -204,7 +204,16 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 
   commandLine.removeFirst();
 
-  if (QProcess::startDetached(exe, commandLine))
+  auto environment = QProcessEnvironment::systemEnvironment();
+  for (auto itr = variables.cbegin(); itr != variables.cend(); ++itr)
+    environment.insert(Q("MTX_%1").arg(itr.key()), itr.value().join(Q(",")));
+
+  QProcess process;
+  process.setProgram(exe);
+  process.setArguments(commandLine);
+  process.setProcessEnvironment(environment);
+
+  if (process.startDetached())
     return;
 
   Util::MessageBox::critical(MainWindow::get())

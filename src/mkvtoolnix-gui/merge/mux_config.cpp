@@ -16,6 +16,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QRegularExpression>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -898,6 +899,33 @@ MuxConfig::isSplittingEnabled()
   const {
   return (MuxConfig::DoNotSplit != m_splitMode)
       || m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")});
+}
+
+void
+MuxConfig::runProgramSetupVariables(QMap<QString, QStringList> &variables)
+  const {
+  auto destinationFI = QFileInfo{ m_destination };
+  auto path          = QDir::toNativeSeparators(destinationFI.absolutePath());
+
+  // OUTPUT_… are kept for backwards compatibility.
+  variables[Q("JOB_TYPE")]                   << Q("multiplexer");
+  variables[Q("OUTPUT_FILE_NAME")]           << QDir::toNativeSeparators(m_destination);
+  variables[Q("OUTPUT_FILE_DIRECTORY")]      << QDir::toNativeSeparators(path);
+  variables[Q("DESTINATION_FILE_BASE_NAME")] << QDir::toNativeSeparators(destinationFI.completeBaseName());
+  variables[Q("DESTINATION_FILE_DIRECTORY")] << QDir::toNativeSeparators(path);
+  variables[Q("DESTINATION_FILE_NAME")]      << QDir::toNativeSeparators(m_destination);
+  variables[Q("DESTINATION_FILE_SUFFIX")]    << QDir::toNativeSeparators(destinationFI.suffix());
+  variables[Q("CHAPTERS_FILE_NAME")]         << QDir::toNativeSeparators(m_chapters);
+
+  for (auto const &sourceFile : m_files) {
+    variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(sourceFile->m_fileName);
+
+    for (auto const &appendedSourceFile : sourceFile->m_appendedFiles)
+      variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(appendedSourceFile->m_fileName);
+
+    for (auto const &additionalPart : sourceFile->m_additionalParts)
+      variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(additionalPart->m_fileName);
+  }
 }
 
 }

@@ -1404,4 +1404,11 @@ Tool::eventFilter(QObject *watched,
   return ToolBase::eventFilter(watched, event);
 }
 
+void
+Tool::runProgramSetupVariablesForCurrentTab(QMap<QString, QStringList> &variables) {
+  auto tab = currentTab();
+  if (tab)
+    tab->runProgramSetupVariables(variables);
+}
+
 }
