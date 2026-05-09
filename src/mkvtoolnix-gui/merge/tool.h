@@ -103,6 +103,8 @@ public Q_SLOTS:
 
   virtual void enableMenuActions();
 
+  virtual void runProgramSetupVariablesForCurrentTab(QMap<QString, QStringList> &variables);
+
 protected:
   virtual void setupModifySelectedTracksMenu();
   virtual void setupFileIdentificationThread();

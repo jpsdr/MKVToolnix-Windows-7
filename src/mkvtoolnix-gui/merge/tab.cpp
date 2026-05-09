@@ -670,4 +670,9 @@ Tab::fileModelIndexForFileNum(unsigned int num) {
   return p_func()->filesModel->index(num, 0);
 }
 
+void
+Tab::runProgramSetupVariables(QMap<QString, QStringList> &variables) {
+  p_func()->config.runProgramSetupVariables(variables);
+}
+
 }
