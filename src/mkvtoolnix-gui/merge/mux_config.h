@@ -100,6 +100,8 @@ public:
   QString toString() const;
   Util::CommandLineOptions buildMkvmergeOptions() const;
 
+  virtual void runProgramSetupVariables(QMap<QString, QStringList> &variables) const;
+
   virtual bool hasSourceFileWithTitle() const;
   virtual bool needChapterNameTemplateAndLanguage() const;
   virtual bool isSplittingEnabled() const;

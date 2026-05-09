@@ -6,6 +6,23 @@
   selecting audio files for playback in "play audio file" program runners
   separately from any other "open file"-type situations. This directory will
   also default to `/System/Library/Sounds` on macOS now. Implemented by #6213.
+* MKVToolNix GUI: executing actions → running programs: added new variables:
+  `MTX_DESTINATION_FILE_BASE_NAME` (the name without the drive letter, path or
+  the suffix; e.b. `/movies/A.new.hope.mkv` → `A.new.hope`) and
+  `MTX_DESTINATION_FILE_SUFFIX` (only the letters after the last `.`,
+  e.g. `/movies/A.new.hope.mkv` → `mkv`). Added examples to all the
+  destination file variables in the popup menu when adding variables in the
+  preferences. Implements parts of #6220.
+* MKVToolNix GUI: executing actions → running programs: the command-line input
+  widget will now receive focus again after using the popup menu for adding a
+  variable. Implements parts of #6220.
+* MKVToolNix GUI: executing actions → running programs: the variables will now
+  also be set as environment variables when running a program after a job
+  completes.
+* MKVToolNix GUI: executing actions → running programs: when using the
+  "Execute now" button for testing the `MTX_…` variables will be set to the
+  current multiplexer tab's values for easier testing. Implements parts of
+  #6220.
 
 ## Bug fixes
 

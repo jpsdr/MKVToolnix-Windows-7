@@ -2,6 +2,7 @@
 
 #include <QAction>
 #include <QCursor>
+#include <QDateTime>
 #include <QDir>
 #include <QMenu>
 
@@ -9,7 +10,9 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -240,6 +243,17 @@ void
 PrefsRunProgramWidget::setupMenu() {
   auto p = p_func();
 
+#if defined(SYS_WINDOWS)
+  auto name        = Q("C:\\data\\movies\\A.new.hope.mkv");
+#else
+  auto name        = Q("/data/movies/A.new.hope.mkv");
+#endif
+  auto nameFI      = QFileInfo{name};
+  auto exName      = Q(" (%1)").arg(name);
+  auto exSuffix    = Q(" (%1 → %2)").arg(name).arg(nameFI.suffix());
+  auto exBaseName  = Q(" (%1 → %2)").arg(name).arg(nameFI.completeBaseName());
+  auto exDirectory = Q(" (%1 → %2)").arg(name).arg(QDir::toNativeSeparators(nameFI.absolutePath()));
+
   QList<std::pair<QString, QString> > entries{
     { QY("Variables for all job types"),                                 Q("")                           },
     { QY("Job type ('multiplexer' or 'info')"),                          Q("JOB_TYPE")                   },
@@ -249,8 +263,10 @@ PrefsRunProgramWidget::setupMenu() {
     { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")              },
 
     { QY("Variables for multiplex jobs"),                                Q("")                           },
-    { QY("Destination file's absolute path"),                            Q("DESTINATION_FILE_NAME")      },
-    { QY("Destination folders's absolute path"),                         Q("DESTINATION_FILE_DIRECTORY") },
+    { QY("Destination file's absolute path") + exName,                   Q("DESTINATION_FILE_NAME")      },
+    { QY("Destination folders's absolute path") + exDirectory,           Q("DESTINATION_FILE_DIRECTORY") },
+    { QY("Destination file's base name") + exBaseName,                   Q("DESTINATION_FILE_BASE_NAME") },
+    { QY("Destination file's suffix") + exSuffix,                        Q("DESTINATION_FILE_SUFFIX")    },
     { QY("Source files' absolute paths"),                                Q("SOURCE_FILE_NAMES")          },
     { QY("Chapter file's absolute path"),                                Q("CHAPTERS_FILE_NAME")         },
 
@@ -308,8 +324,23 @@ PrefsRunProgramWidget::isValid()
 
 void
 PrefsRunProgramWidget::executeNow() {
-  if (isValid())
-    App::programRunner().run(Util::Settings::RunNever, [](Jobs::ProgramRunner::VariableMap &) {}, config());
+  if (!isValid())
+    return;
+
+  auto setupVariables = [](Jobs::ProgramRunner::VariableMap &variables) {
+    auto now = QDateTime::currentDateTime();
+
+    // dummy values for jobs/job.cpp:
+    variables[Q("JOB_START_TIME")]  << now.addSecs(-1 * (4 * 60 + 20)).toString(Qt::ISODate);
+    variables[Q("JOB_END_TIME")]    << now.toString(Qt::ISODate);
+    variables[Q("JOB_DESCRIPTION")] << QY("example values from the current multiplexer tab");
+    variables[Q("JOB_EXIT_CODE")]   << Q("0");
+
+    // current tab's values for jobs/mux_job.cpp:
+    MainWindow::mergeTool()->runProgramSetupVariablesForCurrentTab(variables);
+  };
+
+  App::programRunner().run(Util::Settings::RunNever, setupVariables, config());
 }
 
 void
@@ -372,6 +403,7 @@ PrefsRunProgramWidget::changeArguments(std::function<void(QStringList &)> const 
   worker(arguments);
 
   p->ui->leCommandLine->setText(Util::escape(arguments, Util::EscapeShellUnix).join(Q(" ")));
+  p->ui->leCommandLine->setFocus();
 }
 
 Util::Settings::RunProgramConfigPtr
