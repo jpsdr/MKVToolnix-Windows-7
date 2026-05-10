@@ -530,7 +530,8 @@ EOF
 
   if [[ -n $DMG_NO_DMG ]] return
 
-  volumename=MKVToolNix-${MTX_VER}
+  machine=$(uname -m)
+  volumename=MKVToolNix-${MTX_VER}-${machine}
   if [[ $DMG_PRE == 1 ]]; then
     # Ziel: 29.0.0-revision-008-gb71b2b27c-01808
     # describe: release-29.0.0-8-gb71b2b27c
@@ -547,16 +548,16 @@ EOF
     hash=${build##*-}
     revision="revision-$(printf '%03d' ${num})-${hash}-${build_number}"
 
-    volumename=MKVToolNix-${MTX_VER}-${revision}
+    volumename=${volumename}-${revision}
   fi
 
-  dmgname=${CMPL}/MKVToolNix-${MTX_VER}.dmg
+  dmgname=${CMPL}/MKVToolNix-${MTX_VER}-${machine}.dmg
   dmgbuildname=${CMPL}/${volumename}.dmg
 
   rm -f ${dmgname} ${dmgbuildname}
   hdiutil create -srcfolder ${dmgbase} -volname ${volumename} \
     -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
-    ${CMPL}/MKVToolNix-${MTX_VER}
+    ${dmgname}
 
   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
 
