@@ -4,6 +4,7 @@ set -e
 set -x
 
 source ${0:h}/config.sh
+[[ -f ${0:h}/config.local.sh ]] && source ${0:h}/config.local.sh
 
 MODE=
 FILE=

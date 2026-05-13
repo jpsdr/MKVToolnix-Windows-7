@@ -48,6 +48,18 @@
   developer account. Implementation of #6212 by Touchstone64.
 * macOS: patch added to make building Qt 6.11 from source possible on macOS
   26.4. Patch by Touchstone64.
+* macOS: additions to DMG package naming including the machine type it targets
+  (arm64 or x86_64) and a revision number (to support re-packaging of an
+  existing MKVToolnix release). For example, MKVToolNix-98.0-1-arm64.dmg would
+  represent the first revision of a DMG package for an Apple Silicon Mac,
+  containing MKVToolNix release 98.0. Implementation by Touchstone64.
+* macOS: the packaging process now verifies the MKVToolNix source release
+  using the author's GPG key before packaging. Implementation by Touchstone64.
+* macOS: the app bundle name has been standardised by removing the version
+  number, so DMG packages will contain 'MKVToolNix.app'. Implementation by
+  Touchstone64.
+* macOS: Qt is now built without printing support, reducing the size of the
+  resulting DMG slightly. Implementation by Corticalcode. Implements #6230.
 
 # Version 98.0 "Chonks" 2026-04-05
 
