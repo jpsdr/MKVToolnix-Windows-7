@@ -46,7 +46,7 @@ function run_uninstall {
   tar tzf ${FILE} > ${tmpfile}
   grep -v '/$' ${tmpfile} | tr '\n' '\0' | xargs -0 $DEBUG rm -f
   grep    '/$' ${tmpfile} | perl -le '$/ = ""; print join("\n", reverse split(/\n/, <>))' | tr '\n' '\0' | xargs -0 $DEBUG rmdir || true
-  rm ${tmpfile}
+  command rm ${tmpfile}
 }
 
 function run_install {

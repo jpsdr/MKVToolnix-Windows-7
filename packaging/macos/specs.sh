@@ -3,7 +3,6 @@ spec_automake=(automake-1.16.1.tar.gz https://ftp.gnu.org/gnu/automake/automake-
 spec_boost=(boost_1_88_0.tar.bz2 https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.bz2 46d9d2c06637b219270877c9e16155cbd015b6dc84349af064c088e9b5b12f7b)
 spec_cmake=(cmake-3.31.3.tar.gz https://cmake.org/files/v3.31/cmake-3.31.3.tar.gz fac45bc6d410b49b3113ab866074888d6c9e9dc81a141874446eb239ac38cb87)
 spec_cmark=(cmark-0.30.3.tar.gz https://github.com/commonmark/cmark/archive/0.30.3.tar.gz 85e9fb515531cc2c9ae176d693f9871774830cf1f323a6758fb187a5148d7b16)
-spec_curl=(curl-8.11.1.tar.xz https://curl.se/download/curl-8.11.1.tar.xz c7ca7db48b0909743eaef34250da02c19bc61d4f1dcedd6603f109409536ab56)
 spec_docbook_xsl=(docbook-xsl-1.79.2.tar.gz https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F1.79.2/docbook-xsl-1.79.2.tar.gz 966188d7c05fc76eaca115a55893e643dd01a3486f6368733c9ad974fcee7a26)
 spec_flac=(flac-1.5.0.tar.xz https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz f2c1c76592a82ffff8413ba3c4a1299b6c7ab06c734dee03fd88630485c2b920)
 spec_gettext=(gettext-0.23.tar.lz https://ftp.gnu.org/gnu/gettext/gettext-0.23.tar.lz 9878994930a8e09f1e3186203b3ff2accb2c4e67ddc6098b2c1e4a74364d3c5a)
@@ -13,5 +12,5 @@ spec_ogg=(libogg-1.3.4.tar.xz http://downloads.xiph.org/releases/ogg/libogg-1.3.
 spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz 6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
 spec_zlib=(zlib-v1.3.2.tar.xz https://zlib.net/zlib-1.3.2.tar.xz d7a0654783a4da529d1bb793b7ad9c3318020af77667bcae35f95d0e42a792f3)
-
 spec_qt=(qt-everywhere-src-6.11.0.tar.xz https://download.qt.io/archive/qt/6.11/6.11.0/single/qt-everywhere-src-6.11.0.tar.xz acf3b3db04c9e5d0820e8324b097320388954c297cee83d2bd698789234f68a4)
+spec_gpg=(gnupg-1.4.23.tar.bz2 https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2 c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba)

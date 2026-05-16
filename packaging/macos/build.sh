@@ -8,6 +8,8 @@ setopt nullglob
 export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
 test -f ${SCRIPT_PATH}/config.local.sh && source ${SCRIPT_PATH}/config.local.sh
+export PATH=${TARGET}/bin:$PATH
+export DYLD_LIBRARY_PATH=${TARGET}/lib:${DYLD_LIBRARY_PATH}
 source ${SCRIPT_PATH}/specs.sh
 
 RAKE=./drake
@@ -49,7 +51,7 @@ function retrieve_file {
     fi
 
     echo "Warning: file ${file} exists but has the wrong checksum; retrieving anew"
-    rm ${file}
+    command rm ${file}
   fi
 
   if [[ ! -f ${file} ]]; then
@@ -292,31 +294,6 @@ function build_cmark {
     -DCMARK_SHARED=OFF
 }
 
-function build_curl {
-  build_package curl \
-    --prefix=${TARGET} \
-    --disable-silent-rules \
-    --enable-ipv6 \
-    --without-brotli \
-    --without-cyassl \
-    --without-gnutls \
-    --without-gssapi \
-    --without-libmetalink \
-    --without-librtmp \
-    --without-libssh2 \
-    --without-nghttp2 \
-    --without-nss \
-    --without-polarssl \
-    --without-spnego \
-    --without-darwinssl \
-    --disable-ares \
-    --disable-ldap \
-    --disable-ldaps \
-    --with-zlib=${TARGET} \
-    --with-ssl=${TARGET} \
-    --with-ca-path=${TARGET}/etc/openssl/certs
-}
-
 function build_qt {
   local -a args
   args=(
@@ -388,6 +365,10 @@ function build_docbook_xsl {
   ln -s ${${spec_docbook_xsl[1]}%%.tar*} ${DOCBOOK_XSL_ROOT_DIR}
 }
 
+function build_gpg {
+  build_package gpg --prefix=${TARGET}
+}
+
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
@@ -419,23 +400,20 @@ function retrieve_verified_source_tarball {
   local tarball_name=mkvtoolnix-${MTX_VER}.tar.xz
   local signature_name=${tarball_name}.sig
 
-  rm -f ${SRCDIR}/${public_key_name} ${SRCDIR}/${tarball_name} ${SRCDIR}/${signature_name}
+  rm -f ${SRCDIR}/${public_key_name} ${SRCDIR}/${signature_name}
 
   curl -o ${SRCDIR}/${public_key_name} ${AUTHOR_PUBLIC_KEY_URL}
-  curl -o ${SRCDIR}/${tarball_name} ${SOURCES_URL}/${tarball_name}
   curl -o ${SRCDIR}/${signature_name} ${SOURCES_URL}/${signature_name}
 
-  local keyring=$(uuidgen).keyring
-  local keybox=$( gpg --no-default-keyring --keyring ${keyring} \
-    --list-keys 2>&1 \
-    | awk -F"'" '/keybox.*created/ { print $2 }' )
-  if [[ -z ${keybox} ]]; then
-    fail Build requires an empty GPG keyring but {$keyring} already exists
+  if [[ ! -f ${SRCDIR}/${tarball_name} ]]; then
+    curl -o ${SRCDIR}/${tarball_name} ${SOURCES_URL}/${tarball_name}
   fi
 
-  gpg --no-default-keyring --keyring ${keyring} --import ${SRCDIR}/${public_key_name} 2>&1
+  local gpghome=$(mktemp -d)
 
-  local signature_identity=$( gpg --no-default-keyring --keyring ${keyring} \
+  gpg --homedir ${gpghome} --import ${SRCDIR}/${public_key_name} 2>&1
+
+  local signature_identity=$( gpg --homedir ${gpghome} \
     --verify ${SRCDIR}/${signature_name} ${SRCDIR}/${tarball_name} 2>&1 \
     | awk -F"<|>" '/Good signature/ { print $2 }' )
 
@@ -443,7 +421,7 @@ function retrieve_verified_source_tarball {
     fail Source tarball ${tarball_name} is not signed by ${AUTHOR_IDENTITY}
   fi
 
-  rm -f ${keybox}
+  rm -rf ${gpghome}
 }
 
 function build_mkvtoolnix {
@@ -479,7 +457,7 @@ function build_dmg {
 
   strip ${dmgcnt}/MacOS/mkv{merge,info,extract,propedit,toolnix-gui}
 
-  mv ${dmgmac}/mkvtoolnix ${dmgmac}/data
+  command mv ${dmgmac}/mkvtoolnix ${dmgmac}/data
 
   cp README.md $dmgbase/README.txt
   cp COPYING $dmgbase/COPYING.txt
@@ -599,7 +577,7 @@ EOF
     xcrun notarytool submit ${dmgname} --keychain-profile ${NOTARY_PROFILE} --wait
   fi
 
-  if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
+  if [[ ${dmgname} != ${dmgbuildname} ]] command mv ${dmgname} ${dmgbuildname}
 
   ln -s ${dmgbuildname} ${latest_link}
 }
@@ -626,6 +604,7 @@ if [[ -z $@ ]]; then
   build_gmp
   build_boost
   build_qt
+  build_gpg
   build_mkvtoolnix
 
 else
