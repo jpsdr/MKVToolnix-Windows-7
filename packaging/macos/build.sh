@@ -243,12 +243,7 @@ function build_zlib {
     --static
 }
 
-function build_gettext_fix_compilation {
-  perl -pi -e 's/#define setlocale.*//g' $( find . -name libintl.h )
-}
-
 function build_gettext {
-  build_package_hook_pre_installation=build_gettext_fix_compilation \
   build_package gettext \
     --prefix=${TARGET} \
     --disable-csharp \
