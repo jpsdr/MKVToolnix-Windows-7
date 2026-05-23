@@ -372,6 +372,8 @@ function build_gpg {
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
+  cd ${CMPL}/mkvtoolnix-${MTX_VER}
+
   local dmgbase=${CMPL}/dmg-${MTX_VER}
   local dmgcnt=$dmgbase/${APP_BUNDLE_NAME}/Contents
   local dmgmac=$dmgcnt/MacOS
