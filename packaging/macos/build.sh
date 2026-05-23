@@ -19,6 +19,10 @@ function fail {
   exit 1
 }
 
+function run_curl {
+  curl --retry 3 --retry-delay 5 --retry-all-errors --connect-timeout 30 --max-time 600 "$@"
+}
+
 function verify_checksum {
   local file=$1
   local expected_checksum=$2
@@ -55,7 +59,7 @@ function retrieve_file {
   fi
 
   if [[ ! -f ${file} ]]; then
-    curl -L ${url} > ${file}
+    run_curl -L ${url} > ${file}
   fi
 
   verify_checksum ${file} ${expected_checksum}
@@ -404,11 +408,11 @@ function retrieve_verified_source_tarball {
 
   rm -f ${SRCDIR}/${public_key_name} ${SRCDIR}/${signature_name}
 
-  curl -o ${SRCDIR}/${public_key_name} ${AUTHOR_PUBLIC_KEY_URL}
-  curl -o ${SRCDIR}/${signature_name} ${SOURCES_URL}/${signature_name}
+  run_curl -o ${SRCDIR}/${public_key_name} ${AUTHOR_PUBLIC_KEY_URL}
+  run_curl -o ${SRCDIR}/${signature_name} ${SOURCES_URL}/${signature_name}
 
   if [[ ! -f ${SRCDIR}/${tarball_name} ]]; then
-    curl -o ${SRCDIR}/${tarball_name} ${SOURCES_URL}/${tarball_name}
+    run_curl -o ${SRCDIR}/${tarball_name} ${SOURCES_URL}/${tarball_name}
   fi
 
   local gpghome=$(mktemp -d)
