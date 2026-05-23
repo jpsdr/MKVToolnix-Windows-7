@@ -519,6 +519,16 @@ EOF
 
   ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}
 
+  # Strip the unused ${TARGET}/lib rpath leaked into the binaries (the build
+  # host's absolute path; bundled libs load via @executable_path/libs/). Guard
+  # with otool so a binary lacking the rpath can't abort the build; runs before
+  # codesign since install_name_tool invalidates the signature.
+  for FILE (${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}) {
+    if otool -l ${FILE} | grep -qF "path ${TARGET}/lib "; then
+      install_name_tool -delete_rpath ${TARGET}/lib ${FILE}
+    fi
+  }
+
   # Strip debug symbols from all dylibs and plugins
   strip -x ${dmgmac}/**/*.dylib(.)
 
