@@ -59,6 +59,13 @@ def run_wrapper cmdline, opts = {}
     cmdline += " > #{output.path} 2>&1"
   end
 
+  new_env   = opts[:env] || {}
+  saved_env = new_env.keys.map do |key|
+    [ key, ENV[key] ]
+  end
+
+  new_env.keys.each { |key| ENV[key] = new_env[key] }
+
   if $use_tempfile_for_run
     Tempfile.open("mkvtoolnix-rake-run") do |t|
       t.puts cmdline
@@ -70,6 +77,14 @@ def run_wrapper cmdline, opts = {}
   else
     system cmdline
     code = last_exit_code
+  end
+
+  saved_env.each do |key_value|
+    if key_value[1] == nil
+      ENV.delete(key_value[0])
+    else
+      ENV[key_value[0]] = key_value[1]
+    end
   end
 
   code = opts[:filter_output].call code, output.readlines if opts[:filter_output]
