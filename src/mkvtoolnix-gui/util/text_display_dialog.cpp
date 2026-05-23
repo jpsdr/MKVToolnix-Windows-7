@@ -102,7 +102,7 @@ void
 TextDisplayDialog::save() {
   auto &p       = *p_func();
   auto &cfg     = Util::Settings::get();
-  auto filter   = Q("%1 (*.%2);;%3 (*)").arg(p.m_saveFilter).arg(p.m_saveDefaultSuffix).arg(QY("All files"));
+  auto filter   = u"%1 (*.%2);;%3 (*)"_s.arg(p.m_saveFilter).arg(p.m_saveDefaultSuffix).arg(QY("All files"));
   auto fileName = Util::getSaveFileName(this, QY("Save"), cfg.lastOpenDirPath(), p.m_saveDefaultFileName, filter, p.m_saveDefaultSuffix);
 
   if (!fileName.isEmpty())

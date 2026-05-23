@@ -36,10 +36,10 @@ StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
 
   p->ui->setupUi(this);
 
-  p->m_pixmaps << QIcon::fromTheme(Q("dialog-warning")).pixmap(16, 16);
-  p->m_pixmaps << QIcon::fromTheme(Q("dialog-warning-grayscale")).pixmap(16, 16);
-  p->m_pixmaps << QIcon::fromTheme(Q("dialog-error")).pixmap(16, 16);
-  p->m_pixmaps << QIcon::fromTheme(Q("dialog-error-grayscale")).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(u"dialog-warning"_s).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(u"dialog-warning-grayscale"_s).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(u"dialog-error"_s).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(u"dialog-error-grayscale"_s).pixmap(16, 16);
 
   p->m_timer.setInterval(1000);
 
@@ -121,11 +121,11 @@ StatusBarProgressWidget::setLabelTextsAndToolTip() {
     return;
   }
 
-  auto format = Q("<p>%1</p>"
+  auto format = u"<p>%1</p>"
                   "<ul>"
                   "<li>%2</li>"
                   "<li>%3</li>"
-                  "</ul>");
+                  "</ul>"_s;
 
   auto toolTipWarnings = format
     .arg(QY("Number of warnings:"))

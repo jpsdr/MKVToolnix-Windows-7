@@ -23,7 +23,7 @@ OptionFile::create(QString const &fileName,
 std::unique_ptr<QTemporaryFile>
 OptionFile::createTemporary(QString const &prefix,
                             QStringList const &options) {
-  auto fileNameTemplate = QDir::temp().filePath(Q("%1-XXXXXX.json").arg(prefix));
+  auto fileNameTemplate = QDir::temp().filePath(u"%1-XXXXXX.json"_s.arg(prefix));
   auto file             = std::make_unique<QTemporaryFile>(fileNameTemplate);
 
   if (!file->open()) {

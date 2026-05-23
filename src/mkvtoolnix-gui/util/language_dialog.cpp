@@ -53,7 +53,7 @@ setupComboBoxFromList(QComboBox &comboBox,
   comboBox.addItem(QString{}, QString{});
 
   for (auto const &item : items)
-    comboBox.addItem(Q("%1 (%2)").arg(item.first).arg(item.second), item.second);
+    comboBox.addItem(u"%1 (%2)"_s.arg(item.first).arg(item.second), item.second);
 
   comboBox.blockSignals(false);
 }
@@ -254,7 +254,7 @@ LanguageDialog::allComponentWidgets() {
     p.ui->cbRegion,
   };
 
-  auto reStr = Q("^(%1|%2|%3|%4)").arg(Q(s_cbExtendedSubtag)).arg(Q(s_cbVariant)).arg(Q(s_leExtension)).arg(Q(s_lePrivateUse));
+  auto reStr = u"^(%1|%2|%3|%4)"_s.arg(Q(s_cbExtendedSubtag)).arg(Q(s_cbVariant)).arg(Q(s_leExtension)).arg(Q(s_lePrivateUse));
   widgets += allComponentWidgetsMatchingName(QRegularExpression{reStr});
 
   return widgets;
@@ -489,7 +489,7 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
     if ((extlang_form != tag) && extlang_form.get_first_variant_not_matching_prefixes().empty())
       sentences << QY("The extended language subtags form does use a suitable prefix.");
 
-    lists.second << sentences.join(Q(" "));
+    lists.second << sentences.join(u" "_s);
 
     if (!tag.get_grandfathered().empty())
       lists.second << QY("This language tag is a grandfathered element only supported for historical reasons.");
@@ -528,9 +528,9 @@ LanguageDialog::setStatusFromLanguageTag(mtx::bcp47::language_c const &tag) {
 
   else {
     for (auto const &warning : warnings)
-      warningsText += Q("<li>%1</li>").arg(warning.toHtmlEscaped());
+      warningsText += u"<li>%1</li>"_s.arg(warning.toHtmlEscaped());
 
-    warningsText = Q("<ol style=\"margin-left:15px; -qt-list-indent: 0;\">%1</ol>").arg(warningsText);
+    warningsText = u"<ol style=\"margin-left:15px; -qt-list-indent: 0;\">%1</ol>"_s.arg(warningsText);
   }
 
   delete p.ui->wInfoWarnings->layout();
@@ -549,7 +549,7 @@ LanguageDialog::setStatusFromLanguageTag(mtx::bcp47::language_c const &tag) {
 
     sizePolicy.setHeightForWidth(textLabel->sizePolicy().hasHeightForWidth());
 
-    iconLabel->setPixmap(QIcon::fromTheme(isInfo ? Q("documentinfo") : Q("dialog-warning")).pixmap(16, 16));
+    iconLabel->setPixmap(QIcon::fromTheme(isInfo ? u"documentinfo"_s : u"dialog-warning"_s).pixmap(16, 16));
     iconLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     textLabel->setSizePolicy(sizePolicy);
     textLabel->setWordWrap(true);
@@ -601,14 +601,14 @@ LanguageDialog::addRowItem(QString const &type,
   auto &p        = *p_func();
 
   auto enable    = p.ui->rbComponentSelection->isChecked();
-  auto items     = allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(type) });
+  auto items     = allComponentWidgetsMatchingName(QRegularExpression{ u"^%1"_s.arg(type) });
   auto newIdx    = items.size() + 1;
   auto newRow    = componentGridRowForWidget(items.last()) + 1;
   auto newWidget = createWidget(newIdx);
   auto newButton = new QPushButton{p.ui->sawComponents};
 
-  newButton->setObjectName(Q("pbRemove%1%2").arg(type.mid(2)).arg(newIdx));
-  newButton->setIcon(QIcon::fromTheme(Q("list-remove")));
+  newButton->setObjectName(u"pbRemove%1%2"_s.arg(type.mid(2)).arg(newIdx));
+  newButton->setIcon(QIcon::fromTheme(u"list-remove"_s));
 
   newWidget->setEnabled(enable);
   newButton->setEnabled(enable);
@@ -626,7 +626,7 @@ QWidget *
 LanguageDialog::addVariantRow() {
   return addRowItem(Q(s_cbVariant), [this](int newIdx) {
     auto comboBox = new QComboBox{p_func()->ui->sawComponents};
-    comboBox->setObjectName(Q("%1%2").arg(Q(s_cbVariant)).arg(newIdx));
+    comboBox->setObjectName(u"%1%2"_s.arg(Q(s_cbVariant)).arg(newIdx));
 
     setupVariantComboBox(*comboBox);
 
@@ -638,7 +638,7 @@ QWidget *
 LanguageDialog::addExtensionRow() {
   return addRowItem(Q(s_leExtension), [this](int newIdx) {
     auto lineEdit = new QLineEdit{p_func()->ui->sawComponents};
-    lineEdit->setObjectName(Q("%1%2").arg(Q(s_leExtension)).arg(newIdx));
+    lineEdit->setObjectName(u"%1%2"_s.arg(Q(s_leExtension)).arg(newIdx));
 
     return lineEdit;
   });
@@ -648,7 +648,7 @@ QWidget *
 LanguageDialog::addPrivateUseRow() {
   return addRowItem(Q(s_lePrivateUse), [this](int newIdx) {
     auto lineEdit = new QLineEdit{p_func()->ui->sawComponents};
-    lineEdit->setObjectName(Q("%1%2").arg(Q(s_lePrivateUse)).arg(newIdx));
+    lineEdit->setObjectName(u"%1%2"_s.arg(Q(s_lePrivateUse)).arg(newIdx));
 
     return lineEdit;
   });
@@ -676,7 +676,7 @@ void
 LanguageDialog::removeRowForClickedButton() {
   auto name = sender()->objectName();
 
-  name.replace(QRegularExpression{Q("^pbRemove")}, Q("cb"));
+  name.replace(QRegularExpression{u"^pbRemove"_s}, u"cb"_s);
 
   QTimer::singleShot(0, [this, name]() {
     removeRowItems(name);
@@ -688,7 +688,7 @@ void
 LanguageDialog::removeRowItems(QString const &namePrefix) {
   auto &p = *p_func();
 
-  auto objectNamePattern = Q("^(cb|le|pbRemove)%1$").arg(namePrefix.mid(2));
+  auto objectNamePattern = u"^(cb|le|pbRemove)%1$"_s.arg(namePrefix.mid(2));
   auto widgets           = allComponentWidgetsMatchingName(QRegularExpression{ objectNamePattern });
 
   for (auto widget : widgets) {
@@ -729,12 +729,12 @@ LanguageDialog::setWidgetText(QWidget &widget,
 void
 LanguageDialog::setMultipleWidgetsTexts(QString const &objectNamePrefix,
                                         std::vector<std::string> const &values) {
-  auto widgets      = allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(objectNamePrefix) });
+  auto widgets      = allComponentWidgetsMatchingName(QRegularExpression{ u"^%1"_s.arg(objectNamePrefix) });
   auto numWidgets   = widgets.size();
   auto numValues    = values.size();
-  auto isVariant    = objectNamePrefix.contains(Q("Variant"));
-  auto isExtension  = objectNamePrefix.contains(Q("Extension"));
-  auto isPrivateUse = objectNamePrefix.contains(Q("PrivateUse"));
+  auto isVariant    = objectNamePrefix.contains(u"Variant"_s);
+  auto isExtension  = objectNamePrefix.contains(u"Extension"_s);
+  auto isPrivateUse = objectNamePrefix.contains(u"PrivateUse"_s);
 
   if (!numWidgets)
     return;
@@ -790,7 +790,7 @@ LanguageDialog::languageTagFromComponents() {
 
   std::vector<std::string> strings;
 
-  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbVariant)) })) {
+  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ u"^%1"_s.arg(Q(s_cbVariant)) })) {
     auto code = dynamic_cast<QComboBox &>(*comboBox).currentData().toString();
     if (!code.isEmpty())
       strings.emplace_back(to_utf8(code));
@@ -800,7 +800,7 @@ LanguageDialog::languageTagFromComponents() {
 
   strings.clear();
 
-  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_leExtension)) })) {
+  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ u"^%1"_s.arg(Q(s_leExtension)) })) {
     auto text = dynamic_cast<QLineEdit &>(*lineEdit).text();
     if (!text.isEmpty())
       strings.emplace_back(to_utf8(text));
@@ -815,7 +815,7 @@ LanguageDialog::languageTagFromComponents() {
 
   strings.clear();
 
-  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_lePrivateUse)) })) {
+  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ u"^%1"_s.arg(Q(s_lePrivateUse)) })) {
     auto text = dynamic_cast<QLineEdit &>(*lineEdit).text();
     if (!text.isEmpty())
       strings.emplace_back(to_utf8(text));

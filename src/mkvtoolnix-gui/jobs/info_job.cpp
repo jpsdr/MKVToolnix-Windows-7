@@ -196,7 +196,7 @@ InfoJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   const{
   Job::runProgramSetupVariables(variables);
 
-  variables[Q("JOB_TYPE")] << Q("info");
+  variables[u"JOB_TYPE"_s] << u"info"_s;
 }
 
 }

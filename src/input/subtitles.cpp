@@ -217,7 +217,7 @@ srt_parser_c::parse() {
       auto neg_calculator = [&matches](auto start_idx) -> auto {
         int64_t neg = 1;
         for (auto idx = 0; idx < 4; ++idx)
-          if (matches.captured(start_idx + (idx * 2)) == Q("-"))
+          if (matches.captured(start_idx + (idx * 2)) == u"-"_s)
             neg *= -1;
         return neg;
       };

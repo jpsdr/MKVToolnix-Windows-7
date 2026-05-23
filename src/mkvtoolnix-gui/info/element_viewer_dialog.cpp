@@ -134,20 +134,20 @@ ElementViewerDialog::createHtmlHead(ElementHighlighter::Highlights const &highli
                                     QString const &css) {
   QStringList legend;
 
-  legend << Q("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+  legend << u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
               "%1\n"
-              "p, li { white-space: pre-wrap; }\n").arg(css);
+              "p, li { white-space: pre-wrap; }\n"_s.arg(css);
 
   auto idx = 0;
 
   for (auto const &highlight : highlights)
-    legend << Q(".c%1 { color: %2; background-color: %3; }\n")
+    legend << u".c%1 { color: %2; background-color: %3; }\n"_s
       .arg(idx++)
       .arg(highlight.m_foregroundColor.name())
       .arg(highlight.m_backgroundColor.name());
 
-  legend << Q("</style></head>");
+  legend << u"</style></head>"_s;
 
   return legend.join(QString{});
 }
@@ -157,18 +157,18 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
                                    ElementHighlighter::Highlights const &highlights) {
   QHash<uint8_t, QString> htmlChars;
 
-  htmlChars['<']        = Q("&lt;");
-  htmlChars['>']        = Q("&gt;");
-  htmlChars['"']        = Q("&quot;");
-  htmlChars[' ']        = Q("&nbsp;");
-  auto dot              = Q(".");
-  auto endSpanTag       = Q("</span>");
-  auto hexChars         = Q("0123456789abcdef");
+  htmlChars['<']        = u"&lt;"_s;
+  htmlChars['>']        = u"&gt;"_s;
+  htmlChars['"']        = u"&quot;"_s;
+  htmlChars[' ']        = u"&nbsp;"_s;
+  auto dot              = u"."_s;
+  auto endSpanTag       = u"</span>"_s;
+  auto hexChars         = u"0123456789abcdef"_s;
   auto inLine           = false;
   auto position         = 0u;
   auto buffer           = mem.get_buffer();
   auto size             = mem.get_size();
-  auto lines            = QStringList{ createHtmlHead(highlights, Q("body { font-family: '%1'; }").arg(monospaceFontFamily())) };
+  auto lines            = QStringList{ createHtmlHead(highlights, u"body { font-family: '%1'; }"_s.arg(monospaceFontFamily())) };
   auto currentHighlight = highlights.begin();
   auto lastHighlight    = highlights.end();
   auto highlightIdx     = 0;
@@ -176,13 +176,13 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
   QStringList hex;
   QString ascii, span;
 
-  lines << Q("<body><p>");
+  lines << u"<body><p>"_s;
 
   while (position < size) {
     QString spanStart, spanEnd;
 
     if ((currentHighlight != lastHighlight) && (currentHighlight->m_start == position)) {
-      span      = Q("<span class=\"c%1\">").arg(highlightIdx++);
+      span      = u"<span class=\"c%1\">"_s.arg(highlightIdx++);
       spanStart = span;
 
     } else if (!inLine)
@@ -207,12 +207,12 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
       inLine  = false;
       spanEnd = span.isEmpty() ? QString{} : endSpanTag;
       lines  << (  Q(fmt::format("{0:08x}  ", position - 7))
-                 + hex.join(Q(" "))
+                 + hex.join(u" "_s)
                  + spanEnd
-                 + Q("  ")
+                 + u"  "_s
                  + ascii
                  + spanEnd
-                 + Q("<br>"));
+                 + u"<br>"_s);
       hex.clear();
       ascii.clear();
     }
@@ -223,15 +223,15 @@ ElementViewerDialog::createHexDump(memory_c const &mem,
   if (inLine) {
     auto spanEnd = span.isEmpty() ? QString{} : endSpanTag;
     lines       << (  Q(fmt::format("{0:08x}  ", (position / 8) * 8))
-                    + hex.join(Q(" "))
+                    + hex.join(u" "_s)
                     + spanEnd
-                    + QString((8 - hex.size()) * 3 + 2, Q(' '))
+                    + QString((8 - hex.size()) * 3 + 2, u' ')
                     + ascii
                     + spanEnd
-                    + Q("<br>"));
+                    + u"<br>"_s);
   }
 
-  lines << Q("</p></body></html>");
+  lines << u"</p></body></html>"_s;
 
   return lines.join(QString{});
 }
@@ -243,20 +243,20 @@ ElementViewerDialog::createLegend(ElementHighlighter::Highlights const &highligh
 
   auto idx    = 0;
   auto legend = createHtmlHead(highlights,
-                               Q(".monospace { font-family: '%1'; }\n"
+                               u".monospace { font-family: '%1'; }\n"
                                  "table { margin: 0px; }\n"
-                                 "td { vertical-align: top; }\n")
+                                 "td { vertical-align: top; }\n"_s
                                .arg(monospaceFontFamily()));
 
-  legend += Q("<body><table>");
+  legend += u"<body><table>"_s;
 
   for (auto const &highlight : highlights) {
     if (!highlight.m_label.isEmpty())
-      legend += Q("<tr><td class=\"monospace c%1\">&nbsp;&nbsp;&nbsp;</td><td>%2</td></tr>").arg(idx).arg(highlight.m_label);
+      legend += u"<tr><td class=\"monospace c%1\">&nbsp;&nbsp;&nbsp;</td><td>%2</td></tr>"_s.arg(idx).arg(highlight.m_label);
     ++idx;
   }
 
-  return legend + Q("</table></body></html>");
+  return legend + u"</table></body></html>"_s;
 }
 
 ElementViewerDialog &

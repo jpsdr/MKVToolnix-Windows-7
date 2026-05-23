@@ -357,15 +357,15 @@ teletext_to_srt_packet_converter_c::decode_line(uint8_t const *buffer,
   static std::optional<QRegularExpression> s_re_spaces_start_end, s_re_spaces_before_closing_tag, s_re_spaces_after_opening_tag, s_re_no_content;
 
   if (!s_re_spaces_start_end) {
-    s_re_spaces_before_closing_tag = QRegularExpression{Q("[[:space:]]+</font>[[:space:]]*")};
-    s_re_spaces_after_opening_tag  = QRegularExpression{Q("[[:space:]]*(<font color=[^>]+>)[[:space:]]+")};
-    s_re_spaces_start_end          = QRegularExpression{Q("^[[:space:]]+|[[:space:]]+$")};
-    s_re_no_content                = QRegularExpression{Q("<font color=[^>]+>[[:space:]]*</font>")};
+    s_re_spaces_before_closing_tag = QRegularExpression{u"[[:space:]]+</font>[[:space:]]*"_s};
+    s_re_spaces_after_opening_tag  = QRegularExpression{u"[[:space:]]*(<font color=[^>]+>)[[:space:]]+"_s};
+    s_re_spaces_start_end          = QRegularExpression{u"^[[:space:]]+|[[:space:]]+$"_s};
+    s_re_no_content                = QRegularExpression{u"<font color=[^>]+>[[:space:]]*</font>"_s};
   }
 
   to_clean
-    .replace(*s_re_spaces_before_closing_tag, Q("</font> "))
-    .replace(*s_re_spaces_after_opening_tag,  Q(" \\1"))
+    .replace(*s_re_spaces_before_closing_tag, u"</font> "_s)
+    .replace(*s_re_spaces_after_opening_tag,  u" \\1"_s)
     .replace(*s_re_no_content,                {})
     .replace(*s_re_spaces_start_end,          {});
 

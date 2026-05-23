@@ -37,7 +37,7 @@ Tool::setupUi() {
   Util::setupTabWidgetHeaders(*ui->widgets);
 
   m_currentJobTab = new Tab{ui->widgets, true};
-  ui->widgets->insertTab(0, m_currentJobTab, Q(""));
+  ui->widgets->insertTab(0, m_currentJobTab, u""_s);
 
   auto button = Util::tabWidgetCloseTabButton(*ui->widgets, 0);
   if (button)
@@ -71,7 +71,7 @@ Tool::applyPreferences() {
 
 void
 Tool::retranslateUi() {
-  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
+  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? u""_s : App::translate("CloseButton", "Close Tab");
 
   ui->retranslateUi(this);
   ui->widgets->setTabText(0, QY("Current job"));

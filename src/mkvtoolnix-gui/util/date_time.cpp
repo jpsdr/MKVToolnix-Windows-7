@@ -13,7 +13,7 @@ displayableDate(QDateTime const &date) {
   if (!date.isValid())
     return {};
 
-  return Q("%1 %2")
+  return u"%1 %2"_s
     .arg(date.toString(QString{"yyyy-MM-dd hh:mm:ss"}))
     .arg(timeZoneOffsetString(date));
 }
@@ -21,12 +21,12 @@ displayableDate(QDateTime const &date) {
 QString
 timeZoneOffsetString(QDateTime const &date) {
   if (date.timeSpec() == Qt::UTC)
-    return Q("UTC");
+    return u"UTC"_s;
 
   auto offset = date.offsetFromUtc();
   auto mult   = offset < 0 ? -1 : 1;
 
-  return Q(fmt::format("{0}{1:02}:{2:02}", offset < 0 ? Q("-") : Q("+"), (offset * mult) / 60 / 60, (offset * mult / 60) % 60));
+  return Q(fmt::format("{0}{1:02}:{2:02}", offset < 0 ? u"-"_s : u"+"_s, (offset * mult) / 60 / 60, (offset * mult / 60) % 60));
 }
 
 }

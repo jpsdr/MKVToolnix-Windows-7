@@ -129,7 +129,7 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
 QStringList
 ProgramRunner::replaceVariables(QStringList const &commandLine,
                                 VariableMap const &variables) {
-  auto variableNameRE = QRegularExpression{Q("<MTX_[A-Z0-9_]+>")};
+  auto variableNameRE = QRegularExpression{u"<MTX_[A-Z0-9_]+>"_s};
   auto newCommandLine = QStringList{};
 
   for (auto const &argument: commandLine) {
@@ -137,7 +137,7 @@ ProgramRunner::replaceVariables(QStringList const &commandLine,
     auto newArgument   = argument;
 
     for (auto const &variable : variables.keys()) {
-      auto placeholder = Q("<MTX_%1>").arg(variable);
+      auto placeholder = u"<MTX_%1>"_s.arg(variable);
 
       if (argument == placeholder) {
         newCommandLine += variables[variable];
@@ -145,13 +145,13 @@ ProgramRunner::replaceVariables(QStringList const &commandLine,
         break;
 
       } else
-        newArgument.replace(placeholder, variables[variable].join(Q(' ')));
+        newArgument.replace(placeholder, variables[variable].join(u' '));
     }
 
     if (replacedFully)
       continue;
 
-    newArgument.replace(variableNameRE, Q(""));
+    newArgument.replace(variableNameRE, u""_s);
     newCommandLine << newArgument;
   }
 
@@ -160,8 +160,8 @@ ProgramRunner::replaceVariables(QStringList const &commandLine,
 
 void
 ProgramRunner::setupGeneralVariables(QMap<QString, QStringList> &variables) {
-  variables[Q("CURRENT_TIME")] << QDateTime::currentDateTime().toString(Qt::ISODate);
-  variables[Q("INSTALLATION_DIRECTORY")] << QDir::toNativeSeparators(App::applicationDirPath());
+  variables[u"CURRENT_TIME"_s] << QDateTime::currentDateTime().toString(Qt::ISODate);
+  variables[u"INSTALLATION_DIRECTORY"_s] << QDir::toNativeSeparators(App::applicationDirPath());
 }
 
 std::unique_ptr<ProgramRunner>
@@ -190,7 +190,7 @@ ProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType type) {
 bool
 ProgramRunner::isJobType(VariableMap const &variables,
                          QString const &type) {
-  return variables.contains(Q("JOB_TYPE")) && (variables[Q("JOB_TYPE")][0] == type);
+  return variables.contains(u"JOB_TYPE"_s) && (variables[u"JOB_TYPE"_s][0] == type);
 }
 
 void
@@ -206,7 +206,7 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 
   auto environment = QProcessEnvironment::systemEnvironment();
   for (auto itr = variables.cbegin(); itr != variables.cend(); ++itr)
-    environment.insert(Q("MTX_%1").arg(itr.key()), itr.value().join(Q(",")));
+    environment.insert(u"MTX_%1"_s.arg(itr.key()), itr.value().join(u","_s));
 
   QProcess process;
   process.setProgram(exe);
@@ -218,7 +218,7 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 
   Util::MessageBox::critical(MainWindow::get())
     ->title(QY("Program execution failed"))
-    .text(Q("%1\n%2")
+    .text(u"%1\n%2"_s
           .arg(QY("The following program could not be executed: %1").arg(exe))
           .arg(QY("Possible causes are that the program does not exist or that you're not allowed to access it or its directory.")))
     .exec();
@@ -226,24 +226,24 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 
 void
 ProgramRunner::deleteSourceFiles(VariableMap const &variables) {
-  if (!isJobType(variables, Q("multiplexer")))
+  if (!isJobType(variables, u"multiplexer"_s))
     return;
 
   QStringList toRemove;
-  auto vobsubRE = QRegularExpression{Q("(idx|sub)$"), QRegularExpression::PatternOption::CaseInsensitiveOption};
+  auto vobsubRE = QRegularExpression{u"(idx|sub)$"_s, QRegularExpression::PatternOption::CaseInsensitiveOption};
 
-  for (auto const &sourceFileName : variables[Q("SOURCE_FILE_NAMES")]) {
+  for (auto const &sourceFileName : variables[u"SOURCE_FILE_NAMES"_s]) {
     toRemove << sourceFileName;
 
     if (sourceFileName.contains(vobsubRE)) {
-      auto other = sourceFileName.last(3).toLower() == Q("idx") ? Q("sub") : Q("idx");
+      auto other = sourceFileName.last(3).toLower() == u"idx"_s ? u"sub"_s : u"idx"_s;
       toRemove << sourceFileName.first(sourceFileName.length() - 3) + other;
     }
   }
 
   for (auto const &sourceFileName : toRemove) {
     auto succeeded = QFile::remove(sourceFileName);
-    qDebug() << Q("deleteSourceFiles: file removal %1 (%2)").arg(succeeded ? "succeeded" : "failed").arg(sourceFileName);
+    qDebug() << u"deleteSourceFiles: file removal %1 (%2)"_s.arg(succeeded ? "succeeded" : "failed").arg(sourceFileName);
   }
 }
 
@@ -255,7 +255,7 @@ ProgramRunner::playAudioFile(Util::Settings::RunProgramConfig &config) {
 QString
 ProgramRunner::defaultAudioFileName()
   const {
-  return Q("%1/sounds/finished-1.webm").arg(Q(mtx::sys::get_package_data_folder()));
+  return u"%1/sounds/finished-1.webm"_s.arg(Q(mtx::sys::get_package_data_folder()));
 }
 
 void

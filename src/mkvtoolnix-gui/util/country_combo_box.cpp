@@ -41,13 +41,13 @@ CountryComboBox::onlyShowOftenUsed()
 ComboBoxBase &
 CountryComboBox::setup(bool withEmpty,
                        QString const &emptyTitle) {
-  QRegularExpression reNumeric{Q("^[0-9]+$")};
+  QRegularExpression reNumeric{u"^[0-9]+$"_s};
   auto onlyOftenUsed = onlyShowOftenUsed();
 
   ComboBoxBase::setup(withEmpty, emptyTitle);
 
   if (withEmpty)
-    addItem(emptyTitle, Q(""));
+    addItem(emptyTitle, u""_s);
 
   auto commonRegions = onlyOftenUsed ? mergeCommonAndAdditionalItems(App::commonRegions(), App::regions(), additionalItems()) : App::commonRegions();
 

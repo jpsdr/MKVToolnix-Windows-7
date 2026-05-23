@@ -79,7 +79,7 @@ HeaderViewManager::saveState() {
       hiddenColumns << columnName;
 
     else
-      columnSizes << Q("%1:%2").arg(columnName).arg(headerView->sectionSize(logicalIndex));
+      columnSizes << u"%1:%2"_s.arg(columnName).arg(headerView->sectionSize(logicalIndex));
   }
 
   mtx::sort::by(columnOrder.begin(), columnOrder.end(), [&visualIndexMap](QString const &columnName) { return visualIndexMap[columnName]; });
@@ -179,7 +179,7 @@ HeaderViewManager::restoreSizes(QStringList const &columnSizes) {
 
   QHash<QString, int> sizeMap;
   for (auto const &pair : columnSizes) {
-    auto items = pair.split(Q(":"));
+    auto items = pair.split(u":"_s);
     sizeMap[items[0]] = items[1].toInt();
   }
 

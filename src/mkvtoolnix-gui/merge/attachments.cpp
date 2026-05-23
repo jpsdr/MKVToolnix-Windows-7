@@ -62,16 +62,16 @@ Tab::setupAttachmentsControls() {
   auto &cfg = Util::Settings::get();
   cfg.handleSplitterSizes(p.ui->mergeAttachmentsSplitter);
 
-  Util::HeaderViewManager::create(*p.ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("size"), 100 } });
+  Util::HeaderViewManager::create(*p.ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { u"name"_s, 180 }, { u"mimeType"_s, 180 }, { u"size"_s, 100 } });
 
-  p.enableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
-  p.disableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
-  p.enableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
-  p.disableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
+  p.enableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
+  p.disableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(u"dialog-cancel"_s));
+  p.enableAllAttachedFilesAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
+  p.disableAllAttachedFilesAction->setIcon(QIcon::fromTheme(u"dialog-cancel"_s));
 
-  p.addAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-add")));
-  p.removeAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-remove")));
-  p.selectAllAttachmentsAction->setIcon(QIcon::fromTheme(Q("edit-select-all")));
+  p.addAttachmentsAction->setIcon(QIcon::fromTheme(u"list-add"_s));
+  p.removeAttachmentsAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
+  p.selectAllAttachmentsAction->setIcon(QIcon::fromTheme(u"edit-select-all"_s));
 
   // Q_SIGNALS & Q_SLOTS
   connect(p.addAttachmentsAction,               &QAction::triggered,                                                    this, &Tab::onAddAttachments);
@@ -109,7 +109,7 @@ Tab::setupAttachmentsControls() {
 
   onAttachmentSelectionChanged();
 
-  Util::HeaderViewManager::create(*p.ui->attachments, "Merge::Attachments").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("attachTo"), 130 }, { Q("size"), 100 } });
+  Util::HeaderViewManager::create(*p.ui->attachments, "Merge::Attachments").setDefaultSizes({ { u"name"_s, 180 }, { u"mimeType"_s, 180 }, { u"attachTo"_s, 130 }, { u"size"_s, 100 } });
 }
 
 void
@@ -237,7 +237,7 @@ Tab::prepareFileForAttaching(QString const &fileName,
   if (info.size() > 0x7fffffff) {
     Util::MessageBox::critical(this)
       ->title(QY("Reading failed"))
-      .text(Q("%1 %2")
+      .text(u"%1 %2"_s
             .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(mtx::string::format_file_size(info.size()))))
             .arg(QY("Only files smaller than 2 GiB are supported.")))
       .exec();
@@ -254,7 +254,7 @@ Tab::prepareFileForAttaching(QString const &fileName,
 
       auto const answer = Util::MessageBox::question(this)
         ->title(QY("Attachment with same name present"))
-        .text(Q("%1 %2")
+        .text(u"%1 %2"_s
               .arg(QY("An attachment with the name '%1' is already present.").arg(*existingFileName))
               .arg(QY("Do you really want to add '%1' as another attachment?").arg(QDir::toNativeSeparators(fileName))))
         .buttons(QMessageBox::Yes | QMessageBox::No | QMessageBox::NoToAll)
@@ -302,11 +302,11 @@ Tab::addAttachmentsFiltered(QStringList const &fileNames,
 void
 Tab::addAttachmentsAsCovers(QStringList const &fileNames) {
   addAttachmentsFiltered(fileNames, [](Attachment &attachment) {
-    attachment.m_name = Q("cover");
+    attachment.m_name = u"cover"_s;
 
     auto suffix = QFileInfo{attachment.m_fileName}.suffix();
     if (!suffix.isEmpty())
-      attachment.m_name += Q(".%1").arg(suffix);
+      attachment.m_name += u".%1"_s.arg(suffix);
 
     return true;
   });
@@ -326,7 +326,7 @@ Tab::onAddAttachments() {
 
 QStringList
 Tab::selectAttachmentsToAdd() {
-  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::Settings::get().lastOpenDirPath(), QY("All files") + Q(" (*)"));
+  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::Settings::get().lastOpenDirPath(), QY("All files") + u" (*)"_s);
 
   if (!fileNames.isEmpty())
     Util::Settings::get().m_lastOpenDir.setPath(QFileInfo{fileNames[0]}.path());
@@ -447,9 +447,9 @@ Tab::setAttachmentControlValues(Attachment *attachment) {
     p.ui->attachmentStyle->removeItem(0);
 
   if (!attachment) {
-    p.ui->attachmentName->setText(Q(""));
-    p.ui->attachmentDescription->setText(Q(""));
-    p.ui->attachmentMIMEType->setEditText(Q(""));
+    p.ui->attachmentName->setText(u""_s);
+    p.ui->attachmentDescription->setText(u""_s);
+    p.ui->attachmentMIMEType->setEditText(u""_s);
     p.ui->attachmentStyle->setCurrentIndex(0);
 
   } else {
@@ -622,7 +622,7 @@ Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const 
   if (!attachment)
     return;
 
-  attachment->m_name = Q("cover%2").arg(Q(fileName.extension().string()).toLower());
+  attachment->m_name = u"cover%2"_s.arg(Q(fileName.extension().string()).toLower());
 
   p_func()->attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
 }
@@ -632,7 +632,7 @@ Tab::updateAttachmentsTabTitle() {
   auto &p             = *p_func();
   auto numAttachments = p.attachedFilesModel->rowCount() + p.attachmentsModel->rowCount();
 
-  p.ui->tabs->setTabText(2, Q("%1 (%2)").arg(QY("Atta&chments")).arg(numAttachments));
+  p.ui->tabs->setTabText(2, u"%1 (%2)"_s.arg(QY("Atta&chments")).arg(numAttachments));
 }
 
 }
