@@ -67,8 +67,7 @@ class Array
     }
 
     # Treat other OS (e.g. FreeBSD) the same as Linux wrt. which files to compile
-    os    = $building_for.keys.select { |key| $building_for[key] }.first
-    types = reject[os || :linux]
+    types = reject[$os || :linux]
 
     re    = '(?:' + types.join('|') + ')'
     re    = %r{(?:/|^)#{re}[_.]}

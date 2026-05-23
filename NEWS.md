@@ -31,6 +31,13 @@
   through Core Audio which doesn't support WebM/VP8/Vorbis/Opus. Existing
   configurations will be updated if they point to the prior default WebM audio
   file. Fixes #6209.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: on
+  Windows the MIME type detection will now use the FreeDesktop.org MIME
+  database instead of falling back to file extension-based guesses. This
+  matches how it works on other operating systems. This fixes e.g. OpenType
+  fonts being detected as the legacy type `application/vnd.ms-opentype`
+  instead of the current IETF RFC, `font/otf`, no matter what the "use legacy
+  font MIME types" settings in the preferences was set to. Fixes #6240.
 
 ## Build system changes
 

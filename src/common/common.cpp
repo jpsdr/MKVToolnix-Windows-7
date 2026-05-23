@@ -23,6 +23,8 @@
 # include <sys/syscall.h>
 #endif
 
+#include <QResource>
+
 #include <matroska/KaxVersion.h>
 
 #include "common/audio_emphasis.h"
@@ -35,6 +37,7 @@
 #include "common/logger.h"
 #include "common/mm_file_io.h"
 #include "common/mm_stdio.h"
+#include "common/qt.h"
 #include "common/random.h"
 #include "common/stereo_mode.h"
 #include "common/strings/editing.h"
@@ -152,6 +155,10 @@ mtx_common_init(std::string const &program_name,
   mtx::iana::language_subtag_registry::init_preferred_values(); // uses language_c::parse() & must therefore be initialized last
   audio_emphasis_c::init();
   stereo_mode_c::init();
+
+#if defined(WITH_MKVTOOLNIX_GUI) && WITH_MKVTOOLNIX_GUI
+  QResource::registerResource(u"%1/qt_resources.rcc"_s.arg(Q(mtx::sys::get_package_data_folder())));
+#endif
 }
 
 std::string const &

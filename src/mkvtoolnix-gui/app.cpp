@@ -97,7 +97,6 @@ App::App(int &argc,
   ignore_unique_numbers(UNIQUE_CHAPTER_IDS);
   ignore_unique_numbers(UNIQUE_EDITION_IDS);
 
-  QResource::registerResource(Q("%1/qt_resources.rcc").arg(Q(mtx::sys::get_package_data_folder())));
   QIcon::setThemeName(Q("mkvtoolnix-gui"));
 
   Util::Settings::migrateFromRegistry();

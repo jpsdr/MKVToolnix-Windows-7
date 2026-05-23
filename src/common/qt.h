@@ -18,8 +18,9 @@
 #include <ebml/EbmlString.h>
 #include <ebml/EbmlUnicodeString.h>
 
+using namespace Qt::StringLiterals;
+
 #define Q(s)  to_qs(s)
-#define QL(s) QStringLiteral(u ## s)
 #define QH(s) to_qs(s).toHtmlEscaped()
 #define QY(s) to_qs(Y(s))
 #define QYH(s) to_qs(Y(s)).toHtmlEscaped()

@@ -431,8 +431,11 @@ def add_qrc_dependencies *qrcs
       join('').
       scan(%r{<file[^>]*>([^<]+)}).
       map do |matches|
-      path = Pathname.new(File.absolute_path(dir + matches[0]))
-      path = path.relative_path_from(pwd) unless path.relative?
+      path = matches[0]
+      if path[0] != '/'
+        path = Pathname.new(File.absolute_path(dir + path))
+        path = path.relative_path_from(pwd) unless path.relative?
+      end
       path.to_s
     end
 
