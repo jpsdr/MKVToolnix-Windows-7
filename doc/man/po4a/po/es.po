@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2026-04-05 14:39+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: Casper, 2024-2025\n"
+"Last-Translator: overdrive80 <lukillas.ole@gmail.com>, 2016-2023,2026\n"
 "Language-Team: Spanish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "98.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2026-04-05"
-msgstr ""
+msgstr "2026-04-05"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -351,7 +351,7 @@ msgstr "<option>--no-bom</option>"
 #: doc/man/mkvmerge.xml:2306
 #: doc/man/mkvpropedit.xml:492
 msgid "Normally text files that are created &amp; encoded in one of the UTF variants will start with a byte order marker (BOM).  Using this option disables writing that byte order marker."
-msgstr "Normalmente, los archivos de texto creados y codificados en una de las variantes UTF comienzan con un marcador de orden de bytes (BOM). Usar esta opción deshabilita la escritura de dicho marcador."
+msgstr "Normalmente, los archivos de texto creados y codificados en una de las variantes UTF comienzan con un marcador de orden de bytes (BOM). Usar esta opción deshabilita la escritura de ese marcador."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:146
@@ -673,7 +673,7 @@ msgstr "<option>-T</option>, <option>--no-track-tags</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:409
 msgid "Exports only tags that aren't track-specific."
-msgstr "Exporta únicamente etiquetas que no son específicas de la pista."
+msgstr "Exporta únicamente las etiquetas que no son específicas de la pista."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:416
@@ -1864,7 +1864,7 @@ msgstr "<literal>%&lt;1-9&gt;n</literal> – nanosegundos con hasta nueve dígit
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:354
 msgid "The string '<literal>&lt;TITLE&gt;</literal>' is only filled when generating chapters for appended files.  It'll be replaced by the appended file's title if one is present."
-msgstr "El texto '<literal>&lt;TITLE&gt;</literal>' solo se rellena al generar los títulos de los capítulos para los archivos adjuntos. En ese caso, será reemplazado por el título del archivo adjunto, si este tiene uno."
+msgstr "La cadena '<literal>&lt;TITLE&gt;</literal>' solo se rellena al generar capítulos para archivos adjuntos. Se sustituirá por el título del archivo adjunto, si este existe."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:361
@@ -2039,12 +2039,12 @@ msgstr "Por defecto &mkvmerge; establece en el campo \"fecha\" de información d
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:534
 msgid "<option>--date</option> <replaceable>timestamp</replaceable>"
-msgstr "<option>--date</option> <replaceable>timestamp</replaceable> "
+msgstr "<option>--date</option> <replaceable>timestamp</replaceable>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:537
 msgid "Sets the <literal>DateUTC</literal> field written to the segment information. The timestamp must be ISO 8601-like: <literal>YYYY-mm-ddTHH:MM:SSZ</literal> for UTC or with an offset <literal>&#x00B1;HH:MM</literal> (a space instead of <literal>T</literal> is also accepted), e.g. <literal>2017-03-28T17:28:00Z</literal> or <literal>2017-03-28 17:28:00+02:00</literal>.  If used together with <option>--no-date</option>, <option>--no-date</option> takes precedence and no date will be written."
-msgstr "Establece el campo <literal>DateUTC</literal> que se escribe en la información del segmento. La marca de tiempo debe ser similar a la ISO 8601: <literal>dd-mm-YYYYTHH:MM:SSZ</literal>para UTC o con un desplazamiento <literal>&#x00B1;HH:MM</literal>(también se acepta un espacio en lugar de<literal>T</literal>) e.g. <literal>28-03-2017T17:28:00Z</literal>o <literal>28-03-2017 17:28:00+02:00</literal>.  Si se usa junto con <option>--no-date</option>,<option> --no-date</option>tiene prioridad y no se escribirá ninguna fecha."
+msgstr "Establece el campo <literal>DateUTC</literal> que se escribe en la información del segmento. La marca de tiempo debe ser similar a la ISO 8601: <literal>dd-mm-YYYYTHH:MM:SSZ</literal>para UTC o con un desplazamiento <literal>&#x00B1;HH:MM</literal>(también se acepta un espacio en lugar de<literal>T</literal>) p. ej. <literal>2017-03-28T17:28:00Z</literal>o <literal>2017-03-28 17:28:00+02:00</literal>.  Si se usa junto con <option>--no-date</option>,<option> --no-date</option>tiene prioridad y no se escribirá ninguna fecha."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:546
@@ -2675,7 +2675,7 @@ msgstr "<option>--attach-file</option> <parameter>nombre-archivo</parameter>, <o
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1181
 msgid "Creates a file attachment inside the &matroska; file. The difference between the two forms is that during splitting the files attached with <option>--attach-file</option> are attached to all output files while the ones attached with <option>--attach-file-once</option> are only attached to the first file created. If splitting is not used then both do the same."
-msgstr "Crea un archivo adjunto dentro del archivo &matroska;. La diferencia entre las dos formas es que durante la división, los archivos adjuntos con <option>--adjuntar-archivos</option> se adjuntan a todos los archivos de salida, mientras que los adjuntos con <option>--adjuntar-archivo-una-vez</option> solo se adjuntan al primer archivo creado. Si no se usa la división, ambas formas hacen lo mismo."
+msgstr "Crea un archivo adjunto dentro del archivo &matroska;. La diferencia entre las dos opciones es que al dividir con <option>---attach-file</option>, los archivos adjuntos se añaden a todos los archivos de salida, mientras que al usar <option>--attach-file-once</option> los adjuntos solo se añaden al primer archivo creado. Si no se utiliza la división, ambas opciones hacen lo mismo."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1187
@@ -2888,12 +2888,12 @@ msgstr "<option>--regenerate-track-uids</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1421
 msgid "When this option is used for a Matroska source file, &mkvmerge; will create new random unique track IDs instead of keeping the existing ones in the file. Existing track UIDs in chapters &amp; tags read from the same file will be remapped to the newly generated values."
-msgstr "Cuando se usa esta opción para una fuente de archivo Matroska, &mkvmerge; creará nuevos ID de pista únicos y aleatorios en lugar de mantener los existentes en el archivo. UID de seguimiento existentes en capítulos y secciones. Las etiquetas leídas del mismo archivo se reasignarán a los valores recién generados."
+msgstr "Cuando se usa esta opción, y el archivo de origen es Matroska, &mkvmerge; creará nuevos IDs de pista, únicos y aleatorios, en lugar de conservar los que ya existen en el archivo. Los UID de pista de los capítulos y de las etiquetas se reasignarán a los nuevos valores generados."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1427
 msgid "This behavior is enabled automatically for Matroska files created by the MakeMKV software. The reason is that MakeMKV uses consecutive numbers (1, 2, 3…) as UIDs instead of generating random ones."
-msgstr "Este comportamiento se habilita automáticamente para los archivos Matroska creados por el software MakeMKV. La razón es que MakeMKV usa números consecutivos (1, 2, 3…) como UID en lugar de generar números aleatorios."
+msgstr "Este comportamiento se habilita automáticamente para los archivos Matroska creados por el software MakeMKV. Se debe a que MakeMKV emplea números consecutivos (1, 2, 3…) para generar el UID en lugar de usar números aleatorios."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1434
@@ -3697,7 +3697,7 @@ msgstr "Lee argumentos adicionales de la línea de comandos desde el archivo <pa
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2418
 msgid "If you want to use the <literal>@</literal> sign as the first character in the argument to an option such as '<literal>--title</literal>', you have to escape it with a second <literal>@</literal> sign. Example:"
-msgstr "Si desea usar el signo <literal>@</literal> como primer carácter en el argumento de una opción como '<literal>--title</literal>', tienes que escapar de él con un segundo signo <literal>@</literal>. Ejemplo:"
+msgstr "Si quiere emplear el símbolo <literal>@</literal> como el primer carácter en el argumento de una opción como '<literal>--title</literal>', debe usar un segundo signo <literal>@</literal> como carácter de escape. Ejemplo:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvmerge.xml:2422
