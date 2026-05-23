@@ -231,7 +231,7 @@ convert66_0_0LanguageShortcuts() {
 
   auto idx = 0;
   for (auto const &language : value.toStringList()) {
-    reg->beginGroup(u"%1"_s.arg(++idx, 4, 10, u'0'));
+    reg->beginGroup(Q(fmt::format("{0:04}", ++idx)));
     reg->setValue(s_valLanguage,  language);
     reg->setValue(s_valTrackName, "");
     reg->endGroup();
@@ -1214,7 +1214,7 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
 
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
-    reg.beginGroup(u"%1"_s.arg(++idx, 4, 10, u'0'));
+    reg.beginGroup(Q(fmt::format("{0:04}", ++idx)));
     reg.setValue(s_valActive,      cfg->m_active);
     reg.setValue(s_valName,        cfg->m_name);
     reg.setValue(s_valType,        static_cast<int>(cfg->m_type));
@@ -1238,7 +1238,7 @@ Settings::saveLanguageShortcuts(QSettings &reg)
 
   auto idx = 0;
   for (auto const &shortcut : m_languageShortcuts) {
-    reg.beginGroup(u"%1"_s.arg(++idx, 4, 10, u'0'));
+    reg.beginGroup(Q(fmt::format("{0:04}", ++idx)));
     reg.setValue(s_valLanguage,  shortcut.m_language);
     reg.setValue(s_valTrackName, shortcut.m_trackName);
     reg.endGroup();
