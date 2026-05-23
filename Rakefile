@@ -580,8 +580,6 @@ namespace :translations do
   desc "Create a template for translating the programs"
   task :pot => "po/mkvtoolnix.pot"
 
-
-
   desc "Create a new .po file for the programs with an empty template"
   task "new-programs-po" => "po/mkvtoolnix.pot" do
     create_new_po "po"
