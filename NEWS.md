@@ -38,6 +38,9 @@
   fonts being detected as the legacy type `application/vnd.ms-opentype`
   instead of the current IETF RFC, `font/otf`, no matter what the "use legacy
   font MIME types" settings in the preferences was set to. Fixes #6240.
+* MKVToolNix GUI: update checker: fixed a potential attempt to read from an
+  invalid memory address if an error occurred when parsing the XML file
+  retrieved from the official MKVToolNix server.
 
 ## Build system changes
 

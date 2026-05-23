@@ -138,7 +138,7 @@ UpdateChecker::parseXml(QByteArray const &content) {
       return doc;
     }
 
-    qDebug() << "UpdateChecker::parseXml: of" << content.size() << "bytes failed:" << Q(xml_result.description()) << "at" << Q(xml_result.offset);
+    qDebug() << "UpdateChecker::parseXml: of" << content.size() << "bytes failed:" << Q(xml_result.description()) << "at" << static_cast<uint64_t>(xml_result.offset);
 
   } catch (mtx::compression_x &ex) {
     qDebug() << "UpdateChecker::parseXml: decompression exception:" << Q(ex.what());
