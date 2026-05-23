@@ -568,7 +568,7 @@ EOF
 
   rm -f ${dmgname} ${dmgbuildname}
   hdiutil create -srcfolder ${dmgbase} -volname ${volumename} \
-    -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
+    -fs APFS -format ULMO \
     ${dmgname}
 
   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
