@@ -132,6 +132,24 @@ def runq_touch(file_name)
   end
 end
 
+def remove_files(*file_names)
+  file_names.flatten.each do |file_name|
+    if FileTest.exist?(file_name)
+      puts_vaction "rm -f", :target => file_name
+      File.unlink file_name
+    end
+  end
+end
+
+def remove_files_and_dirs(*dir_names)
+  dir_names.flatten.each do |dir_name|
+    if FileTest.exist?(dir_name)
+      puts_vaction "rm -rf", :target => dir_name
+      FileUtils.rm_rf dir_name
+    end
+  end
+end
+
 def ensure_dir dir
   File.unlink(dir) if FileTest.exist?(dir) && !FileTest.directory?(dir)
   FileUtils.mkdir_p(dir)
@@ -211,10 +229,7 @@ def install_data(destination, *files)
 end
 
 def remove_files_by_patterns patterns
-  patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| FileTest.exist? file_name }.each do |file_name|
-    puts_vaction "rm", :target => file_name
-    File.unlink file_name
-  end
+  remove_files(*patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq)
 end
 
 def read_files *file_names

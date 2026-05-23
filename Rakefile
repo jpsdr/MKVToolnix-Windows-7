@@ -1064,21 +1064,18 @@ task :clean do
 
   remove_files_by_patterns patterns
 
-  if FileTest.exist? $dependency_dir
-    puts_vaction "rm -rf", :target => "#{$dependency_dir}"
-    FileUtils.rm_rf $dependency_dir
-  end
+  remove_files_and_dirs $dependency_dir
 end
 
 namespace :clean do
   desc "Remove all compiled and generated files ('tarball' clean)"
   task :dist => :clean do
-    run "rm -f config.h config.log config.cache build-config TAGS src/mkvtoolnix-gui/static_plugins.cpp #{Mtx::CompilationDatabase.database_file_name}", :allow_failure => true
+    remove_files %w{config.h config.log config.cache build-config TAGS src/mkvtoolnix-gui/static_plugins.cpp}, Mtx::CompilationDatabase.database_file_name
   end
 
   desc "Remove all compiled and generated files ('git' clean)"
   task :maintainer => "clean:dist" do
-    run "rm -f configure config.h.in", :allow_failure => true
+    remove_files %w{configure config.h.in}
   end
 
   desc "Remove compiled objects and programs in the unit test suite"
