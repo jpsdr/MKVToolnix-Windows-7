@@ -34,8 +34,6 @@ database() {
 const std::unordered_map<std::string, std::string> &
 get_font_mime_type_mapping(font_mime_type_type_e type) {
   if (s_font_mime_type_mapping_current_to_legacy.empty()) {
-    s_font_mime_type_mapping_legacy_to_current["application/x-font-otf"s] = "application/vnd.ms-opentype"s;
-    s_font_mime_type_mapping_legacy_to_current["application/x-font-ttf"s] = "application/x-truetype-font"s;
     s_font_mime_type_mapping_current_to_legacy["font/otf"s]               = "application/vnd.ms-opentype"s;
     s_font_mime_type_mapping_current_to_legacy["font/sfnt"s]              = "application/x-truetype-font"s;
     s_font_mime_type_mapping_current_to_legacy["font/ttf"s]               = "application/x-truetype-font"s;
