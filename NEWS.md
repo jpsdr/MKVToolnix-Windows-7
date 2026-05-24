@@ -26,11 +26,6 @@
 
 ## Bug fixes
 
-* macOS: GUI: the default audio file for program runners of type "play audio
-  file" has been changed to an AIFF file as Qt's Multimedia backend routes
-  through Core Audio which doesn't support WebM/VP8/Vorbis/Opus. Existing
-  configurations will be updated if they point to the prior default WebM audio
-  file. Fixes #6209.
 * mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: on
   Windows the MIME type detection will now use the FreeDesktop.org MIME
   database instead of falling back to file extension-based guesses. This
@@ -41,6 +36,11 @@
 * MKVToolNix GUI: update checker: fixed a potential attempt to read from an
   invalid memory address if an error occurred when parsing the XML file
   retrieved from the official MKVToolNix server.
+* macOS: GUI: the default audio file for program runners of type "play audio
+  file" has been changed to an AIFF file as Qt's Multimedia backend routes
+  through Core Audio which doesn't support WebM/VP8/Vorbis/Opus. Existing
+  configurations will be updated if they point to the prior default WebM audio
+  file. Fixes #6209.
 
 ## Build system changes
 
