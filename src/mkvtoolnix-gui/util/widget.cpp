@@ -109,7 +109,7 @@ setToolTip(QWidget *widget,
   // automatically if the format is recognized to be Rich Text. See
   // http://doc.qt.io/qt-5/qstandarditem.html
 
-  widget->setToolTip(toolTip.isEmpty() || toolTip.startsWith('<') ? toolTip : u"<span>%1</span>"_s.arg(toolTip.toHtmlEscaped()));
+  widget->setToolTip(toolTip.isEmpty() || toolTip.startsWith('<') ? toolTip : Q("<span>%1</span>").arg(toolTip.toHtmlEscaped()));
 }
 
 void
@@ -183,8 +183,8 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
                                 bool append) {
   auto &settings = Util::Settings::get();
   auto dir       = settings.lastOpenDirPath();
-  auto filter    = QY("Matroska and WebM files") + u" (*.mkv *.mka *.mks *.mk3d *.webm);;"_s
-                 + QY("All files")               + u" (*)"_s;
+  auto filter    = QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;")
+                 + QY("All files")               + Q(" (*)");
   auto fileName  = Util::getOpenFileName(&parent, QY("Select Matroska file to read segment UID from"), dir, filter);
 
   if (fileName.isEmpty())
@@ -199,13 +199,13 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
     auto src        = segmentUID->data();
 
     for (int idx = 0, numBytes = segmentUID->byte_size(); idx < numBytes; ++idx)
-      uidString += u"%1"_s.arg(QString::number(src[idx], 16), 2, '0').toUpper();
+      uidString += Q("%1").arg(QString::number(src[idx], 16), 2, '0').toUpper();
 
     if (!append || lineEdit.text().isEmpty())
       lineEdit.setText(uidString);
 
     else
-      lineEdit.setText(u"%1,%2"_s.arg(lineEdit.text()).arg(uidString));
+      lineEdit.setText(Q("%1,%2").arg(lineEdit.text()).arg(uidString));
 
   } catch (mtx::kax_analyzer_x &ex) {
     Util::MessageBox::critical(&parent)

@@ -20,14 +20,14 @@ QString
 dirPath(QString const &dir) {
   auto path = dir;
 
-  if (path.isEmpty() || (path == u"."_s))
+  if (path.isEmpty() || (path == Q(".")))
     path = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
 
-  if (path.isEmpty() || (path == u"."_s))
+  if (path.isEmpty() || (path == Q(".")))
     path = QDir::currentPath();
 
   if (!QDir::toNativeSeparators(path).endsWith(QDir::separator()))
-    path += u"/"_s;
+    path += Q("/");
 
   return QDir::fromNativeSeparators(path);
 }
@@ -35,7 +35,7 @@ dirPath(QString const &dir) {
 QString
 sanitizeDirectory(QString const &directory,
                   bool withFileName) {
-  auto dir     = to_utf8(directory.isEmpty() || (directory == u"."_s) ? QStandardPaths::writableLocation(QStandardPaths::MoviesLocation) : directory);
+  auto dir     = to_utf8(directory.isEmpty() || (directory == Q(".")) ? QStandardPaths::writableLocation(QStandardPaths::MoviesLocation) : directory);
   auto oldPath = boost::filesystem::absolute(mtx::fs::to_path(dir));
   auto newPath = oldPath;
   auto ec      = boost::system::error_code{};
@@ -98,7 +98,7 @@ getSaveFileName(QWidget *parent,
     dlg.setDefaultSuffix(defaultSuffix);
     dlg.setOptions(options & QFileDialog::DontUseCustomDirectoryIcons);
     dlg.setFileMode(fileMode);
-    dlg.setSupportedSchemes({ u"file"_s });
+    dlg.setSupportedSchemes({ Q("file") });
     dlg.setAcceptMode(QFileDialog::AcceptSave);
 
     if (selectedFilter && !selectedFilter->isEmpty())
@@ -116,7 +116,7 @@ getSaveFileName(QWidget *parent,
       return result;
 
     if (!defaultSuffix.isEmpty() && QFileInfo{result}.suffix().isEmpty())
-      result += u"."_s + defaultSuffix;
+      result += Q(".") + defaultSuffix;
 
     if ((fileMode != QFileDialog::ExistingFile) || QFile{result}.exists())
       return result;

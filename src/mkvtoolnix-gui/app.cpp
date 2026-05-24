@@ -54,7 +54,7 @@ formatRegionDescription(mtx::iso3166::region_t const &region) {
   if (region.number != 0)
     parts << Q(fmt::format("{0:03}", region.number));
 
-  return u"%1 (%2)"_s.arg(Q(region.name)).arg(parts.join(u"; "_s));
+  return Q("%1 (%2)").arg(Q(region.name)).arg(parts.join(Q("; ")));
 }
 
 } // anonymous namespace
@@ -98,7 +98,7 @@ App::App(int &argc,
   ignore_unique_numbers(UNIQUE_CHAPTER_IDS);
   ignore_unique_numbers(UNIQUE_EDITION_IDS);
 
-  QIcon::setThemeName(u"mkvtoolnix-gui"_s);
+  QIcon::setThemeName(Q("mkvtoolnix-gui"));
 
   Util::Settings::migrateFromRegistry();
   Util::Settings::get().load();
@@ -149,7 +149,7 @@ App::setupUiFont() {
 
 QString
 App::communicatorSocketName() {
-  return u"MKVToolNix-GUI-Instance-Communicator-%1"_s.arg(Util::currentUserName());
+  return Q("MKVToolNix-GUI-Instance-Communicator-%1").arg(Util::currentUserName());
 }
 
 void
@@ -265,8 +265,8 @@ App::initializeIso639Languages() {
 
   for (auto const &language : mtx::iso639::g_languages) {
     auto languageCode  = Q(language.alpha_3_code);
-    auto languageCodes = language.alpha_2_code.empty() ? languageCode : u"%1; %2"_s.arg(Q(language.alpha_2_code)).arg(languageCode);
-    auto description   = u"%1 (%2)"_s.arg(Q(gettext(language.english_name.c_str()))).arg(languageCodes);
+    auto languageCodes = language.alpha_2_code.empty() ? languageCode : Q("%1; %2").arg(Q(language.alpha_2_code)).arg(languageCode);
+    auto description   = Q("%1 (%2)").arg(Q(gettext(language.english_name.c_str()))).arg(languageCodes);
 
     s_iso639Languages.emplace_back(description, languageCode);
     if (language.is_part_of_iso639_2)
@@ -399,11 +399,11 @@ App::initializeLocale(QString const &requestedLocale) {
     p->m_currentTranslator.reset();
 
     auto translator = std::make_unique<QTranslator>();
-    auto paths      = QStringList{} << u"%1/locale/libqt"_s.arg(applicationDirPath())
+    auto paths      = QStringList{} << Q("%1/locale/libqt").arg(applicationDirPath())
                                     << mtxQLibrarylocation(QLibraryInfo::TranslationsPath);
 
     for (auto const &path : paths)
-      if (translator->load(u"qt_%1"_s.arg(locale), path))
+      if (translator->load(Q("qt_%1").arg(locale), path))
         break;
 
     installTranslator(translator.get());
@@ -568,7 +568,7 @@ App::receiveInstanceCommunication() {
 
 QString
 App::settingsBaseGroupName() {
-  return u"MKVToolNix GUI Settings"_s;
+  return Q("MKVToolNix GUI Settings");
 }
 
 void
@@ -587,7 +587,7 @@ App::setupAppearance() {
 void
 App::setupPalette() {
   auto const &cfg                 = Util::Settings::get();
-  auto const regAppsUseLightTheme = QSettings{u"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"_s, QSettings::NativeFormat}.value(u"AppsUseLightTheme"_s);
+  auto const regAppsUseLightTheme = QSettings{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat}.value(Q("AppsUseLightTheme"));
   auto const paletteToUse         = cfg.m_uiPalette != Util::Settings::AppPalette::OS                ? cfg.m_uiPalette
                                   : !regAppsUseLightTheme.isValid() || regAppsUseLightTheme.toBool() ? Util::Settings::AppPalette::Light
                                   :                                                                    Util::Settings::AppPalette::Dark;
@@ -647,7 +647,7 @@ App::event(QEvent *event) {
   if (event->type() == QEvent::FileOpen) {
     auto fileNames = QStringList{} << static_cast<QFileOpenEvent &>(*event).file();
 
-    if (fileNames[0].endsWith(u".mtxcfg"_s))
+    if (fileNames[0].endsWith(Q(".mtxcfg")))
       Q_EMIT openConfigFilesRequested(fileNames);
 
     else

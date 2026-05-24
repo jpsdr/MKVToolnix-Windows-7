@@ -42,7 +42,7 @@ QString
 FloatValuePage::originalValueAsString()
   const {
   if (!m_element)
-    return u""_s;
+    return Q("");
   return QString::number(m_originalValue);
 }
 

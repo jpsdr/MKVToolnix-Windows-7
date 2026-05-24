@@ -51,16 +51,16 @@ LanguageComboBox::setup(bool withEmpty,
   auto separatorOffset = 0;
 
   if (withEmpty) {
-    addItem(emptyTitle, u""_s);
+    addItem(emptyTitle, Q(""));
     ++separatorOffset;
   }
 
   auto commonLanguages = onlyOftenUsed ? mergeCommonAndAdditionalItems(App::commonIso639Languages(), App::iso639Languages(), additionalItems()) : App::commonIso639Languages();
-  auto undIsCommon     = std::find_if(commonLanguages.begin(), commonLanguages.end(), [](auto const &language) { return language.second == u"und"_s; }) != commonLanguages.end();
+  auto undIsCommon     = std::find_if(commonLanguages.begin(), commonLanguages.end(), [](auto const &language) { return language.second == Q("und"); }) != commonLanguages.end();
 
   if (!onlyOftenUsed && !undIsCommon) {
     for (auto const &language : App::iso639Languages()) {
-      if (language.second != u"und"_s)
+      if (language.second != Q("und"))
         continue;
 
       addItem(language.first, language.second);

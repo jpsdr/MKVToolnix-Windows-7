@@ -131,7 +131,7 @@ AdditionalCommandLineOptionsDialog::add(QString const &title,
     connect(option->value, &QLineEdit::textChanged, this, &AdditionalCommandLineOptionsDialog::enableOkButton);
   }
 
-  auto re    = QRegularExpression{ requiresValue ? Q("\\s*%1\\s+([^\\s]+)\\s*").arg(QRegularExpression::escape(title)) : Q("\\s*%1\\s*").arg(QRegularExpression::escape(title)) };  auto re    = QRegularExpression{ requiresValue ? u"\\s*%1\\s+([^\\s]+)\\s*"_s.arg(QRegularExpression::escape(title)) : u"\\s*%1\\s*"_s.arg(QRegularExpression::escape(title)) };
+  auto re    = QRegularExpression{ requiresValue ? Q("\\s*%1\\s+([^\\s]+)\\s*").arg(QRegularExpression::escape(title)) : Q("\\s*%1\\s*").arg(QRegularExpression::escape(title)) };
   auto match = re.match(m_customOptions);
 
   if (!match.hasMatch())

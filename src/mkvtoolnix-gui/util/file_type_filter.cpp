@@ -42,13 +42,13 @@ FileTypeFilter::get() {
     all_extensions << QString("*.%1").arg(extension.first);
 
   s_filter << QString("%1 (*.bdmv)").arg(QY("Blu-ray index files"));
-  all_extensions << u"*.bdmv"_s;
+  all_extensions << Q("*.bdmv");
 
   s_filter.sort();
   all_extensions.sort();
 
-  s_filter.push_front(u"%1 (*)"_s.arg(QY("All files")));
-  s_filter.push_front(u"%1 (%2)"_s.arg(QY("All supported media files")).arg(all_extensions.join(" ")));
+  s_filter.push_front(Q("%1 (*)").arg(QY("All files")));
+  s_filter.push_front(Q("%1 (%2)").arg(QY("All supported media files")).arg(all_extensions.join(" ")));
 
   return s_filter;
 }

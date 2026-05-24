@@ -98,8 +98,8 @@ Tab::setupUi() {
 
   retranslateUi();
 
-  p->ui->acknowledgeWarningsAndErrorsButton->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
-  p->ui->abortButton->setIcon(QIcon::fromTheme(u"dialog-cancel"_s));
+  p->ui->acknowledgeWarningsAndErrorsButton->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
+  p->ui->abortButton->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
 
   auto model = MainWindow::jobTool()->model();
 
@@ -131,8 +131,8 @@ Tab::setupMoreActionsMenu() {
 
   p->ui->moreActionsButton->setMenu(p->m_moreActions);
 
-  p->m_openFolderAction->setIcon(QIcon::fromTheme(u"document-open-folder"_s));
-  p->m_saveOutputAction->setIcon(QIcon::fromTheme(u"document-save"_s));
+  p->m_openFolderAction->setIcon(QIcon::fromTheme(Q("document-open-folder")));
+  p->m_saveOutputAction->setIcon(QIcon::fromTheme(Q("document-save")));
 }
 
 void
@@ -255,7 +255,7 @@ Tab::updateOneRemainingTimeLabel(QLabel *label,
 
   auto elapsedDuration = startTime.msecsTo(QDateTime::currentDateTime());
   if (5000 > elapsedDuration)
-    label->setText(u"–"_s);
+    label->setText(Q("–"));
 
   else {
     auto totalDuration     = elapsedDuration * 100 / progress;
@@ -269,14 +269,14 @@ Tab::updateRemainingTime() {
   auto p = p_func();
 
   if ((Jobs::Job::Running != p->m_currentJobStatus) || !p->m_currentJobProgress)
-    p->ui->remainingTimeCurrentJob->setText(u"–"_s);
+    p->ui->remainingTimeCurrentJob->setText(Q("–"));
 
   else
     updateOneRemainingTimeLabel(p->ui->remainingTimeCurrentJob, p->m_currentJobStartTime, p->m_currentJobProgress);
 
   auto model = MainWindow::jobTool()->model();
   if (!model->isRunning())
-    p->ui->remainingTimeQueue->setText(u"–"_s);
+    p->ui->remainingTimeQueue->setText(Q("–"));
 
   else
     updateOneRemainingTimeLabel(p->ui->remainingTimeQueue, model->queueStartTime(), p->m_queueProgress);
@@ -314,9 +314,9 @@ Tab::onLineRead(QString const &line,
                 : Jobs::Job::WarningLine == type ? p->ui->warnings
                 :                                  p->ui->errors;
 
-  auto prefix   = Jobs::Job::InfoLine    == type ? u""_s
-                : Jobs::Job::WarningLine == type ? u"%1 "_s.arg(QY("Warning:"))
-                :                                  u"%1 "_s.arg(QY("Error:"));
+  auto prefix   = Jobs::Job::InfoLine    == type ? Q("")
+                : Jobs::Job::WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
+                :                                  Q("%1 ").arg(QY("Error:"));
 
   if (mtx::included_in(type, Jobs::Job::WarningLine, Jobs::Job::ErrorLine)) {
     p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
@@ -331,7 +331,7 @@ Tab::onLineRead(QString const &line,
     }
   }
 
-  p->m_fullOutput << u"%1%2"_s.arg(prefix).arg(line);
+  p->m_fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage->appendPlainText(line);
 
 }
@@ -351,9 +351,9 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   } else {
     p->m_fullOutput = job.fullOutput();
 
-    p->ui->output  ->setPlainText(!job.output().isEmpty()   ? u"%1\n"_s.arg(job.output().join("\n"))   : u""_s);
-    p->ui->warnings->setPlainText(!job.warnings().isEmpty() ? u"%1\n"_s.arg(job.warnings().join("\n")) : u""_s);
-    p->ui->errors  ->setPlainText(!job.errors().isEmpty()   ? u"%1\n"_s.arg(job.errors().join("\n"))   : u""_s);
+    p->ui->output  ->setPlainText(!job.output().isEmpty()   ? Q("%1\n").arg(job.output().join("\n"))   : Q(""));
+    p->ui->warnings->setPlainText(!job.warnings().isEmpty() ? Q("%1\n").arg(job.warnings().join("\n")) : Q(""));
+    p->ui->errors  ->setPlainText(!job.errors().isEmpty()   ? Q("%1\n").arg(job.errors().join("\n"))   : Q(""));
   }
 
   p->m_currentJobLineTypeSeen.clear();
@@ -393,8 +393,8 @@ void
 Tab::onSaveOutput() {
   auto p        = p_func();
   auto &cfg     = Util::Settings::get();
-  auto txtName  = Util::replaceInvalidFileNameCharacters(p->m_currentJobDescription) + u".txt"_s;
-  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), txtName, QY("Text files") + u" (*.txt);;"_s + QY("All files") + u" (*)"_s, u"txt"_s);
+  auto txtName  = Util::replaceInvalidFileNameCharacters(p->m_currentJobDescription) + Q(".txt");
+  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), txtName, QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), Q("txt"));
 
   if (!fileName.isEmpty())
     Util::saveTextToFile(fileName, p->m_fullOutput, true);
@@ -448,8 +448,8 @@ Tab::clearOutput() {
   p->ui->description->setText(QY("No job has been started yet."));
   p->ui->startedAt->setText(QY("Not started yet"));
   p->ui->finishedAt->setText(QY("Not finished yet"));
-  p->ui->remainingTimeCurrentJob->setText(u"–"_s);
-  p->ui->remainingTimeQueue->setText(u"–"_s);
+  p->ui->remainingTimeCurrentJob->setText(Q("–"));
+  p->ui->remainingTimeQueue->setText(Q("–"));
 
   Q_EMIT watchCurrentJobTabCleared();
 }

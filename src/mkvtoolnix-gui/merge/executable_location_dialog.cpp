@@ -43,7 +43,7 @@ ExecutableLocationDialog::setInfo(QString const &title,
 
 ExecutableLocationDialog &
 ExecutableLocationDialog::setURL(QString const &url) {
-  m_ui->lURL->setText(u"<a href=\"%1\">%1</a>"_s.arg(url.toHtmlEscaped()));
+  m_ui->lURL->setText(Q("<a href=\"%1\">%1</a>").arg(url.toHtmlEscaped()));
   m_ui->lURL->setVisible(true);
 
   return *this;
@@ -60,11 +60,11 @@ ExecutableLocationDialog::browse() {
   auto filters = QStringList{};
 
 #if defined(SYS_WINDOWS)
-  filters << QY("Executable files") + u" (*.exe)"_s;
+  filters << QY("Executable files") + Q(" (*.exe)");
 #endif
-  filters << QY("All files") + u" (*)"_s;
+  filters << QY("All files") + Q(" (*)");
 
-  auto fileName = Util::getOpenFileName(this, QY("Select executable"), m_ui->leExecutable->text(), filters.join(u";;"_s));
+  auto fileName = Util::getOpenFileName(this, QY("Select executable"), m_ui->leExecutable->text(), filters.join(Q(";;")));
   if (!fileName.isEmpty())
     m_ui->leExecutable->setText(fileName);
 }

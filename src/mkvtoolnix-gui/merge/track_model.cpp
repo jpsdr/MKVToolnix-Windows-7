@@ -40,13 +40,13 @@ insertPriorityForTrack(Track const &track) {
 TrackModel::TrackModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_tracks{}
-  , m_audioIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"audio-headphones"_s))}
-  , m_videoIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"tool-animator"_s))}
-  , m_subtitleIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"draw-text"_s))}
-  , m_attachmentIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"mail-attachment"_s))}
-  , m_chaptersIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"clock"_s))}
-  , m_tagsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"mail-tagged"_s))}
-  , m_genericIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"application-octet-stream"_s))}
+  , m_audioIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("audio-headphones")))}
+  , m_videoIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("tool-animator")))}
+  , m_subtitleIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("draw-text")))}
+  , m_attachmentIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("mail-attachment")))}
+  , m_chaptersIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("clock")))}
+  , m_tagsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("mail-tagged")))}
+  , m_genericIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("application-octet-stream")))}
   , m_yesIcon{Util::fixStandardItemIcon(MainWindow::yesIcon())}
   , m_noIcon{Util::fixStandardItemIcon(MainWindow::noIcon())}
   , m_ignoreTrackRemovals{}
@@ -70,20 +70,20 @@ TrackModel::~TrackModel() {
 void
 TrackModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Codec"),                   u"codec"_s            },
-    { QY("Type"),                    u"type"_s             },
-    { QY("Copy item"),               u"muxThis"_s          },
-    { QY("Language"),                u"language"_s         },
-    { QY("Name"),                    u"name"_s             },
-    { QY("ID"),                      u"id"_s               },
-    { QY("Default track"),           u"defaultTrackFlag"_s },
-    { QY("Forced display"),          u"forcedTrackFlag"_s  },
-    { QY("Character set"),           u"characterSet"_s     },
-    { QY("Properties"),              u"properties"_s       },
-    { QY("Source file"),             u"sourceFile"_s       },
-    { QY("Source file's directory"), u"sourceFileDir"_s    },
-    { QY("Program"),                 u"program"_s          },
-    { QY("Delay"),                   u"delay"_s            },
+    { QY("Codec"),                   Q("codec")            },
+    { QY("Type"),                    Q("type")             },
+    { QY("Copy item"),               Q("muxThis")          },
+    { QY("Language"),                Q("language")         },
+    { QY("Name"),                    Q("name")             },
+    { QY("ID"),                      Q("id")               },
+    { QY("Default track"),           Q("defaultTrackFlag") },
+    { QY("Forced display"),          Q("forcedTrackFlag")  },
+    { QY("Character set"),           Q("characterSet")     },
+    { QY("Properties"),              Q("properties")       },
+    { QY("Source file"),             Q("sourceFile")       },
+    { QY("Source file's directory"), Q("sourceFileDir")    },
+    { QY("Program"),                 Q("program")          },
+    { QY("Delay"),                   Q("delay")            },
   });
 
   horizontalHeaderItem(IDColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -137,9 +137,9 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[MuxThisColumn]         ->setText(track->m_muxThis ? QY("Yes") : QY("No"));
   items[LanguageColumn]        ->setText(track->isAppended() ? QString{} : Q(track->m_language.format()));
   items[NameColumn]            ->setText(track->isAppended() ? QString{} : track->m_name);
-  items[IDColumn]              ->setText(-1 == track->m_id ? u""_s : QString::number(track->m_id));
-  items[DefaultTrackFlagColumn]->setText(!track->isRegular() ? u""_s : track->m_defaultTrackFlag ? QY("Yes") : QY("No"));
-  items[ForcedTrackFlagColumn] ->setText(!track->isRegular() ? u""_s : track->m_forcedTrackFlag  ? QY("Yes") : QY("No"));
+  items[IDColumn]              ->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
+  items[DefaultTrackFlagColumn]->setText(!track->isRegular() ? Q("") : track->m_defaultTrackFlag ? QY("Yes") : QY("No"));
+  items[ForcedTrackFlagColumn] ->setText(!track->isRegular() ? Q("") : track->m_forcedTrackFlag  ? QY("Yes") : QY("No"));
   items[CharacterSetColumn]    ->setText(!track->m_file->isTextSubtitleContainer() ? QString{} : track->m_characterSet);
   items[PropertiesColumn]      ->setText(summarizeProperties(*track));
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
@@ -712,15 +712,15 @@ TrackModel::summarizeProperties(Track const &track) {
       properties << QY("%1 pixels").arg(track.m_properties.value("pixel_dimensions").toString());
   }
 
-  return properties.join(u", "_s);
+  return properties.join(Q(", "));
 }
 
 QString
 TrackModel::programInfoFor(Track const &track) {
-  if (!track.m_properties.contains(u"program_number"_s))
+  if (!track.m_properties.contains(Q("program_number")))
     return {};
 
-  auto programNumber = track.m_properties[u"program_number"_s].toUInt();
+  auto programNumber = track.m_properties[Q("program_number")].toUInt();
 
   if (track.m_file->m_programMap.contains(programNumber))
     return track.m_file->m_programMap[programNumber].m_serviceName;

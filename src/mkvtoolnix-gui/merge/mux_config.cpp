@@ -197,46 +197,46 @@ MuxConfig::findErrorInStructure()
   checkFile = [this, &checkFile, &isSourceFileValid, &isTrackValid](SourceFile &file, int level) -> QString {
     if (file.m_appendedTo) {
       if (level != 2)
-        return u"file->m_appendedTo != nullptr in level %1 file"_s.arg(level);
+        return Q("file->m_appendedTo != nullptr in level %1 file").arg(level);
 
       if (!isSourceFileValid(file.m_appendedTo))
-        return u"file->m_appendedTo is not valid in level %1 file"_s.arg(level);
+        return Q("file->m_appendedTo is not valid in level %1 file").arg(level);
     }
 
     for (auto const &track : file.m_tracks) {
       if ((level == 1) && !m_tracks.contains(track.get()))
-        return u"config->m_tracks does not contain track from level %1 file"_s.arg(level);
+        return Q("config->m_tracks does not contain track from level %1 file").arg(level);
 
       if (!track->m_file)
-        return u"track->m_file == nullptr in level %1 file"_s.arg(level);
+        return Q("track->m_file == nullptr in level %1 file").arg(level);
 
       if (track->m_file != &file)
-        return u"track->m_file != current file in level %1 file"_s.arg(level);
+        return Q("track->m_file != current file in level %1 file").arg(level);
 
       if (track->m_appendedTo && !isTrackValid(track->m_appendedTo))
-        return u"track->m_appendedTo is not valid in level %1 file"_s.arg(level);
+        return Q("track->m_appendedTo is not valid in level %1 file").arg(level);
 
       for (auto const &appendedTrack : track->m_appendedTracks) {
         if (!appendedTrack)
-          return u"track->m_appendedTrack[idx] == nullptr in level %1 file"_s.arg(level);
+          return Q("track->m_appendedTrack[idx] == nullptr in level %1 file").arg(level);
 
         if (!isTrackValid(appendedTrack))
-          return u"track->m_appendedTrack[idx] is not valid in level %1 file"_s.arg(level);
+          return Q("track->m_appendedTrack[idx] is not valid in level %1 file").arg(level);
       }
     }
 
     for (auto const &attachedFile : file.m_attachedFiles) {
       if (!attachedFile->m_file)
-        return u"attachedFile->m_file == nullptr in level %1 file"_s.arg(level);
+        return Q("attachedFile->m_file == nullptr in level %1 file").arg(level);
 
       if (attachedFile->m_file != &file)
-        return u"attachedFile->m_file != current file in level %1 file"_s.arg(level);
+        return Q("attachedFile->m_file != current file in level %1 file").arg(level);
 
       if (attachedFile->m_appendedTo)
-        return u"attachedFile->m_appendedTo != nullptr in level %1 file"_s.arg(level);
+        return Q("attachedFile->m_appendedTo != nullptr in level %1 file").arg(level);
 
       if (!attachedFile->m_appendedTracks.isEmpty())
-        return u"attachedFile->m_appendedTracks is not empty in level %1 file"_s.arg(level);
+        return Q("attachedFile->m_appendedTracks is not empty in level %1 file").arg(level);
     }
 
     if (level == 1) {
@@ -249,7 +249,7 @@ MuxConfig::findErrorInStructure()
     } else {
       for (auto const &appendedFile : file.m_appendedFiles)
         if (!appendedFile->m_appendedFiles.isEmpty())
-          return u"m_appendedFiles is not empty on level 2"_s;
+          return Q("m_appendedFiles is not empty on level 2");
     }
 
     return {};
@@ -257,7 +257,7 @@ MuxConfig::findErrorInStructure()
 
   for (auto const &track : m_tracks)
     if (!isTrackValid(track))
-      return u"m_tracks[idx] is not valid"_s;
+      return Q("m_tracks[idx] is not valid");
 
   for (auto const &file : m_files) {
     auto error = checkFile(*file, 1);
@@ -276,13 +276,13 @@ MuxConfig::verifyStructure()
     return;
 
   auto message = QStringList{}
-    << u"MuxConfig::verifyStructure:"_s
+    << Q("MuxConfig::verifyStructure:")
     << QY("The following non-recoverable error was found: %1.").arg(error)
     << Q(BUGMSG)
     << QY("The application will terminate now.");
 
   Util::MessageBox::critical(nullptr)
-    ->text(message.join(u" "_s))
+    ->text(message.join(Q(" ")))
     .title(QY("Error"))
     .exec();
 
@@ -583,7 +583,7 @@ MuxConfig::toString()
   at_scope_exit_c cleaner([&tempFileName]() { QFile{tempFileName}.remove(); });
 
   {
-    QTemporaryFile tempFile{QDir::temp().filePath(u"MKVToolNix-GUI-MuxConfig-XXXXXX"_s)};
+    QTemporaryFile tempFile{QDir::temp().filePath(Q("MKVToolNix-GUI-MuxConfig-XXXXXX"))};
     tempFile.setAutoRemove(false);
     if (!tempFile.open())
       return QString{};
@@ -636,10 +636,10 @@ MuxConfig::buildTrackOrder(QHash<SourceFile *, unsigned int> const &fileNumbers)
     if (   track->m_muxThis
         && (!track->m_appendedTo || track->m_appendedTo->m_muxThis)
         && (track->isAudio() || track->isVideo() || track->isSubtitles() || track->isButtons()))
-      trackOrder << u"%1:%2"_s.arg(fileNumbers.value(track->m_file)).arg(track->m_id);
+      trackOrder << Q("%1:%2").arg(fileNumbers.value(track->m_file)).arg(track->m_id);
 
   if (trackOrder.size() > 1)
-    return QStringList{} << u"--track-order"_s << trackOrder.join(u","_s);
+    return QStringList{} << Q("--track-order") << trackOrder.join(Q(","));
   return QStringList{};
 }
 
@@ -653,14 +653,14 @@ MuxConfig::buildAppendToMapping(QHash<SourceFile *, unsigned int> const &fileNum
 
     for (auto const &sourceTrack : destinationTrack->m_appendedTracks)
       if (sourceTrack->m_muxThis && (sourceTrack->isAudio() || sourceTrack->isVideo() || sourceTrack->isSubtitles() || sourceTrack->isButtons())) {
-        appendToMapping << u"%1:%2:%3:%4"_s.arg(fileNumbers.value(sourceTrack->m_file)).arg(sourceTrack->m_id).arg(currentDestinationFileNumber).arg(currentDestinationTrackId);
+        appendToMapping << Q("%1:%2:%3:%4").arg(fileNumbers.value(sourceTrack->m_file)).arg(sourceTrack->m_id).arg(currentDestinationFileNumber).arg(currentDestinationTrackId);
 
         currentDestinationFileNumber = fileNumbers.value(sourceTrack->m_file);
         currentDestinationTrackId    = sourceTrack->m_id;
       }
   }
 
-  return appendToMapping.isEmpty() ? QStringList{} : QStringList{} << u"--append-to"_s << appendToMapping.join(u","_s);
+  return appendToMapping.isEmpty() ? QStringList{} : QStringList{} << Q("--append-to") << appendToMapping.join(Q(","));
 }
 
 Util::CommandLineOptions
@@ -671,32 +671,32 @@ MuxConfig::buildMkvmergeOptions()
   auto &settings              = Util::Settings::get();
   auto locale                 = settings.localeToUse();
   auto additionalOptions      = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
-  auto regenerateTrackUIDsStr = u"--regenerate-track-uids"_s;
+  auto regenerateTrackUIDsStr = Q("--regenerate-track-uids");
   auto regenerateTrackUIDs    = additionalOptions.contains(regenerateTrackUIDsStr);
 
   if (regenerateTrackUIDs)
     additionalOptions.remove(regenerateTrackUIDsStr);
 
   if (!locale.isEmpty())
-    options << u"--ui-language"_s << locale;
+    options << Q("--ui-language") << locale;
 
   if (Util::Settings::NormalPriority != settings.m_priority)
-    options << u"--priority"_s << settings.priorityAsString();
+    options << Q("--priority") << settings.priorityAsString();
 
   if (mtx::bcp47::normalization_mode_e::default_mode != settings.m_bcp47NormalizationMode) {
-    auto mode = mtx::bcp47::normalization_mode_e::none      == settings.m_bcp47NormalizationMode ? u"off"_s
-              : mtx::bcp47::normalization_mode_e::canonical == settings.m_bcp47NormalizationMode ? u"canonical"_s
-              :                                                                                    u"extlang"_s;
-    options << u"--normalize-language-ietf"_s << mode;
+    auto mode = mtx::bcp47::normalization_mode_e::none      == settings.m_bcp47NormalizationMode ? Q("off")
+              : mtx::bcp47::normalization_mode_e::canonical == settings.m_bcp47NormalizationMode ? Q("canonical")
+              :                                                                                    Q("extlang");
+    options << Q("--normalize-language-ietf") << mode;
   }
 
-  options << u"--output"_s << Util::CommandLineOption::fileName(m_destination);
+  options << Q("--output") << Util::CommandLineOption::fileName(m_destination);
 
   if (m_webmMode)
-    options << u"--webm"_s;
+    options << Q("--webm");
 
   if (m_stopAfterVideoEnds)
-    options << u"--stop-after-video-ends"_s;
+    options << Q("--stop-after-video-ends");
 
   if (settings.m_useLegacyFontMIMETypes) {
     auto haveAttachments = !m_attachments.isEmpty()
@@ -705,7 +705,7 @@ MuxConfig::buildMkvmergeOptions()
           }) != m_files.end());
 
     if (haveAttachments)
-      options << u"--enable-legacy-font-mime-types"_s;
+      options << Q("--enable-legacy-font-mime-types");
   }
 
   auto probeRangePercentage = 0.0;
@@ -722,20 +722,20 @@ MuxConfig::buildMkvmergeOptions()
     attachment->buildMkvmergeOptions(options);
 
   if (DoNotSplit != m_splitMode) {
-    auto mode = SplitAfterSize       == m_splitMode ? u"size:"_s
-              : SplitAfterDuration   == m_splitMode ? u"duration:"_s
-              : SplitAfterTimestamps == m_splitMode ? u"timestamps:"_s
-              : SplitByParts         == m_splitMode ? u"parts:"_s
-              : SplitByPartsFrames   == m_splitMode ? u"parts-frames:"_s
-              : SplitByFrames        == m_splitMode ? u"frames:"_s
-              : SplitAfterChapters   == m_splitMode ? u"chapters:"_s
-              :                                       u"PROGRAM EROR"_s;
-    options << u"--split"_s << (mode + m_splitOptions);
+    auto mode = SplitAfterSize       == m_splitMode ? Q("size:")
+              : SplitAfterDuration   == m_splitMode ? Q("duration:")
+              : SplitAfterTimestamps == m_splitMode ? Q("timestamps:")
+              : SplitByParts         == m_splitMode ? Q("parts:")
+              : SplitByPartsFrames   == m_splitMode ? Q("parts-frames:")
+              : SplitByFrames        == m_splitMode ? Q("frames:")
+              : SplitAfterChapters   == m_splitMode ? Q("chapters:")
+              :                                       Q("PROGRAM EROR");
+    options << Q("--split") << (mode + m_splitOptions);
 
     if (m_splitMaxFiles >= 2)
-      options << u"--split-max-files"_s << QString::number(m_splitMaxFiles);
+      options << Q("--split-max-files") << QString::number(m_splitMaxFiles);
     if (m_linkFiles)
-      options << u"--link"_s;
+      options << Q("--link");
   }
 
   auto add = [&options](QString const &arg, Util::CommandLineOption const &value, std::optional<bool> predicate = {}) {
@@ -743,44 +743,44 @@ MuxConfig::buildMkvmergeOptions()
       options << arg << value;
   };
 
-  add(u"--title"_s,            m_title, !m_title.isEmpty() || hasSourceFileWithTitle());
-  add(u"--segment-uid"_s,      m_segmentUIDs);
-  add(u"--link-to-previous"_s, m_previousSegmentUID);
-  add(u"--link-to-next"_s,     m_nextSegmentUID);
-  add(u"--segmentinfo"_s,      Util::CommandLineOption::fileName(m_segmentInfo));
+  add(Q("--title"),            m_title, !m_title.isEmpty() || hasSourceFileWithTitle());
+  add(Q("--segment-uid"),      m_segmentUIDs);
+  add(Q("--link-to-previous"), m_previousSegmentUID);
+  add(Q("--link-to-next"),     m_nextSegmentUID);
+  add(Q("--segmentinfo"),      Util::CommandLineOption::fileName(m_segmentInfo));
 
   if (!m_chapters.isEmpty()) {
-    add(u"--chapter-language"_s,        Q(m_chapterLanguage.format()));
-    add(u"--chapter-charset"_s,         m_chapterCharacterSet);
-    add(u"--cue-chapter-name-format"_s, m_chapterCueNameFormat);
+    add(Q("--chapter-language"),        Q(m_chapterLanguage.format()));
+    add(Q("--chapter-charset"),         m_chapterCharacterSet);
+    add(Q("--cue-chapter-name-format"), m_chapterCueNameFormat);
 
     if (!m_chapterDelay.isEmpty() || !m_chapterStretchBy.isEmpty())
-      options << u"--chapter-sync"_s << formatDelayAndStretchBy(m_chapterDelay, m_chapterStretchBy);
+      options << Q("--chapter-sync") << formatDelayAndStretchBy(m_chapterDelay, m_chapterStretchBy);
 
     auto chapters = m_chapters;
     if (m_chapters.toLower().endsWith(".ifo"))
-      chapters += u":%1"_s.arg(m_chapterTitleNumber);
+      chapters += Q(":%1").arg(m_chapterTitleNumber);
 
-    options << u"--chapters"_s << Util::CommandLineOption::fileName(chapters);
+    options << Q("--chapters") << Util::CommandLineOption::fileName(chapters);
   }
 
   if (needChapterNameTemplateAndLanguage()) {
     if (m_chapters.isEmpty())
-      add(u"--chapter-language"_s, Q(m_chapterLanguage.format()));
-    options << u"--generate-chapters-name-template"_s << m_chapterGenerationNameTemplate;
+      add(Q("--chapter-language"), Q(m_chapterLanguage.format()));
+    options << Q("--generate-chapters-name-template") << m_chapterGenerationNameTemplate;
   }
 
   if (ChapterGenerationMode::None != m_chapterGenerationMode) {
-    options << u"--generate-chapters"_s;
+    options << Q("--generate-chapters");
 
     if (ChapterGenerationMode::WhenAppending == m_chapterGenerationMode)
-      options << u"when-appending"_s;
+      options << Q("when-appending");
 
     else
-      options << u"interval:%1"_s.arg(m_chapterGenerationInterval);
+      options << Q("interval:%1").arg(m_chapterGenerationInterval);
   }
 
-  add(u"--global-tags"_s, Util::CommandLineOption::fileName(m_globalTags));
+  add(Q("--global-tags"), Util::CommandLineOption::fileName(m_globalTags));
 
   if (!additionalOptions.isEmpty())
     options << Util::unescapeSplit(additionalOptions, Util::EscapeShellUnix);
@@ -845,12 +845,12 @@ MuxConfig::debugDumpSpecificTrackList(QList<Track *> const &tracks) {
 
 QString
 MuxConfig::settingsType() {
-  return u"MuxConfig"_s;
+  return Q("MuxConfig");
 }
 
 QString
 MuxConfig::settingsTypeMulti() {
-  return u"MuxConfigMulti"_s;
+  return Q("MuxConfigMulti");
 }
 
 bool
@@ -883,12 +883,12 @@ MuxConfig::needChapterNameTemplateAndLanguage()
 QString
 MuxConfig::formatDelayAndStretchBy(QString const &delay,
                                    QString const &stretchBy) {
-  auto arg = delay.isEmpty() ? u"0"_s : delay;
+  auto arg = delay.isEmpty() ? Q("0") : delay;
 
   if (!stretchBy.isEmpty()) {
-    arg += u",%1"_s.arg(stretchBy);
+    arg += Q(",%1").arg(stretchBy);
     if (!stretchBy.contains('/'))
-      arg += u"/1"_s;
+      arg += Q("/1");
   }
 
   return arg;
@@ -898,7 +898,7 @@ bool
 MuxConfig::isSplittingEnabled()
   const {
   return (MuxConfig::DoNotSplit != m_splitMode)
-      || m_additionalOptions.contains(QRegularExpression{u"--split(?:[^a-z-]|$)"_s});
+      || m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")});
 }
 
 void
@@ -908,23 +908,23 @@ MuxConfig::runProgramSetupVariables(QMap<QString, QStringList> &variables)
   auto path          = QDir::toNativeSeparators(destinationFI.absolutePath());
 
   // OUTPUT_… are kept for backwards compatibility.
-  variables[u"JOB_TYPE"_s]                   << u"multiplexer"_s;
-  variables[u"OUTPUT_FILE_NAME"_s]           << QDir::toNativeSeparators(m_destination);
-  variables[u"OUTPUT_FILE_DIRECTORY"_s]      << QDir::toNativeSeparators(path);
-  variables[u"DESTINATION_FILE_BASE_NAME"_s] << QDir::toNativeSeparators(destinationFI.completeBaseName());
-  variables[u"DESTINATION_FILE_DIRECTORY"_s] << QDir::toNativeSeparators(path);
-  variables[u"DESTINATION_FILE_NAME"_s]      << QDir::toNativeSeparators(m_destination);
-  variables[u"DESTINATION_FILE_SUFFIX"_s]    << QDir::toNativeSeparators(destinationFI.suffix());
-  variables[u"CHAPTERS_FILE_NAME"_s]         << QDir::toNativeSeparators(m_chapters);
+  variables[Q("JOB_TYPE")]                   << Q("multiplexer");
+  variables[Q("OUTPUT_FILE_NAME")]           << QDir::toNativeSeparators(m_destination);
+  variables[Q("OUTPUT_FILE_DIRECTORY")]      << QDir::toNativeSeparators(path);
+  variables[Q("DESTINATION_FILE_BASE_NAME")] << QDir::toNativeSeparators(destinationFI.completeBaseName());
+  variables[Q("DESTINATION_FILE_DIRECTORY")] << QDir::toNativeSeparators(path);
+  variables[Q("DESTINATION_FILE_NAME")]      << QDir::toNativeSeparators(m_destination);
+  variables[Q("DESTINATION_FILE_SUFFIX")]    << QDir::toNativeSeparators(destinationFI.suffix());
+  variables[Q("CHAPTERS_FILE_NAME")]         << QDir::toNativeSeparators(m_chapters);
 
   for (auto const &sourceFile : m_files) {
-    variables[u"SOURCE_FILE_NAMES"_s] << QDir::toNativeSeparators(sourceFile->m_fileName);
+    variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(sourceFile->m_fileName);
 
     for (auto const &appendedSourceFile : sourceFile->m_appendedFiles)
-      variables[u"SOURCE_FILE_NAMES"_s] << QDir::toNativeSeparators(appendedSourceFile->m_fileName);
+      variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(appendedSourceFile->m_fileName);
 
     for (auto const &additionalPart : sourceFile->m_additionalParts)
-      variables[u"SOURCE_FILE_NAMES"_s] << QDir::toNativeSeparators(additionalPart->m_fileName);
+      variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(additionalPart->m_fileName);
   }
 }
 

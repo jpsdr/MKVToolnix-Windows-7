@@ -28,9 +28,9 @@ AddingDirectoriesDialog::AddingDirectoriesDialog(QWidget *parent,
   QString fullText;
 
   for (auto const &text : optionDescriptions())
-    fullText += u"<li>%1</li>"_s.arg(text.toHtmlEscaped());
+    fullText += Q("<li>%1</li>").arg(text.toHtmlEscaped());
 
-  ui->lOptions->setText(u"<ol>%1</ol>"_s.arg(fullText));
+  ui->lOptions->setText(Q("<ol>%1</ol>").arg(fullText));
 
   adjustSize();
 

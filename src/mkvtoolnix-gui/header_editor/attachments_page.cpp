@@ -71,7 +71,7 @@ AttachmentsPage::dropEvent(QDropEvent *event) {
 QString
 AttachmentsPage::internalIdentifier()
   const {
-  return u"attachments"_s;
+  return Q("attachments");
 }
 
 void

@@ -159,15 +159,15 @@ PageModel::indexFromPage(PageBase *page)
 void
 PageModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Type"),             u"type"_s             },
-    { QY("Codec/MIME type"),  u"codec"_s            },
-    { QY("Language"),         u"language"_s         },
-    { QY("Name/Description"), u"name"_s             },
-    { QY("UID"),              u"uid"_s              },
-    { QY("Default track"),    u"defaultTrackFlag"_s },
-    { QY("Forced display"),   u"forcedTrackFlag"_s  },
-    { QY("Enabled"),          u"enabled"_s          },
-    { QY("Properties"),       u"properties"_s       },
+    { QY("Type"),             Q("type")             },
+    { QY("Codec/MIME type"),  Q("codec")            },
+    { QY("Language"),         Q("language")         },
+    { QY("Name/Description"), Q("name")             },
+    { QY("UID"),              Q("uid")              },
+    { QY("Default track"),    Q("defaultTrackFlag") },
+    { QY("Forced display"),   Q("forcedTrackFlag")  },
+    { QY("Enabled"),          Q("enabled")          },
+    { QY("Properties"),       Q("properties")       },
   });
 
   horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

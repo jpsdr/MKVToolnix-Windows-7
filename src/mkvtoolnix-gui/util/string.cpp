@@ -42,7 +42,7 @@ DeferredRegularExpression::operator *() {
 static QString
 escapeShellUnix(QString const &source) {
   if (source.isEmpty())
-    return u"\"\""_s;
+    return Q("\"\"");
 
   if (!source.contains(QRegularExpression{"[^\\w%+,\\-./:=]"}))
     return source;
@@ -53,11 +53,11 @@ escapeShellUnix(QString const &source) {
     copy.insert(0, QChar{'@'});
 
   // ' -> '\''
-  copy.replace(QRegularExpression{"'"}, u"'\\''"_s);
+  copy.replace(QRegularExpression{"'"}, Q("'\\''"));
 
-  copy = u"'%1'"_s.arg(copy);
-  copy.replace(QRegularExpression{"^''"}, u""_s);
-  copy.replace(QRegularExpression{"''$"}, u""_s);
+  copy = Q("'%1'").arg(copy);
+  copy.replace(QRegularExpression{"^''"}, Q(""));
+  copy.replace(QRegularExpression{"''$"}, Q(""));
 
   return copy;
 }
@@ -72,7 +72,7 @@ unescapeSplitShellUnix(QString const &source) {
   auto doubleQuoted     = false;
   auto ensureHaveArg    = [&currentArgument, &arguments]() {
     if (!currentArgument) {
-      arguments << u""_s;
+      arguments << Q("");
       currentArgument = &arguments.last();
     }
   };
@@ -87,29 +87,29 @@ unescapeSplitShellUnix(QString const &source) {
       appendChar(c);
 
     } else if (singleQuoted) {
-      if (c == u'\'')
+      if (c == Q('\''))
         singleQuoted = false;
       else
         appendChar(c);
 
-    } else if (c == u'\'')
+    } else if (c == Q('\\'))
       escapeNext = true;
 
     else if (doubleQuoted) {
-      if (c == u'"')
+      if (c == Q('"'))
         doubleQuoted = false;
       else
         appendChar(c);
 
-    } else if (c == u'\'') {
+    } else if (c == Q('\'')) {
       ensureHaveArg();
       singleQuoted = true;
 
-    } else if (c == u'"') {
+    } else if (c == Q('"')) {
       ensureHaveArg();
       doubleQuoted = true;
 
-    } else if (c == u' ')
+    } else if (c == Q(' '))
       currentArgument = nullptr;
 
     else
@@ -122,7 +122,7 @@ unescapeSplitShellUnix(QString const &source) {
 static QString
 escapeShellWindows(QString const &source) {
   if (source.isEmpty())
-    return u"^\"^\""_s;
+    return Q("^\"^\"");
 
   if (!source.contains(QRegularExpression{"[^\\w+,\\-./:=]"}))
     return source;
@@ -153,7 +153,7 @@ escapeShellWindows(QString const &source) {
 
   copy += QChar{'"'};
 
-  copy.replace(QRegularExpression{"([()%!^\"<>&|])"}, u"^\\1"_s);
+  copy.replace(QRegularExpression{"([()%!^\"<>&|])"}, Q("^\\1"));
 
   return copy;
 }
@@ -161,7 +161,7 @@ escapeShellWindows(QString const &source) {
 static QString
 escapeShellWindowsProgram(QString const &source) {
   if (source.contains(QRegularExpression{"[&<>[\\]{}^=;!'+,`~ ]"}))
-    return u"\"%1\""_s.arg(source);
+    return Q("\"%1\"").arg(source);
 
   return source;
 }
@@ -169,13 +169,13 @@ escapeShellWindowsProgram(QString const &source) {
 static QString
 escapeKeyboardShortcuts(QString const &text) {
   auto copy = text;
-  return copy.replace(u"&"_s, u"&&"_s);
+  return copy.replace(Q("&"), Q("&&"));
 }
 
 static QString
 unescapeKeyboardShortcuts(QString const &text) {
   auto copy = text;
-  return copy.replace(u"&&"_s, u"&"_s);
+  return copy.replace(Q("&&"), Q("&"));
 }
 
 QString
@@ -205,7 +205,7 @@ escapeJson(QStringList source) {
 
   for (auto &string : source)
     if (string.isNull())
-      string = u""_s;
+      string = Q("");
 
   return { Q(mtx::json::dump(variantToNlohmannJson(source), 2)) };
 }
@@ -261,21 +261,21 @@ itemFlagsToString(Qt::ItemFlags const &flags) {
   if (flags & Qt::ItemIsEnabled)        items << "IsEnabled";
   if (flags & Qt::ItemNeverHasChildren) items << "NeverHasChildren";
 
-  return items.join(u"|"_s);
+  return items.join(Q("|"));
 }
 
 QString
 replaceApplicationDirectoryWithMtxVariable(QString string) {
-  auto applicationDirectory = App::applicationDirPath().replace(u"\\"_s, u"/"_s);
+  auto applicationDirectory = App::applicationDirPath().replace(Q("\\"), Q("/"));
 
-  return string.replace(u"\\"_s, u"/"_s).replace(applicationDirectory, u"<MTX_INSTALLATION_DIRECTORY>"_s, Qt::CaseInsensitive);
+  return string.replace(Q("\\"), Q("/")).replace(applicationDirectory, Q("<MTX_INSTALLATION_DIRECTORY>"), Qt::CaseInsensitive);
 }
 
 QString
 replaceMtxVariableWithApplicationDirectory(QString string) {
   auto applicationDirectory = QDir::toNativeSeparators(App::applicationDirPath());
 
-  return string.replace(u"<MTX_INSTALLATION_DIRECTORY>"_s, applicationDirectory);
+  return string.replace(Q("<MTX_INSTALLATION_DIRECTORY>"), applicationDirectory);
 }
 
 }

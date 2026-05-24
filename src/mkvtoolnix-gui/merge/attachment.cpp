@@ -52,11 +52,11 @@ Attachment::guessMIMEType() {
 void
 Attachment::buildMkvmergeOptions(Util::CommandLineOptions &opt)
   const {
-  if (!m_description.isEmpty()) opt << u"--attachment-description"_s << m_description;
-  if (!m_name.isEmpty())        opt << u"--attachment-name"_s        << m_name;
-  if (!m_MIMEType.isEmpty())    opt << u"--attachment-mime-type"_s   << m_MIMEType;
+  if (!m_description.isEmpty()) opt << Q("--attachment-description") << m_description;
+  if (!m_name.isEmpty())        opt << Q("--attachment-name")        << m_name;
+  if (!m_MIMEType.isEmpty())    opt << Q("--attachment-mime-type")   << m_MIMEType;
 
-  opt << (ToAllFiles == m_style ? u"--attach-file"_s : u"--attach-file-once"_s) << Util::CommandLineOption::fileName(m_fileName);
+  opt << (ToAllFiles == m_style ? Q("--attach-file") : Q("--attach-file-once")) << Util::CommandLineOption::fileName(m_fileName);
 }
 
 }

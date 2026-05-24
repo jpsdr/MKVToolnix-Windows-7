@@ -73,7 +73,7 @@ Process::execute(QString const &command,
   if (!useTempFile)
     return runner(command, args);
 
-  auto optFile = OptionFile::createTemporary(u"MKVToolNix-process"_s, args);
+  auto optFile = OptionFile::createTemporary(Q("MKVToolNix-process"), args);
 
   return runner(command, { QString{"@%1"}.arg(optFile->fileName()) });
 }

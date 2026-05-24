@@ -83,7 +83,7 @@ GuiCliParser::handleFileNameArg() {
   auto p   = p_func();
   auto arg = QDir::toNativeSeparators(QFileInfo{Q(m_current_arg)}.absoluteFilePath());
 
-  if (arg.endsWith(u".mtxcfg"_s))
+  if (arg.endsWith(Q(".mtxcfg")))
     p->configFiles << arg;
 
   else
@@ -155,15 +155,15 @@ GuiCliParser::rebuildCommandLine()
   auto args = QStringList{} << p->configFiles << p->addToMerge;
 
   if (!p->editChapters.isEmpty())
-    args << u"--edit-chapters"_s << p->editChapters;
+    args << Q("--edit-chapters") << p->editChapters;
 
   if (!p->editHeaders.isEmpty())
-    args << u"--edit-headers"_s << p->editHeaders;
+    args << Q("--edit-headers") << p->editHeaders;
 
-  args << (  p->toProcess == &p->runInfoOn    ? u"--info"_s
-           : p->toProcess == &p->editHeaders  ? u"--edit-headers"_s
-           : p->toProcess == &p->editChapters ? u"--edit-chapters"_s
-           :                                    u"--multiplex"_s);
+  args << (  p->toProcess == &p->runInfoOn    ? Q("--info")
+           : p->toProcess == &p->editHeaders  ? Q("--edit-headers")
+           : p->toProcess == &p->editChapters ? Q("--edit-chapters")
+           :                                    Q("--multiplex"));
 
   return args;
 }

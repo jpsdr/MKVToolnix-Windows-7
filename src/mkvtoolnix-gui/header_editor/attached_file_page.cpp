@@ -45,10 +45,10 @@ AttachedFilePage::retranslateUi() {
 
   ui->size->setText(formatSize());
 
-  Util::setToolTip(ui->name,        u"%1 %2"_s.arg(QY("Other parts of the file (e.g. a subtitle track) may refer to this attachment via this name.")).arg(QY("The name must not be left empty.")));
-  Util::setToolTip(ui->description, u"%1 %2"_s.arg(QY("An arbitrary description meant for the user.")).arg(QY("The description can be left empty.")));
-  Util::setToolTip(ui->mimeType,    u"%1 %2"_s.arg(QY("The MIME type determines which program can be used for handling its content.")).arg(QY("The MIME type must not be left empty.")));
-  Util::setToolTip(ui->uid,         u"%1 %2"_s.arg(QY("A unique, positive number unambiguously identifying the attachment within the Matroska file.")).arg(QY("The UID must not be left empty.")));
+  Util::setToolTip(ui->name,        Q("%1 %2").arg(QY("Other parts of the file (e.g. a subtitle track) may refer to this attachment via this name.")).arg(QY("The name must not be left empty.")));
+  Util::setToolTip(ui->description, Q("%1 %2").arg(QY("An arbitrary description meant for the user.")).arg(QY("The description can be left empty.")));
+  Util::setToolTip(ui->mimeType,    Q("%1 %2").arg(QY("The MIME type determines which program can be used for handling its content.")).arg(QY("The MIME type must not be left empty.")));
+  Util::setToolTip(ui->uid,         Q("%1 %2").arg(QY("A unique, positive number unambiguously identifying the attachment within the Matroska file.")).arg(QY("The UID must not be left empty.")));
   Util::setToolTip(ui->reset,       QY("Reset the attachment values on this page to how they're saved in the file."));
 }
 
@@ -188,7 +188,7 @@ AttachedFilePage::saveContent() {
     return;
 
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save attachment"), Util::dirPath(settings.m_lastOutputDir.path()), ui->name->text(), QY("All files") + u" (*)"_s);
+  auto fileName  = Util::getSaveFileName(this, QY("Save attachment"), Util::dirPath(settings.m_lastOutputDir.path()), ui->name->text(), QY("All files") + Q(" (*)"));
 
   if (fileName.isEmpty())
     return;
@@ -216,7 +216,7 @@ AttachedFilePage::saveContent() {
 void
 AttachedFilePage::replaceContent(bool deriveNameAndMimeType) {
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getOpenFileName(this, QY("Replace attachment"), Util::dirPath(settings.m_lastOpenDir.path()), QY("All files") + u" (*)"_s);
+  auto fileName  = Util::getOpenFileName(this, QY("Replace attachment"), Util::dirPath(settings.m_lastOpenDir.path()), QY("All files") + Q(" (*)"));
 
   if (fileName.isEmpty())
     return;

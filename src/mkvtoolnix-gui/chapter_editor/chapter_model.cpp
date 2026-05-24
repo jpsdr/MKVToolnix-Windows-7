@@ -29,10 +29,10 @@ ChapterModel::~ChapterModel() {
 void
 ChapterModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Edition/Chapter"), u"editionChapter"_s },
-    { QY("Start"),           u"start"_s          },
-    { QY("End"),             u"end"_s            },
-    { QY("Flags"),           u"flags"_s          },
+    { QY("Edition/Chapter"), Q("editionChapter") },
+    { QY("Start"),           Q("start")          },
+    { QY("End"),             Q("end")            },
+    { QY("Flags"),           Q("flags")          },
   });
 
   Util::walkTree(*this, QModelIndex{}, [this](QModelIndex const &currentIdx) {
@@ -79,7 +79,7 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
     flags << QY("Default");
 
   rowItems[0]->setText(QY("Edition entry"));
-  rowItems[3]->setText(flags.join(u", "_s));
+  rowItems[3]->setText(flags.join(Q(", ")));
 }
 
 ChapterPtr
@@ -114,9 +114,9 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
   rowItems[1]->setData(static_cast<qulonglong>(kStart ? kStart->GetValue() : 0), QStandardItemModel::sortRole());
 
   rowItems[0]->setText(chapterDisplayName(*chapter));
-  rowItems[1]->setText(kStart ? Q(mtx::string::format_timestamp(kStart->GetValue(), 9)) : u""_s);
-  rowItems[2]->setText(kEnd   ? Q(mtx::string::format_timestamp(kEnd->GetValue(),   9)) : u""_s);
-  rowItems[3]->setText(flags.join(u", "_s));
+  rowItems[1]->setText(kStart ? Q(mtx::string::format_timestamp(kStart->GetValue(), 9)) : Q(""));
+  rowItems[2]->setText(kEnd   ? Q(mtx::string::format_timestamp(kEnd->GetValue(),   9)) : Q(""));
+  rowItems[3]->setText(flags.join(Q(", ")));
 }
 
 void
@@ -192,7 +192,7 @@ ChapterModel::chapterNameForLanguage(libmatroska::KaxChapterAtom &chapter,
       return Q(find_child_value<libmatroska::KaxChapterString>(kDisplay));
   }
 
-  return u""_s;
+  return Q("");
 }
 
 QString

@@ -250,11 +250,11 @@ Job::addLineToInternalLogs(QString const &line,
                 : WarningLine == type ? p->warnings
                 :                       p->errors;
 
-  auto prefix   = InfoLine    == type ? u""_s
-                : WarningLine == type ? u"%1 "_s.arg(QY("Warning:"))
-                :                       u"%1 "_s.arg(QY("Error:"));
+  auto prefix   = InfoLine    == type ? Q("")
+                : WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
+                :                       Q("%1 ").arg(QY("Error:"));
 
-  p->fullOutput << u"%1%2"_s.arg(prefix).arg(line);
+  p->fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage       << line;
 
   p->modified    = true;
@@ -294,13 +294,13 @@ Job::openOutputFolder()
 
 QString
 Job::queueLocation() {
-  return u"%1/%2"_s.arg(Util::Settings::iniFileLocation()).arg("jobQueue");
+  return Q("%1/%2").arg(Util::Settings::iniFileLocation()).arg("jobQueue");
 }
 
 QString
 Job::queueFileName()
   const {
-  return u"%1/%2.mtxcfg"_s.arg(queueLocation()).arg(p_func()->uuid.toString());
+  return Q("%1/%2.mtxcfg").arg(queueLocation()).arg(p_func()->uuid.toString());
 }
 
 void
@@ -487,10 +487,10 @@ Job::runProgramSetupVariables(ProgramRunner::VariableMap &variables)
   const{
   auto p = p_func();
 
-  variables[u"JOB_START_TIME"_s]  << p->dateStarted.toString(Qt::ISODate);
-  variables[u"JOB_END_TIME"_s]    << p->dateFinished.toString(Qt::ISODate);
-  variables[u"JOB_DESCRIPTION"_s] << p->description;
-  variables[u"JOB_EXIT_CODE"_s]   << QString::number(p->exitCode);
+  variables[Q("JOB_START_TIME")]  << p->dateStarted.toString(Qt::ISODate);
+  variables[Q("JOB_END_TIME")]    << p->dateFinished.toString(Qt::ISODate);
+  variables[Q("JOB_DESCRIPTION")] << p->description;
+  variables[Q("JOB_EXIT_CODE")]   << QString::number(p->exitCode);
 }
 
 void

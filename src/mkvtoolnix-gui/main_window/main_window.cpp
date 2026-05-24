@@ -97,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
   setupDebuggingMenu();
 
   // Setup window properties.
-  setWindowIcon(QIcon::fromTheme(u"mkvtoolnix-gui"_s));
+  setWindowIcon(QIcon::fromTheme(Q("mkvtoolnix-gui")));
 
   retranslateUi();
 
@@ -281,14 +281,14 @@ MainWindow::setupToolSelector() {
   p->toolJobs          = new Jobs::Tool{p->ui->tool,          p->ui->menuJobQueue};
   p->watchJobTool      = new WatchJobs::Tool{p->ui->tool,     p->ui->menuJobOutput};
 
-  p->ui->tool->appendTab(p->toolMerge,                        QIcon::fromTheme(u"merge"_s),                      QY("Multiplexer"));
-  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon::fromTheme(u"split"_s),                      QY("Extractor"));
-  p->ui->tool->appendTab(p->toolInfo,                         QIcon::fromTheme(u"document-preview-archive"_s),   QY("Info tool"));
-  p->ui->tool->appendTab(p->toolHeaderEditor,                 QIcon::fromTheme(u"document-edit"_s),              QY("Header editor"));
-  p->ui->tool->appendTab(p->toolChapterEditor,                QIcon::fromTheme(u"story-editor"_s),               QY("Chapter editor"));
-  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon::fromTheme(u"document-edit-sign-encrypt"_s), QY("Tags editor"));
-  p->ui->tool->appendTab(p->toolJobs,                         QIcon::fromTheme(u"view-task"_s),                  QY("Job queue"));
-  p->ui->tool->appendTab(p->watchJobTool,                     QIcon::fromTheme(u"system-run"_s),                 QY("Job output"));
+  p->ui->tool->appendTab(p->toolMerge,                        QIcon::fromTheme(Q("merge")),                      QY("Multiplexer"));
+  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon::fromTheme(Q("split")),                      QY("Extractor"));
+  p->ui->tool->appendTab(p->toolInfo,                         QIcon::fromTheme(Q("document-preview-archive")),   QY("Info tool"));
+  p->ui->tool->appendTab(p->toolHeaderEditor,                 QIcon::fromTheme(Q("document-edit")),              QY("Header editor"));
+  p->ui->tool->appendTab(p->toolChapterEditor,                QIcon::fromTheme(Q("story-editor")),               QY("Chapter editor"));
+  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon::fromTheme(Q("document-edit-sign-encrypt")), QY("Tags editor"));
+  p->ui->tool->appendTab(p->toolJobs,                         QIcon::fromTheme(Q("view-task")),                  QY("Job queue"));
+  p->ui->tool->appendTab(p->watchJobTool,                     QIcon::fromTheme(Q("system-run")),                 QY("Job output"));
 
   for (auto idx = 0, numTabs = p->ui->tool->count(); idx < numTabs; ++idx) {
     qobject_cast<ToolBase *>(p->ui->tool->widget(idx))->setupUi();
@@ -489,7 +489,7 @@ MainWindow::beforeCloseCheckRunningJobs() {
       && Util::Settings::get().m_warnBeforeAbortingJobs
       && (Util::MessageBox::question(this)
             ->title(QY("Abort running jobs"))
-            .text(u"%1 %2"_s.arg(QY("There is currently a job running.")).arg(QY("Do you really want to abort all currently running jobs?")))
+            .text(Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you really want to abort all currently running jobs?")))
             .buttonLabel(QMessageBox::Yes, QY("&Abort jobs"))
             .buttonLabel(QMessageBox::No,  QY("Cancel"))
             .exec()) == QMessageBox::No)
@@ -606,7 +606,7 @@ MainWindow::silentlyCheckForUpdates() {
 
 QString
 MainWindow::versionStringForSettings(version_number_t const &version) {
-  return u"version_%1"_s.arg(Q(version.to_string()).replace(QRegularExpression{u"[^0-9]+"_s}, u"_"_s));
+  return Q("version_%1").arg(Q(version.to_string()).replace(QRegularExpression{Q("[^0-9]+")}, Q("_")));
 }
 
 void
@@ -623,12 +623,12 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
     return;
 
   auto settingsVersionString = versionStringForSettings(release.latest_source);
-  auto wasVersionDisplayed   = settings.value(u"settings/updates"_s, settingsVersionString, false).toBool();
+  auto wasVersionDisplayed   = settings.value(Q("settings/updates"), settingsVersionString, false).toBool();
 
   if (!forceUpdateCheck && wasVersionDisplayed)
     return;
 
-  settings.setValue(u"settings/updates"_s, settingsVersionString, true);
+  settings.setValue(Q("settings/updates"), settingsVersionString, true);
 
   AvailableUpdateInfoDialog dlg{this};
   dlg.exec();
@@ -652,22 +652,22 @@ MainWindow::visitMkvmergeDocumentation() {
   try {
     auto localeStr = locale_string_c{to_utf8(Util::Settings::get().localeToUse())};
 
-    potentialPaths << u"%1/doc/%2"_s.arg(appDirPath).arg(Q(localeStr.str(locale_string_c::full)));
-    potentialPaths << u"%1/doc/%2"_s.arg(appDirPath).arg(Q(localeStr.str(static_cast<locale_string_c::eval_type_e>(locale_string_c::language | locale_string_c::territory))));
-    potentialPaths << u"%1/doc/%2"_s.arg(appDirPath).arg(Q(localeStr.str(locale_string_c::language)));
+    potentialPaths << Q("%1/doc/%2").arg(appDirPath).arg(Q(localeStr.str(locale_string_c::full)));
+    potentialPaths << Q("%1/doc/%2").arg(appDirPath).arg(Q(localeStr.str(static_cast<locale_string_c::eval_type_e>(locale_string_c::language | locale_string_c::territory))));
+    potentialPaths << Q("%1/doc/%2").arg(appDirPath).arg(Q(localeStr.str(locale_string_c::language)));
 
   } catch (mtx::locale_string_format_x const &) {
   }
 
-  potentialPaths << u"%1/doc/en"_s.arg(appDirPath);
+  potentialPaths << Q("%1/doc/en").arg(appDirPath);
 
   auto url = QUrl{};
 
   for (auto const &path : potentialPaths) {
-    auto fileName = u"%1/mkvmerge.html"_s.arg(path);
+    auto fileName = Q("%1/mkvmerge.html").arg(path);
 
     if (QFileInfo{fileName}.exists()) {
-      url.setScheme(u"file"_s);
+      url.setScheme(Q("file"));
       url.setPath(fileName);
       break;
     }
@@ -685,10 +685,10 @@ MainWindow::showCodeOfConduct() {
 
   dlg.setTitle(QY("The MKVToolNix Code of Conduct"));
 
-  QFile coc{u":/CODE_OF_CONDUCT.md"_s};
+  QFile coc{Q(":/CODE_OF_CONDUCT.md")};
   if (coc.open(QIODevice::ReadOnly))
     dlg.setText(Q(std::string{coc.readAll().constData()}), Util::TextDisplayDialog::Format::Markdown)
-      .setSaveInfo(u"mkvtoolnix_code_of_conduct.md"_s, QY("Markdown files"), u"md"_s);
+      .setSaveInfo(Q("mkvtoolnix_code_of_conduct.md"), QY("Markdown files"), Q("md"));
 
   dlg.exec();
 }
@@ -699,7 +699,7 @@ MainWindow::showSystemInformation() {
 
   dlg.setTitle(QY("System information"))
     .setText(Util::gatherSystemInformation(), Util::TextDisplayDialog::Format::Markdown)
-    .setSaveInfo(u"mkvtoolnix_gui_system_information.md"_s, QY("Markdown files"), u"md"_s)
+    .setSaveInfo(Q("mkvtoolnix_gui_system_information.md"), QY("Markdown files"), Q("md"))
     .exec();
 }
 
@@ -829,18 +829,18 @@ MainWindow::displayInstallationProblems(Util::InstallationChecker::Problems cons
       case Util::InstallationChecker::ProblemType::PortableDirectoryNotWritable:
         description = QY("MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'.")
           .arg(QDir::toNativeSeparators(problem.second))
-          .arg(QDir::toNativeSeparators(u"%1/data/portable-app"_s.arg(problem.second)));
+          .arg(QDir::toNativeSeparators(Q("%1/data/portable-app").arg(problem.second)));
         break;
     }
 
-    problemsString += u"<li>%1</li>"_s.arg(description.toHtmlEscaped());
+    problemsString += Q("<li>%1</li>").arg(description.toHtmlEscaped());
   }
 
   Util::MessageBox::critical(this)
     ->title(QNY("Problem with MKVToolNix installation", "Problems with MKVToolNix installation", numProblems))
-    .text(u"<p>%1</p>"
+    .text(Q("<p>%1</p>"
             "<ul>%2</ul>"
-            "<p>%3 %4</p>"_s
+            "<p>%3 %4</p>")
           .arg(QNY("A problem has been detected with this installation of MKVToolNix:", "Several problems have been detected with this installation of MKVToolNix:", numProblems).toHtmlEscaped())
           .arg(problemsString)
           .arg(QY("Certain functions won't work correctly in this situation.").toHtmlEscaped())
@@ -851,7 +851,7 @@ MainWindow::displayInstallationProblems(Util::InstallationChecker::Problems cons
 void
 MainWindow::runCacheCleanupOncePerVersion()
   const {
-  Util::Settings::runOncePerVersion(u"cacheCleanup"_s, []() {
+  Util::Settings::runOncePerVersion(Q("cacheCleanup"), []() {
     [[maybe_unused]] auto future = QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
   });
 }
@@ -918,11 +918,11 @@ MainWindow::setupWindowMenu() {
   menu->addSeparator();
 
   for (auto tabIdx = 0; tabIdx < numSubWindows; ++tabIdx) {
-    auto prefix = tabIdx <= 8 ? u"&%1: "_s.arg(tabIdx + 1)
-                : tabIdx == 9 ? u"1&0: "_s
-                :               u""_s;
+    auto prefix = tabIdx <= 8 ? Q("&%1: ").arg(tabIdx + 1)
+                : tabIdx == 9 ? Q("1&0: ")
+                :               Q("");
     auto text   = subWindow.second->tabText(tabIdx);
-    auto action = menu->addAction(u"%1%2"_s.arg(prefix).arg(text));
+    auto action = menu->addAction(Q("%1%2").arg(prefix).arg(text));
 
     connect(action, &QAction::triggered, this, [this, tabIdx]() { showSubWindow(tabIdx); });
   }
@@ -1008,7 +1008,7 @@ MainWindow::handleMediaPlaybackError(QMediaPlayer::Error error,
 
   Util::MessageBox::critical(this)
     ->title(QY("Error playing audio"))
-    .text(messages.join(u" "_s))
+    .text(messages.join(Q(" ")))
     .exec();
 }
 

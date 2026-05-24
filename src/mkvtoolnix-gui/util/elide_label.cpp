@@ -111,7 +111,7 @@ QSize
 ElideLabel::sizeHint()
   const {
   auto metrics = fontMetrics();
-  return QSize{ Util::horizontalAdvance(metrics, u"…"_s), metrics.height() };
+  return QSize{ Util::horizontalAdvance(metrics, Q("…")), metrics.height() };
 }
 
 QSize
@@ -144,7 +144,7 @@ ElideLabel::paintEvent(QPaintEvent *event) {
     p.m_label->setTextFormat(Qt::RichText);
     // Explicitly set link color from palette to ensure it updates with color scheme changes
     auto linkColor = palette().color(QPalette::Link).name();
-    p.m_label->setText(u"<a href=\"click://\" style=\"color: %1;\">%2</a>"_s.arg(linkColor).arg(elidedText.toHtmlEscaped()));
+    p.m_label->setText(Q("<a href=\"click://\" style=\"color: %1;\">%2</a>").arg(linkColor).arg(elidedText.toHtmlEscaped()));
 
   } else {
     p.m_label->setTextFormat(Qt::PlainText);

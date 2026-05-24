@@ -304,7 +304,7 @@ Track::setDefaultsBasics() {
   auto encoding                   = m_properties.value(Q(Q(mtx::id::encoding))).toString();
   m_characterSet                  = !encoding.isEmpty()   ? encoding
                                   : canChangeSubCharset() ? settings.m_defaultSubtitleCharset
-                                  :                         u""_s;
+                                  :                         Q("");
   m_delay                         = isAudio() && settings.m_setAudioDelayFromFileName ? extractAudioDelayFromFileName() : QString{};
   m_removeDialogNormalizationGain = canRemoveDialogNormalizationGain() && settings.m_mergeEnableDialogNormGainRemoval;
   auto emphasis                   = m_properties.value(Q(mtx::id::audio_emphasis), static_cast<int>(audio_emphasis_c::unspecified)).toInt();
@@ -578,163 +578,163 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     return;
 
   if (!m_delay.isEmpty() || !m_stretchBy.isEmpty())
-    opt.options << u"--sync"_s << u"%1:%2"_s.arg(sid).arg(MuxConfig::formatDelayAndStretchBy(m_delay, m_stretchBy));
+    opt.options << Q("--sync") << Q("%1:%2").arg(sid).arg(MuxConfig::formatDelayAndStretchBy(m_delay, m_stretchBy));
 
   if (isAudio()) {
     if (m_aacSbrWasDetected || (0 != m_aacIsSBR))
-      opt.options << u"--aac-is-sbr"_s << u"%1:%2"_s.arg(sid).arg((1 == m_aacIsSBR) || ((0 == m_aacIsSBR) && m_aacSbrWasDetected) ? 1 : 0);
+      opt.options << Q("--aac-is-sbr") << Q("%1:%2").arg(sid).arg((1 == m_aacIsSBR) || ((0 == m_aacIsSBR) && m_aacSbrWasDetected) ? 1 : 0);
 
     if (canReduceToAudioCore() && m_reduceAudioToCore)
-      opt.options << u"--reduce-to-core"_s << sid;
+      opt.options << Q("--reduce-to-core") << sid;
 
     if (canRemoveDialogNormalizationGain() && m_removeDialogNormalizationGain)
-      opt.options << u"--remove-dialog-normalization-gain"_s << sid;
+      opt.options << Q("--remove-dialog-normalization-gain") << sid;
 
   } else if (isVideo()) {
     if (!m_cropping.isEmpty())
-      opt.options << u"--cropping"_s << u"%1:%2"_s.arg(sid).arg(m_cropping);
+      opt.options << Q("--cropping") << Q("%1:%2").arg(sid).arg(m_cropping);
 
   } else if (isSubtitles()) {
     if (canChangeSubCharset() && !m_characterSet.isEmpty())
-      opt.options << u"--sub-charset"_s << u"%1:%2"_s.arg(sid).arg(m_characterSet);
+      opt.options << Q("--sub-charset") << Q("%1:%2").arg(sid).arg(m_characterSet);
 
   } else if (isChapters()) {
     if (!m_characterSet.isEmpty())
-      opt.options << u"--chapter-charset"_s << m_characterSet;
+      opt.options << Q("--chapter-charset") << m_characterSet;
 
     if (m_language.is_valid())
-      opt.options << u"--chapter-language"_s << Q(m_language.format());
+      opt.options << Q("--chapter-language") << Q(m_language.format());
 
     return;
 
   }
 
   if (!m_appendedTo) {
-    opt.options << u"--language"_s << u"%1:%2"_s.arg(sid).arg(Q(m_language.format()));
+    opt.options << Q("--language") << Q("%1:%2").arg(sid).arg(Q(m_language.format()));
 
     if (m_cues) {
-      auto cues = 1 == m_cues ? u":iframes"_s
-                : 2 == m_cues ? u":all"_s
-                :               u":none"_s;
-      opt.options << u"--cues"_s << (sid + cues);
+      auto cues = 1 == m_cues ? Q(":iframes")
+                : 2 == m_cues ? Q(":all")
+                :               Q(":none");
+      opt.options << Q("--cues") << (sid + cues);
     }
 
     if (!m_name.isEmpty() || m_nameWasPresent)
-      opt.options << u"--track-name"_s << u"%1:%2"_s.arg(sid).arg(m_name);
+      opt.options << Q("--track-name") << Q("%1:%2").arg(sid).arg(m_name);
 
     if (m_defaultTrackFlagWasSet != m_defaultTrackFlag)
-      opt.options << u"--default-track-flag"_s << u"%1:%2"_s.arg(sid).arg(m_defaultTrackFlag ? u"yes"_s : u"no"_s);
+      opt.options << Q("--default-track-flag") << Q("%1:%2").arg(sid).arg(m_defaultTrackFlag ? Q("yes") : Q("no"));
 
     if (m_forcedTrackFlagWasSet != !!m_forcedTrackFlag)
-      opt.options << u"--forced-display-flag"_s << u"%1:%2"_s.arg(sid).arg(m_forcedTrackFlag == 1 ? u"yes"_s : u"no"_s);
+      opt.options << Q("--forced-display-flag") << Q("%1:%2").arg(sid).arg(m_forcedTrackFlag == 1 ? Q("yes") : Q("no"));
 
     if (m_trackEnabledFlagWasSet != !!m_trackEnabledFlag)
-      opt.options << u"--track-enabled-flag"_s << u"%1:%2"_s.arg(sid).arg(m_trackEnabledFlag == 1 ? u"yes"_s : u"no"_s);
+      opt.options << Q("--track-enabled-flag") << Q("%1:%2").arg(sid).arg(m_trackEnabledFlag == 1 ? Q("yes") : Q("no"));
 
     if (m_hearingImpairedFlagWasSet != m_hearingImpairedFlag)
-      opt.options << u"--hearing-impaired-flag"_s << u"%1:%2"_s.arg(sid).arg(m_hearingImpairedFlag ? u"yes"_s : u"no"_s);
+      opt.options << Q("--hearing-impaired-flag") << Q("%1:%2").arg(sid).arg(m_hearingImpairedFlag ? Q("yes") : Q("no"));
 
     if (m_visualImpairedFlagWasSet != m_visualImpairedFlag)
-      opt.options << u"--visual-impaired-flag"_s << u"%1:%2"_s.arg(sid).arg(m_visualImpairedFlag ? u"yes"_s : u"no"_s);
+      opt.options << Q("--visual-impaired-flag") << Q("%1:%2").arg(sid).arg(m_visualImpairedFlag ? Q("yes") : Q("no"));
 
     if (m_textDescriptionsFlagWasSet != m_textDescriptionsFlag)
-      opt.options << u"--text-descriptions-flag"_s << u"%1:%2"_s.arg(sid).arg(m_textDescriptionsFlag ? u"yes"_s : u"no"_s);
+      opt.options << Q("--text-descriptions-flag") << Q("%1:%2").arg(sid).arg(m_textDescriptionsFlag ? Q("yes") : Q("no"));
 
     if (m_originalFlagWasSet != m_originalFlag)
-      opt.options << u"--original-flag"_s << u"%1:%2"_s.arg(sid).arg(m_originalFlag ? u"yes"_s : u"no"_s);
+      opt.options << Q("--original-flag") << Q("%1:%2").arg(sid).arg(m_originalFlag ? Q("yes") : Q("no"));
 
     if (m_commentaryFlagWasSet != m_commentaryFlag)
-      opt.options << u"--commentary-flag"_s << u"%1:%2"_s.arg(sid).arg(m_commentaryFlag ? u"yes"_s : u"no"_s);
+      opt.options << Q("--commentary-flag") << Q("%1:%2").arg(sid).arg(m_commentaryFlag ? Q("yes") : Q("no"));
 
     if (m_audioEmphasis != audio_emphasis_c::unspecified)
-      opt.options << u"--audio-emphasis"_s << u"%1:%2"_s.arg(sid).arg(Q(audio_emphasis_c::symbol(static_cast<int>(m_audioEmphasis))));
+      opt.options << Q("--audio-emphasis") << Q("%1:%2").arg(sid).arg(Q(audio_emphasis_c::symbol(static_cast<int>(m_audioEmphasis))));
 
     if (!m_tags.isEmpty())
-      opt.options << u"--tags"_s << Util::CommandLineOption::fileName(u"%1:%2"_s.arg(sid).arg(m_tags));
+      opt.options << Q("--tags") << Util::CommandLineOption::fileName(Q("%1:%2").arg(sid).arg(m_tags));
 
     if (m_setAspectRatio && !m_aspectRatio.isEmpty())
-      opt.options << u"--aspect-ratio"_s << u"%1:%2"_s.arg(sid).arg(m_aspectRatio);
+      opt.options << Q("--aspect-ratio") << Q("%1:%2").arg(sid).arg(m_aspectRatio);
 
     else if (!m_setAspectRatio && !m_displayHeight.isEmpty() && !m_displayWidth.isEmpty())
-      opt.options << u"--display-dimensions"_s << u"%1:%2x%3"_s.arg(sid).arg(m_displayWidth).arg(m_displayHeight);
+      opt.options << Q("--display-dimensions") << Q("%1:%2x%3").arg(sid).arg(m_displayWidth).arg(m_displayHeight);
 
     if (m_stereoscopy)
-      opt.options << u"--stereo-mode"_s << u"%1:%2"_s.arg(sid).arg(m_stereoscopy - 1);
+      opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy - 1);
 
     if (!m_colorMatrixCoefficients.isEmpty())
-      opt.options << u"--color-matrix-coefficients"_s << u"%1:%2"_s.arg(sid).arg(m_colorMatrixCoefficients);
+      opt.options << Q("--color-matrix-coefficients") << Q("%1:%2").arg(sid).arg(m_colorMatrixCoefficients);
 
     if (!m_bitsPerColorChannel.isEmpty())
-      opt.options << u"--color-bits-per-channel"_s << u"%1:%2"_s.arg(sid).arg(m_bitsPerColorChannel);
+      opt.options << Q("--color-bits-per-channel") << Q("%1:%2").arg(sid).arg(m_bitsPerColorChannel);
 
     if (!m_chromaSubsampling.isEmpty())
-      opt.options << u"--chroma-subsample"_s << u"%1:%2"_s.arg(sid).arg(m_chromaSubsampling);
+      opt.options << Q("--chroma-subsample") << Q("%1:%2").arg(sid).arg(m_chromaSubsampling);
 
     if (!m_cbSubsampling.isEmpty())
-      opt.options << u"--cb-subsample"_s << u"%1:%2"_s.arg(sid).arg(m_cbSubsampling);
+      opt.options << Q("--cb-subsample") << Q("%1:%2").arg(sid).arg(m_cbSubsampling);
 
     if (!m_chromaSiting.isEmpty())
-      opt.options << u"--chroma-siting"_s << u"%1:%2"_s.arg(sid).arg(m_chromaSiting);
+      opt.options << Q("--chroma-siting") << Q("%1:%2").arg(sid).arg(m_chromaSiting);
 
     if (!m_colorRange.isEmpty())
-      opt.options << u"--color-range"_s << u"%1:%2"_s.arg(sid).arg(m_colorRange);
+      opt.options << Q("--color-range") << Q("%1:%2").arg(sid).arg(m_colorRange);
 
     if (!m_transferCharacteristics.isEmpty())
-      opt.options << u"--color-transfer-characteristics"_s << u"%1:%2"_s.arg(sid).arg(m_transferCharacteristics);
+      opt.options << Q("--color-transfer-characteristics") << Q("%1:%2").arg(sid).arg(m_transferCharacteristics);
 
     if (!m_colorPrimaries.isEmpty())
-      opt.options << u"--color-primaries"_s << u"%1:%2"_s.arg(sid).arg(m_colorPrimaries);
+      opt.options << Q("--color-primaries") << Q("%1:%2").arg(sid).arg(m_colorPrimaries);
 
     if (!m_maximumContentLight.isEmpty())
-      opt.options << u"--max-content-light"_s << u"%1:%2"_s.arg(sid).arg(m_maximumContentLight);
+      opt.options << Q("--max-content-light") << Q("%1:%2").arg(sid).arg(m_maximumContentLight);
 
     if (!m_maximumFrameLight.isEmpty())
-      opt.options << u"--max-frame-light"_s << u"%1:%2"_s.arg(sid).arg(m_maximumFrameLight);
+      opt.options << Q("--max-frame-light") << Q("%1:%2").arg(sid).arg(m_maximumFrameLight);
 
     if (!m_chromaticityCoordinates.isEmpty())
-      opt.options << u"--chromaticity-coordinates"_s << u"%1:%2"_s.arg(sid).arg(m_chromaticityCoordinates);
+      opt.options << Q("--chromaticity-coordinates") << Q("%1:%2").arg(sid).arg(m_chromaticityCoordinates);
 
     if (!m_whiteColorCoordinates.isEmpty())
-      opt.options << u"--white-color-coordinates"_s << u"%1:%2"_s.arg(sid).arg(m_whiteColorCoordinates);
+      opt.options << Q("--white-color-coordinates") << Q("%1:%2").arg(sid).arg(m_whiteColorCoordinates);
 
     if (!m_maximumLuminance.isEmpty())
-      opt.options << u"--max-luminance"_s << u"%1:%2"_s.arg(sid).arg(m_maximumLuminance);
+      opt.options << Q("--max-luminance") << Q("%1:%2").arg(sid).arg(m_maximumLuminance);
 
     if (!m_minimumLuminance.isEmpty())
-      opt.options << u"--min-luminance"_s << u"%1:%2"_s.arg(sid).arg(m_minimumLuminance);
+      opt.options << Q("--min-luminance") << Q("%1:%2").arg(sid).arg(m_minimumLuminance);
 
     if (!m_projectionType.isEmpty())
-      opt.options << u"--projection-type"_s << u"%1:%2"_s.arg(sid).arg(m_projectionType);
+      opt.options << Q("--projection-type") << Q("%1:%2").arg(sid).arg(m_projectionType);
     if (!m_projectionSpecificData.isEmpty())
-      opt.options << u"--projection-private"_s << u"%1:%2"_s.arg(sid).arg(m_projectionSpecificData);
+      opt.options << Q("--projection-private") << Q("%1:%2").arg(sid).arg(m_projectionSpecificData);
 
     if (!m_yawRotation.isEmpty())
-      opt.options << u"--projection-pose-yaw"_s << u"%1:%2"_s.arg(sid).arg(m_yawRotation);
+      opt.options << Q("--projection-pose-yaw") << Q("%1:%2").arg(sid).arg(m_yawRotation);
 
     if (!m_pitchRotation.isEmpty())
-      opt.options << u"--projection-pose-pitch"_s << u"%1:%2"_s.arg(sid).arg(m_pitchRotation);
+      opt.options << Q("--projection-pose-pitch") << Q("%1:%2").arg(sid).arg(m_pitchRotation);
 
     if (!m_rollRotation.isEmpty())
-      opt.options << u"--projection-pose-roll"_s << u"%1:%2"_s.arg(sid).arg(m_rollRotation);
+      opt.options << Q("--projection-pose-roll") << Q("%1:%2").arg(sid).arg(m_rollRotation);
 
     if (m_compression != TrackCompression::Default)
-      opt.options << u"--compression"_s << u"%1:%2"_s.arg(sid).arg(TrackCompression::None == m_compression ? u"none"_s : u"zlib"_s);
+      opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(TrackCompression::None == m_compression ? Q("none") : Q("zlib"));
   }
 
   if (!m_defaultDuration.isEmpty()) {
-    auto unit = m_defaultDuration.contains(QRegularExpression{"\\d$"}) ? u"fps"_s : u""_s;
-    opt.options << u"--default-duration"_s << u"%1:%2%3"_s.arg(sid).arg(m_defaultDuration).arg(unit);
+    auto unit = m_defaultDuration.contains(QRegularExpression{"\\d$"}) ? Q("fps") : Q("");
+    opt.options << Q("--default-duration") << Q("%1:%2%3").arg(sid).arg(m_defaultDuration).arg(unit);
   }
 
   if (!m_timestamps.isEmpty())
-    opt.options << u"--timestamps"_s << Util::CommandLineOption::fileName(u"%1:%2"_s.arg(sid).arg(m_timestamps));
+    opt.options << Q("--timestamps") << Util::CommandLineOption::fileName(Q("%1:%2").arg(sid).arg(m_timestamps));
 
   if (m_fixBitstreamTimingInfo)
-    opt.options << u"--fix-bitstream-timing-information"_s << u"%1:1"_s.arg(sid);
+    opt.options << Q("--fix-bitstream-timing-information") << Q("%1:1").arg(sid);
 
   auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    opt.options << additionalOptions.replace(u"<TID>"_s, sid).split(QRegularExpression{" +"});
+    opt.options << additionalOptions.replace(Q("<TID>"), sid).split(QRegularExpression{" +"});
 }
 
 QString
@@ -747,7 +747,7 @@ Track::nameForType(TrackType type) {
        : TrackType::Chapters   == type ? QY("Chapters")
        : TrackType::Tags       == type ? QY("Tags")
        : TrackType::GlobalTags == type ? QY("Global tags")
-       :                                 u"INTERNAL ERROR"_s;
+       :                                 Q("INTERNAL ERROR");
 }
 
 QString
@@ -760,8 +760,8 @@ bool
 Track::canChangeSubCharset()
   const {
   if (   isSubtitles()
-      && m_properties.value(u"text_subtitles"_s).toBool()
-      && (   m_properties.value(u"encoding"_s).toString().isEmpty()
+      && m_properties.value(Q("text_subtitles")).toBool()
+      && (   m_properties.value(Q("encoding")).toString().isEmpty()
           || mtx::included_in(m_file->m_type, mtx::file_type_e::matroska, mtx::file_type_e::mpeg_ts)))
     return true;
 
@@ -776,21 +776,21 @@ bool
 Track::canReduceToAudioCore()
   const {
   return isAudio()
-      && m_codec.contains(QRegularExpression{u"dts"_s, QRegularExpression::CaseInsensitiveOption});
+      && m_codec.contains(QRegularExpression{Q("dts"), QRegularExpression::CaseInsensitiveOption});
 }
 
 bool
 Track::canRemoveDialogNormalizationGain()
   const {
   return isAudio()
-      && m_codec.contains(QRegularExpression{u"ac-?3|dts|truehd"_s, QRegularExpression::CaseInsensitiveOption});
+      && m_codec.contains(QRegularExpression{Q("ac-?3|dts|truehd"), QRegularExpression::CaseInsensitiveOption});
 }
 
 bool
 Track::canSetAacToSbr()
   const {
   return isAudio()
-      && m_codec.contains(QRegularExpression{u"aac"_s, QRegularExpression::CaseInsensitiveOption})
+      && m_codec.contains(QRegularExpression{Q("aac"), QRegularExpression::CaseInsensitiveOption})
       && mtx::included_in(m_file->m_type, mtx::file_type_e::aac, mtx::file_type_e::matroska, mtx::file_type_e::real);
 }
 

@@ -77,7 +77,7 @@ UpdateChecker::start() {
   qDebug() << "UpdateChecker::start: URL list built";
 
   for (auto const &url : urls)
-    p->m_tokens.push_back(manager.download(QUrl{u"%1.gz"_s.arg(url)}));
+    p->m_tokens.push_back(manager.download(QUrl{Q("%1.gz").arg(url)}));
 
   qDebug() << "UpdateChecker::start: startup done";
 }

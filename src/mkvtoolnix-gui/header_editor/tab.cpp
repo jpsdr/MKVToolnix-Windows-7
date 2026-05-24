@@ -121,7 +121,7 @@ Tab::load() {
   resetData();
 
   if (!kax_analyzer_c::probe(to_utf8(m_fileName))) {
-    auto text = u"%1 %2"_s
+    auto text = Q("%1 %2")
       .arg(QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
@@ -147,7 +147,7 @@ Tab::load() {
     if (error.isEmpty())
       error = QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.");
 
-    auto text = u"%1 %2"_s
+    auto text = Q("%1 %2")
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName))
       .arg(error);
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
@@ -269,7 +269,7 @@ Tab::save() {
         auto details = mtx::doc_type_version_handler_c::update_result_e::err_no_head_found    == result ? QY("No 'EBML head' element was found.")
                      : mtx::doc_type_version_handler_c::update_result_e::err_not_enough_space == result ? QY("There's not enough space at the beginning of the file to fit the updated 'EBML head' element in.")
                      :                                                                                    QY("A generic read or write failure occurred.");
-        auto message = u"%1 %2"_s.arg(QY("Updating the 'document type version' or 'document type read version' header fields failed.")).arg(details);
+        auto message = Q("%1 %2").arg(QY("Updating the 'document type version' or 'document type read version' header fields failed.")).arg(details);
 
         QMessageBox::warning(this, QY("Error writing Matroska file"), message);
       }
@@ -301,7 +301,7 @@ Tab::setupUi() {
   ui->elements->setModel(m_model);
   ui->elements->acceptDroppedFiles(true);
 
-  Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements").setDefaultSizes({ { u"type"_s, 250 }, { u"codec"_s, 100 }, { u"language"_s, 120 }, { u"properties"_s, 120 } });
+  Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements").setDefaultSizes({ { Q("type"), 250 }, { Q("codec"), 100 }, { Q("language"), 120 }, { Q("properties"), 120 } });
   Util::preventScrollingWithoutFocus(this);
 
   auto &mts = m_modifyTracksSubmenu;
@@ -415,10 +415,10 @@ Tab::retranslateUi() {
   m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with a new file and &derive name && MIME type from it"));
   m_modifySelectedTrackMenu->setTitle(QY("Modif&y selected track"));
 
-  m_addAttachmentsAction->setIcon(QIcon::fromTheme(u"list-add"_s));
-  m_removeAttachmentAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
-  m_saveAttachmentContentAction->setIcon(QIcon::fromTheme(u"document-save"_s));
-  m_replaceAttachmentContentAction->setIcon(QIcon::fromTheme(u"document-open"_s));
+  m_addAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-add")));
+  m_removeAttachmentAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  m_saveAttachmentContentAction->setIcon(QIcon::fromTheme(Q("document-save")));
+  m_replaceAttachmentContentAction->setIcon(QIcon::fromTheme(Q("document-open")));
 
   m_modifyTracksSubmenu.retranslateUi();
   m_languageShortcutsMenu->setTitle(QY("Set &language"));
@@ -653,17 +653,17 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
 
     if (track_video == trackType) {
       auto colorPage = new TopLevelPage{*this, YT("Color information")};
-      colorPage->setInternalIdentifier(u"videoColor %1"_s.arg(trackIdxMkvmerge - 1));
+      colorPage->setInternalIdentifier(Q("videoColor %1").arg(trackIdxMkvmerge - 1));
       colorPage->setParentPage(*page);
       colorPage->init();
 
       auto colorMasterMetaPage = new TopLevelPage{*this, YT("Color mastering meta information")};
-      colorMasterMetaPage->setInternalIdentifier(u"videoColorMasterMeta %1"_s.arg(trackIdxMkvmerge - 1));
+      colorMasterMetaPage->setInternalIdentifier(Q("videoColorMasterMeta %1").arg(trackIdxMkvmerge - 1));
       colorMasterMetaPage->setParentPage(*page);
       colorMasterMetaPage->init();
 
       auto projectionPage = new TopLevelPage{*this, YT("Video projection information")};
-      projectionPage->setInternalIdentifier(u"videoProjection %1"_s.arg(trackIdxMkvmerge - 1));
+      projectionPage->setInternalIdentifier(Q("videoProjection %1").arg(trackIdxMkvmerge - 1));
       projectionPage->setParentPage(*page);
       projectionPage->init();
 
@@ -804,7 +804,7 @@ Tab::showTreeContextMenu(QPoint const &pos) {
 void
 Tab::selectAttachmentsAndAdd() {
   auto &settings = Util::Settings::get();
-  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), settings.lastOpenDirPath(), QY("All files") + u" (*)"_s);
+  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), settings.lastOpenDirPath(), QY("All files") + Q(" (*)"));
 
   if (fileNames.isEmpty())
     return;
@@ -865,7 +865,7 @@ Tab::readFileData(QWidget *parent,
   if (info.size() > 0x7fffffff) {
     Util::MessageBox::critical(parent)
       ->title(QY("Reading failed"))
-      .text(u"%1 %2"_s
+      .text(Q("%1 %2")
             .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(mtx::string::format_file_size(info.size()))))
             .arg(QY("Only files smaller than 2 GiB are supported.")))
       .exec();

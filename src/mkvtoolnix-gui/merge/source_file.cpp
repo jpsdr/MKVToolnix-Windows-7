@@ -301,28 +301,28 @@ SourceFile::buildMkvmergeOptions(Util::CommandLineOptions &options)
 
   auto buildTrackIdArg = [&options,&opt](TrackType type, QString const &enabled, QString const &disabled) {
     if (!enabled.isEmpty() && !opt.enabledTrackIds[type].isEmpty() && (static_cast<unsigned int>(opt.enabledTrackIds[type].size()) < opt.numTracksOfType[type]))
-      options << enabled << opt.enabledTrackIds[type].join(u","_s);
+      options << enabled << opt.enabledTrackIds[type].join(Q(","));
 
     else if (opt.enabledTrackIds[type].isEmpty() && opt.numTracksOfType[type])
       options << disabled;
   };
 
-  buildTrackIdArg(TrackType::Audio,      u"--audio-tracks"_s,    u"--no-audio"_s);
-  buildTrackIdArg(TrackType::Video,      u"--video-tracks"_s,    u"--no-video"_s);
-  buildTrackIdArg(TrackType::Subtitles,  u"--subtitle-tracks"_s, u"--no-subtitles"_s);
-  buildTrackIdArg(TrackType::Buttons,    u"--button-tracks"_s,   u"--no-buttons"_s);
-  buildTrackIdArg(TrackType::Attachment, u"--attachments"_s,     u"--no-attachments"_s);
-  buildTrackIdArg(TrackType::Tags,       u"--track-tags"_s,      u"--no-track-tags"_s);
-  buildTrackIdArg(TrackType::GlobalTags, u""_s,                  u"--no-global-tags"_s);
-  buildTrackIdArg(TrackType::Chapters,   u""_s,                  u"--no-chapters"_s);
+  buildTrackIdArg(TrackType::Audio,      Q("--audio-tracks"),    Q("--no-audio"));
+  buildTrackIdArg(TrackType::Video,      Q("--video-tracks"),    Q("--no-video"));
+  buildTrackIdArg(TrackType::Subtitles,  Q("--subtitle-tracks"), Q("--no-subtitles"));
+  buildTrackIdArg(TrackType::Buttons,    Q("--button-tracks"),   Q("--no-buttons"));
+  buildTrackIdArg(TrackType::Attachment, Q("--attachments"),     Q("--no-attachments"));
+  buildTrackIdArg(TrackType::Tags,       Q("--track-tags"),      Q("--no-track-tags"));
+  buildTrackIdArg(TrackType::GlobalTags, Q(""),                  Q("--no-global-tags"));
+  buildTrackIdArg(TrackType::Chapters,   Q(""),                  Q("--no-chapters"));
 
   options << opt.options;
   if (m_appendedTo)
-    options << u"+"_s;
-  options << u"("_s << Util::CommandLineOption::fileName(m_fileName);
+    options << Q("+");
+  options << Q("(") << Util::CommandLineOption::fileName(m_fileName);
   for (auto const &additionalPart : m_additionalParts)
     options << Util::CommandLineOption::fileName(additionalPart->m_fileName);
-  options << u")"_s;
+  options << Q(")");
 
   for (auto const &appendedFile : m_appendedFiles)
     appendedFile->buildMkvmergeOptions(options);
@@ -346,13 +346,13 @@ void
 SourceFile::setupProgramMapFromProperties() {
   m_programMap.clear();
 
-  if (!m_properties.contains(u"programs"_s))
+  if (!m_properties.contains(Q("programs")))
     return;
 
-  for (auto const &program : m_properties[u"programs"_s].toList()) {
+  for (auto const &program : m_properties[Q("programs")].toList()) {
     auto programProps = program.toMap();
-    if (programProps.contains(u"program_number"_s))
-      m_programMap.insert(programProps[u"program_number"_s].toUInt(), { programProps[u"service_provider"_s].toString(), programProps[u"service_name"_s].toString() });
+    if (programProps.contains(Q("program_number")))
+      m_programMap.insert(programProps[Q("program_number")].toUInt(), { programProps[Q("service_provider")].toString(), programProps[Q("service_name")].toString() });
   }
 }
 
@@ -360,7 +360,7 @@ mtx::bcp47::language_c
 SourceFile::deriveLanguageFromFileName() {
   auto &cfg     = Util::Settings::get();
   auto fileName = QFileInfo{m_fileName}.fileName().toLower();
-  auto matches  = QRegularExpression{u"s\\d+e\\d{2,}(.+)"_s}.match(fileName);
+  auto matches  = QRegularExpression{Q("s\\d+e\\d{2,}(.+)")}.match(fileName);
 
   if (matches.hasMatch()) {
     fileName = matches.captured(1);
@@ -376,10 +376,10 @@ SourceFile::deriveLanguageFromFileName() {
     if (c != QChar{'-'})
       escapedChars << QRegularExpression::escape(c);
 
-  QRegularExpression bcp47Re{u"^[^x][a-z]+-"_s, QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression bcp47Re{Q("^[^x][a-z]+-"), QRegularExpression::CaseInsensitiveOption};
 
   if (!escapedChars.isEmpty()) {
-    auto splitRE     = QRegularExpression{u"(?:%1)+"_s.arg(escapedChars.join(u"|"_s))};
+    auto splitRE     = QRegularExpression{Q("(?:%1)+").arg(escapedChars.join(Q("|")))};
     auto allCaptures = fileName.split(splitRE);
 
     for (auto captureItr = allCaptures.rbegin(), captureEnd = allCaptures.rend(); captureItr != captureEnd; ++captureItr) {
@@ -408,7 +408,7 @@ SourceFile::deriveLanguageFromFileName() {
   for (auto c : cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames)
     escapedChars << QRegularExpression::escape(c);
 
-  auto splitRE     = QRegularExpression{u"(?:%1)+"_s.arg(escapedChars.join(u"|"_s))};
+  auto splitRE     = QRegularExpression{Q("(?:%1)+").arg(escapedChars.join(Q("|")))};
   auto allCaptures = fileName.split(splitRE);
 
   if (allCaptures.size() < 2) {
@@ -420,7 +420,7 @@ SourceFile::deriveLanguageFromFileName() {
 
   qDebug() << "potential matches:" << allCaptures;
 
-  QRegularExpression languageNameCleaner{u" *[\\(,].*"_s}, splitter{u" *; *"_s};
+  QRegularExpression languageNameCleaner{Q(" *[\\(,].*")}, splitter{Q(" *; *")};
 
   for (auto captureItr = allCaptures.rbegin(), captureEnd = allCaptures.rend(); captureItr != captureEnd; ++captureItr) {
     auto &capture = *captureItr;

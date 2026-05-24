@@ -124,7 +124,7 @@ MessageBox::exec(std::optional<QMessageBox::StandardButton> pDefaultButton) {
 
   if (!p->m_onlyOnceID.isEmpty()) {
     auto reg          = Util::Settings::registry();
-    auto hasBeenShown = reg->value(u"messageBox/showOnce/%1"_s.arg(p->m_onlyOnceID), false).toBool();
+    auto hasBeenShown = reg->value(Q("messageBox/showOnce/%1").arg(p->m_onlyOnceID), false).toBool();
 
     if (hasBeenShown)
       return p->m_defaultButton;
@@ -173,7 +173,7 @@ MessageBox::exec(std::optional<QMessageBox::StandardButton> pDefaultButton) {
 
   if (!p->m_onlyOnceID.isEmpty() && msgBox.checkBox()->isChecked()) {
     auto reg = Util::Settings::registry();
-    reg->setValue(u"messageBox/showOnce/%1"_s.arg(p->m_onlyOnceID), true);
+    reg->setValue(Q("messageBox/showOnce/%1").arg(p->m_onlyOnceID), true);
   }
 
   return msgBox.standardButton(msgBox.clickedButton());

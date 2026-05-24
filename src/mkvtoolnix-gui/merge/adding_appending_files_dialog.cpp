@@ -32,7 +32,7 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
 
   for (auto const &file : tab.sourceFiles()) {
     auto info = QFileInfo{file->m_fileName};
-    ui->cbFileName->addItem(u"%1 (%2)"_s.arg(info.fileName()).arg(info.path()));
+    ui->cbFileName->addItem(Q("%1 (%2)").arg(info.fileName()).arg(info.path()));
   }
 
   if (tab.sourceFiles().isEmpty()) {

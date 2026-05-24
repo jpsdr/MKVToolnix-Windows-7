@@ -91,95 +91,95 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
       checkBox->setChecked(true);
 
   auto html = QStringList{};
-  html << u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
+  html << Q("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
             "<html><head><meta name=\"qrichtext\" content=\"1\" />"
             "<style type=\"text/css\">"
             "p, li { white-space: pre-wrap; }\n"
             "</style>"
             "</head><body>"
-            "<h3>"_s
+            "<h3>")
        << QYH("Usage and examples")
-       << u"</h3><ul><li>"_s
+       << Q("</h3><ul><li>")
        << QYH("The command line here uses Unix-style shell escaping via the backslash character even on Windows.")
        << QYH("This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes.")
 #if defined(SYS_WINDOWS)
        << QYH("Note that on Windows forward slashes can be used instead of backslashes in path names, too.")
 #endif
        << QYH("See below for examples.")
-       << u"</li>"_s
-       << u"<li>"_s
+       << Q("</li>")
+       << Q("<li>")
        << QYH("Always use full path names even if the application is located in the same directory as the GUI.")
-       << u"</li>"_s
+       << Q("</li>")
 #if !defined(SYS_APPLE)
-       << u"<li>"_s
+       << Q("<li>")
 # if defined(SYS_WINDOWS)
        << QYH("Start file types other than executable files via cmd.exe.")
 # else
        << QYH("Start file types other than executable files via xdg-open.")
 # endif
        << QYH("See below for examples.")
-       << u"</li>"_s
+       << Q("</li>")
 #endif
-       << u"</ul><h3>"_s
+       << Q("</ul><h3>")
        << QYH("Examples")
-       << u"</h3><ul><li>"_s
+       << Q("</h3><ul><li>")
        << QYH("Play a WAV file with the default application:")
 #if defined(SYS_WINDOWS)
-       << u"<code>"_s
+       << Q("<code>")
        << QH("C:\\\\windows\\\\system32\\\\cmd.exe /c C:\\\\temp\\\\signal.wav")
-       << u"</code>"_s
+       << Q("</code>")
        << QYH("or")
-       << u"<code>"_s
+       << Q("<code>")
        << QH("C:/windows/system32/cmd.exe /c C:/temp/signal.wav")
-       << u"</code>"_s
+       << Q("</code>")
        << QYH("or")
-       << u"<code>"_s
+       << Q("<code>")
        << QH("'C:\\windows\\system32\\cmd.exe' /c 'C:\\temp\\signal.wav'")
-       << u"</code>"_s
+       << Q("</code>")
 #elif defined(SYS_APPLE)
-       << u"<code>"_s
+       << Q("<code>")
        << QH("/usr/bin/afplay /Users/janedoe/Audio/signal.wav")
-       << u"</code>"_s
+       << Q("</code>")
 #else
-       << u"<code>"_s
+       << Q("<code>")
        << QH("/usr/bin/xdg-open /home/janedoe/Audio/signal.wav")
-       << u"</code>"_s
+       << Q("</code>")
 #endif
-       << u"</li><li>"_s
+       << Q("</li><li>")
        << QYH("Shut down the system in one minute:")
 #if defined(SYS_WINDOWS)
-       << u"<code>"_s
+       << Q("<code>")
        << QH("'c:\\windows\\system32\\shutdown.exe' /s /t 60")
-       << u"</code>"_s
+       << Q("</code>")
 #elif defined(SYS_APPLE)
-       << u"<code>"_s
+       << Q("<code>")
        << QH("/usr/bin/sudo /sbin/shutdown -h +1")
-       << u"</code>"_s
+       << Q("</code>")
 #else
-       << u"<code>"_s
+       << Q("<code>")
        << QH("/usr/bin/sudo /sbin/shutdown --poweroff +1")
-       << u"</code>"_s
+       << Q("</code>")
 #endif
-       << u"</li>"_s
-       << u"</li><li>"_s
+       << Q("</li>")
+       << Q("</li><li>")
        << QYH("Open the multiplexed file with a player:")
-       << u"</li>"_s
+       << Q("</li>")
 #if defined(SYS_WINDOWS)
-       << u"<code>"_s
+       << Q("<code>")
        << QH("'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe' '<MTX_DESTINATION_FILE_NAME>'")
-       << u"</code>"_s
+       << Q("</code>")
 #elif defined(SYS_APPLE)
-       << u"<code>"_s
+       << Q("<code>")
        << QH("/usr/bin/vlc '<MTX_DESTINATION_FILE_NAME>'")
-       << u"</code>"_s
+       << Q("</code>")
 #else
-       << u"<code>"_s
+       << Q("<code>")
        << QH("/usr/bin/vlc '<MTX_DESTINATION_FILE_NAME>'")
-       << u"</code>"_s
+       << Q("</code>")
 #endif
-       << u"</ul></body></html>"_s;
+       << Q("</ul></body></html>");
 
-  p->ui->tbUsageNotes->setHtml(html.join(u" "_s));
+  p->ui->tbUsageNotes->setHtml(html.join(Q(" ")));
 
   enableControls();
 }
@@ -227,13 +227,13 @@ void
 PrefsRunProgramWidget::setupToolTips() {
   auto p = p_func();
 
-  auto conditionsToolTip = u"%1 %2"_s
+  auto conditionsToolTip = Q("%1 %2")
     .arg(QY("If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."))
     .arg(QY("Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."));
 
   Util::setToolTip(p->ui->leName, QY("This is an arbitrary name the GUI can use to refer to this particular configuration."));
   Util::setToolTip(p->ui->cbConfigurationActive, QY("Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."));
-  Util::setToolTip(p->ui->pbExecuteNow, u"%1 %2"_s.arg(QY("Executes the action immediately.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments.")));
+  Util::setToolTip(p->ui->pbExecuteNow, Q("%1 %2").arg(QY("Executes the action immediately.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments.")));
   Util::setToolTip(p->ui->cbAfterJobQueueStopped, conditionsToolTip);
   Util::setToolTip(p->ui->cbAfterJobSuccessful,   conditionsToolTip);
   Util::setToolTip(p->ui->cbAfterJobError,        conditionsToolTip);
@@ -244,35 +244,35 @@ PrefsRunProgramWidget::setupMenu() {
   auto p = p_func();
 
 #if defined(SYS_WINDOWS)
-  auto name        = u"C:\\data\\movies\\A.new.hope.mkv"_s;
+  auto name        = Q("C:\\data\\movies\\A.new.hope.mkv");
 #else
-  auto name        = u"/data/movies/A.new.hope.mkv"_s;
+  auto name        = Q("/data/movies/A.new.hope.mkv");
 #endif
   auto nameFI      = QFileInfo{name};
-  auto exName      = u" (%1)"_s.arg(name);
-  auto exSuffix    = u" (%1 → %2)"_s.arg(name).arg(nameFI.suffix());
-  auto exBaseName  = u" (%1 → %2)"_s.arg(name).arg(nameFI.completeBaseName());
-  auto exDirectory = u" (%1 → %2)"_s.arg(name).arg(QDir::toNativeSeparators(nameFI.absolutePath()));
+  auto exName      = Q(" (%1)").arg(name);
+  auto exSuffix    = Q(" (%1 → %2)").arg(name).arg(nameFI.suffix());
+  auto exBaseName  = Q(" (%1 → %2)").arg(name).arg(nameFI.completeBaseName());
+  auto exDirectory = Q(" (%1 → %2)").arg(name).arg(QDir::toNativeSeparators(nameFI.absolutePath()));
 
   QList<std::pair<QString, QString> > entries{
-    { QY("Variables for all job types"),                                 u""_s                           },
-    { QY("Job type ('multiplexer' or 'info')"),                          u"JOB_TYPE"_s                   },
-    { QY("Job description"),                                             u"JOB_DESCRIPTION"_s            },
-    { QY("Job start date && time in ISO 8601 format"),                   u"JOB_START_TIME"_s             },
-    { QY("Job end date && time in ISO 8601 format"),                     u"JOB_END_TIME"_s               },
-    { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), u"JOB_EXIT_CODE"_s              },
+    { QY("Variables for all job types"),                                 Q("")                           },
+    { QY("Job type ('multiplexer' or 'info')"),                          Q("JOB_TYPE")                   },
+    { QY("Job description"),                                             Q("JOB_DESCRIPTION")            },
+    { QY("Job start date && time in ISO 8601 format"),                   Q("JOB_START_TIME")             },
+    { QY("Job end date && time in ISO 8601 format"),                     Q("JOB_END_TIME")               },
+    { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")              },
 
-    { QY("Variables for multiplex jobs"),                                u""_s                           },
-    { QY("Destination file's absolute path") + exName,                   u"DESTINATION_FILE_NAME"_s      },
-    { QY("Destination folders's absolute path") + exDirectory,           u"DESTINATION_FILE_DIRECTORY"_s },
-    { QY("Destination file's base name") + exBaseName,                   u"DESTINATION_FILE_BASE_NAME"_s },
-    { QY("Destination file's suffix") + exSuffix,                        u"DESTINATION_FILE_SUFFIX"_s    },
-    { QY("Source files' absolute paths"),                                u"SOURCE_FILE_NAMES"_s          },
-    { QY("Chapter file's absolute path"),                                u"CHAPTERS_FILE_NAME"_s         },
+    { QY("Variables for multiplex jobs"),                                Q("")                           },
+    { QY("Destination file's absolute path") + exName,                   Q("DESTINATION_FILE_NAME")      },
+    { QY("Destination folders's absolute path") + exDirectory,           Q("DESTINATION_FILE_DIRECTORY") },
+    { QY("Destination file's base name") + exBaseName,                   Q("DESTINATION_FILE_BASE_NAME") },
+    { QY("Destination file's suffix") + exSuffix,                        Q("DESTINATION_FILE_SUFFIX")    },
+    { QY("Source files' absolute paths"),                                Q("SOURCE_FILE_NAMES")          },
+    { QY("Chapter file's absolute path"),                                Q("CHAPTERS_FILE_NAME")         },
 
-    { QY("General variables"),                                           u""_s                           },
-    { QY("Current date && time in ISO 8601 format"),                     u"CURRENT_TIME"_s               },
-    { QY("MKVToolNix GUI's installation directory"),                     u"INSTALLATION_DIRECTORY"_s     },
+    { QY("General variables"),                                           Q("")                           },
+    { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")               },
+    { QY("MKVToolNix GUI's installation directory"),                     Q("INSTALLATION_DIRECTORY")     },
   };
 
   p->variableMenu.reset(new QMenu{this});
@@ -282,9 +282,9 @@ PrefsRunProgramWidget::setupMenu() {
       p->variableMenu->addSection(entry.first);
 
     else {
-      auto action = p->variableMenu->addAction(u"<MTX_%1> – %2"_s.arg(entry.second).arg(entry.first));
+      auto action = p->variableMenu->addAction(Q("<MTX_%1> – %2").arg(entry.second).arg(entry.first));
       connect(action, &QAction::triggered, [this, entry]() {
-        this->addVariable(u"<MTX_%1>"_s.arg(entry.second));
+        this->addVariable(Q("<MTX_%1>").arg(entry.second));
       });
     }
 }
@@ -331,10 +331,10 @@ PrefsRunProgramWidget::executeNow() {
     auto now = QDateTime::currentDateTime();
 
     // dummy values for jobs/job.cpp:
-    variables[u"JOB_START_TIME"_s]  << now.addSecs(-1 * (4 * 60 + 20)).toString(Qt::ISODate);
-    variables[u"JOB_END_TIME"_s]    << now.toString(Qt::ISODate);
-    variables[u"JOB_DESCRIPTION"_s] << QY("example values from the current multiplexer tab");
-    variables[u"JOB_EXIT_CODE"_s]   << u"0"_s;
+    variables[Q("JOB_START_TIME")]  << now.addSecs(-1 * (4 * 60 + 20)).toString(Qt::ISODate);
+    variables[Q("JOB_END_TIME")]    << now.toString(Qt::ISODate);
+    variables[Q("JOB_DESCRIPTION")] << QY("example values from the current multiplexer tab");
+    variables[Q("JOB_EXIT_CODE")]   << Q("0");
 
     // current tab's values for jobs/mux_job.cpp:
     MainWindow::mergeTool()->runProgramSetupVariablesForCurrentTab(variables);
@@ -349,12 +349,12 @@ PrefsRunProgramWidget::changeExecutable() {
   auto filters = QStringList{};
 
 #if defined(SYS_WINDOWS)
-  filters << QY("Executable files") + u" (*.exe *.bat *.cmd)"_s;
+  filters << QY("Executable files") + Q(" (*.exe *.bat *.cmd)");
 #endif
-  filters << QY("All files") + u" (*)"_s;
+  filters << QY("All files") + Q(" (*)");
 
   auto realExecutable = Util::replaceMtxVariableWithApplicationDirectory(p->executable);
-  auto newExecutable  = Util::getOpenFileName(this, QY("Select executable"), realExecutable, filters.join(u";;"_s));
+  auto newExecutable  = Util::getOpenFileName(this, QY("Select executable"), realExecutable, filters.join(Q(";;")));
   newExecutable       = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(newExecutable));
 
   if (newExecutable.isEmpty() || (newExecutable == p->executable))
@@ -402,7 +402,7 @@ PrefsRunProgramWidget::changeArguments(std::function<void(QStringList &)> const 
 
   worker(arguments);
 
-  p->ui->leCommandLine->setText(Util::escape(arguments, Util::EscapeShellUnix).join(u" "_s));
+  p->ui->leCommandLine->setText(Util::escape(arguments, Util::EscapeShellUnix).join(Q(" ")));
   p->ui->leCommandLine->setFocus();
 }
 
@@ -411,7 +411,7 @@ PrefsRunProgramWidget::config()
   const {
   auto p             = p_func();
   auto cfg           = std::make_shared<Util::Settings::RunProgramConfig>();
-  auto cmdLine       = p->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, u""_s);
+  auto cmdLine       = p->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, Q(""));
   cfg->m_name        = p->ui->leName->text();
   cfg->m_type        = static_cast<Util::Settings::RunProgramType>(p->ui->cbType->currentData().value<int>());
   cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
@@ -429,11 +429,11 @@ PrefsRunProgramWidget::config()
 void
 PrefsRunProgramWidget::changeAudioFile() {
   auto p             = p_func();
-  auto filters       = QStringList{} << QY("All files") + u" (*)"_s;
+  auto filters       = QStringList{} << QY("All files") + Q(" (*)");
 
   auto realAudioFile = Util::replaceMtxVariableWithApplicationDirectory(p->ui->leAudioFile->text());
   auto startDir      = realAudioFile.isEmpty() ? Util::Settings::get().m_lastProgramRunnerAudioDir.path() : realAudioFile;
-  auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), startDir, filters.join(u";;"_s));
+  auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), startDir, filters.join(Q(";;")));
 
   if (newAudioFile.isEmpty())
     return;

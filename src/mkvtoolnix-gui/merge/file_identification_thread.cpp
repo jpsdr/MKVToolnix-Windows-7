@@ -211,7 +211,7 @@ std::optional<FileIdentificationWorker::Result>
 FileIdentificationWorker::handleBlurayMainFile(QString const &fileName) {
   auto info = QFileInfo{fileName};
 
-  if (info.completeSuffix().toLower() != u"bdmv"_s)
+  if (info.completeSuffix().toLower() != Q("bdmv"))
     return {};
 
   auto dir = info.absoluteDir();

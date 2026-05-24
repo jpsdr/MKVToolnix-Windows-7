@@ -92,9 +92,9 @@ textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
   if (m_strip_whitespaces) {
     auto q_subs = Q(subs);
 
-    q_subs.replace(QRegularExpression{u"^[ \t]+|[ \t]+$"_s, QRegularExpression::MultilineOption}, {});
-    q_subs.replace(QRegularExpression{u"[ \t]+\r"_s},                                             u"\r"_s);
-    q_subs.replace(QRegularExpression{u"[\r\n]+\\z"_s},                                           {});
+    q_subs.replace(QRegularExpression{Q("^[ \t]+|[ \t]+$"), QRegularExpression::MultilineOption}, {});
+    q_subs.replace(QRegularExpression{Q("[ \t]+\r")},                                             Q("\r"));
+    q_subs.replace(QRegularExpression{Q("[\r\n]+\\z")},                                           {});
 
     subs = to_utf8(q_subs);
 

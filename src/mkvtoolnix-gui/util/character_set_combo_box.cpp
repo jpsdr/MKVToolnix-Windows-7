@@ -46,7 +46,7 @@ CharacterSetComboBox::setup(bool withEmpty,
   auto modelWasBlocked = itemModel->blockSignals(true);
 
   if (withEmpty)
-    addItem(emptyTitle, u""_s);
+    addItem(emptyTitle, Q(""));
 
   auto commonCharacterSets = QStringList{ QStringList::fromVector(Util::stdVectorToQVector<QString>(App::commonCharacterSets())) };
 

@@ -47,7 +47,7 @@ LogindSleepInhibitor::inhibit() {
     return false;
   }
 
-  QDBusInterface                            interface{u"org.freedesktop.login1"_s, u"/org/freedesktop/login1"_s, u"org.freedesktop.login1.Manager"_s, bus};
+  QDBusInterface                            interface{Q("org.freedesktop.login1"), Q("/org/freedesktop/login1"), Q("org.freedesktop.login1.Manager"), bus};
   QDBusReply<QDBusUnixFileDescriptor> const reply    {interface.call("Inhibit", "shutdown:idle", "MKVToolNix GUI", "Jobs in progress.", "block")};
 
   if (!reply.isValid()) {

@@ -65,7 +65,7 @@ FileIdentifier::identify() {
   auto args = QStringList{} << "--output-charset" << "utf-8" << "--identification-format" << "json" << "--identify" << p->m_fileName;
   args     += probeRangePercentageArgs(cfg.m_probeRangePercentage);
 
-  if (cfg.m_defaultAdditionalMergeOptions.contains(u"keep_last_chapter_in_mpls"_s))
+  if (cfg.m_defaultAdditionalMergeOptions.contains(Q("keep_last_chapter_in_mpls")))
     args << "--engage" << "keep_last_chapter_in_mpls";
 
   ProcessPtr process;
@@ -347,9 +347,9 @@ FileIdentifier::cacheProperties()
   auto info                             = QFileInfo{p->m_fileName};
   auto properties                       = QHash<QString, QVariant>{};
 
-  properties[u"fileName"_s]             = QDir::toNativeSeparators(p->m_fileName);
-  properties[u"fileSize"_s]             = info.size();
-  properties[u"fileModificationTime"_s] = info.lastModified().toMSecsSinceEpoch();
+  properties[Q("fileName")]             = QDir::toNativeSeparators(p->m_fileName);
+  properties[Q("fileSize")]             = info.size();
+  properties[Q("fileModificationTime")] = info.lastModified().toMSecsSinceEpoch();
 
   return properties;
 }
@@ -441,7 +441,7 @@ FileIdentifier::cleanAllCacheFiles() {
 
 QString
 FileIdentifier::cacheCategory() {
-  return u"fileIdentifier"_s;
+  return Q("fileIdentifier");
 }
 
 void

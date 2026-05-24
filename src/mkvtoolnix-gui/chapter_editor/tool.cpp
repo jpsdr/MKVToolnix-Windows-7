@@ -129,7 +129,7 @@ Tool::toolShown() {
 
 void
 Tool::retranslateUi() {
-  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? u""_s : App::translate("CloseButton", "Close Tab");
+  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
 
   ui->retranslateUi(this);
 
@@ -203,22 +203,22 @@ Tool::selectFileToOpen(bool append) {
   QString dvds, ifo;
 
 #if defined(HAVE_DVDREAD)
-  dvds = QY("DVDs") + u" (*.ifo *.IFO);;"_s;
-  ifo  = u" *.ifo *.IFO"_s;
+  dvds = QY("DVDs") + Q(" (*.ifo *.IFO);;");
+  ifo  = Q(" *.ifo *.IFO");
 #endif  // HAVE_DVDREAD
 
   auto fileNames = Util::getOpenFileNames(this, append ? QY("Append files in chapter editor") : QY("Open files in chapter editor"), Util::Settings::get().lastOpenDirPath(),
-                                          QY("Supported file types")           + u" (*.cue%1 *.meta *.mpls *.mkv *.mka *.mks *.mk3d *.pbf *.txt *.webm *.xml);;"_s.arg(ifo) +
-                                          QY("Matroska files")                 + u" (*.mkv *.mka *.mks *.mk3d);;"_s +
-                                          QY("WebM files")                     + u" (*.webm);;"_s +
-                                          QY("Blu-ray playlist files")         + u" (*.mpls);;"_s +
+                                          QY("Supported file types")           + Q(" (*.cue%1 *.meta *.mpls *.mkv *.mka *.mks *.mk3d *.pbf *.txt *.webm *.xml);;").arg(ifo) +
+                                          QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
+                                          QY("WebM files")                     + Q(" (*.webm);;") +
+                                          QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
                                           dvds +
-                                          QY("XML chapter files")              + u" (*.xml);;"_s +
-                                          QY("Simple OGM-style chapter files") + u" (*.txt);;"_s +
-                                          QY("Cue sheet files")                + u" (*.cue);;"_s +
-                                          QY("ffmpeg metadata files")          + u" (*.meta);;"_s +
-                                          QY("PotPlayer bookmark files")       + u" (*.pbf);;"_s +
-                                          QY("All files")                      + u" (*)"_s);
+                                          QY("XML chapter files")              + Q(" (*.xml);;") +
+                                          QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
+                                          QY("Cue sheet files")                + Q(" (*.cue);;") +
+                                          QY("ffmpeg metadata files")          + Q(" (*.meta);;") +
+                                          QY("PotPlayer bookmark files")       + Q(" (*.pbf);;") +
+                                          QY("All files")                      + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
 
@@ -342,7 +342,7 @@ Tool::tabTitleChanged() {
 
 QString
 Tool::chapterNameTemplateToolTip() {
-  return u"<p>%1 %2 %3 %4</p><p>%5 %6</p><p>%7 %8 %9</p><ul><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li><li>%17</li><li>%18</li></ul>"_s
+  return Q("<p>%1 %2 %3 %4</p><p>%5 %6</p><p>%7 %8 %9</p><ul><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li><li>%17</li><li>%18</li></ul>")
     .arg(QYH("This template will be used for new chapter entries."))
     .arg(QYH("The string '<NUM>' will be replaced by the chapter number."))
     .arg(QYH("The string '<START>' will be replaced by the chapter's start timestamp."))
@@ -365,23 +365,23 @@ Tool::chapterNameTemplateToolTip() {
     .arg(QYH("%S – seconds zero-padded to two places"))
     .arg(QYH("%n – nanoseconds with nine places"))
     .arg(QYH("%<1-9>n – nanoseconds with up to nine places (e.g. three places with %{}3n)"))
-    .remove(u"{}"_s)
-  + u"<p>%1</p>"_s
+    .remove(Q("{}"))
+  + Q("<p>%1</p>")
     .arg(QYH("If nothing is entered, chapters will be generated but no name will be set."));
 }
 
 void
 Tool::removeChaptersFromExistingMatroskaFile() {
   auto fileName = Util::getOpenFileName(this, QY("Removing chapters from existing Matroska file"), Util::Settings::get().lastOpenDirPath(),
-                                        QY("Matroska files") + u" (*.mkv *.mka *.mks *.mk3d);;"_s +
-                                        QY("All files")      + u" (*)"_s);
+                                        QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
+                                        QY("All files")      + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
   auto analyzer = std::make_unique<Util::KaxAnalyzer>(this, fileName);
 
   if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
-    auto text = u"%1 %2"_s
+    auto text = Q("%1 %2")
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();

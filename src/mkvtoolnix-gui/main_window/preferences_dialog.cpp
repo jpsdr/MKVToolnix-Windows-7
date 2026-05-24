@@ -299,7 +299,7 @@ PreferencesDialog::setupToolTips() {
 
   // GUI page
   Util::setToolTip(ui->cbGuiDisableHighDPIScaling,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If enabled, automatic scaling for high DPI displays will be disabled."))
                    .arg(QY("Changes to this option will only take effect the next time the application is started.")));
 
@@ -308,34 +308,34 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->sbGuiNumRecentlyUsedStrings, QY("This affects functions such as the selector of recently used destination directories in the multiplexer."));
 
   Util::setToolTip(ui->cbGuiCheckForUpdates,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."))
                    .arg(QY("This is done at startup and at most once within 24 hours."))
                    .arg(QY("No information is transmitted to the server.")));
 
   Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If checked, the program will ask for confirmation before closing or reloading tabs that have been modified."))
                    .arg(QY("This is also done when quitting the application.")));
   Util::setToolTip(ui->cbGuiWarnBeforeAbortingJobs,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If checked, the program will ask for confirmation before aborting a running job."))
                    .arg(QY("This happens when clicking the \"abort job\" button in a \"job output\" tab and when quitting the application.")));
 
   Util::setToolTip(ui->cbGuiShowMoveUpDownButtons,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."))
                    .arg(QY("If checked, additional buttons for moving selected entries up and down will be shown next to several list views.")));
 
   Util::setToolTip(ui->cbGuiElideTabHeaderLabels, QY("If enabled, the names of tab headers will be shortened so that all tab headers fit into the window's width."));
 
   Util::setToolTip(ui->cbGuiUseLegacyFontMIMETypes,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If enabled, the GUI will use legacy MIME types when detecting the MIME type of font attachments instead of the current standard MIME types."))
                    .arg(QY("This mostly affects TrueType fonts for which the legacy MIME type ('application/x-truetype-font') might be more widely supported than the standard MIME types ('font/sfnt' and 'font/ttf').")));
 
   Util::setToolTip(ui->cbMEnsureAtLeastOneTrackEnabled,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."))
                    .arg(QY("For each track type the GUI determines if at least one track has the flag turned on."))
                    .arg(QY("If not, it will turn on the flag for the first track of the current type.")));
@@ -353,25 +353,25 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->sbGuiRemoveOldJobsDays,                  QY("If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("Normally completed jobs stay in the queue even over restarts until the user clears them out manually."))
                    .arg(QY("You can opt for having them removed automatically under certain conditions.")));
 
   Util::setToolTip(ui->leCENameTemplate, ChapterEditor::Tool::chapterNameTemplateToolTip());
   Util::setToolTip(ui->ldwCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."))
                    .arg(QY("If enabled, the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie.")));
   Util::setToolTip(ui->cbCETextFileCharacterSet,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."))
                    .arg(QY("By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."))
                    .arg(QY("If a character set is selected here, it will be used instead of asking the user.")));
 
   // Merge page
   Util::setToolTip(ui->cbMAutoSetFileTitle,
-                   u"<p>%1 %2</p><p>%3</p>"_s
+                   Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("Certain file formats have 'title' property."))
                    .arg(QYH("When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."))
                    .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
@@ -379,37 +379,37 @@ PreferencesDialog::setupToolTips() {
 
   auto widgets = QList<mtx::gui::Util::StringListConfigurationWidget *>{} << ui->lwMPredefinedVideoTrackNames << ui->lwMPredefinedAudioTrackNames << ui->lwMPredefinedSubtitleTrackNames;
   for (auto const &widget : widgets)
-    widget->setToolTips(u"%1 %2 %3"_s
+    widget->setToolTips(Q("%1 %2 %3")
                         .arg(QY("If you often use the same names for tracks, you can enter them here."))
                         .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
                         .arg(QY("You can still enter track names not present in this list manually in both tools.")));
 
-  ui->lwMPredefinedSplitSizes->setToolTips(u"%1 %2 %3"_s
+  ui->lwMPredefinedSplitSizes->setToolTips(Q("%1 %2 %3")
                                            .arg(QY("If you often use the same values when splitting by size, you can enter them here."))
                                            .arg(QY("The values will be available for easy selection in the multiplexer."))
                                            .arg(QY("You can still enter values not present in this list manually in the multiplexer.")));
 
-  ui->lwMPredefinedSplitDurations->setToolTips(u"%1 %2 %3"_s
+  ui->lwMPredefinedSplitDurations->setToolTips(Q("%1 %2 %3")
                                                .arg(QY("If you often use the same values when splitting by duration, you can enter them here."))
                                                .arg(QY("The values will be available for easy selection in the multiplexer."))
                                                .arg(QY("You can still enter values not present in this list manually in the multiplexer.")));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("When a file is added its name is scanned."))
                    .arg(QY("If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file.")));
 
   Util::setToolTip(ui->cbMDisableDefaultTrackForSubtitles, QY("If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."));
 
   Util::setToolTip(ui->cbMDisableCompressionForAllTrackTypes,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
                    .arg(QY("Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files.")));
 
   Util::setToolTip(ui->cbMEnableDialogNormGainRemoval, QY("If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."));
 
   Util::setToolTip(ui->cbMProbeRangePercentage,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."))
                    .arg(QY("This amount is 0.3% of the source file's size or 10 MB, whichever is higher."))
                    .arg(QY("If tracks are known to be present but not found, the percentage to probe can be changed here.")));
@@ -417,7 +417,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMDefaultCommandLineEscapeMode, QY("Sets how to escape arguments by default in the 'Show command line' dialog."));
 
   Util::setToolTip(ui->cbMSortFilesTracksByTypeWhenAdding,
-                   u"<p>%1 %2</p><p>%3 %4</p><p>%5</p><p>%6</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p><p>%6</p>")
                    .arg(QY("If enabled, files and tracks will be sorted by track types when they're added to multiplex settings."))
                    .arg(QY("The order is: video first followed by audio, subtitles and other types."))
                    .arg(QY("For example, a file containing audio tracks but no video tracks will be inserted before the first file that contains neither video nor audio tracks."))
@@ -426,7 +426,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This only determines the initial order which can still be changed manually later.")));
 
   Util::setToolTip(ui->cbMReconstructSequencesWhenAdding,
-                   u"<p>%1 %2 %3</p><p>%4</p><p>%5 %6</p><p>%7</p><p>%8</p>"_s
+                   Q("<p>%1 %2 %3</p><p>%4</p><p>%5 %6</p><p>%7</p><p>%8</p>")
                    .arg(QY("If enabled, the GUI will analyze the file names when you add multiple files at once."))
                    .arg(QY("It tries to detect sequences of names that likely belong to the same movie by splitting the name into three parts: a prefix, a running number and a suffix that doesn't contain digits."))
                    .arg(QY("Names are considered to be in sequence when the previous file name's prefix & suffix match the current file name's prefix & suffix and the running number is incremented by one."))
@@ -437,12 +437,12 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If disabled, all files selected for adding will always be added regardless of their names.")));
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If enabled, the destination file name controls will always be visible no matter which tab is currently shown."))
                    .arg(QY("Otherwise they're shown on the 'output' tab.")));
 
   Util::setToolTip(ui->cbMShowDNDZones,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."))
                    .arg(QYH("Normally the program will chose what to do with the dropped files based on the preferences, e.g. always add them to the current multiplex settings or ask the user interactively what to do."))
                    .arg(QYH("If enabled, zones will be shown that files can be dropped on to circumvent the preferences."))
@@ -451,20 +451,20 @@ PreferencesDialog::setupToolTips() {
   auto controls = QWidgetList{} << ui->rbMTrackPropertiesLayoutHorizontalScrollArea << ui->rbMTrackPropertiesLayoutHorizontalTwoColumns << ui->rbMTrackPropertiesLayoutVerticalTabWidget;
   for (auto const &control : controls)
     Util::setToolTip(control,
-                     u"<p>%1 %2</p><p>%3 %4</p>"_s
+                     Q("<p>%1 %2</p><p>%3 %4</p>")
                      .arg(QYH("The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."))
                      .arg(QYH("In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."))
                      .arg(QYH("The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."))
                      .arg(QYH("The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window.")));
 
   Util::setToolTip(ui->cbMUseFileAndTrackColors,
-                   u"<p>%1 %2</p>"_s
+                   Q("<p>%1 %2</p>")
                    .arg(QYH("If enabled, small colored boxes will be shown in the file and track lists as a visual clue to help associating tracks with the files they come from."))
                    .arg(QYH("If there are more entries than configured colors, random colors will be used temporarily.")));
 
 
   Util::setToolTip(ui->cbMClearMergeSettings,
-                   u"<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li><li>%6</li></ol>"_s
+                   Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li><li>%6</li></ol>")
                    .arg(QYH("The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."))
                    .arg(QYH("With \"create new settings\" a new set of multiplex settings will be added."))
                    .arg(QYH("The current multiplex settings will be closed."))
@@ -473,7 +473,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("With \"close current settings\" the current multiplex settings will be closed without opening new ones.")));
 
   Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."))
                    .arg(QY("The default is to always add all the files to the current multiplex settings."))
                    .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those.")));
@@ -481,60 +481,60 @@ PreferencesDialog::setupToolTips() {
   QString fullText;
 
   for (auto const &text : Merge::AddingDirectoriesDialog::optionDescriptions())
-    fullText += u"<li>%1</li>"_s.arg(text.toHtmlEscaped());
+    fullText += Q("<li>%1</li>").arg(text.toHtmlEscaped());
 
   Util::setToolTip(ui->cbMDragAndDropDirectoriesPolicy,
-                   u"<p>%1</p><ol>%2</ol>"_s
+                   Q("<p>%1</p><ol>%2</ol>")
                    .arg(QY("When the user drags & drops directories from an external application onto the multiplex tool the GUI can take different actions."))
                    .arg(fullText));
 
   Util::setToolTip(ui->cbMWarnMissingAudioTrack, QY("The GUI can ask for confirmation when you're about to create a file without audio tracks in it."));
 
   Util::setToolTip(ui->cbMDeriveAudioTrackLanguageFromFileName,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
                    .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->cbMDeriveVideoTrackLanguageFromFileName,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
                    .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->cbMDeriveSubtitleTrackLanguageFromFileName,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
                    .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->leMDeriveTrackLanguageBoundaryChars,
-                   u"<p>%1 %2</p>"_s
+                   Q("<p>%1 %2</p>")
                    .arg(QYH("When deriving the track language from the file name, the file name is split into parts on the characters in this list."))
                    .arg(QYH("Each part is then matched against the list of languages selected below to determine whether or not to use it as the track language.")));
   Util::setToolTip(ui->pbMDeriveTrackLanguageRevertBoundaryChars, QY("Revert the entry to its default value."));
   ui->tbMDeriveTrackLanguageRecognizedLanguages->setToolTips(QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."));
 
   Util::setToolTip(ui->ldwMDefaultAudioTrackLanguage,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->ldwMDefaultVideoTrackLanguage,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->ldwMDefaultSubtitleTrackLanguage,
-                   u"<p>%1 %2</p><p>%3 %4</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
 
-  auto text = u"<p>%1 %2</p>"_s
+  auto text = Q("<p>%1 %2</p>")
     .arg(QYH("Audio and subtitle files often contain the words 'cc' or 'sdh' in their file name to signal that they're intended for hearing impaired people."))
     .arg(QYH("The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."));
 
@@ -542,7 +542,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->leMDeriveHearingImpairedFlagRE, text);
   Util::setToolTip(ui->pbMDeriveHearingImpairedFlagRERevert, QY("Revert the entry to its default value."));
 
-  text = u"<p>%1 %2</p>"_s
+  text = Q("<p>%1 %2</p>")
     .arg(QYH("Audio and subtitle files often contain the words 'comments' or 'commentary' in their file name to signal that they contain content such as a movie director's comments."))
     .arg(QYH("The GUI can set the 'commentary' flag for such tracks if the file name matches this regular expression."));
 
@@ -555,7 +555,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMSetOriginalLanguageFlagLanguage, text);
   Util::setToolTip(ui->ldwMSetOriginalLanguageFlagLanguage, text);
 
-  text = u"<p>%1 %2</p>"_s
+  text = Q("<p>%1 %2</p>")
     .arg(QYH("Subtitle files often contain the word 'forced' in their file name to signal that they're intended for 'forced display' only (e.g. when they speak Elfish in 'Lord of the Rings')."))
     .arg(QYH("The GUI can set the 'forced display' flag for such tracks if the file name matches this regular expression."));
 
@@ -570,7 +570,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->leMDefaultAdditionalCommandLineOptions, QY("The options entered here are set for all new multiplex jobs by default."));
 
   Util::setToolTip(ui->cbMScanPlaylistsPolicy,
-                   u"<p>%1 %2</p><p>%3</p>"_s
+                   Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."))
                    .arg(QYH("The user can then select which playlist to actually add."))
                    .arg(QYH("This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) "
@@ -578,45 +578,45 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only playlists whose duration are at least this long are considered and offered to the user for selection."));
   Util::setToolTip(ui->cbMIgnorePlaylistsForMenus,
-                   u"<p>%1 %2</p>"_s
+                   Q("<p>%1 %2</p>")
                    .arg(QY("Ignores playlists which are likely meant for menus."))
                    .arg(QY("This is considered to be the case when a playlist contains the same item at least five times.")));
   Util::setToolTip(ui->cbMAddBlurayCovers, QY("If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."));
   Util::setToolTip(ui->cbMAttachmentAlwaysSkipForExistingName,
-                   u"<p>%1 %2 %3</p>"_s
+                   Q("<p>%1 %2 %3</p>")
                    .arg(QY("When adding new files as attachments the GUI will check if there are other attachments with the same name."))
                    .arg(QY("If one is found, the GUI will ask whether to skip the file or to add it anyway."))
                    .arg(QY("If enabled, such files will always be skipped without asking.")));
 
   Util::setToolTip(ui->cbMAutoSetDestinationFileName,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."))
                    .arg(QY("The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file.")));
 
   Util::setToolTip(ui->cbMAutoSetDestinationOnlyForVideoFiles,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If this option is enabled, only source files containing video tracks will be used for setting the destination file name."))
                    .arg(QY("Other files are ignored when they're added.")));
 
   Util::setToolTip(ui->cbMAutoSetDestinationFromTitle,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If this option is enabled, the file title will be used as the basis for the destination file name if a file title is set."))
                    .arg(QY("Otherwise the destination file name is derived from the source file names.")));
 
   Util::setToolTip(ui->cbMAutoSetDestinationFromDirectory,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If this option is enabled, the name of the directory the file is located in will be used as the basis for the destination file name."))
                    .arg(QY("Otherwise the destination file name is derived from the source file names.")));
 
   Util::setToolTip(ui->cbMUniqueOutputFileNames,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified destination file name.")));
   Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
 
   ui->tbMEnableMuxingTracksByType->setToolTips(QY("Only items whose type is in the 'selected' list on the right will be set to be copied by default."));
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
-                   u"<p>%1 %2 %3</p><p>%4</p>"_s
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("When adding source files all tracks are normally set to be copied into the destination file."))
                    .arg(QYH("If this option is enabled, only those tracks will be set to be copied whose language is selected below."))
                    .arg(QYH("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
@@ -628,7 +628,7 @@ PreferencesDialog::setupToolTips() {
                                                    QY("Only tracks with a language in this list will be set to be copied by default."));
 
   Util::setToolTip(ui->cbMEnableMuxingForcedSubtitleTracks,
-                   u"<p>%1 %2</p><ul><li>%3</li><li>%4</li><li>%5</li></ul>"_s
+                   Q("<p>%1 %2</p><ul><li>%3</li><li>%4</li><li>%5</li></ul>")
                    .arg(QYH("If enabled, forced subtitle tracks will always be set to be copied."))
                    .arg(QYH("A subtitle track is considered to be 'forced' track if any of the following conditions are met:"))
                    .arg(QYH("Its 'forced display' property is set in the source file."))
@@ -638,25 +638,25 @@ PreferencesDialog::setupToolTips() {
   // Often used XYZ page
   ui->tbOftenUsedLanguages->setToolTips(QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedLanguagesOnly,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   ui->tbOftenUsedRegions->setToolTips(QY("The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."));
   Util::setToolTip(ui->cbOftenUsedRegionsOnly,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCharacterSetsOnly,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   // Header editor  page
   Util::setToolTip(ui->cbHEDroppedFilesPolicy,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."))
                    .arg(QY("The default is to ask the user what to do with the dropped files."))
                    .arg(QY("Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab.")));
@@ -735,7 +735,7 @@ PreferencesDialog::setupInterfaceLanguage() {
   auto translations       = std::vector<TranslationSorter>{};
 
   for (auto const &translation : translation_c::ms_available_translations)
-    translations.emplace_back(u"%1 (%2)"_s.arg(Q(translation.m_translated_name)).arg(Q(translation.m_english_name)), Q(translation.get_locale()));
+    translations.emplace_back(Q("%1 (%2)").arg(Q(translation.m_translated_name)).arg(Q(translation.m_english_name)), Q(translation.get_locale()));
 
   std::sort(translations.begin(), translations.end());
 
@@ -1480,11 +1480,11 @@ PreferencesDialog::browseMediaInfoExe() {
   auto filters = QStringList{};
 
 #if defined(SYS_WINDOWS)
-  filters << QY("Executable files") + u" (*.exe)"_s;
+  filters << QY("Executable files") + Q(" (*.exe)");
 #endif
-  filters << QY("All files") + u" (*)"_s;
+  filters << QY("All files") + Q(" (*)");
 
-  auto fileName = Util::getOpenFileName(this, QY("Select executable"), ui->leMMediaInfoExe->text(), filters.join(u";;"_s));
+  auto fileName = Util::getOpenFileName(this, QY("Select executable"), ui->leMMediaInfoExe->text(), filters.join(Q(";;")));
   if (!fileName.isEmpty())
     ui->leMMediaInfoExe->setText(fileName);
 }
@@ -1659,8 +1659,8 @@ PreferencesDialog::verifyRunProgramConfigurations() {
 
     Util::MessageBox::critical(this)
       ->title(QY("Invalid settings"))
-      .text(u"<p>%1 %2</p>"
-              "<p>%3</p>"_s
+      .text(Q("<p>%1 %2</p>"
+              "<p>%3</p>")
             .arg(QY("This configuration is currently invalid.").toHtmlEscaped())
             .arg(error.toHtmlEscaped())
             .arg(QY("Either fix the error or remove the configuration before closing the preferences dialog.").toHtmlEscaped()))

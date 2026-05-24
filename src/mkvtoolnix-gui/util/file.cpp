@@ -55,7 +55,7 @@ checkForBomAndNonAscii(QString const &fileName) {
 QUrl
 pathToFileUrl(QString const &path) {
   auto url = QUrl{};
-  url.setScheme(u"file"_s);
+  url.setScheme(Q("file"));
   url.setPath(path);
   return url;
 }
@@ -63,7 +63,7 @@ pathToFileUrl(QString const &path) {
 QString
 removeInvalidPathCharacters(QString fileName) {
 #if defined(SYS_WINDOWS)
-  static DeferredRegularExpression s_driveRE{u"^[A-Za-z]:"_s}, s_invalidCharRE{u"[<>\"|?*\\x{01}-\\x{1f}]+"_s}, s_invalidCharRE2{u"[:]+"_s};
+  static DeferredRegularExpression s_driveRE{Q("^[A-Za-z]:")}, s_invalidCharRE{Q("[<>\"|?*\\x{01}-\\x{1f}]+")}, s_invalidCharRE2{Q("[:]+")};
 
   fileName.remove(*s_invalidCharRE);
 
@@ -83,12 +83,12 @@ removeInvalidPathCharacters(QString fileName) {
 QString
 replaceInvalidFileNameCharacters(QString fileName) {
 #if defined(SYS_WINDOWS)
-  static DeferredRegularExpression s_invalidCharRE{uR"([\\/:<>"|?*\x{01}-\x{1f}]+)"_s};
+  static DeferredRegularExpression s_invalidCharRE{Q(R"([\\/:<>"|?*\x{01}-\x{1f}]+)")};
 #else
-  static DeferredRegularExpression s_invalidCharRE{u"/+"_s};
+  static DeferredRegularExpression s_invalidCharRE{Q("/+")};
 #endif
 
-  fileName.replace(*s_invalidCharRE, u"-"_s);
+  fileName.replace(*s_invalidCharRE, Q("-"));
 
   return fileName;
 }
@@ -138,7 +138,7 @@ void
 saveTextToFile(QString const &fileName,
                QStringList const &content,
                bool saveLastOpenDir) {
-  saveTextToFile(fileName, content.join(u"\n"_s) + u"\n"_s, saveLastOpenDir);
+  saveTextToFile(fileName, content.join(Q("\n")) + Q("\n"), saveLastOpenDir);
 }
 
 void

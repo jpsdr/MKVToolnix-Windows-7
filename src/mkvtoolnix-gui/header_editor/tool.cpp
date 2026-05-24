@@ -141,7 +141,7 @@ Tool::toolShown() {
 
 void
 Tool::retranslateUi() {
-  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? u""_s : App::translate("CloseButton", "Close Tab");
+  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
 
   ui->retranslateUi(this);
 
@@ -199,7 +199,7 @@ Tool::openFile(QString const &fileName) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = Util::getOpenFileNames(this, QY("Open Matroska or WebM files"), Util::Settings::get().lastOpenDirPath(), QY("Matroska and WebM files") + u" (*.mkv *.mka *.mks *.mk3d *.webm);;"_s + QY("All files") + u" (*)"_s);
+  auto fileNames = Util::getOpenFileNames(this, QY("Open Matroska or WebM files"), Util::Settings::get().lastOpenDirPath(), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
 

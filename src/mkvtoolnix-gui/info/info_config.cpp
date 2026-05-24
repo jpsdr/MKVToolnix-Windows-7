@@ -134,7 +134,7 @@ InfoConfig::loadSettings(QString const &fileName) {
 
 QString
 InfoConfig::settingsType() {
-  return u"InfoConfig"_s;
+  return Q("InfoConfig");
 }
 
 }

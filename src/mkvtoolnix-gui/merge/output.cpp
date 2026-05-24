@@ -179,20 +179,20 @@ Tab::setupOutputToolTips() {
 
   Util::setToolTip(p.ui->title, QY("This is the title that players may show as the 'main title' for this movie."));
   Util::setToolTip(p.ui->splitMode,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("Enables splitting of the output into more than one file."))
                    .arg(QY("You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers.")));
   Util::setToolTip(p.ui->splitMaxFiles,
-                   u"<p>%1 %2</p><p>%3</p>"_s
+                   Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."))
                    .arg(QYH("Useful e.g. when you want exactly two files."))
                    .arg(QYH("If you leave this empty then there is no limit for the number of files mkvmerge might create.")));
   Util::setToolTip(p.ui->linkFiles,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QY("Use 'segment linking' for the resulting files."))
                    .arg(QY("For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation.")));
   Util::setToolTip(p.ui->segmentUIDs,
-                   u"<p>%1 %2</p><p>%3 %4 %5</p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4 %5</p>")
                    .arg(QYH("Sets the segment UIDs to use."))
                    .arg(QYH("This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."))
                    .arg(QYH("Each file created contains one segment, and each segment has one segment UID."))
@@ -205,18 +205,18 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(p.ui->browseSegmentUID,         QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
   Util::setToolTip(p.ui->browseNextSegmentUID,     QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
   Util::setToolTip(p.ui->browsePreviousSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
-  Util::setToolTip(p.ui->chapterLanguage,          u"<p>%1 %2 %3</p><p>%4</p>"_s
+  Util::setToolTip(p.ui->chapterLanguage,          Q("<p>%1 %2 %3</p><p>%4</p>")
                                                    .arg(QYH("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
                                                    .arg(QYH("This option specifies the language to be associated with chapters if the OGM chapter format is used."))
                                                    .arg(QYH("It is ignored for XML chapter files."))
                                                    .arg(QYH("The language set here is also used when chapters are generated.")));
   Util::setToolTip(p.ui->chapterCharacterSet,
-                   u"%1 %2 %3"_s
+                   Q("%1 %2 %3")
                    .arg(QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
                    .arg(QY("If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."))
                    .arg(QY("It is ignored for XML chapter files.")));
   Util::setToolTip(p.ui->chapterCueNameFormat,
-                   u"<p>%1 %2 %3 %4</p><p>%5</p>"_s
+                   Q("<p>%1 %2 %3 %4</p><p>%5</p>")
                    .arg(QYH("mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."))
                    .arg(QYH("This option controls how the chapter names are created."))
                    .arg(QYH("The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."))
@@ -224,11 +224,11 @@ Tab::setupOutputToolTips() {
                    .arg(QYH("If nothing is entered then '%p - %t' will be used.")));
   Util::setToolTip(p.ui->chapterDelay, QY("Delay the chapters' timestamps by a couple of ms."));
   Util::setToolTip(p.ui->chapterStretchBy,
-                   u"%1 %2"_s
+                   Q("%1 %2")
                    .arg(QYH("Multiply the chapters' timestamps with a factor."))
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78).")));
   Util::setToolTip(p.ui->chapterGenerationMode,
-                   u"<p>%1 %2</p><ol><li>%3</li><li>%4</li></ol><p>%5</p>"_s
+                   Q("<p>%1 %2</p><ol><li>%3</li><li>%4</li></ol><p>%5</p>")
                    .arg(QYH("mkvmerge can generate chapters automatically."))
                    .arg(QYH("The following modes are supported:"))
                    .arg(QYH("When appending: one chapter is created at the start and one whenever a file is appended."))
@@ -237,7 +237,7 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(p.ui->chapterGenerationNameTemplate, ChapterEditor::Tool::chapterNameTemplateToolTip());
   Util::setToolTip(p.ui->chapterGenerationInterval, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
   Util::setToolTip(p.ui->webmMode,
-                   u"<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>"_s
+                   Q("<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>")
                    .arg(QYH("Create a WebM compliant file."))
                    .arg(QYH("mkvmerge also turns this on if the destination file name's extension is \"webm\"."))
                    .arg(QYH("This mode enforces several restrictions."))
@@ -245,7 +245,7 @@ Tab::setupOutputToolTips() {
                    .arg(QYH("Tags are allowed, but chapters are not."))
                    .arg(QYH("The DocType header item is changed to \"webm\".")));
   Util::setToolTip(p.ui->stopAfterVideoEnds,
-                   u"<p>%1 %2</p>"_s
+                   Q("<p>%1 %2</p>")
                    .arg(QYH("Stops processing after the primary video track ends."))
                    .arg(QYH("Any later packets of other tracks will be discarded.")));
   Util::setToolTip(p.ui->additionalOptions,     QY("Any option given here will be added at the end of the mkvmerge command line."));
@@ -265,30 +265,30 @@ Tab::setupSplitModeLabelAndToolTips() {
     tooltip << QY("The size after which a new destination file is started.")
             << QY("The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively.")
             << QY("All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024).");
-    entries << u""_s;
+    entries << Q("");
     entries += Util::Settings::get().m_mergePredefinedSplitSizes;
 
   } else if (MuxConfig::SplitAfterDuration == p.config.m_splitMode) {
     label    = QY("Duration:");
     tooltip << QY("The duration after which a new destination file is started.")
-            << (u"%1 %2 %3"_s
+            << (Q("%1 %2 %3")
                 .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."))
                 .arg(QY("If given then you may use up to nine digits after the decimal point.")))
             << QY("Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds).");
-    entries << u""_s;
+    entries << Q("");
     entries += Util::Settings::get().m_mergePredefinedSplitDurations;
 
   } else if (MuxConfig::SplitAfterTimestamps == p.config.m_splitMode) {
     label    = QY("Timestamps:");
-    tooltip << (u"%1 %2"_s
+    tooltip << (Q("%1 %2")
                 .arg(QY("The timestamps after which a new destination file is started."))
                 .arg(QY("The timestamps refer to the whole stream and not to each individual destination file.")))
-            << (u"%1 %2 %3"_s
+            << (Q("%1 %2 %3")
                 .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH'."))
                 .arg(QY("You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all.")))
-            << (u"%1 %2"_s
+            << (Q("%1 %2")
                 .arg(QY("If two or more timestamps are used then you have to separate them with commas."))
                 .arg(QY("The formats can be mixed, too.")))
             << QY("Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes).");
@@ -296,7 +296,7 @@ Tab::setupSplitModeLabelAndToolTips() {
   } else if (MuxConfig::SplitByParts == p.config.m_splitMode) {
     label    = QY("Parts:");
     tooltip << QY("A comma-separated list of timestamp ranges of content to keep.")
-            << (u"%1 %2"_s
+            << (Q("%1 %2")
                 .arg(QY("Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."))
                 .arg(QY("If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range.")))
             << QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'.")
@@ -304,41 +304,41 @@ Tab::setupSplitModeLabelAndToolTips() {
 
   } else if (MuxConfig::SplitByPartsFrames == p.config.m_splitMode) {
     label    = QY("Parts:");
-    tooltip << (u"%1 %2 %3"_s
+    tooltip << (Q("%1 %2 %3")
                 .arg(QY("A comma-separated list of frame/field number ranges of content to keep."))
                 .arg(QY("Each range consists of a start and end frame/field number with a '-' in the middle, e.g. '157-238'."))
                 .arg(QY("The numbering starts at 1.")))
-            << (u"%1 %2"_s
+            << (Q("%1 %2")
                 .arg(QY("This mode considers only the first video track that is output."))
                 .arg(QY("If no video track is output no splitting will occur.")))
-            << (u"%1 %2 %3"_s
+            << (Q("%1 %2 %3")
                 .arg(QY("The numbers given with this argument are interpreted based on the number of Matroska blocks that are output."))
                 .arg(QY("A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."))
                 .arg(QY("mkvmerge does not distinguish between those two and simply counts the number of blocks.")))
-            << (u"%1 %2"_s
+            << (Q("%1 %2")
                 .arg(QY("If a start number is left out then the previous range's end number is used, or the start of the file if there was no previous range."))
                 .arg(QY("If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.")));
 
   } else if (MuxConfig::SplitByFrames == p.config.m_splitMode) {
     label    = QY("Frames/fields:");
-    tooltip << (u"%1 %2"_s
+    tooltip << (Q("%1 %2")
                 .arg(QY("A comma-separated list of frame/field numbers after which to split."))
                 .arg(QY("The numbering starts at 1.")))
-            << (u"%1 %2"_s
+            << (Q("%1 %2")
                 .arg(QY("This mode considers only the first video track that is output."))
                 .arg(QY("If no video track is output no splitting will occur.")))
-            << (u"%1 %2 %3"_s
+            << (Q("%1 %2 %3")
                 .arg(QY("The numbers given with this argument are interpreted based on the number of Matroska blocks that are output."))
                 .arg(QY("A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."))
                 .arg(QY("mkvmerge does not distinguish between those two and simply counts the number of blocks.")));
 
   } else if (MuxConfig::SplitAfterChapters == p.config.m_splitMode) {
     label    = QY("Chapter numbers:");
-    tooltip << (u"%1 %2"_s
+    tooltip << (Q("%1 %2")
                 .arg(QY("Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."))
                 .arg(QY("The numbering starts at 1.")))
             << QY("Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed.")
-            << (u"%1 %2"_s
+            << (Q("%1 %2")
                 .arg(QY("A chapter starting at 0s is never considered for splitting and discarded silently."))
                 .arg(QY("This mode only considers the top-most level of chapters across all edition entries.")));
 
@@ -361,7 +361,7 @@ Tab::setupSplitModeLabelAndToolTips() {
   for (auto &oneTooltip : tooltip)
     oneTooltip = oneTooltip.toHtmlEscaped();
 
-  Util::setToolTip(p.ui->splitOptions, u"<p>%1</p>"_s.arg(tooltip.join(u"</p><p>"_s)));
+  Util::setToolTip(p.ui->splitOptions, Q("<p>%1</p>").arg(tooltip.join(Q("</p><p>"))));
 }
 
 void
@@ -382,7 +382,7 @@ Tab::setDestination(QString const &newValue) {
   }
 
 #if defined(SYS_WINDOWS)
-  if (!newValue.contains(QRegularExpression{uR"(^[a-zA-Z]:[\\/]|^(?:\\\\|//).+[\\/].+)"_s}))
+  if (!newValue.contains(QRegularExpression{Q(R"(^[a-zA-Z]:[\\/]|^(?:\\\\|//).+[\\/].+)")}))
     return;
 #endif
 
@@ -410,8 +410,8 @@ void
 Tab::clearDestination() {
   auto &p = *p_func();
 
-  p.ui->output->setText(u""_s);
-  setDestination(u""_s);
+  p.ui->output->setText(Q(""));
+  setDestination(Q(""));
   p.config.m_destinationAuto.clear();
   p.config.m_destinationUniquenessSuffix.clear();
 
@@ -428,7 +428,7 @@ void
 Tab::clearTitle() {
   auto &p = *p_func();
 
-  p.ui->title->setText(u""_s);
+  p.ui->title->setText(Q(""));
   p.config.m_title.clear();
 }
 
@@ -441,11 +441,11 @@ Tab::clearTitleMaybe() {
 void
 Tab::onBrowseOutput() {
   auto &p       = *p_func();
-  auto filter   = p.config.m_webmMode ? QY("WebM files") + u" (*.webm)"_s : QY("Matroska files") + u" (*.mkv *.mka *.mks *.mk3d)"_s;
+  auto filter   = p.config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
   auto ext      = !p.config.m_destination.isEmpty() ? QFileInfo{p.config.m_destination}.suffix()
-                : p.config.m_webmMode               ? u"webm"_s
-                :                                     u"mkv"_s;
-  auto mkvName  = defaultFileNameForSaving(!ext.isEmpty() ? u".%1"_s.arg(ext) : ext);
+                : p.config.m_webmMode               ? Q("webm")
+                :                                     Q("mkv");
+  auto mkvName  = defaultFileNameForSaving(!ext.isEmpty() ? Q(".%1").arg(ext) : ext);
   auto fileName = getSaveFileName(QY("Select destination file name"), mkvName, filter, p.ui->output, ext);
   if (fileName.isEmpty())
     return;
@@ -465,7 +465,7 @@ Tab::onGlobalTagsChanged(QString newValue) {
 void
 Tab::onBrowseGlobalTags() {
   auto &p       = *p_func();
-  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + u" (*.xml)"_s, p.ui->globalTags);
+  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), p.ui->globalTags);
   if (!fileName.isEmpty())
     p.config.m_globalTags = fileName;
 }
@@ -478,7 +478,7 @@ Tab::onSegmentInfoChanged(QString newValue) {
 void
 Tab::onBrowseSegmentInfo() {
   auto &p       = *p_func();
-  auto fileName = getOpenFileName(QY("Select segment info file"), QY("XML segment info files") + u" (*.xml)"_s, p.ui->segmentInfo);
+  auto fileName = getOpenFileName(QY("Select segment info file"), QY("XML segment info files") + Q(" (*.xml)"), p.ui->segmentInfo);
   if (!fileName.isEmpty())
     p.config.m_segmentInfo = fileName;
 }
@@ -548,17 +548,17 @@ Tab::onBrowseChapters() {
   QStringList dvds;
 
 #if defined(HAVE_DVDREAD)
-  dvds << u"%1 (*.ifo *.IFO)"_s.arg(QY("DVDs"));
-  ifo = u"*.ifo *.IFO "_s;
+  dvds << Q("%1 (*.ifo *.IFO)").arg(QY("DVDs"));
+  ifo = Q("*.ifo *.IFO ");
 #endif  // HAVE_DVDREAD
 
-  auto fileTypes = QStringList{} << u"%1 (%2*.txt *.xml)"_s.arg(QY("Supported file types")).arg(ifo)
-                                 << u"%1 (*.xml)"_s.arg(QY("XML chapter files"))
-                                 << u"%1 (*.txt)"_s.arg(QY("Simple OGM-style chapter files"));
+  auto fileTypes = QStringList{} << Q("%1 (%2*.txt *.xml)").arg(QY("Supported file types")).arg(ifo)
+                                 << Q("%1 (*.xml)").arg(QY("XML chapter files"))
+                                 << Q("%1 (*.txt)").arg(QY("Simple OGM-style chapter files"));
 
   fileTypes += dvds;
 
-  auto fileName = getOpenFileName(QY("Select chapter file"), fileTypes.join(u";;"_s), p_func()->ui->chapters, InitialDirMode::ContentFirstInputFileLastOpenDir);
+  auto fileName = getOpenFileName(QY("Select chapter file"), fileTypes.join(Q(";;")), p_func()->ui->chapters, InitialDirMode::ContentFirstInputFileLastOpenDir);
 
   if (!fileName.isEmpty())
     onChaptersChanged(fileName);
@@ -761,9 +761,9 @@ Tab::onCopyTitleToOutputFileName() {
 
   else {
     auto suffix = info.suffix();
-    newFileName = u"%1.%2"_s
-      .arg(path.isEmpty()   ? title    : u"%1/%2"_s.arg(path).arg(title))
-      .arg(suffix.isEmpty() ? u"mkv"_s : suffix);
+    newFileName = Q("%1.%2")
+      .arg(path.isEmpty()   ? title    : Q("%1/%2").arg(path).arg(title))
+      .arg(suffix.isEmpty() ? Q("mkv") : suffix);
   }
 
   p.ui->output->setText(QDir::toNativeSeparators(newFileName));
@@ -839,8 +839,8 @@ Tab::changeOutputDirectoryTo(QString const &directory) {
 
   auto makeUnique  = Util::Settings::get().m_uniqueOutputFileNames;
   auto oldFileName = QFileInfo{ p.config.m_destination }.fileName();
-  auto newFileName = !oldFileName.isEmpty() ? oldFileName : u"%1.%2"_s.arg(QY("unnamed")).arg(suggestOutputFileNameExtension());
-  auto newFilePath = makeUnique ? generateUniqueOutputFileName(QFileInfo{newFileName}.completeBaseName(), QDir{directory}, true) : u"%1/%2"_s.arg(directory).arg(newFileName);
+  auto newFileName = !oldFileName.isEmpty() ? oldFileName : Q("%1.%2").arg(QY("unnamed")).arg(suggestOutputFileNameExtension());
+  auto newFilePath = makeUnique ? generateUniqueOutputFileName(QFileInfo{newFileName}.completeBaseName(), QDir{directory}, true) : Q("%1/%2").arg(directory).arg(newFileName);
 
   p.ui->output->setText(QDir::toNativeSeparators(newFilePath));
 }

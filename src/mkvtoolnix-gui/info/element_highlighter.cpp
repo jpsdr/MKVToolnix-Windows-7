@@ -64,14 +64,14 @@ QString
 vintExplanation(unsigned int length,
                 uint64_t vint,
                 bool withValue) {
-  auto explanation = u"<span class=\"monospace\">&nbsp;%1</span>&nbsp;%2"_s
+  auto explanation = Q("<span class=\"monospace\">&nbsp;%1</span>&nbsp;%2")
     .arg(Q(std::string(length - 1u, '0') + "1" + std::string(8u - length, '.')))
     .arg(QNY("Length: %1 byte", "Length: %1 bytes", length).arg(length).toHtmlEscaped());
 
   if (!withValue)
     return explanation;
 
-  return u"%1<br><span class=\"monospace\">&nbsp;%2</span>&nbsp;%3"_s
+  return Q("%1<br><span class=\"monospace\">&nbsp;%2</span>&nbsp;%3")
     .arg(explanation)
     .arg(Q(std::string(length, '.') + std::string(8u - length, '#')))
     .arg(QY("Value: %1").arg(QLocale::system().toString(static_cast<quint64>(vintValue(length, vint)))).toHtmlEscaped());
@@ -160,7 +160,7 @@ highlightBlockOrSimpleBlock(mtx::bits::reader_c &r,
   auto locale      = QLocale::system();
   auto length      = vintLength(r.peek_bits(8));
   auto trackNumber = r.get_bits(8 * length);
-  auto text        = u"%1<br>%2"_s.arg(QY("Track number:").toHtmlEscaped()).arg(vintExplanation(length, trackNumber, true));
+  auto text        = Q("%1<br>%2").arg(QY("Track number:").toHtmlEscaped()).arg(vintExplanation(length, trackNumber, true));
 
   highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8 - length, length, "#000000", "#bbbbff", text };
 
@@ -180,13 +180,13 @@ highlightBlockOrSimpleBlock(mtx::bits::reader_c &r,
   lines << QY("Flags:");
 
   if (isSimpleBlock)
-    lines << u"<span class=\"monospace\">&nbsp;%1.......</span>&nbsp;%2"_s .arg(flags & 0x80 ? 1 : 0)                          .arg(flags & 0x80 ? QY("Key frame").toHtmlEscaped()   : QY("Not a key frame").toHtmlEscaped());
+    lines << Q("<span class=\"monospace\">&nbsp;%1.......</span>&nbsp;%2") .arg(flags & 0x80 ? 1 : 0)                          .arg(flags & 0x80 ? QY("Key frame").toHtmlEscaped()   : QY("Not a key frame").toHtmlEscaped());
 
-  lines   << u"<span class=\"monospace\">&nbsp;....%1...</span>&nbsp;%2"_s .arg(flags & 0x08 ? 1 : 0)                          .arg(flags & 0x08 ? QY("Invisible").toHtmlEscaped()   : QY("Visible").toHtmlEscaped());
-  lines   << u"<span class=\"monospace\">&nbsp;.....%1%2.</span>&nbsp;%3"_s.arg(flags & 0x04 ? 1 : 0).arg(flags & 0x02 ? 1 : 0).arg(lacingName.toHtmlEscaped());
-  lines   << u"<span class=\"monospace\">&nbsp;.......%1</span>&nbsp;%2"_s .arg(flags & 0x01 ? 1 : 0)                          .arg(flags & 0x01 ? QY("Discardable").toHtmlEscaped() : QY("Not discardable").toHtmlEscaped());
+  lines   << Q("<span class=\"monospace\">&nbsp;....%1...</span>&nbsp;%2") .arg(flags & 0x08 ? 1 : 0)                          .arg(flags & 0x08 ? QY("Invisible").toHtmlEscaped()   : QY("Visible").toHtmlEscaped());
+  lines   << Q("<span class=\"monospace\">&nbsp;.....%1%2.</span>&nbsp;%3").arg(flags & 0x04 ? 1 : 0).arg(flags & 0x02 ? 1 : 0).arg(lacingName.toHtmlEscaped());
+  lines   << Q("<span class=\"monospace\">&nbsp;.......%1</span>&nbsp;%2") .arg(flags & 0x01 ? 1 : 0)                          .arg(flags & 0x01 ? QY("Discardable").toHtmlEscaped() : QY("Not discardable").toHtmlEscaped());
 
-  highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8u - 1u, 1, "#000000", "#00cc00", lines.join(u"<br>"_s) };
+  highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8u - 1u, 1, "#000000", "#00cc00", lines.join(Q("<br>")) };
 
   if (lacingValue == 0x00) {
     highlights << ElementHighlighter::Highlight{ r.get_bit_position() / 8u, r.get_remaining_bits() / 8u, "#000000", frameColor(0), QY("Frame").toHtmlEscaped() };
@@ -221,14 +221,14 @@ ElementHighlighter::highlightsForElement(memory_c const &mem) {
   try {
     auto length   = vintLength(r.peek_bits(8));
     auto id       = r.get_bits(length * 8);
-    auto text     = u"%1<br>%2"_s.arg(QY("Element ID:").toHtmlEscaped()).arg(vintExplanation(length, id, false));
+    auto text     = Q("%1<br>%2").arg(QY("Element ID:").toHtmlEscaped()).arg(vintExplanation(length, id, false));
 
     highlights << Highlight{ 0u, length, "#000000", "#aaff7f", text };
 
     auto position = length;
     length        = vintLength(r.peek_bits(8));
     auto size     = r.get_bits(length * 8);
-    text          = u"%1<br>%2"_s.arg(QY("Content size:").toHtmlEscaped()).arg(vintExplanation(length, size, true));
+    text          = Q("%1<br>%2").arg(QY("Content size:").toHtmlEscaped()).arg(vintExplanation(length, size, true));
 
     highlights << Highlight{ position, length, "#000000", "#ffff7f", text };
 

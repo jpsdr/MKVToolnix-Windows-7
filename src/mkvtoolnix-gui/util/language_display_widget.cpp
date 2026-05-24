@@ -114,7 +114,7 @@ LanguageDisplayWidget::setClearTitle(QString const &clearTitle) {
 
 void
 LanguageDisplayWidget::setAdditionalToolTip(QString const &additionalToolTip) {
-  p_func()->additionalToolTip = additionalToolTip.isEmpty() || additionalToolTip.startsWith('<') ? additionalToolTip : u"<span>%1</span>"_s.arg(additionalToolTip.toHtmlEscaped());
+  p_func()->additionalToolTip = additionalToolTip.isEmpty() || additionalToolTip.startsWith('<') ? additionalToolTip : Q("<span>%1</span>").arg(additionalToolTip.toHtmlEscaped());
 
   updateDisplay();
 }
@@ -165,61 +165,61 @@ LanguageDisplayWidget::updateToolTip() {
   }
 
   if (!content.isEmpty())
-    content << u"<hr>"_s;
+    content << Q("<hr>");
 
 
-  auto language    = u"—"_s,
-    extendedSubtag = u"—"_s,
-    script         = u"—"_s,
-    region         = u"—"_s,
-    variants       = u"—"_s,
-    privateUses    = u"—"_s;
+  auto language    = Q("—"),
+    extendedSubtag = Q("—"),
+    script         = Q("—"),
+    region         = Q("—"),
+    variants       = Q("—"),
+    privateUses    = Q("—");
 
   if (!p.language.get_language().empty()) {
     auto languageOpt = mtx::iso639::look_up(p.language.get_language());
-    language         = languageOpt ? u"%1 (%2)"_s.arg(Q(languageOpt->english_name)).arg(Q(p.language.get_language())) : Q(p.language.get_language());
+    language         = languageOpt ? Q("%1 (%2)").arg(Q(languageOpt->english_name)).arg(Q(p.language.get_language())) : Q(p.language.get_language());
   }
 
   if (auto subtag = p.language.get_extended_language_subtag(); !subtag.empty()) {
     auto subtagOpt = mtx::iana::language_subtag_registry::look_up_extlang(subtag);
-    extendedSubtag = subtagOpt ? u"%1 (%2)"_s.arg(Q(subtagOpt->description)).arg(Q(subtag)) : Q(subtag);
+    extendedSubtag = subtagOpt ? Q("%1 (%2)").arg(Q(subtagOpt->description)).arg(Q(subtag)) : Q(subtag);
   }
 
   if (!p.language.get_script().empty()) {
     auto scriptOpt = mtx::iso15924::look_up(p.language.get_script());
-    script         = scriptOpt ? u"%1 (%2)"_s.arg(Q(scriptOpt->english_name)).arg(Q(scriptOpt->code)) : Q(p.language.get_script());
+    script         = scriptOpt ? Q("%1 (%2)").arg(Q(scriptOpt->english_name)).arg(Q(scriptOpt->code)) : Q(p.language.get_script());
   }
 
   if (!p.language.get_region().empty()) {
     auto regionOpt = mtx::iso3166::look_up(p.language.get_region());
-    region         = regionOpt ? u"%1 (%2)"_s.arg(Q(regionOpt->name)).arg(Q(p.language.get_region())) : Q(p.language.get_region());
+    region         = regionOpt ? Q("%1 (%2)").arg(Q(regionOpt->name)).arg(Q(p.language.get_region())) : Q(p.language.get_region());
   }
 
   QStringList entries;
   for (auto const &variant : p.language.get_variants()) {
     auto variantOpt = mtx::iana::language_subtag_registry::look_up_variant(variant);
-    entries << (variantOpt ? u"%1 (%2)"_s.arg(Q(variantOpt->description)).arg(Q(variant)) : Q(variant));
+    entries << (variantOpt ? Q("%1 (%2)").arg(Q(variantOpt->description)).arg(Q(variant)) : Q(variant));
   }
 
   if (!entries.empty())
-    variants = entries.join(u", "_s);
+    variants = entries.join(Q(", "));
 
   entries.clear();
   for (auto const &privateUse : p.language.get_private_use())
     entries << Q(privateUse);
 
   if (!entries.empty())
-    privateUses = entries.join(u", "_s);
+    privateUses = entries.join(Q(", "));
 
-  content << u"<b>%1:</b>"_s.arg(QY("BCP 47 language tag details").toHtmlEscaped())
-          << u"<table>"_s
-          << u"<tr><td>%1:</td><td>%2</td></tr>"_s.arg(QY("Language"))                .arg(language      .toHtmlEscaped())
-          << u"<tr><td>%1:</td><td>%2</td></tr>"_s.arg(QY("Extended language subtag")).arg(extendedSubtag.toHtmlEscaped())
-          << u"<tr><td>%1:</td><td>%2</td></tr>"_s.arg(QY("Script"))                  .arg(script        .toHtmlEscaped())
-          << u"<tr><td>%1:</td><td>%2</td></tr>"_s.arg(QY("Region"))                  .arg(region        .toHtmlEscaped())
-          << u"<tr><td>%1:</td><td>%2</td></tr>"_s.arg(QY("Variants"))                .arg(variants      .toHtmlEscaped())
-          << u"<tr><td>%1:</td><td>%2</td></tr>"_s.arg(QY("Private use"))             .arg(privateUses   .toHtmlEscaped())
-          << u"</table>"_s;
+  content << Q("<b>%1:</b>").arg(QY("BCP 47 language tag details").toHtmlEscaped())
+          << Q("<table>")
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Language"))                .arg(language      .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Extended language subtag")).arg(extendedSubtag.toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Script"))                  .arg(script        .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Region"))                  .arg(region        .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Variants"))                .arg(variants      .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Private use"))             .arg(privateUses   .toHtmlEscaped())
+          << Q("</table>");
 
   p.ui->lLanguage->setToolTip(content.join(QString{}));
 }

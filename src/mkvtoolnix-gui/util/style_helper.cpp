@@ -376,7 +376,7 @@ StyleHelper::drawIconWithShadow(QIcon const &icon,
                                 QPoint const &dipOffset) {
   QPixmap cache;
   auto const devicePixelRatio = p->device()->devicePixelRatioF();
-  QString pixmapName = u"icon %0 %1 %2 %3"_s.arg(icon.cacheKey()).arg(iconMode).arg(rect.height()).arg(devicePixelRatio);
+  QString pixmapName = Q("icon %0 %1 %2 %3").arg(icon.cacheKey()).arg(iconMode).arg(rect.height()).arg(devicePixelRatio);
 
   if (!QPixmapCache::find(pixmapName, &cache)) {
     // High-dpi support: The in parameters (rect, radius, offset) are in

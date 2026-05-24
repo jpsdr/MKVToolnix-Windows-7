@@ -75,7 +75,7 @@ Tool::setupUi() {
   setupMoveJobsButtons();
 
   Util::preventScrollingWithoutFocus(this);
-  Util::HeaderViewManager::create(*ui->jobs, "Jobs::Jobs").setDefaultSizes({ { u"status"_s, 150 }, { u"description"_s, 300 }, { u"dateAdded"_s, 130 }, { u"dateStarted"_s, 130 }, { u"dateFinished"_s, 130 } });
+  Util::HeaderViewManager::create(*ui->jobs, "Jobs::Jobs").setDefaultSizes({ { Q("status"), 150 }, { Q("description"), 300 }, { Q("dateAdded"), 130 }, { Q("dateStarted"), 130 }, { Q("dateFinished"), 130 } });
 
   m_jobsMenu->addAction(m_viewOutputAction);
   m_jobsMenu->addAction(m_openFolderAction);
@@ -92,13 +92,13 @@ Tool::setupUi() {
   m_jobsMenu->addAction(m_acknowledgeSelectedErrorsAction);
   m_jobsMenu->addAction(m_acknowledgeSelectedWarningsErrorsAction);
 
-  m_viewOutputAction->setIcon(QIcon::fromTheme(u"layer-visible-on"_s));
-  m_openFolderAction->setIcon(QIcon::fromTheme(u"document-open-folder"_s));
-  m_startAutomaticallyAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s));
-  m_startImmediatelyAction->setIcon(QIcon::fromTheme(u"media-seek-forward"_s));
-  m_editAndRemoveAction->setIcon(QIcon::fromTheme(u"edit-entry"_s));
-  m_removeAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
-  m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
+  m_viewOutputAction->setIcon(QIcon::fromTheme(Q("layer-visible-on")));
+  m_openFolderAction->setIcon(QIcon::fromTheme(Q("document-open-folder")));
+  m_startAutomaticallyAction->setIcon(QIcon::fromTheme(Q("media-playback-start")));
+  m_startImmediatelyAction->setIcon(QIcon::fromTheme(Q("media-seek-forward")));
+  m_editAndRemoveAction->setIcon(QIcon::fromTheme(Q("edit-entry")));
+  m_removeAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
 
   ui->jobs->header()->setSectionsClickable(true);
 
@@ -584,7 +584,7 @@ Tool::checkIfOverwritingExistingFileIsOK(QString const &existingDestination) {
 
   auto answer = Util::MessageBox::question(this)
     ->title(QY("Overwrite existing file"))
-    .text(u"%1 %2"_s
+    .text(Q("%1 %2")
           .arg(QY("The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files.").arg(existingDestination))
           .arg(QY("Do you want to continue and risk overwriting the file?")))
     .buttonLabel(QMessageBox::Yes, QY("C&ontinue"))
@@ -621,7 +621,7 @@ Tool::checkIfOverwritingExistingJobIsOK(QString const &newDestination,
 
   auto answer = Util::MessageBox::question(this)
     ->title(QY("Overwrite existing file"))
-    .text(u"%1 %2 %3"_s
+    .text(Q("%1 %2 %3")
           .arg(QY("A job creating the file '%1' is already in the job queue.").arg(newDestination))
           .arg(QY("If you add another job with the same destination file then file created before will be overwritten."))
           .arg(QY("Do you want to overwrite the file?")))

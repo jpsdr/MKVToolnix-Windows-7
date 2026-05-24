@@ -52,23 +52,23 @@ AvailableUpdateInfoDialog::setReleaseInformation(std::shared_ptr<pugi::xml_docum
 void
 AvailableUpdateInfoDialog::setChangeLogContent(QString const &content) {
   auto html = QStringList{};
-  html << u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
+  html << Q("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
             "<html><head><meta name=\"qrichtext\" content=\"1\" />"
             "<style type=\"text/css\">"
             "p, li { white-space: pre-wrap; }\n"
             "</style>"
-            "</head><body>"_s;
+            "</head><body>");
 
-  html << u"<h1>%1 [<a href=\"%2\">%3</a>]</h1>"_s
+  html << Q("<h1>%1 [<a href=\"%2\">%3</a>]</h1>")
     .arg(QY("MKVToolNix news & changes").toHtmlEscaped())
     .arg(UpdateChecker::newsURL().toHtmlEscaped())
     .arg(QY("Read full NEWS.md file online").toHtmlEscaped());
 
   html << content;
 
-  html << u"</body></html>"_s;
+  html << Q("</body></html>");
 
-  ui->changeLog->setHtml(html.join(u""_s));
+  ui->changeLog->setHtml(html.join(Q("")));
 }
 
 void
@@ -105,7 +105,7 @@ AvailableUpdateInfoDialog::updateStatusDisplay() {
   auto url = m_releaseVersion.urls.find("general");
   if ((url != m_releaseVersion.urls.end()) && !url->second.empty()) {
     m_downloadURL = to_qs(url->second);
-    ui->downloadURL->setText(u"<html><body><a href=\"%1\">%1</a></body></html>"_s.arg(m_downloadURL.toHtmlEscaped()));
+    ui->downloadURL->setText(Q("<html><body><a href=\"%1\">%1</a></body></html>").arg(m_downloadURL.toHtmlEscaped()));
     ui->download->setEnabled(true);
   }
 }
@@ -122,18 +122,18 @@ AvailableUpdateInfoDialog::formattedVersionHeading(pugi::xpath_node const &relea
 
   QString links;
   auto songQ  = song.toHtmlEscaped();
-  auto urlBase    = u"https://www.youtube.com/results"_s;
+  auto urlBase    = Q("https://www.youtube.com/results");
   auto urlSong    = QUrl{urlBase};
   auto querySong  = QUrlQuery{};
 
-  querySong.addQueryItem(u"search_query"_s, u"%1 %2"_s.arg(artist).arg(song));
+  querySong.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(song));
   urlSong.setQuery(querySong);
 
   if (!album.isEmpty() && (song.toLower() != album.toLower())) {
     auto urlAlbum    = QUrl{urlBase};
     auto queryAlbum  = QUrlQuery{};
 
-    queryAlbum.addQueryItem(u"search_query"_s, u"%1 %2"_s.arg(artist).arg(album));
+    queryAlbum.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(album));
     urlAlbum.setQuery(queryAlbum);
 
     links = QY("Listen to <a href=\"%1\">song</a> or <a href=\"%2\">album</a> on YouTube")
@@ -143,7 +143,7 @@ AvailableUpdateInfoDialog::formattedVersionHeading(pugi::xpath_node const &relea
   } else
     links = QY("Listen to <a href=\"%1\">song</a> on YouTube").arg(urlSong.toString(QUrl::FullyEncoded));
 
-  return u"%1 [%2]"_s
+  return Q("%1 [%2]")
     .arg(QY("Version %1 \"%2\"").arg(versionStrQ).arg(songQ))
     .arg(links);
 }
@@ -151,7 +151,7 @@ AvailableUpdateInfoDialog::formattedVersionHeading(pugi::xpath_node const &relea
 void
 AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   if (!m_releasesInfo) {
-    setChangeLogContent(u""_s);
+    setChangeLogContent(Q(""));
     return;
   }
 
@@ -166,7 +166,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto reNewlines        = QRegularExpression{"\r?\n"};
   auto bugFormatter      = [](QRegularExpressionMatch const &matches) {
     auto number_str = matches.captured(1).mid(1);
-    return u"<a href=\"%2%1\">#%1</a>"_s.arg(number_str).arg(MTX_URL_ISSUES);
+    return Q("<a href=\"%2%1\">#%1</a>").arg(number_str).arg(MTX_URL_ISSUES);
   };
 
   releases.sort();
@@ -177,7 +177,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
     auto currentTypeQ = QString{};
     auto inList       = false;
 
-    html << u"<h2>%1</h2>"_s.arg(headingQ);
+    html << Q("<h2>%1</h2>").arg(headingQ);
 
     for (auto change = release.node().child("changes").first_child() ; change ; change = change.next_sibling()) {
       if (   (std::string{change.name()} != "change")
@@ -190,32 +190,32 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
 
         if (inList) {
           inList = false;
-          html << u"</ul></p>"_s;
+          html << Q("</ul></p>");
         }
 
-        html << u"<h3>%1</h3>"_s.arg(typeQ);
+        html << Q("<h3>%1</h3>").arg(typeQ);
       }
 
       if (!inList) {
         inList = true;
-        html << u"<p><ul>"_s;
+        html << Q("<p><ul>");
       }
 
       auto text = mtx::string::replace(Q(mtx::markdown::to_html(change.child_value())), reBug,  bugFormatter).replace(reNewlines, " ");
-      html     << u"<li>%1</li>"_s.arg(text);
+      html     << Q("<li>%1</li>").arg(text);
     }
 
     if (inList)
-      html << u"</ul></p>"_s;
+      html << Q("</ul></p>");
 
     numReleasesOutput++;
     if ((10 < numReleasesOutput) && (version_number_t{versionStr} < m_releaseVersion.current_version))
       break;
   }
 
-  html << u"<p><a href=\"%1\">%2</a></h1>"_s.arg(UpdateChecker::newsURL()).arg(QY("Read full NEWS.md file online"));
+  html << Q("<p><a href=\"%1\">%2</a></h1>").arg(UpdateChecker::newsURL()).arg(QY("Read full NEWS.md file online"));
 
-  setChangeLogContent(html.join(u"\n"_s));
+  setChangeLogContent(html.join(Q("\n")));
 }
 
 void
