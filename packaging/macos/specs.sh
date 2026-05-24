@@ -10,6 +10,7 @@ spec_gmp=(gmp-6.3.0.tar.xz https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz a3c2
 spec_libiconv=(libiconv-1.16.tar.gz https://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04)
 spec_ogg=(libogg-1.3.4.tar.xz http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.xz c163bc12bc300c401b6aa35907ac682671ea376f13ae0969a220f7ddf71893fe)
 spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz 6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591)
+spec_shared_mime_info=(shared-mime-info-2.4.tar.bz2 https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2 32dc32ae39ff1c1bf8434dd3b36770b48538a1772bc0298509d034f057005992)
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
 spec_zlib=(zlib-v1.3.2.tar.xz https://zlib.net/zlib-1.3.2.tar.xz d7a0654783a4da529d1bb793b7ad9c3318020af77667bcae35f95d0e42a792f3)
 spec_qt=(qt-everywhere-src-6.11.0.tar.xz https://download.qt.io/archive/qt/6.11/6.11.0/single/qt-everywhere-src-6.11.0.tar.xz acf3b3db04c9e5d0820e8324b097320388954c297cee83d2bd698789234f68a4)
