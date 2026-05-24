@@ -157,7 +157,7 @@ mtx_common_init(std::string const &program_name,
   stereo_mode_c::init();
 
 #if defined(WITH_MKVTOOLNIX_GUI) && WITH_MKVTOOLNIX_GUI
-  QResource::registerResource(u"%1/qt_resources.rcc"_s.arg(Q(mtx::sys::get_package_data_folder())));
+  QResource::registerResource(Q("%1/qt_resources.rcc").arg(Q(mtx::sys::get_package_data_folder())));
 #endif
 }
 
