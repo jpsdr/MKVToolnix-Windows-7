@@ -67,7 +67,7 @@ public:
   }
 
   virtual QRegularExpression get_file_name_regex() override {
-    return QRegularExpression{ Q("\\.(avc|[hx]?264)$"), QRegularExpression::CaseInsensitiveOption };
+    return QRegularExpression{ u"\\.(avc|[hx]?264)$"_s, QRegularExpression::CaseInsensitiveOption };
   }
 
   virtual unsigned int get_nalu_type(uint8_t *bytes) override {
@@ -90,7 +90,7 @@ public:
   }
 
   virtual QRegularExpression get_file_name_regex() override {
-    return QRegularExpression{ Q("\\.(hevc|[hx]?265)$"), QRegularExpression::CaseInsensitiveOption };
+    return QRegularExpression{ u"\\.(hevc|[hx]?265)$"_s, QRegularExpression::CaseInsensitiveOption };
   }
 
   virtual unsigned int get_nalu_type(uint8_t *bytes) override {
@@ -120,7 +120,7 @@ public:
   }
 
   virtual QRegularExpression get_file_name_regex() override {
-    return QRegularExpression{ Q("\\.(vvc|[hx]?266)$"), QRegularExpression::CaseInsensitiveOption };
+    return QRegularExpression{ u"\\.(vvc|[hx]?266)$"_s, QRegularExpression::CaseInsensitiveOption };
   }
 
   virtual unsigned int get_nalu_type(uint8_t *bytes) override {

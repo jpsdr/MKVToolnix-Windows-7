@@ -72,13 +72,13 @@ TrackTypePage::retranslateUi() {
   ui->m_lCodecId->setText(m_codecId);
 
   ui->m_lTrackIdxMkvmergeLabel->setText(QY("Track ID for mkvmerge & mkvextract:"));
-  ui->m_lTrackIdxMkvmerge->setText(Q("%1").arg(m_trackIdxMkvmerge));
+  ui->m_lTrackIdxMkvmerge->setText(u"%1"_s.arg(m_trackIdxMkvmerge));
 
   ui->m_lTrackNumberMkvpropeditLabel->setText(QY("Track number for mkvpropedit:"));
-  ui->m_lTrackNumberMkvpropedit->setText(Q("track:@%1").arg(m_trackNumber));
+  ui->m_lTrackNumberMkvpropedit->setText(u"track:@%1"_s.arg(m_trackNumber));
 
   ui->m_lUidLabel->setText(QY("UID:"));
-  ui->m_lUid->setText(Q("%1").arg(m_trackUid));
+  ui->m_lUid->setText(u"%1"_s.arg(m_trackUid));
 
   ui->m_lLanguageLabel->setText(QY("Language:"));
   ui->m_lLanguage->setText(Q(m_language.format_long()));
@@ -139,17 +139,17 @@ TrackTypePage::summarizeProperties() {
       properties << QNY("%1 bit per sample", "%1 bits per sample", bitsPerSample).arg(bitsPerSample);
 
   } else if (track_video == m_trackType)
-    properties << QY("%1 pixels").arg(Q("%1x%2")
+    properties << QY("%1 pixels").arg(u"%1x%2"_s
                                       .arg(getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxVideoPixelWidth),  0))
                                       .arg(getPageUnsignedIntegerValueForElement(EBML_ID(libmatroska::KaxVideoPixelHeight), 0)));
 
-  m_properties = properties.join(Q(", "));
+  m_properties = properties.join(u", "_s);
 }
 
 QString
 TrackTypePage::internalIdentifier()
   const {
-  return Q("track %1").arg(m_trackIdxMkvmerge);
+  return u"track %1"_s.arg(m_trackIdxMkvmerge);
 }
 
 ValuePage *

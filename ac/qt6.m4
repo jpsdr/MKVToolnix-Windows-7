@@ -290,6 +290,7 @@ if test $have_qt6 != yes; then
 fi
 
 if test x"$enable_gui" = xyes; then
+  AC_DEFINE(WITH_MKVTOOLNIX_GUI, 1, [Define if the GUI is being built])
   BUILD_GUI=yes
   opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI"
 

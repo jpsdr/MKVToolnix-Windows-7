@@ -37,7 +37,7 @@ convert8_1_0DefaultSubtitleCharset(version_number_t const &writtenByVersion) {
 
   reg->beginGroup(s_grpDefaults);
   if (   (writtenByVersion == version_number_t{"8.1.0"})
-      && (reg->value(s_valDefaultSubtitleCharset).toString() == Q("ISO-8859-15"))) {
+      && (reg->value(s_valDefaultSubtitleCharset).toString() == u"ISO-8859-15"_s)) {
     // Fix for a bug in versions prior to 8.2.0.
     reg->remove(s_valDefaultSubtitleCharset);
   }
@@ -188,7 +188,7 @@ convert60_0_0DerivingTrackLanguagesBoundaryChars(version_number_t const &written
 
   reg->beginGroup(s_grpSettings);
   reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
-  if (reg->value(s_valBoundaryChars) == Q("[](){}.+=#"))
+  if (reg->value(s_valBoundaryChars) == u"[](){}.+=#"_s)
     reg->setValue(s_valBoundaryChars, Settings::defaultBoundaryCharsForDerivingLanguageFromFileName());
   reg->endGroup();
   reg->endGroup();
@@ -231,7 +231,7 @@ convert66_0_0LanguageShortcuts() {
 
   auto idx = 0;
   for (auto const &language : value.toStringList()) {
-    reg->beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg->beginGroup(Q(fmt::format("{0:04}", ++idx)));
     reg->setValue(s_valLanguage,  language);
     reg->setValue(s_valTrackName, "");
     reg->endGroup();
@@ -270,7 +270,7 @@ convert67_0_0DefaultAudioFileNames(version_number_t const &writtenByVersion) {
     return;
 
   auto reg   = Settings::registry();
-  auto oggRe = QRegularExpression{Q("<MTX_INSTALLATION_DIRECTORY>.*ogg$")};
+  auto oggRe = QRegularExpression{u"<MTX_INSTALLATION_DIRECTORY>.*ogg$"_s};
 
   reg->beginGroup(s_grpRunProgramConfigurations);
 
@@ -279,7 +279,7 @@ convert67_0_0DefaultAudioFileNames(version_number_t const &writtenByVersion) {
     auto audioFile = reg->value(s_valAudioFile).toString();
 
     if (audioFile.contains(oggRe))
-      reg->setValue(s_valAudioFile, audioFile.left(audioFile.length() - 3) + Q("webm"));
+      reg->setValue(s_valAudioFile, audioFile.left(audioFile.length() - 3) + u"webm"_s);
 
     reg->endGroup();
   }
@@ -296,16 +296,16 @@ convert93_0RegexesForDerivingTrackFlags(version_number_t const &writtenByVersion
   reg->beginGroup(s_grpDefaults);
 
   auto currentValue = reg->value(s_valDefaultRegexForDerivingCommentaryFlagFromFileNames).toString();
-  if (currentValue == Q(R"([[\](){} .+=#-](comments|commentary)[[\](){} .+=#-])"))
+  if (currentValue == uR"([[\](){} .+=#-](comments|commentary)[[\](){} .+=#-])"_s)
     reg->setValue(s_valDefaultRegexForDerivingCommentaryFlagFromFileNames, Settings::defaultRegexForDerivingCommentaryFlagFromFileName());
 
   currentValue = reg->value(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames).toString();
-  if (    (currentValue == Q(R"([[\](){}.+=#-]forced[[\](){}.+=#-])"))
-       || (currentValue == Q(R"((^|[[\](){}.+=#-])forced([[\](){}.+=#-]|$))")))
+  if (    (currentValue == uR"([[\](){}.+=#-]forced[[\](){}.+=#-])"_s)
+       || (currentValue == uR"((^|[[\](){}.+=#-])forced([[\](){}.+=#-]|$))"_s))
     reg->setValue(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames, Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName());
 
   currentValue = reg->value(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames).toString();
-  if (currentValue == Q(R"([[\](){} .+=#-](cc|sdh)[[\](){} .+=#-])"))
+  if (currentValue == uR"([[\](){} .+=#-](cc|sdh)[[\](){} .+=#-])"_s)
     reg->setValue(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames, Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName());
 
   reg->endGroup();
@@ -341,7 +341,7 @@ Settings::RunProgramConfig::name()
        : m_type == RunProgramType::SleepComputer           ? QY("Sleep the computer")
        : m_type == RunProgramType::DeleteSourceFiles       ? QY("Delete source files for multiplexer jobs")
        : m_type == RunProgramType::QuitMKVToolNix          ? QY("Quit MKVToolNix")
-       :                                                     Q("unknown");
+       :                                                     u"unknown"_s;
 }
 
 QString
@@ -351,7 +351,7 @@ Settings::RunProgramConfig::nameForExternalProgram()
     return QY("Execute a program");
 
   auto program = m_commandLine.value(0);
-  program.replace(QRegularExpression{Q(".*[/\\\\]")}, Q(""));
+  program.replace(QRegularExpression{u".*[/\\\\]"_s}, u""_s);
 
   return QY("Execute program '%1'").arg(program);
 }
@@ -363,7 +363,7 @@ Settings::RunProgramConfig::nameForPlayAudioFile()
     return QY("Play an audio file");
 
   auto audioFile = m_audioFile;
-  audioFile.replace(QRegularExpression{Q(".*[/\\\\]")}, Q(""));
+  audioFile.replace(QRegularExpression{u".*[/\\\\]"_s}, u""_s);
 
   return QY("Play audio file '%1'").arg(audioFile);
 }
@@ -400,7 +400,7 @@ Settings::iniFileLocation() {
 
   return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 #else
-  return Q("%1/%2/%3").arg(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)).arg(App::organizationName()).arg(App::applicationName());
+  return u"%1/%2/%3"_s.arg(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)).arg(App::organizationName()).arg(App::applicationName());
 #endif
 }
 
@@ -410,14 +410,14 @@ Settings::cacheDirLocation(QString const &subDir) {
 
 #if defined(SYS_WINDOWS)
   if (!App::isInstalled())
-    dir = Q("%1/cache").arg(App::applicationDirPath());
+    dir = u"%1/cache"_s.arg(App::applicationDirPath());
 #endif
 
   if (dir.isEmpty())
     dir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
 
   if (!subDir.isEmpty())
-    dir = Q("%1/%2").arg(dir).arg(subDir);
+    dir = u"%1/%2"_s.arg(dir).arg(subDir);
 
   return QDir::toNativeSeparators(dir);
 }
@@ -436,7 +436,7 @@ Settings::iniFileName() {
   if (!var.isEmpty())
     return var;
 
-  return Q("%1/mkvtoolnix-gui.ini").arg(iniFileLocation());
+  return u"%1/mkvtoolnix-gui.ini"_s.arg(iniFileLocation());
 }
 
 void
@@ -470,7 +470,7 @@ Settings::migrateFromRegistry() {
 #else
   // Rename file from .conf to .ini in order to be consistent.
   auto target = QFileInfo{ iniFileName() };
-  auto source = QFileInfo{ Q("%1/%2.conf").arg(target.absolutePath()).arg(target.baseName()) };
+  auto source = QFileInfo{ u"%1/%2.conf"_s.arg(target.absolutePath()).arg(target.baseName()) };
 
   if (source.exists())
     QFile{ source.absoluteFilePath() }.rename(target.filePath());
@@ -595,7 +595,7 @@ Settings::load() {
   m_enableMuxingAllAudioTracks                = reg.value(s_valEnableMuxingAllAudioTracks,                                                     false).toBool();
   m_enableMuxingAllSubtitleTracks             = reg.value(s_valEnableMuxingAllSubtitleTracks,                                                  false).toBool();
   m_enableMuxingForcedSubtitleTracks          = reg.value(s_valEnableMuxingForcedSubtitleTracks,                                               false).toBool();
-  m_regexForRecognizingForcedSubtitleNames    = reg.value(s_valRegexForRecognizingForcedSubtitleNames,                                         Q("forced")).toString();
+  m_regexForRecognizingForcedSubtitleNames    = reg.value(s_valRegexForRecognizingForcedSubtitleNames,                                         u"forced"_s).toString();
   m_enableMuxingTracksByTheseLanguages        = reg.value(s_valEnableMuxingTracksByTheseLanguages).toStringList();
 
   if (reg.contains("enableMuxingTracksByTheseTypes"))
@@ -624,7 +624,7 @@ Settings::load() {
   m_dropLastChapterFromBlurayPlaylist         = reg.value(s_valDropLastChapterFromBlurayPlaylist,                                              true).toBool();
   m_ceTextFileCharacterSet                    = reg.value(s_valCeTextFileCharacterSet).toString();
 
-  m_mediaInfoExe                              = reg.value(s_valMediaInfoExe,                                                                   Q("mediainfo-gui")).toString();
+  m_mediaInfoExe                              = reg.value(s_valMediaInfoExe,                                                                   u"mediainfo-gui"_s).toString();
   m_mediaInfoExe                              = determineMediaInfoExePath();
 
 #if defined(HAVE_LIBINTL_H)
@@ -676,20 +676,20 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
       m_languageShortcuts << LanguageShortcut{ iso639UiLanguage };
 
     m_languageShortcuts
-      << LanguageShortcut { Q("en") }   // English
-      << LanguageShortcut { Q("und") }  // undetermined
-      << LanguageShortcut { Q("mul") }  // multiple languages
-      << LanguageShortcut { Q("zxx") }; // no linguistic content
+      << LanguageShortcut { u"en"_s }   // English
+      << LanguageShortcut { u"und"_s }  // undetermined
+      << LanguageShortcut { u"mul"_s }  // multiple languages
+      << LanguageShortcut { u"zxx"_s }; // no linguistic content
   }
 
   if (m_oftenUsedLanguages.isEmpty()) {
     m_oftenUsedLanguages
-      << Q("mul")               // multiple languages
-      << Q("zxx")               // no linguistic content
-      << Q("qaa")               // reserved for local use
-      << Q("mis")               // uncoded languages
-      << Q("und")               // undetermined
-      << Q("eng");              // English
+      << u"mul"_s               // multiple languages
+      << u"zxx"_s               // no linguistic content
+      << u"qaa"_s               // reserved for local use
+      << u"mis"_s               // uncoded languages
+      << u"und"_s               // undetermined
+      << u"eng"_s;              // English
 
     if (!iso639UiLanguage.isEmpty() && !m_oftenUsedLanguages.contains(iso639UiLanguage))
       m_oftenUsedLanguages << iso639UiLanguage;
@@ -708,7 +708,7 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
 
   if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
     m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
-    m_relativeOutputDir.setPath(Q(".."));
+    m_relativeOutputDir.setPath(u".."_s);
   }
 
   m_enableMuxingTracksByTheseTypes.clear();
@@ -722,29 +722,29 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
 
   if (m_mergePredefinedSplitSizes.isEmpty())
     m_mergePredefinedSplitSizes
-      << Q("350M")
-      << Q("650M")
-      << Q("700M")
-      << Q("703M")
-      << Q("800M")
-      << Q("1000M")
-      << Q("4483M")
-      << Q("8142M");
+      << u"350M"_s
+      << u"650M"_s
+      << u"700M"_s
+      << u"703M"_s
+      << u"800M"_s
+      << u"1000M"_s
+      << u"4483M"_s
+      << u"8142M"_s;
 
   if (m_mergePredefinedSplitDurations.isEmpty())
     m_mergePredefinedSplitDurations
-      << Q("01:00:00")
-      << Q("1800s");
+      << u"01:00:00"_s
+      << u"1800s"_s;
 }
 
 void
 Settings::loadDefaults(QSettings &reg) {
   reg.beginGroup(s_grpDefaults);
-  m_defaultAudioTrackLanguage                        = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString()));
-  m_defaultVideoTrackLanguage                        = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString()));
-  m_defaultSubtitleTrackLanguage                     = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString()));
+  m_defaultAudioTrackLanguage                        = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultAudioTrackLanguage,    u"und"_s).toString()));
+  m_defaultVideoTrackLanguage                        = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultVideoTrackLanguage,    u"und"_s).toString()));
+  m_defaultSubtitleTrackLanguage                     = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, u"und"_s).toString()));
   m_whenToSetDefaultLanguage                         = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
-  m_defaultChapterLanguage                           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
+  m_defaultChapterLanguage                           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       u"und"_s).toString()));
   m_defaultSetOriginalLanguageFlagLanguage           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSetOriginalLanguageFlagLanguage).toString()));
   m_defaultSubtitleCharset                           = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions                    = reg.value(s_valDefaultAdditionalMergeOptions).toString();
@@ -840,7 +840,7 @@ void
 Settings::loadLastProgramRunnerAudioDir(QSettings &reg) {
   reg.beginGroup(s_grpSettings);
   m_lastProgramRunnerAudioDir = QDir{reg.value(s_valLastProgramRunnerAudioDir).toString()};
-  if (m_lastProgramRunnerAudioDir.path().isEmpty() || (m_lastProgramRunnerAudioDir.path() == Q(".")))
+  if (m_lastProgramRunnerAudioDir.path().isEmpty() || (m_lastProgramRunnerAudioDir.path() == u"."_s))
     m_lastProgramRunnerAudioDir = QFileInfo{replaceMtxVariableWithApplicationDirectory(App::programRunner().defaultAudioFileName())}.dir();
   reg.endGroup();               // settings
 }
@@ -896,7 +896,7 @@ void
 Settings::addDefaultRunProgramConfigurationForType(QSettings &reg,
                                                    RunProgramType type,
                                                    std::function<void(RunProgramConfig &)> const &modifier) {
-  auto guard = Q("addedDefaultConfigurationType%1").arg(static_cast<int>(type));
+  auto guard = u"addedDefaultConfigurationType%1"_s.arg(static_cast<int>(type));
 
   if (reg.value(guard).toBool() || !App::programRunner().isRunProgramTypeSupported(type))
     return;
@@ -977,7 +977,7 @@ Settings::fixDefaultAudioFileNameBug() {
 QString
 Settings::actualMkvmergeExe()
   const {
-  return exeWithPath(Q("mkvmerge"));
+  return exeWithPath(u"mkvmerge"_s);
 }
 
 void
@@ -1214,7 +1214,7 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
 
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
-    reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg.beginGroup(Q(fmt::format("{0:04}", ++idx)));
     reg.setValue(s_valActive,      cfg->m_active);
     reg.setValue(s_valName,        cfg->m_name);
     reg.setValue(s_valType,        static_cast<int>(cfg->m_type));
@@ -1238,7 +1238,7 @@ Settings::saveLanguageShortcuts(QSettings &reg)
 
   auto idx = 0;
   for (auto const &shortcut : m_languageShortcuts) {
-    reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg.beginGroup(Q(fmt::format("{0:04}", ++idx)));
     reg.setValue(s_valLanguage,  shortcut.m_language);
     reg.setValue(s_valTrackName, shortcut.m_trackName);
     reg.endGroup();
@@ -1260,7 +1260,7 @@ Settings::saveFileColors(QSettings &reg)
 
   auto idx = 0;
   for (auto const &color : m_mergeFileColors)
-    reg.setValue(Q("color%1").arg(idx++), color);
+    reg.setValue(u"color%1"_s.arg(idx++), color);
 
   reg.endGroup();               // fileColors
   reg.endGroup();               // settings
@@ -1269,11 +1269,11 @@ Settings::saveFileColors(QSettings &reg)
 QString
 Settings::priorityAsString()
   const {
-  return LowestPriority == m_priority ? Q("lowest")
-       : LowPriority    == m_priority ? Q("lower")
-       : NormalPriority == m_priority ? Q("normal")
-       : HighPriority   == m_priority ? Q("higher")
-       :                                Q("highest");
+  return LowestPriority == m_priority ? u"lowest"_s
+       : LowPriority    == m_priority ? u"lower"_s
+       : NormalPriority == m_priority ? u"normal"_s
+       : HighPriority   == m_priority ? u"higher"_s
+       :                                u"highest"_s;
 }
 
 QString
@@ -1330,7 +1330,7 @@ void
 Settings::withGroup(QString const &group,
                     std::function<void(QSettings &)> worker) {
   auto reg    = registry();
-  auto groups = group.split(Q("/"));
+  auto groups = group.split(u"/"_s);
 
   for (auto const &subGroup : groups)
     reg->beginGroup(subGroup);
@@ -1408,7 +1408,7 @@ void
 Settings::runOncePerVersion(QString const &topic,
                             std::function<void()> worker) {
   auto reg = registry();
-  auto key = Q("runOncePerVersion/%1").arg(topic);
+  auto key = u"runOncePerVersion/%1"_s.arg(topic);
 
   auto lastRunInVersion       = reg->value(key).toString();
   auto lastRunInVersionNumber = version_number_t{to_utf8(lastRunInVersion)};
@@ -1426,13 +1426,13 @@ Settings::runOncePerVersion(QString const &topic,
 QString
 Settings::determineMediaInfoExePath() {
   auto &cfg          = get();
-  auto potentialExes = QStringList{exeWithPath(cfg.m_mediaInfoExe.isEmpty() ? Q("mediainfo-gui") : cfg.m_mediaInfoExe)};
+  auto potentialExes = QStringList{exeWithPath(cfg.m_mediaInfoExe.isEmpty() ? u"mediainfo-gui"_s : cfg.m_mediaInfoExe)};
 
 #if defined(SYS_WINDOWS)
-  potentialExes << QSettings{Q("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MediaInfo.exe"), QSettings::NativeFormat}.value("Default").toString();
+  potentialExes << QSettings{u"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MediaInfo.exe"_s, QSettings::NativeFormat}.value("Default").toString();
 #endif
 
-  potentialExes << exeWithPath(Q("mediainfo"));
+  potentialExes << exeWithPath(u"mediainfo"_s);
 
   for (auto const &exe : potentialExes)
     if (!exe.isEmpty() && QFileInfo{exe}.exists())
@@ -1443,22 +1443,22 @@ Settings::determineMediaInfoExePath() {
 
 QString
 Settings::defaultBoundaryCharsForDerivingLanguageFromFileName() {
-  return Q("[](){}.+-=#");
+  return u"[](){}.+-=#"_s;
 }
 
 QString
 Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName() {
-  return Q(R"((^|[[\](){} .+=#-])(cc|sdh)([[\](){} .+=#-]|$))");
+  return uR"((^|[[\](){} .+=#-])(cc|sdh)([[\](){} .+=#-]|$))"_s;
 }
 
 QString
 Settings::defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName() {
-  return Q(R"((^|[[\](){}.+=#-])(forced|signs)([[\](){}.+=#-]|$))");
+  return uR"((^|[[\](){}.+=#-])(forced|signs)([[\](){}.+=#-]|$))"_s;
 }
 
 QString
 Settings::defaultRegexForDerivingCommentaryFlagFromFileName() {
-  return Q(R"((^|[[\](){} .+=#-])(comments|commentary)([[\](){} .+=#-]|$))");
+  return uR"((^|[[\](){} .+=#-])(comments|commentary)([[\](){} .+=#-]|$))"_s;
 }
 
 QVector<QColor>

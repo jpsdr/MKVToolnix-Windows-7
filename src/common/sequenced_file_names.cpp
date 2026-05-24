@@ -37,17 +37,17 @@ analyzeFileNameForSequenceData(QString const &fileNameWithPath) {
   static std::optional<QRegularExpression> s_rePrefixNumberSuffix, s_reGoPro2First, s_reGoPro2FollowingOr6;
 
   if (!s_rePrefixNumberSuffix.has_value()) {
-    s_rePrefixNumberSuffix = QRegularExpression{Q(R"((.*?)(\d+)([^\d]+)$)")};
+    s_rePrefixNumberSuffix = QRegularExpression{uR"((.*?)(\d+)([^\d]+)$)"_s};
 
     // see https://community.gopro.com/s/article/GoPro-Camera-File-Naming-Convention?language=en_US
-    s_reGoPro2First        = QRegularExpression{Q(R"(^GOPR(\d+.*))")};
-    s_reGoPro2FollowingOr6 = QRegularExpression{Q(R"(^(G[PHX])(\d\d)(\d+.*))")};
+    s_reGoPro2First        = QRegularExpression{uR"(^GOPR(\d+.*))"_s};
+    s_reGoPro2FollowingOr6 = QRegularExpression{uR"(^(G[PHX])(\d\d)(\d+.*))"_s};
   }
 
   auto fileName = QFileInfo{fileNameWithPath}.fileName();
 
   if (auto match = s_reGoPro2First->match(fileName); match.hasMatch())
-    return SequencedFileNameData{ SequencedFileNameData::Mode::GoPro, Q("GP"), match.captured(1), 0 };
+    return SequencedFileNameData{ SequencedFileNameData::Mode::GoPro, u"GP"_s, match.captured(1), 0 };
 
   if (auto match = s_reGoPro2FollowingOr6->match(fileName); match.hasMatch())
     return SequencedFileNameData{ SequencedFileNameData::Mode::GoPro, match.captured(1), match.captured(3), match.captured(2).toUInt() };

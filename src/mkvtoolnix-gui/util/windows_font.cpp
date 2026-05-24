@@ -37,7 +37,7 @@ logFontToQFont(LOGFONTW const &logFont) {
   font.setPointSizeF(qAbs(logFont.lfHeight) * 72.0 / verticalDPI);
 
   if (!s_logFontDebugLogged) {
-    qDebug() << Q("logFontToQFont family %1 weight %2 (%3) height %4 (%5 DPI %6) italic %7 underline %8 strickeout %9")
+    qDebug() << u"logFontToQFont family %1 weight %2 (%3) height %4 (%5 DPI %6) italic %7 underline %8 strickeout %9"_s
                 .arg(font.family()).arg(logFont.lfWeight).arg(font.weight()).arg(logFont.lfHeight).arg(font.pointSizeF()).arg(verticalDPI).arg(font.italic()).arg(font.underline()).arg(font.strikeOut());
     s_logFontDebugLogged = true;
   }

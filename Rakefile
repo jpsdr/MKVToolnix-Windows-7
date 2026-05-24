@@ -81,6 +81,8 @@ def setup_globals
     :windows => %r{mingw}i.match(c(:host)),
   }
 
+  $os                      = $building_for.keys.select { |key| $building_for[key] }.first
+
   $build_mkvtoolnix      ||=  c?(:BUILD_MKVTOOLNIX)
   $build_mkvtoolnix_gui  ||=  c?(:BUILD_GUI)
 
@@ -109,8 +111,8 @@ def setup_globals
   $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a
   $gui_ui_h_files          = $gui_ui_files.collect { |file| file.ext 'h' }
 
-  $qrc                     = $build_mkvtoolnix_gui ? FileList[ "src/mkvtoolnix-gui/qt_resources.qrc" ].to_a : []
-  $qt_resources            = $qrc.map { |file| file.ext('rcc') }
+  $qrc                     = determine_qrcs_to_build
+  $qt_resources            = $qrc.empty? ? [] : [ $qrc[0].ext('rcc') ]
 
   $dependency_dir          = "#{$source_dir}/rake.d/dependency.d"
   $dependency_tmp_dir      = "#{$dependency_dir}/tmp"
@@ -257,6 +259,15 @@ def determine_stack_protector_flags
   return " -fstack-protector"        if is_gcc? && !check_compiler_version("gcc", "4.9.0")
   return " -fstack-protector-strong" if check_compiler_version("gcc", "4.9.0") || check_compiler_version("clang", "3.5.0")
   return ""
+end
+
+def determine_qrcs_to_build
+  return [] unless $build_mkvtoolnix_gui
+
+  return [
+    "src/mkvtoolnix-gui/qt_resources.qrc",
+    "src/mkvtoolnix-gui/qt_resources_#{$os}.qrc",
+  ].select { |file_name| FileTest.exist?(file_name) }
 end
 
 def generate_helper_files
@@ -579,8 +590,6 @@ task :manpages => $manpages
 namespace :translations do
   desc "Create a template for translating the programs"
   task :pot => "po/mkvtoolnix.pot"
-
-
 
   desc "Create a new .po file for the programs with an empty template"
   task "new-programs-po" => "po/mkvtoolnix.pot" do
@@ -1064,21 +1073,18 @@ task :clean do
 
   remove_files_by_patterns patterns
 
-  if FileTest.exist? $dependency_dir
-    puts_vaction "rm -rf", :target => "#{$dependency_dir}"
-    FileUtils.rm_rf $dependency_dir
-  end
+  remove_files_and_dirs $dependency_dir
 end
 
 namespace :clean do
   desc "Remove all compiled and generated files ('tarball' clean)"
   task :dist => :clean do
-    run "rm -f config.h config.log config.cache build-config TAGS src/mkvtoolnix-gui/static_plugins.cpp #{Mtx::CompilationDatabase.database_file_name}", :allow_failure => true
+    remove_files %w{config.h config.log config.cache build-config TAGS src/mkvtoolnix-gui/static_plugins.cpp}, Mtx::CompilationDatabase.database_file_name
   end
 
   desc "Remove all compiled and generated files ('git' clean)"
   task :maintainer => "clean:dist" do
-    run "rm -f configure config.h.in", :allow_failure => true
+    remove_files %w{configure config.h.in}
   end
 
   desc "Remove compiled objects and programs in the unit test suite"
@@ -1241,9 +1247,9 @@ end
 #
 
 if $build_mkvtoolnix_gui
-  add_qrc_dependencies(*$qrc)
+  file $qt_resources[0] => $qrc, &qrc_compiler
 
-  file "src/mkvtoolnix-gui/qt_resources.rcc" => $qrc, &qrc_compiler
+  add_qrc_dependencies(*$qrc)
 
   Application.new("src/mkvtoolnix-gui/mkvtoolnix-gui").
     description("Build the mkvtoolnix-gui executable").

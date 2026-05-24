@@ -161,7 +161,7 @@ Tool::setupUi() {
 
   auto color             = MainWindow::get()->palette().window().color();
   color                  = (color.red() + color.green() + color.blue()) > (128 * 3) ? color.darker(105) : color.lighter(105);
-  p.m_dndHoverStyleSheet = Q("QWidget { background-color: rgb(%1, %2, %3) }").arg(color.red()).arg(color.green()).arg(color.blue());
+  p.m_dndHoverStyleSheet = u"QWidget { background-color: rgb(%1, %2, %3) }"_s.arg(color.red()).arg(color.green()).arg(color.blue());
 
   p.ui->wDNDFilesAllCurrent->installEventFilter(this);
   p.ui->wDNDFilesAllOneNew->installEventFilter(this);
@@ -330,7 +330,7 @@ Tool::toolShown() {
 void
 Tool::retranslateUi() {
   auto &p            = *p_func();
-  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
+  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? u""_s : App::translate("CloseButton", "Close Tab");
 
   p.ui->retranslateUi(this);
   p.modifyTracksSubmenu.retranslateUi();
@@ -379,7 +379,7 @@ Tool::appendNewTab() {
 void
 Tool::openConfig() {
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getOpenFileName(this, QY("Open settings file"), settings.lastConfigDirPath(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto fileName  = Util::getOpenFileName(this, QY("Open settings file"), settings.lastConfigDirPath(), QY("MKVToolNix GUI config files") + u" (*.mtxcfg);;"_s + QY("All files") + u" (*)"_s);
   if (fileName.isEmpty())
     return;
 
@@ -541,7 +541,7 @@ void
 Tool::saveAllConfigsToSingleAs() {
   auto &p        = *p_func();
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), Q(".mtxcfg"), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), u".mtxcfg"_s, QY("MKVToolNix GUI config files") + u" (*.mtxcfg);;"_s + QY("All files") + u" (*)"_s, u"mtxcfg"_s);
   if (fileName.isEmpty())
     return;
 
@@ -723,7 +723,7 @@ Tool::handleExternallyAddedFiles(QStringList const &fileNames,
     settings.m_lastOpenDir.setPath(QFileInfo{fileNames[0]}.path());
   });
 
-  auto configExt  = Q(".mtxcfg");
+  auto configExt  = u".mtxcfg"_s;
   auto mediaFiles = QStringList{};
 
   for (auto const &fileName : fileNames)
@@ -760,14 +760,14 @@ Tool::fileNamesFromClipboard()
   // Linux raw file path:                                    /home/mosu/videos/file.avi
 
 #if defined(SYS_WINDOWS)
-  QRegularExpression driveFileUriRE{Q(R"(^file:///?([a-zA-Z]:[/\\].+))")}, uncUriRE{Q(R"(^file://([[:word:]].+?/.+))")}, uncRE{Q(R"(^\\\\.+\\.)")}, driveFileRE{Q(R"(^[a-zA-Z]:[/\\].)")};
+  QRegularExpression driveFileUriRE{uR"(^file:///?([a-zA-Z]:[/\\].+))"_s}, uncUriRE{uR"(^file://([[:word:]].+?/.+))"_s}, uncRE{uR"(^\\\\.+\\.)"_s}, driveFileRE{uR"(^[a-zA-Z]:[/\\].)"_s};
 #else
-  QRegularExpression fileRE{Q("^/.+")};
+  QRegularExpression fileRE{u"^/.+"_s};
 #endif
-  QRegularExpression fileUriRE{Q("^file://(/.+)")};
+  QRegularExpression fileUriRE{u"^file://(/.+)"_s};
   QStringList fileNames;
 
-  for (auto const &line : App::clipboard()->text().split(Q("\n"))) {
+  for (auto const &line : App::clipboard()->text().split(u"\n"_s)) {
 #if defined(SYS_WINDOWS)
     if (uncRE.match(line).hasMatch() || driveFileRE.match(line).hasMatch()) {
       fileNames << line;
@@ -780,7 +780,7 @@ Tool::fileNamesFromClipboard()
     }
 
     if (auto match = uncUriRE.match(line); match.hasMatch()) {
-      fileNames << Q("\\\\%1").arg(match.captured(1).replace(Q("/"), Q("\\")));
+      fileNames << u"\\\\%1"_s.arg(match.captured(1).replace(u"/"_s, u"\\"_s));
       continue;
     }
 
@@ -1153,12 +1153,12 @@ void
 Tool::handleIdentifiedXmlOrSimpleChapters(QString const &fileName) {
   Util::MessageBox::warning(this)
     ->title(QY("Adding chapter files"))
-    .text(Q("%1 %2 %3 %4")
+    .text(u"%1 %2 %3 %4"_s
           .arg(QY("The file '%1' contains chapters.").arg(fileName))
           .arg(QY("These aren't treated like other source files in MKVToolNix."))
           .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
           .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-    .onlyOnce(Q("mergeChaptersDropped"))
+    .onlyOnce(u"mergeChaptersDropped"_s)
     .exec();
 
   currentTab()->setChaptersFileName(fileName);
@@ -1168,12 +1168,12 @@ void
 Tool::handleIdentifiedXmlSegmentInfo(QString const &fileName) {
   Util::MessageBox::warning(this)
     ->title(QY("Adding segment info files"))
-    .text(Q("%1 %2 %3 %4")
+    .text(u"%1 %2 %3 %4"_s
           .arg(QY("The file '%1' contains segment information.").arg(fileName))
           .arg(QY("These aren't treated like other source files in MKVToolNix."))
           .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
           .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-    .onlyOnce(Q("mergeSegmentInfoDropped"))
+    .onlyOnce(u"mergeSegmentInfoDropped"_s)
     .exec();
 
   currentTab()->setSegmentInfoFileName(fileName);
@@ -1183,12 +1183,12 @@ void
 Tool::handleIdentifiedXmlTags(QString const &fileName) {
   Util::MessageBox::warning(this)
     ->title(QY("Adding tag files"))
-    .text(Q("%1 %2 %3 %4")
+    .text(u"%1 %2 %3 %4"_s
           .arg(QY("The file '%1' contains tags.").arg(fileName))
           .arg(QY("These aren't treated like other source files in MKVToolNix."))
           .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
           .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-    .onlyOnce(Q("mergeTagsDropped"))
+    .onlyOnce(u"mergeTagsDropped"_s)
     .exec();
 
   currentTab()->setTagsFileName(fileName);

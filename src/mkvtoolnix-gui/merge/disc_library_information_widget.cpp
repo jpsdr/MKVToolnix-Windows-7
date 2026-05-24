@@ -65,8 +65,8 @@ DiscLibraryItem::create(std::string const &language,
   auto item = new DiscLibraryItem{info, QStringList{
     languageName,
     Q(info.m_title),
-    biggestThumbnail == end ? Q("") : Q(biggestThumbnail->m_file_name.filename().string()),
-    biggestThumbnail == end ? Q("") : Q("%1x%2").arg(biggestThumbnail->m_width).arg(biggestThumbnail->m_height),
+    biggestThumbnail == end ? u""_s : Q(biggestThumbnail->m_file_name.filename().string()),
+    biggestThumbnail == end ? u""_s : u"%1x%2"_s.arg(biggestThumbnail->m_width).arg(biggestThumbnail->m_height),
   }};
 
   item->setData(0, Qt::UserRole, Q(language));
@@ -143,7 +143,7 @@ DiscLibraryInformationWidget::setup() {
 
   for (auto row = 0, numRows = model()->rowCount(); row < numRows; ++row) {
     auto language = model()->data(model()->index(row, 0), Qt::UserRole).toString();
-    if (language == Q("eng")) {
+    if (language == u"eng"_s) {
       rowToSelect = row;
       break;
     }

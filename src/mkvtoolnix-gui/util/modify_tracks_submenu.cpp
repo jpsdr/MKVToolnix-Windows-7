@@ -24,14 +24,14 @@ ModifyTracksSubmenu::setupTrack(QMenu &subMenu) {
   m_toggleVisualImpairedFlag   = new QAction{&subMenu};
   m_toggleTextDescriptionsFlag = new QAction{&subMenu};
 
-  m_toggleTrackEnabledFlag    ->setShortcut(Q("Ctrl+Alt+F, E"));
-  m_toggleDefaultTrackFlag    ->setShortcut(Q("Ctrl+Alt+F, D"));
-  m_toggleForcedDisplayFlag   ->setShortcut(Q("Ctrl+Alt+F, F"));
-  m_toggleOriginalFlag        ->setShortcut(Q("Ctrl+Alt+F, O"));
-  m_toggleCommentaryFlag      ->setShortcut(Q("Ctrl+Alt+F, C"));
-  m_toggleHearingImpairedFlag ->setShortcut(Q("Ctrl+Alt+F, H"));
-  m_toggleVisualImpairedFlag  ->setShortcut(Q("Ctrl+Alt+F, V"));
-  m_toggleTextDescriptionsFlag->setShortcut(Q("Ctrl+Alt+F, T"));
+  m_toggleTrackEnabledFlag    ->setShortcut(u"Ctrl+Alt+F, E"_s);
+  m_toggleDefaultTrackFlag    ->setShortcut(u"Ctrl+Alt+F, D"_s);
+  m_toggleForcedDisplayFlag   ->setShortcut(u"Ctrl+Alt+F, F"_s);
+  m_toggleOriginalFlag        ->setShortcut(u"Ctrl+Alt+F, O"_s);
+  m_toggleCommentaryFlag      ->setShortcut(u"Ctrl+Alt+F, C"_s);
+  m_toggleHearingImpairedFlag ->setShortcut(u"Ctrl+Alt+F, H"_s);
+  m_toggleVisualImpairedFlag  ->setShortcut(u"Ctrl+Alt+F, V"_s);
+  m_toggleTextDescriptionsFlag->setShortcut(u"Ctrl+Alt+F, T"_s);
 
   m_toggleTrackEnabledFlag    ->setData(EBML_ID(libmatroska::KaxTrackFlagEnabled).GetValue());
   m_toggleDefaultTrackFlag    ->setData(EBML_ID(libmatroska::KaxTrackFlagDefault).GetValue());
@@ -72,13 +72,13 @@ ModifyTracksSubmenu::setupLanguage(QMenu &subMenu) {
     auto text   = Q(language.format_long());
 
     if (!shortcut.m_trackName.isEmpty())
-      text = Q("%1; %2: %3").arg(text).arg(QY("track name")).arg(shortcut.m_trackName);
+      text = u"%1; %2: %3"_s.arg(text).arg(QY("track name")).arg(shortcut.m_trackName);
 
     action->setData(structIdx);
     action->setText(text);
 
     if (keyboardShortcutIdx <= 10)
-      action->setShortcut(Q("Ctrl+Alt+A, %1").arg(keyboardShortcutIdx % 10));
+      action->setShortcut(u"Ctrl+Alt+A, %1"_s.arg(keyboardShortcutIdx % 10));
 
     subMenu.addAction(action);
 

@@ -90,8 +90,8 @@ JobSettingsWidget::browseFileName() {
   auto &ui       = *p_func()->m_ui;
   auto &settings = Util::Settings::get();
   auto path      = !ui.fileName->text().isEmpty() ? QFileInfo{ ui.fileName->text() }.absoluteDir() : Util::dirPath(settings.m_lastOpenDir.path());
-  auto mkvName   = !ui.fileName->text().isEmpty() ? QFileInfo{ ui.fileName->text() }.completeBaseName() + Q(".txt") : QString{};
-  auto fileName  = Util::getSaveFileName(this, QY("Select destination file name"), Util::dirPath(settings.m_lastOpenDir.path()), mkvName, QY("Text files") + Q(" (*.txt)"), Q("txt"));
+  auto mkvName   = !ui.fileName->text().isEmpty() ? QFileInfo{ ui.fileName->text() }.completeBaseName() + u".txt"_s : QString{};
+  auto fileName  = Util::getSaveFileName(this, QY("Select destination file name"), Util::dirPath(settings.m_lastOpenDir.path()), mkvName, QY("Text files") + u" (*.txt)"_s, u"txt"_s);
 
   if (fileName.isEmpty())
     return;

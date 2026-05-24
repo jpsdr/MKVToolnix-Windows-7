@@ -151,19 +151,19 @@ Tab::setupUi() {
   p->nameWidgets << p->ui->pbChRemoveName << p->ui->lChName << p->ui->leChName;
 
   Util::fixScrollAreaBackground(p->ui->scrollArea);
-  Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements")    .setDefaultSizes({ { Q("editionChapter"), 200 }, { Q("start"),    130 }, { Q("end"), 130 } });
-  Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames").setDefaultSizes({ { Q("name"),           200 }, { Q("language"), 150 } });
+  Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements")    .setDefaultSizes({ { u"editionChapter"_s, 200 }, { u"start"_s,    130 }, { u"end"_s, 130 } });
+  Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames").setDefaultSizes({ { u"name"_s,           200 }, { u"language"_s, 150 } });
 
-  p->addEditionBeforeAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-above")));
-  p->addEditionAfterAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-below")));
-  p->addChapterBeforeAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-above")));
-  p->addChapterAfterAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-below")));
-  p->addSubChapterAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-under")));
-  p->duplicateAction->setIcon(QIcon::fromTheme(Q("tab-duplicate")));
-  p->removeElementAction->setIcon(QIcon::fromTheme(Q("list-remove")));
-  p->renumberSubChaptersAction->setIcon(QIcon::fromTheme(Q("format-list-ordered")));
-  p->massModificationAction->setIcon(QIcon::fromTheme(Q("tools-wizard")));
-  p->copyToOtherTabMenu->setIcon(QIcon::fromTheme(Q("edit-copy")));
+  p->addEditionBeforeAction->setIcon(QIcon::fromTheme(u"edit-table-insert-row-above"_s));
+  p->addEditionAfterAction->setIcon(QIcon::fromTheme(u"edit-table-insert-row-below"_s));
+  p->addChapterBeforeAction->setIcon(QIcon::fromTheme(u"edit-table-insert-row-above"_s));
+  p->addChapterAfterAction->setIcon(QIcon::fromTheme(u"edit-table-insert-row-below"_s));
+  p->addSubChapterAction->setIcon(QIcon::fromTheme(u"edit-table-insert-row-under"_s));
+  p->duplicateAction->setIcon(QIcon::fromTheme(u"tab-duplicate"_s));
+  p->removeElementAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
+  p->renumberSubChaptersAction->setIcon(QIcon::fromTheme(u"format-list-ordered"_s));
+  p->massModificationAction->setIcon(QIcon::fromTheme(u"tools-wizard"_s));
+  p->copyToOtherTabMenu->setIcon(QIcon::fromTheme(u"edit-copy"_s));
 
   auto tool = MainWindow::chapterEditorTool();
   connect(p->ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                    &Tab::showChapterContextMenu);
@@ -210,7 +210,7 @@ Tab::updateFileNameDisplay() {
 
   } else {
     p->ui->fileName->setText(QY("<Unsaved file>"));
-    p->ui->directory->setText(Q(""));
+    p->ui->directory->setText(u""_s);
 
   }
 }
@@ -386,7 +386,7 @@ Tab::loadFromMatroskaFile(QString const &fileName,
   auto analyzer = std::make_unique<Util::KaxAnalyzer>(this, fileName);
 
   if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(libebml::MODE_READ).process()) {
-    auto text = Q("%1 %2")
+    auto text = u"%1 %2"_s
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
@@ -479,7 +479,7 @@ Tab::loadFromChapterFile(QString const &fileName,
   if (!chapters) {
     auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(fileName);
     if (!error.isEmpty())
-      message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
+      message = u"%1 %2"_s.arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
 
@@ -583,7 +583,7 @@ Tab::loadFromMplsFile(QString const &fileName,
   if (!chapters) {
     auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(fileName);
     if (!error.isEmpty())
-      message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
+      message = u"%1 %2"_s.arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
     if (!append)
@@ -619,7 +619,7 @@ Tab::loadFromDVD([[maybe_unused]] QString const &fileName,
   if (!chapters) {
     auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(fileName);
     if (!error.isEmpty())
-      message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
+      message = u"%1 %2"_s.arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
     if (!append)
@@ -648,8 +648,8 @@ Tab::load() {
 
   p->savedState = currentState();
   auto result   = kax_analyzer_c::probe(to_utf8(p->fileName)) ? loadFromMatroskaFile(p->fileName, false)
-                : p->fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile(p->fileName, false)
-                : p->fileName.toLower().endsWith(Q(".ifo"))   ? loadFromDVD(p->fileName, false)
+                : p->fileName.toLower().endsWith(u".mpls"_s)  ? loadFromMplsFile(p->fileName, false)
+                : p->fileName.toLower().endsWith(u".ifo"_s)   ? loadFromDVD(p->fileName, false)
                 :                                               loadFromChapterFile(p->fileName, false);
 
   if (result.first)
@@ -659,8 +659,8 @@ Tab::load() {
 void
 Tab::append(QString const &fileName) {
   auto result   = kax_analyzer_c::probe(to_utf8(fileName)) ? loadFromMatroskaFile(fileName, true)
-                : fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile(fileName, true)
-                : fileName.toLower().endsWith(Q(".ifo"))   ? loadFromDVD(fileName, true)
+                : fileName.toLower().endsWith(u".mpls"_s)  ? loadFromMplsFile(fileName, true)
+                : fileName.toLower().endsWith(u".ifo"_s)   ? loadFromDVD(fileName, true)
                 :                                            loadFromChapterFile(fileName, true);
 
   if (result.first)
@@ -762,7 +762,7 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
   saveAsImpl(requireNewFileName, [this, p](bool doRequireNewFileName, QString &newFileName) -> bool {
     if (doRequireNewFileName) {
       auto defaultFilePath = !p->fileName.isEmpty() ? Util::dirPath(QFileInfo{p->fileName}.path()) : Util::Settings::get().lastOpenDirPath();
-      newFileName          = Util::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, {}, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"), Q("xml"));
+      newFileName          = Util::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, {}, QY("XML chapter files") + u" (*.xml);;"_s + QY("All files") + u" (*)"_s, u"xml"_s);
 
       if (newFileName.isEmpty())
         return false;
@@ -802,10 +802,10 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     if (doRequireNewFileName) {
       auto defaultFilePath = !p->fileName.isEmpty() ? QFileInfo{p->fileName}.path() : Util::Settings::get().lastOpenDirPath();
       newFileName          = Util::getSaveFileName(this, QY("Save chapters to Matroska or WebM file"), defaultFilePath, {},
-                                                   QY("Supported file types") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") +
-                                                   QY("Matroska files")       + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
-                                                   QY("WebM files")           + Q(" (*.webm);;") +
-                                                   QY("All files")            + Q(" (*)"),
+                                                   QY("Supported file types") + u" (*.mkv *.mka *.mks *.mk3d *.webm);;"_s +
+                                                   QY("Matroska files")       + u" (*.mkv *.mka *.mks *.mk3d);;"_s +
+                                                   QY("WebM files")           + u" (*.webm);;"_s +
+                                                   QY("All files")            + u" (*)"_s,
                                                    {}, {}, QFileDialog::DontConfirmOverwrite, QFileDialog::ExistingFile);
 
       if (newFileName.isEmpty())
@@ -815,7 +815,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     if (doRequireNewFileName || (QFileInfo{newFileName}.lastModified() != p->fileModificationTime)) {
       p->analyzer = std::make_unique<Util::KaxAnalyzer>(this, newFileName);
       if (!p->analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
-        auto text = Q("%1 %2")
+        auto text = u"%1 %2"_s
           .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(newFileName))
           .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
         Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
@@ -907,8 +907,8 @@ QString
 Tab::fixAndGetTimestampString(QLineEdit &lineEdit) {
   auto timestampText = lineEdit.text();
 
-  if (timestampText.contains(Q(','))) {
-    timestampText.replace(Q(','), Q('.'));
+  if (timestampText.contains(u',')) {
+    timestampText.replace(u',', u'.');
     lineEdit.setText(timestampText);
   }
 
@@ -1065,12 +1065,12 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
 
   p->ui->lChapter->setText(p->chapterModel->chapterDisplayName(*chapter));
   p->ui->leChStart->setText(Q(mtx::string::format_timestamp(find_child_value<libmatroska::KaxChapterTimeStart>(*chapter))));
-  p->ui->leChEnd->setText(end ? Q(mtx::string::format_timestamp(end->GetValue())) : Q(""));
+  p->ui->leChEnd->setText(end ? Q(mtx::string::format_timestamp(end->GetValue())) : u""_s);
   p->ui->cbChFlagEnabled->setChecked(!!find_child_value<libmatroska::KaxChapterFlagEnabled>(*chapter, 1));
   p->ui->cbChFlagHidden->setChecked(!!find_child_value<libmatroska::KaxChapterFlagHidden>(*chapter));
-  p->ui->leChUid->setText(uid ? QString::number(uid) : Q(""));
+  p->ui->leChUid->setText(uid ? QString::number(uid) : u""_s);
   p->ui->leChSegmentUid->setText(formatEbmlBinary(find_child<libmatroska::KaxChapterSegmentUID>(*chapter)));
-  p->ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : Q(""));
+  p->ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : u""_s);
 
   auto nameSelectionModel        = p->ui->tvChNames->selectionModel();
   auto previouslySelectedNameIdx = nameSelectionModel->currentIndex();
@@ -1104,7 +1104,7 @@ Tab::setEditionControlsFromStorage(EditionPtr const &edition) {
 
   auto uid = find_child_value<libmatroska::KaxEditionUID>(*edition);
 
-  p->ui->leEdUid->setText(uid ? QString::number(uid) : Q(""));
+  p->ui->leEdUid->setText(uid ? QString::number(uid) : u""_s);
   p->ui->cbEdFlagDefault->setChecked(!!find_child_value<libmatroska::KaxEditionFlagDefault>(*edition));
   p->ui->cbEdFlagHidden->setChecked(!!find_child_value<libmatroska::KaxEditionFlagHidden>(*edition));
   p->ui->cbEdFlagOrdered->setChecked(!!find_child_value<libmatroska::KaxEditionFlagOrdered>(*edition));
@@ -1302,7 +1302,7 @@ Tab::addOneChapterNameLanguage(mtx::bcp47::language_c const &languageCode,
   QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   language->setSizePolicy(sizePolicy);
 
-  removeButton->setIcon(QIcon::fromTheme(Q("list-remove")));
+  removeButton->setIcon(QIcon::fromTheme(u"list-remove"_s));
 
   layout->addWidget(language);
   layout->addWidget(removeButton);
@@ -1916,12 +1916,12 @@ Tab::renumberSubChapters() {
       firstName = name;
 
     if (end)
-      chapterTitles << Q("%1 (%2 – %3)").arg(name).arg(Q(mtx::string::format_timestamp(start))).arg(Q(mtx::string::format_timestamp(end->GetValue())));
+      chapterTitles << u"%1 (%2 – %3)"_s.arg(name).arg(Q(mtx::string::format_timestamp(start))).arg(Q(mtx::string::format_timestamp(end->GetValue())));
     else
-      chapterTitles << Q("%1 (%2)").arg(name).arg(Q(mtx::string::format_timestamp(start)));
+      chapterTitles << u"%1 (%2)"_s.arg(name).arg(Q(mtx::string::format_timestamp(start)));
   }
 
-  auto matches       = QRegularExpression{Q("(\\d+)$")}.match(firstName);
+  auto matches       = QRegularExpression{u"(\\d+)$"_s}.match(firstName);
   auto firstNumber   = matches.hasMatch() ? matches.captured(0).toInt() : 1;
   auto usedLanguages = usedNameLanguages(selectedItem);
 
