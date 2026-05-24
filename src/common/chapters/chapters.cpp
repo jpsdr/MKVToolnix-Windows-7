@@ -406,10 +406,10 @@ parse_ffmpeg_meta(mm_text_io_c *in,
                     :                                 mtx::bcp47::language_c::parse("eng"s);
 
   QRegularExpression
-    start_line_re{     Q("^start *=([0-9]+)"),             QRegularExpression::CaseInsensitiveOption},
-    end_line_re{       Q("^end *=([0-9]+)"),               QRegularExpression::CaseInsensitiveOption},
-    title_line_re{     Q("^title *=(.*)"),                 QRegularExpression::CaseInsensitiveOption},
-    time_base_line_re{ Q("^timebase *=([0-9]+)/([0-9]+)"), QRegularExpression::CaseInsensitiveOption};
+    start_line_re{     u"^start *=([0-9]+)"_s,             QRegularExpression::CaseInsensitiveOption},
+    end_line_re{       u"^end *=([0-9]+)"_s,               QRegularExpression::CaseInsensitiveOption},
+    title_line_re{     u"^title *=(.*)"_s,                 QRegularExpression::CaseInsensitiveOption},
+    time_base_line_re{ u"^timebase *=([0-9]+)/([0-9]+)"_s, QRegularExpression::CaseInsensitiveOption};
   QRegularExpressionMatch matches;
 
   auto reset_values = [&]() {
@@ -542,7 +542,7 @@ parse_potplayer_bookmarks(mm_text_io_c *in,
                     : g_default_language.is_valid() ? g_default_language
                     :                                 mtx::bcp47::language_c::parse("eng"s);
 
-  QRegularExpression content_re{Q(R"(^[0-9]+=([0-9]+)\*(.*?)(\*[0-9a-fA-F]+)?$)")};
+  QRegularExpression content_re{uR"(^[0-9]+=([0-9]+)\*(.*?)(\*[0-9a-fA-F]+)?$)"_s};
   QRegularExpressionMatch matches;
 
   while (in->getline2(line)) {

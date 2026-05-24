@@ -310,7 +310,7 @@ Tab::setupInputControls() {
   p.ui->chapterCharacterSet->setup(true);
 
   // Stereoscopy
-  p.ui->stereoscopy->addItem(Q(""), 0);
+  p.ui->stereoscopy->addItem(u""_s, 0);
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     p.ui->stereoscopy->addItem(QString{}, idx + 1);
 
@@ -360,11 +360,11 @@ Tab::setupInputControls() {
   p.filesMenu->addSeparator();
   p.filesMenu->addAction(p.selectTracksFromFilesAction);
 
-  p.addFilesAction->setIcon(QIcon::fromTheme(Q("list-add")));
-  p.appendFilesAction->setIcon(QIcon::fromTheme(Q("distribute-horizontal-x")));
-  p.addAdditionalPartsAction->setIcon(QIcon::fromTheme(Q("distribute-horizontal-margin")));
-  p.removeFilesAction->setIcon(QIcon::fromTheme(Q("list-remove")));
-  p.openFilesInMediaInfoAction->setIcon(QIcon::fromTheme(Q("documentinfo")));
+  p.addFilesAction->setIcon(QIcon::fromTheme(u"list-add"_s));
+  p.appendFilesAction->setIcon(QIcon::fromTheme(u"distribute-horizontal-x"_s));
+  p.addAdditionalPartsAction->setIcon(QIcon::fromTheme(u"distribute-horizontal-margin"_s));
+  p.removeFilesAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
+  p.openFilesInMediaInfoAction->setIcon(QIcon::fromTheme(u"documentinfo"_s));
 
   // "tracks" context menu
   p.tracksMenu->addAction(p.selectAllTracksAction);
@@ -378,14 +378,14 @@ Tab::setupInputControls() {
   p.selectTracksOfTypeMenu->addAction(p.selectAllAudioTracksAction);
   p.selectTracksOfTypeMenu->addAction(p.selectAllSubtitlesTracksAction);
 
-  p.selectAllTracksAction->setIcon(QIcon::fromTheme(Q("edit-select-all")));
-  p.enableAllTracksAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
-  p.disableAllTracksAction->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
-  p.openTracksInMediaInfoAction->setIcon(QIcon::fromTheme(Q("documentinfo")));
+  p.selectAllTracksAction->setIcon(QIcon::fromTheme(u"edit-select-all"_s));
+  p.enableAllTracksAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
+  p.disableAllTracksAction->setIcon(QIcon::fromTheme(u"dialog-cancel"_s));
+  p.openTracksInMediaInfoAction->setIcon(QIcon::fromTheme(u"documentinfo"_s));
 
-  p.selectAllVideoTracksAction->setIcon(QIcon::fromTheme(Q("tool-animator")));
-  p.selectAllAudioTracksAction->setIcon(QIcon::fromTheme(Q("audio-headphones")));
-  p.selectAllSubtitlesTracksAction->setIcon(QIcon::fromTheme(Q("draw-text")));
+  p.selectAllVideoTracksAction->setIcon(QIcon::fromTheme(u"tool-animator"_s));
+  p.selectAllAudioTracksAction->setIcon(QIcon::fromTheme(u"audio-headphones"_s));
+  p.selectAllSubtitlesTracksAction->setIcon(QIcon::fromTheme(u"draw-text"_s));
 
   // "add source files" menu
   p.addFilesMenu->addAction(p.addFilesAction2);
@@ -407,9 +407,9 @@ Tab::setupInputControls() {
   p.addToJobQueueMenu->addAction(p.addToJobQueueCloseSettings);
   p.ui->addToJobQueue->setMenu(p.addToJobQueueMenu);
 
-  p.addFilesAction2->setIcon(QIcon::fromTheme(Q("list-add")));
-  p.appendFilesAction2->setIcon(QIcon::fromTheme(Q("distribute-horizontal-x")));
-  p.addAdditionalPartsAction2->setIcon(QIcon::fromTheme(Q("distribute-horizontal-margin")));
+  p.addFilesAction2->setIcon(QIcon::fromTheme(u"list-add"_s));
+  p.appendFilesAction2->setIcon(QIcon::fromTheme(u"distribute-horizontal-x"_s));
+  p.addAdditionalPartsAction2->setIcon(QIcon::fromTheme(u"distribute-horizontal-margin"_s));
 
   // Connect Q_SIGNALS & Q_SLOTS.
   auto mw = MainWindow::get();
@@ -539,8 +539,8 @@ Tab::setupInputControls() {
   enableMoveFilesButtons();
   onTrackSelectionChanged();
 
-  Util::HeaderViewManager::create(*p.ui->files,  "Merge::Files") .setDefaultSizes({ { Q("fileName"), 200 }, { Q("container"), 100 }, { Q("fileSize"),  60 } });
-  Util::HeaderViewManager::create(*p.ui->tracks, "Merge::Tracks").setDefaultSizes({ { Q("codec"),    150 }, { Q("type"),       80 }, { Q("name"),     150 }, { Q("properties"), 150 } });
+  Util::HeaderViewManager::create(*p.ui->files,  "Merge::Files") .setDefaultSizes({ { u"fileName"_s, 200 }, { u"container"_s, 100 }, { u"fileSize"_s,  60 } });
+  Util::HeaderViewManager::create(*p.ui->tracks, "Merge::Tracks").setDefaultSizes({ { u"codec"_s,    150 }, { u"type"_s,       80 }, { u"name"_s,     150 }, { u"properties"_s, 150 } });
 }
 
 void
@@ -554,15 +554,15 @@ Tab::setupInputToolTips() {
   Util::setToolTip(p.ui->trackName, QY("A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."));
   Util::setToolTip(p.ui->trackLanguage, QY("The language for this track that players can use for automatic track selection and display for the user."));
   Util::setToolTip(p.ui->defaultTrackFlag,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Make this track eligible to be played by default."))
                    .arg(QY("Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language.")));
   Util::setToolTip(p.ui->forcedTrackFlag,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Mark this track as \"forced display\"."))
                    .arg(QY("Use this for tracks containing onscreen text or foreign-language dialogue.")));
   Util::setToolTip(p.ui->trackEnabledFlag,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Mark this track as \"enabled\" (the default) or \"disabled\"."))
                    .arg(QY("Players should only consider enabled tracks for playback.")));
   Util::setToolTip(p.ui->hearingImpairedFlag,  QY("Can be set if the track is suitable for users with hearing impairments."));
@@ -571,86 +571,86 @@ Tab::setupInputToolTips() {
   Util::setToolTip(p.ui->originalFlag,         QY("Can be set if the track is in the content's original language (not a translation)."));
   Util::setToolTip(p.ui->commentaryFlag,       QY("Can be set if the track contains commentary."));
   Util::setToolTip(p.ui->compression,
-                   Q("%1 %2 %3")
+                   u"%1 %2 %3"_s
                    .arg(QY("Sets the lossless compression algorithm to be used for this track."))
                    .arg(QY("If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."))
                    .arg(QY("Currently only certain subtitle formats are compressed with the zlib algorithm.")));
   Util::setToolTip(p.ui->delay,
-                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   u"<p>%1 %2 %3</p><p>%4</p>"_s
                    .arg(QYH("Delay this track's timestamps by a couple of ms."))
                    .arg(QYH("The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."))
                    .arg(QYH("This works with all track types."))
                    .arg(QYH("This option can also be used for chapters.")));
   Util::setToolTip(p.ui->stretchBy,
-                   Q("<p>%1 %2</p><p>%3</p><p>%4</p>")
+                   u"<p>%1 %2</p><p>%3</p><p>%4</p>"_s
                    .arg(QYH("Multiply this track's timestamps with a factor."))
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78)."))
                    .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks."))
                    .arg(QYH("This option can also be used for chapters.")));
   Util::setToolTip(p.ui->defaultDuration,
-                   Q("%1 %2 %3 %4")
+                   u"%1 %2 %3 %4"_s
                    .arg(QY("Forces the default duration or number of frames per second for a track."))
                    .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
                    .arg(QY("You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."))
                    .arg(QY("If no unit is given, 'fps' will be used.")));
   Util::setToolTip(p.ui->fixBitstreamTimingInfo,
-                   Q("%1 %2 %3")
+                   u"%1 %2 %3"_s
                    .arg(QY("Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."))
                    .arg(QY("With this option that information is adjusted to match the container's timing information."))
                    .arg(QY("There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, "
                            "the source container or the video bitstream.")));
   Util::setToolTip(p.ui->aspectRatio,
-                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   u"<p>%1 %2 %3</p><p>%4</p>"_s
                    .arg(QYH("The Matroska container format can store the display width/height for a video track."))
                    .arg(QYH("This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."))
                    .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."))
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
   Util::setToolTip(p.ui->displayWidth,
-                   Q("<p>%1 %2</p><p>%3</p>")
+                   u"<p>%1 %2</p><p>%3</p>"_s
                    .arg(QYH("The Matroska container format can store the display width/height for a video track."))
                    .arg(QYH("This parameter is the display width in pixels."))
                    .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
   Util::setToolTip(p.ui->displayHeight,
-                   Q("<p>%1 %2</p><p>%3</p>")
+                   u"<p>%1 %2</p><p>%3</p>"_s
                    .arg(QYH("The Matroska container format can store the display width/height for a video track."))
                    .arg(QYH("This parameter is the display height in pixels."))
                    .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
   Util::setToolTip(p.ui->cropping,
-                   Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p>")
+                   u"<p>%1 %2</p><p>%3 %4</p><p>%5</p>"_s
                    .arg(QYH("Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."))
                    .arg(QYH("This must be a comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
                    .arg(QYH("Note that the video content is not modified by this option."))
                    .arg(QYH("The values are only stored in the track headers."))
                    .arg(QYH("Note also that there are not a lot of players that support the cropping parameters.")));
   Util::setToolTip(p.ui->stereoscopy,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Sets the stereo mode of the video track to this value."))
                    .arg(QY("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all.")));
   Util::setToolTip(p.ui->aacIsSBR,
-                   Q("%1 %2 %3")
+                   u"%1 %2 %3"_s
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
                    .arg(QY("Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."))
                    .arg(QY("Not needed for AAC tracks read from other container formats like MP4 or Matroska files.")));
   Util::setToolTip(p.ui->reduceToAudioCore,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Drops all HD extensions from an audio track and keeps only its lossy core."))
                    .arg(QY("This only works with DTS audio tracks.")));
   Util::setToolTip(p.ui->removeDialogNormalizationGain,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Removes or at least minimizes the dialog normalization gain by modifying audio headers."))
                    .arg(QY("This only works with AC-3, DTS & TrueHD audio tracks.")));
   Util::setToolTip(p.ui->subtitleCharacterSet,
-                   Q("<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>")
+                   u"<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>"_s
                    .arg(QYH("Selects the character set a subtitle file or chapter information was written with."))
                    .arg(QYH("Only needed in certain situations:"))
                    .arg(QYH("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)").arg(Q(g_cc_local_utf8->get_charset())))
                    .arg(QYH("for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly")));
   Util::setToolTip(p.ui->cues,
-                   Q("%1 %2")
+                   u"%1 %2"_s
                    .arg(QY("Selects for which blocks mkvmerge will produce index entries ( = cue entries)."))
                    .arg(QY("\"Determine automatically\" is a good choice for almost all situations.")));
   Util::setToolTip(p.ui->additionalTrackOptions,
-                   Q("%1 %2 %3")
+                   u"%1 %2 %3"_s
                    .arg(QY("Free-form edit field for user defined options for this track."))
                    .arg(QY("What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."))
                    .arg(QY("All occurrences of the string \"<TID>\" will be replaced by the track's track ID.")));
@@ -800,10 +800,10 @@ Tab::clearInputControlValues() {
     comboBox->setCurrentIndex(0);
 
   for (auto control : std::vector<QLineEdit *>{p.ui->trackTags, p.ui->delay, p.ui->stretchBy, p.ui->timestamps, p.ui->displayWidth, p.ui->displayHeight, p.ui->cropping, p.ui->additionalTrackOptions})
-    control->setText(Q(""));
+    control->setText(u""_s);
 
   for (auto control : std::vector<QComboBox *>{p.ui->trackName, p.ui->defaultDuration, p.ui->aspectRatio})
-    control->setEditText(Q(""));
+    control->setEditText(u""_s);
 
   p.ui->setAspectRatio->setChecked(false);
   p.ui->setDisplayWidthHeight->setChecked(false);
@@ -1409,7 +1409,7 @@ Tab::onTimestampsChanged(QString newValue) {
 
 void
 Tab::onBrowseTimestamps() {
-  auto fileName = getOpenFileName(QY("Select timestamp file"), QY("Text files") + Q(" (*.txt)"), p_func()->ui->timestamps);
+  auto fileName = getOpenFileName(QY("Select timestamp file"), QY("Text files") + u" (*.txt)"_s, p_func()->ui->timestamps);
   if (!fileName.isEmpty())
     withSelectedTracks([&fileName](auto &track) { track.m_timestamps = fileName; });
 }
@@ -1421,7 +1421,7 @@ Tab::onFixBitstreamTimingInfoChanged(bool newValue) {
 
 void
 Tab::onBrowseTrackTags() {
-  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), p_func()->ui->trackTags);
+  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + u" (*.xml)"_s, p_func()->ui->trackTags);
   if (!fileName.isEmpty())
     withSelectedTracks([&fileName](auto &track) { track.m_tags = fileName; }, true);
 }
@@ -1651,7 +1651,7 @@ Tab::setDefaultsFromSettingsForAddedFiles(QVector<SourceFilePtr> const &files) {
 QStringList
 Tab::selectFilesToAdd(QString const &title) {
   auto &settings = Util::Settings::get();
-  auto fileNames = Util::getOpenFileNames(this, title, settings.lastOpenDirPath(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
+  auto fileNames = Util::getOpenFileNames(this, title, settings.lastOpenDirPath(), Util::FileTypeFilter::get().join(u";;"_s), nullptr, QFileDialog::HideNameFilterDetails);
 
   if (!fileNames.isEmpty()) {
     settings.m_lastOpenDir.setPath(QFileInfo{fileNames[0]}.path());
@@ -1826,7 +1826,7 @@ Tab::retranslateInputUI() {
     Util::setComboBoxTexts(comboBox, QStringList{} << QY("Yes") << QY("No"));
 
   Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{}                                  << QY("Yes")                  << QY("No"));
-  Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
+  Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << u"zlib"_s);
   Util::setComboBoxTexts(p.ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));
   Util::setComboBoxTexts(p.ui->aacIsSBR,         QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
 
@@ -1834,7 +1834,7 @@ Tab::retranslateInputUI() {
   texts << QString{};
   for (auto idx = 0; idx <= static_cast<int>(audio_emphasis_c::max_index()); ++idx)
     if (audio_emphasis_c::valid_index(idx))
-      texts << Q("%1 (%2)").arg(Q(audio_emphasis_c::symbol(idx))).arg(Q(audio_emphasis_c::translate(idx)));
+      texts << u"%1 (%2)"_s.arg(Q(audio_emphasis_c::symbol(idx))).arg(Q(audio_emphasis_c::translate(idx)));
   Util::setComboBoxTexts(p.ui->audioEmphasis, texts);
   Util::fixComboBoxViewWidth(*p.ui->audioEmphasis);
 
@@ -1933,7 +1933,7 @@ Tab::setOutputFileNameMaybe(bool force) {
     outputDir = settings.m_fixedOutputDir;
 
   else if (Util::Settings::ToRelativeOfFirstInputFile == policy)
-    outputDir = QDir{ QFileInfo{p.config.m_firstInputFileName}.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
+    outputDir = QDir{ QFileInfo{p.config.m_firstInputFileName}.absoluteDir().path() + u"/"_s + settings.m_relativeOutputDir.path() };
 
   else if (   (Util::Settings::ToSameAsFirstInputFile == policy)
            || force)
@@ -2251,12 +2251,12 @@ Tab::mediaInfoLocation() {
   ExecutableLocationDialog dlg{this};
   auto result = dlg
     .setInfo(QY("Executable not found"),
-             Q("<p>%1 %2 %3</p><p>%4</p>")
+             u"<p>%1 %2 %3</p><p>%4</p>"_s
              .arg(QYH("This function requires the application %1.").arg("MediaInfo"))
              .arg(QYH("Its installation location could not be determined automatically."))
              .arg(QYH("Please select its location below."))
              .arg(QYH("You can download the application from the following URL:")))
-    .setURL(Q("https://mediaarea.net/en/MediaInfo"))
+    .setURL(u"https://mediaarea.net/en/MediaInfo"_s)
     .exec();
 
   if (QDialog::Rejected == result)

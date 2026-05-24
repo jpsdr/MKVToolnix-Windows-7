@@ -112,13 +112,13 @@ TrackItem::summarizeProperties(Track const &track) {
       properties << QNY("%1 bit per sample", "%1 bits per sample", bitsPerSample).arg(bitsPerSample);
 
   } else if (track.isVideo()) {
-    auto pixelDimensions = (track.isPropertySet(Q(mtx::id::pixel_dimensions)) ? track.m_properties[Q(mtx::id::pixel_dimensions)].toString() : QString{}).split(Q("x"));
+    auto pixelDimensions = (track.isPropertySet(Q(mtx::id::pixel_dimensions)) ? track.m_properties[Q(mtx::id::pixel_dimensions)].toString() : QString{}).split(u"x"_s);
 
     if (pixelDimensions.size() == 2)
-      properties << QY("%1 pixels").arg(Q("%1x%2").arg(pixelDimensions[0]).arg(pixelDimensions[1]));
+      properties << QY("%1 pixels").arg(u"%1x%2"_s.arg(pixelDimensions[0]).arg(pixelDimensions[1]));
   }
 
-  return properties.join(Q(", "));
+  return properties.join(u", "_s);
 }
 
 TrackItem *

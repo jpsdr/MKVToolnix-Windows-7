@@ -59,13 +59,13 @@ AttachmentModel::setRowData(QList<QStandardItem *> const &items,
 void
 AttachmentModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Name"),             Q("name")           },
-    { QY("MIME type"),        Q("mimeType")       },
-    { QY("Attach to"),        Q("attachTo")       },
-    { QY("Description"),      Q("description")    },
-    { QY("Source file name"), Q("sourceFileName") },
-    { QY("Directory"),        Q("directory")      },
-    { QY("Size"),             Q("size")           },
+    { QY("Name"),             u"name"_s           },
+    { QY("MIME type"),        u"mimeType"_s       },
+    { QY("Attach to"),        u"attachTo"_s       },
+    { QY("Description"),      u"description"_s    },
+    { QY("Source file name"), u"sourceFileName"_s },
+    { QY("Directory"),        u"directory"_s      },
+    { QY("Size"),             u"size"_s           },
   });
 
   horizontalHeaderItem(SizeColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

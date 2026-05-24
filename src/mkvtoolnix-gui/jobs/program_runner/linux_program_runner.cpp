@@ -48,30 +48,30 @@ LinuxProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType typ
 
 void
 LinuxProgramRunner::systemctlAction(QString const &action) {
-  qDebug() << Q("LinuxProgramRunner::systemctlAction: about to execute 'systemctl %1'").arg(action);
+  qDebug() << u"LinuxProgramRunner::systemctlAction: about to execute 'systemctl %1'"_s.arg(action);
 
   auto args   = QStringList{} << action;
-  auto result = QProcess::execute(Q("systemctl"), args);
+  auto result = QProcess::execute(u"systemctl"_s, args);
 
   if (result == 0)
     return;
 
-  qDebug() << Q("LinuxProgramRunner::systemctlAction: 'systemctl %1' failed: %2").arg(action).arg(result);
+  qDebug() << u"LinuxProgramRunner::systemctlAction: 'systemctl %1' failed: %2"_s.arg(action).arg(result);
 }
 
 void
 LinuxProgramRunner::shutDownComputer(Util::Settings::RunProgramConfig &) {
-  systemctlAction(Q("poweroff"));
+  systemctlAction(u"poweroff"_s);
 }
 
 void
 LinuxProgramRunner::hibernateComputer(Util::Settings::RunProgramConfig &) {
-  systemctlAction(Q("hibernate"));
+  systemctlAction(u"hibernate"_s);
 }
 
 void
 LinuxProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &) {
-  systemctlAction(Q("suspend"));
+  systemctlAction(u"suspend"_s);
 }
 
 void
@@ -83,24 +83,24 @@ LinuxProgramRunner::showDesktopNotification([[maybe_unused]] Util::Settings::Run
   QVariantMap hints;
 
   if (mtx::included_in(forEvent, Util::Settings::RunAfterJobCompletesSuccessfully, Util::Settings::RunAfterJobCompletesWithErrors, Util::Settings::RunAfterJobCompletesWithWarnings)) {
-    auto description = variables.value(Q("JOB_DESCRIPTION"));
+    auto description = variables.value(u"JOB_DESCRIPTION"_s);
     if (description.isEmpty())
       return;
 
     message              = forEvent == Util::Settings::RunAfterJobCompletesSuccessfully ? QY("Job succeeded")
                          : forEvent == Util::Settings::RunAfterJobCompletesWithWarnings ? QY("Job completed with warnings")
                          :                                                                QY("Job failed");
-    hints[Q("category")] = forEvent == Util::Settings::RunAfterJobCompletesSuccessfully ? Q("transfer.complete")
-                         : forEvent == Util::Settings::RunAfterJobCompletesWithWarnings ? Q("transfer.complete")
-                         :                                                                Q("transfer.error");
+    hints[u"category"_s] = forEvent == Util::Settings::RunAfterJobCompletesSuccessfully ? u"transfer.complete"_s
+                         : forEvent == Util::Settings::RunAfterJobCompletesWithWarnings ? u"transfer.complete"_s
+                         :                                                                u"transfer.error"_s;
 
-    message              = Q("%1: %2").arg(message).arg(description[0]);
+    message              = u"%1: %2"_s.arg(message).arg(description[0]);
 
   } else
     message = QY("The job queue has finished processing.");
 
-  hints[Q("desktop-entry")] = Q("org.bunkus.mkvtoolnix-gui");
-  hints[Q("urgency")]       = 0u; // low
+  hints[u"desktop-entry"_s] = u"org.bunkus.mkvtoolnix-gui"_s;
+  hints[u"urgency"_s]       = 0u; // low
 
   qDebug() << "LinuxProgramRunner::showDesktopNotification: about to notify; message & hints:" << message << hints;
 
@@ -111,12 +111,12 @@ LinuxProgramRunner::showDesktopNotification([[maybe_unused]] Util::Settings::Run
     return;
   }
 
-  QDBusInterface interface{Q("org.freedesktop.Notifications"), Q("/org/freedesktop/Notifications"), Q("org.freedesktop.Notifications"), bus};
+  QDBusInterface interface{u"org.freedesktop.Notifications"_s, u"/org/freedesktop/Notifications"_s, u"org.freedesktop.Notifications"_s, bus};
   QDBusReply<uint32_t> const reply{
-    interface.call(Q("Notify"),
-                   Q("MKVToolNix GUI"),     // app_name
+    interface.call(u"Notify"_s,
+                   u"MKVToolNix GUI"_s,     // app_name
                    0u,                      // replaces_id
-                   Q(""),                   // app_icon
+                   u""_s,                   // app_icon
                    QY("Job queue changed"), // summary
                    message,                 // body
                    QStringList{},           // actions

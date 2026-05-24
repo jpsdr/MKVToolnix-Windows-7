@@ -18,7 +18,7 @@ MacOSProgramRunner::~MacOSProgramRunner() {
 QString
 MacOSProgramRunner::defaultAudioFileName()
   const {
-  return Q("/System/Library/Sounds/Glass.aiff");
+  return u"/System/Library/Sounds/Glass.aiff"_s;
 }
 
 }

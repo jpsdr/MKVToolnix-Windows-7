@@ -23,7 +23,7 @@ Cache::cacheDirLocation(QString const &category) {
 QString
 Cache::cacheFileName(QString const &category,
                      QString const &key) {
-  return QDir::toNativeSeparators(Q("%1/%2").arg(cacheDirLocation(category)).arg(key));
+  return QDir::toNativeSeparators(u"%1/%2"_s.arg(cacheDirLocation(category)).arg(key));
 }
 
 QString
@@ -89,10 +89,10 @@ Cache::fetch(QString const &category,
   QStringList mismatches;
 
   if (settings->value("programVersion").toString() != Q(get_current_version().to_string()))
-    mismatches << Q("programVersion");
+    mismatches << u"programVersion"_s;
 
   if (settings->value("uiLocale").toString() != Settings::get().m_uiLocale)
-    mismatches << Q("uiLocale");
+    mismatches << u"uiLocale"_s;
 
   for (auto const &propertyKey : properties.keys())
     if (settings->value(propertyKey) != properties[propertyKey])
@@ -102,7 +102,7 @@ Cache::fetch(QString const &category,
 
   if (mismatches.isEmpty()) {
     qDebug() << "Cache::fetch: conditions OK, returning cached content";
-    settings->beginGroup(Q("data"));
+    settings->beginGroup(u"data"_s);
 
     return settings;
   }
@@ -151,7 +151,7 @@ Cache::cleanOldCacheFilesForCategory(QString const &category) {
 
 void
 Cache::cleanOldCacheFiles() {
-  auto cacheDir        = QDir{cacheDirLocation(Q(""))};
+  auto cacheDir        = QDir{cacheDirLocation(u""_s)};
   auto cacheCategories = cacheDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
   for (auto category : cacheCategories)
@@ -171,7 +171,7 @@ Cache::cleanAllCacheFilesForCategory(QString const &category) {
 
 void
 Cache::cleanAllCacheFiles() {
-  auto cacheDir        = QDir{cacheDirLocation(Q(""))};
+  auto cacheDir        = QDir{cacheDirLocation(u""_s)};
   auto cacheCategories = cacheDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
   for (auto category : cacheCategories)

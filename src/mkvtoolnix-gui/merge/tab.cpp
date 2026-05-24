@@ -99,7 +99,7 @@ Tab::Tab(QWidget *parent)
   p.ui->setupUi(this);
 
   for (auto const &groupBox : findChildren<Util::QgsCollapsibleGroupBox *>()) {
-    groupBox->setSettingGroup(Q("mergeTool"));
+    groupBox->setSettingGroup(u"mergeTool"_s);
     groupBox->loadState();
   }
 
@@ -147,7 +147,7 @@ Tab::title()
   auto &p    = *p_func();
   auto title = p.config.m_destination.isEmpty() ? QY("<No destination file>") : QFileInfo{p.config.m_destination}.fileName();
   if (!p.config.m_configFileName.isEmpty())
-    title = Q("%1 (%2)").arg(title).arg(QFileInfo{p.config.m_configFileName}.fileName());
+    title = u"%1 (%2)"_s.arg(title).arg(QFileInfo{p.config.m_configFileName}.fileName());
 
   return title;
 }
@@ -211,7 +211,7 @@ Tab::onSaveConfig() {
 void
 Tab::onSaveOptionFile() {
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(Q(".json")), QY("MKVToolNix option files (JSON-formatted)") + Q(" (*.json);;") + QY("All files") + Q(" (*)"), Q("json"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(u".json"_s), QY("MKVToolNix option files (JSON-formatted)") + u" (*.json);;"_s + QY("All files") + u" (*)"_s, u"json"_s);
   if (fileName.isEmpty())
     return;
 
@@ -226,7 +226,7 @@ void
 Tab::onSaveConfigAs() {
   auto &p        = *p_func();
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(Q(".mtxcfg")), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(u".mtxcfg"_s), QY("MKVToolNix GUI config files") + u" (*.mtxcfg);;"_s + QY("All files") + u" (*)"_s, u"mtxcfg"_s);
   if (fileName.isEmpty())
     return;
 
@@ -287,8 +287,8 @@ Tab::getOpenFileName(QString const &title,
                      InitialDirMode initialDirMode) {
   auto fullFilter = filter;
   if (!fullFilter.isEmpty())
-    fullFilter += Q(";;");
-  fullFilter += QY("All files") + Q(" (*)");
+    fullFilter += u";;"_s;
+  fullFilter += QY("All files") + u" (*)"_s;
 
   auto &settings = Util::Settings::get();
   auto dir       = determineInitialDirForOpening(lineEdit, initialDirMode);
@@ -325,10 +325,10 @@ Tab::determineInitialDirForSaving(QLineEdit *lineEdit)
       auto firstDir = QFileInfo{p.config.m_files.at(0)->m_fileName}.path();
       dir           = settings.m_outputFileNamePolicy == Util::Settings::ToParentOfFirstInputFile ? QFileInfo{firstDir}.path()
                     : settings.m_outputFileNamePolicy == Util::Settings::ToSameAsFirstInputFile   ? firstDir
-                    :                                                                               firstDir + Q("/") + settings.m_relativeOutputDir.path();
+                    :                                                                               firstDir + u"/"_s + settings.m_relativeOutputDir.path();
     }
 
-  } else if (!settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")))
+  } else if (!settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != u"."_s))
     dir = settings.m_lastOutputDir.path();
 
   qDebug() << "determineInitialDirForSaving()"
@@ -350,8 +350,8 @@ Tab::getSaveFileName(QString const &title,
                      QString const &defaultSuffix) {
   auto fullFilter = filter;
   if (!fullFilter.isEmpty())
-    fullFilter += Q(";;");
-  fullFilter += QY("All files") + Q(" (*)");
+    fullFilter += u";;"_s;
+  fullFilter += QY("All files") + u" (*)"_s;
 
   auto dir      = determineInitialDirForSaving(lineEdit);
   auto fileName = Util::getSaveFileName(this, title, dir, defaultFileName, fullFilter, defaultSuffix);
@@ -430,7 +430,7 @@ Tab::isReadyForMerging() {
 
 #if defined(SYS_WINDOWS)
   if (destinationValid)
-    destinationValid = destination.contains(QRegularExpression{Q("^[a-zA-Z]:[\\\\/]|^\\\\\\\\.+\\.+")});
+    destinationValid = destination.contains(QRegularExpression{u"^[a-zA-Z]:[\\\\/]|^\\\\\\\\.+\\.+"_s});
 #endif  // SYS_WINDOWS
 
   if (!destinationValid) {
@@ -461,7 +461,7 @@ Tab::findExistingDestination()
 #endif
   auto destinationBaseName  = QRegularExpression::escape(destinationInfo.completeBaseName());
   auto destinationSuffix    = QRegularExpression::escape(destinationInfo.suffix());
-  auto splitNameTestPattern = Q("^%1-\\d+%2%3$").arg(destinationBaseName).arg(destinationSuffix.isEmpty() ? Q("") : Q("\\.")).arg(destinationSuffix);
+  auto splitNameTestPattern = u"^%1-\\d+%2%3$"_s.arg(destinationBaseName).arg(destinationSuffix.isEmpty() ? u""_s : u"\\."_s).arg(destinationSuffix);
   auto splitNameTestRE      = QRegularExpression{splitNameTestPattern, rePatternOptions};
   auto destinationDir       = destinationInfo.dir();
 
@@ -509,7 +509,7 @@ Tab::checkIfMissingAudioTrackIsOK() {
 
   auto answer = Util::MessageBox::question(this)
     ->title(QY("Create file without audio track"))
-    .text(Q("%1 %2")
+    .text(u"%1 %2"_s
           .arg(QY("With the current multiplex settings the destination file will not contain an audio track."))
           .arg(QY("Do you want to continue?")))
     .buttonLabel(QMessageBox::Yes, QY("&Create file without audio track"))

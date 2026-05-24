@@ -29,9 +29,9 @@ namespace {
 
 QIcon
 createSourceIndicatorIcon(SourceFile &sourceFile) {
-  auto iconName = sourceFile.isAdditionalPart() ? Q("distribute-horizontal-margin")
-                : sourceFile.isAppended()       ? Q("distribute-horizontal-x")
-                :                                 Q("distribute-vertical-page");
+  auto iconName = sourceFile.isAdditionalPart() ? u"distribute-horizontal-margin"_s
+                : sourceFile.isAppended()       ? u"distribute-horizontal-x"_s
+                :                                 u"distribute-vertical-page"_s;
   auto icon     = QIcon::fromTheme(iconName);
 
   if (!Util::Settings::get().m_mergeUseFileAndTrackColors)
@@ -86,10 +86,10 @@ SourceFileModel::~SourceFileModel() {
 void
 SourceFileModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("File name"), Q("fileName")  },
-    { QY("Container"), Q("container") },
-    { QY("File size"), Q("fileSize")  },
-    { QY("Directory"), Q("directory") },
+    { QY("File name"), u"fileName"_s  },
+    { QY("Container"), u"container"_s },
+    { QY("File size"), u"fileSize"_s  },
+    { QY("Directory"), u"directory"_s },
   });
 
   horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -705,7 +705,7 @@ dumpIdx(QModelIndex const &idx,
   if (!idx.isValid())
     return dumped.isEmpty() ? "<invalid>" : dumped;
 
-  return Q("%1/%2%3").arg(idx.row()).arg(idx.column()).arg(dumped.isEmpty() ? Q("") : Q(">%1").arg(dumped));
+  return u"%1/%2%3"_s.arg(idx.row()).arg(idx.column()).arg(dumped.isEmpty() ? u""_s : u">%1"_s.arg(dumped));
 }
 
 bool

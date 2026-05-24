@@ -30,7 +30,7 @@ PageBase::hasBeenModified() {
   if (hasThisBeenModified()) {
     // auto vp = dynamic_cast<ValuePage const *>(this);
     // qDebug() << "I have been modified: " << typeid(*this).name() << " title " << title()
-    //          << " orig " << (vp ? vp->originalValueAsString() : Q("<not a value page>")) << " current " << (vp ? vp->currentValueAsString() : Q("<not a value page>"));
+    //          << " orig " << (vp ? vp->originalValueAsString() : u"<not a value page>"_s) << " current " << (vp ? vp->currentValueAsString() : u"<not a value page>"_s);
     return this;
   }
 

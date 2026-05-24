@@ -85,8 +85,8 @@ formatDateFinishedForSorting(JobPtr const &job) {
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{}
-  , m_warningsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("dialog-warning")))}
-  , m_errorsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("dialog-error")))}
+  , m_warningsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"dialog-warning"_s))}
+  , m_errorsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(u"dialog-error"_s))}
   , m_started{}
   , m_dontStartJobsNow{}
   , m_running{}
@@ -105,17 +105,17 @@ Model::retranslateUi() {
   QMutexLocker locked{&m_mutex};
 
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Status"),        Q("status")         },
-    { Q(""),               Q("warningsErrors") },
-    { QY("Description"),   Q("description")    },
-    { QY("Type"),          Q("type")           },
-    { QY("Progress"),      Q("progress")       },
-    { QY("Date added"),    Q("dateAdded")      },
-    { QY("Date started"),  Q("dateStarted")    },
-    { QY("Date finished"), Q("dateFinished")   },
+    { QY("Status"),        u"status"_s         },
+    { u""_s,               u"warningsErrors"_s },
+    { QY("Description"),   u"description"_s    },
+    { QY("Type"),          u"type"_s           },
+    { QY("Progress"),      u"progress"_s       },
+    { QY("Date added"),    u"dateAdded"_s      },
+    { QY("Date started"),  u"dateStarted"_s    },
+    { QY("Date finished"), u"dateFinished"_s   },
   });
 
-  horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon::fromTheme(Q("dialog-warning-grayscale")));
+  horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon::fromTheme(u"dialog-warning-grayscale"_s));
   horizontalHeaderItem(StatusIconColumn)->setData(QY("Warnings/Errors"), Util::HiddenDescriptionRole);
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
@@ -645,7 +645,7 @@ Model::convertJobQueueToSeparateIniFiles() {
 
   for (auto idx = 0u; idx < numberOfJobs; ++idx) {
     reg->beginGroup("jobQueue");
-    reg->beginGroup(Q("job %1").arg(idx));
+    reg->beginGroup(u"job %1"_s.arg(idx));
 
     try {
       Util::IniConfigFile cfg{*reg};
@@ -666,7 +666,7 @@ Model::convertJobQueueToSeparateIniFiles() {
   reg->beginGroup("jobQueue");
   reg->remove("numberOfJobs");
   for (auto idx = 0u; idx < numberOfJobs; ++idx)
-    reg->remove(Q("job %1").arg(idx));
+    reg->remove(u"job %1"_s.arg(idx));
   reg->setValue("order", order);
   reg->endGroup();
 }
@@ -730,13 +730,13 @@ Model::loadJobs() {
     orderByUuid[uuid] = orderIdx++;
 
   auto queueLocation = Job::queueLocation();
-  auto jobQueueFiles = QDir{queueLocation}.entryList(QStringList{} << Q("*.mtxcfg"), QDir::Files);
+  auto jobQueueFiles = QDir{queueLocation}.entryList(QStringList{} << u"*.mtxcfg"_s, QDir::Files);
   auto knownJobs     = QList<JobPtr>{};
   auto unknownJobs   = QList<JobPtr>{};
 
   for (auto const &fileName : jobQueueFiles) {
     try {
-      auto job = Job::loadJob(Q("%1/%2").arg(queueLocation).arg(fileName));
+      auto job = Job::loadJob(u"%1/%2"_s.arg(queueLocation).arg(fileName));
       if (!job)
         continue;
 
