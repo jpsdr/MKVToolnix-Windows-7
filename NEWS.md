@@ -26,6 +26,9 @@
 
 ## Bug fixes
 
+* mkvmerge: if using legacy font MIME types is off mkvmerge will now remap
+  legacy font MIME types present in source files into the current ones. Patch
+  by corticalcode via #6249.
 * mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: on
   Windows the MIME type detection will now use the FreeDesktop.org MIME
   database instead of falling back to file extension-based guesses. This
