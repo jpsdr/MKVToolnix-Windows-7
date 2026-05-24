@@ -82,11 +82,11 @@ Model::retranslateUi() {
   auto p = p_func();
 
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Elements"),  Q("elements") },
-    { QY("Content"),   Q("content")  },
-    { QY("Position"),  Q("position") },
-    { QY("Size"),      Q("size")     },
-    { QY("Data size"), Q("dataSize") },
+    { QY("Elements"),  u"elements"_s },
+    { QY("Content"),   u"content"_s  },
+    { QY("Position"),  u"position"_s },
+    { QY("Size"),      u"size"_s     },
+    { QY("Data size"), u"dataSize"_s },
   });
 
   horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

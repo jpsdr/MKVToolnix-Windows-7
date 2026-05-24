@@ -32,7 +32,7 @@ QWidget *
 LanguageValuePage::createInputControl() {
   m_originalValue   = m_element ? static_cast<libebml::EbmlString *>(m_element)->GetValue() : "eng";
   auto qOriginal    = Q(m_originalValue);
-  auto languageOnly = qOriginal.mid(0, qOriginal.indexOf(Q('-')));
+  auto languageOnly = qOriginal.mid(0, qOriginal.indexOf(u'-'));
   auto languageOpt  = mtx::iso639::look_up(to_utf8(languageOnly), true);
   auto currentValue = languageOpt ? languageOpt->alpha_3_code : m_originalValue;
 
@@ -42,7 +42,7 @@ LanguageValuePage::createInputControl() {
 
   m_cbValue->setAdditionalItems(Q(currentValue))
     .setup()
-    .setCurrentByData(QStringList{} << Q(currentValue) << Q("und"));
+    .setCurrentByData(QStringList{} << Q(currentValue) << u"und"_s);
 
   connect(MainWindow::get(), &MainWindow::preferencesChanged, m_cbValue, &Util::ComboBoxBase::reInitialize);
   connect(m_cbValue, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]() { Q_EMIT valueChanged(); });

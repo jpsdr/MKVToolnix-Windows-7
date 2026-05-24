@@ -23,8 +23,8 @@ NameModel::~NameModel() {
 void
 NameModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Name"),      Q("name")     },
-    { QY("Languages"), Q("language") },
+    { QY("Name"),      u"name"_s     },
+    { QY("Languages"), u"language"_s },
   });
 }
 
@@ -85,7 +85,7 @@ NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
   lists.languageNames.sort();
 
   rowItems[0]->setText(Q(get_child_value<libmatroska::KaxChapterString>(display)));
-  rowItems[1]->setText(lists.languageNames.join(Q("; ")));
+  rowItems[1]->setText(lists.languageNames.join(u"; "_s));
 }
 
 QList<QStandardItem *>

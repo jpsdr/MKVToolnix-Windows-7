@@ -67,7 +67,7 @@ determine_program(std::vector<std::string> &args) {
 
 std::unique_ptr<QTemporaryFile>
 create_option_file(std::vector<std::string> const &options) {
-  auto file = std::make_unique<QTemporaryFile>(QDir::temp().filePath(Q("mkvtoolnix-XXXXXX.json")));
+  auto file = std::make_unique<QTemporaryFile>(QDir::temp().filePath(u"mkvtoolnix-XXXXXX.json"_s));
 
   if (!file->open())
     mxerror(to_utf8(QY("Error creating a temporary file (reason: %1).").arg(file->errorString())));

@@ -187,13 +187,13 @@ TEST(StringsEditing, ReplacingRegex) {
     return match.captured(1);
   };
 
-  EXPECT_EQ("48000",          mtx::string::replace("48000.",           re, repl));
-  EXPECT_EQ("48000",          mtx::string::replace("48000.0",          re, repl));
-  EXPECT_EQ("48000",          mtx::string::replace("48000.000",        re, repl));
-  EXPECT_EQ("48000.0012",     mtx::string::replace("48000.0012",       re, repl));
-  EXPECT_EQ("48000.0012",     mtx::string::replace("48000.001200",     re, repl));
-  EXPECT_EQ("48000.00120034", mtx::string::replace("48000.00120034",   re, repl));
-  EXPECT_EQ("48000.00120034", mtx::string::replace("48000.0012003400", re, repl));
+  EXPECT_EQ("48000"s,          mtx::string::replace("48000."s,           re, repl));
+  EXPECT_EQ("48000"s,          mtx::string::replace("48000.0"s,          re, repl));
+  EXPECT_EQ("48000"s,          mtx::string::replace("48000.000"s,        re, repl));
+  EXPECT_EQ("48000.0012"s,     mtx::string::replace("48000.0012"s,       re, repl));
+  EXPECT_EQ("48000.0012"s,     mtx::string::replace("48000.001200"s,     re, repl));
+  EXPECT_EQ("48000.00120034"s, mtx::string::replace("48000.00120034"s,   re, repl));
+  EXPECT_EQ("48000.00120034"s, mtx::string::replace("48000.0012003400"s, re, repl));
 }
 
 }

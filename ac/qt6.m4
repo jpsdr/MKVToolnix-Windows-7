@@ -282,8 +282,15 @@ AC_ARG_ENABLE([dbus],
   AS_HELP_STRING([--enable-dbus],[compile DBus support (auto)]),
   [],[enable_dbus=auto])
 
+if test x"$enable_gui" = xyes; then
+  AC_DEFINE(WITH_MKVTOOLNIX_GUI, 1, [Define if the GUI is being built])
+  BUILD_GUI=yes
+  opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI"
+fi
+
 have_qt6=no
 
+check_qt6
 if test x"$enable_qt6" != "xyes"; then
   AC_MSG_CHECKING(for Qt 6)
   AC_MSG_RESULT(no: disabled by user request)
@@ -291,7 +298,8 @@ if test x"$enable_qt6" != "xyes"; then
 else
   check_qt6
 
- unset qmake_dir qt_bindir qt_libdir qt_searchpath
+  unset qmake_dir qt_bindir qt_libdir qt_searchpath
+
 
 
   if test $have_qt6 != yes; then

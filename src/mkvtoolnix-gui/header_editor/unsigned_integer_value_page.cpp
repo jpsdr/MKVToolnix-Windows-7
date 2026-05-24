@@ -42,7 +42,7 @@ QString
 UnsignedIntegerValuePage::originalValueAsString()
   const {
   if (!m_element)
-    return Q("");
+    return u""_s;
   return QString::number(m_originalValue);
 }
 

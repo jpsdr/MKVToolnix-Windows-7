@@ -60,8 +60,8 @@ void QgsCollapsibleGroupBoxBasic::init()
   mTitleClicked = false;
 
   // init icons
-  mCollapseIcon = QIcon::fromTheme(Q("draw-triangle4"));
-  mExpandIcon = QIcon::fromTheme(Q("draw-triangle2"));
+  mCollapseIcon = QIcon::fromTheme(u"draw-triangle4"_s);
+  mExpandIcon = QIcon::fromTheme(u"draw-triangle2"_s);
 
   // collapse button
   mCollapseButton = new QgsGroupBoxCollapseButton( this );

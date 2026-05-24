@@ -45,6 +45,5 @@ std::string get_displayable(std::string const &src);
 
 QString replace(QString const &original, QRegularExpression const &regex, std::function<QString(QRegularExpressionMatch const &)> replacement);
 std::string replace(std::string const &original, QRegularExpression const &regex, std::function<QString(QRegularExpressionMatch const &)> replacement);
-std::string replace(char const *original, QRegularExpression const &regex, std::function<QString(QRegularExpressionMatch const &)> replacement);
 
 } // mtx::string

@@ -59,6 +59,13 @@ def run_wrapper cmdline, opts = {}
     cmdline += " > #{output.path} 2>&1"
   end
 
+  new_env   = opts[:env] || {}
+  saved_env = new_env.keys.map do |key|
+    [ key, ENV[key] ]
+  end
+
+  new_env.keys.each { |key| ENV[key] = new_env[key] }
+
   if $use_tempfile_for_run
     Tempfile.open("mkvtoolnix-rake-run") do |t|
       t.puts cmdline
@@ -70,6 +77,14 @@ def run_wrapper cmdline, opts = {}
   else
     system cmdline
     code = last_exit_code
+  end
+
+  saved_env.each do |key_value|
+    if key_value[1] == nil
+      ENV.delete(key_value[0])
+    else
+      ENV[key_value[0]] = key_value[1]
+    end
   end
 
   code = opts[:filter_output].call code, output.readlines if opts[:filter_output]
@@ -129,6 +144,24 @@ end
 def runq_touch(file_name)
   runq_code "touch", :target => file_name do
     FileUtils.touch file_name
+  end
+end
+
+def remove_files(*file_names)
+  file_names.flatten.each do |file_name|
+    if FileTest.exist?(file_name)
+      puts_vaction "rm -f", :target => file_name
+      File.unlink file_name
+    end
+  end
+end
+
+def remove_files_and_dirs(*dir_names)
+  dir_names.flatten.each do |dir_name|
+    if FileTest.exist?(dir_name)
+      puts_vaction "rm -rf", :target => dir_name
+      FileUtils.rm_rf dir_name
+    end
   end
 end
 
@@ -211,10 +244,7 @@ def install_data(destination, *files)
 end
 
 def remove_files_by_patterns patterns
-  patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| FileTest.exist? file_name }.each do |file_name|
-    puts_vaction "rm", :target => file_name
-    File.unlink file_name
-  end
+  remove_files(*patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq)
 end
 
 def read_files *file_names
@@ -401,8 +431,11 @@ def add_qrc_dependencies *qrcs
       join('').
       scan(%r{<file[^>]*>([^<]+)}).
       map do |matches|
-      path = Pathname.new(File.absolute_path(dir + matches[0]))
-      path = path.relative_path_from(pwd) unless path.relative?
+      path = matches[0]
+      if path[0] != '/'
+        path = Pathname.new(File.absolute_path(dir + path))
+        path = path.relative_path_from(pwd) unless path.relative?
+      end
       path.to_s
     end
 

@@ -88,7 +88,7 @@ load_file(std::string const &file_name,
     if (auto matches = encoding_re.match(Q(content)); matches.hasMatch())
       content = charset_converter_c::init(to_utf8(matches.captured(2)))->utf8(content);
 
-    content = to_utf8(Q(content).replace(encoding_re, Q("\\1UTF-8")));
+    content = to_utf8(Q(content).replace(encoding_re, u"\\1UTF-8"_s));
   }
 
   std::stringstream scontent(content);

@@ -19,6 +19,10 @@ function fail {
   exit 1
 }
 
+function run_curl {
+  curl --retry 3 --retry-delay 5 --retry-all-errors --connect-timeout 30 --max-time 600 "$@"
+}
+
 function verify_checksum {
   local file=$1
   local expected_checksum=$2
@@ -55,7 +59,7 @@ function retrieve_file {
   fi
 
   if [[ ! -f ${file} ]]; then
-    curl -L ${url} > ${file}
+    run_curl -L ${url} > ${file}
   fi
 
   verify_checksum ${file} ${expected_checksum}
@@ -239,12 +243,7 @@ function build_zlib {
     --static
 }
 
-function build_gettext_fix_compilation {
-  perl -pi -e 's/#define setlocale.*//g' $( find . -name libintl.h )
-}
-
 function build_gettext {
-  build_package_hook_pre_installation=build_gettext_fix_compilation \
   build_package gettext \
     --prefix=${TARGET} \
     --disable-csharp \
@@ -372,6 +371,8 @@ function build_gpg {
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
+  cd ${CMPL}/mkvtoolnix-${MTX_VER}
+
   local dmgbase=${CMPL}/dmg-${MTX_VER}
   local dmgcnt=$dmgbase/${APP_BUNDLE_NAME}/Contents
   local dmgmac=$dmgcnt/MacOS
@@ -402,11 +403,11 @@ function retrieve_verified_source_tarball {
 
   rm -f ${SRCDIR}/${public_key_name} ${SRCDIR}/${signature_name}
 
-  curl -o ${SRCDIR}/${public_key_name} ${AUTHOR_PUBLIC_KEY_URL}
-  curl -o ${SRCDIR}/${signature_name} ${SOURCES_URL}/${signature_name}
+  run_curl -o ${SRCDIR}/${public_key_name} ${AUTHOR_PUBLIC_KEY_URL}
+  run_curl -o ${SRCDIR}/${signature_name} ${SOURCES_URL}/${signature_name}
 
   if [[ ! -f ${SRCDIR}/${tarball_name} ]]; then
-    curl -o ${SRCDIR}/${tarball_name} ${SOURCES_URL}/${tarball_name}
+    run_curl -o ${SRCDIR}/${tarball_name} ${SOURCES_URL}/${tarball_name}
   fi
 
   local gpghome=$(mktemp -d)
@@ -519,6 +520,16 @@ EOF
 
   ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}
 
+  # Strip the unused ${TARGET}/lib rpath leaked into the binaries (the build
+  # host's absolute path; bundled libs load via @executable_path/libs/). Guard
+  # with otool so a binary lacking the rpath can't abort the build; runs before
+  # codesign since install_name_tool invalidates the signature.
+  for FILE (${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}) {
+    if otool -l ${FILE} | grep -qF "path ${TARGET}/lib "; then
+      install_name_tool -delete_rpath ${TARGET}/lib ${FILE}
+    fi
+  }
+
   # Strip debug symbols from all dylibs and plugins
   strip -x ${dmgmac}/**/*.dylib(.)
 
@@ -568,7 +579,7 @@ EOF
 
   rm -f ${dmgname} ${dmgbuildname}
   hdiutil create -srcfolder ${dmgbase} -volname ${volumename} \
-    -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
+    -fs APFS -format ULMO \
     ${dmgname}
 
   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}

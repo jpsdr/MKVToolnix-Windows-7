@@ -228,11 +228,4 @@ replace(std::string const &original,
   return to_utf8(replace(Q(original), regex, replacement));
 }
 
-std::string
-replace(char const *original,
-        QRegularExpression const &regex,
-        std::function<QString(QRegularExpressionMatch const &)> replacement) {
-  return to_utf8(replace(Q(original), regex, replacement));
-}
-
 } // mtx::string

@@ -27,7 +27,7 @@ void
 InstallationChecker::runChecks() {
   m_problems.clear();
   auto mkvmergeExe  = Util::Settings::get().actualMkvmergeExe();
-  auto versionRE    = QRegularExpression{Q("^mkvmerge [[:space:]]+ v ( [[:digit:].]+ )"), QRegularExpression::ExtendedPatternSyntaxOption};
+  auto versionRE    = QRegularExpression{u"^mkvmerge [[:space:]]+ v ( [[:digit:].]+ )"_s, QRegularExpression::ExtendedPatternSyntaxOption};
   auto guiVersion   = Q(get_current_version().to_string());
   auto testMkvmerge = true;
 
@@ -38,7 +38,7 @@ InstallationChecker::runChecks() {
   }
 
   try {
-    auto optFile = OptionFile::createTemporary(Q("MKVToolNix-process"), {});
+    auto optFile = OptionFile::createTemporary(u"MKVToolNix-process"_s, {});
 
   } catch (ProcessX const &ex) {
     m_problems << Problem{ ProblemType::TemporaryDirectoryNotWritable, Q(ex.what()) };
@@ -46,7 +46,7 @@ InstallationChecker::runChecks() {
   }
 
   if (testMkvmerge) {
-    auto process = Process::execute(mkvmergeExe, { Q("--version") });
+    auto process = Process::execute(mkvmergeExe, { u"--version"_s });
 
     if (process->hasError())
       m_problems << Problem{ ProblemType::MkvmergeCannotBeExecuted, {} };
@@ -70,7 +70,7 @@ InstallationChecker::runChecks() {
 #if defined(SYS_WINDOWS)
   if (!App::isInstalled()) {
     auto dir = App::applicationDirPath();
-    QFile tempFile{Q("%1/writeTest").arg(dir)};
+    QFile tempFile{u"%1/writeTest"_s.arg(dir)};
 
     if (!tempFile.open(QIODevice::WriteOnly))
       m_problems << Problem{ ProblemType::PortableDirectoryNotWritable, dir };

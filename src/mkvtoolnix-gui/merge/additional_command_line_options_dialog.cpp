@@ -44,7 +44,6 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--disable-track-statistics-tags"), false, global, { QY("Tells mkvmerge not to write tags with statistics for each track.") });
   add(Q("--disable-language-ietf"),         false, global, { QY("Tells mkvmerge not to write LanguageIETF track header elements and ChapLanguageIETF chapter elements.") });
   add(Q("--enable-durations"),              false, global, { QY("Write durations for all blocks."), QY("This will increase file size and does not offer any additional value for players at the moment.") });
-
   add(Q("--flush-on-close"), false, global,
       { QY("Tells mkvmerge to flush all data cached in memory to storage when closing files opened for writing."),
         QY("This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers."),
@@ -132,7 +131,7 @@ AdditionalCommandLineOptionsDialog::add(QString const &title,
     connect(option->value, &QLineEdit::textChanged, this, &AdditionalCommandLineOptionsDialog::enableOkButton);
   }
 
-  auto re    = QRegularExpression{ requiresValue ? Q("\\s*%1\\s+([^\\s]+)\\s*").arg(QRegularExpression::escape(title)) : Q("\\s*%1\\s*").arg(QRegularExpression::escape(title)) };
+  auto re    = QRegularExpression{ requiresValue ? Q("\\s*%1\\s+([^\\s]+)\\s*").arg(QRegularExpression::escape(title)) : Q("\\s*%1\\s*").arg(QRegularExpression::escape(title)) };  auto re    = QRegularExpression{ requiresValue ? u"\\s*%1\\s+([^\\s]+)\\s*"_s.arg(QRegularExpression::escape(title)) : u"\\s*%1\\s*"_s.arg(QRegularExpression::escape(title)) };
   auto match = re.match(m_customOptions);
 
   if (!match.hasMatch())

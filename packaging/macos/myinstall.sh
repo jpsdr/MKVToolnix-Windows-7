@@ -24,6 +24,7 @@ function run_build {
   install_command=${INSTALL_COMMAND//TMPDIR/${tmpdir}}
   echo PACKAGE $PACKAGE package $package tmpdir $tmpdir install_command $install_command
   $DEBUG mkdir -p $tmpdir $PACKAGE_DIR
+  trap "command rm -rf $tmpdir" EXIT
 
   $DEBUG eval ${install_command}
 
@@ -42,6 +43,7 @@ function run_uninstall {
   if [[ ! -f $FILE ]] fail "No such package: $FILE"
 
   local tmpfile=$(mktemp ${TMPDIR}/uninstallXXXXXX)
+  trap "command rm -f $tmpfile" EXIT
   cd ${TARGET}
   tar tzf ${FILE} > ${tmpfile}
   grep -v '/$' ${tmpfile} | tr '\n' '\0' | xargs -0 $DEBUG rm -f

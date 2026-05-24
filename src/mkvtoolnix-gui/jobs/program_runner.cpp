@@ -161,7 +161,7 @@ ProgramRunner::replaceVariables(QStringList const &commandLine,
 void
 ProgramRunner::setupGeneralVariables(QMap<QString, QStringList> &variables) {
   variables[Q("CURRENT_TIME")] << QDateTime::currentDateTime().toString(Qt::ISODate);
-  variables[Q("INSTALLATION_DIRECTORY")] << QDir::toNativeSeparators(App::applicationDirPath());
+  variables[Q("INSTALLATION_DIRECTORY")] << QDir::toNativeSeparators(App::applicationDirPath());  variables[u"INSTALLATION_DIRECTORY"_s] << QDir::toNativeSeparators(App::applicationDirPath());
 }
 
 std::unique_ptr<ProgramRunner>

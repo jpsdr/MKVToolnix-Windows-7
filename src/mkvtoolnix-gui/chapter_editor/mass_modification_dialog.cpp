@@ -63,7 +63,7 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages) {
 void
 MassModificationDialog::retranslateUi() {
   Util::setToolTip(m_ui->leShiftBy,
-                   Q("%1 %2 %3")
+                   u"%1 %2 %3"_s
                    .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                    .arg(QY("Negative values are allowed."))
                    .arg(QY("If both shifting and multiplication are enabled then the shift will be performed before the multiplication.")));
@@ -71,7 +71,7 @@ MassModificationDialog::retranslateUi() {
   Util::setToolTip(m_ui->dsbMultiplyBy, QY("If both shifting and multiplication are enabled then the shift will be performed before the multiplication."));
 
   Util::setToolTip(m_ui->cbSetEndTimestamps,
-                   Q("<p>%1 %2</p><p>%3</p>")
+                   u"<p>%1 %2</p><p>%3</p>"_s
                    .arg(QY("For most entries the smallest start timestamp of all chapters on the same level higher than the current chapter's start timestamp will be used as its end timestamp."))
                    .arg(QY("If there is no such chapter, the parent chapter's end timestamp will be used instead."))
                    .arg(QY("If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration.")));
