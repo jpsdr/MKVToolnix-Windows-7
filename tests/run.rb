@@ -101,6 +101,7 @@ end
 
 Dir.mktmpdir do |dir|
   $temp_dir = dir
+  $temp_dir = ENV["KEEP_TMPDIR"] if (ENV["KEEP_TMPDIR"] || "") != ""
   setup
   main
 end

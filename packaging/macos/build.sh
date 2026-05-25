@@ -368,6 +368,12 @@ function build_gpg {
   build_package gpg --prefix=${TARGET}
 }
 
+function build_shared_mime_info {
+  NO_CONFIGURE=1 build_package shared_mime_info
+  command mkdir -p ${TARGET}/share/mime/packages
+  command cp data/freedesktop.org.xml.in ${TARGET}/share/mime/packages/freedesktop.org.xml
+}
+
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
@@ -390,6 +396,21 @@ function build_configured_mkvtoolnix {
   )
 
   ./configure ${args}
+
+  # Embed the FreeDesktop MIME DB that build_shared_mime_info installs earlier in the
+  # default target list; the guard makes its absence a no-op (non-macOS/partial builds).
+  local freedesktop_mime=${TARGET}/share/mime/packages/freedesktop.org.xml
+  if [[ -f ${freedesktop_mime} ]]; then
+    cat > src/mkvtoolnix-gui/qt_resources_macos.qrc <<QRC_EOF
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE RCC>
+<RCC version='1.0'>
+ <qresource>
+  <file alias='/qt-project.org/qmime/packages/freedesktop.org.xml'>${freedesktop_mime}</file>
+</qresource>
+</RCC>
+QRC_EOF
+  fi
 
   grep -q 'BUILD_GUI.*yes' build-config
 }
@@ -616,6 +637,7 @@ if [[ -z $@ ]]; then
   build_boost
   build_qt
   build_gpg
+  build_shared_mime_info
   build_mkvtoolnix
 
 else
