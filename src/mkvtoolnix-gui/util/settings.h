@@ -34,6 +34,7 @@ public:
     DeleteSourceFiles,
     ShowDesktopNotification,
     QuitMKVToolNix,
+    ExecutePowerShellScript,
     Max,
     Default = ExecuteProgram,
   };
@@ -165,6 +166,8 @@ public:
     QStringList m_commandLine;
     QString m_audioFile;
     unsigned int m_volume{75};
+    bool m_powerShellScriptIsFile{true};
+    QString m_powerShellScriptFile, m_powerShellScriptCode;
 
     bool isValid() const;
     QString validate() const;
@@ -173,6 +176,7 @@ public:
   private:
     QString nameForExternalProgram() const;
     QString nameForPlayAudioFile() const;
+    QString nameForPowerShellScriptFileOrCode() const;
   };
 
   class LanguageShortcut {

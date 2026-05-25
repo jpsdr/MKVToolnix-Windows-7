@@ -124,6 +124,9 @@ char const * const s_valOftenUsedLanguagesOnly                                  
 char const * const s_valOftenUsedRegions                                        = "oftenUsedRegions";
 char const * const s_valOftenUsedRegionsOnly                                    = "oftenUsedRegionsOnly";
 char const * const s_valOutputFileNamePolicy                                    = "outputFileNamePolicy";
+char const * const s_valPowerShellScriptCode                                    = "powerShellScriptCode";
+char const * const s_valPowerShellScriptFile                                    = "powerShellScriptFile";
+char const * const s_valPowerShellScriptIsFile                                  = "powerShellScriptIsFile";
 char const * const s_valPriority                                                = "priority";
 char const * const s_valProbeRangePercentage                                    = "probeRangePercentage";
 char const * const s_valRecognizedTrackLanguagesInFileNames                     = "recognizedTrackLanguagesInFileNames";

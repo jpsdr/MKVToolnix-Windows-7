@@ -37,12 +37,13 @@ protected Q_SLOTS:
   void selectVariableToAdd();
   void changeExecutable();
   void commandLineEdited(QString const &commandLine);
-  void nameEdited();
   void executeNow();
   void enableControls();
+  void enableControlsAndEmitTitleChanged();
 
   void changeAudioFile();
-  void audioFileEdited();
+
+  void changePowerShellScriptFile();
 
 protected:
   void changeArguments(std::function<void(QStringList &)> const &worker);

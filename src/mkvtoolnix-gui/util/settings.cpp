@@ -334,6 +334,7 @@ Settings::RunProgramConfig::name()
     return m_name;
 
   return m_type == RunProgramType::ExecuteProgram          ? nameForExternalProgram()
+       : m_type == RunProgramType::ExecutePowerShellScript ? nameForPowerShellScriptFileOrCode()
        : m_type == RunProgramType::PlayAudioFile           ? nameForPlayAudioFile()
        : m_type == RunProgramType::ShowDesktopNotification ? QY("Show a desktop notification")
        : m_type == RunProgramType::ShutDownComputer        ? QY("Shut down the computer")
@@ -366,6 +367,18 @@ Settings::RunProgramConfig::nameForPlayAudioFile()
   audioFile.replace(QRegularExpression{u".*[/\\\\]"_s}, u""_s);
 
   return QY("Play audio file '%1'").arg(audioFile);
+}
+
+QString
+Settings::RunProgramConfig::nameForPowerShellScriptFileOrCode()
+  const {
+  if (!m_powerShellScriptIsFile || m_powerShellScriptFile.isEmpty())
+    return QY("Execute a PowerShell script");
+
+  auto script = m_powerShellScriptFile;
+  script.replace(QRegularExpression{u".*[/\\\\]"_s}, u""_s);
+
+  return QY("Execute PowerShell script '%1'").arg(script);
 }
 
 Settings Settings::s_settings;
@@ -819,14 +832,17 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     auto cfg = std::make_shared<RunProgramConfig>();
 
     reg.beginGroup(group);
-    cfg->m_active      = reg.value(s_valActive, true).toBool();
-    cfg->m_name        = reg.value(s_valName).toString();
-    auto type          = reg.value(s_valType, static_cast<int>(RunProgramType::ExecuteProgram)).toInt();
-    cfg->m_type        = (type > static_cast<int>(RunProgramType::Min)) && (type < static_cast<int>(RunProgramType::Max)) ? static_cast<RunProgramType>(type) : RunProgramType::Default;
-    cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value(s_valForEvents).toInt());
-    cfg->m_commandLine = reg.value(s_valCommandLine).toStringList();
-    cfg->m_audioFile   = reg.value(s_valAudioFile).toString();
-    cfg->m_volume      = std::min(reg.value(s_valVolume, 50).toUInt(), 100u);
+    cfg->m_active                 = reg.value(s_valActive, true).toBool();
+    cfg->m_name                   = reg.value(s_valName).toString();
+    auto type                     = reg.value(s_valType, static_cast<int>(RunProgramType::ExecuteProgram)).toInt();
+    cfg->m_type                   = (type > static_cast<int>(RunProgramType::Min)) && (type < static_cast<int>(RunProgramType::Max)) ? static_cast<RunProgramType>(type) : RunProgramType::Default;
+    cfg->m_forEvents              = static_cast<RunProgramForEvents>(reg.value(s_valForEvents).toInt());
+    cfg->m_commandLine            = reg.value(s_valCommandLine).toStringList();
+    cfg->m_audioFile              = reg.value(s_valAudioFile).toString();
+    cfg->m_volume                 = std::min(reg.value(s_valVolume, 50).toUInt(), 100u);
+    cfg->m_powerShellScriptIsFile = reg.value(s_valPowerShellScriptIsFile).toBool();
+    cfg->m_powerShellScriptFile   = reg.value(s_valPowerShellScriptFile).toString();
+    cfg->m_powerShellScriptCode   = reg.value(s_valPowerShellScriptCode).toString();
     reg.endGroup();
 
     if (!cfg->m_active || cfg->isValid())
@@ -928,6 +944,9 @@ Settings::addDefaultRunProgramConfigurations(QSettings &reg) {
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::ShutDownComputer);
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::DeleteSourceFiles, [](RunProgramConfig &cfg) { cfg.m_active = false; });
   addDefaultRunProgramConfigurationForType(reg, RunProgramType::QuitMKVToolNix);
+#if defined(SYS_WINDOWS)
+  addDefaultRunProgramConfigurationForType(reg, RunProgramType::ExecutePowerShellScript);
+#endif // SYS_WINDOWS
 
   auto changed = fixDefaultAudioFileNameBug();
 
@@ -1215,13 +1234,16 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
     reg.beginGroup(Q(fmt::format("{0:04}", ++idx)));
-    reg.setValue(s_valActive,      cfg->m_active);
-    reg.setValue(s_valName,        cfg->m_name);
-    reg.setValue(s_valType,        static_cast<int>(cfg->m_type));
-    reg.setValue(s_valForEvents,   static_cast<int>(cfg->m_forEvents));
-    reg.setValue(s_valCommandLine, cfg->m_commandLine);
-    reg.setValue(s_valAudioFile,   cfg->m_audioFile);
-    reg.setValue(s_valVolume,      cfg->m_volume);
+    reg.setValue(s_valActive,                 cfg->m_active);
+    reg.setValue(s_valName,                   cfg->m_name);
+    reg.setValue(s_valType,                   static_cast<int>(cfg->m_type));
+    reg.setValue(s_valForEvents,              static_cast<int>(cfg->m_forEvents));
+    reg.setValue(s_valCommandLine,            cfg->m_commandLine);
+    reg.setValue(s_valAudioFile,              cfg->m_audioFile);
+    reg.setValue(s_valVolume,                 cfg->m_volume);
+    reg.setValue(s_valPowerShellScriptIsFile, cfg->m_powerShellScriptIsFile);
+    reg.setValue(s_valPowerShellScriptFile,   cfg->m_powerShellScriptFile);
+    reg.setValue(s_valPowerShellScriptCode,   cfg->m_powerShellScriptCode);
     reg.endGroup();
   }
 

@@ -1,3 +1,15 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: executing actions: added a new type on Windows: executing a
+  PowerShell script. Either an existing script file can be selected or custom
+  PowerShell script code entered in a small editor. The executed script has
+  access to all `MTX_…` variables through the environment,
+  e.g. `$env:MTX_DESTINATION_FILE_BASE_NAME`. Workaround for the problems
+  talked about in #6254.
+
+
 # Version 99.0 "Buka" 2026-05-24
 
 ## New features and enhancements
