@@ -4,17 +4,22 @@
 describe "mkvmerge / font MIME types"
 
 def do_test title, options, expected
-  file_name = tmp
+  file_name = tmp + ".mkv"
 
-  test_merge "data/subtitles/srt/ven.srt", :args => "#{options} --attach-file data/fonts/AndaleMo.TTF --attach-file data/fonts/latinmodern-math.otf", :keep_tmp => true
+  test_merge "data/subtitles/srt/ven.srt", :args => "#{options} --attach-file data/fonts/AndaleMo.TTF --attach-file data/fonts/latinmodern-math.otf", :keep_tmp => true, :output => file_name
 
   test "#{title} font MIME types" do
-    attachments = identify_json(file_name)["attachments"]
-    all_ok      = true
-    result      = [ ]
+    # |  + MIME type: application/vnd.ms-opentype
+
+    all_ok            = true
+    result            = [ ]
+    actual_mime_types = info(file_name, :output => :return).
+      first.
+      select { |line| %r{MIME type:}i.match(line) }.
+      map    { |line| line.chomp.gsub(%r{.*: *}, '') }
 
     expected.each_with_index do |expected_mime_type, idx|
-      actual_mime_type  = attachments[idx]["content_type"]
+      actual_mime_type  = actual_mime_types[idx]
       result           += [ actual_mime_type, actual_mime_type == expected_mime_type ? "OK" : "bad" ]
       all_ok            = false if actual_mime_type != expected_mime_type
     end

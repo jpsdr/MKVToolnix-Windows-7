@@ -1,4 +1,4 @@
-# Version ?
+# Version 99.0 "Buka" 2026-05-24
 
 ## New features and enhancements
 
@@ -26,21 +26,26 @@
 
 ## Bug fixes
 
+* mkvmerge: if using legacy font MIME types is off mkvmerge will now remap
+  legacy font MIME types present in source files into the current ones. Patch
+  by corticalcode via #6249.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: on
+  Windows & macOS the MIME type detection will now use the FreeDesktop.org
+  MIME database instead of falling back to file extension-based guesses. This
+  matches how it works on other operating systems. This fixes e.g. OpenType
+  fonts being detected as the legacy type `application/vnd.ms-opentype`
+  instead of the current IETF RFC, `font/otf`, no matter what the "use legacy
+  font MIME types" settings in the preferences was set to. Fixes #6240 for
+  Windows; fixes #6248 for macOS. Implemented by corticalcode for macOS in
+  #6250.
+* MKVToolNix GUI: update checker: fixed a potential attempt to read from an
+  invalid memory address if an error occurred when parsing the XML file
+  retrieved from the official MKVToolNix server.
 * macOS: GUI: the default audio file for program runners of type "play audio
   file" has been changed to an AIFF file as Qt's Multimedia backend routes
   through Core Audio which doesn't support WebM/VP8/Vorbis/Opus. Existing
   configurations will be updated if they point to the prior default WebM audio
   file. Fixes #6209.
-* mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: on
-  Windows the MIME type detection will now use the FreeDesktop.org MIME
-  database instead of falling back to file extension-based guesses. This
-  matches how it works on other operating systems. This fixes e.g. OpenType
-  fonts being detected as the legacy type `application/vnd.ms-opentype`
-  instead of the current IETF RFC, `font/otf`, no matter what the "use legacy
-  font MIME types" settings in the preferences was set to. Fixes #6240.
-* MKVToolNix GUI: update checker: fixed a potential attempt to read from an
-  invalid memory address if an error occurred when parsing the XML file
-  retrieved from the official MKVToolNix server.
 
 ## Build system changes
 
