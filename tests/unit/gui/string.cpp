@@ -51,6 +51,14 @@ TEST(GuiStringEscaping, EscapingShellCmdExeArgumentString) {
   EXPECT_EQ("^\"`hello`^\""s,               to_utf8(mtx::gui::Util::escape(u"`hello`"_s,         mtx::gui::Util::EscapeShellCmdExeArgument)));
 }
 
+TEST(GuiStringEscaping, EscapingJsonString) {
+  EXPECT_EQ("\"hello\""s,               to_utf8(mtx::gui::Util::escape(u"hello"_s,           mtx::gui::Util::EscapeJSON)));
+  EXPECT_EQ("\"hello_world\""s,         to_utf8(mtx::gui::Util::escape(u"hello_world"_s,     mtx::gui::Util::EscapeJSON)));
+  EXPECT_EQ("\"hello world\""s,         to_utf8(mtx::gui::Util::escape(u"hello world"_s,     mtx::gui::Util::EscapeJSON)));
+  EXPECT_EQ("\"\\\"hello world\\\"\""s, to_utf8(mtx::gui::Util::escape(u"\"hello world\""_s, mtx::gui::Util::EscapeJSON)));
+  EXPECT_EQ("\"'hello world'\""s,       to_utf8(mtx::gui::Util::escape(u"'hello world'"_s,   mtx::gui::Util::EscapeJSON)));
+}
+
 TEST(GuiStringEscaping, EscapingJsonStringList) {
   EXPECT_EQ("[\n  \"hello\"\n]"s,               to_utf8(mtx::gui::Util::escape(QStringList{u"hello"_s},           mtx::gui::Util::EscapeJSON).join(u"!"_s)));
   EXPECT_EQ("[\n  \"hello_world\"\n]"s,         to_utf8(mtx::gui::Util::escape(QStringList{u"hello_world"_s},     mtx::gui::Util::EscapeJSON).join(u"!"_s)));
