@@ -9,7 +9,8 @@ namespace :tests do
 
   desc "Build and run the unit tests"
   task :run_unit => 'tests:unit' do
-    $gtest_apps.each { |app| run "LC_ALL=C ./tests/unit/#{app}/#{app}" }
+    runtime, args = $building_for[:windows] ? [ "wine", "--gtest_color=no | tr -d '\n'" ] : [ "", "" ]
+    $gtest_apps.each { |app| run "LC_ALL=C #{runtime} ./tests/unit/#{app}/#{app}#{c(:EXEEXT)} #{args}" }
   end
 
   if !c(:VALGRIND).to_s.empty?
