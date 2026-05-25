@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$gtest_apps     = %w{common merge propedit}
+$gtest_apps     = %w{common gui merge propedit}
 $gtest_internal = c(:GTEST_TYPE) == "internal"
 
 namespace :tests do
@@ -29,10 +29,17 @@ $build_system_modules[:gtest] = {
 
   :define_tasks => lambda do
     gtest_libs = {
-      'common'   => [],
       'propedit' => [ :mtxpropedit ],
       'merge'    => [ :mtxmerge ],
     }
+
+    gtest_libs.default = []
+
+    gtest_gui_sources = {
+      'gui' => [ "src/mkvtoolnix-gui/util/json.cpp", "src/mkvtoolnix-gui/util/string.cpp", ],
+    }
+
+    gtest_gui_sources.default = []
 
     #
     # Google Test framework
@@ -55,6 +62,7 @@ $build_system_modules[:gtest] = {
         description("Build the unit tests executable for '#{app}'").
         aliases("unit_tests_#{app}").
         sources([ "tests/unit/#{app}" ], :type => :dir).
+        sources(gtest_gui_sources[app]).
         libraries(gtest_libs[app], :mtxunittest, $common_libs, :gtest, :pthread).
         create
     end
