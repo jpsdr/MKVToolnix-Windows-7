@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$gtest_apps     = %w{common merge propedit}
+$gtest_apps     = %w{common gui merge propedit}
 $gtest_internal = c(:GTEST_TYPE) == "internal"
 
 namespace :tests do
@@ -9,7 +9,8 @@ namespace :tests do
 
   desc "Build and run the unit tests"
   task :run_unit => 'tests:unit' do
-    $gtest_apps.each { |app| run "LC_ALL=C ./tests/unit/#{app}/#{app}" }
+    runtime, args = $building_for[:windows] ? [ "wine", "--gtest_color=no | tr -d '\n'" ] : [ "", "" ]
+    $gtest_apps.each { |app| run "LC_ALL=C #{runtime} ./tests/unit/#{app}/#{app}#{c(:EXEEXT)} #{args}" }
   end
 
   if !c(:VALGRIND).to_s.empty?
@@ -29,10 +30,23 @@ $build_system_modules[:gtest] = {
 
   :define_tasks => lambda do
     gtest_libs = {
-      'common'   => [],
       'propedit' => [ :mtxpropedit ],
       'merge'    => [ :mtxmerge ],
     }
+
+    gtest_libs.default = []
+
+    gtest_gui_sources = {
+      'gui' => [ "src/mkvtoolnix-gui/util/json.cpp", "src/mkvtoolnix-gui/util/string.cpp", ],
+    }
+
+    gtest_gui_sources.default = []
+
+    conditions = {
+      'gui' => $build_mkvtoolnix_gui,
+    }
+
+    conditions.default = true
 
     #
     # Google Test framework
@@ -50,11 +64,14 @@ $build_system_modules[:gtest] = {
       create
 
     $gtest_apps.each do |app|
+      next if !conditions[app]
+
       Application.
         new("tests/unit/#{app}/#{app}").
         description("Build the unit tests executable for '#{app}'").
         aliases("unit_tests_#{app}").
         sources([ "tests/unit/#{app}" ], :type => :dir).
+        sources(gtest_gui_sources[app]).
         libraries(gtest_libs[app], :mtxunittest, $common_libs, :gtest, :pthread).
         create
     end

@@ -7,6 +7,7 @@
 #include <QMenu>
 
 #include "common/qt.h"
+#include "common/list_utils.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
@@ -35,6 +36,7 @@ class PrefsRunProgramWidgetPrivate {
   }
 };
 
+
 PrefsRunProgramWidget::PrefsRunProgramWidget(QWidget *parent,
                                              Util::Settings::RunProgramConfig const &cfg)
   : QWidget{parent}
@@ -60,8 +62,21 @@ PrefsRunProgramWidget::enableControls() {
     if (control == p->ui->pbExecuteNow)
       p->ui->pbExecuteNow->setEnabled(active && isValid() && (type != Util::Settings::RunProgramType::DeleteSourceFiles));
 
+    else if (mtx::included_in(control, p->ui->lePowerShellScriptFile, p->ui->pbBrowsePowerShellScriptFile))
+      control->setEnabled(p->ui->rbPowerShellScriptIsFile->isChecked());
+
+    else if (control == p->ui->ptePowerShellScriptCode)
+      control->setEnabled(!p->ui->rbPowerShellScriptIsFile->isChecked());
+
     else if (control != p->ui->cbConfigurationActive)
       control->setEnabled(active);
+}
+
+void
+PrefsRunProgramWidget::enableControlsAndEmitTitleChanged() {
+  enableControls();
+
+  Q_EMIT titleChanged();
 }
 
 void
@@ -85,6 +100,10 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   p->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
   p->ui->leAudioFile->setText(QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(cfg.m_audioFile)));
   p->ui->sbVolume->setValue(cfg.m_volume);
+  p->ui->lePowerShellScriptFile->setText(QDir::toNativeSeparators(cfg.m_powerShellScriptFile));
+  p->ui->ptePowerShellScriptCode->setPlainText(cfg.m_powerShellScriptCode);
+  p->ui->rbPowerShellScriptIsFile->setChecked( cfg.m_powerShellScriptIsFile);
+  p->ui->rbPowerShellScriptIsCode->setChecked(!cfg.m_powerShellScriptIsFile);
 
   for (auto const &checkBox : p->flagsByCheckbox.keys())
     if (cfg.m_forEvents & p->flagsByCheckbox[checkBox])
@@ -197,6 +216,7 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
   };
 
   addItemIfSupported(QY("Execute a program"),                        Util::Settings::RunProgramType::ExecuteProgram);
+  addItemIfSupported(QY("Execute a PowerShell script"),              Util::Settings::RunProgramType::ExecutePowerShellScript);
   addItemIfSupported(QY("Play an audio file"),                       Util::Settings::RunProgramType::PlayAudioFile);
   addItemIfSupported(QY("Show a desktop notification"),              Util::Settings::RunProgramType::ShowDesktopNotification);
   addItemIfSupported(QY("Shut down the computer"),                   Util::Settings::RunProgramType::ShutDownComputer);
@@ -206,6 +226,7 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
   addItemIfSupported(QY("Quit MKVToolNix"),                          Util::Settings::RunProgramType::QuitMKVToolNix);
 
   p->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]          = p->ui->executeProgramTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::ExecutePowerShellScript] = p->ui->executePowerShellScriptTypePage;
   p->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]           = p->ui->playAudioFileTypePage;
   p->pagesByType[Util::Settings::RunProgramType::ShowDesktopNotification] = p->ui->emptyTypePage;
   p->pagesByType[Util::Settings::RunProgramType::ShutDownComputer]        = p->ui->emptyTypePage;
@@ -293,15 +314,20 @@ void
 PrefsRunProgramWidget::setupConnections() {
   auto p = p_func();
 
-  connect(p->ui->cbConfigurationActive, &QCheckBox::toggled,                                                    this, &PrefsRunProgramWidget::enableControls);
-  connect(p->ui->leName,                &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::nameEdited);
-  connect(p->ui->cbType,                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &PrefsRunProgramWidget::typeChanged);
-  connect(p->ui->leCommandLine,         &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::commandLineEdited);
-  connect(p->ui->pbBrowseExecutable,    &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeExecutable);
-  connect(p->ui->pbAddVariable,         &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::selectVariableToAdd);
-  connect(p->ui->pbExecuteNow,          &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::executeNow);
-  connect(p->ui->leAudioFile,           &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::audioFileEdited);
-  connect(p->ui->pbBrowseAudioFile,     &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeAudioFile);
+  connect(p->ui->cbConfigurationActive,        &QCheckBox::toggled,                                                    this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->leName,                       &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->cbType,                       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &PrefsRunProgramWidget::typeChanged);
+  connect(p->ui->leCommandLine,                &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::commandLineEdited);
+  connect(p->ui->pbBrowseExecutable,           &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeExecutable);
+  connect(p->ui->pbAddVariable,                &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::selectVariableToAdd);
+  connect(p->ui->pbExecuteNow,                 &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::executeNow);
+  connect(p->ui->leAudioFile,                  &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->pbBrowseAudioFile,            &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeAudioFile);
+  connect(p->ui->lePowerShellScriptFile,       &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->pbBrowsePowerShellScriptFile, &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changePowerShellScriptFile);
+  connect(p->ui->ptePowerShellScriptCode,      &QPlainTextEdit::textChanged,                                           this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->rbPowerShellScriptIsFile,     &QRadioButton::toggled,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->rbPowerShellScriptIsCode,     &QRadioButton::toggled,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
 }
 
 void
@@ -369,9 +395,7 @@ PrefsRunProgramWidget::changeExecutable() {
 
   p->executable = newExecutable;
 
-  enableControls();
-
-  Q_EMIT titleChanged();
+  enableControlsAndEmitTitleChanged();
 }
 
 void
@@ -385,14 +409,7 @@ PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
 
   p->executable = newExecutable;
 
-  enableControls();
-
-  Q_EMIT titleChanged();
-}
-
-void
-PrefsRunProgramWidget::nameEdited() {
-  Q_EMIT titleChanged();
+  enableControlsAndEmitTitleChanged();
 }
 
 void
@@ -409,15 +426,18 @@ PrefsRunProgramWidget::changeArguments(std::function<void(QStringList &)> const 
 Util::Settings::RunProgramConfigPtr
 PrefsRunProgramWidget::config()
   const {
-  auto p             = p_func();
-  auto cfg           = std::make_shared<Util::Settings::RunProgramConfig>();
-  auto cmdLine       = p->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, u""_s);
-  cfg->m_name        = p->ui->leName->text();
-  cfg->m_type        = static_cast<Util::Settings::RunProgramType>(p->ui->cbType->currentData().value<int>());
-  cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
-  cfg->m_active      = p->ui->cbConfigurationActive->isChecked();
-  cfg->m_audioFile   = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(p->ui->leAudioFile->text()));
-  cfg->m_volume      = p->ui->sbVolume->value();
+  auto p                        = p_func();
+  auto cfg                      = std::make_shared<Util::Settings::RunProgramConfig>();
+  auto cmdLine                  = p->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, u""_s);
+  cfg->m_name                   = p->ui->leName->text();
+  cfg->m_type                   = static_cast<Util::Settings::RunProgramType>(p->ui->cbType->currentData().value<int>());
+  cfg->m_commandLine            = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
+  cfg->m_active                 = p->ui->cbConfigurationActive->isChecked();
+  cfg->m_audioFile              = QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(p->ui->leAudioFile->text()));
+  cfg->m_volume                 = p->ui->sbVolume->value();
+  cfg->m_powerShellScriptIsFile = p->ui->rbPowerShellScriptIsFile->isChecked();
+  cfg->m_powerShellScriptFile   = QDir::toNativeSeparators(p->ui->lePowerShellScriptFile->text());
+  cfg->m_powerShellScriptCode   = p->ui->ptePowerShellScriptCode->toPlainText();
 
   for (auto const &checkBox : p->flagsByCheckbox.keys())
     if (checkBox->isChecked())
@@ -446,16 +466,28 @@ PrefsRunProgramWidget::changeAudioFile() {
 
   p->ui->leAudioFile->setText(newAudioFile);
 
-  enableControls();
-
-  Q_EMIT titleChanged();
+  enableControlsAndEmitTitleChanged();
 }
 
 void
-PrefsRunProgramWidget::audioFileEdited() {
-  enableControls();
+PrefsRunProgramWidget::changePowerShellScriptFile() {
+  auto p             = p_func();
+  auto filters       = QStringList{} << (QY("PowerShell scripts") + u" (*.ps1)"_s) << (QY("All files") + u" (*)"_s);
 
-  Q_EMIT titleChanged();
+  auto scriptFile    = p->ui->lePowerShellScriptFile->text();
+  auto startDir      = scriptFile.isEmpty() ? Util::Settings::get().m_lastOpenDir.path() : scriptFile;
+  auto newScriptFile = Util::getOpenFileName(this, QY("Select PowerShell script file"), startDir, filters.join(u";;"_s));
+
+  if (newScriptFile.isEmpty())
+    return;
+
+  Util::Settings::change([&newScriptFile](Util::Settings &settings) {
+    settings.m_lastOpenDir.setPath(QFileInfo{newScriptFile}.path());
+  });
+
+  p->ui->lePowerShellScriptFile->setText(newScriptFile);
+
+  enableControlsAndEmitTitleChanged();
 }
 
 void
@@ -465,9 +497,7 @@ PrefsRunProgramWidget::typeChanged(int index) {
 
   showPageForType(type);
 
-  Q_EMIT titleChanged();
-
-  enableControls();
+  enableControlsAndEmitTitleChanged();
 }
 
 void
