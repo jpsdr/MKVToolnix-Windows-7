@@ -122,6 +122,9 @@ WindowsProgramRunner::executePowerShellScript(Util::Settings::RunProgramConfig &
       throw Util::ProcessX{ to_utf8(QY("Saving the file '%1' failed. Error message from the system: %2").arg(fileName).arg(file.errorString())) };
     }
 
+    uint8_t utf8_bom[3] = {0xef, 0xbb, 0xbf};
+
+    file.write(reinterpret_cast<char const *>(utf8_bom), 3);
     file.write(to_utf8(config.m_powerShellScriptCode).c_str());
     file.flush();
     file.close();
