@@ -3,6 +3,7 @@
 #if defined(SYS_WINDOWS)
 
 #include <QDebug>
+#include <QTemporaryFile>
 
 #include <windows.h>
 #include <powrprof.h>
@@ -11,6 +12,8 @@
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/program_runner/windows_program_runner.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/process_x.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx::gui::Jobs {
@@ -28,7 +31,7 @@ WindowsProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType t
   if (ProgramRunner::isRunProgramTypeSupported(type))
     return true;
 
-  return mtx::included_in(type, Util::Settings::RunProgramType::ShutDownComputer, Util::Settings::RunProgramType::HibernateComputer, Util::Settings::RunProgramType::SleepComputer);
+  return mtx::included_in(type, Util::Settings::RunProgramType::ShutDownComputer, Util::Settings::RunProgramType::HibernateComputer, Util::Settings::RunProgramType::SleepComputer, Util::Settings::RunProgramType::ExecutePowerShellScript);
 }
 
 void
@@ -95,6 +98,44 @@ QString
 WindowsProgramRunner::defaultAudioFileName()
   const {
   return Q("<MTX_INSTALLATION_DIRECTORY>\\data\\sounds\\finished-1.webm");
+}
+
+void
+WindowsProgramRunner::executePowerShellScript(Util::Settings::RunProgramConfig &config,
+                                              VariableMap const &variables) {
+  qDebug() << "executePowerShellScript running for" << config.name();
+
+  QString scriptFile;
+
+  if (config.m_powerShellScriptIsFile && !config.m_powerShellScriptFile.isEmpty())
+    scriptFile = config.m_powerShellScriptFile;
+
+  else if (!config.m_powerShellScriptIsFile && !config.m_powerShellScriptCode.isEmpty()) {
+    auto fileNameTemplate = QDir::temp().filePath(u"MKVToolNix-executePS1-XXXXXX.ps1"_s);
+
+    QTemporaryFile file{fileNameTemplate};
+
+    file.setAutoRemove(false);
+
+    if (!file.open()) {
+      auto fileName = file.fileName().isEmpty() ? fileNameTemplate : file.fileName();
+      throw Util::ProcessX{ to_utf8(QY("Saving the file '%1' failed. Error message from the system: %2").arg(fileName).arg(file.errorString())) };
+    }
+
+    uint8_t utf8_bom[3] = {0xef, 0xbb, 0xbf};
+
+    file.write(reinterpret_cast<char const *>(utf8_bom), 3);
+    file.write(to_utf8(config.m_powerShellScriptCode).c_str());
+    file.flush();
+    file.close();
+
+    scriptFile = file.fileName();
+
+    MainWindow::get()->addTemporaryFile(scriptFile);
+  }
+
+  if (!scriptFile.isEmpty())
+    replaceVariablesAndExecuteProgram({ u"powershell.exe"_s, u"-ExecutionPolicy"_s, u"Bypass"_s, u"-File"_s, scriptFile }, variables);
 }
 
 }

@@ -72,6 +72,8 @@ public:
 
   virtual void registerSubWindowWidget(ToolBase &toolBase, QTabWidget &tabWidget);
 
+  virtual void addTemporaryFile(QString const &fileName);
+
 Q_SIGNALS:
   void windowShown();
   void preferencesChanged();
@@ -153,6 +155,8 @@ protected:
   virtual void runCacheCleanupOncePerVersion() const;
 
   virtual std::pair<ToolBase *, QTabWidget *> currentSubWindowWidget();
+
+  virtual void removeTemporaryFiles();
 };
 
 }

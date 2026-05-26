@@ -70,6 +70,7 @@ class MainWindowPrivate {
 
   QHash<QObject *, QString> helpURLs;
   QHash<ToolBase *, QTabWidget *> subWindowWidgets;
+  QStringList temporaryFiles;
 
   bool forceClosing{};
 
@@ -514,6 +515,7 @@ MainWindow::closeEvent(QCloseEvent *event) {
 
   if (p.forceClosing) {
     Util::saveWidgetGeometry(this);
+    removeTemporaryFiles();
     return;
   }
 
@@ -528,6 +530,7 @@ MainWindow::closeEvent(QCloseEvent *event) {
   }
 
   Util::saveWidgetGeometry(this);
+  removeTemporaryFiles();
 
   event->accept();
 }
@@ -1024,6 +1027,17 @@ MainWindow::setupLanguageDialog() {
 Util::LanguageDialog &
 MainWindow::languageDialog() {
   return MainWindow::get()->setupLanguageDialog();
+}
+
+void
+MainWindow::addTemporaryFile(QString const &fileName) {
+  p_func()->temporaryFiles << fileName;
+}
+
+void
+MainWindow::removeTemporaryFiles() {
+  for (auto const &temporaryFile : p_func()->temporaryFiles)
+    QFile{temporaryFile}.remove();
 }
 
 }
