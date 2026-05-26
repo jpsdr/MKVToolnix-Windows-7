@@ -40,11 +40,13 @@ $build_system_modules[:gtest] = {
       'gui' => [ "src/mkvtoolnix-gui/util/json.cpp", "src/mkvtoolnix-gui/util/string.cpp", ],
     }
 
+    gtest_gui_sources.default = []
+
     conditions = {
       'gui' => $build_mkvtoolnix_gui,
     }
 
-    gtest_gui_sources.default = []
+    conditions.default = true
 
     #
     # Google Test framework
