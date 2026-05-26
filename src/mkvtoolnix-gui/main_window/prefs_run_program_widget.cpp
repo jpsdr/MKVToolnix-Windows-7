@@ -472,11 +472,11 @@ PrefsRunProgramWidget::changeAudioFile() {
 void
 PrefsRunProgramWidget::changePowerShellScriptFile() {
   auto p             = p_func();
-  auto filters       = QStringList{} << (QY("PowerShell scripts") + u" (*.ps1)"_s) << (QY("All files") + u" (*)"_s);
+  auto filters       = QStringList{} << (QY("PowerShell scripts") + Q(" (*.ps1)")) << (QY("All files") + Q(" (*)"));
 
   auto scriptFile    = p->ui->lePowerShellScriptFile->text();
   auto startDir      = scriptFile.isEmpty() ? Util::Settings::get().m_lastOpenDir.path() : scriptFile;
-  auto newScriptFile = Util::getOpenFileName(this, QY("Select PowerShell script file"), startDir, filters.join(u";;"_s));
+  auto newScriptFile = Util::getOpenFileName(this, QY("Select PowerShell script file"), startDir, filters.join(Q(";;")));
 
   if (newScriptFile.isEmpty())
     return;
