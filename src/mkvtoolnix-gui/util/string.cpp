@@ -179,21 +179,16 @@ unescapeKeyboardShortcuts(QString const &text) {
 }
 
 QString
-escape(QString const &source,
-       EscapeMode mode) {
-  return EscapeShellUnix           == mode ? escapeShellUnix(source)
-       : EscapeShellCmdExeArgument == mode ? escapeShellWindows(source)
-       : EscapeShellCmdExeProgram  == mode ? escapeShellWindowsProgram(source)
-       : EscapeKeyboardShortcuts   == mode ? escapeKeyboardShortcuts(source)
-       :                                     source;
-}
-
-QString
 unescape(QString const &source,
          EscapeMode mode) {
   Q_ASSERT(mtx::included_in(mode, EscapeKeyboardShortcuts));
 
   return unescapeKeyboardShortcuts(source);
+}
+
+static QString
+escapeJson(QString const &source) {
+  return Q(mtx::json::dump(nlohmann::json(to_utf8(source.isNull() ? QString{} : source))));
 }
 
 static QStringList
@@ -208,6 +203,17 @@ escapeJson(QStringList source) {
       string = u""_s;
 
   return { Q(mtx::json::dump(variantToNlohmannJson(source), 2)) };
+}
+
+QString
+escape(QString const &source,
+       EscapeMode mode) {
+  return EscapeShellUnix           == mode ? escapeShellUnix(source)
+       : EscapeShellCmdExeArgument == mode ? escapeShellWindows(source)
+       : EscapeShellCmdExeProgram  == mode ? escapeShellWindowsProgram(source)
+       : EscapeKeyboardShortcuts   == mode ? escapeKeyboardShortcuts(source)
+       : EscapeJSON                == mode ? escapeJson(source)
+       :                                     source;
 }
 
 QStringList

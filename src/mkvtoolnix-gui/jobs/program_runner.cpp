@@ -103,6 +103,9 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
     if (runConfig->m_type == Util::Settings::RunProgramType::ExecuteProgram)
       executeProgram(*runConfig, variables);
 
+    else if (runConfig->m_type == Util::Settings::RunProgramType::ExecutePowerShellScript)
+      executePowerShellScript(*runConfig, variables);
+
     else if (runConfig->m_type == Util::Settings::RunProgramType::DeleteSourceFiles)
       deleteSourceFiles(variables);
 
@@ -196,7 +199,13 @@ ProgramRunner::isJobType(VariableMap const &variables,
 void
 ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
                               VariableMap const &variables) {
-  auto commandLine = replaceVariables(config.m_commandLine, variables);
+  replaceVariablesAndExecuteProgram(config.m_commandLine, variables);
+}
+
+void
+ProgramRunner::replaceVariablesAndExecuteProgram(QStringList const &programAndArguments,
+                                                 VariableMap const &variables) {
+  auto commandLine = programAndArguments;
   auto exe         = commandLine.value(0);
 
   if (exe.isEmpty())
@@ -276,6 +285,12 @@ ProgramRunner::hibernateComputer(Util::Settings::RunProgramConfig &/* config */)
 
 void
 ProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &/* config */) {
+  // Not supported in an OS-agnostic way.
+}
+
+void
+ProgramRunner::executePowerShellScript(Util::Settings::RunProgramConfig &/* config */,
+                                       VariableMap const &/* variables */) {
   // Not supported in an OS-agnostic way.
 }
 

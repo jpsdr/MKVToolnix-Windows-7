@@ -46,6 +46,7 @@ public Q_SLOTS:
 protected:
   virtual void executeActions(ExecuteActionCondition condition, Job const *job = nullptr);
   virtual void executeProgram(Util::Settings::RunProgramConfig &config, VariableMap const &variables);
+  virtual void executePowerShellScript(Util::Settings::RunProgramConfig &config, VariableMap const &variables);
   virtual void deleteSourceFiles(VariableMap const &variables);
   virtual void playAudioFile(Util::Settings::RunProgramConfig &config);
   virtual void shutDownComputer(Util::Settings::RunProgramConfig &config);
@@ -60,6 +61,7 @@ protected:
   static void setupGeneralVariables(VariableMap &variables);
   static QStringList replaceVariables(QStringList const &commandLine, VariableMap const &variables);
   static bool isJobType(VariableMap const &variables, QString const &type);
+  static void replaceVariablesAndExecuteProgram(QStringList const &programAndArguments, VariableMap const &variables);
 };
 
 }}
