@@ -376,7 +376,7 @@ Settings::RunProgramConfig::nameForPowerShellScriptFileOrCode()
     return QY("Execute a PowerShell script");
 
   auto script = m_powerShellScriptFile;
-  script.replace(QRegularExpression{u".*[/\\\\]"_s}, u""_s);
+  script.replace(QRegularExpression{Q(".*[/\\\\]")}, Q(""));
 
   return QY("Execute PowerShell script '%1'").arg(script);
 }
