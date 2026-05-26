@@ -111,7 +111,7 @@ WindowsProgramRunner::executePowerShellScript(Util::Settings::RunProgramConfig &
     scriptFile = config.m_powerShellScriptFile;
 
   else if (!config.m_powerShellScriptIsFile && !config.m_powerShellScriptCode.isEmpty()) {
-    auto fileNameTemplate = QDir::temp().filePath(u"MKVToolNix-executePS1-XXXXXX.ps1"_s);
+    auto fileNameTemplate = QDir::temp().filePath(Q("MKVToolNix-executePS1-XXXXXX.ps1"));
 
     QTemporaryFile file{fileNameTemplate};
 
@@ -135,7 +135,7 @@ WindowsProgramRunner::executePowerShellScript(Util::Settings::RunProgramConfig &
   }
 
   if (!scriptFile.isEmpty())
-    replaceVariablesAndExecuteProgram({ u"powershell.exe"_s, u"-ExecutionPolicy"_s, u"Bypass"_s, u"-File"_s, scriptFile }, variables);
+    replaceVariablesAndExecuteProgram({ Q("powershell.exe"), Q("-ExecutionPolicy"), Q("Bypass"), Q("-File"), scriptFile }, variables);
 }
 
 }
