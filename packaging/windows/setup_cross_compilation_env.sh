@@ -55,7 +55,7 @@ function write_mxe_settings {
   cat > settings.mk <<EOF
 MXE_TARGETS = ${HOST}
 MXE_USE_CCACHE =
-MXE_PLUGIN_DIRS += plugins/gcc14
+MXE_PLUGIN_DIRS += plugins/gcc15
 JOBS = ${PARALLEL}
 
 MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost flac ogg pthreads vorbis cmark libdvdread gmp
