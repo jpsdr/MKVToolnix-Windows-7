@@ -137,6 +137,14 @@ def setup_globals
   $unwrapped_po            = %{ca es eu it nl uk pl sr_RS@latin tr}
   $po_multiple_sources     = %{sv}
 
+  $icon_type_sources       = {
+    "mkvextract"           => "mkvextract",
+    "mkvinfo"              => "mkvinfo",
+    "mkvpropedit"          => "mkvpropedit",
+    "mkvmerge"             => "mkvtoolnix",
+    "mkvtoolnix-gui"       => "mkvtoolnix",
+  }
+
   $benchmark_sources       = c?(:GOOGLE_BENCHMARK) ? FileList["src/benchmark/*.cpp"].to_a : []
   $benchmark_programs      = $benchmark_sources.map { |src| src.gsub(%r{\.cpp$}, '') + c(:EXEEXT) }
 
@@ -216,8 +224,6 @@ def setup_globals
   setup_compiler_specifics
 
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
-
-  $magick_convert = !c(:MAGICK).empty? ? c(:MAGICK) + " convert" : !c(:CONVERT).empty? ? c(:CONVERT) : nil
 end
 
 def setup_overrides
@@ -283,7 +289,7 @@ def define_default_task
   targets += $tools.map { |name| "src/tools/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   targets += $qt_resources
 
-  targets << "msix-assets" if $building_for[:windows] && $magick_convert
+  targets << "msix-assets" if $building_for[:windows]
   targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
 
   # Build the unit tests only if requested
@@ -314,6 +320,8 @@ def define_default_task
 
   targets += $benchmark_programs
 
+  targets << "icons:all"
+
   task :default_targets => targets
 
   if !c(:DEFAULT_TARGET).empty?
@@ -337,12 +345,75 @@ def define_default_task
   Rake.application.top_level_tasks.append(*targets.clone)
 end
 
+def define_icon_tasks
+  if c(:INKSCAPE).empty? || c(:MAGICK).empty?
+    namespace :icons do
+      task :all do
+        # intentional no-op
+      end
+    end
+
+    namespace :clean do
+      task :icons do
+        # intentional no-op
+      end
+    end
+
+    return
+  end
+
+  inkscape_output_filter = lambda do |code, lines|
+    # ** (inkscape:157151): WARNING **: 13:16:45.299: Failed to wrap object of type 'GtkRecentManager'. Hint: this error is commonly caused by failing to call a library init() function.
+    # ** (inkscape:155385): WARNING **: 13:16:13.566: Failed to wrap object of type 'PangoFT2FontMap'. Hint: this error is commonly caused by failing to call a library init() function.
+    lines = lines.reject { |l| %r{warning.*?Failed to wrap object of type '(GtkRecentManager|PangoFT2FontMap)'|^$}i.match(l) }
+    puts lines.join('') unless lines.empty?
+    code
+  end
+
+  ico_from_svg = lambda do |*args|
+    t = args.first
+
+    FileUtils.mkdir_p(t.name.gsub(%r{/[^/]+$}, ''))
+
+    # Magick calls Inkscape for converting SVGs if the latter is installedd.
+    #
+    # SELF_CALL environment variable is required due to a bug in Inkscape trying to detect if another instance is running.
+    # If multiple instances start simultaneously, this causes crashes. See https://gitlab.com/inkscape/inkscape/-/work_items/4716
+
+    runq "MAGICK", t.name, "#{c(:MAGICK)} -density 256x256 -background transparent #{t.prerequisites.join(' ')} -define icon:auto-resize -colors 256 #{t.name}",
+      :env => { "SELF_CALL" => "0" }, :filter_output => inkscape_output_filter
+  end
+
+  generated_icos = $icon_type_sources.keys.sort.map { |name| "share/icons/windows/#{name}.ico" }
+
+  generated_icos.each do |ico|
+    src = "share/icons/mkvtoolnix/" + $icon_type_sources[ico.gsub(%r{.*/|\.ico$}, '')] + ".svg"
+
+    file ico => src, &ico_from_svg
+  end
+
+  generated_icons = generated_icos
+
+  namespace :icons do
+    desc "Build bitmap icons from MKVToolNix' own scalable ones"
+    task :all => generated_icons
+  end
+
+  namespace :clean do
+    desc "Remove generated bitmap icons"
+    task :icons do
+      remove_files generated_icons
+    end
+  end
+end
+
 # main
 setup_globals
 setup_overrides
 import_dependencies
 generate_helper_files
 update_version_number_include
+define_icon_tasks
 
 # Default task
 define_default_task
@@ -449,8 +520,8 @@ rule '.o' => '.c' do |t|
   handle_deps t.name, last_exit_code
 end
 
-rule '.o' => '.rc' do |t|
-  runq "windres", t.source, "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources.join(" ")}"
+rule '.o' => [ '.rc', 'icons:all' ] do |t|
+  runq "windres", t.source, "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources[0]}"
 end
 
 rule '.xml' => '.xml.erb' do |t|
@@ -969,7 +1040,7 @@ namespace :install do
     $applications.each { |application| install_program "#{c(:bindir)}/#{application_name_mapper[application]}", application }
   end
 
-  task :shared => $qt_resources do
+  task :shared => [ $qt_resources, "icons:all" ].flatten do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$source_dir}/share/mime/*.xml" ]
     if c?(:BUILD_GUI)
@@ -978,14 +1049,11 @@ namespace :install do
       install_data :appdatadir, "#{$source_dir}/share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml"
     end
 
-    wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
-    wanted_dirs     = %w{16x16 24x24 32x32 48x48 64x64 96x96 128x128 256x256}.to_hash_by
-    dirs_to_install = FileList[ "#{$source_dir}/share/icons/*"   ].select { |dir|  wanted_dirs[ dir.gsub(/.*icons\//, '').gsub(/\/.*/, '') ] }.sort.uniq
+    dest_dir = "#{c(:icondir)}/scalable/apps"
+    install_dir dest_dir
 
-    dirs_to_install.each do |dir|
-      dest_dir = "#{c(:icondir)}/#{dir.gsub(/.*icons\//, '')}/apps"
-      install_dir dest_dir
-      install_data "#{dest_dir}/", FileList[ "#{dir}/*" ].to_a.select { |file| wanted_apps[ file.gsub(/.*\//, '') ] }
+    $icon_type_sources.keys.sort.each do |name|
+      install_data "#{dest_dir}/#{name}.svg", "share/icons/mkvtoolnix/#{$icon_type_sources[name]}.svg"
     end
 
     if c?(:BUILD_GUI)
@@ -1074,6 +1142,7 @@ task :clean do
   remove_files_by_patterns patterns
 
   remove_files_and_dirs $dependency_dir
+  remove_files_and_dirs 'packaging/windows/msix/assets'
 end
 
 namespace :clean do
