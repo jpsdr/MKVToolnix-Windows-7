@@ -520,7 +520,7 @@ rule '.o' => '.c' do |t|
   handle_deps t.name, last_exit_code
 end
 
-rule '.o' => [ '.rc', 'icons:all' ] do |t|
+rule '.o' => '.rc' do |t|
   runq "windres", t.source, "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources[0]}"
 end
 
@@ -540,7 +540,7 @@ end
 if $building_for[:windows]
   $programs.each do |program|
     path = FileTest.directory?("src/#{program}") ? program : program.gsub(/^mkv/, '')
-    icon = program == 'mkvinfo' ? 'share/icons/windows/mkvinfo.ico' : 'share/icons/windows/mkvtoolnix-gui.ico'
+    icon = program == 'mkvtoolnix' ? 'share/icons/windows/mkvtoolnix-gui.ico' : "share/icons/windows/mkv#{program.gsub(%r{^mkv}, '')}.ico"
     file "src/#{path}/resources.o" => [ "src/#{path}/manifest.xml", "src/#{path}/resources.rc", icon ]
   end
 
@@ -1095,7 +1095,7 @@ end
 
 # Cleaning tasks
 desc "Remove all compiled files"
-task :clean do
+task :clean => "clean:icons" do
   puts_action "clean"
 
   patterns = %w{
