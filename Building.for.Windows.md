@@ -21,6 +21,7 @@ You will need:
 
 - a MinGW cross compiler
 - roughly 4 GB of free space available
+- the programs ImageMagick & Inkscape
 
 Luckily there's the [M cross environment project](http://mxe.cc/)
 that provides an easy-to-use way of setting up the cross-compiler

@@ -198,7 +198,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_mandir}/man1/mkvtoolnix-gui.1*
 %{_datadir}/applications/org.bunkus.mkvtoolnix-gui.desktop
 %{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml
-%{_datadir}/icons/hicolor/*/apps/*.png
+%{_datadir}/icons/hicolor/scalable/apps/*.svg
 %{_datadir}/mime/packages/org.bunkus.mkvtoolnix-gui.xml
 %{_datadir}/mkvtoolnix
 

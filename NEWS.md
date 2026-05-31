@@ -8,6 +8,15 @@
   access to all `MTX_…` variables through the environment,
   e.g. `$env:MTX_DESTINATION_FILE_BASE_NAME`. Workaround for the problems
   talked about in #6254.
+* all: added new scalable (SVG) application icons for all applications,
+  replacing the existing pixmap (PNG, ICO) icons. Icons from Sarreq
+  Teryx. Implements #6253.
+
+## Build system changes
+
+* all: when building for Windows the programs ImageMagick (executable
+  `magick`) & Inkscape (executable `inkscape`) are required in order to build
+  ICOs from SVGs.
 
 
 # Version 99.0 "Buka" 2026-05-24
