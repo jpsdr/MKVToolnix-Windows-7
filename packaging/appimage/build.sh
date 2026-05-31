@@ -219,7 +219,7 @@ delete_blacklisted
 
 cd ..
 
-cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png .
+cp ./usr/share/icons/hicolor/scalable/apps/mkvtoolnix-gui.svg .
 cp ./usr/share/applications/org.bunkus.mkvtoolnix-gui.desktop mkvtoolnix-gui.desktop
 
 fix_desktop mkvtoolnix-gui.desktop
