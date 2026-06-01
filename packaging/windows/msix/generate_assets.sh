@@ -3,6 +3,8 @@
 set -e
 setopt nullglob
 
+typeset -a convert_command=(convert)
+
 # Magick calls Inkscape for converting SVGs if the latter is installedd.
 #
 # SELF_CALL environment variable is required due to a bug in Inkscape trying to detect if another instance is running.
@@ -13,9 +15,18 @@ function run_magick {
   # ** (inkscape:1672090): WARNING **: 10:00:15.759: Failed to wrap object of type 'PangoFT2FontMap'. Hint: this error is commonly caused by failing to call a library init() function.
   # ** (inkscape:1672090): WARNING **: 10:00:15.817: Failed to wrap object of type 'GtkRecentManager'. Hint: this error is commonly caused by failing to call a library init() function.
 
-  magick $@ |& grep -Eiv 'Hint: this error is commonly caused by failing to call a library init|^$' || true
+  ${convert_command} $@ |& grep -Eiv 'Hint: this error is commonly caused by failing to call a library init|^$' || true
   return ${pipestatus[1]}
 }
+
+base_dir=${0:a:h}/../../..
+build_config=${base_dir}/build-config
+
+if [[ -f ${build_config} ]]; then
+  magick=$(awk '-F=' '/^MAGICK *=/ { gsub("^ ", "", $2); print $2 }' ${build_config})
+  convert=$(awk '-F=' '/^CONVERT *=/ { gsub("^ ", "", $2); print $2 }' ${build_config})
+  convert_command=(${magick:-${convert:-convert}})
+fi
 
 rm -rf ${0:a:h}/assets
 mkdir -p ${0:a:h}/assets
