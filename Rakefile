@@ -224,6 +224,8 @@ def setup_globals
   setup_compiler_specifics
 
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
+
+  $magick = !c(:MAGICK).empty? ? c(:MAGICK) : !c(:CONVERT).empty? ? c(:CONVERT) : nil
 end
 
 def setup_overrides
@@ -346,7 +348,7 @@ def define_default_task
 end
 
 def define_icon_tasks
-  if c(:INKSCAPE).empty? || c(:MAGICK).empty?
+  if c(:INKSCAPE).empty? || !$magick.empty?
     namespace :icons do
       task :all do
         # intentional no-op
@@ -380,7 +382,7 @@ def define_icon_tasks
     # SELF_CALL environment variable is required due to a bug in Inkscape trying to detect if another instance is running.
     # If multiple instances start simultaneously, this causes crashes. See https://gitlab.com/inkscape/inkscape/-/work_items/4716
 
-    runq "MAGICK", t.name, "#{c(:MAGICK)} -density 256x256 -background transparent #{t.prerequisites.join(' ')} -define icon:auto-resize -colors 256 #{t.name}",
+    runq "MAGICK", t.name, "#{$magick} -density 256x256 -background transparent #{t.prerequisites.join(' ')} -define icon:auto-resize -colors 256 #{t.name}",
       :env => { "SELF_CALL" => "0" }, :filter_output => inkscape_output_filter
   end
 
