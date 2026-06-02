@@ -348,7 +348,7 @@ def define_default_task
 end
 
 def define_icon_tasks
-  if c(:INKSCAPE).empty? || !$magick.empty?
+  if c(:INKSCAPE).empty? || $magick.empty?
     namespace :icons do
       task :all do
         # intentional no-op
