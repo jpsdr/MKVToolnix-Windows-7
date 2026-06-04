@@ -12,6 +12,14 @@
   replacing the existing pixmap (PNG, ICO) icons. Icons from Sarreq
   Teryx. Implements #6253.
 
+## Bug fixes
+
+* command-line tools: Windows: switched to Boost's UTF-8 code-conversion facet
+  (`boost::locale::utf8_codecvt`) from `std::utf8_codecvt` included in
+  MingW. This seems to fix an issue with converting certain high code point
+  from `wchar_t` to `char` (from UTF-32/16 to UTF-8), preventing interesting
+  exceptions from being thrown. Fixes #6257.
+
 ## Build system changes
 
 * all: when building for Windows the programs ImageMagick (executable

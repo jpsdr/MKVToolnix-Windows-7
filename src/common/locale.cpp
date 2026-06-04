@@ -13,9 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include <boost/locale/utf8_codecvt.hpp>
 #include <cerrno>
 #include <clocale>
-#include <codecvt>
 #if HAVE_NL_LANGINFO
 # include <langinfo.h>
 #elif HAVE_LOCALE_CHARSET
@@ -334,7 +334,7 @@ initialize_std_and_boost_filesystem_locales() {
 
   for (auto const &locale_name : locales_to_try) {
     auto locale      = locale_name.empty() ? std::locale() : std::locale{locale_name};
-    auto utf8_locale = std::locale{ locale, new std::codecvt_utf8<wchar_t> };
+    auto utf8_locale = std::locale{ locale, new boost::locale::utf8_codecvt<wchar_t> };
 
     try {
       std::locale::global(utf8_locale);
