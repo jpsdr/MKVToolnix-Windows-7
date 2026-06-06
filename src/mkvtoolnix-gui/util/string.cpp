@@ -92,7 +92,7 @@ unescapeSplitShellUnix(QString const &source) {
       else
         appendChar(c);
 
-    } else if (c == u'\'')
+    } else if (c == u'\\')
       escapeNext = true;
 
     else if (doubleQuoted) {
