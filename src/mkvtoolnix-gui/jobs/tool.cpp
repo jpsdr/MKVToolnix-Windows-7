@@ -18,6 +18,7 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
+#include <QInputDialog>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QList>
@@ -27,6 +28,20 @@
 #include <QTreeView>
 
 namespace mtx::gui::Jobs {
+
+namespace {
+
+bool
+anyStringContains(QStringList const &list,
+                  QString const &searchTerm) {
+  for (auto const &entry : list)
+    if (entry.contains(searchTerm, Qt::CaseInsensitive))
+      return true;
+
+  return false;
+}
+
+}
 
 Tool::Tool(QWidget *parent,
            QMenu *jobQueueMenu)
@@ -123,6 +138,10 @@ Tool::setupActions() {
   connect(mwUi->actionJobQueueRemoveDone,                   &QAction::triggered,                              this,    &Tool::onRemoveDone);
   connect(mwUi->actionJobQueueRemoveDoneOk,                 &QAction::triggered,                              this,    &Tool::onRemoveDoneOk);
   connect(mwUi->actionJobQueueRemoveAll,                    &QAction::triggered,                              this,    &Tool::onRemoveAll);
+
+  connect(mwUi->actionJobQueueFind,                         &QAction::triggered,                              this,    &Tool::onFind);
+  connect(mwUi->actionJobQueueFindNext,                     &QAction::triggered,                              this,    &Tool::onFindNext);
+  connect(mwUi->actionJobQueueFindPrevious,                 &QAction::triggered,                              this,    &Tool::onFindPrevious);
 
   connect(mwUi->actionJobQueueAcknowledgeAllWarnings,       &QAction::triggered,                              m_model, &Model::acknowledgeAllWarnings);
   connect(mwUi->actionJobQueueAcknowledgeAllErrors,         &QAction::triggered,                              m_model, &Model::acknowledgeAllErrors);
@@ -661,6 +680,94 @@ Tool::sortJobs(int logicalColumnIndex,
 void
 Tool::hideSortIndicator() {
   ui->jobs->header()->setSortIndicatorShown(false);
+}
+
+void
+Tool::onFind() {
+  querySearchTermFindAndSelectJob(SearchDirection::Next, 0);
+}
+
+void
+Tool::onFindNext() {
+  findAndSelectNextOrPreviousJob(SearchDirection::Next);
+}
+
+void
+Tool::onFindPrevious() {
+  findAndSelectNextOrPreviousJob(SearchDirection::Previous);
+}
+
+void
+Tool::querySearchTermFindAndSelectJob(SearchDirection direction,
+                                      int startRow) {
+  if (!m_model->hasJobs())
+    return;
+
+  QInputDialog dlg{this};
+  dlg.setWindowTitle(QY("Find job"));
+  dlg.setLabelText(QY("Search term:"));
+  dlg.setOkButtonText(QY("&Find"));
+  dlg.setInputMode(QInputDialog::TextInput);
+
+  if (!dlg.exec() || dlg.textValue().isEmpty())
+    return;
+
+  m_searchTerm = dlg.textValue();
+  findAndSelectJob(direction, startRow);
+}
+
+void
+Tool::findAndSelectNextOrPreviousJob(SearchDirection const direction) {
+  auto rows = m_model->rowCount();
+  if (!rows)
+    return;
+
+  auto startRowIfFirst = direction == SearchDirection::Next ? 0 : rows - 1;
+
+  if (m_searchTerm.isEmpty()) {
+    querySearchTermFindAndSelectJob(direction, startRowIfFirst);
+    return;
+  }
+
+  auto currentIndex = ui->jobs->selectionModel()->currentIndex();
+  auto rowDiff      = direction == SearchDirection::Next ? 1 : -1;
+
+  findAndSelectJob(direction, currentIndex.isValid() ? (currentIndex.row() + rowDiff + rows) % rows : startRowIfFirst);
+}
+
+void
+Tool::findAndSelectJob(SearchDirection const direction,
+                       int startRow) {
+  m_model->withLockedJobsAsList([this, direction, startRow](QList<Job *> const &jobs) {
+    if (jobs.isEmpty())
+      return;
+
+    auto actualStartRow  = std::min<int>(std::max(startRow, 0), jobs.size() - 1);
+    auto currentRow      = actualStartRow;
+    auto &selectionModel = *this->ui->jobs->selectionModel();
+    auto rowDiff         = direction == SearchDirection::Next ? 1 : -1;
+
+    do {
+      auto const &job = *jobs[currentRow];
+
+      auto found = job.description().contains(m_searchTerm, Qt::CaseInsensitive)
+        || anyStringContains(job.output(),   m_searchTerm)
+        || anyStringContains(job.warnings(), m_searchTerm)
+        || anyStringContains(job.errors(),   m_searchTerm);
+
+      if (found) {
+        auto idx = m_model->index(currentRow, 0);
+
+        selectionModel.setCurrentIndex(idx, QItemSelectionModel::Rows | QItemSelectionModel::ClearAndSelect);
+        selectionModel.select(         idx, QItemSelectionModel::Rows | QItemSelectionModel::ClearAndSelect);
+
+        break;
+      }
+
+      currentRow = (currentRow + rowDiff + jobs.size()) % jobs.size();
+
+    } while (currentRow != actualStartRow);
+  });
 }
 
 }
