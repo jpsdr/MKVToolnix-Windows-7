@@ -42,6 +42,7 @@ Tool::Tool(QWidget *parent,
   , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
   , m_openFolderAction{new QAction{this}}
   , m_editAndRemoveAction{new QAction{this}}
+  , m_editCopyAction{new QAction{this}}
   , m_startImmediatelyAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
   , m_jobsMenu{new QMenu{this}}
@@ -85,6 +86,7 @@ Tool::setupUi() {
   m_jobsMenu->addAction(m_startImmediatelyAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_editAndRemoveAction);
+  m_jobsMenu->addAction(m_editCopyAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_removeAction);
   m_jobsMenu->addSeparator();
@@ -97,6 +99,7 @@ Tool::setupUi() {
   m_startAutomaticallyAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s));
   m_startImmediatelyAction->setIcon(QIcon::fromTheme(u"media-seek-forward"_s));
   m_editAndRemoveAction->setIcon(QIcon::fromTheme(u"edit-entry"_s));
+  m_editCopyAction->setIcon(QIcon::fromTheme(u"edit-copy"_s));
   m_removeAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
   m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
 
@@ -136,6 +139,7 @@ Tool::setupActions() {
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,                              this,    &Tool::acknowledgeSelectedErrors);
   connect(m_openFolderAction,                               &QAction::triggered,                              this,    &Tool::onOpenFolder);
   connect(m_editAndRemoveAction,                            &QAction::triggered,                              this,    &Tool::onEditAndRemove);
+  connect(m_editCopyAction,                                 &QAction::triggered,                              this,    &Tool::onEditCopy);
   connect(m_startImmediatelyAction,                         &QAction::triggered,                              this,    &Tool::onStartImmediately);
 
   connect(ui->jobs->selectionModel(),                       &QItemSelectionModel::selectionChanged,           this,    &Tool::enableMoveJobsButtons);
@@ -211,6 +215,7 @@ Tool::onContextMenu(QPoint pos) {
   m_removeAction->setEnabled(hasSelection);
   m_openFolderAction->setEnabled(hasSelection);
   m_editAndRemoveAction->setEnabled(hasEditable);
+  m_editCopyAction->setEnabled(hasSelection);
   m_startImmediatelyAction->setEnabled(hasNotRunning);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
@@ -413,6 +418,7 @@ Tool::retranslateUi() {
   m_viewOutputAction->setText(QY("&View output"));
   m_openFolderAction->setText(QY("&Open folder"));
   m_editAndRemoveAction->setText(QY("E&dit in corresponding tool and remove from queue"));
+  m_editCopyAction->setText(QY("Edit a &copy in corresponding tool as new settings"));
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge &warnings"));
   m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge &errors"));
@@ -495,6 +501,13 @@ Tool::onEditAndRemove() {
 
   if (emitRunningWarning)
     MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be edited."));
+}
+
+void
+Tool::onEditCopy() {
+  m_model->withSelectedJobs(ui->jobs, [this](Job &jobToEdit) {
+    openJobInTool(jobToEdit);
+  });
 }
 
 void

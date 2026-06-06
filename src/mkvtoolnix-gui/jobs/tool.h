@@ -27,7 +27,7 @@ protected:
   Model *m_model;
 
   QAction *m_startAutomaticallyAction, *m_startManuallyAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
-  QAction *m_openFolderAction, *m_editAndRemoveAction, *m_startImmediatelyAction;
+  QAction *m_openFolderAction, *m_editAndRemoveAction, *m_editCopyAction, *m_startImmediatelyAction;
   QMenu *m_jobQueueMenu, *m_jobsMenu;
 
   mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
@@ -64,6 +64,7 @@ public Q_SLOTS:
   void onRemoveAll();
   void onOpenFolder();
   void onEditAndRemove();
+  void onEditCopy();
   void sortJobs(int logicalColumnIndex, Qt::SortOrder order);
   void hideSortIndicator();
 
