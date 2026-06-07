@@ -27,11 +27,17 @@ protected:
   Model *m_model;
 
   QAction *m_startAutomaticallyAction, *m_startManuallyAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
-  QAction *m_openFolderAction, *m_editAndRemoveAction, *m_startImmediatelyAction;
+  QAction *m_openFolderAction, *m_editAndRemoveAction, *m_editCopyAction, *m_startImmediatelyAction;
   QMenu *m_jobQueueMenu, *m_jobsMenu;
+  QString m_searchTerm;
 
   mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
   QStringList m_droppedFiles;
+
+  enum SearchDirection {
+    Next,
+    Previous,
+  };
 
 public:
   explicit Tool(QWidget *parent, QMenu *jobQueueMenu);
@@ -64,8 +70,13 @@ public Q_SLOTS:
   void onRemoveAll();
   void onOpenFolder();
   void onEditAndRemove();
+  void onEditCopy();
   void sortJobs(int logicalColumnIndex, Qt::SortOrder order);
   void hideSortIndicator();
+
+  void onFind();
+  void onFindNext();
+  void onFindPrevious();
 
   void onJobQueueMenu();
   void onContextMenu(QPoint pos);
@@ -92,6 +103,10 @@ protected:
   virtual void dropEvent(QDropEvent *event) override;
 
   virtual void selectJobs(QList<Job *> const &jobs);
+
+  void querySearchTermFindAndSelectJob(SearchDirection const direction, int startRow);
+  void findAndSelectNextOrPreviousJob(SearchDirection const direction);
+  void findAndSelectJob(SearchDirection const direction, int startRow);
 };
 
 }
