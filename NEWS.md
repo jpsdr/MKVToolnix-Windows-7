@@ -30,6 +30,9 @@
 * all: when building for Windows the programs ImageMagick (executable
   `magick`) & Inkscape (executable `inkscape`) are required in order to build
   ICOs from SVGs.
+* macOS: include the app's supported platform(s) in `Info.plist` to correctly
+  resolve the app's Kind as Apple Silicon in System Information. Detected
+  during discussion of #6260.
 
 
 # Version 99.0 "Buka" 2026-05-24
