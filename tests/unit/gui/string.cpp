@@ -69,6 +69,14 @@ TEST(GuiStringEscaping, EscapingJsonStringList) {
   EXPECT_EQ("[\n  \"\\\"hello world\\\"\",\n  \"'hello world'\"\n]"s, to_utf8(mtx::gui::Util::escape(QStringList{u"\"hello world\""_s, u"'hello world'"_s}, mtx::gui::Util::EscapeJSON).join(u"!"_s)));
 }
 
+TEST(GuiStringEscaping, Unescape1) {
+  auto resultList = QStringList{u"exe"_s, u"arg with spaces"_s, u"<MTX_DESTINATION_FILE_NAME>"_s};
+  EXPECT_EQ(resultList, mtx::gui::Util::unescapeSplit(uR"(exe 'arg with spaces' '<MTX_DESTINATION_FILE_NAME>')"_s, mtx::gui::Util::EscapeShellUnix));
+
+  resultList = QStringList{uR"(C:\windows\system32\cmd.exe)"_s, u"/c echo"_s, u"<MTX_DESTINATION_FILE_NAME>"_s, u">"_s, uR"(<MTX_DESTINATION_FILE_DIRECTORY>\testing.txt)"_s};
+  EXPECT_EQ(resultList, mtx::gui::Util::unescapeSplit(uR"(C:\\windows\\system32\\cmd.exe '/c echo' '<MTX_DESTINATION_FILE_NAME>' \> '<MTX_DESTINATION_FILE_DIRECTORY>\testing.txt')"_s, mtx::gui::Util::EscapeShellUnix));
+}
+
 // NOT IMPLEMENTED YET:
 
 // TEST(GuiStringEscaping, UnescapingShellUnixString) {

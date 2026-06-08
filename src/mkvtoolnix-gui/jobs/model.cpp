@@ -270,6 +270,18 @@ Model::withJob(uint64_t id,
 }
 
 void
+Model::withLockedJobsAsList(std::function<void(QList<Job *> const &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  QList<Job *> jobs;
+
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
+    jobs << m_jobsById[idFromRow(row)].get();
+
+  worker(jobs);
+}
+
+void
 Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
   QMutexLocker locked{&m_mutex};
 
