@@ -18,6 +18,7 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
+#include <QInputDialog>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QList>
@@ -27,6 +28,20 @@
 #include <QTreeView>
 
 namespace mtx::gui::Jobs {
+
+namespace {
+
+bool
+anyStringContains(QStringList const &list,
+                  QString const &searchTerm) {
+  for (auto const &entry : list)
+    if (entry.contains(searchTerm, Qt::CaseInsensitive))
+      return true;
+
+  return false;
+}
+
+}
 
 Tool::Tool(QWidget *parent,
            QMenu *jobQueueMenu)
@@ -42,6 +57,7 @@ Tool::Tool(QWidget *parent,
   , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
   , m_openFolderAction{new QAction{this}}
   , m_editAndRemoveAction{new QAction{this}}
+  , m_editCopyAction{new QAction{this}}
   , m_startImmediatelyAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
   , m_jobsMenu{new QMenu{this}}
@@ -85,6 +101,7 @@ Tool::setupUi() {
   m_jobsMenu->addAction(m_startImmediatelyAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_editAndRemoveAction);
+  m_jobsMenu->addAction(m_editCopyAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_removeAction);
   m_jobsMenu->addSeparator();
@@ -97,6 +114,7 @@ Tool::setupUi() {
   m_startAutomaticallyAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s));
   m_startImmediatelyAction->setIcon(QIcon::fromTheme(u"media-seek-forward"_s));
   m_editAndRemoveAction->setIcon(QIcon::fromTheme(u"edit-entry"_s));
+  m_editCopyAction->setIcon(QIcon::fromTheme(u"edit-copy"_s));
   m_removeAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
   m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
 
@@ -121,6 +139,10 @@ Tool::setupActions() {
   connect(mwUi->actionJobQueueRemoveDoneOk,                 &QAction::triggered,                              this,    &Tool::onRemoveDoneOk);
   connect(mwUi->actionJobQueueRemoveAll,                    &QAction::triggered,                              this,    &Tool::onRemoveAll);
 
+  connect(mwUi->actionJobQueueFind,                         &QAction::triggered,                              this,    &Tool::onFind);
+  connect(mwUi->actionJobQueueFindNext,                     &QAction::triggered,                              this,    &Tool::onFindNext);
+  connect(mwUi->actionJobQueueFindPrevious,                 &QAction::triggered,                              this,    &Tool::onFindPrevious);
+
   connect(mwUi->actionJobQueueAcknowledgeAllWarnings,       &QAction::triggered,                              m_model, &Model::acknowledgeAllWarnings);
   connect(mwUi->actionJobQueueAcknowledgeAllErrors,         &QAction::triggered,                              m_model, &Model::acknowledgeAllErrors);
   connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,                              m_model, &Model::acknowledgeAllWarnings);
@@ -136,6 +158,7 @@ Tool::setupActions() {
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,                              this,    &Tool::acknowledgeSelectedErrors);
   connect(m_openFolderAction,                               &QAction::triggered,                              this,    &Tool::onOpenFolder);
   connect(m_editAndRemoveAction,                            &QAction::triggered,                              this,    &Tool::onEditAndRemove);
+  connect(m_editCopyAction,                                 &QAction::triggered,                              this,    &Tool::onEditCopy);
   connect(m_startImmediatelyAction,                         &QAction::triggered,                              this,    &Tool::onStartImmediately);
 
   connect(ui->jobs->selectionModel(),                       &QItemSelectionModel::selectionChanged,           this,    &Tool::enableMoveJobsButtons);
@@ -211,6 +234,7 @@ Tool::onContextMenu(QPoint pos) {
   m_removeAction->setEnabled(hasSelection);
   m_openFolderAction->setEnabled(hasSelection);
   m_editAndRemoveAction->setEnabled(hasEditable);
+  m_editCopyAction->setEnabled(hasSelection);
   m_startImmediatelyAction->setEnabled(hasNotRunning);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
@@ -413,6 +437,7 @@ Tool::retranslateUi() {
   m_viewOutputAction->setText(QY("&View output"));
   m_openFolderAction->setText(QY("&Open folder"));
   m_editAndRemoveAction->setText(QY("E&dit in corresponding tool and remove from queue"));
+  m_editCopyAction->setText(QY("Edit a &copy in corresponding tool as new settings"));
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge &warnings"));
   m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge &errors"));
@@ -495,6 +520,13 @@ Tool::onEditAndRemove() {
 
   if (emitRunningWarning)
     MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be edited."));
+}
+
+void
+Tool::onEditCopy() {
+  m_model->withSelectedJobs(ui->jobs, [this](Job &jobToEdit) {
+    openJobInTool(jobToEdit);
+  });
 }
 
 void
@@ -648,6 +680,94 @@ Tool::sortJobs(int logicalColumnIndex,
 void
 Tool::hideSortIndicator() {
   ui->jobs->header()->setSortIndicatorShown(false);
+}
+
+void
+Tool::onFind() {
+  querySearchTermFindAndSelectJob(SearchDirection::Next, 0);
+}
+
+void
+Tool::onFindNext() {
+  findAndSelectNextOrPreviousJob(SearchDirection::Next);
+}
+
+void
+Tool::onFindPrevious() {
+  findAndSelectNextOrPreviousJob(SearchDirection::Previous);
+}
+
+void
+Tool::querySearchTermFindAndSelectJob(SearchDirection direction,
+                                      int startRow) {
+  if (!m_model->hasJobs())
+    return;
+
+  QInputDialog dlg{this};
+  dlg.setWindowTitle(QY("Find job"));
+  dlg.setLabelText(QY("Search term:"));
+  dlg.setOkButtonText(QY("&Find"));
+  dlg.setInputMode(QInputDialog::TextInput);
+
+  if (!dlg.exec() || dlg.textValue().isEmpty())
+    return;
+
+  m_searchTerm = dlg.textValue();
+  findAndSelectJob(direction, startRow);
+}
+
+void
+Tool::findAndSelectNextOrPreviousJob(SearchDirection const direction) {
+  auto rows = m_model->rowCount();
+  if (!rows)
+    return;
+
+  auto startRowIfFirst = direction == SearchDirection::Next ? 0 : rows - 1;
+
+  if (m_searchTerm.isEmpty()) {
+    querySearchTermFindAndSelectJob(direction, startRowIfFirst);
+    return;
+  }
+
+  auto currentIndex = ui->jobs->selectionModel()->currentIndex();
+  auto rowDiff      = direction == SearchDirection::Next ? 1 : -1;
+
+  findAndSelectJob(direction, currentIndex.isValid() ? (currentIndex.row() + rowDiff + rows) % rows : startRowIfFirst);
+}
+
+void
+Tool::findAndSelectJob(SearchDirection const direction,
+                       int startRow) {
+  m_model->withLockedJobsAsList([this, direction, startRow](QList<Job *> const &jobs) {
+    if (jobs.isEmpty())
+      return;
+
+    auto actualStartRow  = std::min<int>(std::max(startRow, 0), jobs.size() - 1);
+    auto currentRow      = actualStartRow;
+    auto &selectionModel = *this->ui->jobs->selectionModel();
+    auto rowDiff         = direction == SearchDirection::Next ? 1 : -1;
+
+    do {
+      auto const &job = *jobs[currentRow];
+
+      auto found = job.description().contains(m_searchTerm, Qt::CaseInsensitive)
+        || anyStringContains(job.output(),   m_searchTerm)
+        || anyStringContains(job.warnings(), m_searchTerm)
+        || anyStringContains(job.errors(),   m_searchTerm);
+
+      if (found) {
+        auto idx = m_model->index(currentRow, 0);
+
+        selectionModel.setCurrentIndex(idx, QItemSelectionModel::Rows | QItemSelectionModel::ClearAndSelect);
+        selectionModel.select(         idx, QItemSelectionModel::Rows | QItemSelectionModel::ClearAndSelect);
+
+        break;
+      }
+
+      currentRow = (currentRow + rowDiff + jobs.size()) % jobs.size();
+
+    } while (currentRow != actualStartRow);
+  });
 }
 
 }

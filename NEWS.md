@@ -11,6 +11,11 @@
 * all: added new scalable (SVG) application icons for all applications,
   replacing the existing pixmap (PNG, ICO) icons. Icons from Sarreq
   Teryx. Implements #6253.
+* MKVToolNix GUI: job queue: added a context menu for opening copies of the
+  selected queue jobs in the multiplexer as new settings there without
+  removing the queue jobs. Implements #6255.
+* MKVToolNix GUI: job queue: added a search functionality for jobs that
+  searches in job descriptions, outputs, warnings & errors. Implements #6256.
 
 ## Bug fixes
 
@@ -19,12 +24,20 @@
   MingW. This seems to fix an issue with converting certain high code point
   from `wchar_t` to `char` (from UTF-32/16 to UTF-8), preventing interesting
   exceptions from being thrown. Fixes #6257.
+* MKVToolNix GUI: fix backslash handling when parsing a Unix-shell escaped
+  string into separate arguments. The user-visible fix is that the
+  command-line in the "executing actions" dialog will not have the quoting
+  changed in wrong ways by the GUI when the GUI adds another variable upon
+  user request, a regression introduced in v99. Fixes #6253.
 
 ## Build system changes
 
 * all: when building for Windows the programs ImageMagick (executable
   `magick`) & Inkscape (executable `inkscape`) are required in order to build
   ICOs from SVGs.
+* macOS: include the app's supported platform(s) in `Info.plist` to correctly
+  resolve the app's Kind as Apple Silicon in System Information. Detected
+  during discussion of #6260.
 
 
 # Version 99.0 "Buka" 2026-05-24
