@@ -895,7 +895,7 @@ parser_c::parse() {
 std::string
 parser_c::get_multiplex_type_name(multiplex_type_e multiplex_type) {
   return multiplex_type == adts_multiplex      ? "ADTS"
-       : multiplex_type == adts_multiplex      ? "ADIF"
+       : multiplex_type == adif_multiplex      ? "ADIF"
        : multiplex_type == loas_latm_multiplex ? "LOAS/LATM"
        :                                         "unknown";
 }
