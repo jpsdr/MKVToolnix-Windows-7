@@ -109,14 +109,14 @@ Tool::setupUi() {
   m_jobsMenu->addAction(m_acknowledgeSelectedErrorsAction);
   m_jobsMenu->addAction(m_acknowledgeSelectedWarningsErrorsAction);
 
-  m_viewOutputAction->setIcon(QIcon::fromTheme(u"layer-visible-on"_s));
-  m_openFolderAction->setIcon(QIcon::fromTheme(u"document-open-folder"_s));
-  m_startAutomaticallyAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s));
-  m_startImmediatelyAction->setIcon(QIcon::fromTheme(u"media-seek-forward"_s));
-  m_editAndRemoveAction->setIcon(QIcon::fromTheme(u"edit-entry"_s));
-  m_editCopyAction->setIcon(QIcon::fromTheme(u"edit-copy"_s));
-  m_removeAction->setIcon(QIcon::fromTheme(u"list-remove"_s));
-  m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(u"dialog-ok-apply"_s));
+  m_viewOutputAction->setIcon(QIcon::fromTheme(Q("layer-visible-on")));
+  m_openFolderAction->setIcon(QIcon::fromTheme(Q("document-open-folder")));
+  m_startAutomaticallyAction->setIcon(QIcon::fromTheme(Q("media-playback-start")));
+  m_startImmediatelyAction->setIcon(QIcon::fromTheme(Q("media-seek-forward")));
+  m_editAndRemoveAction->setIcon(QIcon::fromTheme(Q("edit-entry")));
+  m_editCopyAction->setIcon(QIcon::fromTheme(Q("edit-copy")));
+  m_removeAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
 
   ui->jobs->header()->setSectionsClickable(true);
 
