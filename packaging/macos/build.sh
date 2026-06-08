@@ -461,7 +461,7 @@ function build_mkvtoolnix {
 function build_dmg {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
-  if [[ -f packaging/macos/unlock_keychain.sh ]] packaging/macos/unlock_keychain.sh
+  if [[ -f ${SCRIPT_PATH}/unlock_keychain.sh ]] ${SCRIPT_PATH}/unlock_keychain.sh
 
   local dmgbase=${CMPL}/dmg-${MTX_VER}
   local dmgapp=$dmgbase/${APP_BUNDLE_NAME}
@@ -497,7 +497,7 @@ releases that work on older macOS versions can be found at
 https://mkvtoolnix.download/downloads.html#macosx-old
 
 If you need the command line tools then copy mkvextract, mkvinfo,
-mkvmerge and mkvproedit from ./${APP_BUNDLE_NAME}/Contents/MacOS/
+mkvmerge and mkvpropedit from ./${APP_BUNDLE_NAME}/Contents/MacOS/
 to /usr/local/bin
 
 EOF
@@ -518,7 +518,7 @@ APPL????
 EOF
 
   sed -e "s/::MTX_VER::/${MTX_VER}/" -e "s/::MACOSX_DEPLOYMENT_TARGET::/${MACOSX_DEPLOYMENT_TARGET}/" \
-      < packaging/macos/Info.plist \
+      < ${SCRIPT_PATH}/Info.plist \
       > $dmgcnt/Info.plist
 
   cat $dmgcnt/Info.plist

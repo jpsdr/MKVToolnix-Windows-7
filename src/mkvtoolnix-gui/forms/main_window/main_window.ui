@@ -255,6 +255,10 @@
     <addaction name="actionJobQueueRemoveDone"/>
     <addaction name="actionJobQueueRemoveAll"/>
     <addaction name="separator"/>
+    <addaction name="actionJobQueueFind"/>
+    <addaction name="actionJobQueueFindNext"/>
+    <addaction name="actionJobQueueFindPrevious"/>
+    <addaction name="separator"/>
     <addaction name="actionJobQueueAcknowledgeAllWarnings"/>
     <addaction name="actionJobQueueAcknowledgeAllErrors"/>
     <addaction name="actionJobQueueAcknowledgeAllWarningsErrors"/>
@@ -750,6 +754,39 @@
   <action name="actionJobQueueStopImmediately">
    <property name="text">
     <string>Abort all running jobs and stop &amp;immediately</string>
+   </property>
+  </action>
+  <action name="actionJobQueueFind">
+   <property name="icon">
+    <iconset theme="search"/>
+   </property>
+   <property name="text">
+    <string>&amp;Find</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionJobQueueFindNext">
+   <property name="icon">
+    <iconset theme="arrow-right"/>
+   </property>
+   <property name="text">
+    <string>Find &amp;next</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionJobQueueFindPrevious">
+   <property name="icon">
+    <iconset theme="arrow-left"/>
+   </property>
+   <property name="text">
+    <string>Find &amp;previous</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F3</string>
    </property>
   </action>
   <action name="actionMergeCopyFirstFileNameToTitle">

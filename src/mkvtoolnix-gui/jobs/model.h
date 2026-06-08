@@ -63,6 +63,7 @@ public:
   void withSelectedJobsAsList(QAbstractItemView *view, std::function<void(QList<Job *> const &)> const &worker);
   void withAllJobs(std::function<void(Job &)> const &worker);
   void withJob(uint64_t id, std::function<void(Job &)> const &worker);
+  void withLockedJobsAsList(std::function<void(QList<Job *> const &)> const &worker);
 
   void moveJobsUpOrDown(QList<Job *> jobs, bool up);
 
