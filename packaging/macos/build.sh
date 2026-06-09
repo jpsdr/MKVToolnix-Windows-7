@@ -505,10 +505,11 @@ EOF
   mkdir -p $dmgcnt/Resources
   cp share/icons/macos/MKVToolNix.icns $dmgcnt/Resources/MKVToolNix.icns
 
+  mkdir -p ${dmgmac}/locale/libqt
   for file in ${TARGET}/translations/qtbase_*.qm; do
     lang=${${file%.qm}##*_}
     lcdir=${dmgmac}/locale/${lang}/LC_MESSAGES
-    if [[ -d ${lcdir} ]] cp -v ${file} ${lcdir}/
+    if [[ -d ${lcdir} ]] cp -v ${file} ${dmgmac}/locale/libqt/qt_${lang}.qm
   done
 
   ln -s /Applications ${dmgbase}/
