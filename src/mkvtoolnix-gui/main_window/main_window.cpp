@@ -214,6 +214,19 @@ MainWindow::setupConnections() {
   connect(p->ui->actionGUIExit,                   &QAction::triggered,                                    this,                 &MainWindow::close);
   connect(p->ui->actionGUIPreferences,            &QAction::triggered,                                    this,                 &MainWindow::editPreferences);
 
+#if defined(SYS_APPLE)
+  // On macOS Qt moves actions into the application menu by guessing their role
+  // from the text: anything containing "preferences"/"settings"/"options"/
+  // "config"/"setup" becomes the Settings item, "quit"/"exit" becomes Quit.
+  // Several mkvtoolnix actions trip this ("Create option file", "Save
+  // settings", ...) and would hijack those slots, and a translated UI isn't
+  // recognized at all. Pin every action to NoRole, then set the two real roles.
+  for (auto action : findChildren<QAction *>())
+    action->setMenuRole(QAction::NoRole);
+  p->ui->actionGUIPreferences->setMenuRole(QAction::PreferencesRole);
+  p->ui->actionGUIExit->setMenuRole(QAction::QuitRole);
+#endif  // SYS_APPLE
+
   connect(p->ui->actionHelpFAQ,                   &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpKnownProblems,         &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpMkvmergeDocumentation, &QAction::triggered,                                    this,                 &MainWindow::visitMkvmergeDocumentation);
