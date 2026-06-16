@@ -725,6 +725,42 @@ parser_c::decode_header(uint8_t const *buffer,
   return { failure, 0 };
 }
 
+// Length of the longest run of consecutive frames of the given multiplex type.
+// A stray sync word (the 11-bit LOAS sync matches in ADTS payload roughly once
+// per 2 KiB) decodes as an isolated frame but doesn't chain into the next one,
+// so only the framing that actually carries the audio builds up a long run.
+unsigned int
+parser_c::max_consecutive_frames(multiplex_type_e multiplex_type,
+                                 uint8_t const *buffer,
+                                 size_t buffer_size) {
+  auto position    = std::size_t{};
+  auto current_run = 0u;
+  auto longest_run = 0u;
+
+  while (position < buffer_size) {
+    auto remaining_bytes = buffer_size - position;
+    auto result          = multiplex_type == loas_latm_multiplex ? decode_loas_latm_header(&buffer[position], remaining_bytes) : decode_adts_header(&buffer[position], remaining_bytes);
+
+    if (result.first == need_more_data)
+      break;
+
+    auto num_bytes = std::max<std::size_t>(std::min(result.second, remaining_bytes), 1);
+    position      += num_bytes;
+
+    if (result.first == success) {
+      ++current_run;
+      longest_run = std::max(longest_run, current_run);
+
+      if (m_abort_after_num_frames && (longest_run >= m_abort_after_num_frames))
+        break;
+
+    } else
+      current_run = 0;
+  }
+
+  return longest_run;
+}
+
 bool
 parser_c::determine_multiplex_type(uint8_t const *new_buffer,
                                    std::size_t new_buffer_size) {
@@ -760,29 +796,12 @@ parser_c::determine_multiplex_type(uint8_t const *new_buffer,
   if (m_require_frame_at_first_byte)
     return false;
 
-  std::vector<std::pair<multiplex_type_e, unsigned int>> multiplexes_to_try{ { loas_latm_multiplex, 0u }, { adif_multiplex, 0u } };
+  // Neither framing matched at offset 0 (the buffer may start mid-frame). Pick
+  // whichever one builds the longest run of consecutive frames.
+  std::vector<std::pair<multiplex_type_e, unsigned int>> multiplexes_to_try{ { loas_latm_multiplex, 0u }, { adts_multiplex, 0u } };
 
-  for (auto &multiplex : multiplexes_to_try) {
-    auto position = 0u;
-
-    while (position < buffer_size) {
-      auto remaining_bytes = buffer_size - position;
-      result               = multiplex.first == loas_latm_multiplex ? decode_loas_latm_header(&buffer[position], remaining_bytes) : decode_adts_header(&buffer[position], remaining_bytes);
-
-      if (result.first == need_more_data)
-        break;
-
-      auto num_bytes = std::max<std::size_t>(std::min(result.second, remaining_bytes), 1);
-      position      += num_bytes;
-
-      if (result.first == success) {
-        ++multiplex.second;
-
-        if (m_abort_after_num_frames && (multiplex.second >= m_abort_after_num_frames))
-          break;
-      }
-    }
-  }
+  for (auto &multiplex : multiplexes_to_try)
+    multiplex.second = max_consecutive_frames(multiplex.first, buffer, buffer_size);
 
   auto latm_config_parsed = m_latm_parser.config_parsed();
 
@@ -876,7 +895,7 @@ parser_c::parse() {
 std::string
 parser_c::get_multiplex_type_name(multiplex_type_e multiplex_type) {
   return multiplex_type == adts_multiplex      ? "ADTS"
-       : multiplex_type == adts_multiplex      ? "ADIF"
+       : multiplex_type == adif_multiplex      ? "ADIF"
        : multiplex_type == loas_latm_multiplex ? "LOAS/LATM"
        :                                         "unknown";
 }
