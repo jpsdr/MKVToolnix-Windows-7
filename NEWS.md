@@ -30,7 +30,7 @@
   changed in wrong ways by the GUI when the GUI adds another variable upon
   user request, a regression introduced in v99. Fixes #6253.
 * mkvmerge: AAC: fixed mis-detection of ADTS streams not starting on a frame
-  boundary. Fixes regression starting with v89 when fixing AAC LATM config not
+  boundary. Fixes regression starting with v87 when fixing AAC LATM config not
   being parsed if it wasn't present in the first AAC frame. Patch by
   Corticalcode. Fixes #6196.
 
