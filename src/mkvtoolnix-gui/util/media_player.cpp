@@ -66,7 +66,8 @@ MediaPlayer::playFile(QString const &fileName,
 
   p.lastPlayedFile = fileName;
 
-  p.audioOutput->setVolume(volume);
+  // volume is a 0-100 percentage; QAudioOutput::setVolume() expects 0.0-1.0.
+  p.audioOutput->setVolume(volume / 100.0f);
   p.player->setSource(QUrl::fromLocalFile(fileName));
   p.player->play();
 }
