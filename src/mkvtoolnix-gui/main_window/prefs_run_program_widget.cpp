@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QDir>
 #include <QMenu>
+#include <QSlider>
+#include <QSpinBox>
 
 #include "common/qt.h"
 #include "common/list_utils.h"
@@ -100,6 +102,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   p->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
   p->ui->leAudioFile->setText(QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(cfg.m_audioFile)));
   p->ui->sbVolume->setValue(cfg.m_volume);
+  p->ui->slVolume->setValue(cfg.m_volume);
   p->ui->lePowerShellScriptFile->setText(QDir::toNativeSeparators(cfg.m_powerShellScriptFile));
   p->ui->ptePowerShellScriptCode->setPlainText(cfg.m_powerShellScriptCode);
   p->ui->rbPowerShellScriptIsFile->setChecked( cfg.m_powerShellScriptIsFile);
@@ -323,6 +326,8 @@ PrefsRunProgramWidget::setupConnections() {
   connect(p->ui->pbExecuteNow,                 &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::executeNow);
   connect(p->ui->leAudioFile,                  &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
   connect(p->ui->pbBrowseAudioFile,            &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeAudioFile);
+  connect(p->ui->slVolume, &QSlider::valueChanged,  p->ui->sbVolume, &QSpinBox::setValue);
+  connect(p->ui->sbVolume, &QSpinBox::valueChanged, p->ui->slVolume, &QSlider::setValue);
   connect(p->ui->lePowerShellScriptFile,       &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
   connect(p->ui->pbBrowsePowerShellScriptFile, &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changePowerShellScriptFile);
   connect(p->ui->ptePowerShellScriptCode,      &QPlainTextEdit::textChanged,                                           this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
