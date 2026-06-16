@@ -216,6 +216,7 @@ protected:
   std::pair<parse_result_e, size_t> decode_header(uint8_t const *buffer, size_t buffer_size);
   std::pair<parse_result_e, size_t> decode_adts_header(uint8_t const *buffer, size_t buffer_size);
   std::pair<parse_result_e, size_t> decode_loas_latm_header(uint8_t const *buffer, size_t buffer_size);
+  unsigned int max_consecutive_frames(multiplex_type_e multiplex_type, uint8_t const *buffer, size_t buffer_size);
   bool determine_multiplex_type(uint8_t const *buffer, std::size_t buffer_size);
   void push_frame(frame_c &frame);
 };
