@@ -278,14 +278,28 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="mtx::gui::Util::BasicSpinBox" name="sbVolume">
-              <property name="suffix">
-               <string notr="true">%</string>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="volumeLayout">
+              <item>
+               <widget class="QSlider" name="slVolume">
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="mtx::gui::Util::BasicSpinBox" name="sbVolume">
+                <property name="suffix">
+                 <string notr="true">%</string>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
