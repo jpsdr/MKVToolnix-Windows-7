@@ -200,6 +200,12 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 
   p->ui->tbUsageNotes->setHtml(html.join(u" "_s));
 
+#if !defined(SYS_APPLE)
+  // Only macOS needs this button: there the bundled default lives inside the
+  // .app, unreachable through the picker. Elsewhere it is navigable, so hide it.
+  p->ui->pbRevertAudioFile->setVisible(false);
+#endif
+
   enableControls();
 }
 
@@ -258,6 +264,8 @@ PrefsRunProgramWidget::setupToolTips() {
   Util::setToolTip(p->ui->cbAfterJobQueueStopped, conditionsToolTip);
   Util::setToolTip(p->ui->cbAfterJobSuccessful,   conditionsToolTip);
   Util::setToolTip(p->ui->cbAfterJobError,        conditionsToolTip);
+
+  Util::setToolTip(p->ui->pbRevertAudioFile, QY("Reset the audio file to the default sound."));
 }
 
 void
@@ -323,6 +331,7 @@ PrefsRunProgramWidget::setupConnections() {
   connect(p->ui->pbExecuteNow,                 &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::executeNow);
   connect(p->ui->leAudioFile,                  &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
   connect(p->ui->pbBrowseAudioFile,            &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeAudioFile);
+  connect(p->ui->pbRevertAudioFile,            &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::revertAudioFileToDefault);
   connect(p->ui->lePowerShellScriptFile,       &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
   connect(p->ui->pbBrowsePowerShellScriptFile, &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changePowerShellScriptFile);
   connect(p->ui->ptePowerShellScriptCode,      &QPlainTextEdit::textChanged,                                           this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
@@ -444,6 +453,14 @@ PrefsRunProgramWidget::config()
       cfg->m_forEvents |= p->flagsByCheckbox[checkBox];
 
   return cfg;
+}
+
+void
+PrefsRunProgramWidget::revertAudioFileToDefault() {
+  auto p = p_func();
+
+  p->ui->leAudioFile->setText(QDir::toNativeSeparators(App::programRunner().defaultAudioFileName()));
+  enableControlsAndEmitTitleChanged();
 }
 
 void
