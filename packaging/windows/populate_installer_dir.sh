@@ -136,7 +136,7 @@ function copy_files {
   cp src/tools/{bluray_dump,ebml_validator,hevcc_dump,xyzvc_dump}.exe ${tgt_dir}/tools/
 
   cp src/mkvtoolnix-gui/qt_resources.rcc ${tgt_dir}/data/
-  cp share/sounds/* ${tgt_dir}/data/sounds/
+  cp share/sounds/*.webm ${tgt_dir}/data/sounds/
   touch ${tgt_dir}/data/portable-app
 
   cp README.md ${tgt_dir}/doc/README.txt

@@ -2,6 +2,11 @@
 
 ## New features and enhancements
 
+* MKVToolNix GUI: program runner configuration, type "play audio file": added
+  a slider to make configuration more intuitive. Implemented by #6267.
+* MKVToolNix GUI: macOS only: the GUI will now use bundled audio files for
+  "play audio file" program runners that Qt can play instead of using macOS's
+  system sounds. Implemented by #6268. Fixes #6264.
 * MKVToolNix GUI: executing actions: added a new type on Windows: executing a
   PowerShell script. Either an existing script file can be selected or custom
   PowerShell script code entered in a small editor. The executed script has
@@ -19,6 +24,10 @@
 
 ## Bug fixes
 
+* MKVToolNix GUI: program runner configuration, type "play audio file": fixed
+  audio volume not working since switching to Qt 6 due to its interface taking
+  a `float` in range `0.0`–`1.0` instead of the old interface taking an `int`
+  in range `0`–`100`. Implemented by #6267. Fixes #6266.
 * command-line tools: Windows: switched to Boost's UTF-8 code-conversion facet
   (`boost::locale::utf8_codecvt`) from `std::utf8_codecvt` included in
   MingW. This seems to fix an issue with converting certain high code point

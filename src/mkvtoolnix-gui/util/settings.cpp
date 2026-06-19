@@ -973,11 +973,15 @@ Settings::fixDefaultAudioFileNameBug() {
   QRegularExpression wrongFileNameRE{"<MTX_INSTALLATION_DIRECTORY>[/\\\\]sounds[/\\\\]finished-1\\.ogg"};
 
 # else // → SYS_APPLE
-  // Qt Multimedia's macOS backend cannot decode WebM as the Darwin
-  // backend (`libdarwinmediaplugin.dylib`) routes through
-  // AVFoundation → Core Audio, which has no WebM/VP8/Vorbis/Opus
-  // codec.
-  QRegularExpression wrongFileNameRE{"<MTX_INSTALLATION_DIRECTORY>/sounds/finished-1\\.webm"};
+  // Qt Multimedia's macOS backend cannot decode WebM or Ogg: the Darwin
+  // plugin (`libdarwinmediaplugin.dylib`) routes through AVFoundation →
+  // Core Audio, which has no WebM/VP8/Vorbis/Opus codec. The bundled
+  // finished-1/2/3 defaults shipped as `.ogg` (pre-WebM) and later as
+  // `.webm`, in both the `sounds/` and `data/sounds/` layouts, so a
+  // config still pointing at one of those plays silent here. Reset only
+  // those stale bundled defaults to the `.caf` Core Audio can play; a
+  // file the user picked themselves is left alone.
+  QRegularExpression wrongFileNameRE{"<MTX_INSTALLATION_DIRECTORY>/(?:data/)?sounds/finished-\\d+\\.(webm|ogg)$"};
 # endif
 
   for (auto const &config : m_runProgramConfigurations) {

@@ -2,9 +2,8 @@
 
 #include <Qt>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
-# include <QAudioOutput>
-#endif
-#include <QDebug>
+# include <QAudio>
+#endif#include <QDebug>
 #include <QMediaPlayer>
 
 #include "mkvtoolnix-gui/util/media_player.h"
@@ -83,8 +82,12 @@ MediaPlayer::playFile(QString const &fileName,
   p.lastPlayedFile = fileName;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
-  p.audioOutput->setVolume(volume);
-  p.player->setSource(QUrl::fromLocalFile(fileName));
+  // volume is a 0-100 percentage. Qt recommends scaling volume controls
+  // logarithmically; convert to the 0.0-1.0 linear value setVolume() expects.
+  auto const linearVolume = QAudio::convertVolume(volume / 100.0,
+                                                  QAudio::LogarithmicVolumeScale,
+                                                  QAudio::LinearVolumeScale);
+  p.audioOutput->setVolume(linearVolume);  p.player->setSource(QUrl::fromLocalFile(fileName));
 #else
   p.player->setVolume(volume);
   p.player->setMedia(QUrl::fromLocalFile(fileName));

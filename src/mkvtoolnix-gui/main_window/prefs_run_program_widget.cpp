@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QDir>
 #include <QMenu>
+#include <QSlider>
+#include <QSpinBox>
 
 #include "common/qt.h"
 #include "common/list_utils.h"
@@ -100,6 +102,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   p->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
   p->ui->leAudioFile->setText(QDir::toNativeSeparators(Util::replaceApplicationDirectoryWithMtxVariable(cfg.m_audioFile)));
   p->ui->sbVolume->setValue(cfg.m_volume);
+  p->ui->slVolume->setValue(cfg.m_volume);
   p->ui->lePowerShellScriptFile->setText(QDir::toNativeSeparators(cfg.m_powerShellScriptFile));
   p->ui->ptePowerShellScriptCode->setPlainText(cfg.m_powerShellScriptCode);
   p->ui->rbPowerShellScriptIsFile->setChecked( cfg.m_powerShellScriptIsFile);
@@ -200,6 +203,12 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 
   p->ui->tbUsageNotes->setHtml(html.join(Q(" ")));
 
+#if !defined(SYS_APPLE)
+  // Only macOS needs this button: there the bundled default lives inside the
+  // .app, unreachable through the picker. Elsewhere it is navigable, so hide it.
+  p->ui->pbRevertAudioFile->setVisible(false);
+#endif
+
   enableControls();
 }
 
@@ -258,6 +267,8 @@ PrefsRunProgramWidget::setupToolTips() {
   Util::setToolTip(p->ui->cbAfterJobQueueStopped, conditionsToolTip);
   Util::setToolTip(p->ui->cbAfterJobSuccessful,   conditionsToolTip);
   Util::setToolTip(p->ui->cbAfterJobError,        conditionsToolTip);
+
+  Util::setToolTip(p->ui->pbRevertAudioFile, QY("Reset the audio file to the default sound."));
 }
 
 void
@@ -314,20 +325,23 @@ void
 PrefsRunProgramWidget::setupConnections() {
   auto p = p_func();
 
-  connect(p->ui->cbConfigurationActive,        &QCheckBox::toggled,                                                    this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
-  connect(p->ui->leName,                       &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
-  connect(p->ui->cbType,                       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &PrefsRunProgramWidget::typeChanged);
-  connect(p->ui->leCommandLine,                &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::commandLineEdited);
-  connect(p->ui->pbBrowseExecutable,           &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeExecutable);
-  connect(p->ui->pbAddVariable,                &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::selectVariableToAdd);
-  connect(p->ui->pbExecuteNow,                 &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::executeNow);
-  connect(p->ui->leAudioFile,                  &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
-  connect(p->ui->pbBrowseAudioFile,            &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changeAudioFile);
-  connect(p->ui->lePowerShellScriptFile,       &QLineEdit::textEdited,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
-  connect(p->ui->pbBrowsePowerShellScriptFile, &QPushButton::clicked,                                                  this, &PrefsRunProgramWidget::changePowerShellScriptFile);
-  connect(p->ui->ptePowerShellScriptCode,      &QPlainTextEdit::textChanged,                                           this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
-  connect(p->ui->rbPowerShellScriptIsFile,     &QRadioButton::toggled,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
-  connect(p->ui->rbPowerShellScriptIsCode,     &QRadioButton::toggled,                                                 this, &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->cbConfigurationActive,        &QCheckBox::toggled,                                                    this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->leName,                       &QLineEdit::textEdited,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->cbType,                       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,            &PrefsRunProgramWidget::typeChanged);
+  connect(p->ui->leCommandLine,                &QLineEdit::textEdited,                                                 this,            &PrefsRunProgramWidget::commandLineEdited);
+  connect(p->ui->pbBrowseExecutable,           &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::changeExecutable);
+  connect(p->ui->pbAddVariable,                &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::selectVariableToAdd);
+  connect(p->ui->pbExecuteNow,                 &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::executeNow);
+  connect(p->ui->leAudioFile,                  &QLineEdit::textEdited,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->pbBrowseAudioFile,            &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::changeAudioFile);
+  connect(p->ui->pbRevertAudioFile,            &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::revertAudioFileToDefault);
+  connect(p->ui->slVolume,                     &QSlider::valueChanged,                                                 p->ui->sbVolume, &QSpinBox::setValue);
+  connect(p->ui->sbVolume,                     &QSpinBox::valueChanged,                                                p->ui->slVolume, &QSlider::setValue);
+  connect(p->ui->lePowerShellScriptFile,       &QLineEdit::textEdited,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->pbBrowsePowerShellScriptFile, &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::changePowerShellScriptFile);
+  connect(p->ui->ptePowerShellScriptCode,      &QPlainTextEdit::textChanged,                                           this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->rbPowerShellScriptIsFile,     &QRadioButton::toggled,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
+  connect(p->ui->rbPowerShellScriptIsCode,     &QRadioButton::toggled,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
 }
 
 void
@@ -444,6 +458,14 @@ PrefsRunProgramWidget::config()
       cfg->m_forEvents |= p->flagsByCheckbox[checkBox];
 
   return cfg;
+}
+
+void
+PrefsRunProgramWidget::revertAudioFileToDefault() {
+  auto p = p_func();
+
+  p->ui->leAudioFile->setText(QDir::toNativeSeparators(App::programRunner().defaultAudioFileName()));
+  enableControlsAndEmitTitleChanged();
 }
 
 void

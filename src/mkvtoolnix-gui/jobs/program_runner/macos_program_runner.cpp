@@ -18,7 +18,7 @@ MacOSProgramRunner::~MacOSProgramRunner() {
 QString
 MacOSProgramRunner::defaultAudioFileName()
   const {
-  return Q("/System/Library/Sounds/Glass.aiff");
+  return Q("<MTX_INSTALLATION_DIRECTORY>/data/sounds/finished-1.caf");
 }
 
 }
