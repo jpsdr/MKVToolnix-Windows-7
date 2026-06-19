@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <Qt>
+#include <QAudio>
 #include <QAudioOutput>
 #include <QDebug>
 #include <QMediaPlayer>
@@ -66,7 +67,12 @@ MediaPlayer::playFile(QString const &fileName,
 
   p.lastPlayedFile = fileName;
 
-  p.audioOutput->setVolume(volume);
+  // volume is a 0-100 percentage. Qt recommends scaling volume controls
+  // logarithmically; convert to the 0.0-1.0 linear value setVolume() expects.
+  auto const linearVolume = QAudio::convertVolume(volume / 100.0,
+                                                  QAudio::LogarithmicVolumeScale,
+                                                  QAudio::LinearVolumeScale);
+  p.audioOutput->setVolume(linearVolume);
   p.player->setSource(QUrl::fromLocalFile(fileName));
   p.player->play();
 }

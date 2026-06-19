@@ -42,6 +42,7 @@ protected Q_SLOTS:
   void enableControlsAndEmitTitleChanged();
 
   void changeAudioFile();
+  void revertAudioFileToDefault();
 
   void changePowerShellScriptFile();
 
