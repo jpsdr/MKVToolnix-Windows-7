@@ -1062,7 +1062,8 @@ namespace :install do
       sounds_dir ="#{c(:pkgdatadir)}/sounds"
 
       install_dir  sounds_dir
-      install_data sounds_dir, FileList["#{$source_dir}/share/sounds/*"]
+      sounds_extension = $building_for[:macos] ? "caf" : "webm"
+      install_data sounds_dir, FileList["#{$source_dir}/share/sounds/*.#{sounds_extension}"]
       install_data c(:pkgdatadir), $qt_resources
     end
   end

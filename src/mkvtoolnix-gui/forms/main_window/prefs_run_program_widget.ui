@@ -255,6 +255,16 @@ p, li { white-space: pre-wrap; }
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QPushButton" name="pbRevertAudioFile">
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+                <property name="icon">
+                 <iconset theme="edit-undo"/>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
             <item row="1" column="0">
@@ -268,14 +278,28 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="mtx::gui::Util::BasicSpinBox" name="sbVolume">
-              <property name="suffix">
-               <string notr="true">%</string>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="volumeLayout">
+              <item>
+               <widget class="QSlider" name="slVolume">
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="mtx::gui::Util::BasicSpinBox" name="sbVolume">
+                <property name="suffix">
+                 <string notr="true">%</string>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
@@ -399,6 +423,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>tbUsageNotes</tabstop>
   <tabstop>leAudioFile</tabstop>
   <tabstop>pbBrowseAudioFile</tabstop>
+  <tabstop>pbRevertAudioFile</tabstop>
   <tabstop>sbVolume</tabstop>
  </tabstops>
  <resources>
