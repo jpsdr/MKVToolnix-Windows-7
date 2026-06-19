@@ -335,8 +335,8 @@ PrefsRunProgramWidget::setupConnections() {
   connect(p->ui->leAudioFile,                  &QLineEdit::textEdited,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
   connect(p->ui->pbBrowseAudioFile,            &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::changeAudioFile);
   connect(p->ui->pbRevertAudioFile,            &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::revertAudioFileToDefault);
-  connect(p->ui->slVolume,                     &QSlider::valueChanged,                                                 p->ui->sbVolume, &QSpinBox::setValue);
-  connect(p->ui->sbVolume,                     &QSpinBox::valueChanged,                                                p->ui->slVolume, &QSlider::setValue);
+//  connect(p->ui->slVolume,                     &QSlider::valueChanged,                                                 p->ui->sbVolume, &QSpinBox::setValue);
+//  connect(p->ui->sbVolume,                     &QSpinBox::valueChanged,                                                p->ui->slVolume, &QSlider::setValue);
   connect(p->ui->lePowerShellScriptFile,       &QLineEdit::textEdited,                                                 this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
   connect(p->ui->pbBrowsePowerShellScriptFile, &QPushButton::clicked,                                                  this,            &PrefsRunProgramWidget::changePowerShellScriptFile);
   connect(p->ui->ptePowerShellScriptCode,      &QPlainTextEdit::textChanged,                                           this,            &PrefsRunProgramWidget::enableControlsAndEmitTitleChanged);
