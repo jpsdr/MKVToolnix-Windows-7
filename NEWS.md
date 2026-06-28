@@ -21,6 +21,8 @@
   removing the queue jobs. Implements #6255.
 * MKVToolNix GUI: job queue: added a search functionality for jobs that
   searches in job descriptions, outputs, warnings & errors. Implements #6256.
+* mkvmerge: MP4 reader: track names are now read from the track's user-data
+  atoms (`trak` → `udta` → `name`) if present. Implements #6274.
 
 ## Bug fixes
 

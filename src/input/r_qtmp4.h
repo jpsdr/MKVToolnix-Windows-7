@@ -282,6 +282,8 @@ struct qtmp4_demuxer_c {
   int ptzr;
   packet_converter_cptr m_converter;
 
+  std::string m_name, m_title;
+
   mtx::bcp47::language_c language;
 
   debugging_option_c m_debug_tables, m_debug_tables_full, m_debug_frame_rate, m_debug_headers, m_debug_editlists, m_debug_indexes, m_debug_indexes_full;
@@ -565,6 +567,7 @@ protected:
   virtual void handle_tkhd_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_display_matrix(qtmp4_demuxer_c &new_dmx, int level);
   virtual void handle_trak_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_trak_udta_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_edts_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_elst_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
   virtual void handle_tref_atom(qtmp4_demuxer_c &new_dmx, qt_atom_t parent, int level);
