@@ -1336,6 +1336,7 @@ reader_c::setup_initial_tracks() {
 
 void
 reader_c::read_headers_for_file(std::size_t file_num) {
+  auto prev_file = m_current_file;
   m_current_file = file_num;
   auto &f        = file();
 
@@ -1420,6 +1421,13 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   }
 
   mxdebug_if(m_debug_headers, fmt::format("read_headers: Detection done on {0} bytes\n", f.m_in->getFilePointer()));
+
+  // Ensure file position is reset & EOF is cleared. Also restore the
+  // original "m_current_file".
+  f.m_in->setFilePointer(0);
+  f.m_in->clear_eof();
+
+  m_current_file = prev_file;
 
   // Run probe_packet_complete() for track-type detection once for
   // each track. This way tracks that don't actually need their

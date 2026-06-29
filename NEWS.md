@@ -44,6 +44,11 @@
   boundary. Fixes regression starting with v87 when fixing AAC LATM config not
   being parsed if it wasn't present in the first AAC frame. Patch by
   Corticalcode. Fixes #6196.
+* mkvmerge: MPEG TS reader: under certain rare conditions mkvmerge was
+  skipping a certain amount of content at the start of the main M2TS file when
+  reading MPLS playlists. The amount of content skipped proportional to the
+  probe range percentage. This only happened when the source Blu-ray contains
+  HDMV TextST subtitles. Fixes #6269.
 
 ## Build system changes
 
