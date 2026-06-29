@@ -1372,8 +1372,15 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       if (   f.m_pat_found
           && f.all_pmts_found()
           && (0 == f.m_es_to_process)
-          && (f.m_in->getFilePointer() >= min_size_to_probe))
+          && (f.m_in->getFilePointer() >= min_size_to_probe)) {
+        // Happy case: PAT & all PMTs were found, all expected
+        // elementary streams have been processed, meaning all tracks
+        // are ready to have their packetizers be
+        // created. Additionally we've reached the minimum size to
+        // probe, ensuring to pick up everything we need.
+        mxdebug_if(m_debug_headers, fmt::format("read_headers: getting out: case PAT & all PMTs found, no more ES to process, pos ≥ min_size_to_probe\n"));
         break;
+      }
 
       auto eof = f.m_in->eof() || (f.m_in->getFilePointer() >= size_to_probe);
       if (!eof)
@@ -1388,15 +1395,20 @@ reader_c::read_headers_for_file(std::size_t file_num) {
                              m_tracks.size(), f.m_num_pat_crc_errors, f.m_num_pmt_crc_errors, f.m_pat_found, f.m_num_pmts_found, f.m_num_pmts_to_find));
 
       if (!f.m_pat_found && f.m_validate_pat_crc)
+        // No PAT found but still validating; retry without validating
         f.m_validate_pat_crc = false;
 
       else if (f.m_pat_found && !f.all_pmts_found() && f.m_validate_pmt_crc) {
+        // PAT found but not all PMTs and still validating; retry without validating
         f.m_validate_pmt_crc = false;
         f.m_num_pmts_to_find = 0;
         f.m_pmt_pid_seen.clear();
 
-      } else
+      } else {
+        // No success with PAT + all PMTs and not validating anymore, no reason to keep going
+        mxdebug_if(m_debug_headers, fmt::format("read_headers: getting out: case EOF, else-branch\n"));
         break;
+      }
 
       f.m_in->setFilePointer(0);
       f.m_in->clear_eof();
@@ -1571,6 +1583,9 @@ reader_c::read_headers() {
 
   m_tracks = std::move(identified_tracks);
 
+  for (auto const &file : m_files)
+    mxdebug_if(m_debug_headers, fmt::format("read_headers: file positions at end of probing: file {0} pos {1}/{2}\n", file->m_in->get_file_name(), file->m_in->getFilePointer(), file->m_in->get_size()));
+
   show_demuxer_info();
 }
 
@@ -1597,7 +1612,7 @@ reader_c::determine_global_timestamp_offset() {
   f.m_in->setFilePointer(probe_start_pos);
   f.m_in->clear_eof();
 
-  mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes\n", f.m_probe_range));
+  mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes from {1}\n", f.m_probe_range, probe_start_pos));
 
   try {
     uint8_t buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
