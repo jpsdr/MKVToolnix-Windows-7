@@ -1890,6 +1890,15 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
   track->set_pid(pmt_pid_info->get_pid());
   track->determine_codec_from_stream_type(pmt_pid_info->stream_type);
 
+  if (track->probed_ok && (track->type != pid_type_e::unknown))
+    // Codec types that do not require further ES data for creating
+    // the packetizer set `probed_ok` in
+    // `determine_codec_from_stream_type()`. If that's the case, later
+    // code that decreases `m_es_to_process` in
+    // `probe_packet_complete` will never be called, leaving
+    // `m_es_to_process` one-too-high.
+    f.m_es_to_process--;
+
   while (es_info_length >= sizeof(pmt_descriptor_t)) {
     auto pmt_descriptor_buffer = read_pmt_descriptor(mem);
     auto pmt_descriptor        = reinterpret_cast<pmt_descriptor_t *>(pmt_descriptor_buffer->get_buffer());
