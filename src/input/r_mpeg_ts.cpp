@@ -74,7 +74,25 @@
 
 // This is ISO/IEC 13818-1.
 
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::mpeg_ts::pid_type_e> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000
+
 namespace mtx::mpeg_ts {
+
+inline std::ostream &
+operator <<(std::ostream &out,
+            mtx::mpeg_ts::pid_type_e const &pid_type) {
+  out << (  pid_type == mtx::mpeg_ts::pid_type_e::pat       ? "pid_type<pat>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::pmt       ? "pid_type<pmt>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::sdt       ? "pid_type<sdt>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::video     ? "pid_type<video>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::audio     ? "pid_type<audio>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::subtitles ? "pid_type<subtitles>"
+          :                                                   "pid_type<unknown>");
+
+  return out;
+}
 
 constexpr auto TS_PACKET_SIZE     = 188;
 constexpr auto TS_MAX_PACKET_SIZE = 204;
@@ -1093,6 +1111,8 @@ track_c::determine_codec_from_stream_type(stream_type_e stream_type) {
       type      = pid_type_e::unknown;
       break;
   }
+
+  mxdebug_if(reader.m_debug_headers, fmt::format("parse_pmt: determine_codec_from_stream_type: type {0} codec {1} es_to_process {2}\n", type, codec, reader.file().m_es_to_process));
 }
 
 void
@@ -2549,7 +2569,7 @@ reader_c::probe_packet_complete(track_c &track,
   track.clear_pes_payload();
 
   if (result != 0) {
-    mxdebug_if(m_debug_headers, (result == FILE_STATUS_MOREDATA) ? "probe_packet_complete: Need more data to probe ES\n" : "probe_packet_complete: Failed to parse packet. Reset and retry\n");
+    mxdebug_if(m_debug_headers, fmt::format("probe_packet_complete: pid {0} {1}\n", track.pid, result == FILE_STATUS_MOREDATA ? "need more data to probe ES" : "failed to parse packet; reset and retry"));
     track.processed = false;
 
     return;
@@ -2569,7 +2589,7 @@ reader_c::probe_packet_complete(track_c &track,
     if (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
       f.m_has_audio_or_video_track = true;
 
-    mxdebug_if(m_debug_headers, fmt::format("probe_packet_complete: ES to process: {0}\n", f.m_es_to_process));
+    mxdebug_if(m_debug_headers, fmt::format("probe_packet_complete: pid {0} type {1} codec {2} es_to_process {3}\n", track.pid, track.type, track.codec, f.m_es_to_process));
   }
 }
 
