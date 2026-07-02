@@ -21,6 +21,8 @@
   removing the queue jobs. Implements #6255.
 * MKVToolNix GUI: job queue: added a search functionality for jobs that
   searches in job descriptions, outputs, warnings & errors. Implements #6256.
+* mkvmerge: MP4 reader: track names are now read from the track's user-data
+  atoms (`trak` → `udta` → `name`) if present. Implements #6274.
 
 ## Bug fixes
 
@@ -42,6 +44,11 @@
   boundary. Fixes regression starting with v87 when fixing AAC LATM config not
   being parsed if it wasn't present in the first AAC frame. Patch by
   Corticalcode. Fixes #6196.
+* mkvmerge: MPEG TS reader: under certain rare conditions mkvmerge was
+  skipping a certain amount of content at the start of the main M2TS file when
+  reading MPLS playlists. The amount of content skipped proportional to the
+  probe range percentage. This only happened when the source Blu-ray contains
+  HDMV TextST subtitles. Fixes #6269.
 
 ## Build system changes
 
