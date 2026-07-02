@@ -13,5 +13,5 @@ spec_pkgconfig=(pkg-config-0.29.2.tar.gz https://pkg-config.freedesktop.org/rele
 spec_shared_mime_info=(shared-mime-info-2.4.tar.bz2 https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.bz2 32dc32ae39ff1c1bf8434dd3b36770b48538a1772bc0298509d034f057005992)
 spec_vorbis=(libvorbis-1.3.7.tar.xz http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.xz b33cc4934322bcbf6efcbacf49e3ca01aadbea4114ec9589d1b1e9d20f72954b)
 spec_zlib=(zlib-v1.3.2.tar.xz https://zlib.net/zlib-1.3.2.tar.xz d7a0654783a4da529d1bb793b7ad9c3318020af77667bcae35f95d0e42a792f3)
-spec_qt=(qt-everywhere-src-6.11.0.tar.xz https://download.qt.io/archive/qt/6.11/6.11.0/single/qt-everywhere-src-6.11.0.tar.xz acf3b3db04c9e5d0820e8324b097320388954c297cee83d2bd698789234f68a4)
+spec_qt=(qt-everywhere-src-6.11.1.tar.xz https://download.qt.io/archive/qt/6.11/6.11.1/single/qt-everywhere-src-6.11.1.tar.xz 252acef8c5ae68074d91cadba2ee4a83465051bbb970dd26e8f0daa0f3904e03)
 spec_gpg=(gnupg-1.4.23.tar.bz2 https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-1.4.23.tar.bz2 c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba)
