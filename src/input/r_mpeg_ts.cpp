@@ -74,7 +74,25 @@
 
 // This is ISO/IEC 13818-1.
 
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::mpeg_ts::pid_type_e> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000
+
 namespace mtx::mpeg_ts {
+
+inline std::ostream &
+operator <<(std::ostream &out,
+            mtx::mpeg_ts::pid_type_e const &pid_type) {
+  out << (  pid_type == mtx::mpeg_ts::pid_type_e::pat       ? "pid_type<pat>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::pmt       ? "pid_type<pmt>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::sdt       ? "pid_type<sdt>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::video     ? "pid_type<video>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::audio     ? "pid_type<audio>"
+          : pid_type == mtx::mpeg_ts::pid_type_e::subtitles ? "pid_type<subtitles>"
+          :                                                   "pid_type<unknown>");
+
+  return out;
+}
 
 constexpr auto TS_PACKET_SIZE     = 188;
 constexpr auto TS_MAX_PACKET_SIZE = 204;
@@ -1093,6 +1111,8 @@ track_c::determine_codec_from_stream_type(stream_type_e stream_type) {
       type      = pid_type_e::unknown;
       break;
   }
+
+  mxdebug_if(reader.m_debug_headers, fmt::format("parse_pmt: determine_codec_from_stream_type: type {0} codec {1} es_to_process {2}\n", type, codec, reader.file().m_es_to_process));
 }
 
 void
@@ -1336,6 +1356,7 @@ reader_c::setup_initial_tracks() {
 
 void
 reader_c::read_headers_for_file(std::size_t file_num) {
+  auto prev_file = m_current_file;
   m_current_file = file_num;
   auto &f        = file();
 
@@ -1372,8 +1393,15 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       if (   f.m_pat_found
           && f.all_pmts_found()
           && (0 == f.m_es_to_process)
-          && (f.m_in->getFilePointer() >= min_size_to_probe))
+          && (f.m_in->getFilePointer() >= min_size_to_probe)) {
+        // Happy case: PAT & all PMTs were found, all expected
+        // elementary streams have been processed, meaning all tracks
+        // are ready to have their packetizers be
+        // created. Additionally we've reached the minimum size to
+        // probe, ensuring to pick up everything we need.
+        mxdebug_if(m_debug_headers, fmt::format("read_headers: getting out: case PAT & all PMTs found, no more ES to process, pos ≥ min_size_to_probe\n"));
         break;
+      }
 
       auto eof = f.m_in->eof() || (f.m_in->getFilePointer() >= size_to_probe);
       if (!eof)
@@ -1388,15 +1416,20 @@ reader_c::read_headers_for_file(std::size_t file_num) {
                              m_tracks.size(), f.m_num_pat_crc_errors, f.m_num_pmt_crc_errors, f.m_pat_found, f.m_num_pmts_found, f.m_num_pmts_to_find));
 
       if (!f.m_pat_found && f.m_validate_pat_crc)
+        // No PAT found but still validating; retry without validating
         f.m_validate_pat_crc = false;
 
       else if (f.m_pat_found && !f.all_pmts_found() && f.m_validate_pmt_crc) {
+        // PAT found but not all PMTs and still validating; retry without validating
         f.m_validate_pmt_crc = false;
         f.m_num_pmts_to_find = 0;
         f.m_pmt_pid_seen.clear();
 
-      } else
+      } else {
+        // No success with PAT + all PMTs and not validating anymore, no reason to keep going
+        mxdebug_if(m_debug_headers, fmt::format("read_headers: getting out: case EOF, else-branch\n"));
         break;
+      }
 
       f.m_in->setFilePointer(0);
       f.m_in->clear_eof();
@@ -1408,6 +1441,13 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   }
 
   mxdebug_if(m_debug_headers, fmt::format("read_headers: Detection done on {0} bytes\n", f.m_in->getFilePointer()));
+
+  // Ensure file position is reset & EOF is cleared. Also restore the
+  // original "m_current_file".
+  f.m_in->setFilePointer(0);
+  f.m_in->clear_eof();
+
+  m_current_file = prev_file;
 
   // Run probe_packet_complete() for track-type detection once for
   // each track. This way tracks that don't actually need their
@@ -1571,6 +1611,9 @@ reader_c::read_headers() {
 
   m_tracks = std::move(identified_tracks);
 
+  for (auto const &file : m_files)
+    mxdebug_if(m_debug_headers, fmt::format("read_headers: file positions at end of probing: file {0} pos {1}/{2}\n", file->m_in->get_file_name(), file->m_in->getFilePointer(), file->m_in->get_size()));
+
   show_demuxer_info();
 }
 
@@ -1597,7 +1640,7 @@ reader_c::determine_global_timestamp_offset() {
   f.m_in->setFilePointer(probe_start_pos);
   f.m_in->clear_eof();
 
-  mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes\n", f.m_probe_range));
+  mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes from {1}\n", f.m_probe_range, probe_start_pos));
 
   try {
     uint8_t buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
@@ -1846,6 +1889,15 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
 
   track->set_pid(pmt_pid_info->get_pid());
   track->determine_codec_from_stream_type(pmt_pid_info->stream_type);
+
+  if (track->probed_ok && (track->type != pid_type_e::unknown))
+    // Codec types that do not require further ES data for creating
+    // the packetizer set `probed_ok` in
+    // `determine_codec_from_stream_type()`. If that's the case, later
+    // code that decreases `m_es_to_process` in
+    // `probe_packet_complete` will never be called, leaving
+    // `m_es_to_process` one-too-high.
+    f.m_es_to_process--;
 
   while (es_info_length >= sizeof(pmt_descriptor_t)) {
     auto pmt_descriptor_buffer = read_pmt_descriptor(mem);
@@ -2526,7 +2578,7 @@ reader_c::probe_packet_complete(track_c &track,
   track.clear_pes_payload();
 
   if (result != 0) {
-    mxdebug_if(m_debug_headers, (result == FILE_STATUS_MOREDATA) ? "probe_packet_complete: Need more data to probe ES\n" : "probe_packet_complete: Failed to parse packet. Reset and retry\n");
+    mxdebug_if(m_debug_headers, fmt::format("probe_packet_complete: pid {0} {1}\n", track.pid, result == FILE_STATUS_MOREDATA ? "need more data to probe ES" : "failed to parse packet; reset and retry"));
     track.processed = false;
 
     return;
@@ -2546,7 +2598,7 @@ reader_c::probe_packet_complete(track_c &track,
     if (mtx::included_in(track.type, pid_type_e::audio, pid_type_e::video))
       f.m_has_audio_or_video_track = true;
 
-    mxdebug_if(m_debug_headers, fmt::format("probe_packet_complete: ES to process: {0}\n", f.m_es_to_process));
+    mxdebug_if(m_debug_headers, fmt::format("probe_packet_complete: pid {0} type {1} codec {2} es_to_process {3}\n", track.pid, track.type, track.codec, f.m_es_to_process));
   }
 }
 

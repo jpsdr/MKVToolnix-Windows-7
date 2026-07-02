@@ -980,6 +980,26 @@ qtmp4_reader_c::handle_udta_atom(qt_atom_t parent,
 }
 
 void
+qtmp4_reader_c::handle_trak_udta_atom(qtmp4_demuxer_c &new_dmx,
+                                      qt_atom_t parent,
+                                      int level) {
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
+    if (atom.fourcc == "name") {
+      try {
+        auto content = read_string_atom(atom, 0);
+        mtx::string::strip(content, true);
+
+        if (new_dmx.m_name.empty())
+          new_dmx.m_name = content;
+
+        mxdebug_if(m_debug_headers, fmt::format("{0} content: {1}\n", space(level * 2 + 2), content));
+      } catch (mtx::exception const &ex) {
+        mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading track name/title: {1}\n", space(level * 2 + 1), ex.what()));
+      }
+    }
+  });
+}
+void
 qtmp4_reader_c::handle_chpl_atom(qt_atom_t,
                                  int level) {
   if (m_ti.m_no_chapters || m_chapters)
@@ -1634,6 +1654,9 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
 
     else if (atom.fourcc == "tref")
       handle_tref_atom(dmx, atom.to_parent(), level + 1);
+
+    else if (atom.fourcc == "udta")
+      handle_trak_udta_atom(dmx, atom.to_parent(), level + 1);
   });
 
   dmx.determine_codec();
@@ -1984,6 +2007,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
   m_ti.m_language = dmx.language;
   m_ti.m_private_data.reset();
 
+  if (!dmx.m_name.empty())
+    m_ti.m_track_name = dmx.m_name;
+
   bool packetizer_ok = true;
 
   if (dmx.is_video()) {
@@ -2150,6 +2176,7 @@ qtmp4_reader_c::identify() {
       info.add(mtx::id::packetizer, dmx.m_hevc_is_annex_b ? mtx::id::mpegh_p2_es_video : mtx::id::mpegh_p2_video);
 
     info.add(mtx::id::language, dmx.language.get_iso639_alpha_3_code());
+    info.add(mtx::id::track_name, dmx.m_name);
 
     if (dmx.is_video()) {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, dmx.v_width, dmx.v_height);
