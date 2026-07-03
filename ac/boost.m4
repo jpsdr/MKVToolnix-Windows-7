@@ -4,11 +4,14 @@ AX_BOOST_BASE([1.74.0])
 AC_MSG_CHECKING([for Boost's multi-precision library with GMP backend])
 
 saved_CPPFLAGS="$CPPFLAGS"
+saved_CXXFLAGS="$CXXFLAGS"
 saved_LDFLAGS="$LDFLAGS"
 saved_LIBS="$LIBS"
 
 CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
 export CPPFLAGS
+CXXFLAGS="$CXXFLAGS -std=c++20"
+export CXXFLAGS
 LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
 export LDFLAGS
 LIBS="$LIBS -lgmp"
@@ -27,6 +30,7 @@ AC_COMPILE_IFELSE([
 ],[am_cv_bmp_gmp=yes],[am_cv_bmp_gmp=no])
 
 CPPFLAGS="$saved_CPPFLAGS"
+CXXFLAGS="$saved_CXXFLAGS"
 LDFLAGS="$saved_LDFLAGS"
 LIBS="$saved_LIBS"
 
