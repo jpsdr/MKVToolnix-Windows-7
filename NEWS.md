@@ -58,6 +58,9 @@
 * macOS: include the app's supported platform(s) in `Info.plist` to correctly
   resolve the app's Kind as Apple Silicon in System Information. Detected
   during discussion of #6260.
+* macOS: updated Qt to 6.11.1. The patch that made building Qt from source
+  possible on macOS 26.4 (by Touchstone64) has been removed as Qt 6.11.1
+  includes the fix upstream. See #6276.
 
 
 # Version 99.0 "Buka" 2026-05-24
