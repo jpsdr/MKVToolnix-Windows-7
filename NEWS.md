@@ -2,44 +2,35 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: program runner configuration, type "play audio file": added
-  a slider to make configuration more intuitive. Implemented by #6267.
-* MKVToolNix GUI: macOS only: the GUI will now use bundled audio files for
-  "play audio file" program runners that Qt can play instead of using macOS's
-  system sounds. Implemented by #6268. Fixes #6264.
-* MKVToolNix GUI: executing actions: added a new type on Windows: executing a
-  PowerShell script. Either an existing script file can be selected or custom
-  PowerShell script code entered in a small editor. The executed script has
-  access to all `MTX_…` variables through the environment,
-  e.g. `$env:MTX_DESTINATION_FILE_BASE_NAME`. Workaround for the problems
-  talked about in #6254.
 * all: added new scalable (SVG) application icons for all applications,
   replacing the existing pixmap (PNG, ICO) icons. Icons from Sarreq
   Teryx. Implements #6253.
+* mkvmerge: MP4 reader: track names are now read from the track's user-data
+  atoms (`trak` → `udta` → `name`) if present. Implements #6274.
+* MKVToolNix GUI: executing actions configuration, type "play audio file":
+  added a slider to make configuration more intuitive. Implemented by #6267.
+* MKVToolNix GUI: executing actions: macOS only: the GUI will now use bundled
+  audio files for "play audio file" actions that Qt can play instead of using
+  macOS's system sounds. Implemented by #6268. Fixes #6264.
+* MKVToolNix GUI: executing actions: Windows only: added a new type: executing
+  a PowerShell script. Either an existing script file can be selected or
+  custom PowerShell script code entered in a small editor. The executed script
+  has access to all `MTX_…` variables through the environment,
+  e.g. `$env:MTX_DESTINATION_FILE_BASE_NAME`. Workaround for the problems
+  talked about in #6254.
 * MKVToolNix GUI: job queue: added a context menu for opening copies of the
   selected queue jobs in the multiplexer as new settings there without
   removing the queue jobs. Implements #6255.
 * MKVToolNix GUI: job queue: added a search functionality for jobs that
   searches in job descriptions, outputs, warnings & errors. Implements #6256.
-* mkvmerge: MP4 reader: track names are now read from the track's user-data
-  atoms (`trak` → `udta` → `name`) if present. Implements #6274.
 
 ## Bug fixes
 
-* MKVToolNix GUI: program runner configuration, type "play audio file": fixed
-  audio volume not working since switching to Qt 6 due to its interface taking
-  a `float` in range `0.0`–`1.0` instead of the old interface taking an `int`
-  in range `0`–`100`. Implemented by #6267. Fixes #6266.
 * command-line tools: Windows: switched to Boost's UTF-8 code-conversion facet
   (`boost::locale::utf8_codecvt`) from `std::utf8_codecvt` included in
   MingW. This seems to fix an issue with converting certain high code point
   from `wchar_t` to `char` (from UTF-32/16 to UTF-8), preventing interesting
   exceptions from being thrown. Fixes #6257.
-* MKVToolNix GUI: fix backslash handling when parsing a Unix-shell escaped
-  string into separate arguments. The user-visible fix is that the
-  command-line in the "executing actions" dialog will not have the quoting
-  changed in wrong ways by the GUI when the GUI adds another variable upon
-  user request, a regression introduced in v99. Fixes #6253.
 * mkvmerge: AAC: fixed mis-detection of ADTS streams not starting on a frame
   boundary. Fixes regression starting with v87 when fixing AAC LATM config not
   being parsed if it wasn't present in the first AAC frame. Patch by
@@ -49,6 +40,15 @@
   reading MPLS playlists. The amount of content skipped proportional to the
   probe range percentage. This only happened when the source Blu-ray contains
   HDMV TextST subtitles. Fixes #6269.
+* MKVToolNix GUI: executing actions configuration, type "play audio file":
+  fixed audio volume not working since switching to Qt 6 due to its interface
+  taking a `float` in range `0.0`–`1.0` instead of the old interface taking an
+  `int` in range `0`–`100`. Implemented by #6267. Fixes #6266.
+* MKVToolNix GUI: executing actions: fix backslash handling when parsing a
+  Unix-shell escaped string into separate arguments. The user-visible fix is
+  that the command-line in the "executing actions" dialog will not have the
+  quoting changed in wrong ways by the GUI when the GUI adds another variable
+  upon user request, a regression introduced in v99. Fixes #6253.
 
 ## Build system changes
 
