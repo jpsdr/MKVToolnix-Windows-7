@@ -1,4 +1,4 @@
-# Version ?
+# Version 100.0 "Do Hot Girls Like Chords" 2026-07-05
 
 ## New features and enhancements
 
