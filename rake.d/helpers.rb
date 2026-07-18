@@ -170,6 +170,10 @@ def ensure_dir dir
   FileUtils.mkdir_p(dir)
 end
 
+def ensure_parent_dir file
+  ensure_dir file.gsub(%r{/[^/]+$}, '')
+end
+
 def create_dependency_dirs
   [ $dependency_dir, $dependency_tmp_dir ].each { |dir| ensure_dir dir }
 end
