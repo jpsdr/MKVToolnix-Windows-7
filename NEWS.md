@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* Windows: fixed converting the scalable SVG icons into the bitmap `.ico` ones
+  used on Windows so that the grey background remains uniform & doesn't get
+  garbled. Fixes #6280.
+
+
 # Version 100.0 "Do Hot Girls Like Chords" 2026-07-05
 
 ## New features and enhancements

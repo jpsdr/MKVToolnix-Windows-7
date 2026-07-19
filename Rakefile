@@ -372,39 +372,59 @@ def define_icon_tasks
     code
   end
 
-  ico_from_svg = lambda do |*args|
+  ico_from_pngs = lambda do |*args|
     t = args.first
 
-    FileUtils.mkdir_p(t.name.gsub(%r{/[^/]+$}, ''))
+    ensure_parent_dir t.name
 
-    # Magick calls Inkscape for converting SVGs if the latter is installedd.
-    #
+    runq "MAGICK", t.name, "#{$magick} #{t.prerequisites.join(' ')} #{t.name}"
+  end
+
+  png_from_svg = lambda do |*args|
+    t = args.first
+
+    ensure_parent_dir t.name
+
+    # path/to/mkvtoolnix-gui-256x256.png
+    size = t.name.gsub(%r{.*x|\.png$|}, '')
+
     # SELF_CALL environment variable is required due to a bug in Inkscape trying to detect if another instance is running.
     # If multiple instances start simultaneously, this causes crashes. See https://gitlab.com/inkscape/inkscape/-/work_items/4716
 
-    runq "MAGICK", t.name, "#{$magick} -density 256x256 -background transparent #{t.prerequisites.join(' ')} -define icon:auto-resize -colors 256 #{t.name}",
+    runq "INKSCAPE", t.name, "#{c(:INKSCAPE)} --export-overwrite --export-type=png --export-width=#{size} --export-height=#{size} --export-filename=#{t.name} #{t.prerequisites.join(' ')}",
       :env => { "SELF_CALL" => "0" }, :filter_output => inkscape_output_filter
   end
 
-  generated_icos = $icon_type_sources.keys.sort.map { |name| "share/icons/windows/#{name}.ico" }
+  icon_sizes      = [ 16, 24, 32, 48, 64, 128, 256, 512 ].map { |s| "#{s}x#{s}" }
+  icon_type_names = $icon_type_sources.keys.sort
+  generated_icos  = []
+  generated_pngs  = []
 
-  generated_icos.each do |ico|
-    src = "share/icons/mkvtoolnix/" + $icon_type_sources[ico.gsub(%r{.*/|\.ico$}, '')] + ".svg"
+  icon_type_names.map do |name|
+    ico                 = "#{$build_dir}/share/icons/windows/#{name}.ico"
+    generated_icos     << ico
+    generated_type_pngs = icon_sizes.map { |size| "#{$build_dir}/share/icons/windows/#{name}-#{size}.png" }
+    generated_pngs     += generated_type_pngs
+    src_svg             = "#{$source_dir}/share/icons/mkvtoolnix/" + $icon_type_sources[name] + ".svgz"
 
-    file ico => src, &ico_from_svg
+    generated_type_pngs.each do |png|
+      file png => src_svg, &png_from_svg
+    end
+
+    file ico => generated_type_pngs, &ico_from_pngs
   end
-
-  generated_icons = generated_icos
 
   namespace :icons do
     desc "Build bitmap icons from MKVToolNix' own scalable ones"
-    task :all => generated_icons
+    task :all => generated_icos
   end
 
   namespace :clean do
     desc "Remove generated bitmap icons"
     task :icons do
-      remove_files generated_icons
+      puts_action "clean:icons"
+
+      remove_files(generated_icos + generated_pngs)
     end
   end
 end
@@ -541,8 +561,10 @@ end
 # Resources depend on the manifest.xml file for Windows builds.
 if $building_for[:windows]
   $programs.each do |program|
-    path = FileTest.directory?("src/#{program}") ? program : program.gsub(/^mkv/, '')
-    icon = program == 'mkvtoolnix' ? 'share/icons/windows/mkvtoolnix-gui.ico' : "share/icons/windows/mkv#{program.gsub(%r{^mkv}, '')}.ico"
+    path    = FileTest.directory?("src/#{program}") ? program : program.gsub(/^mkv/, '')
+    ico_dir = "#{$build_dir}/share/icons/windows/"
+    icon    = ico_dir + (program == 'mkvtoolnix' ? "mkvtoolnix-gui.ico" : "mkv#{program.gsub(%r{^mkv}, '')}.ico")
+
     file "src/#{path}/resources.o" => [ "src/#{path}/manifest.xml", "src/#{path}/resources.rc", icon ]
   end
 
