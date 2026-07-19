@@ -99,9 +99,15 @@ programs and libraries you absolutely need are:
   used, e.g. `filesystem`, `multi-precision`, `operators`,
   `system`. At least v1.74.0 is required.
 
+Furthermore you need to have several programs installed:
+
 - [libxslt's xsltproc binary](http://xmlsoft.org/libxslt/) and
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
   — for creating man pages from XML documents
+
+- [Inkscape](https://inkscape.org) and
+  [ImageMagick](https://imagemagick.org/) — for converting SVG icons
+  into different types
 
 You also need the `rake` or `drake` build program. I suggest `rake`
 v10.0.0 or newer (this is included with Ruby 2.1) as it offers
