@@ -1068,9 +1068,9 @@ namespace :install do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$source_dir}/share/mime/*.xml" ]
     if c?(:BUILD_GUI)
-      install_dir :appdatadir
-      install_data :desktopdir, "#{$source_dir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
-      install_data :appdatadir, "#{$source_dir}/share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml"
+      install_dir :metainfodir
+      install_data :desktopdir,  "#{$source_dir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
+      install_data :metainfodir, "#{$source_dir}/share/metainfo/org.bunkus.mkvtoolnix-gui.metainfo.xml"
     end
 
     dest_dir = "#{c(:icondir)}/scalable/apps"
