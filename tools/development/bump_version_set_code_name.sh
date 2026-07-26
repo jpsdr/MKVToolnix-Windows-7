@@ -99,7 +99,7 @@ function update_docs {
 
 function update_appstream_metainfo {
   perl -pi -e "s{<releases>\\n}{<releases>\\n    <release version=\"${TO}\" date=\"${MANDATE}\"></release>\\n}" \
-    share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml
+    share/metainfo/org.bunkus.mkvtoolnix-gui.metainfo.xml
 }
 
 update_news

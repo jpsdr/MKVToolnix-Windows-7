@@ -116,7 +116,7 @@ done
 ./drake DESTDIR=$RPM_BUILD_ROOT TOOLS=1 install
 desktop-file-validate %{buildroot}%{_datadir}/applications/org.bunkus.mkvtoolnix-gui.desktop
 if test `lsb_release -is` = Fedora; then
-  appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml
+  appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/org.bunkus.mkvtoolnix-gui.metainfo.xml
 fi
 
 install -pm 755 src/tools/{bluray_dump,ebml_validator,hevcc_dump,xyzvc_dump} $RPM_BUILD_ROOT%{_bindir}
@@ -172,7 +172,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_bindir}/mkvtoolnix-gui
 %{_mandir}/man1/mkvtoolnix-gui.1*
 %{_datadir}/applications/org.bunkus.mkvtoolnix-gui.desktop
-%{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml
+%{_metainfodir}/org.bunkus.mkvtoolnix-gui.metainfo.xml
 %{_datadir}/icons/hicolor/scalable/apps/*.svg
 %{_datadir}/mime/packages/org.bunkus.mkvtoolnix-gui.xml
 %{_datadir}/mkvtoolnix
