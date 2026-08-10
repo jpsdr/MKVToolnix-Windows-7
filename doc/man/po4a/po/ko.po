@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
-"POT-Creation-Date: 2026-07-05 16:50+0200\n"
+"POT-Creation-Date: 2026-08-09 16:02+0200\n"
 "PO-Revision-Date: 2022-07-07 18:33+0200\n"
 "Last-Translator: 양성욱, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1478,7 +1478,9 @@ msgstr "<option>--all --positions</option> 옵션을 사용해도 동일한 효�
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:323
-msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
+#, fuzzy
+#| msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
+msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. At all other levels it only prints information about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
 msgstr "레벨 3 이상에서 &mkvinfo;는 &matroska; 요소에 직접 연결되지 않은 일부 정보를 인쇄합니다. 다른 모든 요소는 방금 발견된 요소에 대한 내용만 인쇄합니다. 레벨 3은 디버깅을 쉽게 하기 위해 메타 정보를 추가합니다(읽기: 개발자 전용). 레벨 3으로 작성된 모든 줄은 쉽게 필터링할 수 있도록 대괄호로 묶습니다."
 
 #. type: Content of: <refentry><refsect1><para>
@@ -1939,7 +1941,9 @@ msgstr "<option>--track-order</option> <parameter>FID1:TID1,FID2:TID2,...</param
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:427
-msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma separated list of pairs IDs. Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
+#, fuzzy
+#| msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs. Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
+msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs.  Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
 msgstr "이 옵션은 입력 파일의 트랙이 생성되는 순서를 변경합니다. 인수는 쌍 ID의 쉼표로 구분된 목록입니다. 각 쌍에는 먼저 파일 ID(<parameter>FID1</parameter>)가 포함되어 있으며, 이는 단순히 0부터 시작하는 명령줄의 파일 번호입니다. 두 번째는 해당 파일의 트랙 ID(<parameter>TID1</parameter>)입니다. 일부 트랙 ID가 생략된 경우 이 옵션과 함께 제공된 트랙이 생성된 후 해당 트랙이 생성됩니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -2501,7 +2505,7 @@ msgstr "이 옵션은 다른 트랙이 추가되는 트랙을 제어합니다. �
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1024
-msgid "If this option has been omitted then a standard mapping is used.  This standard mapping appends each track from the current file to a track from the previous file with the same track ID.  This allows for easy appending if a movie has been split into two parts and both file have the same number of tracks and track IDs with the command <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>."
+msgid "If this option has been omitted then a standard mapping is used.  This standard mapping appends each track from the current file to a track from the previous file with the same track ID.  This allows for easy appending if a movie has been split into two parts and both files have the same number of tracks and track IDs with the command <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>."
 msgstr "이 옵션을 생략한 경우 표준 매핑이 사용됩니다. 이 표준 매핑은 현재 파일의 각 트랙을 동일한 트랙 ID를 가진 이전 파일의 트랙에 추가합니다. 이렇게 하면 동영상을 두 부분으로 분할하고 두 파일의 트랙 수와 트랙 ID 수가 <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>인 경우 쉽게 추가할 수 있습니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -2912,7 +2916,9 @@ msgstr "<option>--cues</option> <parameter>TID:none|iframes|all</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1463
-msgid "Controls for which tracks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
+#, fuzzy
+#| msgid "Controls for which tracks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
+msgid "Controls for which blocks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
 msgstr "지정된 트랙에 대해 트랙 큐(인덱스) 항목이 생성되는 컨트롤입니다(섹션 <link linkend=\"mkvmerge.track_ids\">track IDs</link> 참조). '<literal>none</literal>'은 큐 항목 생성을 금지합니다. '<literal>iframes</literal>'의 경우 후진 또는 전진 참조가 없는 블록(비디오 트랙의 = I 프레임)만 큐 시트에 들어갑니다. '<literal>all</literal>'은 모든 블록에 대해 큐 항목을 생성하므로 파일이 매우 커집니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -4174,8 +4180,8 @@ msgstr "MacOS를 포함한 Linux 및 Unix 계열 시스템"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2830
-msgid "On Unix-like systems &mkvmerge; uses the <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> system call which in turn uses the environment variables <varname>LANG</varname>, <varname>LC_ALL</varname> and <varname>LC_CYPE</varname>. The resulting character set is often one of UTF-8 or the ISO-8859-* family and is used for all text file operations and for encoding strings on the command line and for output to the console."
-msgstr "유닉스 계열 시스템에서 &mkvmerge;는 환경 변수 <varname>LANG</varname>, <varname>LC_ALL</varname>, <varname>LC_CYPE</varname>을 사용하는 <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> 시스템 호출을 사용합니다. 결과 문자 집합은 종종 UTF-8이나 ISO-8859-* 계열 중 하나이며 모든 텍스트 파일 작업과 명령줄의 문자열 인코딩 및 콘솔 출력에 사용됩니다."
+msgid "On Unix-like systems &mkvmerge; uses the <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> system call which in turn uses the environment variables <varname>LANG</varname>, <varname>LC_ALL</varname> and <varname>LC_CTYPE</varname>. The resulting character set is often one of UTF-8 or the ISO-8859-* family and is used for all text file operations and for encoding strings on the command line and for output to the console."
+msgstr "유닉스 계열 시스템에서 &mkvmerge;는 환경 변수 <varname>LANG</varname>, <varname>LC_ALL</varname>, <varname>LC_CTYPE</varname>을 사용하는 <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> 시스템 호출을 사용합니다. 결과 문자 집합은 종종 UTF-8이나 ISO-8859-* 계열 중 하나이며 모든 텍스트 파일 작업과 명령줄의 문자열 인코딩 및 콘솔 출력에 사용됩니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2838
@@ -4422,8 +4428,8 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3078
 #, fuzzy
-#| msgid "&mkvmerge; will transform every pair or lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that the chapters all apply to all tracks in the file."
-msgid "&mkvmerge; will transform every pair or lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that all chapters apply to all tracks in the file."
+#| msgid "&mkvmerge; will transform every pair of lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that the chapters all apply to all tracks in the file."
+msgid "&mkvmerge; will transform every pair of lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that all chapters apply to all tracks in the file."
 msgstr "&mkvmerge;는 모든 쌍 또는 줄을 하나의 &matroska; <classname>ChapterAtom</classname>으로 변환합니다. <classname>ChapterTrackNumber</classname>는 설정되지 않습니다. 이는 모든 챕터가 파일의 모든 트랙에 적용됨을 의미합니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
@@ -5688,7 +5694,7 @@ msgstr "&mkvtoolnix-gui;는 &mkvmerge;용 <productname>Qt</productname> 기반 <
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:71
-msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
+msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
 msgstr "<literal>.mtxcfg</literal> 확장자로 구성 파일 이름을 나열하면 GUI가 해당 도구에 해당 구성 파일을 로드합니다. 다른 모든 파일 이름은 현재 모드에 따라 정보 도구, 장 편집기 또는 헤더 편집기에서 열리는 다중화를 위한 소스 파일로 추가됩니다. 현재 모드는 <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> 또는 <option>--edit-headers</option>를 사용하여 변경할 수 있습니다. 기본 모드는 다중화를 위해 파일을 추가하는 것입니다."
 
 #. type: Content of: <refentry><refsect1><para>

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
-"POT-Creation-Date: 2026-07-05 16:50+0200\n"
+"POT-Creation-Date: 2026-08-09 16:02+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>, 2016-2026\n"
 "Language-Team: French (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -1481,7 +1481,9 @@ msgstr " Le même effet peut être obtenu avec les options <option>--all --posit
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:323
-msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
+#, fuzzy
+#| msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
+msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. At all other levels it only prints information about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
 msgstr "Au niveau 3 et + &mkvinfo; imprimera quelques informations non directement reliées à un élément &matroska;. Tous les autres éléments imprimeront des choses sur les éléments venant juste d'être trouvés. Le niveau 3 ajoute des métadonnées pour faciliter le débogage (lire : il est seulement prévu pour les développeurs). Toutes les lignes écrites au niveau 3 sont entourées de crochets pour faciliter leur filtrage."
 
 #. type: Content of: <refentry><refsect1><para>
@@ -1938,7 +1940,9 @@ msgstr "<option>--track-order</option> <parameter>FID1:TID1,FID2:TID2,...</param
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:427
-msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma separated list of pairs IDs. Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
+#, fuzzy
+#| msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs. Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
+msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs.  Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
 msgstr "Cette option modifie l'ordre dans lequel les pistes d'un fichier source sont créées. L'argument est une liste de paires d'ID séparées par virgule. Chaque paire contient en premier l'ID fichier (<parameter>FID1</parameter>) qui est simplement le numéro du fichier sur la ligne de commande et commençant à 0. Le second est l'ID de piste (<parameter>TID1</parameter>) de ce fichier. Si quelques ID de pistes sont omis, alors ces pistes sont créées après que celles données par cette option ont été créées."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -2496,7 +2500,7 @@ msgstr "Cette option contrôle à quelle piste une autre piste est ajoutée. Cha
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1024
-msgid "If this option has been omitted then a standard mapping is used.  This standard mapping appends each track from the current file to a track from the previous file with the same track ID.  This allows for easy appending if a movie has been split into two parts and both file have the same number of tracks and track IDs with the command <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>."
+msgid "If this option has been omitted then a standard mapping is used.  This standard mapping appends each track from the current file to a track from the previous file with the same track ID.  This allows for easy appending if a movie has been split into two parts and both files have the same number of tracks and track IDs with the command <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>."
 msgstr "Si cette option a été omise, alors un mappage standard est utilisé. Ce mappage standard ajoute chaque piste du fichier actuel à une piste du fichier précédent avec le même ID de piste. Cela rend l'ajout plus facile, si un film a été scindé en deux parties et que les deux fichiers ont le même nombre de pistes et d'ID de pistes, avec la commande <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -2903,7 +2907,9 @@ msgstr "<option>--cues</option> <parameter>TID:none|iframes|all</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1463
-msgid "Controls for which tracks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
+#, fuzzy
+#| msgid "Controls for which tracks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
+msgid "Controls for which blocks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
 msgstr "Contrôle pour quelles pistes les entrées de montage (index) sont créées pour la piste fournie (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>). '<literal>none</literal>' inhibe la création des entrées de montage. Pour les '<literal>iframes</literal>', seuls les blocs sans références avance et retour ( = trames I dans les pistes vidéo) sont placées dans la feuille de montage. '<literal>all</literal>' oblige &mkvmerge; à créer des entrées de montage pour tous les blocs, ce qui rendra le fichier très lourd."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
@@ -4148,8 +4154,8 @@ msgstr "Linux et les systèmes de type Unix incluant macOS"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2830
-msgid "On Unix-like systems &mkvmerge; uses the <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> system call which in turn uses the environment variables <varname>LANG</varname>, <varname>LC_ALL</varname> and <varname>LC_CYPE</varname>. The resulting character set is often one of UTF-8 or the ISO-8859-* family and is used for all text file operations and for encoding strings on the command line and for output to the console."
-msgstr "Sur les systèmes de type Unix &mkvmerge; utilise l'appel système <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> qui à son tour utilise les variables d'environnement <varname>LANG</varname>, <varname>LC_ALL</varname> et <varname>LC_CYPE</varname>. Le jeu de caractères résultant est souvent un de la famille UTF-8 ou ISO-8859-* et est utilisé pour toutes les opérations de fichier texte, pour l'encodage des chaînes sur la ligne de commande et pour la sortie vers la console."
+msgid "On Unix-like systems &mkvmerge; uses the <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> system call which in turn uses the environment variables <varname>LANG</varname>, <varname>LC_ALL</varname> and <varname>LC_CTYPE</varname>. The resulting character set is often one of UTF-8 or the ISO-8859-* family and is used for all text file operations and for encoding strings on the command line and for output to the console."
+msgstr "Sur les systèmes de type Unix &mkvmerge; utilise l'appel système <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry> qui à son tour utilise les variables d'environnement <varname>LANG</varname>, <varname>LC_ALL</varname> et <varname>LC_CTYPE</varname>. Le jeu de caractères résultant est souvent un de la famille UTF-8 ou ISO-8859-* et est utilisé pour toutes les opérations de fichier texte, pour l'encodage des chaînes sur la ligne de commande et pour la sortie vers la console."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2838
@@ -4395,7 +4401,7 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3078
-msgid "&mkvmerge; will transform every pair or lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that all chapters apply to all tracks in the file."
+msgid "&mkvmerge; will transform every pair of lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any <classname>ChapterTrackNumber</classname> which means that all chapters apply to all tracks in the file."
 msgstr "&mkvmerge; va transformer chaque paire ou lignes en un <classname>ChapterAtom</classname> &matroska;. Il ne définit aucun <classname>ChapterTrackNumber</classname>, ce qui signifie que tous les chapitres s'appliquent tous à toutes les pistes du fichier."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
@@ -5660,7 +5666,7 @@ msgstr "&mkvtoolnix-gui; est une interface graphique basée sur <productname>Qt<
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:71
-msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
+msgid "Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load those configuration files in the appropriate tool. Any other file name is added as a source file for multiplexing, opened in the info tool, the chapter editor or in the header editor depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> or <option>--edit-headers</option>. The default mode is adding files for multiplexing."
 msgstr "Lister les noms de fichiers de configuration avec l'extension <literal>.mtxcfg</literal> oblige l'interface graphique à les charger dans l'outil approprié. Tout autre nom de fichier est ajouté comme fichier source pour multiplexage, ouvert dans l'outil d'informations, l'éditeur de chapitres ou d'entêtes selon le mode courant. Ce mode peut être modifié avec <option>--merge</option>, <option>--info</option>, <option>--edit-chapters</option> ou <option>--edit-headers</option>. Le mode par défaut est l'ajout des fichiers pour le multiplexage."
 
 #. type: Content of: <refentry><refsect1><para>
