@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2026-06-06 22:19+0200\n"
+"POT-Creation-Date: 2026-08-09 15:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Fúlvio Alves <fga.fulvio@gmail.com>, 2021-2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
@@ -1891,7 +1891,7 @@ msgstr "Flag \"exibição forçada\""
 
 #: src/common/kax_element_names.cpp:213
 #: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
 #: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:76
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:334
@@ -2045,7 +2045,7 @@ msgstr "Estado do codec cue ref"
 
 #: src/common/kax_element_names.cpp:246
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:109
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:18
 #: src/propedit/options.cpp:220
 #, no-c-format
@@ -5286,102 +5286,102 @@ msgstr "Leitor Quicktime/MP4: A partícula 'cabeçalho da mídia' ('mdhd') usa a
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Leitor Quicktime/MP4: O parâmetro da 'escala de tempo' é 0. Isso não é suportado.\n"
 
-#: src/input/r_qtmp4.cpp:1252
+#: src/input/r_qtmp4.cpp:1272
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "O arquivo MP4 '{0}' contém capítulos cujo formato não é reconhecido. Isto ocorre, às vezes, se os capítulos não estão codificados em UTF-8. Use a opção '--chapter-charset' para especificar o código de caracteres a ser usado.\n"
 
-#: src/input/r_qtmp4.cpp:1382
+#: src/input/r_qtmp4.cpp:1402
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Leitor Quicktime/MP4: O campo 'tamanho' é pequeno demais na partícula de descrição do arquivo para a faixa de ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1389
+#: src/input/r_qtmp4.cpp:1409
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Leitor Quicktime/MP4: Não foi possível ler a partícula de descrição do arquivo para a faixa de ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1763
+#: src/input/r_qtmp4.cpp:1786
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Leitor Quicktime/MP4: Não foi possível ler o fragmento de informação de número {0}/{1} cujo tamanho é {2} da posição {3}. Abortando.\n"
 
-#: src/input/r_qtmp4.cpp:1820
+#: src/input/r_qtmp4.cpp:1843
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nenhum cabeçalho AC-3 encontrado no primeiro quadro, a faixa será pulada.\n"
 
-#: src/input/r_qtmp4.cpp:2595
+#: src/input/r_qtmp4.cpp:2622
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Leitor Quicktime/MP4: O tamanho de amostra constante e de duração variável ainda não são suportados. Contate o autor se tiver um arquivo de amostra.\n"
 
-#: src/input/r_qtmp4.cpp:3000
+#: src/input/r_qtmp4.cpp:3027
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Leitor Quicktime/MP4: Não foi possível ler a partícula de descrição do som para a faixa de ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3010
-#: src/input/r_qtmp4.cpp:3094
+#: src/input/r_qtmp4.cpp:3037
+#: src/input/r_qtmp4.cpp:3121
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Leitor Quicktime/MP4: A faixa de ID {0} tem mais de um FourCC. Só será usado o primeiro ({1}), e não o outro ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:3036
-#: src/input/r_qtmp4.cpp:3050
+#: src/input/r_qtmp4.cpp:3063
+#: src/input/r_qtmp4.cpp:3077
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Leitor Quicktime/MP4: Não foi possível ler a partícula de ampla descrição de som para a faixa de ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3085
+#: src/input/r_qtmp4.cpp:3112
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Leitor Quicktime/MP4: Não foi possível ler a partícula de descrição do vídeo para a faixa de ID {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3175
+#: src/input/r_qtmp4.cpp:3202
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Faixa {0}: A informação AAC não pôde ser analisada.\n"
 
-#: src/input/r_qtmp4.cpp:3688
-#: src/input/r_qtmp4.cpp:3707
-#: src/input/r_qtmp4.cpp:3755
-#: src/input/r_qtmp4.cpp:3848
+#: src/input/r_qtmp4.cpp:3715
+#: src/input/r_qtmp4.cpp:3734
+#: src/input/r_qtmp4.cpp:3782
+#: src/input/r_qtmp4.cpp:3875
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Leitor Quicktime/MP4: Na faixa Track {0}, faltam alguns dados. As partículas do cabeçalho estão corrompidas?\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3751
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nenhum cabeçalho DTS encontrado nos primeiros quadros; a faixa será ignorada.\n"
 
-#: src/input/r_qtmp4.cpp:3737
+#: src/input/r_qtmp4.cpp:3764
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Leitor Quicktime/MP4: A faixa de áudio {0} está usando um 'object type id' não suportado de {1} na partícula 'esds'. Pulando esta faixa.\n"
 
-#: src/input/r_qtmp4.cpp:3742
+#: src/input/r_qtmp4.cpp:3769
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Leitor Quicktime/MP4: A configuração de decodificador/partícula esds da faixa AAC {0} está faltando. Pulando esta faixa.\n"
 
-#: src/input/r_qtmp4.cpp:3804
+#: src/input/r_qtmp4.cpp:3831
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Leitor Quicktime/MP4: A configuração de decodificador da faixa MPEG4 part 10/AVC {0} está faltando. Pulando esta faixa.\n"
 
-#: src/input/r_qtmp4.cpp:3811
+#: src/input/r_qtmp4.cpp:3838
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Leitor Quicktime/MP4: a faixa MPEGH part 2/HEVC {0} sem configuração de decodificador. Pulando esta faixa.\n"
 
-#: src/input/r_qtmp4.cpp:3821
+#: src/input/r_qtmp4.cpp:3848
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Leitor Quicktime/MP4: A faixa de vídeo {0} está sem a partícula ESDS. Pulando esta faixa.\n"
 
-#: src/input/r_qtmp4.cpp:3827
+#: src/input/r_qtmp4.cpp:3854
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Leitor Quicktime/MP4: A configuração de decodificador/partículas esds da faixa MPEG4 {0} está faltando. Pulando esta faixa.\n"
@@ -8637,9 +8637,9 @@ msgstr "Arquivos de capítulo XML"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:133
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1483
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:380
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:452
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:475
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:474
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:497
 #: src/mkvtoolnix-gui/merge/attachments.cpp:329
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
@@ -8820,7 +8820,7 @@ msgstr "&Recarregar arquivo"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:558
 #: src/mkvtoolnix-gui/jobs/tool.cpp:623
 #: src/mkvtoolnix-gui/jobs/tool.cpp:661
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:495
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:508
 #: src/mkvtoolnix-gui/merge/tab.cpp:516
 #: src/mkvtoolnix-gui/merge/tool.cpp:486
 #: src/mkvtoolnix-gui/merge/tool.cpp:1118
@@ -9105,7 +9105,7 @@ msgid "&Number of entries to renumber:"
 msgstr "&Número de entradas para renumerar:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2433
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2432
 #, no-c-format
 msgid "Na&me template:"
 msgstr "&Modelo de nome:"
@@ -9198,7 +9198,7 @@ msgid "Names"
 msgstr "Nomes"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:533
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:392
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:417
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2318
 #, no-c-format
 msgid "&Name:"
@@ -9353,7 +9353,7 @@ msgid "UID:"
 msgstr "UID:"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2434
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2433
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2309
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 #, no-c-format
@@ -9549,8 +9549,8 @@ msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below
 msgstr "Abra um arquivo Matroska ou WebM através do menu \"Informações\", do botão abaixo ou arraste e solte um aqui."
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:291
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:304
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #, no-c-format
 msgid "Job queue"
 msgstr "Fila de tarefas"
@@ -9753,7 +9753,7 @@ msgid "Save to &Matroska or WebM file"
 msgstr "Salvar no arquivo &Matroska ou WebM"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:701
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:459
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:472
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "&Multiplexador"
@@ -9765,7 +9765,7 @@ msgstr "&Ferramenta de extração"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:814
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:460
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:473
 #, no-c-format
 msgid "&Info tool"
 msgstr "&Ferramenta de informações"
@@ -9776,13 +9776,13 @@ msgid "&Header editor"
 msgstr "&Editor de cabeçalhos"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:705
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:475
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "&Editor de capítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:476
 #, no-c-format
 msgid "&Job queue"
 msgstr "&Fila de tarefas"
@@ -10015,196 +10015,196 @@ msgstr "&Parar fila de tarefas"
 msgid "&Window"
 msgstr "&Janela"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
 msgstr "Preferências do MKVToolNix GUI"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2409
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2408
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2204
 #, no-c-format
 msgid "General options"
 msgstr "Opções gerais"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
 #, no-c-format
 msgid "Number of &recently used entries to remember:"
 msgstr "Número de entradas usadas &recentemente para lembrar:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, no-c-format
 msgid "Interface &language:"
 msgstr "&Idioma da interface:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
 #, no-c-format
 msgid "&Font && size:"
 msgstr "&Fonte e tamanho:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
 #, no-c-format
 msgid "Use system settings"
 msgstr "Usar configurações do sistema"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
 #, no-c-format
 msgid "Light"
 msgstr "Claro"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
 #, no-c-format
 msgid "Dark"
 msgstr "Escuro"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
 #, no-c-format
 msgid "Color palette:"
 msgstr "Paleta de cores:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
 #, no-c-format
 msgid "Stay on top of other &windows"
 msgstr "Ficar acima de outras &janelas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
 #, no-c-format
 msgid "Disable scaling for &high DPI displays"
 msgstr "Desabilitar dimensionamento para telas de &DPI alto"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
 #, no-c-format
 msgid "Disable &tooltips"
 msgstr "Desa&tivar dicas de ferramentas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
 #, no-c-format
 msgid "Check online for available &updates"
 msgstr "Procurar por at&ualizações disponíveis online"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, no-c-format
 msgid "Use legac&y MIME types for font attachments"
 msgstr "Usar &tipos MIME legados para anexos de fonte"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
 #, no-c-format
 msgid "Show debu&gging menu"
 msgstr "Mostrar menu de depuração"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #, no-c-format
 msgid "Layout"
 msgstr "Layout"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
 #, no-c-format
 msgid "Tab &position in tab widgets:"
 msgstr "&Posição das abas nos widgets de aba:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
 msgstr "&Encurtar textos de cabeçalhos de abas nos widgets de abas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
 #, no-c-format
 msgid "Show the tool &selector"
 msgstr "Mostrar o &seletor de ferramenta"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
 #, no-c-format
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "Mostrar &botões para mover entradas de exibição de lista para cima e para baixo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
 #, no-c-format
 msgid "Warnings"
 msgstr "Avisos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
 #, no-c-format
 msgid "Warn before &closing modified tabs"
 msgstr "Avisar antes de fe&char abas modificadas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
 #, no-c-format
 msgid "Warn before &aborting running jobs"
 msgstr "Avisar antes de &abortar tarefas em execução"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
 #, no-c-format
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Avisar antes de s&obrescrever itens existentes (arquivos, tarefas etc.)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
 #, no-c-format
 msgid "&Only include often used entries in selections"
 msgstr "Incluir &apenas entradas frequentemente usadas nas seleções"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
 #, no-c-format
 msgid "&Languages"
 msgstr "&Idiomas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
 #, no-c-format
 msgid "C&ountries && regions"
 msgstr "Países e regiões"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, no-c-format
 msgid "&Character sets"
 msgstr "&Conjuntos de caracteres"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
 msgstr "&Modo de edição de idioma padrão IETF BCP 47:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
 #, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
 msgstr "Modo de &normalização IETF BCP 47:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
 #, no-c-format
 msgid "Enable language codes from &ISO 639-3 && 639-5"
 msgstr "Ativar códigos de idioma de &ISO 639-3 e 639-5"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
 #, no-c-format
 msgid "Language shortcuts"
 msgstr "Atalhos de idioma"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
 #, no-c-format
 msgid "Track name"
 msgstr "Nome da faixa"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
 #, no-c-format
 msgid "Warn about missing &audio tracks:"
 msgstr "&Avisar sobre faixas de áudio faltando:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
 #, no-c-format
 msgid "Probe &range percentage:"
 msgstr "Sondar porcentagem de inte&rvalo:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
 #, no-c-format
 msgid "Clearing settings auto&matically:"
 msgstr "Limpar as configurações auto&maticamente:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:36
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:52
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:90
@@ -10226,390 +10226,390 @@ msgstr "Limpar as configurações auto&maticamente:"
 msgid "No"
 msgstr "Não"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
 #, no-c-format
 msgid "Create new settings"
 msgstr "Criar novas configurações"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
 #, no-c-format
 msgid "Remove source files"
 msgstr "Remover arquivos de origem"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
 #, no-c-format
 msgid "Close current settings"
 msgstr "Fechar configurações atuais"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
 #, no-c-format
 msgid "Location of MediaInfo &GUI:"
 msgstr "Localização da &GUI MediaInfo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
 #, no-c-format
 msgid "Process &priority:"
 msgstr "&Prioridade do processo:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
 #, no-c-format
 msgid "Default command-&line escape mode:"
 msgstr "Modo de escape padrão da &linha de comando:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
 msgstr "C&ertificar-se de que pelo menos uma faixa de cada tipo tenha sua flag \"faixa ativada\" definida"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "Adding files"
 msgstr "Adicionando arquivos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
 msgstr "Ao a&dicionar arquivos através de arrastar-e-soltar/copiar-e-colar:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
 #, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
 msgstr "Ao adicionar vários arquivos através de \"adicionar arquivos de origem\":"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
 #, no-c-format
 msgid "When adding d&irectories via drag && drop/copy && paste:"
 msgstr "Ao adicionar d&iretórios por meio de arrastar e soltar/copiar e colar:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
 #, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
 msgstr "&Sempre criar novas configurações de multiplexação para arquivos contendo faixas de vídeo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
 #, no-c-format
 msgid "Show special drag && drop &zones"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "S&ort files && tracks by track type when adding files"
 msgstr "Classificar arquiv&os e faixas por tipo de faixa ao adicionar aquivos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #, no-c-format
 msgid "Detect file name se&quences when adding multiple files"
 msgstr "Detectar se&quências de nomes de arquivos ao adicionar vários arquivos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
 #, no-c-format
 msgid "Always s&kip while attaching new files when attachment with same name exists"
 msgstr "Sempre pular ao anexar novos arquivos quando e&xistir um anexo com o mesmo nome"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
 #, no-c-format
 msgid "Always show the destination file controls &below tabs"
 msgstr "Sempre mostrar os controles do arquivo de destino em&baixo das abas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
 #, no-c-format
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Posição para as propriedades da faixa na aba \"entrada\":"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, no-c-format
 msgid "In a &scrollable column on the right of the files and tracks"
 msgstr "Em uma &coluna rolável à direita dos arquivos e faixas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
 #, no-c-format
 msgid "In &two fixed columns on the right of the files and tracks"
 msgstr "Em &duas colunas fixas à direita dos arquivos e faixas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
 #, no-c-format
 msgid "In a tab &widget below the files and tracks"
 msgstr "Em uma &widget de aba embaixo dos arquivos e faixas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
 #, no-c-format
 msgid "File && track colors"
 msgstr "Cores de arquivo e faixa"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
 #, no-c-format
 msgid "Use &file && track colors"
 msgstr "Usar cores de arquivo e &faixa"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
 #, no-c-format
 msgid "Revert to default colors"
 msgstr "Reverter para as cores padrão"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
 #, no-c-format
 msgid "Predefined video track names"
 msgstr "Nomes de faixa de vídeo predefinidos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
 #, no-c-format
 msgid "Predefined audio track names"
 msgstr "Nomes de faixa de áudio predefinidos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
 #, no-c-format
 msgid "Predefined subtitle track names"
 msgstr "Nomes de faixa de legenda predefinidos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
 #, no-c-format
 msgid "Predefined split sizes"
 msgstr "Tamanhos de divisão predefinidos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
 #, no-c-format
 msgid "Predefined split durations"
 msgstr "Durações de divisão predefinidos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
 #, no-c-format
 msgid "Defaults for new multiplex settings"
 msgstr "Padrão para novas configurações de multiplexação"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2366
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
 #, no-c-format
 msgid "Default additional co&mmand line options:"
 msgstr "Opções de linha de co&mando adicionais padrão:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2367
 #, no-c-format
 msgid "Defaults for newly added tracks"
 msgstr "Padrão para faixas recém-adicionadas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
 #, no-c-format
 msgid "Automatically set the file &title from source files"
 msgstr "Definir automaticamente o &título do arquivo a partir do arquivo original"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
 #, no-c-format
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Limpa&r automaticamente o título do arquivo quando o último arquivo for removido"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
 msgstr "&Definir automaticamente atrasos de faixa do nome de arquivo de origem"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2372
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
 msgstr "Desativar flag \"&faixa padrão\" para faixas de legenda"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2373
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2372
 #, no-c-format
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr "Desativar c&ompressão sem perda adicional para todos os tipos de faixas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2374
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2373
 #, no-c-format
 msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "Ativar ganho da &normalização do diálogo para faixas de áudio"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2375
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2374
 #, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
 msgstr "Derivar dos nomes dos arquivos a fla&g \"exibição forçada\" para as legendas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2376
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2375
 #, fuzzy, no-c-format
 msgid "Derive \"commentar&y\" flag for audio/subtitles from file names:"
 msgstr "Derivar a flag \"deficientes a&uditivos\" para áudio/legendas a partir de nomes de arquivos:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2377
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2376
 #, fuzzy, no-c-format
 msgid "Set \"original language\" flag for audio/subtitles for language:"
 msgstr "Derivar a flag \"deficientes a&uditivos\" para áudio/legendas a partir de nomes de arquivos:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2378
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2377
 #, no-c-format
 msgid "Derive \"&hearing impaired\" flag for audio/subtitles from file names:"
 msgstr "Derivar a flag \"deficientes a&uditivos\" para áudio/legendas a partir de nomes de arquivos:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2379
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2378
 #, no-c-format
 msgid "Default subtitle &charset to set:"
 msgstr "&Conjunto de caracteres padrão de legenda para definir:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2379
 #, fuzzy, no-c-format
 msgid "Derive flags from trac&k names in addition to file names"
 msgstr "Derivação de idiomas de faixas a partir de nomes de arquivos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2381
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
 #, no-c-format
 msgid "Default track languages to set"
 msgstr "Idiomas da faixa padrão para definir"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2382
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2387
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2381
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2386
 #, no-c-format
 msgid "&Audio tracks:"
 msgstr "F&aixas de áudio:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2383
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2388
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2382
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2387
 #, no-c-format
 msgid "&Video tracks:"
 msgstr "Faixas de &vídeo:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2384
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2389
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2383
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2388
 #, no-c-format
 msgid "&Subtitle tracks:"
 msgstr "Faixa&s de legenda:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2385
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2384
 #, no-c-format
 msgid "&When to set the language:"
 msgstr "&Quando definir o idioma:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2386
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2385
 #, no-c-format
 msgid "Deriving track languages from file names"
 msgstr "Derivação de idiomas de faixas a partir de nomes de arquivos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2390
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2389
 #, no-c-format
 msgid "&Boundary characters:"
 msgstr "&Caracteres de limite:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2391
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2390
 #, no-c-format
 msgid "Recognized languages"
 msgstr "Idiomas reconhecidos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2392
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2391
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:274
 #, no-c-format
 msgid "Destination file name"
 msgstr "Nome de arquivo de destino"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2393
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2392
 #, no-c-format
 msgid "&Automatically set the destination file name"
 msgstr "&Definir automaticamente o nome do arquivo de destino"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2394
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2393
 #, no-c-format
 msgid "&Only use the first source file that contains a video track"
 msgstr "U&sar apenas o primeiro arquivo de origem que contém uma faixa de vídeo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2395
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2394
 #, no-c-format
 msgid "Use the &title as the base file name if a title is set"
 msgstr "Usar &título como o nome do arquivo base se um título for definido"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2396
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2395
 #, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
 msgstr "Use o nome do &diretório do arquivo de entrada em vez do nome do arquivo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2397
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2396
 #, no-c-format
 msgid "Destination directory"
 msgstr "Diretório de destino"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2398
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2397
 #, no-c-format
 msgid "Sa&me directory as the first source file"
 msgstr "&Mesmo diretório que o primeiro arquivo de origem"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2399
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2398
 #, no-c-format
 msgid "Pre&viously used destination directory"
 msgstr "Diretório de destino &usado anteriormente"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2400
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2399
 #, no-c-format
 msgid "Directory &relative to first source file's directory:"
 msgstr "Diretório &relativo ao diretório do primeiro arquivo de origem"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2401
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2400
 #, no-c-format
 msgid "Use fi&xed directory:"
 msgstr "Usar diretório fi&xo:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2403
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2402
 #, no-c-format
 msgid "Ensure the file name is &unique"
 msgstr "&Garantir que o nome do arquivo seja único"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2404
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2403
 #, no-c-format
 msgid "Automatically &clear the destination file name when the last file is removed"
 msgstr "&Limpar automaticamente o nome de arquivo de destino quando o último arquivo for removido"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2405
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2404
 #, no-c-format
 msgid "Recent destination directories"
 msgstr "Diretórios de destino recentes"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2406
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2405
 #, no-c-format
 msgid "Enable copying of items by their type"
 msgstr "Ativar cópia de itens por seu tipo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2407
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2406
 #, no-c-format
 msgid "Enable copying of tracks by their language"
 msgstr "Ativar cópia de faixas por seu idioma"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2408
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2407
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
 msgstr "Por padrão, ativar apenas a &cópia de faixas com idiomas específicos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2410
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2409
 #, no-c-format
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
 msgstr "Sempre permitir cópia para todas as faixas dos tipos a seguir, independentemente de seu idioma:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2411
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2410
 #: src/mkvtoolnix-gui/merge/input.cpp:1802
 #, no-c-format
 msgid "&Video"
 msgstr "&Vídeo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2412
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2411
 #: src/mkvtoolnix-gui/merge/input.cpp:1803
 #, no-c-format
 msgid "&Audio"
 msgstr "Á&udio"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2413
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2412
 #: src/mkvtoolnix-gui/merge/input.cpp:1804
 #, no-c-format
 msgid "&Subtitles"
 msgstr "&Legendas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2414
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2413
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
 msgstr "Sempre ativar a cópia de faixas de legendas &forçadas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2415
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2414
 #, no-c-format
 msgid "Scanning playlists"
 msgstr "Analisando listas de reprodução"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2416
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2415
 #, no-c-format
 msgid "&Scan directory for other playlists:"
 msgstr "&Varrer diretório por outras listas de reprodução:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2417
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2416
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:907
@@ -10619,163 +10619,163 @@ msgstr "&Varrer diretório por outras listas de reprodução:"
 msgid "Always ask the user"
 msgstr "Sempre perguntar ao usuário"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2418
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2417
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 #, no-c-format
 msgid "Always scan for other playlists"
 msgstr "Sempre procurar por outras listas de reprodução"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2419
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2418
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
 #, no-c-format
 msgid "Never scan for other playlists"
 msgstr "Nunca varrer por outras listas de reprodução"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2421
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2420
 #, no-c-format
 msgid "&Minimum playlist duration:"
 msgstr "&Duração mínima da lista de reprodução:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2422
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2421
 #, no-c-format
 msgid "&Ignore playlists meant for menus"
 msgstr "&Ignorar listas de reprodução destinadas a menus"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2423
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2422
 #, no-c-format
 msgid "Blu-rays"
 msgstr "Blu-rays"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2424
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2423
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
 msgstr "Adicionar imagens de capa de &Blu-ray como anexos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2425
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2424
 #, no-c-format
 msgid "Defaults for jobs saving info tool output to text files"
 msgstr "Padrão para tarefas aos salvar saída da ferramenta de informações para arquivos de texto"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2425
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:301
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
 #, no-c-format
 msgid "Header editor"
 msgstr "Editor de cabeçalhos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2427
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
 #, no-c-format
 msgid "When &dropping files:"
 msgstr "Ao &soltar arquivos:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2428
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2427
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr "Mostrar datas e horas em &UTC em vez do fuso horário local"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:289
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2428
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:302
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "Chapter editor"
 msgstr "Editor de capítulos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2430
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
 #, no-c-format
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr "Descartar a última entrada das listas de reprodução importadas de &Blu-ray se estiver perto do fim"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2431
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2430
 #, no-c-format
 msgid "&Character set for text files:"
 msgstr "&Conjunto de caracteres para arquivos de texto:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2432
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2431
 #, no-c-format
 msgid "Defaults for new chapter entries"
 msgstr "Padrão para novas entradas de capítulos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2435
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2434
 #, no-c-format
 msgid "Jobs and job output"
 msgstr "Tarefas e saídas de tarefas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2436
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2435
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
 msgstr "&Sempre trocar para a ferramenta de saída de tarefas após iniciar uma imediatamente"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2437
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2436
 #, no-c-format
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "Sempre usar uma &descrição padrão ao adicionar uma tarefa à fila"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2438
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2437
 #, no-c-format
 msgid "Show &output of all jobs instead of current job only"
 msgstr "M&ostrar saídas para todas as tarefas em vez da tarefa atual apenas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2439
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2438
 #, no-c-format
 msgid "Reset the warning and error &counters on exit"
 msgstr "Redefinir os &contadores de aviso e erro na saída"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2440
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2439
 #, no-c-format
 msgid "Remove the output &file when a job ends with errors or when it is aborted"
 msgstr "Remover o arquivo de saída quando uma tarefa terminar com erros ou quando &for abortada"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2441
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2440
 #, no-c-format
 msgid "Remove com&pleted jobs older than x days:"
 msgstr "Remover tarefas concluídas mais antigas que x dias:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2442
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2441
 #, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
 msgstr "Remover as tarefas concluídas da fila ao sair:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2443
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2442
 #, no-c-format
 msgid "&Remove job from queue after completion:"
 msgstr "&Remover tarefa da fila após concluída:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2444
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2448
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2443
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2447
 #, no-c-format
 msgid "Only if the job completed successfully"
 msgstr "Apenas se a tarefa for concluída com sucesso"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2445
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2449
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2444
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2448
 #, no-c-format
 msgid "Even if there were warnings"
 msgstr "Mesmo se houver avisos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2446
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2450
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2445
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2449
 #, no-c-format
 msgid "Even if there were errors"
 msgstr "Mesmo se houver erros"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2452
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2451
 #, no-c-format
 msgid "Ma&ximum number of concurrent jobs:"
 msgstr "Número má&ximo de tarefas simultâneas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2453
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2452
 #, no-c-format
 msgid "Executing actions after certain events"
 msgstr "Execução de ações após certos eventos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2454
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2453
 #, no-c-format
 msgid "&Add action"
 msgstr "&Adicionar ação"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2455
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2454
 #, no-c-format
 msgid "No actions have been added yet."
 msgstr "Nenhuma ação foi adicionada ainda."
@@ -10785,77 +10785,77 @@ msgstr "Nenhuma ação foi adicionada ainda."
 msgid "Track &name (optional):"
 msgstr "&Nome da faixa (opcional):"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:384
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:409
 #, no-c-format
 msgid "C&onfiguration active"
 msgstr "C&onfiguração ativa"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:385
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:410
 #, no-c-format
 msgid "After a job completes &successfully"
 msgstr "Após uma tarefa ser concluída com &sucesso"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:386
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:411
 #, no-c-format
 msgid "After a job exits with &warnings"
 msgstr "Após uma tarefa ser encerrada co&m avisos"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:387
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:412
 #, no-c-format
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "Após uma tarefa sair com um &erro ou o usuário abortar a tarefa"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:388
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:413
 #, no-c-format
 msgid "After the job &queue has stopped"
 msgstr "Após a &fila de tarefa ter parado"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:389
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:414
 #, no-c-format
 msgid "E&xecute now"
 msgstr "E&xecutar agora"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:390
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:415
 #, no-c-format
 msgid "When to execute:"
 msgstr "Quando executar:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:391
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:416
 #, no-c-format
 msgid "&Type:"
 msgstr "&Tipo:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:393
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:418
 #, no-c-format
 msgid "Type-specific settings"
 msgstr "Configurações específicas por tipo"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:394
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:419
 #, no-c-format
 msgid "&Command line:"
 msgstr "&Linha de comando:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:395
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:420
 #, no-c-format
 msgid "Add &variable"
 msgstr "Adicionar &variável"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:396
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:421
 #, no-c-format
 msgid "A&udio file:"
 msgstr "Arquivo de á&udio:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:397
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:422
 #, no-c-format
 msgid "&Volume:"
 msgstr "&Volume:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:398
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:423
 #, fuzzy, no-c-format
 msgid "Script &file:"
 msgstr "&Ignorar arquivo"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:399
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:424
 #, fuzzy, no-c-format
 msgid "Script &code:"
 msgstr "&Script:"
@@ -11815,7 +11815,7 @@ msgstr "mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <nome
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:51
 #, no-c-format
-msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
+msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load those configuration files in the appropriate tool."
 msgstr "Listar nomes de arquivos de configuração com a extensão .mtxcfg faz com que a interface gráfica carregue esses arquivos de configuração na ferramenta apropriada."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:52
@@ -12577,7 +12577,7 @@ msgid "Warnings/Errors"
 msgstr "Avisos/Erros"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:813
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:826
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:83
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -12725,19 +12725,19 @@ msgid "Running jobs cannot be edited."
 msgstr "Tarefas em execução não podem ser editadas."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:555
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:492
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:505
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "Abortar tarefas em execução"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:556
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:493
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:506
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "Você realmente deseja abortar todas as tarefas atualmente em execução?"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:557
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:494
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:507
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "&Abortar tarefas"
@@ -12865,108 +12865,108 @@ msgstr "Versão %1 \"%2\""
 msgid "This has not been implemented yet."
 msgstr "Isso ainda não foi implementado."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:285
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:298
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "Multiplexer"
 msgstr "Multiplexador"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:300
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "Info tool"
 msgstr "Informações"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:292
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:305
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #, no-c-format
 msgid "Job output"
 msgstr "Saída de tarefas"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:449
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "Extraction tool"
 msgstr "Ferramenta de extração"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:449
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "Tag editor"
 msgstr "Editor de etiquetas"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:458
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:471
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:461
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:474
 #, no-c-format
 msgid "Header &editor"
 msgstr "&Editor de cabeçalho"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:464
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:477
 #, no-c-format
 msgid "&Job output"
 msgstr "&Saída de tarefas"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:465
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:478
 #, no-c-format
 msgid "&Help"
 msgstr "&Ajuda"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:493
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:506
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "Existe atualmente uma tarefa em execução."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:702
 #, no-c-format
 msgid "The MKVToolNix Code of Conduct"
 msgstr "O Código de Conduta do MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:694
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:705
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:707
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:718
 #, no-c-format
 msgid "Markdown files"
 msgstr "Arquivos de remarcação"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:703
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:716
 #, no-c-format
 msgid "System information"
 msgstr "Informações do sistema"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:809
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:822
 #, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "O arquivo '%1' não foi encontrado na pasta de instalação."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:817
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:830
 #, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "O executável do mkvmerge foi encontrado, mas não pôde ser executado."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:821
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:834
 #, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "A linha de versão informada pelo mkvmerge ('%1') não pode ser reconhecida."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:825
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:838
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr "As versões do mkvmerge (%1) e da GUI (%2) são diferentes."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:829
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:842
 #, no-c-format
 msgid "Temporary files cannot be created. Additional information: %1"
 msgstr "Arquivos temporários não podem ser criados. Informação adicional: %1"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:833
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:846
 #, no-c-format
 msgid "MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'."
 msgstr "MKVToolNix GUI age como um aplicativo portátil, mas não pode escrever em seu diretório base, '%1'. Se deve agir como um aplicativo instalado, remova o arquivo '%2'."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:843
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:856
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
@@ -12974,7 +12974,7 @@ msgstr[0] "Problema com a instalação do MKVToolNix"
 msgstr[1] "Problemas com a instalação do MKVToolNix"
 msgstr[2] "Problemas com a instalação do MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:847
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:860
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
@@ -12982,12 +12982,12 @@ msgstr[0] "Um problema foi detectado com esta instalação do MKVToolNix:"
 msgstr[1] "Vários problemas foram detectados com esta instalação do MKVToolNix:"
 msgstr[2] "Vários problemas foram detectados com esta instalação do MKVToolNix:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:849
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:862
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr "Certas funções não vão funcionar corretamente nessa situação."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:850
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:863
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
@@ -12995,22 +12995,22 @@ msgstr[0] "Reinstale o MKVToolNix ou corrija o problema manualmente."
 msgstr[1] "Reinstale o MKVToolNix ou corrija os problemas manualmente."
 msgstr[2] "Reinstale o MKVToolNix ou corrija os problemas manualmente."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:999
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1012
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
 msgstr "O arquivo de áudio '%1' não pode ser reproduzido."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:1002
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1015
 #, no-c-format
 msgid "Either the file format or the audio codec is not supported."
 msgstr "O formato do arquivo ou o codec de áudio não é suportado."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:1005
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1018
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
 msgstr "Nenhum dispositivo de áudio está disponível para reprodução ou o acesso falhou."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:1008
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1021
 #, no-c-format
 msgid "Error playing audio"
 msgstr "Erro ao reproduzir áudio"
@@ -14048,14 +14048,14 @@ msgid "Select destination directory"
 msgstr "Selecione o diretório de destino"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1481
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:378
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:392
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
 msgstr "Arquivos executáveis"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1485
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:383
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:397
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -14132,253 +14132,258 @@ msgstr "Adicionar novo atalho de idioma"
 msgid "Edit language shortcut"
 msgstr "Editar atalho de idioma"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:123
 #, no-c-format
 msgid "Usage and examples"
 msgstr "Uso e exemplos"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #, no-c-format
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr "A linha de comando aqui usa escape de shell no estilo Unix por meio de caractere barra invertida até mesmo no Windows."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:123
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:126
 #, no-c-format
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr "Isso significa que as barras invertidas devem ser duplicadas ou o argumento inteiro deve ser colocado entre aspas simples."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:128
 #, no-c-format
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Observe que, no Windows, também podem ser usadas barras comuns em vez de barras invertidas nos nomes dos caminhos."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:127
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:139
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:142
 #, no-c-format
 msgid "See below for examples."
 msgstr "Veja abaixo para exemplos."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:133
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "Sempre use nomes de caminho completos, mesmo se o aplicativo estiver localizado no mesmo diretório da GUI."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:135
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:138
 #, no-c-format
 msgid "Start file types other than executable files via cmd.exe."
 msgstr "Inicie os tipos de arquivo, exceto arquivos executáveis via cmd.exe."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:140
 #, no-c-format
 msgid "Start file types other than executable files via xdg-open."
 msgstr "Inicie os tipos de arquivos diferentes dos executáveis via xdg-open."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:143
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:146
 #, no-c-format
 msgid "Examples"
 msgstr "Exemplos"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:145
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:148
 #, no-c-format
 msgid "Play a WAV file with the default application:"
 msgstr "Reproduzir um arquivo WAV com o aplicativo padrão:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:150
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:154
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:157
 #, no-c-format
 msgid "or"
 msgstr "ou"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:168
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:171
 #, no-c-format
 msgid "Shut down the system in one minute:"
 msgstr "Desligar o sistema em um minuto:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:184
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:187
 #, no-c-format
 msgid "Open the multiplexed file with a player:"
 msgstr "Abrir o arquivo multiplexado com um reprodutor:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:218
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #: src/mkvtoolnix-gui/util/settings.cpp:352
 #, no-c-format
 msgid "Execute a program"
 msgstr "Executar um programa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:219
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:228
 #: src/mkvtoolnix-gui/util/settings.cpp:376
 #, no-c-format
 msgid "Execute a PowerShell script"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:220
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:229
 #: src/mkvtoolnix-gui/util/settings.cpp:364
 #, no-c-format
 msgid "Play an audio file"
 msgstr "Reproduzir um arquivo de áudio"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:230
 #: src/mkvtoolnix-gui/util/settings.cpp:339
 #, no-c-format
 msgid "Show a desktop notification"
 msgstr "Mostrar uma notificação na área de trabalho"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:231
 #: src/mkvtoolnix-gui/util/settings.cpp:340
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "Desligar o computador"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:232
 #: src/mkvtoolnix-gui/util/settings.cpp:341
 #, no-c-format
 msgid "Hibernate the computer"
 msgstr "Hibernar o computador"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:233
 #: src/mkvtoolnix-gui/util/settings.cpp:342
 #, no-c-format
 msgid "Sleep the computer"
 msgstr "Suspender o computador"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:234
 #: src/mkvtoolnix-gui/util/settings.cpp:343
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
 msgstr "Excluir arquivos de origem para tarefas de multiplexação"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
 #: src/mkvtoolnix-gui/util/settings.cpp:344
 #, no-c-format
 msgid "Quit MKVToolNix"
 msgstr "Sair do MKVToolNix"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:261
 #, no-c-format
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "Se qualquer uma dessas caixas de seleção estiver marcada, a ação será executada quando a condição correspondente for atendida."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:253
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:262
 #, no-c-format
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr "Independentemente das caixas de seleção, todas as configurações ativas podem ser acionadas manualmente através da ferramenta \"saída de tarefas\"."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:255
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:264
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr "Este é um nome arbitrário que a GUI pode usar para se referir a esta configuração específica."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:265
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
 msgstr "A desativação desta caixa de seleção é uma forma de desativar uma configuração temporariamente sem ter que alterar seus parâmetros."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
 #, no-c-format
 msgid "Executes the action immediately."
 msgstr "Executar a ação imediatamente."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
 #, no-c-format
 msgid "Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments."
 msgstr "Observe que a maioria das variáveis <MTX_…> estão vazias e serão removidas para ações que podem tomar variáveis como argumentos."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:279
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:271
+#, fuzzy, no-c-format
+msgid "Reset the audio file to the default sound."
+msgstr "Reverte a entrada para seu valor padrão."
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:290
 #, no-c-format
 msgid "Variables for all job types"
 msgstr "Variáveis para todos os tipos de tarefas"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:280
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:291
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
 msgstr "Tipo de tarefa ('multiplexer' ou 'info')"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:281
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:292
 #, no-c-format
 msgid "Job description"
 msgstr "Descrição da tarefa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:282
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:293
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
 msgstr "Data e hora de início da tarefa no formato ISO 8601"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:283
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:294
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Data e hora de término da tarefa no formato ISO 8601"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:284
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:295
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "Código de saída (0: ok, 1: ocorreram avisos, 2: ocorreram erros)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:286
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:297
 #, no-c-format
 msgid "Variables for multiplex jobs"
 msgstr "Variáveis para tarefas de multiplexação"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:287
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:298
 #, no-c-format
 msgid "Destination file's absolute path"
 msgstr "Caminho absoluto do arquivo de destino"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:288
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:299
 #, no-c-format
 msgid "Destination folders's absolute path"
 msgstr "Caminho absoluto das pastas de destino"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:289
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:300
 #, fuzzy, no-c-format
 msgid "Destination file's base name"
 msgstr "Nome de arquivo de destino"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:290
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:301
 #, fuzzy, no-c-format
 msgid "Destination file's suffix"
 msgstr "Arquivo de destino"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:291
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:302
 #, no-c-format
 msgid "Source files' absolute paths"
 msgstr "Caminhos absolutos dos arquivos de origem"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:292
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:303
 #, fuzzy, no-c-format
 msgid "Chapter file's absolute path"
 msgstr "Caminho absoluto do arquivo de destino"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:294
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:305
 #, no-c-format
 msgid "General variables"
 msgstr "Variáveis gerais"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:295
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:306
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "Data && hora atual no formato ISO 8601"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:296
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:307
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "Diretório de instalação do MKVToolNix GUI"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:362
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:376
 #, fuzzy, no-c-format
 msgid "example values from the current multiplexer tab"
 msgstr "Adicionar todos os arquivos às configurações de multiplexação atuais"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:456
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:478
 #, no-c-format
 msgid "Select audio file"
 msgstr "Selecionar arquivo de áudio"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:475
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:497
 #, no-c-format
 msgid "PowerShell scripts"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:479
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:501
 #, fuzzy, no-c-format
 msgid "Select PowerShell script file"
 msgstr "Selecionar arquivo de capítulo"
