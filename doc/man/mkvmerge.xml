@@ -424,8 +424,8 @@
      <term><option>--track-order</option> <parameter>FID1:TID1,FID2:TID2,...</parameter></term>
      <listitem>
       <para>
-       This option changes the order in which the tracks for an input file are created. The argument is a comma separated list of pairs
-       IDs. Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line
+       This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs.
+       Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line
        starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks
        are created after the ones given with this option have been created.
       </para>
@@ -1023,7 +1023,7 @@
       <para>
        If this option has been omitted then a standard mapping is used.  This standard mapping appends each track from the current file to a
        track from the previous file with the same track ID.  This allows for easy appending if a movie has been split into two parts and both
-       file have the same number of tracks and track IDs with the command <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>.
+       files have the same number of tracks and track IDs with the command <command>mkvmerge -o output.mkv part1.mkv +part2.mkv</command>.
       </para>
      </listitem>
     </varlistentry>
@@ -1460,7 +1460,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>--cues</option> <parameter>TID:none|iframes|all</parameter></term>
      <listitem>
       <para>
-       Controls for which tracks cue (index) entries are created for the given track (see section <link linkend="mkvmerge.track_ids">track
+       Controls for which blocks cue (index) entries are created for the given track (see section <link linkend="mkvmerge.track_ids">track
        IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with
        no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes
        &mkvmerge; to create cue entries for all blocks which will make the file very big.
@@ -2829,7 +2829,7 @@ Track ID 1: audio (A_MPEG/L3)</screen>
    <para>
     On Unix-like systems &mkvmerge; uses the <citerefentry><refentrytitle>setlocale</refentrytitle><manvolnum>3</manvolnum></citerefentry>
     system call which in turn uses the environment variables <varname>LANG</varname>, <varname>LC_ALL</varname> and
-    <varname>LC_CYPE</varname>. The resulting character set is often one of UTF-8 or the ISO-8859-* family and is used for all text file
+    <varname>LC_CTYPE</varname>. The resulting character set is often one of UTF-8 or the ISO-8859-* family and is used for all text file
     operations and for encoding strings on the command line and for output to the console.
    </para>
   </refsect2>
@@ -3075,7 +3075,7 @@ CHAPTER03=00:02:42.300
 CHAPTER03NAME=Baby rocks the house</screen>
 
    <para>
-    &mkvmerge; will transform every pair or lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any
+    &mkvmerge; will transform every pair of lines into one &matroska; <classname>ChapterAtom</classname>. It does not set any
     <classname>ChapterTrackNumber</classname> which means that all chapters apply to all tracks in the file.
    </para>
 

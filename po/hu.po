@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2026-06-06 22:19+0200\n"
+"POT-Creation-Date: 2026-08-09 15:57+0200\n"
 "PO-Revision-Date: 2025-11-06 15:25+0100\n"
 "Last-Translator: John Fowler <john@madarasz.page>\n"
 "Language-Team: \n"
@@ -1889,7 +1889,7 @@ msgstr "\"Kényszerített megjelenítés\" jelző"
 
 #: src/common/kax_element_names.cpp:213
 #: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
 #: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:76
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:334
@@ -2043,7 +2043,7 @@ msgstr "Referencia kódek állapot jelölő"
 
 #: src/common/kax_element_names.cpp:246
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:109
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:18
 #: src/propedit/options.cpp:220
 #, no-c-format
@@ -5281,102 +5281,102 @@ msgstr "Quicktime/MP4 olvasó: A \"médiafejléc\" elem ('mdhd') a nem támogato
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 olvasó: Az \"időskála\" paraméter 0 volt. Ez nem támogatott.\n"
 
-#: src/input/r_qtmp4.cpp:1252
+#: src/input/r_qtmp4.cpp:1272
 #, no-c-format, c++-format
 msgid "The MP4 file '{0}' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "A \"{0}\" MP4 fájl olyan fejezeteket tartalmaz, amelyek formátumát nem ismeri fel. Ez gyakran előfordul, ha a fejezetek nincsenek UTF-8-ban kódolva. Használja a '--chapter-charset' opciót a használni kívánt karakterkészlet megadásához.\n"
 
-#: src/input/r_qtmp4.cpp:1382
+#: src/input/r_qtmp4.cpp:1402
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 olvasó: A \"méret\" mező túl kicsi az adatfolyam leírás részében a sávazonosító {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1389
+#: src/input/r_qtmp4.cpp:1409
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 olvasó: Nem sikerült elolvasni a sáv azonosítójának adatfolyam-leíró elemét {0}.\n"
 
-#: src/input/r_qtmp4.cpp:1763
+#: src/input/r_qtmp4.cpp:1786
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 olvasó: Nem sikerült beolvasni a(z) {0}/{1} darabszámot {2} mérettel a {3}. pozícióból. Megszakítás.\n"
 
-#: src/input/r_qtmp4.cpp:1820
+#: src/input/r_qtmp4.cpp:1843
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nem található AC-3 fejléc az első képkockában; A sáv kimarad.\n"
 
-#: src/input/r_qtmp4.cpp:2595
+#: src/input/r_qtmp4.cpp:2622
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 olvasó: Az állandó mintaméret és a változó időtartam még nem támogatott. Vegye fel a kapcsolatot a szerzővel, ha rendelkezik ilyen mintafájllal.\n"
 
-#: src/input/r_qtmp4.cpp:3000
+#: src/input/r_qtmp4.cpp:3027
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 olvasó: Nem sikerült elolvasni a hangleíró elemet a sávazonosítóhoz {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3010
-#: src/input/r_qtmp4.cpp:3094
+#: src/input/r_qtmp4.cpp:3037
+#: src/input/r_qtmp4.cpp:3121
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 olvasó: A sáv ID {0} egynél több FourCC-vel rendelkezik. Csak az elsőt ({1}) használja, és ezt ({2}) nem.\n"
 
-#: src/input/r_qtmp4.cpp:3036
-#: src/input/r_qtmp4.cpp:3050
+#: src/input/r_qtmp4.cpp:3063
+#: src/input/r_qtmp4.cpp:3077
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 olvasó: Nem sikerült elolvasni a kiterjesztett hangleíró elemet a sávazonosítóhoz {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3085
+#: src/input/r_qtmp4.cpp:3112
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 olvasó: Nem sikerült elolvasni a videó leírásának elemét a sávazonosítóhoz {0}.\n"
 
-#: src/input/r_qtmp4.cpp:3175
+#: src/input/r_qtmp4.cpp:3202
 #, no-c-format, c++-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Sáv {0}: az AAC információ nem elemezhető.\n"
 
-#: src/input/r_qtmp4.cpp:3688
-#: src/input/r_qtmp4.cpp:3707
-#: src/input/r_qtmp4.cpp:3755
-#: src/input/r_qtmp4.cpp:3848
+#: src/input/r_qtmp4.cpp:3715
+#: src/input/r_qtmp4.cpp:3734
+#: src/input/r_qtmp4.cpp:3782
+#: src/input/r_qtmp4.cpp:3875
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 olvasó: A {0} sávból hiányzik néhány adat. Törött fejléc elemek?\n"
 
-#: src/input/r_qtmp4.cpp:3724
+#: src/input/r_qtmp4.cpp:3751
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Az első képkockákban nem található DTS fejléc; A sáv kimarad.\n"
 
-#: src/input/r_qtmp4.cpp:3737
+#: src/input/r_qtmp4.cpp:3764
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4-olvasó: A hangsáv {0} nem támogatott \"objektumtípus-azonosítót\" használ {1} az \"esds\" elemben. Kihagyva ez a sáv.\n"
 
-#: src/input/r_qtmp4.cpp:3742
+#: src/input/r_qtmp4.cpp:3769
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 olvasó: Az AAC-sáv {0} hiányzik az esds elem/a dekóder konfigurációja. Ezt a sávot kihagyja..\n"
 
-#: src/input/r_qtmp4.cpp:3804
+#: src/input/r_qtmp4.cpp:3831
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 olvasó: MPEG4 rész 10/AVC sáv {0} hiányzik a dekóder konfigurációja. Ezt a sávot kihagyja.\n"
 
-#: src/input/r_qtmp4.cpp:3811
+#: src/input/r_qtmp4.cpp:3838
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 olvasó: MPEGH rész 2/HEVC sáv {0} hiányzik a dekóder konfigurációja. Ezt a sávot kihagyja.\n"
 
-#: src/input/r_qtmp4.cpp:3821
+#: src/input/r_qtmp4.cpp:3848
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 olvasó: A {0} videósávból hiányzik az ESDS elem. Ezt a sávot kihagyja.\n"
 
-#: src/input/r_qtmp4.cpp:3827
+#: src/input/r_qtmp4.cpp:3854
 #, no-c-format, c++-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 olvasó: MPEG4 sáv {0} hiányzik az esds elem/dekóder konfigurációja. Kihagyja ezt a sávot.\n"
@@ -8607,9 +8607,9 @@ msgstr "XML fejezetfájlok"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:133
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1483
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:380
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:452
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:475
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:474
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:497
 #: src/mkvtoolnix-gui/merge/attachments.cpp:329
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:214
@@ -8789,7 +8789,7 @@ msgstr "Fájl új&ratöltése"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:558
 #: src/mkvtoolnix-gui/jobs/tool.cpp:623
 #: src/mkvtoolnix-gui/jobs/tool.cpp:661
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:495
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:508
 #: src/mkvtoolnix-gui/merge/tab.cpp:516
 #: src/mkvtoolnix-gui/merge/tool.cpp:486
 #: src/mkvtoolnix-gui/merge/tool.cpp:1118
@@ -9074,7 +9074,7 @@ msgid "&Number of entries to renumber:"
 msgstr "Az újra számoza&ndó bejegyzések száma:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2433
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2432
 #, no-c-format
 msgid "Na&me template:"
 msgstr "Név sablo&n:"
@@ -9167,7 +9167,7 @@ msgid "Names"
 msgstr "Nevek"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:533
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:392
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:417
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2318
 #, no-c-format
 msgid "&Name:"
@@ -9322,7 +9322,7 @@ msgid "UID:"
 msgstr "UID:"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2434
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2433
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2309
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 #, no-c-format
@@ -9518,8 +9518,8 @@ msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below
 msgstr "Nyisson meg egy Matroska vagy WebM fájlt az \"információs eszköz\" menüben, az alábbi gombbal, vagy húzza át ide az egyiket."
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:291
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:304
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #, no-c-format
 msgid "Job queue"
 msgstr "Feladatsor"
@@ -9722,7 +9722,7 @@ msgid "Save to &Matroska or WebM file"
 msgstr "Mentés &Matroska vagy WebM fájlba"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:701
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:459
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:472
 #, no-c-format
 msgid "&Multiplexer"
 msgstr "&Multiplexelő"
@@ -9734,7 +9734,7 @@ msgstr "Kivonó &eszköz"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:703
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:814
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:460
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:473
 #, no-c-format
 msgid "&Info tool"
 msgstr "&Információs eszköz"
@@ -9745,13 +9745,13 @@ msgid "&Header editor"
 msgstr "&Fejléc szerkesztő"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:705
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:475
 #, no-c-format
 msgid "&Chapter editor"
 msgstr "Feje&zetszerkesztő"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:706
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:476
 #, no-c-format
 msgid "&Job queue"
 msgstr "Fela&datsor"
@@ -9984,196 +9984,196 @@ msgstr "Felada&tsor leállítása"
 msgid "&Window"
 msgstr "&Ablak"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix GUI beállítások"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2409
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2408
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2204
 #, no-c-format
 msgid "General options"
 msgstr "Általános beállítások"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
 #, no-c-format
 msgid "Number of &recently used entries to remember:"
 msgstr "A legutóbb használt bejegyzések száma:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, no-c-format
 msgid "Interface &language:"
 msgstr "Fe&lhasználói felület nyelve:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
 #, no-c-format
 msgid "&Font && size:"
 msgstr "Bet&típus és méret:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
 #, no-c-format
 msgid "Use system settings"
 msgstr "Rendszerbeállítások használata"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
 #, no-c-format
 msgid "Light"
 msgstr "Világos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
 #, no-c-format
 msgid "Dark"
 msgstr "Sötét"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
 #, no-c-format
 msgid "Color palette:"
 msgstr "Színpaletta:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
 #, no-c-format
 msgid "Stay on top of other &windows"
 msgstr "Maradjon a többi ablak előtt"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
 #, no-c-format
 msgid "Disable scaling for &high DPI displays"
 msgstr "Tiltsa le a méretezést a nagy DPI-s kijelzőkhöz"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
 #, no-c-format
 msgid "Disable &tooltips"
 msgstr "Eszköztippek letiltása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
 #, no-c-format
 msgid "Check online for available &updates"
 msgstr "Ellenőrizze az interneten az elérhető frissítéseket"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, no-c-format
 msgid "Use legac&y MIME types for font attachments"
 msgstr "Örö&költ MIME-típusok használata betűtípus-mellékletekhez"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
 #, no-c-format
 msgid "Show debu&gging menu"
 msgstr "Hibakeresési menü me&gjelenítése"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #, no-c-format
 msgid "Layout"
 msgstr "Elrendezés"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
 #, no-c-format
 msgid "Tab &position in tab widgets:"
 msgstr "Tabulátor pozíciója a lapvezérlőkben:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
 msgstr "Szö&veg eltörlése a lapvezérlők lapfejlécében"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
 #, no-c-format
 msgid "Show the tool &selector"
 msgstr "Az e&szközválasztó megjelenítése"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
 #, no-c-format
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "Listanézet bejegyzéseinek felfelé és lefelé mozgatására szolgáló gom&bok megjelenítése"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
 #, no-c-format
 msgid "Warnings"
 msgstr "Figyelmeztetések"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
 #, no-c-format
 msgid "Warn before &closing modified tabs"
 msgstr "&Figyelmeztetés a módosított lapok bezárása előtt"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
 #, no-c-format
 msgid "Warn before &aborting running jobs"
 msgstr "Figyelmeztetés &a futó feladatok megszakítása előtt"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
 #, no-c-format
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Figyelmeztetés a meglévő elemek (fájlok, feladatok stb.) &felülírása előtt"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
 #, no-c-format
 msgid "&Only include often used entries in selections"
 msgstr "&Csak a gyakran használt bejegyzéseket tartalmazza a kijelölésekben"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
 #, no-c-format
 msgid "&Languages"
 msgstr "Nye&lvek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
 #, no-c-format
 msgid "C&ountries && regions"
 msgstr "&Országok és régiók"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, no-c-format
 msgid "&Character sets"
 msgstr "&Karakterkészleteket"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
 msgstr "Alapértelmezett IETF BCP 47 nyelvi szerkesztési &mód:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
 #, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
 msgstr "IETF BCP 47 &normalizálási mód:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
 #, no-c-format
 msgid "Enable language codes from &ISO 639-3 && 639-5"
 msgstr "Nyelvi kódok engedélyezése az &ISO 639-3 és 639-5 szabványból"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
 #, no-c-format
 msgid "Language shortcuts"
 msgstr "Nyelvi parancsikonok"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
 #, no-c-format
 msgid "Track name"
 msgstr "Sávnév"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
 #, no-c-format
 msgid "Warn about missing &audio tracks:"
 msgstr "Figyelmeztetés &a hiányzó hangsávokra:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
 #, no-c-format
 msgid "Probe &range percentage:"
 msgstr "Szonda hatótávolságának százalékos a&ránya:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
 #, no-c-format
 msgid "Clearing settings auto&matically:"
 msgstr "Beállítások auto&matikus törlése:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:36
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:52
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:90
@@ -10195,390 +10195,390 @@ msgstr "Beállítások auto&matikus törlése:"
 msgid "No"
 msgstr "Nem"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
 #, no-c-format
 msgid "Create new settings"
 msgstr "Új beállítások létrehozása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
 #, no-c-format
 msgid "Remove source files"
 msgstr "Forrásfájlok eltávolítása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
 #, no-c-format
 msgid "Close current settings"
 msgstr "Jelenlegi beállítások bezárása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
 #, no-c-format
 msgid "Location of MediaInfo &GUI:"
 msgstr "A MediaInfo &GUI helye:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
 #, no-c-format
 msgid "Process &priority:"
 msgstr "Folyamat &prioritás:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
 #, no-c-format
 msgid "Default command-&line escape mode:"
 msgstr "A&lapértelmezett parancssori menekülési mód:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
 msgstr "Győződjön m&eg arról, hogy minden típusból legalább egy sáv rendelkezik a \"track enabled\" jelzővel"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "Adding files"
 msgstr "Fájlok hozzáadása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
 msgstr "&Fájlok hozzáadása húzással és ejtéssel/másolással és beillesztéssel:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
 #, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
 msgstr "&Ha több fájlt ad hozzá a \"forrásfájlok hozzáadása\" segítségével:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
 #, no-c-format
 msgid "When adding d&irectories via drag && drop/copy && paste:"
 msgstr "Könyvtárak hozzáadása húzással és ejtéssel/másolással és be&illesztéssel:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
 #, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
 msgstr "Mindi&g hozzon létre új multiplex beállításokat a videósávokat tartalmazó fájlokhoz"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
 #, no-c-format
 msgid "Show special drag && drop &zones"
 msgstr "Speciális húzás és ejtés &zónák megjelenítése"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "S&ort files && tracks by track type when adding files"
 msgstr "Fájlok és sávok sávtípus szerinti rendezése fájlok hozzáadásakor&"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #, no-c-format
 msgid "Detect file name se&quences when adding multiple files"
 msgstr "Fájlnév-soro&zatok észlelése több fájl hozzáadásakor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
 #, no-c-format
 msgid "Always s&kip while attaching new files when attachment with same name exists"
 msgstr "Mindig &kihagyja az új fájlok csatolása közben, ha létezik azonos nevű csatolmány"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
 #, no-c-format
 msgid "Always show the destination file controls &below tabs"
 msgstr "A célfájl vezérlőelemeinek megjelenítése &mindig a lapok alatt"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
 #, no-c-format
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "A sáv tulajdonságainak pozíciója a \"bemenet\" lapon:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, no-c-format
 msgid "In a &scrollable column on the right of the files and tracks"
 msgstr "A fájlok és &sávok jobb oldalán található görgethető oszlopban"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
 #, no-c-format
 msgid "In &two fixed columns on the right of the files and tracks"
 msgstr "Ké&t rögzített oszlopban a fájlok és sávok jobb oldalán"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
 #, no-c-format
 msgid "In a tab &widget below the files and tracks"
 msgstr "A fájlok és zeneszámok alatti lap &widgetben"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
 #, no-c-format
 msgid "File && track colors"
 msgstr "Fájl- és sávszínek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
 #, no-c-format
 msgid "Use &file && track colors"
 msgstr "Fájl- és sávszínek használata"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
 #, no-c-format
 msgid "Revert to default colors"
 msgstr "Visszaállítás az alapértelmezett színekre"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
 #, no-c-format
 msgid "Predefined video track names"
 msgstr "Előre definiált videósáv-nevek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
 #, no-c-format
 msgid "Predefined audio track names"
 msgstr "Előre definiált hangsáv nevek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
 #, no-c-format
 msgid "Predefined subtitle track names"
 msgstr "Előre meghatározott feliratsávnevek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
 #, no-c-format
 msgid "Predefined split sizes"
 msgstr "Előre meghatározott osztott méretek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
 #, no-c-format
 msgid "Predefined split durations"
 msgstr "Előre meghatározott osztott időtartamok"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
 #, no-c-format
 msgid "Defaults for new multiplex settings"
 msgstr "Az új multiplex beállítások alapértelmezett értékei"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2366
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
 #, no-c-format
 msgid "Default additional co&mmand line options:"
 msgstr "Alapértel&mezett további parancssori beállítások:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2367
 #, no-c-format
 msgid "Defaults for newly added tracks"
 msgstr "Az újonnan hozzáadott számok alapértelmezett értékei"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
 #, no-c-format
 msgid "Automatically set the file &title from source files"
 msgstr "A fájl címének automa&tikus beállítása a forrásfájlokból"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
 #, no-c-format
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Az utolsó fájl eltávolításako&r automatikusan törli a fájl címét"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
 msgstr "Automatikusan beállítja a &késések nyomon követését a forrásfájl nevéből"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2372
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
 msgstr "Tiltsa le az\" alapértelmezett sáv \" &jelzőt a feliratsávokhoz"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2373
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2372
 #, no-c-format
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr "Tiltsa le a t&ovábbi veszteségmentes tömörítést az összes sávtípushoz"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2374
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2373
 #, no-c-format
 msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "A párbeszéd normalizálás erősítés eltávolításának engedélyezése a hangsávoknál&"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2375
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2374
 #, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
 msgstr "A feliratok \"kényszerített megjelenítése\" jel&zőjének származtatása a fájlnevekből:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2376
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2375
 #, no-c-format
 msgid "Derive \"commentar&y\" flag for audio/subtitles from file names:"
 msgstr "A \"kommentá&r\" jelző levezetése a hanghoz/feliratokhoz a fájlnevekből:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2377
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2376
 #, no-c-format
 msgid "Set \"original language\" flag for audio/subtitles for language:"
 msgstr "Állítsa be az \"eredeti nyelv\" jelzőt a hanghoz/feliratokhoz a nyelvhez:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2378
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2377
 #, no-c-format
 msgid "Derive \"&hearing impaired\" flag for audio/subtitles from file names:"
 msgstr "A \"&hallássérült\" jelző levezetése a hang/feliratok számára a fájlnevekből:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2379
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2378
 #, no-c-format
 msgid "Default subtitle &charset to set:"
 msgstr "Ala&pértelmezett felirat-karakterkészlet beállítása:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2379
 #, no-c-format
 msgid "Derive flags from trac&k names in addition to file names"
 msgstr "Jelző&k származtatása a fájlnevek mellett a műsorszámok nevéből is"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2381
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2380
 #, no-c-format
 msgid "Default track languages to set"
 msgstr "Alapértelmezett sávnyelvek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2382
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2387
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2381
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2386
 #, no-c-format
 msgid "&Audio tracks:"
 msgstr "H&angsávok:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2383
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2388
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2382
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2387
 #, no-c-format
 msgid "&Video tracks:"
 msgstr "&Videósávok:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2384
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2389
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2383
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2388
 #, no-c-format
 msgid "&Subtitle tracks:"
 msgstr "Felirat&sávok:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2385
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2384
 #, no-c-format
 msgid "&When to set the language:"
 msgstr "&Mikor kell beállítani a nyelvet:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2386
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2385
 #, no-c-format
 msgid "Deriving track languages from file names"
 msgstr "Sávnyelvek származtatása fájlnevekből"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2390
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2389
 #, no-c-format
 msgid "&Boundary characters:"
 msgstr "Ha&tárkarakterek:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2391
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2390
 #, no-c-format
 msgid "Recognized languages"
 msgstr "Elismert nyelvek"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2392
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2391
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:274
 #, no-c-format
 msgid "Destination file name"
 msgstr "Célfájl neve"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2393
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2392
 #, no-c-format
 msgid "&Automatically set the destination file name"
 msgstr "&A célfájl nevének automatikus beállítása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2394
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2393
 #, no-c-format
 msgid "&Only use the first source file that contains a video track"
 msgstr "Csak az első f&orrásfájlt használja, amely videósávot tartalmaz"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2395
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2394
 #, no-c-format
 msgid "Use the &title as the base file name if a title is set"
 msgstr "Használja a címet alapfájlnévkén&t, ha cím van beállítva"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2396
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2395
 #, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
 msgstr "A bemeneti fájl kön&yvtárnevének használata a fájlnév helyett"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2397
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2396
 #, no-c-format
 msgid "Destination directory"
 msgstr "Célkönyvtár"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2398
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2397
 #, no-c-format
 msgid "Sa&me directory as the first source file"
 msgstr "Ugyanaz a könyvtár, &mint az első forrásfájl"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2399
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2398
 #, no-c-format
 msgid "Pre&viously used destination directory"
 msgstr "Korá&bban használt célkönyvtár"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2400
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2399
 #, no-c-format
 msgid "Directory &relative to first source file's directory:"
 msgstr "Könyvtá&r az első forrásfájl könyvtárához viszonyítva:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2401
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2400
 #, no-c-format
 msgid "Use fi&xed directory:"
 msgstr "Rö&gzített könyvtár használata:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2403
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2402
 #, no-c-format
 msgid "Ensure the file name is &unique"
 msgstr "Győződjön m&eg arról, hogy a fájlnév egyedi"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2404
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2403
 #, no-c-format
 msgid "Automatically &clear the destination file name when the last file is removed"
 msgstr "A &célfájl nevének automatikus törlése az utolsó fájl eltávolításakor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2405
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2404
 #, no-c-format
 msgid "Recent destination directories"
 msgstr "Legutóbbi célkönyvtárak"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2406
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2405
 #, no-c-format
 msgid "Enable copying of items by their type"
 msgstr "Engedélyezze az elemek másolását típusuk szerint"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2407
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2406
 #, no-c-format
 msgid "Enable copying of tracks by their language"
 msgstr "Engedélyezze a sávok másolását a nyelvük szerint"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2408
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2407
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
 msgstr "Alapértelmezés szerint csak meghatár&ozott nyelvekkel rendelkező műsorszámok másolásának engedélyezése"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2410
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2409
 #, no-c-format
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
 msgstr "Mindig engedélyezze a másolást a következő típusú sávok esetében, függetlenül azok nyelvétől:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2411
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2410
 #: src/mkvtoolnix-gui/merge/input.cpp:1802
 #, no-c-format
 msgid "&Video"
 msgstr "&Videó"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2412
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2411
 #: src/mkvtoolnix-gui/merge/input.cpp:1803
 #, no-c-format
 msgid "&Audio"
 msgstr "&Audió"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2413
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2412
 #: src/mkvtoolnix-gui/merge/input.cpp:1804
 #, no-c-format
 msgid "&Subtitles"
 msgstr "Fel&iratok"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2414
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2413
 #, no-c-format
 msgid "Always enable copying of &forced subtitle tracks"
 msgstr "Mindig engedélyezze a kényszerített &feliratsávok másolását"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2415
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2414
 #, no-c-format
 msgid "Scanning playlists"
 msgstr "Lejátszási listák beolvasása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2416
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2415
 #, no-c-format
 msgid "&Scan directory for other playlists:"
 msgstr "Má&s lejátszási listák könyvtárának beolvasása:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2417
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2416
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:907
@@ -10588,163 +10588,163 @@ msgstr "Má&s lejátszási listák könyvtárának beolvasása:"
 msgid "Always ask the user"
 msgstr "Mindig kérdezze meg a felhasználót"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2418
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2417
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 #, no-c-format
 msgid "Always scan for other playlists"
 msgstr "Mindig keressen más lejátszási listákat"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2419
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2418
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
 #, no-c-format
 msgid "Never scan for other playlists"
 msgstr "Soha ne keressen más lejátszási listákat"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2421
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2420
 #, no-c-format
 msgid "&Minimum playlist duration:"
 msgstr "A lejátszási lista &minimális időtartama:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2422
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2421
 #, no-c-format
 msgid "&Ignore playlists meant for menus"
 msgstr "A menükhöz szánt lejátszás&i listák figyelmen kívül hagyása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2423
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2422
 #, no-c-format
 msgid "Blu-rays"
 msgstr "Blu-ray"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2424
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2423
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
 msgstr "&Blu-ray borítóképek hozzáadása mellékletként"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2425
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2424
 #, no-c-format
 msgid "Defaults for jobs saving info tool output to text files"
 msgstr "Az információs eszköz kimenetének szövegfájlokba mentésére vonatkozó feladatok alapértelmezett beállításai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2425
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:301
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
 #, no-c-format
 msgid "Header editor"
 msgstr "Fejléc szerkesztő"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2427
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2426
 #, no-c-format
 msgid "When &dropping files:"
 msgstr "Fájlok el&dobásakor:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2428
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2427
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr "Dátumok és időpontok megjelenítése &UTC-ben a helyi időzóna helyett"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:289
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2428
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:302
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "Chapter editor"
 msgstr "Fejezetszerkesztő"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2430
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2429
 #, no-c-format
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr "Hagyja el az utolsó bejegyzést az importált &Blu-ray lejátszási listákból, ha a vége felé van"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2431
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2430
 #, no-c-format
 msgid "&Character set for text files:"
 msgstr "&Karakterkészlet szöveges fájlokhoz:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2432
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2431
 #, no-c-format
 msgid "Defaults for new chapter entries"
 msgstr "Az új fejezetbejegyzések alapértelmezett beállításai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2435
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2434
 #, no-c-format
 msgid "Jobs and job output"
 msgstr "Feladatok és feladatkimenet"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2436
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2435
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
 msgstr "Mindig vált&son át a munkakimeneti eszközre, miután azonnal elindított egy munkát"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2437
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2436
 #, no-c-format
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "Mindig használjon alapértelmezett leírást, amikor fela&datot ad hozzá az üzenetsorhoz"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2438
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2437
 #, no-c-format
 msgid "Show &output of all jobs instead of current job only"
 msgstr "Az összes feladat &kimenetének megjelenítése csak az aktuális feladat helyett"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2439
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2438
 #, no-c-format
 msgid "Reset the warning and error &counters on exit"
 msgstr "A fi&gyelmeztetés és a hibaszámlálók alaphelyzetbe állítása kilépéskor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2440
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2439
 #, no-c-format
 msgid "Remove the output &file when a job ends with errors or when it is aborted"
 msgstr "Távolítsa el a kimeneti &fájlt, ha egy feladat hibával végződik vagy megszakad"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2441
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2440
 #, no-c-format
 msgid "Remove com&pleted jobs older than x days:"
 msgstr "&Távolítsa el az x napnál régebbi befejezett feladatokat:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2442
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2441
 #, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
 msgstr "B&efejezett feladatok eltávolítása a várólistából kilépéskor:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2443
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2442
 #, no-c-format
 msgid "&Remove job from queue after completion:"
 msgstr "Feladat eltávolítása az üzenetso&rból a befejezés után:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2444
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2448
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2443
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2447
 #, no-c-format
 msgid "Only if the job completed successfully"
 msgstr "Csak akkor, ha a feladat sikeresen befejeződött"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2445
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2449
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2444
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2448
 #, no-c-format
 msgid "Even if there were warnings"
 msgstr "Még akkor is, ha voltak figyelmeztetések"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2446
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2450
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2445
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2449
 #, no-c-format
 msgid "Even if there were errors"
 msgstr "Még akkor is, ha voltak hibák"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2452
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2451
 #, no-c-format
 msgid "Ma&ximum number of concurrent jobs:"
 msgstr "Egyidejű feladatok ma&ximális száma:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2453
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2452
 #, no-c-format
 msgid "Executing actions after certain events"
 msgstr "Műveletek végrehajtása bizonyos események után"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2454
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2453
 #, no-c-format
 msgid "&Add action"
 msgstr "Művelet hozzá&adása"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2455
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2454
 #, no-c-format
 msgid "No actions have been added yet."
 msgstr "Még nem adtak hozzá műveleteket."
@@ -10754,77 +10754,77 @@ msgstr "Még nem adtak hozzá műveleteket."
 msgid "Track &name (optional):"
 msgstr "Sáv &neve (választható):"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:384
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:409
 #, no-c-format
 msgid "C&onfiguration active"
 msgstr "K&onfiguráció aktív"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:385
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:410
 #, no-c-format
 msgid "After a job completes &successfully"
 msgstr "A feladat &sikeres befejezése után"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:386
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:411
 #, no-c-format
 msgid "After a job exits with &warnings"
 msgstr "Miután eg&y feladat figyelmeztetésekkel kilép"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:387
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:412
 #, no-c-format
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "Miután &egy feladat hibával kilép, vagy a felhasználó megszakítja a feladatot"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:388
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:413
 #, no-c-format
 msgid "After the job &queue has stopped"
 msgstr "A feladatsor leállítása &után"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:389
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:414
 #, no-c-format
 msgid "E&xecute now"
 msgstr "&Végrehajtás most"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:390
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:415
 #, no-c-format
 msgid "When to execute:"
 msgstr "Mikor kell végrehajtani:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:391
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:416
 #, no-c-format
 msgid "&Type:"
 msgstr "&Típus:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:393
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:418
 #, no-c-format
 msgid "Type-specific settings"
 msgstr "Típusspecifikus beállítások"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:394
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:419
 #, no-c-format
 msgid "&Command line:"
 msgstr "Paran&cssor:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:395
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:420
 #, no-c-format
 msgid "Add &variable"
 msgstr "&Változó hozzáadása"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:396
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:421
 #, no-c-format
 msgid "A&udio file:"
 msgstr "A&udió fájl:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:397
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:422
 #, no-c-format
 msgid "&Volume:"
 msgstr "&Hangerő :"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:398
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:423
 #, fuzzy, no-c-format
 msgid "Script &file:"
 msgstr "Fájl kihagyá&sa"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:399
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:424
 #, fuzzy, no-c-format
 msgid "Script &code:"
 msgstr "&Karakterlánc:"
@@ -11784,7 +11784,7 @@ msgstr "mkvtoolnix-gui [--multiplex|--info|--edit-chapters|--edit-headers] <file
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:51
 #, no-c-format
-msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
+msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load those configuration files in the appropriate tool."
 msgstr "Az .mtxcfg kiterjesztésű konfigurációs fájlnevek listázása azt eredményezi, hogy a grafikus felhasználói felület betölti ezeket a konfigurációs fájlokat a megfelelő eszközbe."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:52
@@ -12541,7 +12541,7 @@ msgid "Warnings/Errors"
 msgstr "Figyelmeztetések/hibák"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:170
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:813
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:826
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:83
 #, no-c-format
 msgid "The mkvmerge executable was not found."
@@ -12685,19 +12685,19 @@ msgid "Running jobs cannot be edited."
 msgstr "A futó feladatok nem szerkeszthetők."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:555
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:492
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:505
 #, no-c-format
 msgid "Abort running jobs"
 msgstr "Futó feladatok megszakítása"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:556
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:493
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:506
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "Valóban meg akarja szakítani az összes jelenleg futó feladatot?"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:557
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:494
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:507
 #, no-c-format
 msgid "&Abort jobs"
 msgstr "Fel&adatok megszakítása"
@@ -12825,149 +12825,149 @@ msgstr "Verzió %1 \"%2\""
 msgid "This has not been implemented yet."
 msgstr "Ez még nem került végrehajtásra."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:285
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:298
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "Multiplexer"
 msgstr "Multiplexelő"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:300
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "Info tool"
 msgstr "Információs eszköz"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:292
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:450
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:305
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #, no-c-format
 msgid "Job output"
 msgstr "Feladat kimenete"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:449
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "Extraction tool"
 msgstr "Kivonási eszköz"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:449
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:462
 #, no-c-format
 msgid "Tag editor"
 msgstr "Címkeszerkesztő"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:458
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:471
 #, no-c-format
 msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:461
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:474
 #, no-c-format
 msgid "Header &editor"
 msgstr "F&ejléc szerkesztő"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:464
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:477
 #, no-c-format
 msgid "&Job output"
 msgstr "&Feladat kimenete"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:465
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:478
 #, no-c-format
 msgid "&Help"
 msgstr "&Súgó"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:493
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:506
 #, no-c-format
 msgid "There is currently a job running."
 msgstr "Jelenleg fut egy feladat."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:689
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:702
 #, no-c-format
 msgid "The MKVToolNix Code of Conduct"
 msgstr "Az MKVToolNix magatartási kódexe"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:694
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:705
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:707
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:718
 #, no-c-format
 msgid "Markdown files"
 msgstr "Markdown fájlok"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:703
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:716
 #, no-c-format
 msgid "System information"
 msgstr "Rendszerinformációk"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:809
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:822
 #, no-c-format
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "A (z) '%1' fájl nem található a telepítési mappában."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:817
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:830
 #, no-c-format
 msgid "The mkvmerge executable was found, but it couldn't be executed."
 msgstr "Az mkvmerge futtatható fájl megtalálható, de nem hajtható végre."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:821
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:834
 #, no-c-format
 msgid "The version line reported by mkvmerge ('%1') could not be recognized."
 msgstr "Az mkvmerge által jelentett verziósor ('%1') nem volt felismerhető."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:825
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:838
 #, no-c-format
 msgid "The versions of mkvmerge (%1) and the GUI (%2) differ."
 msgstr "Az mkvmerge (%1) és a GUI (%2) verziói eltérőek."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:829
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:842
 #, no-c-format
 msgid "Temporary files cannot be created. Additional information: %1"
 msgstr "Ideiglenes fájlok nem hozhatók létre. További információ: %1"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:833
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:846
 #, no-c-format
 msgid "MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'."
 msgstr "Az MKVToolNix grafikus felhasználói felülete hordozható alkalmazásként működik, de nem tud írni a(z) '%1' alapkönyvtárba. Ha telepített alkalmazásként működik, távolítsa el a(z) '%2'fájlt."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:843
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:856
 #, no-c-format
 msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
 msgstr[0] "Probléma az MKVToolNix telepítésével"
 msgstr[1] "Problémák az MKVToolNix telepítésével"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:847
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:860
 #, no-c-format
 msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
 msgstr[0] "Az MKVToolNix telepítésével probléma merült fel:"
 msgstr[1] "Az MKVToolNix telepítésével számos problémát észleltek:"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:849
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:862
 #, no-c-format
 msgid "Certain functions won't work correctly in this situation."
 msgstr "Bizonyos funkciók nem működnek megfelelően ebben a helyzetben."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:850
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:863
 #, no-c-format
 msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
 msgstr[0] "Kérjük, telepítse újra az MKVToolNix-ot, vagy manuálisan javítsa ki a problémát."
 msgstr[1] "Kérjük, telepítse újra az MKVToolNix - ot, vagy manuálisan javítsa ki a problémákat."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:999
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1012
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
 msgstr "A(z) '%1' hangfájl nem játszható le."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:1002
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1015
 #, no-c-format
 msgid "Either the file format or the audio codec is not supported."
 msgstr "A fájlformátum vagy a hangkódek nem támogatott."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:1005
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1018
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
 msgstr "Nincs elérhető hangeszköz a lejátszáshoz, vagy a hozzáférés sikertelen volt."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:1008
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:1021
 #, no-c-format
 msgid "Error playing audio"
 msgstr "Hiba a hang lejátszása során"
@@ -14005,14 +14005,14 @@ msgid "Select destination directory"
 msgstr "Célkönyvtár kiválasztása"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1481
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:378
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:392
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
 msgstr "Futtatható fájlok"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1485
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:383
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:397
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -14087,253 +14087,258 @@ msgstr "Új nyelvi parancsikon hozzáadása"
 msgid "Edit language shortcut"
 msgstr "Nyelvi parancsikon szerkesztése"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:123
 #, no-c-format
 msgid "Usage and examples"
 msgstr "Használat és példák"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
 #, no-c-format
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr "A parancssor itt a Unix-stílusú héjkijelzéseket használja a backslash karakterrel, még Windows alatt is."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:123
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:126
 #, no-c-format
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr "Ez azt jelenti, hogy vagy a fordított perjeleket meg kell duplázni, vagy az egész argumentumot idézőjelek közé kell tenni."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:125
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:128
 #, no-c-format
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Vegye figyelembe, hogy Windows rendszeren perjelek is használhatók fordított perjelek helyett az elérési utak nevében."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:127
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:139
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:142
 #, no-c-format
 msgid "See below for examples."
 msgstr "Példákat lásd alább."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:133
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "Mindig használjon teljes elérési út nevét, még akkor is, ha az alkalmazás ugyanabban a könyvtárban található, mint a grafikus felhasználói felület."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:135
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:138
 #, no-c-format
 msgid "Start file types other than executable files via cmd.exe."
 msgstr "Indítsa el a futtatható fájloktól eltérő fájltípusokat cmd.exe keresztül."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:140
 #, no-c-format
 msgid "Start file types other than executable files via xdg-open."
 msgstr "Indítson el a futtatható fájloktól eltérő fájltípusokat az xdg-open segítségével."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:143
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:146
 #, no-c-format
 msgid "Examples"
 msgstr "Példák"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:145
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:148
 #, no-c-format
 msgid "Play a WAV file with the default application:"
 msgstr "WAV-fájl lejátszása az alapértelmezett alkalmazással:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:150
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:154
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:157
 #, no-c-format
 msgid "or"
 msgstr "vagy"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:168
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:171
 #, no-c-format
 msgid "Shut down the system in one minute:"
 msgstr "Kapcsolja ki a rendszert egy perc múlva:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:184
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:187
 #, no-c-format
 msgid "Open the multiplexed file with a player:"
 msgstr "Nyissa meg a multiplexelt fájlt egy lejátszóval:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:218
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #: src/mkvtoolnix-gui/util/settings.cpp:352
 #, no-c-format
 msgid "Execute a program"
 msgstr "Egy program végrehajtása"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:219
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:228
 #: src/mkvtoolnix-gui/util/settings.cpp:376
 #, no-c-format
 msgid "Execute a PowerShell script"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:220
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:229
 #: src/mkvtoolnix-gui/util/settings.cpp:364
 #, no-c-format
 msgid "Play an audio file"
 msgstr "Hangfájl lejátszása"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:221
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:230
 #: src/mkvtoolnix-gui/util/settings.cpp:339
 #, no-c-format
 msgid "Show a desktop notification"
 msgstr "Asztali értesítés megjelenítése"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:231
 #: src/mkvtoolnix-gui/util/settings.cpp:340
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "Kapcsolja ki a számítógépet"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:232
 #: src/mkvtoolnix-gui/util/settings.cpp:341
 #, no-c-format
 msgid "Hibernate the computer"
 msgstr "Hibernálja a számítógépet"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:233
 #: src/mkvtoolnix-gui/util/settings.cpp:342
 #, no-c-format
 msgid "Sleep the computer"
 msgstr "A számítógép alvó állapotba helyezése"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:234
 #: src/mkvtoolnix-gui/util/settings.cpp:343
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
 msgstr "Multiplexer-feladatok forrásfájljainak törlése"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:235
 #: src/mkvtoolnix-gui/util/settings.cpp:344
 #, no-c-format
 msgid "Quit MKVToolNix"
 msgstr "Lépjen ki az MKVToolNixből"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:261
 #, no-c-format
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "Ha ezen jelölőnégyzetek bármelyike be van jelölve, a művelet akkor kerül végrehajtásra, ha a megfelelő feltétel teljesül."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:253
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:262
 #, no-c-format
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr "A jelölőnégyzetektől függetlenül minden aktív konfiguráció manuálisan indítható el a 'feladatkimenet' eszközből."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:255
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:264
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr "Ez egy tetszőleges név, amelyet a grafikus felhasználói felület használhat az adott konfigurációra való hivatkozáshoz."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:256
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:265
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
 msgstr "A jelölőnégyzet kikapcsolásával ideiglenesen letilthatja a konfigurációt anélkül, hogy módosítania kellene a paramétereit."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
 #, no-c-format
 msgid "Executes the action immediately."
 msgstr "Azonnal végrehajtja a műveletet."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:257
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
 #, no-c-format
 msgid "Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments."
 msgstr "Vegye figyelembe, hogy a legtöbb <MTX_...> változó üres, és el lesz távolítva azoknál a műveleteknél, amelyek változókat vehetnek fel argumentumként."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:279
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:271
+#, fuzzy, no-c-format
+msgid "Reset the audio file to the default sound."
+msgstr "Állítsa vissza a bejegyzést az alapértelmezett értékre."
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:290
 #, no-c-format
 msgid "Variables for all job types"
 msgstr "Változók minden feladattípushoz"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:280
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:291
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
 msgstr "Feladat típusa ('multiplexer' vagy 'info')"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:281
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:292
 #, no-c-format
 msgid "Job description"
 msgstr "Feladatleírás"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:282
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:293
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
 msgstr "A feladat kezdési dátuma és időpontja ISO 8601 formátumban"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:283
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:294
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Feladat befejezési dátuma és időpontja ISO 8601 formátumban"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:284
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:295
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "Kilépési kód (0: ok, 1: figyelmeztetések történtek, 2: hibák történtek)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:286
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:297
 #, no-c-format
 msgid "Variables for multiplex jobs"
 msgstr "Multiplex feladatok változói"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:287
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:298
 #, no-c-format
 msgid "Destination file's absolute path"
 msgstr "A célfájl abszolút elérési útja"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:288
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:299
 #, no-c-format
 msgid "Destination folders's absolute path"
 msgstr "A célmappák abszolút elérési útja"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:289
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:300
 #, fuzzy, no-c-format
 msgid "Destination file's base name"
 msgstr "Célfájl neve"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:290
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:301
 #, fuzzy, no-c-format
 msgid "Destination file's suffix"
 msgstr "Célfájl"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:291
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:302
 #, no-c-format
 msgid "Source files' absolute paths"
 msgstr "A forrásfájlok abszolút elérési útjai"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:292
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:303
 #, no-c-format
 msgid "Chapter file's absolute path"
 msgstr "A fejezetfájl abszolút elérési útja"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:294
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:305
 #, no-c-format
 msgid "General variables"
 msgstr "Általános változók"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:295
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:306
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "Az aktuális dátum és idő ISO 8601 formátumban"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:296
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:307
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "Az MKVToolNix grafikus felhasználói felület telepítési könyvtára"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:362
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:376
 #, fuzzy, no-c-format
 msgid "example values from the current multiplexer tab"
 msgstr "Az összes fájl hozzáadása az aktuális multiplex beállításokhoz"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:456
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:478
 #, no-c-format
 msgid "Select audio file"
 msgstr "Hangfájl kiválasztása"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:475
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:497
 #, no-c-format
 msgid "PowerShell scripts"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:479
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:501
 #, fuzzy, no-c-format
 msgid "Select PowerShell script file"
 msgstr "Válassza ki a fejezetfájlt"

@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* translations: substantial extension of the Czech translation by Michal
+  Várady.
+
 ## Bug fixes
 
 * Windows: fixed converting the scalable SVG icons into the bitmap `.ico` ones
@@ -8,7 +13,7 @@
 
 ## Build system changes
 
-* The bundled libraries `libEBML` & `libMatroska` were updated to v1.4.6 &
+* The bundled libraries `libEBML` & `libMatroska` were updated to v1.4.7 &
   v1.7.2 respectively.
 * The meta info file `org.bunkus.mkvtoolnix-gui.appdata.xml` was renamed
   to `org.bunkus.mkvtoolnix-gui.metainfo.xml`.

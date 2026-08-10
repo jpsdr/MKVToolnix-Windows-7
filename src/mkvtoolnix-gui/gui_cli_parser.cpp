@@ -48,7 +48,7 @@ GuiCliParser::initParser() {
   add_separator();
 
   add_information(fmt::format("{0} {1} {2} {3}",
-                              YT("Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."),
+                              YT("Listing configuration file names with the extension .mtxcfg causes the GUI to load those configuration files in the appropriate tool."),
                               YT("Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."),
                               YT("The current mode can be changed with --multiplex, --edit-chapters or --edit-headers."),
                               YT("The default mode is adding files for multiplexing.")));
