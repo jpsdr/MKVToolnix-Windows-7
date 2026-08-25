@@ -217,6 +217,10 @@ ProgramRunner::replaceVariablesAndExecuteProgram(QStringList const &programAndAr
   for (auto itr = variables.cbegin(); itr != variables.cend(); ++itr)
     environment.insert(Q("MTX_%1").arg(itr.key()), itr.value().join(Q(",")));
 
+  exe = Util::replaceMtxVariableWithApplicationDirectory(exe);
+
+  qDebug() << "replaceVariablesAndExecuteProgram exe orig" << programAndArguments.value(0) << "exe modified" << exe << "commandLine" << commandLine << "variables" << variables;
+
   QProcess process;
   process.setProgram(exe);
   process.setArguments(commandLine);
