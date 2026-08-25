@@ -1,5 +1,5 @@
 !define PRODUCT_NAME "MKVToolNix"
-!define PRODUCT_VERSION "100.0.0"
+!define PRODUCT_VERSION "101.0.0"
 !define PRODUCT_VERSION_BUILD ""
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://mkvtoolnix.download/"
@@ -208,7 +208,11 @@ SectionEnd
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
   WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\mkvtoolnix-gui.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
+!if ${MINGW_PROCESSOR_ARCH} == "amd64"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME} (64-bit)"
+!else
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME} (32-bit)"
+!endif
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\mkvtoolnix-gui.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"

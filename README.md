@@ -1,4 +1,4 @@
-MKVToolNix 100.0
+MKVToolNix 101.0
 =================
 
 # Moving to Codeberg
@@ -130,8 +130,8 @@ These libraries are:
 - [fmt](http://fmtlib.net/) — a small, safe and fast formatting
   library. Version 8.0.0 or later is required.
 
-- [libEBML v1.4.4](http://dl.matroska.org/downloads/libebml/) or later
-  and [libMatroska v1.7.1](http://dl.matroska.org/downloads/libmatroska/)
+- [libEBML v1.4.7](http://dl.matroska.org/downloads/libebml/) or later
+  and [libMatroska v1.7.2](http://dl.matroska.org/downloads/libmatroska/)
   or later for low-level access to Matroska files. Instructions on how to
   compile them are a bit further down in this file.
 
