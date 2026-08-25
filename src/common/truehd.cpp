@@ -52,7 +52,7 @@ int const frame_t::ms_sampling_rates[16]   = { 48000, 96000, 192000, 0, 0, 0, 0,
 uint8_t const frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
                                                    5,     6,      5, 5, 6, 0, 0, 0,     0,     0,      0, 0, 0, 0, 0, 0 };
 
-constexpr std::size_t PARSER_MIN_HEADER_SIZE = 12;
+constexpr std::size_t PARSER_MIN_HEADER_SIZE = 6;
 
 bool
 frame_t::parse_header(uint8_t const *data,
