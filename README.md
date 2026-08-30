@@ -163,8 +163,7 @@ built. These include:
 - [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
 
-- [po4a](https://po4a.alioth.debian.org/) for building the translated
-  man pages
+- [po4a](https://www.po4a.org/) for building the translated man pages
 
 ## 2.3. Building libEBML and libMatroska
 
