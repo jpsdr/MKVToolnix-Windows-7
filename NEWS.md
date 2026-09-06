@@ -1,12 +1,18 @@
 # Version ?
 
+## Bug fixes
+
+* MKVToolNix GUI: executing actions, type "execute a program": all the
+  variables (`<MTX_…>`) will now be replaced again in the argument list to the
+  program to be executed. This was broken in v100. Fixes #6306.
+
 ## Security fixes
 
 * avilib: fixed potential heap overflows/invalid memory access in the ODML
   index handling due to unsiged integer multiplication wrapping around
   (colloquially known as "overflowing") with specifically crafted AVI
   files. Affects only mkvmerge as the other tools do not read AVIs. Reported
-  by Tristan <TristanInSec@gmail.com>.
+  by Tristan Madani <TristanInSec@gmail.com>.
 
 
 # Version 101.0 "Time To Turn" 2026-08-24
