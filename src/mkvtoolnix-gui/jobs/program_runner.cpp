@@ -205,25 +205,26 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 void
 ProgramRunner::replaceVariablesAndExecuteProgram(QStringList const &programAndArguments,
                                                  VariableMap const &variables) {
-  auto commandLine = programAndArguments;
-  auto exe         = commandLine.value(0);
+  auto arguments = programAndArguments;
+  auto exe       = arguments.value(0);
 
   if (exe.isEmpty())
     return;
 
-  commandLine.removeFirst();
+  arguments.removeFirst();
 
   auto environment = QProcessEnvironment::systemEnvironment();
   for (auto itr = variables.cbegin(); itr != variables.cend(); ++itr)
     environment.insert(u"MTX_%1"_s.arg(itr.key()), itr.value().join(u","_s));
 
-  exe = Util::replaceMtxVariableWithApplicationDirectory(exe);
+  exe       = Util::replaceMtxVariableWithApplicationDirectory(exe);
+  arguments = replaceVariables(arguments, variables);
 
-  qDebug() << "replaceVariablesAndExecuteProgram exe orig" << programAndArguments.value(0) << "exe modified" << exe << "commandLine" << commandLine << "variables" << variables;
+  qDebug() << "replaceVariablesAndExecuteProgram programAndarguments orig" << programAndArguments << "exe modified" << exe << "arguments modified" << arguments << "variables" << variables;
 
   QProcess process;
   process.setProgram(exe);
-  process.setArguments(commandLine);
+  process.setArguments(arguments);
   process.setProcessEnvironment(environment);
 
   if (process.startDetached())
