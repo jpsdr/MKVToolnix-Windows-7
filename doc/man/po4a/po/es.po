@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2026-08-24 19:56+0200\n"
-"PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: overdrive80 <lukillas.ole@gmail.com>, 2016-2023,2026\n"
+"PO-Revision-Date: 2026-09-14 15:48+0200\n"
+"Last-Translator: Casper, 2024-2026\n"
 "Language-Team: Spanish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1483,10 +1483,8 @@ msgstr "Se puede lograr el mismo efecto con las opciones <option>--all --positio
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:323
-#, fuzzy
-#| msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
 msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. At all other levels it only prints information about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
-msgstr "En el nivel 3 y superiores &mkvinfo; imprimirá algo de información que no está directamente relacionada al elemento &matroska;. El resto de elementos sólo imprimirá datos sobre los elementos que fueron encontrados. El nivel 3 añade meta información para facilitar la depuración (leer: está indicado para desarrolladores). Todas las líneas escritas por el nivel 3 están cerradas entre corchetes para facilitar el filtrado. "
+msgstr "A partir del nivel 3, &mkvinfo;, imprime información que no está directamente relacionada con un elemento &matroska;. En los demás niveles, solo imprime información sobre los elementos recién encontrados. El nivel 3 añade metainformación para facilitar la depuración (es decir, está pensado solo para desarrolladores). Todas las líneas escritas en el nivel 3 aparecen entre corchetes para facilitar su filtrado."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:342
@@ -1942,10 +1940,8 @@ msgstr "<option>--track-order</option> <parameter>FID1:TID1,FID2:TID2,...</param
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:427
-#, fuzzy
-#| msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs. Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
 msgid "This option changes the order in which the tracks for an input file are created. The argument is a comma-separated list of ID pairs.  Each pair contains first the file ID (<parameter>FID1</parameter>) which is simply the number of the file on the command line starting at 0. The second is a track ID (<parameter>TID1</parameter>) from that file.  If some track IDs are omitted then those tracks are created after the ones given with this option have been created."
-msgstr "Esta opción cambia el orden en el que se crean las pistas de un archivo de entrada. El argumento es una lista separada por comas de pares de IDs. Cada par contiene primero el ID de archivo (<parameter>FID1</parameter>) que es tan sólo es el número del archivo en la línea de comandos partiendo de cero. El segundo es el ID de pista (<parameter>TID1</parameter>) de ese archivo. Si algunos IDs de pista son omitidos entonces esas pistas se crean después de que se hayan creado las establecidas con esta opción. "
+msgstr "Esta opción modifica el orden de creación de las pistas de un archivo de entrada. El argumento es una lista de pares de identificadores separados por comas. Cada par contiene, en primer lugar, el identificador del archivo (<parameter>FID1</parameter>), que es simplemente el número del archivo en la línea de comandos, comenzando desde 0. El segundo es un identificador de pista (<parameter>TID1</parameter>) de ese archivo. Si se omiten algunos identificadores de pista, estas se crearán después de las especificadas con esta opción."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:434
@@ -2918,10 +2914,8 @@ msgstr "<option>--cues</option> <parameter>TID:none|iframes|all</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1463
-#, fuzzy
-#| msgid "Controls for which tracks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
 msgid "Controls for which blocks cue (index) entries are created for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). '<literal>none</literal>' inhibits the creation of cue entries.  For '<literal>iframes</literal>' only blocks with no backward or forward references ( = I frames in video tracks) are put into the cue sheet. '<literal>all</literal>' causes &mkvmerge; to create cue entries for all blocks which will make the file very big."
-msgstr "Controla qué entradas del índice (cue) de la pistas se crean para una pista concreta (consulte la sección <link linkend=\"mkvmerge.track_ids\">IDs de pista</link>). '<literal>None</literal>' evita la creación de entradas del índice. Sólo los bloques '<literal>iframes</literal>' sin referencias anteriores o posteriores ( = fotogramas I en pistas de video) se insertan en el cue sheet. '<literal>All</literal>' provoca que &mkvmerge; genere las entradas del índice para todos los bloques lo que hará que el archivo sea más grande. "
+msgstr "Controla para qué bloques se crean entradas de índice (cue) para la pista dada (ver sección <link linkend=\"mkvmerge.track_ids\">ID de pista</link>). '<literal>none</literal>' impide la creación de entradas de índice. Para '<literal>iframes</literal>', solo se colocan en la hoja de índice los bloques sin referencias hacia atrás o hacia adelante (= fotogramas I en pistas de vídeo). '<literal>all</literal>' hace que &mkvmerge;, cree entradas de índice para todos los bloques, lo que hará que el archivo sea muy grande."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1470
