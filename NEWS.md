@@ -1,4 +1,4 @@
-# Version ?
+# Version 102.0 "Little Houses" 2026-09-14
 
 ## Bug fixes
 
@@ -8,9 +8,9 @@
 
 ## Security fixes
 
-* avilib: fixed potential heap overflows/invalid memory access in the ODML
-  index handling due to unsiged integer multiplication wrapping around
-  (colloquially known as "overflowing") with specifically crafted AVI
+* CVE-2026-90783: avilib: fixed potential heap overflows/invalid memory access
+  in the ODML index handling due to unsiged integer multiplication wrapping
+  around (colloquially known as "overflowing") with specifically crafted AVI
   files. Affects only mkvmerge as the other tools do not read AVIs. Reported
   by Tristan Madani <TristanInSec@gmail.com>.
 
