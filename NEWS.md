@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* macOS: GUI: fixed check boxes in lists such as the multiplexer's track list
+  being invisible on macOS 27 by patching the Qt bundled with the app. Patch
+  by corticalcode, based on the fix J.D. Purcell proposed in QTBUG-150017.
+  Fixes #6307.
+
+
 # Version 102.0 "Little Houses" 2026-09-14
 
 ## Bug fixes
