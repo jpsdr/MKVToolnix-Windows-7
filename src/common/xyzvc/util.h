@@ -14,8 +14,15 @@
 
 #include "common/common_pch.h"
 
+#include "common/stereo_mode.h"
+
+namespace mtx::bits {
+class reader_c;
+}
+
 namespace mtx::xyzvc {
 
 bool might_be_xyzvc(memory_c const &buffer);
+std::optional<stereo_mode_c::mode> parse_frame_packing_arrangement(mtx::bits::reader_c &r);
 
 }
