@@ -286,9 +286,9 @@ track_c::new_stream_v_avc(bool end_of_detection) {
   if (!m_avc_parser->headers_parsed())
     return FILE_STATUS_MOREDATA;
 
-  codec    = codec_c::look_up(codec_c::type_e::V_MPEG4_P10);
-  v_width  = m_avc_parser->get_width();
-  v_height = m_avc_parser->get_height();
+  codec         = codec_c::look_up(codec_c::type_e::V_MPEG4_P10);
+  v_width       = m_avc_parser->get_width();
+  v_height      = m_avc_parser->get_height();
   v_stereo_mode = m_avc_parser->get_stereo_mode();
 
   if (m_avc_parser->has_par_been_found()) {
