@@ -316,6 +316,7 @@ public:
   // video related parameters
   bool v_interlaced;
   int v_version, v_width, v_height, v_dwidth, v_dheight;
+  std::optional<stereo_mode_c::mode> v_stereo_mode;
   mtx_mp_rational_t v_aspect_ratio;
   memory_cptr m_codec_private_data;
   std::optional<mtx::dovi::dovi_decoder_configuration_record_t> m_dovi_config;
