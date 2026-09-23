@@ -24,6 +24,7 @@ protected:
 
   int m_width{}, m_height{};
   int64_t m_default_duration{};
+  std::optional<stereo_mode_c::mode> m_stereo_mode;
 
   memory_cptr m_buffer{memory_c::alloc(1024 * 1024)};
 

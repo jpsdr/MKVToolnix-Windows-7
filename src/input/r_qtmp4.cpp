@@ -2045,6 +2045,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     dmx.set_packetizer_display_dimensions();
     dmx.set_packetizer_color_properties();
+    dmx.set_packetizer_stereo_mode();
 
   } else if (dmx.is_audio()) {
     if (dmx.codec.is(codec_c::type_e::A_AAC))
@@ -2180,6 +2181,9 @@ qtmp4_reader_c::identify() {
 
     if (dmx.is_video()) {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, dmx.v_width, dmx.v_height);
+
+      if (dmx.v_stereo_mode)
+        info.add(mtx::id::stereo_mode, static_cast<int>(*dmx.v_stereo_mode));
 
       if (dmx.v_color_primaries != 2)
         info.set(mtx::id::color_primaries, dmx.v_color_primaries);
@@ -2908,6 +2912,12 @@ qtmp4_demuxer_c::set_packetizer_color_properties() {
   if (v_color_matrix_coefficients != 2) {
     m_reader.m_reader_packetizers[ptzr]->set_video_color_matrix(v_color_matrix_coefficients, option_source_e::container);
   }
+}
+
+void
+qtmp4_demuxer_c::set_packetizer_stereo_mode() {
+  if (v_stereo_mode)
+    m_reader.m_reader_packetizers[ptzr]->set_video_stereo_mode(*v_stereo_mode, option_source_e::bitstream);
 }
 
 void
@@ -3716,34 +3726,47 @@ qtmp4_demuxer_c::verify_video_parameters() {
 
 bool
 qtmp4_demuxer_c::derive_track_params_from_avc_bitstream() {
-  priv.clear();
+  // Builds the avcC from the first frames if the track does not have one.
+  //
+  // The frame packing arrangement is signalled in an SEI message inside the
+  // bitstream only, never in the avcC, so the first frames are parsed even
+  // when the decoder configuration record is present. Doing it here means the
+  // stereo mode is known during file identification already.
+  auto have_configuration_record = !priv.empty() && (4 <= priv[0]->get_size());
 
-  // No avcC content? Try to build one from the first frames.
+  if (!have_configuration_record)
+    priv.clear();
+
   auto mem = read_first_bytes(10'000);
 
-  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: deriving avcC from bitstream; read {0} bytes\n", mem ? mem->get_size() : 0));
+  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: read {0} bytes; avcC present? {1}\n", mem ? mem->get_size() : 0, have_configuration_record));
 
   if (!mem)
-    return false;
+    return have_configuration_record;
 
   mtx::avc::es_parser_c parser;
 
-  parser.add_bytes(mem->get_buffer(), mem->get_size());
+  if (have_configuration_record) {
+    parser.set_configuration_record(priv[0]);
+    parser.add_bytes_framed(mem, (priv[0]->get_buffer()[4] & 0x03) + 1);
+
+  } else
+    parser.add_bytes(mem->get_buffer(), mem->get_size());
+
   parser.flush();
 
-  if (parser.headers_parsed())
+  if (!have_configuration_record && parser.headers_parsed())
     priv.emplace_back(parser.get_configuration_record());
 
-  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: avcC derived? size {0} bytes\n", !priv.empty() && priv[0] ? priv[0]->get_size() : 0));
+  v_stereo_mode = parser.get_stereo_mode();
+
+  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: avcC size {0} bytes; stereo mode {1}\n", !priv.empty() && priv[0] ? priv[0]->get_size() : 0, v_stereo_mode ? static_cast<int>(*v_stereo_mode) : -1));
 
   return !priv.empty() && priv[0]->get_size();
 }
 
 bool
 qtmp4_demuxer_c::verify_avc_video_parameters() {
-  if (!priv.empty() && (4 <= priv[0]->get_size()))
-    return true;
-
   if (derive_track_params_from_avc_bitstream())
     return true;
 

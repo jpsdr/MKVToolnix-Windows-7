@@ -15,6 +15,7 @@
 #include "common/common_pch.h"
 
 #include "common/math_fwd.h"
+#include "common/stereo_mode.h"
 #include "common/xyzvc/types.h"
 
 namespace mtx::xyzvc {
@@ -36,6 +37,8 @@ protected:
   int64_t m_stream_default_duration{-1}, m_forced_default_duration{-1}, m_container_default_duration{-1};
   int m_frame_number{}, m_num_skipped_frames{};
   bool m_first_keyframe_found{}, m_recovery_point_valid{}, m_b_frames_since_keyframe{};
+
+  std::optional<stereo_mode_c::mode> m_stereo_mode;
 
   bool m_par_found{};
   mtx_mp_rational_t m_par{};
@@ -91,6 +94,8 @@ public:
   void set_container_default_duration(int64_t default_duration);
   bool has_stream_default_duration() const;
   int64_t get_stream_default_duration() const;
+
+  std::optional<stereo_mode_c::mode> get_stereo_mode() const;
 
   void set_keep_ar_info(bool keep);
 

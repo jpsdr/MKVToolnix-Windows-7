@@ -24,6 +24,7 @@
 #include "common/list_utils.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
+#include "common/xyzvc/util.h"
 #include <type_traits>
 #include <unordered_map>
 
@@ -359,13 +360,20 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
         psize += value;
       psize += value;
 
-      if (6 == ptype) {         // recovery point
-        m_recovery_point_valid = true;
-        return;
-      } else if (0x80 == ptype)
+      if (0x80 == ptype)
         return;
 
-      r.skip_bits(psize * 8);
+      auto payload_start = r.get_bit_position();
+
+      if (6 == ptype)                               // recovery point
+        m_recovery_point_valid = true;
+
+      else if ((45 == ptype) && !m_stereo_mode)     // frame packing arrangement
+        m_stereo_mode = mtx::xyzvc::parse_frame_packing_arrangement(r);
+
+      // Keep walking: a NAL unit may carry several SEI messages, e.g. a
+      // recovery point followed by a frame packing arrangement.
+      r.set_bit_position(payload_start + psize * 8);
     }
   } catch (...) {
   }

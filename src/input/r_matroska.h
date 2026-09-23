@@ -71,6 +71,7 @@ struct kax_track_t {
   std::optional<double> v_max_luminance, v_min_luminance;
   std::optional<int64_t> v_field_order;
   stereo_mode_c::mode v_stereo_mode;
+  std::optional<stereo_mode_c::mode> v_bitstream_stereo_mode;
   std::optional<bool> v_alpha_mode;
   char v_fourcc[5];
   std::optional<uint64_t> v_projection_type;
@@ -264,6 +265,7 @@ protected:
   virtual bool verify_truehd_audio_track(kax_track_t *t);
   virtual bool verify_vorbis_audio_track(kax_track_t *t);
   virtual void verify_audio_track(kax_track_t *t);
+  virtual bool verify_avc_video_track(kax_track_t *t);
   virtual bool verify_mscomp_video_track(kax_track_t *t);
   virtual bool verify_theora_video_track(kax_track_t *t);
   virtual void verify_video_track(kax_track_t *t);
