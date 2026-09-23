@@ -266,6 +266,7 @@ struct qtmp4_demuxer_c {
   memory_cptr stsd;
   unsigned int stsd_non_priv_struct_size;
   uint32_t v_width, v_height, v_bitdepth, v_display_width_flt{}, v_display_height_flt{};
+  std::optional<stereo_mode_c::mode> v_stereo_mode;
   uint16_t v_color_primaries, v_color_transfer_characteristics, v_color_matrix_coefficients;
   bool m_hevc_is_annex_b{};
   std::deque<int64_t> references;
@@ -384,6 +385,7 @@ struct qtmp4_demuxer_c {
 
   void set_packetizer_display_dimensions();
   void set_packetizer_color_properties();
+  void set_packetizer_stereo_mode();
   void set_packetizer_block_addition_mappings();
 
 

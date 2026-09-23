@@ -195,6 +195,12 @@ es_parser_c::has_stream_default_duration()
   return -1 != m_stream_default_duration;
 }
 
+std::optional<stereo_mode_c::mode>
+es_parser_c::get_stereo_mode()
+  const {
+  return m_stereo_mode;
+}
+
 int64_t
 es_parser_c::get_stream_default_duration()
   const {

@@ -46,6 +46,7 @@
 #include "common/alac.h"
 #include "common/at_scope_exit.h"
 #include "common/audio_emphasis.h"
+#include "common/avc/es_parser.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
 #include "common/container.h"
@@ -232,6 +233,9 @@ void
 kax_track_t::handle_packetizer_stereo_mode() {
   if (stereo_mode_c::unspecified != v_stereo_mode)
     ptzr_ptr->set_video_stereo_mode(v_stereo_mode, option_source_e::container);
+
+  if (v_bitstream_stereo_mode)
+    ptzr_ptr->set_video_stereo_mode(*v_bitstream_stereo_mode, option_source_e::bitstream);
 }
 
 void
@@ -684,6 +688,39 @@ kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
 }
 
 bool
+kax_reader_c::verify_avc_video_track(kax_track_t *t) {
+  // The frame packing arrangement is signalled only in an SEI message inside
+  // the bitstream. Container-level signalling takes precedence, so only look
+  // at the first frame when the track has no StereoMode element.
+  if (   (stereo_mode_c::unspecified != t->v_stereo_mode)
+      || t->ms_compat
+      || !t->private_data
+      || (5 > t->private_data->get_size()))
+    return true;
+
+  try {
+    read_first_frames(t, 1);
+
+    if (t->first_frames_data.empty())
+      return true;
+
+    mtx::avc::es_parser_c parser;
+    auto nalu_size_length = (t->private_data->get_buffer()[4] & 0x03) + 1;
+
+    parser.set_configuration_record(t->private_data);
+    for (auto const &frame : t->first_frames_data)
+      parser.add_bytes_framed(frame, nalu_size_length);
+    parser.flush();
+
+    t->v_bitstream_stereo_mode = parser.get_stereo_mode();
+
+  } catch (...) {
+  }
+
+  return true;
+}
+
+bool
 kax_reader_c::verify_theora_video_track(kax_track_t *t) {
   if (t->private_data)
     return true;
@@ -708,6 +745,9 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 
     if (t->codec.is(codec_c::type_e::V_THEORA))
       is_ok = verify_theora_video_track(t);
+
+    else if (t->codec.is(codec_c::type_e::V_MPEG4_P10))
+      is_ok = verify_avc_video_track(t);
   }
 
   if (!is_ok)
@@ -2899,6 +2939,10 @@ kax_reader_c::identify() {
 
     info = mtx::id::info_c{};
 
+    auto stereo_mode = stereo_mode_c::unspecified != track->v_stereo_mode ? track->v_stereo_mode
+                     : track->v_bitstream_stereo_mode                     ? *track->v_bitstream_stereo_mode
+                     :                                                      stereo_mode_c::unspecified;
+
     info.add(mtx::id::number,                 track->track_number);
     info.add(mtx::id::uid,                    track->track_uid);
     info.set(mtx::id::num_index_entries,      track->num_cue_points);
@@ -2910,7 +2954,7 @@ kax_reader_c::identify() {
     info.add(mtx::id::language,               track->language.get_iso639_alpha_3_code());
     info.add(mtx::id::language_ietf,          track->language_ietf.format());
     info.add(mtx::id::track_name,             track->track_name);
-    info.add(mtx::id::stereo_mode,            static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
+    info.add(mtx::id::stereo_mode,            static_cast<int>(stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
     info.add(mtx::id::alpha_mode,             track->v_alpha_mode);
     info.add(mtx::id::default_duration,       track->default_duration);
     info.set(mtx::id::default_track,          track->default_track ? true : false);

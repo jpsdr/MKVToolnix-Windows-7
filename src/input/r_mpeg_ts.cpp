@@ -286,9 +286,10 @@ track_c::new_stream_v_avc(bool end_of_detection) {
   if (!m_avc_parser->headers_parsed())
     return FILE_STATUS_MOREDATA;
 
-  codec    = codec_c::look_up(codec_c::type_e::V_MPEG4_P10);
-  v_width  = m_avc_parser->get_width();
-  v_height = m_avc_parser->get_height();
+  codec         = codec_c::look_up(codec_c::type_e::V_MPEG4_P10);
+  v_width       = m_avc_parser->get_width();
+  v_height      = m_avc_parser->get_height();
+  v_stereo_mode = m_avc_parser->get_stereo_mode();
 
   if (m_avc_parser->has_par_been_found()) {
     auto dimensions = m_avc_parser->get_display_dimensions();
@@ -1754,10 +1755,13 @@ reader_c::identify() {
       info.add(mtx::id::audio_sampling_frequency, track->a_sample_rate);
       info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
 
-    } else if (pid_type_e::video == track->type)
+    } else if (pid_type_e::video == track->type) {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, track->v_width, track->v_height);
 
-    else if (pid_type_e::subtitles == track->type) {
+      if (track->v_stereo_mode)
+        info.add(mtx::id::stereo_mode, static_cast<int>(*track->v_stereo_mode));
+
+    } else if (pid_type_e::subtitles == track->type) {
       info.set(mtx::id::text_subtitles,        track->codec.is(codec_c::type_e::S_SRT));
       info.add(mtx::id::teletext_page,         track->m_ttx_wanted_page);
       info.add(mtx::id::flag_hearing_impaired, track->m_hearing_impaired_flag);
@@ -2674,6 +2678,9 @@ reader_c::create_packetizer(int64_t id) {
 
   if (track->m_hearing_impaired_flag.has_value() &&track->m_hearing_impaired_flag.value())
     packetizer.set_hearing_impaired_flag(true, option_source_e::container);
+
+  if (track->v_stereo_mode)
+    packetizer.set_video_stereo_mode(*track->v_stereo_mode, option_source_e::bitstream);
 
   show_packetizer_info(id, packetizer);
 }

@@ -1,5 +1,13 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: AVC/H.264: the stereo mode is now set from the frame packing
+  arrangement SEI message in the video stream if neither the command line
+  nor the container specifies one. This works for MP4, Matroska, AVC
+  elementary stream and MPEG transport stream input and is already known
+  during file identification. Implements the AVC part of #6309.
+
 ## Bug fixes
 
 * macOS: GUI: fixed check boxes in lists such as the multiplexer's track list
