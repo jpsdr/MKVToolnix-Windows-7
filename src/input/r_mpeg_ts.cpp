@@ -312,9 +312,10 @@ track_c::new_stream_v_hevc(bool end_of_detection) {
   if (!m_hevc_parser->headers_parsed())
     return FILE_STATUS_MOREDATA;
 
-  codec    = codec_c::look_up(codec_c::type_e::V_MPEGH_P2);
-  v_width  = m_hevc_parser->get_width();
-  v_height = m_hevc_parser->get_height();
+  codec         = codec_c::look_up(codec_c::type_e::V_MPEGH_P2);
+  v_width       = m_hevc_parser->get_width();
+  v_height      = m_hevc_parser->get_height();
+  v_stereo_mode = m_hevc_parser->get_stereo_mode();
 
   if (m_hevc_parser->has_par_been_found()) {
     auto dimensions = m_hevc_parser->get_display_dimensions();

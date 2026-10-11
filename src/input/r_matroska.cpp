@@ -55,6 +55,8 @@
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/hevc/es_parser.h"
+#include "common/hevc/hevcc.h"
 #include "common/kax_analyzer.h"
 #include "common/math.h"
 #include "common/mime.h"
@@ -721,6 +723,38 @@ kax_reader_c::verify_avc_video_track(kax_track_t *t) {
 }
 
 bool
+kax_reader_c::verify_hevc_video_track(kax_track_t *t) {
+  // The frame packing arrangement is signalled only in an SEI message inside
+  // the bitstream. Container-level signalling takes precedence, so only look
+  // at the first frame when the track has no StereoMode element.
+  if (   (stereo_mode_c::unspecified != t->v_stereo_mode)
+      || t->ms_compat
+      || !t->private_data
+      || (23 > t->private_data->get_size()))
+    return true;
+
+  try {
+    read_first_frames(t, 1);
+
+    if (t->first_frames_data.empty())
+      return true;
+
+    mtx::hevc::es_parser_c parser;
+
+    parser.set_configuration_record(t->private_data);
+    for (auto const &frame : t->first_frames_data)
+      parser.add_bytes_framed(frame, mtx::hevc::hevcc_c::unpack(t->private_data).m_size_nalu_minus_one + 1);
+    parser.flush();
+
+    t->v_bitstream_stereo_mode = parser.get_stereo_mode();
+
+  } catch (...) {
+  }
+
+  return true;
+}
+
+bool
 kax_reader_c::verify_theora_video_track(kax_track_t *t) {
   if (t->private_data)
     return true;
@@ -748,6 +782,9 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 
     else if (t->codec.is(codec_c::type_e::V_MPEG4_P10))
       is_ok = verify_avc_video_track(t);
+
+    else if (t->codec.is(codec_c::type_e::V_MPEGH_P2))
+      is_ok = verify_hevc_video_track(t);
   }
 
   if (!is_ok)
