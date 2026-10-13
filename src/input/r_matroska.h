@@ -266,6 +266,7 @@ protected:
   virtual bool verify_vorbis_audio_track(kax_track_t *t);
   virtual void verify_audio_track(kax_track_t *t);
   virtual bool verify_avc_video_track(kax_track_t *t);
+  virtual bool verify_hevc_video_track(kax_track_t *t);
   virtual bool verify_mscomp_video_track(kax_track_t *t);
   virtual bool verify_theora_video_track(kax_track_t *t);
   virtual void verify_video_track(kax_track_t *t);

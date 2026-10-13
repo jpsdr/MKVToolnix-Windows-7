@@ -35,6 +35,7 @@
 #include "common/endian.h"
 #include "common/frame_timing.h"
 #include "common/hacks.h"
+#include "common/hevc/hevcc.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
@@ -3688,6 +3689,8 @@ qtmp4_demuxer_c::check_for_hevc_video_annex_b_bitstream() {
     priv.clear();
     priv.emplace_back(parser.get_configuration_record());
 
+    v_stereo_mode = parser.get_stereo_mode();
+
     break;
   }
 
@@ -3846,6 +3849,35 @@ qtmp4_demuxer_c::derive_track_params_from_avc_bitstream() {
   return !priv.empty() && priv[0]->get_size();
 }
 
+void
+qtmp4_demuxer_c::derive_track_params_from_hevc_bitstream() {
+  // The frame packing arrangement is signalled only in an SEI message inside
+  // the bitstream, never in the hvcC, so look at the first frames even when
+  // the decoder configuration is present. Doing it here means the result is
+  // known during file identification already. Annex B streams were already
+  // parsed when they were detected.
+  if (m_hevc_is_annex_b || priv.empty() || (23 > priv[0]->get_size()))
+    return;
+
+  auto mem = read_first_bytes(10'000);
+  if (!mem)
+    return;
+
+  try {
+    mtx::hevc::es_parser_c parser;
+
+    parser.set_configuration_record(priv[0]);
+    parser.add_bytes_framed(mem, mtx::hevc::hevcc_c::unpack(priv[0]).m_size_nalu_minus_one + 1);
+    parser.flush();
+
+    v_stereo_mode = parser.get_stereo_mode();
+
+  } catch (...) {
+  }
+
+  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_hevc_bitstream: stereo mode from frame packing SEI: {0}\n", v_stereo_mode ? static_cast<int>(*v_stereo_mode) : -1));
+}
+
 bool
 qtmp4_demuxer_c::verify_avc_video_parameters() {
   if (derive_track_params_from_avc_bitstream())
@@ -3861,6 +3893,8 @@ qtmp4_demuxer_c::verify_hevc_video_parameters() {
     mxwarn(fmt::format(FY("Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"), id));
     return false;
   }
+
+  derive_track_params_from_hevc_bitstream();
 
   return true;
 }

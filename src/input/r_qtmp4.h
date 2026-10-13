@@ -378,6 +378,7 @@ struct qtmp4_demuxer_c {
   void derive_track_params_from_ac3_audio_bitstream();
   bool derive_track_params_from_avc_bitstream();
   void derive_track_params_from_dts_audio_bitstream();
+  void derive_track_params_from_hevc_bitstream();
   void derive_track_params_from_mp3_audio_bitstream();
   bool derive_track_params_from_opus_private_data();
   bool derive_track_params_from_vorbis_private_data();
