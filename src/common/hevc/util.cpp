@@ -28,6 +28,7 @@
 #include "common/mm_mem_io.h"
 #include "common/mpeg.h"
 #include "common/xyzvc/types.h"
+#include "common/xyzvc/util.h"
 
 namespace mtx::hevc {
 
@@ -763,7 +764,8 @@ parse_pps(memory_cptr const &buffer,
 // HEVC spec, 7.3.2.4
 bool
 parse_sei(memory_cptr const &buffer,
-          user_data_t &user_data) {
+          user_data_t &user_data,
+          std::optional<stereo_mode_c::mode> *stereo_mode) {
   try {
     mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
     mm_mem_io_c byte_reader{*buffer};
@@ -806,6 +808,23 @@ parse_sei(memory_cptr const &buffer,
         bytes_read++;
       }
       payload_size += payload_size_byte;
+
+      // The frame packing arrangement message carries the stereo layout;
+      // see Rec. ITU-T H.265, annex D. The shared AVC/HEVC helper parses
+      // its leading fields, so read the payload into a bit reader for it.
+      if (   stereo_mode
+          && !stereo_mode->has_value()
+          && (SEI_FRAME_PACKING == payload_type)) {
+        auto payload_start = byte_reader.getFilePointer();
+        auto payload       = memory_c::alloc(payload_size);
+
+        if (payload_size == byte_reader.read(payload->get_buffer(), payload_size)) {
+          mtx::bits::reader_c payload_reader{payload->get_buffer(), payload_size};
+          *stereo_mode = mtx::xyzvc::parse_frame_packing_arrangement(payload_reader);
+        }
+
+        byte_reader.setFilePointer(payload_start);
+      }
 
       handle_sei_payload(byte_reader, payload_type, payload_size, user_data);
 

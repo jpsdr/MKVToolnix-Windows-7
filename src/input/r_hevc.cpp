@@ -57,6 +57,8 @@ hevc_es_reader_c::probe_file() {
     if (parser.has_stream_default_duration())
       m_default_duration = parser.get_stream_default_duration();
 
+    m_stereo_mode = parser.get_stereo_mode();
+
     if ((0 >= m_width) || (0 >= m_height))
       return false;
 
@@ -77,6 +79,9 @@ hevc_es_reader_c::create_packetizer(int64_t) {
     return;
 
   add_packetizer(new hevc_es_video_packetizer_c(this, m_ti, m_width, m_height));
+
+  if (m_stereo_mode)
+    ptzr(0).set_video_stereo_mode(*m_stereo_mode, option_source_e::bitstream);
 
   show_packetizer_info(0, ptzr(0));
 }
@@ -100,6 +105,9 @@ hevc_es_reader_c::identify() {
   info.add(mtx::id::packetizer,       mtx::id::mpegh_p2_es_video);
   info.add(mtx::id::default_duration, m_default_duration);
   info.add_joined(mtx::id::pixel_dimensions, "x"s, m_width, m_height);
+
+  if (m_stereo_mode)
+    info.add(mtx::id::stereo_mode, static_cast<int>(*m_stereo_mode));
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), info.get());
