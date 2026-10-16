@@ -37,7 +37,7 @@ class TabPrivate {
   bool currentlySettingInputControlValues{};
 
   QAction *addFilesAction{}, *appendFilesAction{}, *addAdditionalPartsAction{}, *addFilesAction2{}, *appendFilesAction2{}, *addAdditionalPartsAction2{};
-  QAction *removeFilesAction{}, *removeAllFilesAction{}, *setDestinationFileNameAction{}, *selectAllTracksAction{}, *enableAllTracksAction{}, *disableAllTracksAction{};
+  QAction *removeFilesAction{}, *removeAllFilesAction{}, *setDestinationFileNameAction{}, *selectAllTracksAction{}, *enableAllTracksAction{}, *disableAllTracksAction{}, *enableAllTracksSameSourceAction{}, *disableAllTracksSameSourceAction{};
   QAction *selectAllVideoTracksAction{}, *selectAllAudioTracksAction{}, *selectAllSubtitlesTracksAction{}, *openFilesInMediaInfoAction{}, *openTracksInMediaInfoAction{}, *selectTracksFromFilesAction{};
   QAction *enableAllAttachedFilesAction{}, *disableAllAttachedFilesAction{}, *enableSelectedAttachedFilesAction{}, *disableSelectedAttachedFilesAction{};
   QAction *startMuxingLeaveAsIs{}, *startMuxingCreateNewSettings{}, *startMuxingCloseSettings{}, *startMuxingRemoveInputFiles{};

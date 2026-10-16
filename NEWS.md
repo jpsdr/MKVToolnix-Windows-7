@@ -12,6 +12,9 @@
   nor the container specifies one. This works for MP4, Matroska, HEVC
   elementary stream and MPEG transport stream input and is already known
   during file identification. Implements the HEVC part of #6309.
+* MKVToolNix GUI: multiplexer: added new actions to the tracks context menu
+  for enabling/disabling all items belonging to the same source file as the
+  selected item. Implements #6318.
 
 ## Bug fixes
 
