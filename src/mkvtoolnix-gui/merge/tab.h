@@ -91,6 +91,8 @@ public Q_SLOTS:
   virtual void selectAllTracksFromSelectedFiles();
   virtual void enableAllTracks();
   virtual void disableAllTracks();
+  virtual void enableAllTracksFromSameSource();
+  virtual void disableAllTracksFromSameSource();
 
   virtual void onTracksDoubleClicked(QModelIndex const &idx);
   virtual void onDefaultTrackFlagColumnDoubleClicked();
@@ -342,7 +344,8 @@ protected:
 
   virtual void ensureAtLeastOneTrackEnabledMaybe();
 
-  virtual void enableDisableAllTracks(bool enable);
+  virtual void enableDisableAllTracksFromSameSource(bool enable);
+  virtual void enableDisableAllTracksIf(bool enable, std::function<bool(Track &)> forThisTrack);
 
   virtual QString currentState();
 

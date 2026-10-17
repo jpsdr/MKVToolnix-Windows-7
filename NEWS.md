@@ -12,6 +12,9 @@
   nor the container specifies one. This works for MP4, Matroska, HEVC
   elementary stream and MPEG transport stream input and is already known
   during file identification. Implements the HEVC part of #6309.
+* MKVToolNix GUI: multiplexer: added new actions to the tracks context menu
+  for enabling/disabling all items belonging to the same source file as the
+  selected item. Implements #6318.
 
 ## Bug fixes
 
@@ -19,6 +22,11 @@
   being invisible on macOS 27 by patching the Qt bundled with the app. Patch
   by corticalcode, based on the fix J.D. Purcell proposed in QTBUG-150017.
   Fixes #6307.
+* mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
+  to flushing the packetizers too early (when the first track ends instead of
+  only when all tracks in the file have ended). Another byproduct is that
+  `BlockDuration` attributes aren't set for the last frame when they aren't
+  needed anymore. Fixes #6320.
 
 
 # Version 102.0 "Little Houses" 2026-09-14

@@ -372,6 +372,9 @@ Tab::setupInputControls() {
   p.tracksMenu->addAction(p.enableAllTracksAction);
   p.tracksMenu->addAction(p.disableAllTracksAction);
   p.tracksMenu->addSeparator();
+  p.tracksMenu->addAction(p.enableAllTracksSameSourceAction);
+  p.tracksMenu->addAction(p.disableAllTracksSameSourceAction);
+  p.tracksMenu->addSeparator();
   p.tracksMenu->addAction(p.openTracksInMediaInfoAction);
 
   p.selectTracksOfTypeMenu->addAction(p.selectAllVideoTracksAction);
@@ -513,6 +516,8 @@ Tab::setupInputControls() {
   connect(p.selectTracksFromFilesAction,       &QAction::triggered,                                                    this,                       &Tab::selectAllTracksFromSelectedFiles);
   connect(p.enableAllTracksAction,             &QAction::triggered,                                                    this,                       &Tab::enableAllTracks);
   connect(p.disableAllTracksAction,            &QAction::triggered,                                                    this,                       &Tab::disableAllTracks);
+  connect(p.enableAllTracksSameSourceAction,   &QAction::triggered,                                                    this,                       &Tab::enableAllTracksFromSameSource);
+  connect(p.disableAllTracksSameSourceAction,  &QAction::triggered,                                                    this,                       &Tab::disableAllTracksFromSameSource);
 
   connect(p.startMuxingLeaveAsIs,              &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(true,  CMSAction::None); });
   connect(p.startMuxingCreateNewSettings,      &QAction::triggered,                                                    this,                       [this]() { addToJobQueue(true,  CMSAction::NewSettings); });
@@ -1764,6 +1769,8 @@ Tab::enableTracksActions() {
   p.selectTracksOfTypeMenu->setEnabled(hasTracks);
   p.enableAllTracksAction->setEnabled(hasTracks);
   p.disableAllTracksAction->setEnabled(hasTracks);
+  p.enableAllTracksSameSourceAction->setEnabled(numSelected > 0);
+  p.disableAllTracksSameSourceAction->setEnabled(numSelected > 0);
 
   p.selectAllVideoTracksAction->setEnabled(hasTracks);
   p.selectAllAudioTracksAction->setEnabled(hasTracks);
@@ -1798,6 +1805,8 @@ Tab::retranslateInputUI() {
   p.selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
   p.enableAllTracksAction->setText(QY("&Enable all items"));
   p.disableAllTracksAction->setText(QY("&Disable all items"));
+  p.enableAllTracksSameSourceAction->setText(QY("E&nable all items from same source file"));
+  p.disableAllTracksSameSourceAction->setText(QY("D&isable all items from same source file"));
 
   p.selectAllVideoTracksAction->setText(QY("&Video"));
   p.selectAllAudioTracksAction->setText(QY("&Audio"));
@@ -2116,26 +2125,55 @@ Tab::selectSourceFiles(QList<SourceFile *> const &files) {
 
 void
 Tab::enableAllTracks() {
-  enableDisableAllTracks(true);
+  enableDisableAllTracksIf(true, [](Track &) -> bool { return true; });
 }
 
 void
 Tab::disableAllTracks() {
-  enableDisableAllTracks(false);
+  enableDisableAllTracksIf(false, [](Track &) -> bool { return true; });
 }
 
 void
-Tab::enableDisableAllTracks(bool enable) {
+Tab::enableAllTracksFromSameSource() {
+  enableDisableAllTracksFromSameSource(true);
+}
+
+void
+Tab::disableAllTracksFromSameSource() {
+  enableDisableAllTracksFromSameSource(false);
+}
+
+void
+Tab::enableDisableAllTracksFromSameSource(bool enable) {
+  auto tracks = selectedTracks();
+
+  enableDisableAllTracksIf(enable, [&tracks](Track &forThisTrack) -> bool {
+    for (auto const &selTrack : tracks)
+      if (forThisTrack.m_file == selTrack->m_file)
+        return true;
+
+    return false;
+  });
+}
+
+void
+Tab::enableDisableAllTracksIf(bool enable,
+                              std::function<bool(Track &)> forThisTrack) {
   auto &p = *p_func();
 
   for (auto row = 0, numRows = p.tracksModel->rowCount(); row < numRows; ++row) {
-    auto track       = p.tracksModel->fromIndex(p.tracksModel->index(row, 0));
-    track->m_muxThis = enable;
-    p.tracksModel->trackUpdated(track);
+    auto track = p.tracksModel->fromIndex(p.tracksModel->index(row, 0));
+
+    if (forThisTrack(*track)) {
+      track->m_muxThis = enable;
+      p.tracksModel->trackUpdated(track);
+    }
 
     for (auto const &appendedTrack : track->m_appendedTracks) {
-      appendedTrack->m_muxThis = enable;
-      p.tracksModel->trackUpdated(appendedTrack);
+      if (forThisTrack(*appendedTrack)) {
+        appendedTrack->m_muxThis = enable;
+        p.tracksModel->trackUpdated(appendedTrack);
+      }
     }
   }
 

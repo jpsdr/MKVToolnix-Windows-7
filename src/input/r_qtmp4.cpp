@@ -1672,17 +1672,19 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
   for (dmx_idx = 0; dmx_idx < m_demuxers.size(); ++dmx_idx) {
     auto &dmx = *m_demuxers[dmx_idx];
 
-    if ((-1 == dmx.ptzr) || (&ptzr(dmx.ptzr) != packetizer))
-      continue;
-
-    if (dmx.pos < dmx.m_index.size())
+    if ((-1 != dmx.ptzr) && (&ptzr(dmx.ptzr) == packetizer))
       break;
   }
 
   if (m_demuxers.size() == dmx_idx)
+    // Requested demuxer not found. This is a programming error. Bail out.
     return finish();
 
-  auto &dmx   = *m_demuxers[dmx_idx];
+  auto &dmx = *m_demuxers[dmx_idx];
+
+  if (dmx.pos >= dmx.m_index.size())
+    return finish_demuxer(dmx);
+
   auto &index = dmx.m_index[dmx.pos];
 
   m_in->setFilePointer(index.file_pos);
@@ -1705,6 +1707,7 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
   }
 
   if (m_in->read(buffer->get_buffer() + buffer_offset, index.size) != static_cast<uint64_t>(index.size)) {
+    // A read error occurred, e.g. due to the file being truncated. Bail out.
     mxwarn(fmt::format(FY("Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"),
                        dmx.pos, dmx.m_index.size(), index.size, index.file_pos));
     return finish();
@@ -1718,9 +1721,22 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
 
   m_bytes_processed += index.size;
 
-  if (dmx.pos < dmx.m_index.size())
-    return FILE_STATUS_MOREDATA;
+  return FILE_STATUS_MOREDATA;
+}
 
+file_status_e
+qtmp4_reader_c::finish_demuxer(qtmp4_demuxer_c &to_finish) {
+  if (to_finish.m_finished)
+    return FILE_STATUS_DONE;
+
+  to_finish.m_finished = true;
+
+  // Keep going with the file if any of the demuxers have frames left to process.
+  for (auto const &to_test : m_demuxers)
+    if (!to_test->m_finished)
+      return FILE_STATUS_DONE;
+
+  // No demuxer with frames left. Flush the connected converters, flush all packetizers.
   return finish();
 }
 

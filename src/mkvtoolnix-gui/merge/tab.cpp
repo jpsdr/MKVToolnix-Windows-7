@@ -52,6 +52,8 @@ TabPrivate::TabPrivate(QWidget *parent)
   , selectAllTracksAction{new QAction{parent}}
   , enableAllTracksAction{new QAction{parent}}
   , disableAllTracksAction{new QAction{parent}}
+  , enableAllTracksSameSourceAction{new QAction{parent}}
+  , disableAllTracksSameSourceAction{new QAction{parent}}
   , selectAllVideoTracksAction{new QAction{parent}}
   , selectAllAudioTracksAction{new QAction{parent}}
   , selectAllSubtitlesTracksAction{new QAction{parent}}
