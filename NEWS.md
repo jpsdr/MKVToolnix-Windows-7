@@ -33,6 +33,11 @@
   from the UI into them for the selected chapter. The result is that those
   elements won't show up in saved XML/Matroska files even if they have never
   been selected in the UI. Fixes #6294.
+* MKVToolNix GUI: multiplexer: when identification fails due to an
+  unrecognized or unsupported format, clicking the "Cancel" button in the
+  error dialog shown no longer locks up the GUI in the state of
+  "identification is still running", which disabled most elements. Fixes
+  #6298.
 
 
 # Version 102.0 "Little Houses" 2026-09-14
