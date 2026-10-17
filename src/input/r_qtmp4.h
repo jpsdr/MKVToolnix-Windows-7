@@ -225,7 +225,7 @@ class qtmp4_reader_c;
 struct qtmp4_demuxer_c {
   qtmp4_reader_c &m_reader;
 
-  bool ok{}, m_tables_updated{}, m_timestamps_calculated{}, m_enabled{true};
+  bool ok{}, m_tables_updated{}, m_timestamps_calculated{}, m_enabled{true}, m_finished{false};
 
   char type;
   uint32_t id, container_id;
@@ -616,6 +616,8 @@ protected:
   virtual std::string read_string_atom(qt_atom_t atom, size_t num_skipped);
 
   virtual void process_atom(qt_atom_t const &parent, int level, std::function<void(qt_atom_t const &)> const &handler);
+
+  virtual file_status_e finish_demuxer(qtmp4_demuxer_c &dmx);
 };
 
 #if FMT_VERSION >= 90000
