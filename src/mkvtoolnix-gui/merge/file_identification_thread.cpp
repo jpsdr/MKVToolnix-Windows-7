@@ -62,6 +62,7 @@ FileIdentificationWorker::addPackToIdentify(IdentificationPack &pack) {
   pack.m_initialNumberOfFiles = pack.m_fileNames.count();
 
   p->m_toIdentify.push_back(pack);
+  p->m_abortIdentification = false;
 
   auto numFiles = countNumberOfIdentifiedAndQueuedFiles();
   Q_EMIT queueProgressChanged(numFiles.first, numFiles.second);
@@ -113,8 +114,6 @@ FileIdentificationWorker::identifyFiles() {
   auto p = p_func();
 
   qDebug() << "FileIdentificationWorker::identifyFiles: starting loop";
-
-  p->m_abortIdentification = false;
 
   {
     QMutexLocker lock{&p->m_mutex};

@@ -1409,6 +1409,8 @@ Tab::createEmptyChapter(int64_t startTime,
     mtx::chapters::set_languages_in_display(display, actual_language);
   }
 
+  remove_mandatory_elements_set_to_their_default(*chapter);
+
   return chapter;
 }
 
