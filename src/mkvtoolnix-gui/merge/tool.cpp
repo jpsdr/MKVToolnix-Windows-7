@@ -1207,10 +1207,10 @@ Tool::showFileIdentificationError(QString const &errorTitle,
 
   auto result = dlg->title(errorTitle).text(errorText).exec();
 
-  if (p.identifier->isEmpty() || (result == QMessageBox::Ok))
-    p.identifier->continueIdentification();
-  else
+  if (result != QMessageBox::Ok)
     p.identifier->abortIdentification();
+
+  p.identifier->continueIdentification();
 }
 
 void
