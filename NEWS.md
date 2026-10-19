@@ -1,4 +1,4 @@
-# Version ?
+# Version 103.0 "The Darkness" 2026-10-18
 
 ## New features and enhancements
 
@@ -18,26 +18,26 @@
 
 ## Bug fixes
 
-* macOS: GUI: fixed check boxes in lists such as the multiplexer's track list
-  being invisible on macOS 27 by patching the Qt bundled with the app. Patch
-  by corticalcode, based on the fix J.D. Purcell proposed in QTBUG-150017.
-  Fixes #6307.
 * mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
   to flushing the packetizers too early (when the first track ends instead of
   only when all tracks in the file have ended). Another byproduct is that
   `BlockDuration` attributes aren't set for the last frame when they aren't
   needed anymore. Fixes #6320.
+* MKVToolNix GUI: multiplexer: when identification fails due to an
+  unrecognized or unsupported format, clicking the "Cancel" button in the
+  error dialog shown no longer locks up the GUI in the state of
+  "identification is still running", which disabled most elements. Fixes
+  #6298.
 * MKVToolNix GUI: chapter editor: when adding chapters mandatory elements set
   to their default values are removed in the underlying data structures. This
   restores consistency to how the chapter editor worked when copying values
   from the UI into them for the selected chapter. The result is that those
   elements won't show up in saved XML/Matroska files even if they have never
   been selected in the UI. Fixes #6294.
-* MKVToolNix GUI: multiplexer: when identification fails due to an
-  unrecognized or unsupported format, clicking the "Cancel" button in the
-  error dialog shown no longer locks up the GUI in the state of
-  "identification is still running", which disabled most elements. Fixes
-  #6298.
+* macOS: GUI: fixed check boxes in lists such as the multiplexer's track list
+  being invisible on macOS 27 by patching the Qt bundled with the app. Patch
+  by corticalcode, based on the fix J.D. Purcell proposed in QTBUG-150017.
+  Fixes #6307.
 
 
 # Version 102.0 "Little Houses" 2026-09-14

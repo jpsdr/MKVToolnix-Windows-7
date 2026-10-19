@@ -568,6 +568,7 @@ if $building_for[:windows]
     file "src/#{path}/resources.o" => [ "src/#{path}/manifest.xml", "src/#{path}/resources.rc", icon ]
   end
 
+  desc 'Build assets required for creating MSIX packages for the Microsoft Store'
   task 'msix-assets' => 'packaging/windows/msix/assets/StoreLogo.png'
 
   file 'packaging/windows/msix/assets/StoreLogo.png' => 'packaging/windows/msix/generate_assets.sh' do
