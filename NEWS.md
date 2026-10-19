@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
+  to not flushing the packetizers under certain circumstances (when the video
+  track isn't the longest track in the file). Introduced during the fix of
+  #6320. Fixes #6321.
+
+
 # Version 103.0 "The Darkness" 2026-10-18
 
 ## New features and enhancements
