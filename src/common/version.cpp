@@ -27,7 +27,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-constexpr auto VERSIONNAME = "Little Houses - Non official";
+constexpr auto VERSIONNAME = "The Darkness - Non official";
 
 version_number_t::version_number_t(const std::string &s)
   : valid{}
