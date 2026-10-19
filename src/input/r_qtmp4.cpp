@@ -1731,22 +1731,26 @@ qtmp4_reader_c::finish_demuxer(qtmp4_demuxer_c &to_finish) {
 
   to_finish.m_finished = true;
 
+  if (to_finish.m_converter)
+    to_finish.m_converter->flush();
+
+  m_reader_packetizers[to_finish.ptzr]->flush();
+
   // Keep going with the file if any of the demuxers have frames left to process.
   for (auto const &to_test : m_demuxers)
     if (!to_test->m_finished)
-      return FILE_STATUS_DONE;
+      return FILE_STATUS_MOREDATA;
 
   // No demuxer with frames left. Flush the connected converters, flush all packetizers.
-  return finish();
+  return FILE_STATUS_DONE;
 }
 
 file_status_e
 qtmp4_reader_c::finish() {
   for (auto const &dmx : m_demuxers)
-    if (dmx->m_converter)
-      dmx->m_converter->flush();
+    finish_demuxer(*dmx);
 
-  return flush_packetizers();
+  return FILE_STATUS_DONE;
 }
 
 memory_cptr
