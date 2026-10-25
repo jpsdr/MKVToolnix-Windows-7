@@ -6,6 +6,9 @@
   to not flushing the packetizers under certain circumstances (when the video
   track isn't the longest track in the file). Introduced during the fix of
   #6320. Fixes #6321.
+* mkvmerge: SSA/ASS reader: fixed file identification taking a long time for
+  large files as all entries were parsed during identification already. Fixes
+  #6324.
 
 
 # Version 103.0 "The Darkness" 2026-10-18

@@ -432,7 +432,7 @@ avi_reader_c::create_ssa_packetizer(int idx) {
 
   parser->set_charset_converter(cc_utf8);
   parser->set_attachment_id_base(g_attachments.size());
-  parser->parse();
+  parser->parse(true);
 
   m_ti.m_private_data = memory_c::clone(parser->get_global());
   demuxer.m_ptzr      = add_packetizer(new textsubs_packetizer_c(this, m_ti, parser->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA));
@@ -949,7 +949,7 @@ avi_reader_c::identify_attachments() {
       auto parser   = std::make_shared<ssa_parser_c>(*this, text_io, m_ti.m_fname, i + 1 + AVI_audio_tracks(m_avi));
 
       parser->set_attachment_id_base(g_attachments.size());
-      parser->parse();
+      parser->parse(true);
 
     } catch (...) {
     }

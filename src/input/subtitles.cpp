@@ -351,7 +351,7 @@ ssa_parser_c::ssa_parser_c(generic_reader_c &reader,
 }
 
 void
-ssa_parser_c::parse() {
+ssa_parser_c::parse(bool fully) {
   QRegularExpression sec_styles_ass_re{"^\\s*\\[V4\\+\\s+Styles\\]", QRegularExpression::CaseInsensitiveOption};
   QRegularExpression sec_styles_re{    "^\\s*\\[V4\\s+Styles\\]",    QRegularExpression::CaseInsensitiveOption};
   QRegularExpression sec_info_re{      "^\\s*\\[Script\\s+Info\\]",  QRegularExpression::CaseInsensitiveOption};
@@ -359,14 +359,9 @@ ssa_parser_c::parse() {
   QRegularExpression sec_graphics_re{  "^\\s*\\[Graphics\\]",        QRegularExpression::CaseInsensitiveOption};
   QRegularExpression sec_fonts_re{     "^\\s*\\[Fonts\\]",           QRegularExpression::CaseInsensitiveOption};
 
-  int num                        = 0;
-  ssa_section_e section          = SSA_SECTION_NONE;
-  ssa_section_e previous_section = SSA_SECTION_NONE;
-  std::string name_field         = "Name";
+  auto num = entries.size();
 
   std::string attachment_name, attachment_data_uu;
-
-  m_io->setFilePointer(0);
 
   while (!m_io->eof()) {
     std::string line;
@@ -383,26 +378,26 @@ ssa_parser_c::parse() {
 
     else if (qline.contains(sec_styles_ass_re)) {
       m_is_ass = true;
-      section  = SSA_SECTION_V4STYLES;
+      m_section  = SSA_SECTION_V4STYLES;
 
     } else if (qline.contains(sec_styles_re))
-      section = SSA_SECTION_V4STYLES;
+      m_section = SSA_SECTION_V4STYLES;
 
     else if (qline.contains(sec_info_re))
-      section = SSA_SECTION_INFO;
+      m_section = SSA_SECTION_INFO;
 
     else if (qline.contains(sec_events_re))
-      section = SSA_SECTION_EVENTS;
+      m_section = SSA_SECTION_EVENTS;
 
     else if (qline.contains(sec_graphics_re)) {
-      section       = SSA_SECTION_GRAPHICS;
+      m_section       = SSA_SECTION_GRAPHICS;
       add_to_global = false;
 
     } else if (qline.contains(sec_fonts_re)) {
-      section       = SSA_SECTION_FONTS;
+      m_section       = SSA_SECTION_FONTS;
       add_to_global = false;
 
-    } else if (SSA_SECTION_EVENTS == section) {
+    } else if (SSA_SECTION_EVENTS == m_section) {
       if (balg::istarts_with(line, "Format: ")) {
         // Analyze the format string.
         m_format = mtx::string::split(&line.c_str()[strlen("Format: ")]);
@@ -412,13 +407,13 @@ ssa_parser_c::parse() {
         size_t i;
         for (i = 0; m_format.size() > i; ++i)
           if (balg::iequals(m_format[i], "actor")) {
-            name_field = "Actor";
+            m_name_field = "Actor";
             break;
           }
 
       } else if (balg::istarts_with(line, "Dialogue: ")) {
         if (m_format.empty())
-          throw mtx::input::extended_x(Y("ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."));
+          throw mtx::input::extended_x(Y("ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" m_section."));
 
         std::string orig_line = line;
 
@@ -448,25 +443,28 @@ ssa_parser_c::parse() {
 
         std::string comma = ",";
         line
-          = fmt::to_string(num)                     + comma
-          + get_element("Layer", fields)            + comma
-          + get_element("Style", fields)            + comma
-          + get_element(name_field.c_str(), fields) + comma
-          + get_element("MarginL", fields)          + comma
-          + get_element("MarginR", fields)          + comma
-          + get_element("MarginV", fields)          + comma
-          + get_element("Effect", fields)           + comma
+          = fmt::to_string(num)                       + comma
+          + get_element("Layer", fields)              + comma
+          + get_element("Style", fields)              + comma
+          + get_element(m_name_field.c_str(), fields) + comma
+          + get_element("MarginL", fields)            + comma
+          + get_element("MarginR", fields)            + comma
+          + get_element("MarginV", fields)            + comma
+          + get_element("Effect", fields)             + comma
           + get_element("Text", fields);
 
         add(start, end, num, line);
         num++;
 
         add_to_global = false;
+
+        if (!fully)
+          break;
       }
 
-    } else if ((SSA_SECTION_FONTS == section) || (SSA_SECTION_GRAPHICS == section)) {
+    } else if ((SSA_SECTION_FONTS == m_section) || (SSA_SECTION_GRAPHICS == m_section)) {
       if (balg::istarts_with(line, "fontname:")) {
-        add_attachment_maybe(attachment_name, attachment_data_uu, section);
+        add_attachment_maybe(attachment_name, attachment_data_uu, m_section);
 
         line.erase(0, strlen("fontname:"));
         mtx::string::strip(line, true);
@@ -485,13 +483,14 @@ ssa_parser_c::parse() {
       m_global += "\r\n";
     }
 
-    if (previous_section != section)
-      add_attachment_maybe(attachment_name, attachment_data_uu, previous_section);
+    if (m_previous_section != m_section)
+      add_attachment_maybe(attachment_name, attachment_data_uu, m_previous_section);
 
-    previous_section = section;
+    m_previous_section = m_section;
   }
 
-  sort();
+  if (fully)
+    sort();
 }
 
 std::string
