@@ -122,13 +122,15 @@ protected:
   bool m_is_ass;
   std::string m_global;
   int64_t m_attachment_id;
+  ssa_section_e m_section{SSA_SECTION_NONE}, m_previous_section{SSA_SECTION_NONE};
+  std::string m_name_field{"Name"};
 
 public:
   std::vector<attachment_t> m_attachments;
 
 public:
   ssa_parser_c(generic_reader_c &reader, mm_text_io_cptr const &io, const std::string &file_name, int64_t track_id);
-  void parse();
+  void parse(bool fully);
 
   bool is_ass() {
     return m_is_ass;

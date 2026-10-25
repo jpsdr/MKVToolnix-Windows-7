@@ -23,6 +23,7 @@ private:
   ssa_parser_cptr m_subs;
   std::optional<std::string> m_encoding;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
+  bool m_parsed_fully{};
 
 public:
   virtual mtx::file_type_e get_format_type() const {
