@@ -22,6 +22,7 @@
 #include "input/r_ssa.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
+#include "merge/output_control.h"
 #include "output/p_ssa.h"
 
 bool
@@ -40,10 +41,10 @@ ssa_reader_c::read_headers() {
   m_subs       = std::make_shared<ssa_parser_c>(*this, text_in, m_ti.m_fname, 0);
   m_encoding   = text_in->get_encoding();
 
-  m_subs->set_charset_converter(cc_utf8);
-  m_subs->parse();
+  text_in->setFilePointer(0);
 
-  m_bytes_to_process = m_subs->get_total_byte_size();
+  m_subs->set_charset_converter(cc_utf8);
+  m_subs->parse(!g_identifying);
 
   show_demuxer_info();
 }
@@ -61,6 +62,12 @@ ssa_reader_c::create_packetizer(int64_t) {
 file_status_e
 ssa_reader_c::read(generic_packetizer_c *,
                    bool) {
+  if (!m_parsed_fully) {
+    m_subs->parse(true);
+    m_bytes_to_process = m_subs->get_total_byte_size();
+    m_parsed_fully     = true;
+  }
+
   if (!m_subs->empty()) {
     m_bytes_processed += m_subs->get_next_byte_size();
     m_subs->process(static_cast<textsubs_packetizer_c *>(&ptzr(0)));
