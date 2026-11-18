@@ -9,6 +9,8 @@
 * mkvmerge: SSA/ASS reader: fixed file identification taking a long time for
   large files as all entries were parsed during identification already. Fixes
   #6324.
+* build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
+  #6334.
 
 
 # Version 103.0 "The Darkness" 2026-10-18
