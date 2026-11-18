@@ -151,13 +151,13 @@ Tab::load(QString const &fileName) {
   }
 }
 
-void
+bool
 Tab::save() {
   auto p = p_func();
 
   JobSettingsDialog dlg{this, p->m_savedFileName};
   if (dlg.exec() == QDialog::Rejected)
-    return;
+    return false;
 
   auto settings                    = dlg.settings();
   auto newConfig                   = std::make_shared<InfoConfig>();
@@ -184,6 +184,8 @@ Tab::save() {
     MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+
+  return true;
 }
 
 void

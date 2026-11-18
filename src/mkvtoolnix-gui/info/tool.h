@@ -41,6 +41,7 @@ public Q_SLOTS:
   virtual void selectAndOpenFile();
 
   virtual void saveCurrentTab();
+  virtual void saveAndCloseCurrentTab();
 
   virtual bool closeTab(int index);
   virtual void closeCurrentTab();

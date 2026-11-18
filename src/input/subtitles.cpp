@@ -413,7 +413,7 @@ ssa_parser_c::parse(bool fully) {
 
       } else if (balg::istarts_with(line, "Dialogue: ")) {
         if (m_format.empty())
-          throw mtx::input::extended_x(Y("ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" m_section."));
+          throw mtx::input::extended_x(Y("ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."));
 
         std::string orig_line = line;
 

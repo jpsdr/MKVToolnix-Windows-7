@@ -118,6 +118,7 @@
     <addaction name="actionMergeNew"/>
     <addaction name="actionMergeOpen"/>
     <addaction name="actionMergeSave"/>
+    <addaction name="actionMergeSaveAndClose"/>
     <addaction name="actionMergeSaveAs"/>
     <addaction name="actionMergeSaveOptionFile"/>
     <addaction name="separator"/>
@@ -165,6 +166,7 @@
     <addaction name="separator"/>
     <addaction name="actionHeaderEditorValidate"/>
     <addaction name="actionHeaderEditorSave"/>
+    <addaction name="actionHeaderEditorSaveAndClose"/>
     <addaction name="separator"/>
     <addaction name="actionHeaderEditorClose"/>
     <addaction name="separator"/>
@@ -189,6 +191,7 @@
     <addaction name="actionChapterEditorReload"/>
     <addaction name="separator"/>
     <addaction name="actionChapterEditorSave"/>
+    <addaction name="actionChapterEditorSaveAndClose"/>
     <addaction name="actionChapterEditorSaveAsXml"/>
     <addaction name="actionChapterEditorSaveToMatroska"/>
     <addaction name="separator"/>
@@ -277,6 +280,7 @@
     <addaction name="actionInfoOpen"/>
     <addaction name="separator"/>
     <addaction name="actionInfoSave"/>
+    <addaction name="actionInfoSaveAndClose"/>
     <addaction name="separator"/>
     <addaction name="actionInfoClose"/>
     <addaction name="separator"/>
@@ -328,6 +332,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionMergeSaveAndClose">
+   <property name="text">
+    <string>Sav&amp;e &amp;&amp; close settings</string>
    </property>
   </action>
   <action name="actionMergeOpen">
@@ -460,6 +469,11 @@
     <string>Ctrl+S</string>
    </property>
   </action>
+  <action name="actionHeaderEditorSaveAndClose">
+   <property name="text">
+    <string>Sav&amp;e &amp;&amp; close</string>
+   </property>
+  </action>
   <action name="actionHeaderEditorReload">
    <property name="icon">
     <iconset theme="edit-undo"/>
@@ -523,6 +537,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorSaveAndClose">
+   <property name="text">
+    <string>Sav&amp;e &amp;&amp; close</string>
    </property>
   </action>
   <action name="actionChapterEditorSaveAsXml">
@@ -953,6 +972,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionInfoSaveAndClose">
+   <property name="text">
+    <string>Sav&amp;e &amp;&amp; close</string>
    </property>
   </action>
   <action name="actionMergeAddFilesFromClipboard">

@@ -705,24 +705,24 @@ Tab::chaptersLoaded(ChaptersPtr const &chapters,
   MainWindow::chapterEditorTool()->enableMenuActions();
 }
 
-void
+bool
 Tab::save() {
   auto p = p_func();
 
   if (!p->analyzer)
-    saveAsXmlImpl(false);
+    return saveAsXmlImpl(false);
 
   else
-    saveToMatroskaImpl(false);
+    return saveToMatroskaImpl(false);
 }
 
-void
+bool
 Tab::saveAsImpl(bool requireNewFileName,
                 std::function<bool(bool, QString &)> const &worker) {
   auto p = p_func();
 
   if (!copyControlsToStorage())
-    return;
+    return false;
 
   p->chapterModel->fixMandatoryElements();
   setControlsFromStorage();
@@ -732,7 +732,7 @@ Tab::saveAsImpl(bool requireNewFileName,
     requireNewFileName = true;
 
   if (!worker(requireNewFileName, newFileName))
-    return;
+    return false;
 
   p->savedState = currentState();
 
@@ -748,6 +748,8 @@ Tab::saveAsImpl(bool requireNewFileName,
   }
 
   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+
+  return true;
 }
 
 void
@@ -755,11 +757,11 @@ Tab::saveAsXml() {
   saveAsXmlImpl(true);
 }
 
-void
+bool
 Tab::saveAsXmlImpl(bool requireNewFileName) {
   auto p = p_func();
 
-  saveAsImpl(requireNewFileName, [this, p](bool doRequireNewFileName, QString &newFileName) -> bool {
+  return saveAsImpl(requireNewFileName, [this, p](bool doRequireNewFileName, QString &newFileName) -> bool {
     if (doRequireNewFileName) {
       auto defaultFilePath = !p->fileName.isEmpty() ? Util::dirPath(QFileInfo{p->fileName}.path()) : Util::Settings::get().lastOpenDirPath();
       newFileName          = Util::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, {}, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"), Q("xml"));
@@ -791,11 +793,11 @@ Tab::saveToMatroska() {
   saveToMatroskaImpl(true);
 }
 
-void
+bool
 Tab::saveToMatroskaImpl(bool requireNewFileName) {
   auto p = p_func();
 
-  saveAsImpl(requireNewFileName, [this, p](bool doRequireNewFileName, QString &newFileName) -> bool {
+  return saveAsImpl(requireNewFileName, [this, p](bool doRequireNewFileName, QString &newFileName) -> bool {
     if (!p->analyzer)
       doRequireNewFileName = true;
 

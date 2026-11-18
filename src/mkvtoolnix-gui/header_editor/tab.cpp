@@ -176,7 +176,7 @@ Tab::load() {
   selectionChanged(selectedIdx, QModelIndex{});
 }
 
-void
+bool
 Tab::save() {
   auto segmentinfoModified = false;
   auto tracksModified      = false;
@@ -198,13 +198,13 @@ Tab::save() {
 
   if (!segmentinfoModified && !tracksModified && !attachmentsModified && !m_tracksReordered) {
     Util::MessageBox::information(this)->title(QY("File has not been modified")).text(QY("The header values have not been modified. There is nothing to save.")).exec();
-    return;
+    return true;
   }
 
   auto pageIdx = m_model->validate();
   if (pageIdx.isValid()) {
     reportValidationFailure(false, pageIdx);
-    return;
+    return false;
   }
 
   auto trackUIDChanges = determineTrackUIDChanges();
@@ -286,6 +286,8 @@ Tab::save() {
 
   if (ok)
     MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+
+  return ok;
 }
 
 void

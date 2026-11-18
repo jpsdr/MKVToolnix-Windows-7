@@ -193,14 +193,12 @@ Tab::cloneConfig(MuxConfig const &config) {
   Q_EMIT titleChanged();
 }
 
-void
+bool
 Tab::onSaveConfig() {
   auto &p = *p_func();
 
-  if (p.config.m_configFileName.isEmpty()) {
-    onSaveConfigAs();
-    return;
-  }
+  if (p.config.m_configFileName.isEmpty())
+    return onSaveConfigAs();
 
   updateConfigFromControlValues();
   p.config.save();
@@ -208,6 +206,8 @@ Tab::onSaveConfig() {
   p.savedState = currentState();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
+
+  return true;
 }
 
 void
@@ -224,13 +224,13 @@ Tab::onSaveOptionFile() {
   MainWindow::get()->setStatusBarMessage(QY("The option file has been created."));
 }
 
-void
+bool
 Tab::onSaveConfigAs() {
   auto &p        = *p_func();
   auto &settings = Util::Settings::get();
   auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(Q(".mtxcfg")), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
   if (fileName.isEmpty())
-    return;
+    return false;
 
   updateConfigFromControlValues();
   p.config.save(fileName);
@@ -242,6 +242,8 @@ Tab::onSaveConfigAs() {
   Q_EMIT titleChanged();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
+
+  return true;
 }
 
 void
