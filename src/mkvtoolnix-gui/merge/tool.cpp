@@ -206,6 +206,7 @@ Tool::setupActions() {
   connect(mwUi->actionMergeClose,                     &QAction::triggered,                                 this, &Tool::closeCurrentTab);
   connect(mwUi->actionMergeCloseAll,                  &QAction::triggered,                                 this, &Tool::closeAllTabs);
   connect(mwUi->actionMergeSave,                      &QAction::triggered,                                 this, &Tool::saveConfig);
+  connect(mwUi->actionMergeSaveAndClose,              &QAction::triggered,                                 this, &Tool::saveAndCloseConfig);
   connect(mwUi->actionMergeSaveAll,                   &QAction::triggered,                                 this, &Tool::saveAllConfigs);
   connect(mwUi->actionMergeSaveAs,                    &QAction::triggered,                                 this, &Tool::saveConfigAs);
   connect(mwUi->actionMergeSaveAllSingle,             &QAction::triggered,                                 this, &Tool::saveAllConfigsToSingle);
@@ -279,6 +280,7 @@ Tool::enableMenuActions() {
   mwUi->actionMergeNew->setEnabled(!identifying);
   mwUi->actionMergeOpen->setEnabled(!identifying);
   mwUi->actionMergeSave->setEnabled(!identifying && hasTab);
+  mwUi->actionMergeSaveAndClose->setEnabled(!identifying && hasTab);
   mwUi->actionMergeSaveAs->setEnabled(!identifying && hasTab);
   mwUi->actionMergeSaveAllSingle->setEnabled(!identifying && hasTab);
   mwUi->actionMergeSaveAllSingleAs->setEnabled(!identifying && hasTab);
@@ -530,6 +532,14 @@ Tool::saveConfig() {
   auto tab = currentTab();
   if (tab)
     tab->onSaveConfig();
+}
+
+void
+Tool::saveAndCloseConfig() {
+  auto tab = currentTab();
+
+  if (tab && tab->onSaveConfig())
+    closeCurrentTab();
 }
 
 void

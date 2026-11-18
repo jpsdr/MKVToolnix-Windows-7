@@ -45,6 +45,7 @@ public Q_SLOTS:
   virtual void toolShown() override;
   virtual void selectFileToOpen();
   virtual void save();
+  virtual void saveAndClose();
   virtual void saveAllTabs();
   virtual void validate();
   virtual bool closeTab(int index);

@@ -646,11 +646,12 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   @endblock_skip_save = false
 
   END {
-    next if @endblock_skip_save
-    begin
-      save_config
-    rescue StandardError => e
-      puts "WARNING: failed to save config: #{e}"
+    if !@endblock_skip_save
+      begin
+        save_config
+      rescue StandardError => e
+        puts "WARNING: failed to save config: #{e}"
+      end
     end
   }
 
