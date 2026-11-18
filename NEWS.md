@@ -12,6 +12,11 @@
 * build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
   #6334.
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer, chapter & header editors, info tool: added menu
+  entries for saving & closing the current in one step. Implements #6330.
+
 
 # Version 103.0 "The Darkness" 2026-10-18
 

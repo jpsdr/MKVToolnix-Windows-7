@@ -55,6 +55,7 @@ Tool::setupActions() {
   connect(m_infoMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
 
   connect(mwUi->actionInfoSave,     &QAction::triggered,             this, &Tool::saveCurrentTab);
+  connect(mwUi->actionInfoSaveAndClose, &QAction::triggered,             this, &Tool::saveAndCloseCurrentTab);
   connect(mwUi->actionInfoOpen,     &QAction::triggered,             this, &Tool::selectAndOpenFile);
   connect(mwUi->actionInfoClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
   connect(mwUi->actionInfoCloseAll, &QAction::triggered,             this, &Tool::closeAllTabs);
@@ -80,6 +81,7 @@ Tool::enableMenuActions() {
   auto hasTab = tab && tab->isEnabled();
 
   mwUi->actionInfoSave->setEnabled(hasTab);
+  mwUi->actionInfoSaveAndClose->setEnabled(hasTab);
   mwUi->actionInfoClose->setEnabled(hasTab);
   mwUi->actionInfoCloseAll->setEnabled(hasTab);
 }
@@ -189,6 +191,13 @@ Tool::saveCurrentTab() {
   auto tab = currentTab();
   if (tab)
     tab->save();
+}
+
+void
+Tool::saveAndCloseCurrentTab() {
+  auto tab = currentTab();
+  if (tab && tab->save())
+    closeCurrentTab();
 }
 
 void

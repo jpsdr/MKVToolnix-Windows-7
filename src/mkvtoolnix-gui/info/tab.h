@@ -31,7 +31,7 @@ public:
 
   QString title() const;
   void load(QString const &fileName);
-  void save();
+  bool save();
 
 Q_SIGNALS:
   void removeThisTab();

@@ -43,6 +43,7 @@ public Q_SLOTS:
   virtual void newFile();
   virtual void selectFileToOpen(bool append);
   virtual void save();
+  virtual void saveAndClose();
   virtual void saveAsXml();
   virtual void saveToMatroska();
   virtual void saveAllTabs();
