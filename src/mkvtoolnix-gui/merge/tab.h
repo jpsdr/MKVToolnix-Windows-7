@@ -75,8 +75,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
   // Input tab:
-  virtual void onSaveConfig();
-  virtual void onSaveConfigAs();
+  virtual bool onSaveConfig();
+  virtual bool onSaveConfigAs();
   virtual void onSaveOptionFile();
   virtual void onAddFiles();
   virtual void onAddAdditionalParts();

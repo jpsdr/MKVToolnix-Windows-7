@@ -61,6 +61,7 @@ Tool::setupActions() {
 
   connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,                                 this, &Tool::selectFileToOpen);
   connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,                                 this, &Tool::save);
+  connect(mwUi->actionHeaderEditorSaveAndClose, &QAction::triggered,                                 this, &Tool::saveAndClose);
   connect(mwUi->actionHeaderEditorSaveAll,  &QAction::triggered,                                 this, &Tool::saveAllTabs);
   connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,                                 this, &Tool::validate);
   connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,                                 this, &Tool::reload);
@@ -121,6 +122,7 @@ Tool::enableMenuActions() {
   auto tab     = currentTab();
 
   mwUi->actionHeaderEditorSave->setEnabled(hasTabs);
+  mwUi->actionHeaderEditorSaveAndClose->setEnabled(hasTabs);
   mwUi->actionHeaderEditorReload->setEnabled(hasTabs);
   mwUi->actionHeaderEditorValidate->setEnabled(hasTabs);
   mwUi->actionHeaderEditorClose->setEnabled(hasTabs);
@@ -214,6 +216,13 @@ Tool::save() {
   auto tab = currentTab();
   if (tab)
     tab->save();
+}
+
+void
+Tool::saveAndClose() {
+  auto tab = currentTab();
+  if (tab && tab->save())
+    closeCurrentTab();
 }
 
 void

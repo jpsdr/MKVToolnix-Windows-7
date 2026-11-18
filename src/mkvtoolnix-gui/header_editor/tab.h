@@ -81,7 +81,7 @@ public Q_SLOTS:
   virtual void showTreeContextMenu(QPoint const &pos);
   virtual void selectionChanged(QModelIndex const &current, QModelIndex const &previous);
   virtual void load();
-  virtual void save();
+  virtual bool save();
   virtual void expandAll();
   virtual void collapseAll();
   virtual void selectAttachmentsAndAdd();

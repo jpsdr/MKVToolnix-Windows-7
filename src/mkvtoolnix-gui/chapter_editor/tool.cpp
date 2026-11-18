@@ -62,6 +62,7 @@ Tool::setupActions() {
   connect(mwUi->actionChapterEditorOpen,               &QAction::triggered,             this, &Tool::selectAndOpenFile);
   connect(mwUi->actionChapterEditorAppend,             &QAction::triggered,             this, &Tool::selectAndAppendFile);
   connect(mwUi->actionChapterEditorSave,               &QAction::triggered,             this, &Tool::save);
+  connect(mwUi->actionChapterEditorSaveAndClose,       &QAction::triggered,             this, &Tool::saveAndClose);
   connect(mwUi->actionChapterEditorSaveAsXml,          &QAction::triggered,             this, &Tool::saveAsXml);
   connect(mwUi->actionChapterEditorSaveToMatroska,     &QAction::triggered,             this, &Tool::saveToMatroska);
   connect(mwUi->actionChapterEditorSaveAll,            &QAction::triggered,             this, &Tool::saveAllTabs);
@@ -109,11 +110,13 @@ Tool::enableMenuActions() {
   auto hasElements = tab && tab->hasChapters();
   auto tabEnabled  = tab && tab->areWidgetsEnabled();
   auto isSourceKax = tab && tab->isSourceMatroska();
+  auto enableSave  = tabEnabled && (hasElements || isSourceKax) && hasFileName;
 
-  mwUi->actionChapterEditorSave->setEnabled(          tabEnabled && (hasElements || isSourceKax) && hasFileName);
+  mwUi->actionChapterEditorSave->setEnabled(          enableSave);
+  mwUi->actionChapterEditorSaveAndClose->setEnabled(  enableSave);
   mwUi->actionChapterEditorSaveAsXml->setEnabled(     tabEnabled && hasElements);
   mwUi->actionChapterEditorSaveToMatroska->setEnabled(tabEnabled);
-  mwUi->actionChapterEditorReload->setEnabled(        tabEnabled                                 && hasFileName);
+  mwUi->actionChapterEditorReload->setEnabled(        tabEnabled && hasFileName);
   mwUi->actionChapterEditorAppend->setEnabled(        !!tab);
   mwUi->actionChapterEditorClose->setEnabled(         !!tab);
   mwUi->menuChapterEditorAll->setEnabled(             !!tab);
@@ -233,6 +236,13 @@ Tool::save() {
   auto tab = currentTab();
   if (tab)
     tab->save();
+}
+
+void
+Tool::saveAndClose() {
+  auto tab = currentTab();
+  if (tab && tab->save())
+    closeCurrentTab();
 }
 
 void

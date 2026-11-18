@@ -97,7 +97,7 @@ public Q_SLOTS:
   virtual void append(QString const &fileName);
   virtual void appendSimpleChaptersWithCharacterSet(QString const &characterSet);
   virtual void reloadSimpleChaptersWithCharacterSet(QString const &characterSet);
-  virtual void save();
+  virtual bool save();
   virtual void saveAsXml();
   virtual void saveToMatroska();
   virtual void expandAll();
@@ -176,9 +176,9 @@ protected:
 
   ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, std::optional<QString> const &nameTemplate = {}, mtx::bcp47::language_c const &language = {});
 
-  void saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
-  void saveAsXmlImpl(bool requireNewFileName);
-  void saveToMatroskaImpl(bool requireNewFileName);
+  bool saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
+  bool saveAsXmlImpl(bool requireNewFileName);
+  bool saveToMatroskaImpl(bool requireNewFileName);
   void updateFileNameDisplay();
 
   void massModifyImpl(MassModificationDialog::Options const &options, QModelIndex const selectedIdx = QModelIndex{});
