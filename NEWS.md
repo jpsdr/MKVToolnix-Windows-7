@@ -2,7 +2,6 @@
 
 ## Bug fixes
 
-  #6320. Fixes #6321.
 * build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
   #6334.
 * mkvmerge: AVC/H.264, HEVC/H.265, VC-1, MPEG-1/2 video: when calculating
@@ -23,6 +22,7 @@
 * mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
   to not flushing the packetizers under certain circumstances (when the video
   track isn't the longest track in the file). Introduced during the fix of
+  #6320. Fixes #6321.
 * mkvmerge: MP4 reader: fixed calculating the frame durations by using the
   duration map from the `stts` atom instead of the difference between
   consecutive frames. Fixes mostly the duration of the last frame of subtitle
