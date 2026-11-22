@@ -23,6 +23,11 @@
   bitstream if that information is present. Fixes timestamp calculation being
   off by 1ms between what mkvmerge calculates based on nanoseconds vs. what
   the bitstream's internal clock says. Patch by wingedonezero. Fixes #6323.
+* mkvmerge: MP4 reader: fixed calculating the frame durations by using the
+  duration map from the `stts` atom instead of the difference between
+  consecutive frames. Fixes mostly the duration of the last frame of subtitle
+  tracks which would use the average frame duration before the fix. Fixes
+  #6333.
 
 ## New features and enhancements
 
