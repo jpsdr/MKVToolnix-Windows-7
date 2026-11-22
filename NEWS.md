@@ -1,4 +1,4 @@
-# Version ?
+# Version 104.0 "Chimera" 2026-11-22
 
 ## Bug fixes
 
