@@ -17,6 +17,14 @@
 * MKVToolNix GUI: multiplexer, chapter & header editors, info tool: added menu
   entries for saving & closing the current in one step. Implements #6330.
 
+## Security fixes
+
+* mkvextract: attachments: when not specifying a file name to write to
+  mkvextract uses the one stored in the source Matroska file. However, it will
+  now strip all path components from that stored name & only use to the file
+  name portion of it. This one is written to the current working
+  directory. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
+
 
 # Version 103.0 "The Darkness" 2026-10-18
 
