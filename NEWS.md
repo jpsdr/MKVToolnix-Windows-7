@@ -11,6 +11,9 @@
   #6324.
 * build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
   #6334.
+* mkvmerge: FLAC, Matroska readers: when copying attachments (pictures) from
+  these source file types, the embedded names will be striped of any path
+  component. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
 
 ## New features and enhancements
 

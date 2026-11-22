@@ -32,6 +32,7 @@
 #include "common/id3.h"
 #include "common/list_utils.h"
 #include "common/mime.h"
+#include "common/path.h"
 #include "common/tags/tags.h"
 #include "common/tags/vorbis.h"
 #include "merge/input_x.h"
@@ -255,7 +256,7 @@ flac_reader_c::handle_picture_metadata(FLAC__StreamMetadata const *metadata) {
   auto attachment         = std::make_shared<attachment_t>();
   attachment->description = std::string{ picture.description ? reinterpret_cast<char const *>(picture.description) : "" };
   attachment->mime_type   = picture.mime_type;
-  attachment->name        = attachment_name_from_metadata(picture);
+  attachment->name        = mtx::fs::to_path(attachment_name_from_metadata(picture)).filename().string();
   attachment->data        = memory_c::clone(picture.data, picture.data_length);
   attachment->ui_id       = m_attachment_id;
 
