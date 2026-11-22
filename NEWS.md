@@ -2,18 +2,9 @@
 
 ## Bug fixes
 
-* mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
-  to not flushing the packetizers under certain circumstances (when the video
-  track isn't the longest track in the file). Introduced during the fix of
   #6320. Fixes #6321.
-* mkvmerge: SSA/ASS reader: fixed file identification taking a long time for
-  large files as all entries were parsed during identification already. Fixes
-  #6324.
 * build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
   #6334.
-* mkvmerge: FLAC, Matroska readers: when copying attachments (pictures) from
-  these source file types, the embedded names will be striped of any path
-  component. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
 * mkvmerge: AVC/H.264, HEVC/H.265, VC-1, MPEG-1/2 video: when calculating
   timestamps for frames for which the source container doesn't provide a
   timestamp (e.g. when reading elementary streams, or for container types
@@ -23,14 +14,23 @@
   bitstream if that information is present. Fixes timestamp calculation being
   off by 1ms between what mkvmerge calculates based on nanoseconds vs. what
   the bitstream's internal clock says. Patch by wingedonezero. Fixes #6323.
+* mkvmerge: AVC/H.264: fix bitstream timing information: when `60000/1001p` is
+  selected the wrong rational `120/1` was written to the bistream. Fixed to
+  write `120.000/1.001` instead. Fixes #6317.
+* mkvmerge: FLAC, Matroska readers: when copying attachments (pictures) from
+  these source file types, the embedded names will be striped of any path
+  component. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
+* mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
+  to not flushing the packetizers under certain circumstances (when the video
+  track isn't the longest track in the file). Introduced during the fix of
 * mkvmerge: MP4 reader: fixed calculating the frame durations by using the
   duration map from the `stts` atom instead of the difference between
   consecutive frames. Fixes mostly the duration of the last frame of subtitle
   tracks which would use the average frame duration before the fix. Fixes
   #6333.
-* mkvmerge: AVC/H.264: fix bitstream timing information: when `60000/1001p` is
-  selected the wrong rational `120/1` was written to the bistream. Fixed to
-  write `120.000/1.001` instead. Fixes #6317.
+* mkvmerge: SSA/ASS reader: fixed file identification taking a long time for
+  large files as all entries were parsed during identification already. Fixes
+  #6324.
 
 ## New features and enhancements
 
