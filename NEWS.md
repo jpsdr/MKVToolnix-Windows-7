@@ -14,6 +14,15 @@
 * mkvmerge: FLAC, Matroska readers: when copying attachments (pictures) from
   these source file types, the embedded names will be striped of any path
   component. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
+* mkvmerge: AVC/H.264, HEVC/H.265, VC-1, MPEG-1/2 video: when calculating
+  timestamps for frames for which the source container doesn't provide a
+  timestamp (e.g. when reading elementary streams, or for container types
+  where exact timestamps are only available for some of the frames such as
+  MPEG transport/program streams) the timestamps will now be calculated from
+  the stream's last provided timestamp and the frame timing information in the
+  bitstream if that information is present. Fixes timestamp calculation being
+  off by 1ms between what mkvmerge calculates based on nanoseconds vs. what
+  the bitstream's internal clock says. Patch by wingedonezero. Fixes #6323.
 
 ## New features and enhancements
 

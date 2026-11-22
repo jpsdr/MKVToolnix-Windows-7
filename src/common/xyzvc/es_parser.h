@@ -14,11 +14,17 @@
 
 #include "common/common_pch.h"
 
+#include "common/frame_clock.h"
 #include "common/math_fwd.h"
 #include "common/stereo_mode.h"
 #include "common/xyzvc/types.h"
 
 namespace mtx::xyzvc {
+
+// A frame's length: `units` units of num / den seconds each.
+struct frame_timing_t {
+  int64_t num{}, den{}, units{};
+};
 
 class es_parser_c {
 public:
@@ -48,6 +54,7 @@ protected:
 
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
   int64_t m_max_timestamp{}, m_previous_i_p_start{};
+  mtx::frame_clock_c m_clock;
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_sps_list, m_pps_list, m_vps_list;
@@ -145,6 +152,8 @@ public:
   virtual int get_height() const = 0;
 
   virtual int64_t duration_for(mtx::xyzvc::slice_info_t const &si) const = 0;
+  // The same length as duration_for(), exactly.
+  virtual frame_timing_t timing_for(mtx::xyzvc::slice_info_t const &si) const = 0;
 
   virtual void calculate_frame_order() = 0;
   void calculate_frame_timestamps(std::vector<int64_t> const &provided_timestamps_to_use);

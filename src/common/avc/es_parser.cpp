@@ -523,6 +523,23 @@ es_parser_c::duration_for(mtx::xyzvc::slice_info_t const &si)
   return duration_for_impl(si.sps, si.field_pic_flag);
 }
 
+mtx::xyzvc::frame_timing_t
+es_parser_c::timing_for(mtx::xyzvc::slice_info_t const &si)
+  const {
+  // units: fields (a frame picture lasts two)
+  int64_t units = si.field_pic_flag ? 1 : 2;
+
+  if (-1 != m_forced_default_duration)
+    return { m_forced_default_duration, 1'000'000'000, units };
+  if ((m_sps_info_list.size() > si.sps) && m_sps_info_list[si.sps].timing_info_valid())
+    return { m_sps_info_list[si.sps].timing_info.num_units_in_tick, m_sps_info_list[si.sps].timing_info.time_scale, units };
+  if (-1 != m_stream_default_duration)
+    return { m_stream_default_duration, 1'000'000'000, units };
+  if (-1 != m_container_default_duration)
+    return { m_container_default_duration, 1'000'000'000, units };
+  return { 20'000'000, 1'000'000'000, units };
+}
+
 int64_t
 es_parser_c::duration_for_impl(unsigned int sps,
                                bool field_pic_flag)

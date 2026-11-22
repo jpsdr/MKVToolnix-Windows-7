@@ -14,6 +14,7 @@
 
 #include "common/checksums/base_fwd.h"
 #include "common/endian.h"
+#include "common/hacks.h"
 #include "common/memory_slice_cursor.h"
 #include "common/mm_file_io.h"
 #include "common/mpeg.h"
@@ -451,10 +452,13 @@ es_parser_c::calculate_frame_timestamps(std::vector<int64_t> const &provided_tim
   auto previous_frame_itr     = frames_begin;
   auto provided_timestamp_itr = provided_timestamps_to_use.begin();
 
+  auto const cut_durations    = mtx::hacks::is_engaged(mtx::hacks::CUT_FRAME_DURATIONS);
+
   for (auto frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
     if (frame_itr->m_has_provided_timestamp) {
       frame_itr->m_start = *provided_timestamp_itr;
       ++provided_timestamp_itr;
+      m_clock.reset(frame_itr->m_start);
 
       if (frames_begin != frame_itr)
         previous_frame_itr->m_end = frame_itr->m_start;
@@ -464,7 +468,17 @@ es_parser_c::calculate_frame_timestamps(std::vector<int64_t> const &provided_tim
       ++m_stats.num_timestamps_generated;
     }
 
-    frame_itr->m_end = frame_itr->m_start + duration_for(frame_itr->m_si);
+    if (cut_durations)
+      frame_itr->m_end = frame_itr->m_start + duration_for(frame_itr->m_si);
+
+    else {
+      // Counted in units of the exact frame or field length from the last
+      // provided timestamp; the start above is the clock's current time.
+      auto timing = timing_for(frame_itr->m_si);
+      m_clock.set_unit(timing.num, timing.den);
+      m_clock.advance(timing.units);
+      frame_itr->m_end = m_clock.now();
+    }
 
     previous_frame_itr = frame_itr;
   }
