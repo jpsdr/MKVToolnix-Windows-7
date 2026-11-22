@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2026-11-18 19:56+0100\n"
+"POT-Creation-Date: 2026-11-22 12:24+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025-2026\n"
 "Language-Team: Swedish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/sv/)\n"
@@ -49,8 +49,8 @@ msgstr "första ordningens filter som finns i CD/DVD/MPEG-ljud"
 #: src/common/kax_info.cpp:867
 #: src/common/kax_info.cpp:880
 #: src/common/stereo_mode.cpp:70
-#: src/input/r_matroska.cpp:134
-#: src/input/r_matroska.cpp:3100
+#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:3101
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -1113,15 +1113,25 @@ msgstr "Gör att mkvmerge använder kodek-ID:n A_AC3/BSID9 & A_AC3/BSID10 i stä
 
 #: src/common/hacks.cpp:73
 #, no-c-format
+msgid "Video frames without a container timestamp (e.g. from elementary stream files) are normally timed by counting fields or frames from the last known timestamp, each timestamp worked out exactly and rounded to the nearest nanosecond."
+msgstr ""
+
+#: src/common/hacks.cpp:74
+#, no-c-format
+msgid "If this hack is enabled, mkvmerge adds up frame durations cut to whole nanoseconds as earlier versions did, which makes the timestamps fall slowly behind the stream's own clock."
+msgstr ""
+
+#: src/common/hacks.cpp:75
+#, no-c-format
 msgid "No help available."
 msgstr "Ingen hjälp tillgänglig."
 
-#: src/common/hacks.cpp:95
+#: src/common/hacks.cpp:97
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Giltiga hacks är:\n"
 
-#: src/common/hacks.cpp:119
+#: src/common/hacks.cpp:121
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' är inte ett giltigt hack.\n"
@@ -2469,8 +2479,8 @@ msgstr "{0}: ett undantag inträffade (meddelande: {1}; typ: {2})."
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1845
-#: src/input/r_matroska.cpp:2578
+#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:2579
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Detta tyder vanligtvis på en skadad filstruktur."
@@ -2478,15 +2488,15 @@ msgstr "Detta tyder vanligtvis på en skadad filstruktur."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1845
-#: src/input/r_matroska.cpp:2578
+#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:2579
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Filen kommer inte att behandlas vidare."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1844
-#: src/input/r_matroska.cpp:2577
+#: src/input/r_matroska.cpp:1845
+#: src/input/r_matroska.cpp:2578
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: ett okänt undantag inträffade."
@@ -2701,14 +2711,14 @@ msgstr "Spår {0}: {1}, kodek-ID: {2}{3}{4}{5}\n"
 
 #: src/common/kax_info.cpp:639
 #: src/common/kax_info.cpp:842
-#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:136
 #, no-c-format
 msgid "audio"
 msgstr "ljud"
 
 #: src/common/kax_info.cpp:640
 #: src/common/kax_info.cpp:843
-#: src/input/r_matroska.cpp:137
+#: src/input/r_matroska.cpp:138
 #, no-c-format
 msgid "video"
 msgstr "video"
@@ -2721,7 +2731,7 @@ msgstr "undertexter"
 
 #: src/common/kax_info.cpp:642
 #: src/common/kax_info.cpp:845
-#: src/input/r_matroska.cpp:136
+#: src/input/r_matroska.cpp:137
 #, no-c-format
 msgid "buttons"
 msgstr "knappar"
@@ -4180,17 +4190,22 @@ msgstr "Taggen eller attributet '{0}' i position {1} innehåller ogiltiga eller 
 msgid "The tag or attribute '{0}' at position {1} contains data that is outside its allowed range."
 msgstr "Taggen eller attributet '{0}' på position {1} innehåller data som ligger utanför det tillåtna området."
 
-#: src/extract/attachments.cpp:103
+#: src/extract/attachments.cpp:104
 #, no-c-format, c++-format
 msgid "An attachment with the ID {0} was not found.\n"
 msgstr "En bifogad fil med ID {0} hittades inte.\n"
 
-#: src/extract/attachments.cpp:109
+#: src/extract/attachments.cpp:111
+#, no-c-format, c++-format
+msgid "Attachment {0}: neither was a file name to write to given on the command line, nor is one stored in the source file.\n"
+msgstr ""
+
+#: src/extract/attachments.cpp:113
 #, no-c-format, c++-format
 msgid "The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"
 msgstr "Bilagan #{0}, ID {1}, MIME-typ {2}, storlek {3}, skrivs till '{4}'.\n"
 
-#: src/extract/attachments.cpp:115
+#: src/extract/attachments.cpp:119
 #: src/extract/cues.cpp:73
 #: src/extract/mkvextract.cpp:79
 #: src/extract/tracks.cpp:390
@@ -4930,200 +4945,200 @@ msgstr "Kunde inte hitta giltiga DTS-headers i det här spårets första frames.
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Ogiltiga Vorbis-huvuden i AVI-ljudspår."
 
-#: src/input/r_flac.cpp:91
+#: src/input/r_flac.cpp:92
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: kunde inte initiera FLAC packetizer.\n"
 
-#: src/input/r_flac.cpp:126
+#: src/input/r_flac.cpp:127
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> Parsing av FLAC-filen. Detta kan ta en LONG tid.\n"
 
-#: src/input/r_flac.cpp:134
+#: src/input/r_flac.cpp:135
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Inget metadatablock hittades. Den här filen är trasig.\n"
 
-#: src/input/r_flac.cpp:153
+#: src/input/r_flac.cpp:154
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> Föranalys av FLAC-fil: {0}%{1}"
 
-#: src/input/r_flac.cpp:176
+#: src/input/r_flac.cpp:177
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Föranalys av FLAC-fil: 100%\n"
 
-#: src/input/r_flac.cpp:181
+#: src/input/r_flac.cpp:182
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Kunde inte läsa alla header-paket.\n"
 
-#: src/input/r_matroska.cpp:138
+#: src/input/r_matroska.cpp:139
 #, no-c-format
 msgid "subtitle"
 msgstr "undertext"
 
-#: src/input/r_matroska.cpp:429
+#: src/input/r_matroska.cpp:430
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: CodecID för spår {0} är '{1}', men det fanns ingen WAVEFORMATEX-struktur. Därför har vi inte något format-ID för att identifiera den ljudcodec som används.\n"
 
-#: src/input/r_matroska.cpp:451
+#: src/input/r_matroska.cpp:452
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS compatibility mode for track {0}) Matroska säger att det är {1} samplingar per sekund, men WAVEFORMATEX säger att det är {2}.\n"
 
-#: src/input/r_matroska.cpp:460
+#: src/input/r_matroska.cpp:461
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS compatibility mode för spår {0}) Matroska säger att det finns {1} kanaler, men WAVEFORMATEX säger att det finns {2}.\n"
 
-#: src/input/r_matroska.cpp:469
+#: src/input/r_matroska.cpp:470
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS kompatibilitetsläge för spår {0}) Matroska säger att det finns {1} bitar per sampel, men WAVEFORMATEX säger att det finns {2}.\n"
 
-#: src/input/r_matroska.cpp:484
-#: src/input/r_matroska.cpp:531
-#: src/input/r_matroska.cpp:554
-#: src/input/r_matroska.cpp:812
-#: src/input/r_matroska.cpp:822
-#: src/input/r_matroska.cpp:843
+#: src/input/r_matroska.cpp:485
+#: src/input/r_matroska.cpp:532
+#: src/input/r_matroska.cpp:555
+#: src/input/r_matroska.cpp:813
+#: src/input/r_matroska.cpp:823
+#: src/input/r_matroska.cpp:844
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: CodecID för spår {0} är '{1}', men den privata kodekdatan innehåller inte giltiga huvuden.\n"
 
-#: src/input/r_matroska.cpp:522
+#: src/input/r_matroska.cpp:523
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge kompilerades inte med FLAC-stöd. Ignorerar spår {0}.\n"
 
-#: src/input/r_matroska.cpp:658
+#: src/input/r_matroska.cpp:659
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: CodecID för spår {0} är '{1}', men det fanns ingen BITMAPINFOHEADER-struktur närvarande. Därför har vi ingen FourCC för att identifiera den videocodec som används.\n"
 
-#: src/input/r_matroska.cpp:670
+#: src/input/r_matroska.cpp:671
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS compatibility mode, track {0}) Matroska säger att videobredden är {1}, men BITMAPINFOHEADER säger {2}.\n"
 
-#: src/input/r_matroska.cpp:679
+#: src/input/r_matroska.cpp:680
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS compatibility mode, track {0}) Matroska säger att videohöjden är {1}, men BITMAPINFOHEADER säger {2}.\n"
 
-#: src/input/r_matroska.cpp:763
+#: src/input/r_matroska.cpp:764
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: CodecID för spår {0} är '{1}', men det fanns inga privata kodekhuvuden.\n"
 
-#: src/input/r_matroska.cpp:795
+#: src/input/r_matroska.cpp:796
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: Bredden för spår {0} var inte inställd.\n"
 
-#: src/input/r_matroska.cpp:801
+#: src/input/r_matroska.cpp:802
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: Höjden för spår {0} var inte inställd.\n"
 
-#: src/input/r_matroska.cpp:861
+#: src/input/r_matroska.cpp:862
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: CodecID för spår {0} är '{1}', men inga privata data hittades.\n"
 
-#: src/input/r_matroska.cpp:874
+#: src/input/r_matroska.cpp:875
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "VobSub-undertextspåret {0} innehåller inte sitt index i CodecPrivate-elementet."
 
-#: src/input/r_matroska.cpp:875
+#: src/input/r_matroska.cpp:876
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Ett standardindex och därmed standardinställningar för bredd, höjd och färgpalett kommer att användas istället."
 
-#: src/input/r_matroska.cpp:908
+#: src/input/r_matroska.cpp:909
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: CodecID '{0}' för spår {1} är okänt.\n"
 
-#: src/input/r_matroska.cpp:941
+#: src/input/r_matroska.cpp:942
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: okänd demultiplexertyp för spår {0}: '{1}'\n"
 
-#: src/input/r_matroska.cpp:946
+#: src/input/r_matroska.cpp:947
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: Spår {0} verkar vara ok.\n"
 
-#: src/input/r_matroska.cpp:1422
+#: src/input/r_matroska.cpp:1423
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Pixelbredd saknas.\n"
 
-#: src/input/r_matroska.cpp:1424
+#: src/input/r_matroska.cpp:1425
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Pixelhöjd saknas.\n"
 
-#: src/input/r_matroska.cpp:1476
+#: src/input/r_matroska.cpp:1477
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Spår {0} saknar sitt spår UID-element som måste finnas enligt Matroska-specifikationen. Om filen innehåller taggar kan dessa taggar vara trasiga.\n"
 
-#: src/input/r_matroska.cpp:1754
+#: src/input/r_matroska.cpp:1755
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: inget EBML-huvud hittades.\n"
 
-#: src/input/r_matroska.cpp:1774
-#: src/input/r_matroska.cpp:1787
+#: src/input/r_matroska.cpp:1775
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Inget segment hittades.\n"
 
-#: src/input/r_matroska.cpp:1872
+#: src/input/r_matroska.cpp:1873
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Använda den generiska utdatamodulen för spårtyp '{0}'.\n"
 
-#: src/input/r_matroska.cpp:1946
+#: src/input/r_matroska.cpp:1947
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "Det gick inte att behålla ett spårs UID {0} eftersom det redan har tilldelats ett annat spår. Ett nytt slumpmässigt UID kommer att tilldelas automatiskt.\n"
 
-#: src/input/r_matroska.cpp:2038
-#: src/input/r_matroska.cpp:2055
+#: src/input/r_matroska.cpp:2039
+#: src/input/r_matroska.cpp:2056
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Felaktigt initialiseringsdata för AAC-kodek hittades.\n"
 
-#: src/input/r_matroska.cpp:2048
+#: src/input/r_matroska.cpp:2049
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Felaktigt kodek-id '{0}'.\n"
 
-#: src/input/r_matroska.cpp:2166
+#: src/input/r_matroska.cpp:2167
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Du kopierar ett Opus-spår som skrevs i experimentellt läge. Det resulterande spåret kommer att skrivas i final mode, men en detalj kan inte återskapas från ett spår som skrivits i experimental mode: trimning av slutet. Detta innebär att en avkodare kan mata ut några samplingar mer än vad som ursprungligen var avsett. Om möjligt bör du multiplexera om från den ursprungliga Opus-filen.\n"
 
-#: src/input/r_matroska.cpp:2400
+#: src/input/r_matroska.cpp:2401
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Spårtyp som inte stöds för det här spåret.\n"
 
-#: src/input/r_matroska.cpp:2609
-#: src/input/r_matroska.cpp:2729
+#: src/input/r_matroska.cpp:2610
+#: src/input/r_matroska.cpp:2730
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Ett block hittades vid tidsstämpel {0} för spårnummer {1}. Inga headers hittades dock för det spårnumret. Blocket kommer att hoppas över.\n"
 
-#: src/input/r_matroska.cpp:3083
+#: src/input/r_matroska.cpp:3084
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "okänd, format tagg 0x{0:04x}"
@@ -16520,12 +16535,12 @@ msgstr "&Nästa jobb i utmatningsflik"
 msgid "&Previous job output tab"
 msgstr "&Föregående flik för jobbutmatning"
 
-#: src/mpegparser/M2VParser.cpp:416
+#: src/mpegparser/M2VParser.cpp:429
 #, no-c-format
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Bild med ett enda fält upptäckt. Fixa MPEG2-videoströmmen innan du försöker multiplexera den.\n"
 
-#: src/mpegparser/M2VParser.cpp:440
+#: src/mpegparser/M2VParser.cpp:453
 #, no-c-format
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Hittade minst en B-ram utan andra referens i en icke sluten GOP.\n"
