@@ -28,6 +28,9 @@
   consecutive frames. Fixes mostly the duration of the last frame of subtitle
   tracks which would use the average frame duration before the fix. Fixes
   #6333.
+* mkvmerge: AVC/H.264: fix bitstream timing information: when `60000/1001p` is
+  selected the wrong rational `120/1` was written to the bistream. Fixed to
+  write `120.000/1.001` instead. Fixes #6317.
 
 ## New features and enhancements
 
