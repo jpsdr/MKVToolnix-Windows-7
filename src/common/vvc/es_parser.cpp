@@ -653,6 +653,12 @@ es_parser_c::duration_for([[maybe_unused]] mtx::xyzvc::slice_info_t const &si)
 //   return duration;
 }
 
+mtx::xyzvc::frame_timing_t
+es_parser_c::timing_for([[maybe_unused]] mtx::xyzvc::slice_info_t const &si)
+  const {
+  return { 0, 1, 0 };           // as duration_for()
+}
+
 void
 es_parser_c::calculate_frame_order() {
 //   auto frames_begin      = m_frames.begin();

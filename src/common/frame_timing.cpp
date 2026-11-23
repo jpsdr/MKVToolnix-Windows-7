@@ -18,6 +18,7 @@ namespace mtx::frame_timing {
 
 std::vector<common_frame_rate_t> g_common_frame_rates{
   { 1'000'000'000ll         /    120, {    120,     1 } }, // 120 fps
+  { 1'000'000'000ll * 1'001 /120'000, {120'000, 1'001 } }, //  59.94 * 2 fields/s
   { 1'000'000'000ll         /    100, {    100,     1 } }, // 100 fps
   { 1'000'000'000ll         /     50, {     50,     1 } }, //  50 fps
   { 1'000'000'000ll         /     48, {     48,     1 } }, //  48 fps
@@ -43,6 +44,7 @@ determine_frame_rate(int64_t duration,
 
   for (auto const &common_frame_rate : g_common_frame_rates) {
     auto difference = std::abs(duration - common_frame_rate.duration);
+    mxdebug_if(s_debug, fmt::format("determine_frame_rate: search: duration {0} max_difference {1}: for {2}/{3} difference {4}\n", duration, max_difference, boost::multiprecision::numerator(common_frame_rate.frame_rate), boost::multiprecision::denominator(common_frame_rate.frame_rate), difference));
     if (difference < max_difference)
       potentials.emplace_back(difference, common_frame_rate);
   }

@@ -2489,7 +2489,8 @@ qtmp4_demuxer_c::calculate_timestamps_constant_sample_size() {
     auto frame_offset = chunk_index < num_frame_offsets ? frame_offset_table[chunk_index] : 0;
 
     timestamps.push_back(to_nsecs(static_cast<uint64_t>(chunk.samples) * track_duration + frame_offset));
-    durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.size)     * track_duration));
+    if (durations.size() < timestamps.size())
+      durations.push_back(to_nsecs(static_cast<uint64_t>(chunk.size) * track_duration));
     frame_indices.push_back(chunk_index);
 
     ++chunk_index;
@@ -2519,6 +2520,9 @@ qtmp4_demuxer_c::calculate_timestamps_variable_sample_size() {
   int64_t avg_duration = 0, num_good_frames = 0;
 
   for (int frame = 0; static_cast<int>(num_samples) > (frame + 1); ++frame) {
+    if (durations.size() >= timestamps.size())
+      break;
+
     int64_t diff = timestamps_before_offsets[frame + 1] - timestamps_before_offsets[frame];
 
     if (0 >= diff)
@@ -2530,7 +2534,8 @@ qtmp4_demuxer_c::calculate_timestamps_variable_sample_size() {
     }
   }
 
-  durations.push_back(0);
+  while (durations.size() < timestamps.size())
+    durations.push_back(0);
 
   if (num_good_frames) {
     avg_duration /= num_good_frames;
@@ -2660,6 +2665,7 @@ qtmp4_demuxer_c::update_tables() {
     for (i = 0; (i < durmap_table[j].number) && (s < num_samples); ++i) {
       sample_table[s].pts  = pts;
       pts                 += durmap_table[j].duration;
+      durations.push_back(to_nsecs(durmap_table[j].duration));
       ++s;
     }
   }
