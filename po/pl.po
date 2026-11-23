@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2026-11-18 19:56+0100\n"
-"PO-Revision-Date: 2026-09-27 18:52+0200\n"
-"Last-Translator: JakubDriver <JakubDriver@gmail.com>\n"
+"POT-Creation-Date: 2026-11-22 12:24+0100\n"
+"PO-Revision-Date: 2016-01-14 08:27+0000\n"
+"Last-Translator: Jakub A, 2025-2026\n"
 "Language-Team: Polish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/pl/)\n"
 "Language: pl\n"
@@ -53,8 +53,8 @@ msgstr "filtr pierwszego rzędu znaleziony w dźwięku CD/DVD/MPEG"
 #: src/common/kax_info.cpp:867
 #: src/common/kax_info.cpp:880
 #: src/common/stereo_mode.cpp:70
-#: src/input/r_matroska.cpp:134
-#: src/input/r_matroska.cpp:3100
+#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:3101
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -1119,15 +1119,25 @@ msgstr "Powoduje, że mkvmerge używa identyfikatorów kodeka A_AC3/BSID9 i A_AC
 
 #: src/common/hacks.cpp:73
 #, no-c-format
+msgid "Video frames without a container timestamp (e.g. from elementary stream files) are normally timed by counting fields or frames from the last known timestamp, each timestamp worked out exactly and rounded to the nearest nanosecond."
+msgstr ""
+
+#: src/common/hacks.cpp:74
+#, no-c-format
+msgid "If this hack is enabled, mkvmerge adds up frame durations cut to whole nanoseconds as earlier versions did, which makes the timestamps fall slowly behind the stream's own clock."
+msgstr ""
+
+#: src/common/hacks.cpp:75
+#, no-c-format
 msgid "No help available."
 msgstr "Brak pliku pomocy."
 
-#: src/common/hacks.cpp:95
+#: src/common/hacks.cpp:97
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Poprawnymi hackami są:\n"
 
-#: src/common/hacks.cpp:119
+#: src/common/hacks.cpp:121
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "\"{0}\" nie jest prawidłowym hack'iem.\n"
@@ -2475,8 +2485,8 @@ msgstr "{0}: wystąpił wyjątek (wiadomość: {1}; typ: {2})."
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1845
-#: src/input/r_matroska.cpp:2578
+#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:2579
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Zazwyczaj oznacza uszkodzoną strukturę plików."
@@ -2484,15 +2494,15 @@ msgstr "Zazwyczaj oznacza uszkodzoną strukturę plików."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1845
-#: src/input/r_matroska.cpp:2578
+#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:2579
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Plik nie może być dalej przetwarzany."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1844
-#: src/input/r_matroska.cpp:2577
+#: src/input/r_matroska.cpp:1845
+#: src/input/r_matroska.cpp:2578
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: wystąpił nieznany wyjątek."
@@ -2707,14 +2717,14 @@ msgstr "Ścieżka {0}: {1}, ID kodeka: {2}{3}{4}{5}\n"
 
 #: src/common/kax_info.cpp:639
 #: src/common/kax_info.cpp:842
-#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:136
 #, no-c-format
 msgid "audio"
 msgstr "audio"
 
 #: src/common/kax_info.cpp:640
 #: src/common/kax_info.cpp:843
-#: src/input/r_matroska.cpp:137
+#: src/input/r_matroska.cpp:138
 #, no-c-format
 msgid "video"
 msgstr "wideo"
@@ -2727,7 +2737,7 @@ msgstr "napisy"
 
 #: src/common/kax_info.cpp:642
 #: src/common/kax_info.cpp:845
-#: src/input/r_matroska.cpp:136
+#: src/input/r_matroska.cpp:137
 #, no-c-format
 msgid "buttons"
 msgstr "przyciski"
@@ -4192,17 +4202,22 @@ msgstr "Tag albo wartość \"{0}\" w pozycji {1} zawiera nieprawidłowe lub uszk
 msgid "The tag or attribute '{0}' at position {1} contains data that is outside its allowed range."
 msgstr "Tag lub wartość \"{0}\" w pozycji {1} zawiera dane, które wykraczają poza dozwolony zakres."
 
-#: src/extract/attachments.cpp:103
+#: src/extract/attachments.cpp:104
 #, no-c-format, c++-format
 msgid "An attachment with the ID {0} was not found.\n"
 msgstr "Załącznik posiadający ID {0} nie został odnaleziony.\n"
 
-#: src/extract/attachments.cpp:109
+#: src/extract/attachments.cpp:111
+#, no-c-format, c++-format
+msgid "Attachment {0}: neither was a file name to write to given on the command line, nor is one stored in the source file.\n"
+msgstr ""
+
+#: src/extract/attachments.cpp:113
 #, no-c-format, c++-format
 msgid "The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"
 msgstr "Załącznik #{0}, ID {1}, typ MIME {2}, rozmiar {3}, jest zapisany do \"{4}\".\n"
 
-#: src/extract/attachments.cpp:115
+#: src/extract/attachments.cpp:119
 #: src/extract/cues.cpp:73
 #: src/extract/mkvextract.cpp:79
 #: src/extract/tracks.cpp:390
@@ -4942,200 +4957,200 @@ msgstr "Nie można odnaleźć prawidłowych nagłówków DTS w pierwszych klatka
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Nieprawidłowe nagłówki Vorbis w ścieżce audio w AVI."
 
-#: src/input/r_flac.cpp:91
+#: src/input/r_flac.cpp:92
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: nie można zainicjować pakietowania FLAC.\n"
 
-#: src/input/r_flac.cpp:126
+#: src/input/r_flac.cpp:127
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> Analizowanie pliku FLAC. To może zająć DUŻO czasu.\n"
 
-#: src/input/r_flac.cpp:134
+#: src/input/r_flac.cpp:135
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Nie znaleziono bloku z metadanymi. Ten plik jest uszkodzony.\n"
 
-#: src/input/r_flac.cpp:153
+#: src/input/r_flac.cpp:154
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> Wstępna analiza pliku FLAC: {0}%{1}"
 
-#: src/input/r_flac.cpp:176
+#: src/input/r_flac.cpp:177
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Wstępna analiza pliku FLAC: 100%\n"
 
-#: src/input/r_flac.cpp:181
+#: src/input/r_flac.cpp:182
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Nie można odczytać wszystkich pakietów nagłówka.\n"
 
-#: src/input/r_matroska.cpp:138
+#: src/input/r_matroska.cpp:139
 #, no-c-format
 msgid "subtitle"
 msgstr "napisy"
 
-#: src/input/r_matroska.cpp:429
+#: src/input/r_matroska.cpp:430
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: CodecID dla ścieżki {0} to \"{1}\", jednakże brak jest obecnego WAVEFORMATEX. W związku z tym nie mamy ID formatu audio, aby zidentyfikować użytego kodeka.\n"
 
-#: src/input/r_matroska.cpp:451
+#: src/input/r_matroska.cpp:452
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki {0}) Matroska mówi, że są {1} próbki na sekundę, ale WAVEFORMATEX stanowi, że są {2}.\n"
 
-#: src/input/r_matroska.cpp:460
+#: src/input/r_matroska.cpp:461
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki {0}) Matroska mówi, że są {1} kanały, ale WAVEFORMATEX stanowi, że są {2}.\n"
 
-#: src/input/r_matroska.cpp:469
+#: src/input/r_matroska.cpp:470
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki {0}) Matroska mówi, że są {1} bity na próbkę, ale WAVEFORMATEX stanowi, że są {2}.\n"
 
-#: src/input/r_matroska.cpp:484
-#: src/input/r_matroska.cpp:531
-#: src/input/r_matroska.cpp:554
-#: src/input/r_matroska.cpp:812
-#: src/input/r_matroska.cpp:822
-#: src/input/r_matroska.cpp:843
+#: src/input/r_matroska.cpp:485
+#: src/input/r_matroska.cpp:532
+#: src/input/r_matroska.cpp:555
+#: src/input/r_matroska.cpp:813
+#: src/input/r_matroska.cpp:823
+#: src/input/r_matroska.cpp:844
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: CodecID dla ścieżki {0} to \"{1}\", jednakże dane własne kodeka nie zawierają prawidłowych nagłówków.\n"
 
-#: src/input/r_matroska.cpp:522
+#: src/input/r_matroska.cpp:523
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge nie został skompilowany z obsługą FLAC. Ignorowanie ścieżki {0}.\n"
 
-#: src/input/r_matroska.cpp:658
+#: src/input/r_matroska.cpp:659
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: CodecID dla ścieżki {0} to \"{1}\", jednakże brak jest obecnego BITMAPINFOHEADER. W związku z tym nie posiadamy kodu FourCC, aby zidentyfikować użytego kodeka obrazu.\n"
 
-#: src/input/r_matroska.cpp:670
+#: src/input/r_matroska.cpp:671
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki {0}) Matroska mówi, że szerokość obrazu to {1}, ale BITMAPINFOHEADER podaje {2}.\n"
 
-#: src/input/r_matroska.cpp:679
+#: src/input/r_matroska.cpp:680
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (tryb kompatybilności z MS dla ścieżki {0}) Matroska mówi, że wysokość obrazu to {1}, ale BITMAPINFOHEADER podaje {2}.\n"
 
-#: src/input/r_matroska.cpp:763
+#: src/input/r_matroska.cpp:764
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: CodecID dla ścieżki {0} to \"{1}\", jednakże brak jest nagłówków własnych kodeka.\n"
 
-#: src/input/r_matroska.cpp:795
+#: src/input/r_matroska.cpp:796
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: Nie została ustawiona szerokość dla ścieżki {0}.\n"
 
-#: src/input/r_matroska.cpp:801
+#: src/input/r_matroska.cpp:802
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: Nie została ustawiona wysokość dla ścieżki {0}.\n"
 
-#: src/input/r_matroska.cpp:861
+#: src/input/r_matroska.cpp:862
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: CodecID dla ścieżki {0} to \"{1}\", jednakże brak jest danych własnych.\n"
 
-#: src/input/r_matroska.cpp:874
+#: src/input/r_matroska.cpp:875
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "Ścieżka napisów VobSub {0} nie zawiera swojego indeksu w elemencie CodecPrivate."
 
-#: src/input/r_matroska.cpp:875
+#: src/input/r_matroska.cpp:876
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Indeks domyślny, a wraz z nim domyślne ustawienia dla szerokości, wysokości i palety kolorów zostaną użyte w zamian."
 
-#: src/input/r_matroska.cpp:908
+#: src/input/r_matroska.cpp:909
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: Nieznany CodecID \"{0}\" dla ścieżki {1}.\n"
 
-#: src/input/r_matroska.cpp:941
+#: src/input/r_matroska.cpp:942
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: nieznany typ demultipleksera dla ścieżki {0}: \"{1}\"\n"
 
-#: src/input/r_matroska.cpp:946
+#: src/input/r_matroska.cpp:947
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: Ścieżka {0} wygląda na prawidłową.\n"
 
-#: src/input/r_matroska.cpp:1422
+#: src/input/r_matroska.cpp:1423
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Brakuje wartości szerokości piksela.\n"
 
-#: src/input/r_matroska.cpp:1424
+#: src/input/r_matroska.cpp:1425
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Brakuje wartości wysokości piksela.\n"
 
-#: src/input/r_matroska.cpp:1476
+#: src/input/r_matroska.cpp:1477
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Ścieżka {0} nie posiada UID ścieżki, który powinien być obowiązkowo obecny, aby być zgodnym ze specyfikacją Matroska. Jeśli plik zawiera tagi, wtedy te tagi mogą być uszkodzone.\n"
 
-#: src/input/r_matroska.cpp:1754
+#: src/input/r_matroska.cpp:1755
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nie znaleziono nagłówka EBML.\n"
 
-#: src/input/r_matroska.cpp:1774
-#: src/input/r_matroska.cpp:1787
+#: src/input/r_matroska.cpp:1775
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nie znaleziono segmentu.\n"
 
-#: src/input/r_matroska.cpp:1872
+#: src/input/r_matroska.cpp:1873
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Użycie ogólnego modułu wyjścia dla ścieżki typu \"{0}\".\n"
 
-#: src/input/r_matroska.cpp:1946
+#: src/input/r_matroska.cpp:1947
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "Nie można zachować UID ścieżki {0}, ponieważ jest ona już przydzielona innej ścieżce. Nowy losowy UID zostanie przydzielony automatycznie.\n"
 
-#: src/input/r_matroska.cpp:2038
-#: src/input/r_matroska.cpp:2055
+#: src/input/r_matroska.cpp:2039
+#: src/input/r_matroska.cpp:2056
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Znaleziono zdeformowane dane inicjalizacji kodeka AAC.\n"
 
-#: src/input/r_matroska.cpp:2048
+#: src/input/r_matroska.cpp:2049
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Uszkodzone id kodeka \"{0}\".\n"
 
-#: src/input/r_matroska.cpp:2166
+#: src/input/r_matroska.cpp:2167
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "\"{0}\": Kopiujesz ścieżkę Opus, która została zapisana w trybie eksperymentalnym. Ścieżka wynikowa zostanie zapisana w trybie finalnym, jednak jeden parametr nie może być uzyskany ze ścieżki zapisanej w trybie eksperymentalnym: jest to przycięcie. Oznacza to, że dekoder może dać na wyjście o kilka więcej sampli niż to było zamierzone oryginalnie. Powinienieś zremultipleksować ścieżkę Opus z pliku oryginalnego, jeśli to tylko możliwe.\n"
 
-#: src/input/r_matroska.cpp:2400
+#: src/input/r_matroska.cpp:2401
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Ten typ ścieżki nie jest obsługiwany.\n"
 
-#: src/input/r_matroska.cpp:2609
-#: src/input/r_matroska.cpp:2729
+#: src/input/r_matroska.cpp:2610
+#: src/input/r_matroska.cpp:2730
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Został znaleziony blok w miejscu {0} w ścieżce o numerze {1}. Jednakże nie znaleziono nagłówków dla tej ściezki. Blok zostanie pominięty.\n"
 
-#: src/input/r_matroska.cpp:3083
+#: src/input/r_matroska.cpp:3084
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "nieznany, format tagu 0x{0:04x}"
@@ -9594,9 +9609,9 @@ msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sav&e && close settings"
-msgstr "&Zamknij ustawienia"
+msgstr "Zapisz i zamknij ustawienia"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:661
 #: src/mkvtoolnix-gui/forms/merge/tool.h:440
@@ -9723,7 +9738,7 @@ msgstr "Zapi&sz"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:819
 #, no-c-format
 msgid "Sav&e && close"
-msgstr ""
+msgstr "Zapisz i zamknij"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:697
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:719
@@ -15248,14 +15263,14 @@ msgid "&Disable all items"
 msgstr "W&yłącz wszystkie elementy"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1808
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "E&nable all items from same source file"
-msgstr "&Zaznacz wszystkie elementy z wybranego pliku"
+msgstr "Włącz wszystkie elementy z tego samego pliku źródłowego"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1809
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "D&isable all items from same source file"
-msgstr "&Zaznacz wszystkie elementy z wybranego pliku"
+msgstr "Wyłącz wszystkie elementy z tego samego pliku źródłowego"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1815
 #: src/mkvtoolnix-gui/merge/input.cpp:1820
@@ -16594,12 +16609,12 @@ msgstr "&Następna karta"
 msgid "&Previous job output tab"
 msgstr "&Poprzednia karta"
 
-#: src/mpegparser/M2VParser.cpp:416
+#: src/mpegparser/M2VParser.cpp:429
 #, no-c-format
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Wykryto obraz w pojedynczym polu. Napraw strumień wideo MPEG2 przed próbą jego multipleksowania.\n"
 
-#: src/mpegparser/M2VParser.cpp:440
+#: src/mpegparser/M2VParser.cpp:453
 #, no-c-format
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Znaleziono przynajmniej jedną klatkę typu B, która nie posiada odniesienia w otwartej grupie klatek GOP.\n"

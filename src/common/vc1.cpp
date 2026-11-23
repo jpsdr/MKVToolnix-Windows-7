@@ -17,6 +17,7 @@
 #include "common/bit_reader.h"
 #include "common/debugging.h"
 #include "common/endian.h"
+#include "common/hacks.h"
 #include "common/memory_slice_cursor.h"
 #include "common/strings/formatting.h"
 #include "common/vc1.h"
@@ -548,7 +549,36 @@ es_parser_c::combine_extra_data_with_packet() {
 }
 
 int64_t
+es_parser_c::get_next_timestamp_from_frame_timing() {
+  // Counted in fields from the last provided timestamp: a frame lasts two,
+  // one more with RFF, two more per repeated frame.
+  if (is_timestamp_available()) {
+    m_clock.reset(m_timestamps.front());
+    m_timestamps.pop_front();
+    m_timestamp_positions.pop_front();
+  }
+
+  if (!m_default_duration_forced && m_seqhdr.framerate_flag &&
+      (0 != m_seqhdr.framerate_num) && (0 != m_seqhdr.framerate_den))
+    m_clock.set_unit(m_seqhdr.framerate_num,
+                     int64_t{m_seqhdr.framerate_den} * 2);
+  else
+    m_clock.set_unit(m_default_duration, 2'000'000'000);
+
+  auto fields = 2 * (1 + m_current_frame->header.repeat_frame);
+  if (m_seqhdr.interlace_flag &&
+      m_current_frame->header.repeat_first_field_flag &&
+      !m_current_frame->contains_field)
+    ++fields;
+
+  return m_clock.advance(fields);
+}
+
+int64_t
 es_parser_c::get_next_timestamp() {
+  if (!mtx::hacks::is_engaged(mtx::hacks::CUT_FRAME_DURATIONS))
+    return get_next_timestamp_from_frame_timing();
+
   int64_t next_timestamp = m_previous_timestamp
                         + (m_num_timestamps + m_num_repeated_fields) * m_default_duration
                         - m_num_repeated_fields                     * m_default_duration / 2;
@@ -575,6 +605,9 @@ es_parser_c::get_next_timestamp() {
 int64_t
 es_parser_c::peek_next_calculated_timestamp()
   const {
+  if (!mtx::hacks::is_engaged(mtx::hacks::CUT_FRAME_DURATIONS))
+    return m_clock.now();
+
   return m_previous_timestamp
     + (m_num_timestamps + m_num_repeated_fields) * m_default_duration
     - m_num_repeated_fields                     * m_default_duration / 2;

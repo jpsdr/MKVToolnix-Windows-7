@@ -1,21 +1,49 @@
-# Version ?
+# Version 104.0 "Chimera" 2026-11-22
 
 ## Bug fixes
 
+* build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
+  #6334.
+* mkvmerge: AVC/H.264, HEVC/H.265, VC-1, MPEG-1/2 video: when calculating
+  timestamps for frames for which the source container doesn't provide a
+  timestamp (e.g. when reading elementary streams, or for container types
+  where exact timestamps are only available for some of the frames such as
+  MPEG transport/program streams) the timestamps will now be calculated from
+  the stream's last provided timestamp and the frame timing information in the
+  bitstream if that information is present. Fixes timestamp calculation being
+  off by 1ms between what mkvmerge calculates based on nanoseconds vs. what
+  the bitstream's internal clock says. Patch by wingedonezero. Fixes #6323.
+* mkvmerge: AVC/H.264: fix bitstream timing information: when `60000/1001p` is
+  selected the wrong rational `120/1` was written to the bistream. Fixed to
+  write `120.000/1.001` instead. Fixes #6317.
+* mkvmerge: FLAC, Matroska readers: when copying attachments (pictures) from
+  these source file types, the embedded names will be striped of any path
+  component. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
 * mkvmerge: MP4 reader: fixed losing video frames at the end of the file due
   to not flushing the packetizers under certain circumstances (when the video
   track isn't the longest track in the file). Introduced during the fix of
   #6320. Fixes #6321.
+* mkvmerge: MP4 reader: fixed calculating the frame durations by using the
+  duration map from the `stts` atom instead of the difference between
+  consecutive frames. Fixes mostly the duration of the last frame of subtitle
+  tracks which would use the average frame duration before the fix. Fixes
+  #6333.
 * mkvmerge: SSA/ASS reader: fixed file identification taking a long time for
   large files as all entries were parsed during identification already. Fixes
   #6324.
-* build system: fixed a syntax error with the upcoming Ruby 4.1.0. Fixes
-  #6334.
 
 ## New features and enhancements
 
 * MKVToolNix GUI: multiplexer, chapter & header editors, info tool: added menu
   entries for saving & closing the current in one step. Implements #6330.
+
+## Security fixes
+
+* mkvextract: attachments: when not specifying a file name to write to
+  mkvextract uses the one stored in the source Matroska file. However, it will
+  now strip all path components from that stored name & only use to the file
+  name portion of it. This one is written to the current working
+  directory. Reported by Prakash Tomar <prakash_tomar@outlook.com>.
 
 
 # Version 103.0 "The Darkness" 2026-10-18

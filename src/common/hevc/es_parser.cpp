@@ -651,6 +651,21 @@ es_parser_c::duration_for(mtx::xyzvc::slice_info_t const &si)
   return duration;
 }
 
+mtx::xyzvc::frame_timing_t
+es_parser_c::timing_for(mtx::xyzvc::slice_info_t const &si)
+  const {
+  // the SPS gives a picture's length; the other values are a field's
+  if (-1 != m_forced_default_duration)
+    return { m_forced_default_duration, 1'000'000'000, 2 };
+  if ((m_sps_info_list.size() > si.sps) && m_sps_info_list[si.sps].timing_info_valid())
+    return { m_sps_info_list[si.sps].num_units_in_tick, m_sps_info_list[si.sps].time_scale, 1 };
+  if (-1 != m_stream_default_duration)
+    return { m_stream_default_duration, 1'000'000'000, 2 };
+  if (-1 != m_container_default_duration)
+    return { m_container_default_duration, 1'000'000'000, 2 };
+  return { 20'000'000, 1'000'000'000, 2 };
+}
+
 unsigned int
 es_parser_c::calculate_picture_order_cnt(mtx::xyzvc::frame_t const &frame,
                                          sps_info_t const &sps)

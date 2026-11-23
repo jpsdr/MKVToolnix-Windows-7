@@ -21,6 +21,7 @@
  **/
 
 #include "common/common_pch.h"
+#include "common/hacks.h"
 #include "common/memory.h"
 #include "common/output.h"
 #include "M2VParser.h"
@@ -201,15 +202,27 @@ void M2VParser::FlushWaitQueue(){
 }
 
 void M2VParser::StampFrame(MPEGFrame* frame){
-  if (m_timestamps.empty())
-    frame->timestamp = previousTimestamp + previousDuration;
-  else {
-    frame->timestamp = m_timestamps.front();
-    m_timestamps.pop_front();
+  if ((0 < m_seqHdr.frameRate) && !mtx::hacks::is_engaged(mtx::hacks::CUT_FRAME_DURATIONS)) {
+    // Frames without a timestamp of their own: counted in fields from the last one.
+    m_clock.set_unit(1 / (m_seqHdr.frameRate * 2));
+    if (!m_timestamps.empty()) {
+      m_clock.reset(m_timestamps.front());
+      m_timestamps.pop_front();
+    }
+    frame->timestamp = m_clock.advance(frame->duration);
+    frame->duration  = m_clock.now() - frame->timestamp;
+
+  } else {
+    if (m_timestamps.empty())
+      frame->timestamp = previousTimestamp + previousDuration;
+    else {
+      frame->timestamp = m_timestamps.front();
+      m_timestamps.pop_front();
+    }
+    frame->duration = mtx::to_int(mtx::rational(frame->duration, 1) * 1'000'000'000 / (m_seqHdr.frameRate * 2));
   }
   previousTimestamp = frame->timestamp;
-  frame->duration = mtx::to_int(mtx::rational(frame->duration, 1) * 1'000'000'000 / (m_seqHdr.frameRate * 2));
-  previousDuration = frame->duration;
+  previousDuration  = frame->duration;
 
   frameTimestamps[frame->frameNumber] = frame->timestamp;
 
