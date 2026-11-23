@@ -74,6 +74,7 @@ public:
   bool headers_parsed() const;
 
   virtual int64_t duration_for(mtx::xyzvc::slice_info_t const &si) const override;
+  virtual mtx::xyzvc::frame_timing_t timing_for(mtx::xyzvc::slice_info_t const &si) const override;
 
   bool parse_slice(memory_cptr const &nalu, mtx::xyzvc::slice_info_t &si);
   void handle_sps_nalu(memory_cptr const &nalu);

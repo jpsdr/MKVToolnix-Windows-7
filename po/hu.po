@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <mo@bunkus.online>\n"
-"POT-Creation-Date: 2026-11-18 19:56+0100\n"
+"POT-Creation-Date: 2026-11-22 12:24+0100\n"
 "PO-Revision-Date: 2025-11-06 15:25+0100\n"
 "Last-Translator: John Fowler <john@madarasz.page>\n"
 "Language-Team: \n"
@@ -47,8 +47,8 @@ msgstr "elsőrendű szűrő található a CD/DVD/MPEG hangban"
 #: src/common/kax_info.cpp:867
 #: src/common/kax_info.cpp:880
 #: src/common/stereo_mode.cpp:70
-#: src/input/r_matroska.cpp:134
-#: src/input/r_matroska.cpp:3100
+#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:3101
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:119
 #: src/mkvtoolnix-gui/info/model.cpp:120
@@ -1111,15 +1111,25 @@ msgstr "Az mkvmerge az A_AC3/BSID9 & A_AC3/BSID10 kódjeleket használja az A_AC
 
 #: src/common/hacks.cpp:73
 #, no-c-format
+msgid "Video frames without a container timestamp (e.g. from elementary stream files) are normally timed by counting fields or frames from the last known timestamp, each timestamp worked out exactly and rounded to the nearest nanosecond."
+msgstr ""
+
+#: src/common/hacks.cpp:74
+#, no-c-format
+msgid "If this hack is enabled, mkvmerge adds up frame durations cut to whole nanoseconds as earlier versions did, which makes the timestamps fall slowly behind the stream's own clock."
+msgstr ""
+
+#: src/common/hacks.cpp:75
+#, no-c-format
 msgid "No help available."
 msgstr "Nincs elérhető súgó."
 
-#: src/common/hacks.cpp:95
+#: src/common/hacks.cpp:97
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Érvényes hackek:\n"
 
-#: src/common/hacks.cpp:119
+#: src/common/hacks.cpp:121
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "A(z) \"{0}\" nem érvényes hack.\n"
@@ -2467,8 +2477,8 @@ msgstr "{0}: kivétel történt (üzenet: {1}; típus: {2})."
 #: src/common/kax_file.cpp:58
 #: src/common/kax_file.cpp:64
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1845
-#: src/input/r_matroska.cpp:2578
+#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:2579
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Ez általában sérült fájlstruktúrát jelez."
@@ -2476,15 +2486,15 @@ msgstr "Ez általában sérült fájlstruktúrát jelez."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1845
-#: src/input/r_matroska.cpp:2578
+#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:2579
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Az akta feldolgozása nem történik meg."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1844
-#: src/input/r_matroska.cpp:2577
+#: src/input/r_matroska.cpp:1845
+#: src/input/r_matroska.cpp:2578
 #, no-c-format, c++-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: ismeretlen kivétel történt."
@@ -2699,14 +2709,14 @@ msgstr "Sáv {0}: {1}, kódek ID: {2}{3}{4}{5}\n"
 
 #: src/common/kax_info.cpp:639
 #: src/common/kax_info.cpp:842
-#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:136
 #, no-c-format
 msgid "audio"
 msgstr "audió"
 
 #: src/common/kax_info.cpp:640
 #: src/common/kax_info.cpp:843
-#: src/input/r_matroska.cpp:137
+#: src/input/r_matroska.cpp:138
 #, no-c-format
 msgid "video"
 msgstr "videó"
@@ -2719,7 +2729,7 @@ msgstr "feliratok"
 
 #: src/common/kax_info.cpp:642
 #: src/common/kax_info.cpp:845
-#: src/input/r_matroska.cpp:136
+#: src/input/r_matroska.cpp:137
 #, no-c-format
 msgid "buttons"
 msgstr "gombok"
@@ -4178,17 +4188,22 @@ msgstr "A(z) '{0}' címke vagy attribútum az {1} pozícióban érvénytelen vag
 msgid "The tag or attribute '{0}' at position {1} contains data that is outside its allowed range."
 msgstr "A(z) '{0}' címke vagy attribútum az {1} pozícióban olyan adatokat tartalmaz, amelyek kívül esnek a megengedett tartományon."
 
-#: src/extract/attachments.cpp:103
+#: src/extract/attachments.cpp:104
 #, no-c-format, c++-format
 msgid "An attachment with the ID {0} was not found.\n"
 msgstr "A(z) {0} azonosítóval ellátott melléklet nem található.\n"
 
-#: src/extract/attachments.cpp:109
+#: src/extract/attachments.cpp:111
+#, no-c-format, c++-format
+msgid "Attachment {0}: neither was a file name to write to given on the command line, nor is one stored in the source file.\n"
+msgstr ""
+
+#: src/extract/attachments.cpp:113
 #, no-c-format, c++-format
 msgid "The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"
 msgstr "A melléklet #{0}, ID {1}, MIME típus {2}, Méret {3}, '{4}' - re van írva.\n"
 
-#: src/extract/attachments.cpp:115
+#: src/extract/attachments.cpp:119
 #: src/extract/cues.cpp:73
 #: src/extract/mkvextract.cpp:79
 #: src/extract/tracks.cpp:390
@@ -4928,200 +4943,200 @@ msgstr "Nem találtam érvényes DTS fejléceket a sáv első képkockáiban.\n"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Érvénytelen Vorbis fejlécek az AVI hangsávban."
 
-#: src/input/r_flac.cpp:91
+#: src/input/r_flac.cpp:92
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: nem sikerült inicializálni a FLAC csomagolót.\n"
 
-#: src/input/r_flac.cpp:126
+#: src/input/r_flac.cpp:127
 #, no-c-format
 msgid "+-> Parsing the FLAC file. This can take a LONG time.\n"
 msgstr "+-> A FLAC fájl elemzése. Ez SOKÁIG tarthat.\n"
 
-#: src/input/r_flac.cpp:134
+#: src/input/r_flac.cpp:135
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Nem található metaadatblokk. Ez a fájl hibás.\n"
 
-#: src/input/r_flac.cpp:153
+#: src/input/r_flac.cpp:154
 #, no-c-format, c++-format
 msgid "+-> Pre-parsing FLAC file: {0}%{1}"
 msgstr "+-> FLAC fájl előzetes elemzése: {0}%{1}"
 
-#: src/input/r_flac.cpp:176
+#: src/input/r_flac.cpp:177
 #, no-c-format
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> FLAC fájl előzetes elemzése: 100%\n"
 
-#: src/input/r_flac.cpp:181
+#: src/input/r_flac.cpp:182
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Nem sikerült beolvasni az összes fejléccsomagot.\n"
 
-#: src/input/r_matroska.cpp:138
+#: src/input/r_matroska.cpp:139
 #, no-c-format
 msgid "subtitle"
 msgstr "felirat"
 
-#: src/input/r_matroska.cpp:429
+#: src/input/r_matroska.cpp:430
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: A {0} sáv CodecID a '{1}', de nem volt jelen WAVEFORMATEX struktúra. Ezért nincs formátumazonosítónk a használt hangkódek azonosítására.\n"
 
-#: src/input/r_matroska.cpp:451
+#: src/input/r_matroska.cpp:452
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS kompatibilitási mód a {0}. sávhoz) Matroska azt mondja, hogy másodpercenként {1} minta van, de a WAVEFORMATEX szerint {2}.\n"
 
-#: src/input/r_matroska.cpp:460
+#: src/input/r_matroska.cpp:461
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS kompatibilitási mód a {0}. számhoz) Matroska azt mondja, hogy {1} csatorna van, de a WAVEFORMATEX azt mondja, hogy {2} van.\n"
 
-#: src/input/r_matroska.cpp:469
+#: src/input/r_matroska.cpp:470
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (MS kompatibilitási mód a {0}. számhoz) Matroska azt mondja, hogy mintánként {1} bit van, de a WAVEFORMATEX azt mondja, hogy {2} van.\n"
 
-#: src/input/r_matroska.cpp:484
-#: src/input/r_matroska.cpp:531
-#: src/input/r_matroska.cpp:554
-#: src/input/r_matroska.cpp:812
-#: src/input/r_matroska.cpp:822
-#: src/input/r_matroska.cpp:843
+#: src/input/r_matroska.cpp:485
+#: src/input/r_matroska.cpp:532
+#: src/input/r_matroska.cpp:555
+#: src/input/r_matroska.cpp:813
+#: src/input/r_matroska.cpp:823
+#: src/input/r_matroska.cpp:844
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: A {0} sáv CodecID '{1}', de a privát kodekadatok nem tartalmaznak érvényes fejléceket.\n"
 
-#: src/input/r_matroska.cpp:522
+#: src/input/r_matroska.cpp:523
 #, no-c-format, c++-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: Az mkvmerge nem FLAC támogatással lett lefordítva. A {0} sáv figyelmen kívül hagyása.\n"
 
-#: src/input/r_matroska.cpp:658
+#: src/input/r_matroska.cpp:659
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: A {0} sáv CodecID '{1}', de nem volt jelen BITMAPINFOHEADER struktúra. Ezért nincs FourCC-nk a használt videokódek azonosítására.\n"
 
-#: src/input/r_matroska.cpp:670
+#: src/input/r_matroska.cpp:671
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS kompatibilitási mód, sáv {0}) Matroska szerint a videó szélessége {1}, de a BITMAPINFOHEADER azt mondja, hogy {2}.\n"
 
-#: src/input/r_matroska.cpp:679
+#: src/input/r_matroska.cpp:680
 #, no-c-format, c++-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS kompatibilitási mód, sáv {0}) Matroska azt mondja, hogy a videó magassága {1}, de a BITMAPINFOHEADER azt mondja, hogy {2}.\n"
 
-#: src/input/r_matroska.cpp:763
+#: src/input/r_matroska.cpp:764
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: A {0} sáv CodecID '{1}', de nem voltak kódek privát fejlécek.\n"
 
-#: src/input/r_matroska.cpp:795
+#: src/input/r_matroska.cpp:796
 #, no-c-format, c++-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: A {0} sáv szélessége nincs beállítva.\n"
 
-#: src/input/r_matroska.cpp:801
+#: src/input/r_matroska.cpp:802
 #, no-c-format, c++-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: A {0} sáv magasságát nem határozták meg.\n"
 
-#: src/input/r_matroska.cpp:861
+#: src/input/r_matroska.cpp:862
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: A {0} sáv követés CodecID-je '{1}', de nem található személyes adat.\n"
 
-#: src/input/r_matroska.cpp:874
+#: src/input/r_matroska.cpp:875
 #, no-c-format, c++-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "A VobSub feliratsáv {0} nem tartalmazza az indexét a CodecPrivate elemben."
 
-#: src/input/r_matroska.cpp:875
+#: src/input/r_matroska.cpp:876
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "Ehelyett egy alapértelmezett indexet és ezzel együtt a szélesség, magasság és színpaletta alapértelmezett beállításait kell használni."
 
-#: src/input/r_matroska.cpp:908
+#: src/input/r_matroska.cpp:909
 #, no-c-format, c++-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: A {1} sáv '{0}' codecID-je ismeretlen.\n"
 
-#: src/input/r_matroska.cpp:941
+#: src/input/r_matroska.cpp:942
 #, no-c-format, c++-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: ismeretlen demultiplexer típus a {0}. sávhoz: '{1}'\n"
 
-#: src/input/r_matroska.cpp:946
+#: src/input/r_matroska.cpp:947
 #, no-c-format, c++-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: A {0} sáv rendben van.\n"
 
-#: src/input/r_matroska.cpp:1422
+#: src/input/r_matroska.cpp:1423
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Hiányzik a képpontszélesség.\n"
 
-#: src/input/r_matroska.cpp:1424
+#: src/input/r_matroska.cpp:1425
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Hiányzik a képpontmagasság.\n"
 
-#: src/input/r_matroska.cpp:1476
+#: src/input/r_matroska.cpp:1477
 #, no-c-format, c++-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A {0}. sávról hiányzik a sáv UID-eleme, amelynek a Matroska specifikáció szerint jelen kell lennie. Ha a fájl címkéket tartalmaz, akkor ezek a címkék hibásak lehetnek.\n"
 
-#: src/input/r_matroska.cpp:1754
+#: src/input/r_matroska.cpp:1755
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nem található EBML-fej.\n"
 
-#: src/input/r_matroska.cpp:1774
-#: src/input/r_matroska.cpp:1787
+#: src/input/r_matroska.cpp:1775
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nem található szegmens.\n"
 
-#: src/input/r_matroska.cpp:1872
+#: src/input/r_matroska.cpp:1873
 #, no-c-format, c++-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Az általános kimeneti modul használata a '{0}' sávtípushoz.\n"
 
-#: src/input/r_matroska.cpp:1946
+#: src/input/r_matroska.cpp:1947
 #, no-c-format, c++-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "Nem sikerült megtartani egy sáv UID-jét {0}, mert az már le van foglalva egy másik sávhoz. A rendszer automatikusan kioszt egy új véletlenszerű azonosítót.\n"
 
-#: src/input/r_matroska.cpp:2038
-#: src/input/r_matroska.cpp:2055
+#: src/input/r_matroska.cpp:2039
+#: src/input/r_matroska.cpp:2056
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Hibásan kialakított AAC kodek inicializálási adatok találhatók.\n"
 
-#: src/input/r_matroska.cpp:2048
+#: src/input/r_matroska.cpp:2049
 #, no-c-format, c++-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Hibásan kialakított kodekazonosító '{0}'.\n"
 
-#: src/input/r_matroska.cpp:2166
+#: src/input/r_matroska.cpp:2167
 #, no-c-format, c++-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Egy Opus-sávot másolsz, amelyet kísérleti módban írtak. Az eredményül kapott sáv végleges módban lesz megírva, de egy részlet nem állítható helyre egy kísérleti módban írt sávból: a végvágás. Ez azt jelenti, hogy a dekóder néhány mintával többet adhat ki, mint amennyit eredetileg szántak. Ha lehetséges, újra multiplexelje az eredeti Opus fájlt.\n"
 
-#: src/input/r_matroska.cpp:2400
+#: src/input/r_matroska.cpp:2401
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Nem támogatott sávtípus ehhez a sávhoz.\n"
 
-#: src/input/r_matroska.cpp:2609
-#: src/input/r_matroska.cpp:2729
+#: src/input/r_matroska.cpp:2610
+#: src/input/r_matroska.cpp:2730
 #, no-c-format, c++-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "A {1}-es számú sáv időbélyegzőjén {0} blokkot találtak. Ennek a sávszámnak azonban nem találtak fejlécet. A blokk kimarad.\n"
 
-#: src/input/r_matroska.cpp:3083
+#: src/input/r_matroska.cpp:3084
 #, no-c-format, c++-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "ismeretlen, formátumcímke 0x{0:04x}"
@@ -16522,12 +16537,12 @@ msgstr "&Következő feladat kimenete lap"
 msgid "&Previous job output tab"
 msgstr "&Előző feladat kimenete lap"
 
-#: src/mpegparser/M2VParser.cpp:416
+#: src/mpegparser/M2VParser.cpp:429
 #, no-c-format
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Egymezős kép észlelve. Javítsa ki az MPEG2 videofolyamot, mielőtt megpróbálná multiplexelni.\n"
 
-#: src/mpegparser/M2VParser.cpp:440
+#: src/mpegparser/M2VParser.cpp:453
 #, no-c-format
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Legalább egy B képkockát találtam második hivatkozás nélkül egy nem zárt GOP-ban.\n"

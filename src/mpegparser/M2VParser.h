@@ -24,6 +24,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/frame_clock.h"
+
 #include "MPEGVideoBuffer.h"
 #include <queue>
 
@@ -84,6 +86,7 @@ private:
   uint64_t frameCounter;
   MediaTime previousTimestamp;
   MediaTime previousDuration;
+  mtx::frame_clock_c m_clock; // in fields
   //Added to allow reading the header's raw data, contains first found seq hdr.
   MPEGChunk* seqHdrChunk, *gopChunk, *firstField;
   MPEG2SequenceHeader m_seqHdr; //current sequence header

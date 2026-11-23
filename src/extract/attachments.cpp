@@ -25,6 +25,7 @@
 #include "common/kax_analyzer.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/path.h"
 #include "extract/mkvextract.h"
 
 struct attachment_t {
@@ -104,7 +105,10 @@ handle_attachments(libmatroska::KaxAttachments *atts,
 
     // check for output name
     if (track.out_name.empty())
-      track.out_name = attachment.name;
+      track.out_name = mtx::fs::to_path(attachment.name).filename().string();
+
+    if (track.out_name.empty())
+      mxerror(fmt::format(FY("Attachment {0}: neither was a file name to write to given on the command line, nor is one stored in the source file.\n"), track.tid));
 
     mxinfo(fmt::format(FY("The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"),
                        track.tid, attachment.id, attachment.type, attachment.size, track.out_name));

@@ -61,6 +61,7 @@
 #include "common/math.h"
 #include "common/mime.h"
 #include "common/mm_io.h"
+#include "common/path.h"
 #include "common/qt.h"
 #include "common/random.h"
 #include "common/strings/formatting.h"
@@ -995,7 +996,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
       continue;
 
     auto matt         = std::make_shared<attachment_t>();
-    matt->name        = to_utf8(find_child_value<libmatroska::KaxFileName>(att));
+    matt->name        = mtx::fs::to_path(to_utf8(find_child_value<libmatroska::KaxFileName>(att))).filename().string();
     matt->description = to_utf8(find_child_value<libmatroska::KaxFileDescription>(att));
     matt->mime_type   = ::mtx::mime::get_font_mime_type_to_use(find_child_value<libmatroska::KaxMimeType>(att), g_use_legacy_font_mime_types ? mtx::mime::font_mime_type_type_e::legacy : mtx::mime::font_mime_type_type_e::current);
     matt->id          = find_child_value<libmatroska::KaxFileUID>(att);
